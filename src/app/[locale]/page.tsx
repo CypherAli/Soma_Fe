@@ -1,27 +1,18 @@
 import { setRequestLocale } from "next-intl/server";
-import TopBar from "@/components/TopBar";
-import Sidebar from "@/components/Sidebar";
-import InfoPanel from "@/components/InfoPanel";
-import AnatomyViewer from "@/components/viewer/AnatomyViewer";
+import { hasLocale } from "next-intl";
+import { routing } from "@/i18n/routing";
+import HomePage from "@/components/home/HomePage";
+import type { Loc } from "@/lib/homeContent";
+import "../home.css";
 
-export default async function HomePage({
+export default async function Home({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const loc = (hasLocale(routing.locales, locale) ? locale : routing.defaultLocale) as Loc;
 
-  return (
-    <div className="flex h-full flex-col bg-slate-950">
-      <TopBar />
-      <div className="flex flex-1 overflow-hidden">
-        <Sidebar />
-        <main className="relative flex-1 bg-slate-950">
-          <AnatomyViewer />
-        </main>
-        <InfoPanel />
-      </div>
-    </div>
-  );
+  return <HomePage locale={loc} />;
 }

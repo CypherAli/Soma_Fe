@@ -6,12 +6,11 @@
 
 html,
 body {
-  height: 100%;
+  min-height: 100%;
 }
 
 body {
-  background: #020617;
-  color: #e2e8f0;
+  background: #ffffff;
+  color: #1d2939;
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
-  overflow: hidden;
 }
