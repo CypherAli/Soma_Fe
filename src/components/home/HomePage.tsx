@@ -46,7 +46,6 @@ export default function HomePage({ locale }: { locale: Loc }) {
       <HomeNav />
 
       <header className="hero">
-        <div className="hero-fig"><div className="vasc" /><div className="body" /></div>
         <div className="wrap">
           <div className="hero-copy">
             <h1>{pick(C.hero.title, locale)}</h1>

@@ -59,7 +59,14 @@
 .bd .mega-back{position:fixed; inset:0; background:transparent; z-index:35; display:none}
 .bd .mega-back.open{display:block}
 
-.bd .hero{background:radial-gradient(120% 130% at 82% 8%,var(--hero-glow) 0%,var(--navy-2) 34%,var(--navy) 70%); position:relative; overflow:hidden}
+.bd .hero{
+  background-color:#071233;
+  background-image:linear-gradient(90deg,rgba(7,18,51,.94),rgba(7,18,51,.4) 46%,rgba(7,18,51,0) 70%), url('/hero-anatomy.jpg');
+  background-repeat:no-repeat,no-repeat;
+  background-position:center,right center;
+  background-size:cover,cover;
+  position:relative; overflow:hidden;
+}
 .bd .hero .wrap{position:relative; z-index:2; padding:92px 40px 104px; max-width:var(--maxw)}
 .bd .hero-copy{max-width:600px}
 .bd .hero h1{color:#fff; font-size:clamp(34px,4.4vw,52px); line-height:1.1; letter-spacing:-.02em}
