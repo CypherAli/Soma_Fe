@@ -2,7 +2,7 @@ import { setRequestLocale } from "next-intl/server";
 import TopBar from "@/components/TopBar";
 import Sidebar from "@/components/Sidebar";
 import InfoPanel from "@/components/InfoPanel";
-import AnatomyViewer from "@/components/viewer/AnatomyViewer";
+import ModelViewer from "@/components/viewer/ModelViewer";
 
 export default async function ViewerPage({
   params,
@@ -18,7 +18,7 @@ export default async function ViewerPage({
       <div className="flex flex-1 overflow-hidden">
         <Sidebar />
         <main className="relative flex-1 bg-slate-950">
-          <AnatomyViewer />
+          <ModelViewer url="/models/cardiovascular.glb" />
         </main>
         <InfoPanel />
       </div>
