@@ -1,0 +1,34 @@
+{
+  "app": {
+    "name": "Soma 3D",
+    "tagline": "Atlas giải phẫu 3D tương tác"
+  },
+  "nav": {
+    "search": "Tìm kiếm bộ phận cơ thể...",
+    "language": "Ngôn ngữ",
+    "human": "Con người",
+    "veterinary": "Thú y"
+  },
+  "sidebar": {
+    "systems": "Hệ cơ quan",
+    "layers": "Các lớp",
+    "skeletal": "Hệ xương",
+    "muscular": "Hệ cơ",
+    "nervous": "Hệ thần kinh",
+    "cardiovascular": "Hệ tuần hoàn",
+    "digestive": "Hệ tiêu hóa",
+    "respiratory": "Hệ hô hấp"
+  },
+  "viewer": {
+    "loading": "Đang tải mô hình...",
+    "placeholder": "Khu vực mô hình 3D — sẽ nạp giải phẫu ở giai đoạn tiếp theo",
+    "reset": "Đặt lại góc nhìn",
+    "selectHint": "Nhấp vào một bộ phận để xem thông tin"
+  },
+  "info": {
+    "title": "Thông tin bộ phận",
+    "empty": "Chưa chọn bộ phận nào",
+    "latin": "Tên Latin",
+    "description": "Mô tả"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "app": {
+    "name": "Soma 3D",
+    "tagline": "交互式 3D 解剖图谱"
+  },
+  "nav": {
+    "search": "搜索身体部位...",
+    "language": "语言",
+    "human": "人体",
+    "veterinary": "兽医"
+  },
+  "sidebar": {
+    "systems": "身体系统",
+    "layers": "层次",
+    "skeletal": "骨骼系统",
+    "muscular": "肌肉系统",
+    "nervous": "神经系统",
+    "cardiovascular": "心血管系统",
+    "digestive": "消化系统",
+    "respiratory": "呼吸系统"
+  },
+  "viewer": {
+    "loading": "正在加载模型...",
+    "placeholder": "3D 模型区域 — 解剖模型将在下一阶段加载",
+    "reset": "重置视角",
+    "selectHint": "点击部位查看信息"
+  },
+  "info": {
+    "title": "部位信息",
+    "empty": "未选择任何部位",
+    "latin": "拉丁名称",
+    "description": "描述"
+  }
+}

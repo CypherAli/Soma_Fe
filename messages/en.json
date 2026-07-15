@@ -1,0 +1,34 @@
+{
+  "app": {
+    "name": "Soma 3D",
+    "tagline": "Interactive 3D anatomy atlas"
+  },
+  "nav": {
+    "search": "Search a body part...",
+    "language": "Language",
+    "human": "Human",
+    "veterinary": "Veterinary"
+  },
+  "sidebar": {
+    "systems": "Body systems",
+    "layers": "Layers",
+    "skeletal": "Skeletal system",
+    "muscular": "Muscular system",
+    "nervous": "Nervous system",
+    "cardiovascular": "Cardiovascular system",
+    "digestive": "Digestive system",
+    "respiratory": "Respiratory system"
+  },
+  "viewer": {
+    "loading": "Loading model...",
+    "placeholder": "3D model area — anatomy loads in the next phase",
+    "reset": "Reset view",
+    "selectHint": "Click a part to see its information"
+  },
+  "info": {
+    "title": "Part information",
+    "empty": "No part selected",
+    "latin": "Latin name",
+    "description": "Description"
+  }
+}
