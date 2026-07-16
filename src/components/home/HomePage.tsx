@@ -11,10 +11,10 @@ function SmallCard({ card, locale }: { card: Card; locale: Loc }) {
         {card.badge && <span className="badge-vet">{pick(card.badge, locale)}</span>}
         <div className="figline" />
         {card.lock && <span className="lock"><Icon id="i-lock" /></span>}
-        <div className="cap">
-          <div className="t">{pick(card.title, locale)}</div>
-          {card.sub && <div className="s">{pick(card.sub, locale)}</div>}
-        </div>
+      </div>
+      <div className="cap">
+        <div className="t">{pick(card.title, locale)}</div>
+        {card.sub && <div className="s">{pick(card.sub, locale)}</div>}
       </div>
     </div>
   );
