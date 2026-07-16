@@ -6,6 +6,7 @@ import { OrbitControls, useGLTF, Center, Bounds } from "@react-three/drei";
 import * as THREE from "three";
 import { useAnatomyStore, type SelectedPart, type SystemKey } from "@/store/useAnatomyStore";
 import Hotspots from "./Hotspots";
+import { defaultViewerHotspots, type SceneHotspot } from "@/lib/sceneModules";
 
 export const SYSTEM_FILES: Record<SystemKey, string> = {
   skeletal: "/models/skeletal.glb",
@@ -269,7 +270,15 @@ function Picker() {
   return null;
 }
 
-export default function ModelScene() {
+export default function ModelScene({
+  hotspots = defaultViewerHotspots,
+  requiredSystems = ["visceral"],
+  autoFocusOnLoad = false,
+}: {
+  hotspots?: SceneHotspot[];
+  requiredSystems?: SystemKey[];
+  autoFocusOnLoad?: boolean;
+}) {
   const controls = useRef<React.ComponentRef<typeof OrbitControls>>(null);
   const visibleSystems = useAnatomyStore((s) => s.visibleSystems);
 
@@ -302,7 +311,12 @@ export default function ModelScene() {
       </Bounds>
       <Picker />
       <ClipRig />
-      <Hotspots controlsRef={controls} />
+      <Hotspots
+        controlsRef={controls}
+        hotspots={hotspots}
+        requiredSystems={requiredSystems}
+        autoFocusOnLoad={autoFocusOnLoad}
+      />
       <OrbitControls ref={controls} makeDefault enablePan={false} minDistance={0.15} maxDistance={10} />
     </Canvas>
   );

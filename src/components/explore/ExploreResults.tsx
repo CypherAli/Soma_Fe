@@ -103,9 +103,13 @@ export default function ExploreResults({
               onClick={() => c.href && router.push(c.href)}
             >
               <div className={`thumb ${c.img}`}>
-                {c.real && (
+                {c.real ? (
                   <span className="badge-real">
                     {locale === "vi" ? "MÔ HÌNH THẬT" : locale === "zh" ? "真实模型" : "REAL MODEL"}
+                  </span>
+                ) : (
+                  <span className="badge-soon">
+                    {locale === "vi" ? "SẮP CÓ" : locale === "zh" ? "即将推出" : "COMING SOON"}
                   </span>
                 )}
                 <div className="figline" />

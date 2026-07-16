@@ -39,6 +39,8 @@ type AnatomyState = {
   clipPercent: number;
   /** true = giữ lại nửa dương của trục, false = giữ nửa âm. */
   clipKeepPositive: boolean;
+  /** key hotspot đang active (camera đã zoom vào) — dùng chung giữa pin 3D và danh sách Labels bên panel. */
+  activeHotspotKey: string | null;
   setSelected: (part: SelectedPart) => void;
   setHovered: (id: string | null) => void;
   toggleSystem: (key: SystemKey) => void;
@@ -50,6 +52,9 @@ type AnatomyState = {
   setClipAxis: (a: "x" | "y" | "z") => void;
   setClipPercent: (v: number) => void;
   toggleClipDirection: () => void;
+  setActiveHotspotKey: (key: string | null) => void;
+  /** Đặt lại toàn bộ trạng thái viewer (Ẩn/Mờ/Cô lập/Mặt cắt/lựa chọn) khi vào 1 scene mới, tránh trạng thái scene trước lẫn sang. */
+  resetViewer: (visibleSystems?: Partial<Record<SystemKey, boolean>>) => void;
 };
 
 const allSystems: SystemKey[] = [
@@ -76,6 +81,7 @@ export const useAnatomyStore = create<AnatomyState>((set) => ({
   clipAxis: "y",
   clipPercent: 50,
   clipKeepPositive: false,
+  activeHotspotKey: null,
   setSelected: (part) => set({ selected: part }),
   setHovered: (id) => set({ hovered: id }),
   toggleSystem: (key) =>
@@ -101,6 +107,23 @@ export const useAnatomyStore = create<AnatomyState>((set) => ({
   setClipPercent: (v) => set({ clipPercent: Math.min(100, Math.max(0, v)) }),
   toggleClipDirection: () =>
     set((state) => ({ clipKeepPositive: !state.clipKeepPositive })),
+  setActiveHotspotKey: (key) => set({ activeHotspotKey: key }),
+  resetViewer: (visibleSystemsPatch) =>
+    set((state) => ({
+      selected: null,
+      hovered: null,
+      hiddenIds: {},
+      fadedIds: {},
+      isolatedId: null,
+      clipEnabled: false,
+      activeHotspotKey: null,
+      visibleSystems: visibleSystemsPatch
+        ? {
+            ...Object.fromEntries(allSystems.map((s) => [s, false])),
+            ...visibleSystemsPatch,
+          } as Record<SystemKey, boolean>
+        : state.visibleSystems,
+    })),
 }));
 
 export const SYSTEM_KEYS = allSystems;

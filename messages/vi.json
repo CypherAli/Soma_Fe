@@ -39,5 +39,10 @@
   "clip": {
     "title": "Mặt cắt lát",
     "flip": "Đảo chiều"
+  },
+  "scene": {
+    "back": "Quay lại",
+    "labels": "Nhãn",
+    "reviewedNote": "Mô tả biên soạn theo giải phẫu học phổ thông"
   }
 }

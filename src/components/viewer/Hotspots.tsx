@@ -1,37 +1,14 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { Html } from "@react-three/drei";
 import type { OrbitControls as OrbitControlsComp } from "@react-three/drei";
 import * as THREE from "three";
-import { useAnatomyStore, type SelectedPart } from "@/store/useAnatomyStore";
+import { useAnatomyStore, type SelectedPart, type SystemKey } from "@/store/useAnatomyStore";
+import type { SceneHotspot } from "@/lib/sceneModules";
 
 type OrbitControlsImpl = React.ComponentRef<typeof OrbitControlsComp>;
-
-type HotspotDef = {
-  key: string;
-  /**
-   * Tên mesh CHÍNH XÁC trong glTF (Z-Anatomy/TA2), đã verify tồn tại thật
-   * trong public/models/visceral.glb bằng cách đọc JSON chunk của glb —
-   * không tự đoán/đặt tên khác để tránh gắn nhầm vị trí.
-   */
-  meshName: string;
-  /** Lệch label so với điểm neo (px màn hình) — chỉ để tránh đè chữ giữa các pin. */
-  offset: [number, number];
-};
-
-// "Liver" cố ý CHƯA đưa vào: trong glTF nó là node cha chứa 8 mesh phân thùy
-// con (không phải 1 mesh đơn), Ẩn/Cô lập theo đúng nghĩa "cả lá gan" cần xử lý
-// riêng theo nhóm — để tạm ngoài danh sách thay vì gắn sai/nửa vời.
-const VISCERAL_HOTSPOTS: HotspotDef[] = [
-  { key: "stomach", meshName: "Stomach", offset: [120, -70] },
-  { key: "gallbladder", meshName: "Gallbladder", offset: [150, 0] },
-  { key: "pancreas", meshName: "Pancreas", offset: [-20, 95] },
-  { key: "kidney-l", meshName: "Kidney.l", offset: [-150, 45] },
-  { key: "kidney-r", meshName: "Kidney.r", offset: [160, 55] },
-  { key: "bladder", meshName: "Urinary bladder", offset: [10, 130] },
-];
 
 /**
  * GLTFLoader tự "làm sạch" tên node lúc dựng scene runtime — xoá các ký tự
@@ -40,11 +17,12 @@ const VISCERAL_HOTSPOTS: HotspotDef[] = [
  * thành mesh.name = "Kidneyl" lúc chạy — phải áp đúng quy tắc này khi tra
  * cứu theo tên, nếu không mesh sẽ không tìm thấy (không phải do sai vị trí).
  */
-function sanitizeGltfName(raw: string): string {
+export function sanitizeGltfName(raw: string): string {
   return raw.replace(/\s/g, "_").replace(/[[\].:/]/g, "");
 }
 
-function cleanName(raw: string): string {
+/** Bỏ hậu tố .l/.r/.j và ngoặc trong tên mesh Z-Anatomy gốc → tên hiển thị gọn. */
+export function cleanName(raw: string): string {
   let n = raw.replace(/_/g, " ");
   const m = n.match(/\.(ol|or|l|r|j)$/i);
   let side = "";
@@ -72,16 +50,28 @@ function easeOutCubic(t: number) {
 
 export default function Hotspots({
   controlsRef,
+  hotspots,
+  requiredSystems,
+  autoFocusOnLoad = false,
 }: {
   controlsRef: React.RefObject<OrbitControlsImpl | null>;
+  hotspots: SceneHotspot[];
+  /** Hotspot chỉ render khi TẤT CẢ các hệ này đang bật (tránh pin nổi khi hệ chứa nó đã tắt). */
+  requiredSystems: SystemKey[];
+  /** Tự động zoom camera vào gộp toàn bộ hotspot khi vào scene lần đầu (dùng cho trang scene riêng). */
+  autoFocusOnLoad?: boolean;
 }) {
   const { camera, scene } = useThree();
-  const visceralOn = useAnatomyStore((s) => s.visibleSystems.visceral);
+  const visibleSystems = useAnatomyStore((s) => s.visibleSystems);
   const setSelected = useAnatomyStore((s) => s.setSelected);
-  const [activeKey, setActiveKey] = useState<string | null>(null);
+  const activeHotspotKey = useAnatomyStore((s) => s.activeHotspotKey);
+  const setActiveHotspotKey = useAnatomyStore((s) => s.setActiveHotspotKey);
+  const systemsReady = requiredSystems.every((k) => visibleSystems[k]);
 
   const homeRef = useRef<{ pos: THREE.Vector3; target: THREE.Vector3 } | null>(null);
   const animRef = useRef<CamAnim | null>(null);
+  const prevActiveKeyRef = useRef<string | null>(null);
+  const didAutoFocusRef = useRef(false);
 
   useFrame(() => {
     const controls = controlsRef.current;
@@ -95,27 +85,37 @@ export default function Hotspots({
     if (t >= 1) animRef.current = null;
   });
 
-  // Chỉ tìm mesh thật trong scene đã nạp — không có mesh khớp tên (vd hệ
-  // đang tắt/chưa nạp xong) thì KHÔNG render pin đó, tránh pin lơ lửng sai vị trí.
+  // Chỉ tìm object thật trong scene đã nạp — không khớp tên (vd hệ đang
+  // tắt/chưa nạp xong) thì KHÔNG render pin đó, tránh pin lơ lửng sai vị trí.
+  // Chấp nhận cả Group (VD "Vertebra_T12" là node cha chứa 2 mesh con thân
+  // đốt sống + cung đốt sống, không phải mesh đơn) — Box3().setFromObject
+  // vẫn tính đúng bbox gộp cả con cho Group, chỉ mesh đơn mới có
+  // material để paint highlight lúc chọn.
   const resolved = useMemo(() => {
-    if (!visceralOn) return [];
-    return VISCERAL_HOTSPOTS.map((h) => {
-      const mesh = scene.getObjectByName(sanitizeGltfName(h.meshName)) as THREE.Mesh | undefined;
-      if (!mesh || !mesh.isMesh) return null;
-      const box = new THREE.Box3().setFromObject(mesh);
+    if (!systemsReady) return [];
+    return hotspots.map((h) => {
+      const obj = scene.getObjectByName(sanitizeGltfName(h.meshName));
+      if (!obj) return null;
+      const box = new THREE.Box3().setFromObject(obj);
+      if (box.isEmpty()) return null;
       const center = box.getCenter(new THREE.Vector3());
       const radius = box.getSize(new THREE.Vector3()).length() / 2;
-      return { def: h, mesh, center, radius };
+      return { def: h, obj, center, radius };
     }).filter((x): x is NonNullable<typeof x> => x !== null);
     // scene.children.length như một proxy để re-chạy khi model nạp xong.
-  }, [visceralOn, scene, scene.children.length]);
+  }, [systemsReady, hotspots, scene, scene.children.length]);
 
-  const focus = (center: THREE.Vector3, radius: number, controls: OrbitControlsImpl) => {
+  const focus = (
+    center: THREE.Vector3,
+    radius: number,
+    controls: OrbitControlsImpl,
+    distanceMultiplier = 2.8,
+  ) => {
     if (!homeRef.current) {
       homeRef.current = { pos: camera.position.clone(), target: controls.target.clone() };
     }
     const dir = camera.position.clone().sub(controls.target).normalize();
-    const dist = Math.max(radius * 2.8, 0.12);
+    const dist = Math.max(radius * distanceMultiplier, 0.12);
     const toPos = center.clone().add(dir.multiplyScalar(dist));
     animRef.current = {
       fromPos: camera.position.clone(),
@@ -141,32 +141,57 @@ export default function Hotspots({
     homeRef.current = null;
   };
 
-  const handleClick = (item: (typeof resolved)[number]) => {
+  // Tự động zoom vào gộp toàn bộ hotspot khi mới vào scene (1 lần duy nhất),
+  // dùng đúng bbox thật của các mesh đã resolve — không đoán camera cố định.
+  useEffect(() => {
+    if (!autoFocusOnLoad || didAutoFocusRef.current) return;
+    if (resolved.length !== hotspots.length) return;
     const controls = controlsRef.current;
     if (!controls) return;
-    if (activeKey === item.def.key) {
+    didAutoFocusRef.current = true;
+    const box = new THREE.Box3();
+    resolved.forEach((r) => box.expandByObject(r.obj));
+    const center = box.getCenter(new THREE.Vector3());
+    const radius = box.getSize(new THREE.Vector3()).length() / 2;
+    // Multiplier lớn hơn zoom 1 điểm — gộp nhiều mesh cách xa nhau (VD đốt
+    // sống ở sau lưng + tạng ở phía trước) cần lùi camera đủ xa để cả cụm
+    // còn nằm trong khung hình, tránh điểm rìa bị rơi ra sau lưng camera.
+    focus(center, radius, controls, 4.5);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoFocusOnLoad, resolved, hotspots.length, controlsRef]);
+
+  // Toggle active hotspot đến từ CẢ pin 3D lẫn danh sách Labels bên panel
+  // (cùng ghi vào store.activeHotspotKey) — effect này phản ứng chung 1 chỗ.
+  useEffect(() => {
+    if (activeHotspotKey === prevActiveKeyRef.current) return;
+    const controls = controlsRef.current;
+    if (!controls) return;
+    prevActiveKeyRef.current = activeHotspotKey;
+    if (activeHotspotKey === null) {
       reset(controls);
-      setActiveKey(null);
       setSelected(null);
       return;
     }
+    const item = resolved.find((r) => r.def.key === activeHotspotKey);
+    if (!item) return;
     focus(item.center, item.radius, controls);
-    setActiveKey(item.def.key);
-    // Hiển thị dùng TÊN GỐC (item.def.meshName) — mesh.name lúc chạy đã bị
-    // GLTFLoader khử ký tự (mất dấu chấm phân cách trái/phải) nên không còn
-    // đúng định dạng để cleanName() tách "· trái/phải" chính xác.
     const payload: SelectedPart = {
-      id: item.mesh.name,
+      id: item.obj.name,
       name: cleanName(item.def.meshName),
       latin: item.def.meshName.replace(/_/g, " "),
     };
     setSelected(payload);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeHotspotKey, resolved]);
+
+  const toggle = (key: string) => {
+    setActiveHotspotKey(activeHotspotKey === key ? null : key);
   };
 
   return (
     <>
       {resolved.map((item) => {
-        const active = activeKey === item.def.key;
+        const active = activeHotspotKey === item.def.key;
         const [dx, dy] = item.def.offset;
         return (
           <Html key={item.def.key} position={item.center} zIndexRange={[10, 0]} sprite>
@@ -187,7 +212,7 @@ export default function Hotspots({
               </svg>
               <button
                 type="button"
-                onClick={() => handleClick(item)}
+                onClick={() => toggle(item.def.key)}
                 className={`pointer-events-auto flex h-7 w-7 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border text-sm font-bold shadow ${
                   active
                     ? "border-sky-400 bg-sky-500 text-white"

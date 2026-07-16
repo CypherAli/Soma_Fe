@@ -39,5 +39,10 @@
   "clip": {
     "title": "Cross section",
     "flip": "Flip side"
+  },
+  "scene": {
+    "back": "Back",
+    "labels": "Labels",
+    "reviewedNote": "Description written from general anatomy knowledge"
   }
 }
