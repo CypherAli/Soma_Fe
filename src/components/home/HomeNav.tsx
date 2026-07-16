@@ -23,8 +23,8 @@ export default function HomeNav() {
   return (
     <>
       <nav className="nav">
-        <div className="wrap nav-inner">
-          <div className="brand"><span className="mk">S</span>Soma&nbsp;3D</div>
+        <div className="nav-inner">
+          <span className="nav-logo" aria-label="Soma 3D">S</span>
           <div className="menu">
             <button
               type="button"
