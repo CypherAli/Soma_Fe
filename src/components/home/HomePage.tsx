@@ -104,22 +104,22 @@ export default function HomePage({ locale }: { locale: Loc }) {
                 <button className="lb">{pick(C.feature.male, locale)}</button>
               </div>
             </div>
-            <div className="fcol blue">
-              <span className="exp"><Icon id="i-expand" /></span>
-              <h3>{pick(C.feature.studioT, locale)}</h3>
-              <p>{pick(C.feature.studioD, locale)}</p>
-            </div>
-          </div>
-          <div className="feat2">
-            <div className="fcol purple">
-              <span className="exp"><Icon id="i-expand" /></span>
-              <h3>{pick(C.feature.vrT, locale)}</h3>
-              <p>{pick(C.feature.vrD, locale)}</p>
-            </div>
-            <div className="fcol dark">
-              <span className="exp"><Icon id="i-expand" /></span>
-              <h3>{pick(C.feature.svcT, locale)}</h3>
-              <p>{pick(C.feature.svcD, locale)}</p>
+            <div className="fside">
+              <div className="fcol blue">
+                <span className="exp"><Icon id="i-expand" /></span>
+                <h3>{pick(C.feature.studioT, locale)}</h3>
+                <p>{pick(C.feature.studioD, locale)}</p>
+              </div>
+              <div className="fcol purple">
+                <span className="exp"><Icon id="i-expand" /></span>
+                <h3>{pick(C.feature.vrT, locale)}</h3>
+                <p>{pick(C.feature.vrD, locale)}</p>
+              </div>
+              <div className="fcol dark">
+                <span className="exp"><Icon id="i-expand" /></span>
+                <h3>{pick(C.feature.svcT, locale)}</h3>
+                <p>{pick(C.feature.svcD, locale)}</p>
+              </div>
             </div>
           </div>
         </div>
