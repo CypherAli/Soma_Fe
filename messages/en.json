@@ -16,8 +16,9 @@
     "muscular": "Muscular system",
     "nervous": "Nervous system",
     "cardiovascular": "Cardiovascular system",
-    "digestive": "Digestive system",
-    "respiratory": "Respiratory system"
+    "visceral": "Visceral organs",
+    "lymphoid": "Lymphoid system",
+    "joints": "Joints"
   },
   "viewer": {
     "loading": "Loading model...",

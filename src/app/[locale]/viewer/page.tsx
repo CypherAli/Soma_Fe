@@ -18,7 +18,7 @@ export default async function ViewerPage({
       <div className="flex flex-1 overflow-hidden">
         <Sidebar />
         <main className="relative flex-1 bg-slate-950">
-          <ModelViewer url="/models/cardiovascular.glb" />
+          <ModelViewer />
         </main>
         <InfoPanel />
       </div>

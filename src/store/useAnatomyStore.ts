@@ -17,8 +17,9 @@ export type SystemKey =
   | "muscular"
   | "nervous"
   | "cardiovascular"
-  | "digestive"
-  | "respiratory";
+  | "visceral"
+  | "lymphoid"
+  | "joints";
 
 type AnatomyState = {
   selected: SelectedPart;
@@ -36,8 +37,9 @@ const allSystems: SystemKey[] = [
   "muscular",
   "nervous",
   "cardiovascular",
-  "digestive",
-  "respiratory",
+  "visceral",
+  "lymphoid",
+  "joints",
 ];
 
 export const useAnatomyStore = create<AnatomyState>((set) => ({

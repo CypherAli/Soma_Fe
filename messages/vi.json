@@ -16,8 +16,9 @@
     "muscular": "Hệ cơ",
     "nervous": "Hệ thần kinh",
     "cardiovascular": "Hệ tuần hoàn",
-    "digestive": "Hệ tiêu hóa",
-    "respiratory": "Hệ hô hấp"
+    "visceral": "Nội tạng",
+    "lymphoid": "Hệ bạch huyết",
+    "joints": "Khớp"
   },
   "viewer": {
     "loading": "Đang tải mô hình...",

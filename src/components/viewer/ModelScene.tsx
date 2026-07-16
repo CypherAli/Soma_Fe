@@ -4,7 +4,17 @@ import { useRef, useEffect } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls, useGLTF, Center, Bounds } from "@react-three/drei";
 import * as THREE from "three";
-import { useAnatomyStore, type SelectedPart } from "@/store/useAnatomyStore";
+import { useAnatomyStore, type SelectedPart, type SystemKey } from "@/store/useAnatomyStore";
+
+export const SYSTEM_FILES: Record<SystemKey, string> = {
+  skeletal: "/models/skeletal.glb",
+  muscular: "/models/muscular.glb",
+  nervous: "/models/nervous.glb",
+  cardiovascular: "/models/cardiovascular.glb",
+  visceral: "/models/visceral.glb",
+  lymphoid: "/models/lymphoid.glb",
+  joints: "/models/joints.glb",
+};
 
 /** Bỏ hậu tố .l/.r/.j và ngoặc trong tên mesh Z-Anatomy → tên hiển thị gọn. */
 function cleanName(raw: string): string {
@@ -27,7 +37,7 @@ function getStd(mesh: THREE.Mesh): THREE.MeshStandardMaterial | null {
     : null;
 }
 
-function Model({ url }: { url: string }) {
+function SystemModel({ url, visible }: { url: string; visible: boolean }) {
   const { scene } = useGLTF(url, "/draco/");
   useEffect(() => {
     // Mỗi mesh một material riêng để highlight độc lập.
@@ -40,7 +50,7 @@ function Model({ url }: { url: string }) {
       }
     });
   }, [scene]);
-  return <primitive object={scene} />;
+  return <primitive object={scene} visible={visible} />;
 }
 
 /** Tự raycast hover + click (R3F event không nhận cây gltf ngoài đáng tin cậy). */
@@ -76,7 +86,7 @@ function Picker() {
       const hits = raycaster.intersectObjects(scene.children, true);
       for (const h of hits) {
         const m = h.object as THREE.Mesh;
-        if (m.isMesh && m.name) return m;
+        if (m.isMesh && m.name && m.visible) return m;
       }
       return null;
     };
@@ -125,13 +135,14 @@ function Picker() {
   return null;
 }
 
-export default function ModelScene({ url }: { url: string }) {
+export default function ModelScene() {
   const controls = useRef<React.ComponentRef<typeof OrbitControls>>(null);
+  const visibleSystems = useAnatomyStore((s) => s.visibleSystems);
 
   return (
     <Canvas
       dpr={[1, 1.75]}
-      camera={{ position: [0, 0, 1.2], fov: 40, near: 0.01, far: 100 }}
+      camera={{ position: [0, 0, 2.6], fov: 40, near: 0.01, far: 100 }}
       gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping }}
     >
       <color attach="background" args={["#0b1220"]} />
@@ -140,13 +151,17 @@ export default function ModelScene({ url }: { url: string }) {
       <directionalLight position={[-4, -2, -3]} intensity={0.5} />
       <Bounds fit clip observe margin={1.1}>
         <Center>
-          <Model url={url} />
+          <group>
+            {(Object.keys(SYSTEM_FILES) as SystemKey[]).map((key) => (
+              <SystemModel key={key} url={SYSTEM_FILES[key]} visible={visibleSystems[key]} />
+            ))}
+          </group>
         </Center>
       </Bounds>
       <Picker />
-      <OrbitControls ref={controls} makeDefault enablePan={false} minDistance={0.15} maxDistance={6} />
+      <OrbitControls ref={controls} makeDefault enablePan={false} minDistance={0.15} maxDistance={10} />
     </Canvas>
   );
 }
 
-useGLTF.preload("/models/cardiovascular.glb", "/draco/");
+Object.values(SYSTEM_FILES).forEach((url) => useGLTF.preload(url, "/draco/"));

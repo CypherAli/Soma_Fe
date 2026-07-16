@@ -16,8 +16,9 @@
     "muscular": "肌肉系统",
     "nervous": "神经系统",
     "cardiovascular": "心血管系统",
-    "digestive": "消化系统",
-    "respiratory": "呼吸系统"
+    "visceral": "内脏器官",
+    "lymphoid": "淋巴系统",
+    "joints": "关节"
   },
   "viewer": {
     "loading": "正在加载模型...",
