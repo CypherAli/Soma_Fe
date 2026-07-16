@@ -39,5 +39,10 @@
   "clip": {
     "title": "截面",
     "flip": "翻转方向"
+  },
+  "scene": {
+    "back": "返回",
+    "labels": "标签",
+    "reviewedNote": "描述根据通用解剖学知识编写"
   }
 }

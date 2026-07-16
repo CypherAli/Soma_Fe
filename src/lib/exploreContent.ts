@@ -111,13 +111,24 @@ const systemCards: ResultCard[] = [
   { img: "an-brain", title: { vi: "Hệ thị giác", en: "Visual system", zh: "视觉系统" }, filters: ["male", "female"], type: "anatomy" },
 ];
 
-export const categoryData: Record<"tat-ca" | "theo-vung" | "theo-he", CategoryData> = {
+const crossSectionCards: ResultCard[] = [
+  {
+    img: "an-organ",
+    title: { vi: "Mặt cắt ngang bụng", en: "Abdomen Transverse Section", zh: "腹部横切面" },
+    filters: [],
+    href: "/giai-phau/mo-hinh/mat-cat-ngang-bung",
+    real: true,
+    type: "anatomy",
+  },
+];
+
+export const categoryData: Record<"tat-ca" | "theo-vung" | "theo-he" | "lat-cat", CategoryData> = {
   "tat-ca": {
     slug: "tat-ca",
     icon: "i-grid",
     title: { vi: "Tất cả mô hình", en: "All Models", zh: "所有模型" },
     filters: [],
-    cards: [...systemCards, ...regionCards],
+    cards: [...systemCards, ...regionCards, ...crossSectionCards],
   },
   "theo-vung": {
     slug: "theo-vung",
@@ -132,5 +143,12 @@ export const categoryData: Record<"tat-ca" | "theo-vung" | "theo-he", CategoryDa
     title: { vi: "Giải phẫu theo hệ", en: "Anatomy by system", zh: "按系统解剖" },
     filters: systemFilters,
     cards: systemCards,
+  },
+  "lat-cat": {
+    slug: "lat-cat",
+    icon: "i-cross",
+    title: { vi: "Lát cắt & vi giải phẫu", en: "Cross sections & microanatomy", zh: "断面与微观解剖" },
+    filters: [],
+    cards: crossSectionCards,
   },
 };

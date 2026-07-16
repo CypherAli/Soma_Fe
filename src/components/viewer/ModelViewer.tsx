@@ -3,6 +3,8 @@
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import ClipControls from "./ClipControls";
+import type { SceneHotspot } from "@/lib/sceneModules";
+import type { SystemKey } from "@/store/useAnatomyStore";
 
 const ModelScene = dynamic(() => import("./ModelScene"), {
   ssr: false,
@@ -21,12 +23,26 @@ function ViewerFallback() {
   );
 }
 
-export default function ModelViewer() {
+export default function ModelViewer({
+  hotspots,
+  requiredSystems,
+  autoFocusOnLoad,
+  showClipControls = true,
+}: {
+  hotspots?: SceneHotspot[];
+  requiredSystems?: SystemKey[];
+  autoFocusOnLoad?: boolean;
+  showClipControls?: boolean;
+}) {
   const t = useTranslations("viewer");
   return (
     <div className="relative h-full w-full">
-      <ModelScene />
-      <ClipControls />
+      <ModelScene
+        hotspots={hotspots}
+        requiredSystems={requiredSystems}
+        autoFocusOnLoad={autoFocusOnLoad}
+      />
+      {showClipControls && <ClipControls />}
       <p className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-slate-900/70 px-4 py-1.5 text-xs text-slate-300 backdrop-blur">
         {t("selectHint")}
       </p>
