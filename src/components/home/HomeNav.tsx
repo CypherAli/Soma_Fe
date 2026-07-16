@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocale } from "next-intl";
 import { useRouter, usePathname, Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
@@ -12,8 +12,20 @@ export default function HomeNav() {
   const router = useRouter();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
+  const langRef = useRef<HTMLDivElement>(null);
 
   const langCode: Record<Loc, string> = { vi: "VI", en: "EN", zh: "中" };
+  const otherLocales = routing.locales.filter((l) => l !== locale);
+
+  useEffect(() => {
+    if (!langOpen) return;
+    const onClickOutside = (e: MouseEvent) => {
+      if (langRef.current && !langRef.current.contains(e.target as Node)) setLangOpen(false);
+    };
+    document.addEventListener("mousedown", onClickOutside);
+    return () => document.removeEventListener("mousedown", onClickOutside);
+  }, [langOpen]);
   const section: "explore" | "library" | "studio" = pathname.startsWith("/thu-vien")
     ? "library"
     : pathname.startsWith("/studio")
@@ -45,16 +57,30 @@ export default function HomeNav() {
             <a className={section === "studio" ? "active" : ""}>{pick(C.nav.studio, locale)}</a>
           </div>
           <div className="nav-r">
-            <div className="lang">
-              {routing.locales.map((l) => (
-                <button
-                  key={l}
-                  className={l === locale ? "on" : ""}
-                  onClick={() => router.replace(pathname, { locale: l })}
-                >
-                  {langCode[l as Loc]}
-                </button>
-              ))}
+            <div className="lang" ref={langRef}>
+              <button
+                type="button"
+                className="lang-trigger"
+                onClick={() => setLangOpen((o) => !o)}
+              >
+                {langCode[locale]}
+                <Icon id="i-chev" className="isvg cx" />
+              </button>
+              {langOpen && (
+                <div className="lang-menu">
+                  {otherLocales.map((l) => (
+                    <button
+                      key={l}
+                      onClick={() => {
+                        router.replace(pathname, { locale: l });
+                        setLangOpen(false);
+                      }}
+                    >
+                      {langCode[l as Loc]}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
             <button className="btn-up">{pick(C.nav.upgrade, locale)}</button>
             <span className="nic"><Icon id="i-msg" /></span>
