@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { useRouter } from "@/i18n/navigation";
 import { pick, type Loc } from "@/lib/homeContent";
-import type { CategoryData } from "@/lib/exploreContent";
+import { contentTypeTabs, type CategoryData } from "@/lib/exploreContent";
 import { Icon } from "../home/IconSprite";
 
 export default function ExploreResults({
@@ -13,18 +13,21 @@ export default function ExploreResults({
   data: CategoryData;
   locale: Loc;
 }) {
+  const isAllModels = data.filters.length === 0;
   const [active, setActive] = useState("all");
+  const [contentType, setContentType] = useState<"all" | "anatomy" | "condition" | "procedure">("all");
   const [query, setQuery] = useState("");
   const router = useRouter();
 
   const cards = useMemo(() => {
     return data.cards.filter((c) => {
       const matchesFilter = active === "all" || c.filters.includes(active);
+      const matchesType = contentType === "all" || c.type === contentType;
       const matchesQuery =
         query.trim() === "" || pick(c.title, locale).toLowerCase().includes(query.trim().toLowerCase());
-      return matchesFilter && matchesQuery;
+      return matchesFilter && matchesType && matchesQuery;
     });
-  }, [data.cards, active, query, locale]);
+  }, [data.cards, active, contentType, query, locale]);
 
   return (
     <>
@@ -57,37 +60,61 @@ export default function ExploreResults({
         </div>
       </div>
 
-      <div className="filter-tabs">
-        {data.filters.map((f) => (
-          <button
-            key={f.key}
-            className={`filter-tab${active === f.key ? " active" : ""}`}
-            onClick={() => setActive(f.key)}
-          >
-            {pick(f.label, locale)}
-          </button>
-        ))}
-      </div>
+      {isAllModels ? (
+        <div className="content-tabs">
+          {contentTypeTabs.map((t) => (
+            <button
+              key={t.key}
+              className={`content-tab${contentType === t.key ? " active" : ""}`}
+              onClick={() => setContentType(t.key)}
+            >
+              {pick(t.label, locale)}
+            </button>
+          ))}
+        </div>
+      ) : (
+        <div className="filter-tabs">
+          {data.filters.map((f) => (
+            <button
+              key={f.key}
+              className={`filter-tab${active === f.key ? " active" : ""}`}
+              onClick={() => setActive(f.key)}
+            >
+              {pick(f.label, locale)}
+            </button>
+          ))}
+        </div>
+      )}
 
-      <div className="results-grid">
-        {cards.map((c, i) => (
-          <div
-            key={i}
-            className="result-card"
-            onClick={() => c.href && router.push(c.href)}
-          >
-            <div className={`thumb ${c.img}`}>
-              {c.real && (
-                <span className="badge-real">
-                  {locale === "vi" ? "MÔ HÌNH THẬT" : locale === "zh" ? "真实模型" : "REAL MODEL"}
-                </span>
-              )}
-              <div className="figline" />
+      {cards.length === 0 ? (
+        <p className="content-empty">
+          {locale === "vi"
+            ? "Chưa có nội dung ở mục này."
+            : locale === "zh"
+              ? "此分类暂无内容。"
+              : "No content in this category yet."}
+        </p>
+      ) : (
+        <div className="results-grid">
+          {cards.map((c, i) => (
+            <div
+              key={i}
+              className="result-card"
+              onClick={() => c.href && router.push(c.href)}
+            >
+              <div className={`thumb ${c.img}`}>
+                {c.real && (
+                  <span className="badge-real">
+                    {locale === "vi" ? "MÔ HÌNH THẬT" : locale === "zh" ? "真实模型" : "REAL MODEL"}
+                  </span>
+                )}
+                <div className="figline" />
+              </div>
+              <div className="rc-label">{pick(c.title, locale)}</div>
             </div>
-            <div className="rc-label">{pick(c.title, locale)}</div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </>
   );
 }
