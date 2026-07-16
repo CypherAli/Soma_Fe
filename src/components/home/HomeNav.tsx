@@ -26,13 +26,19 @@ export default function HomeNav() {
         <div className="nav-inner">
           <span className="nav-logo" aria-label="Soma 3D">S</span>
           <div className="menu">
-            <button
-              type="button"
-              className={`explore-btn${section === "explore" ? " active" : ""}`}
-              onClick={() => setOpen((o) => !o)}
-            >
-              {pick(C.nav.explore, locale)} <Icon id="i-chev" className="isvg cx" />
-            </button>
+            <span className={`explore-group${section === "explore" ? " active" : ""}`}>
+              <Link href="/giai-phau/tat-ca" className="explore-link">
+                {pick(C.nav.explore, locale)}
+              </Link>
+              <button
+                type="button"
+                className="explore-chev"
+                aria-label={pick(C.nav.explore, locale)}
+                onClick={() => setOpen((o) => !o)}
+              >
+                <Icon id="i-chev" className="isvg cx" />
+              </button>
+            </span>
             <Link href="/thu-vien" className={section === "library" ? "active" : ""}>
               {pick(C.nav.library, locale)}
             </Link>

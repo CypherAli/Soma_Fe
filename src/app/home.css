@@ -28,9 +28,11 @@
 .bd .brand{display:flex; align-items:center; gap:10px; color:#fff; font-weight:700; font-size:19px; letter-spacing:.01em}
 .bd .brand .mk{width:28px; height:28px; background:linear-gradient(135deg,#3f8fe0,#2f6bd8); border-radius:7px; display:grid; place-items:center; color:#fff; font-size:15px}
 .bd .menu{display:flex; align-self:stretch; gap:20px; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:#d4d9e3; font-weight:400}
-.bd .menu a, .bd .menu button.explore-btn{display:flex; align-items:center; gap:4px; height:100%; cursor:pointer; border:0; border-bottom:2px solid transparent; background:transparent; color:inherit; font:inherit; letter-spacing:inherit; text-transform:inherit; font-weight:inherit}
-.bd .menu a:hover, .bd .menu button.explore-btn:hover{color:#fff}
-.bd .menu a.active, .bd .menu button.explore-btn.active{color:#fff; border-bottom-color:var(--red)}
+.bd .menu > a, .bd .menu > .explore-group{display:flex; align-items:center; gap:4px; height:100%; cursor:pointer; border-bottom:2px solid transparent; color:inherit; font:inherit; letter-spacing:inherit; text-transform:inherit; font-weight:inherit}
+.bd .menu > a:hover, .bd .menu > .explore-group:hover{color:#fff}
+.bd .menu > a.active, .bd .menu > .explore-group.active{color:#fff; border-bottom-color:var(--red)}
+.bd .explore-group .explore-link{color:inherit; font:inherit; letter-spacing:inherit; text-transform:inherit; cursor:pointer}
+.bd .explore-chev{display:flex; align-items:center; cursor:pointer; border:0; background:transparent; color:inherit; padding:4px; margin:-4px -4px -4px 0}
 .bd .menu .cx{font-size:11px; opacity:.7; text-transform:none; letter-spacing:0}
 .bd .nav-r{margin-left:auto; display:flex; align-items:center; gap:12px}
 .bd .lang{display:flex; border:1px solid rgba(255,255,255,.18); border-radius:6px; overflow:hidden; font-size:11px; font-family:var(--mono)}
@@ -47,7 +49,7 @@
   display:none; z-index:60}
 .bd .mega.open{display:block}
 .bd .mega .wrap{padding:34px 40px 40px}
-.bd .mega-grid{display:grid; grid-template-columns:1.05fr 1.95fr 1.1fr; gap:44px}
+.bd .mega-grid{display:grid; grid-template-columns:1.05fr 1.95fr 1.1fr; gap:44px; align-items:start}
 .bd .mcol-h{font-size:17px; font-weight:700; color:var(--ink); margin:0 0 10px; padding-left:10px}
 .bd .mcol-h.mt{margin-top:26px}
 .bd .mi{display:flex; align-items:center; gap:13px; padding:8px 10px; border-radius:9px; font-size:14px; color:var(--body-fg); cursor:pointer}
