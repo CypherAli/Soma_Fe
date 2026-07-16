@@ -30,6 +30,14 @@
     "title": "Part information",
     "empty": "No part selected",
     "latin": "Latin name",
-    "description": "Description"
+    "description": "Description",
+    "hide": "Hide",
+    "show": "Show",
+    "fade": "Fade",
+    "isolate": "Isolate"
+  },
+  "clip": {
+    "title": "Cross section",
+    "flip": "Flip side"
   }
 }
