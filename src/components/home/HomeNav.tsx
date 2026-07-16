@@ -18,7 +18,7 @@ export default function HomeNav() {
   return (
     <>
       <nav className="nav">
-        <div className="wrap">
+        <div className="wrap nav-inner">
           <div className="brand"><span className="mk">S</span>Soma&nbsp;3D</div>
           <div className="menu">
             <button

@@ -19,7 +19,7 @@
 .bd a{color:inherit; text-decoration:none}
 
 .bd .nav{background:var(--navy); position:sticky; top:0; z-index:60; border-bottom:1px solid rgba(255,255,255,.06)}
-.bd .nav .wrap{display:flex; align-items:center; gap:34px; height:60px}
+.bd .nav-inner{display:flex; align-items:center; gap:34px; height:60px}
 .bd .brand{display:flex; align-items:center; gap:10px; color:#fff; font-weight:700; font-size:19px; letter-spacing:.01em}
 .bd .brand .mk{width:28px; height:28px; background:linear-gradient(135deg,#3f8fe0,#2f6bd8); border-radius:7px; display:grid; place-items:center; color:#fff; font-size:15px}
 .bd .menu{display:flex; gap:26px; font-size:14px; color:#c6d2e6; font-weight:600}
