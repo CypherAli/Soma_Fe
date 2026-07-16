@@ -14,6 +14,11 @@ export default function HomeNav() {
   const [open, setOpen] = useState(false);
 
   const langCode: Record<Loc, string> = { vi: "VI", en: "EN", zh: "中" };
+  const section: "explore" | "library" | "studio" = pathname.startsWith("/thu-vien")
+    ? "library"
+    : pathname.startsWith("/studio")
+      ? "studio"
+      : "explore";
 
   return (
     <>
@@ -23,14 +28,15 @@ export default function HomeNav() {
           <div className="menu">
             <button
               type="button"
-              className="explore-btn"
+              className={`explore-btn${section === "explore" ? " active" : ""}`}
               onClick={() => setOpen((o) => !o)}
-              style={{ display: "flex", alignItems: "center", gap: 5 }}
             >
               {pick(C.nav.explore, locale)} <Icon id="i-chev" className="isvg cx" />
             </button>
-            <a>{pick(C.nav.library, locale)}</a>
-            <a>{pick(C.nav.studio, locale)}</a>
+            <Link href="/thu-vien" className={section === "library" ? "active" : ""}>
+              {pick(C.nav.library, locale)}
+            </Link>
+            <a className={section === "studio" ? "active" : ""}>{pick(C.nav.studio, locale)}</a>
           </div>
           <div className="nav-r">
             <div className="lang">

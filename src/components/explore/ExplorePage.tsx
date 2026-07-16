@@ -18,12 +18,6 @@ export default function ExplorePage({
       <IconSprite />
       <HomeNav />
 
-      <div className="explore-tabs">
-        <span className="explore-tab active">
-          {locale === "vi" ? "Khám phá" : locale === "zh" ? "探索" : "Explore"}
-        </span>
-      </div>
-
       <div className="explore-shell">
         <CategorySidebar locale={locale} active={data.slug as CategorySlug} />
 
