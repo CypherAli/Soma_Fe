@@ -36,7 +36,7 @@ export default function HomeNav() {
     <>
       <nav className="nav">
         <div className="nav-inner">
-          <span className="nav-logo" aria-label="Soma 3D">S</span>
+          <Link href="/" className="nav-logo" aria-label="Soma 3D">S</Link>
           <div className="menu">
             <span className={`explore-group${section === "explore" ? " active" : ""}`}>
               <Link href="/giai-phau/tat-ca" className="explore-link">

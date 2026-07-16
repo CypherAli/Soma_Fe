@@ -30,6 +30,14 @@
     "title": "Thông tin bộ phận",
     "empty": "Chưa chọn bộ phận nào",
     "latin": "Tên Latin",
-    "description": "Mô tả"
+    "description": "Mô tả",
+    "hide": "Ẩn",
+    "show": "Hiện",
+    "fade": "Làm mờ",
+    "isolate": "Cô lập"
+  },
+  "clip": {
+    "title": "Mặt cắt lát",
+    "flip": "Đảo chiều"
   }
 }

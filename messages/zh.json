@@ -30,6 +30,14 @@
     "title": "部位信息",
     "empty": "未选择任何部位",
     "latin": "拉丁名称",
-    "description": "描述"
+    "description": "描述",
+    "hide": "隐藏",
+    "show": "显示",
+    "fade": "淡化",
+    "isolate": "隔离"
+  },
+  "clip": {
+    "title": "截面",
+    "flip": "翻转方向"
   }
 }

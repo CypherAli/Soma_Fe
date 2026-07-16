@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
+import ClipControls from "./ClipControls";
 
 const ModelScene = dynamic(() => import("./ModelScene"), {
   ssr: false,
@@ -25,6 +26,7 @@ export default function ModelViewer() {
   return (
     <div className="relative h-full w-full">
       <ModelScene />
+      <ClipControls />
       <p className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-slate-900/70 px-4 py-1.5 text-xs text-slate-300 backdrop-blur">
         {t("selectHint")}
       </p>
