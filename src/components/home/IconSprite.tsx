@@ -36,6 +36,10 @@ export default function IconSprite() {
         <symbol id="i-steth" viewBox="0 0 24 24"><path d="M6 4v4a4 4 0 0 0 8 0V4" /><path d="M10 12v2a6 6 0 0 0 6 6" /><circle cx="18.5" cy="16" r="2" /></symbol>
         <symbol id="i-nephro" viewBox="0 0 24 24"><path d="M9 4C6 4 5 7 5 10s1 5 3 6c1.5.7 2.2-.6 2.5-1.6M15 4c3 0 4 3 4 6s-1 5-3 6c-1.5.7-2.2-.6-2.5-1.6" /></symbol>
         <symbol id="i-paw" viewBox="0 0 24 24"><circle cx="6" cy="10" r="1.8" /><circle cx="10" cy="7" r="1.8" /><circle cx="14" cy="7" r="1.8" /><circle cx="18" cy="10" r="1.8" /><path d="M8 15.5c0-2.5 1.8-4 4-4s4 1.5 4 4-1.5 4-4 4-4-1.5-4-4z" /></symbol>
+        <symbol id="i-sliders" viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7" /><circle cx="9" cy="7" r="2" /><line x1="4" y1="17" x2="20" y2="17" /><circle cx="15" cy="17" r="2" /></symbol>
+        <symbol id="i-sort" viewBox="0 0 24 24"><path d="M7 5v14M7 19l-3-3M7 19l3-3" /><path d="M17 19V5M17 5l-3 3M17 5l3 3" /></symbol>
+        <symbol id="i-dots" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.4" className="fill" /><circle cx="12" cy="12" r="1.4" className="fill" /><circle cx="19" cy="12" r="1.4" className="fill" /></symbol>
+        <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><ellipse cx="12" cy="12" rx="4" ry="9" /><line x1="3" y1="12" x2="21" y2="12" /></symbol>
       </defs>
     </svg>
   );

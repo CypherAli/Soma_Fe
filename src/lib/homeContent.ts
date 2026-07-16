@@ -3,7 +3,7 @@ export type T3 = Record<Loc, string>;
 
 export const pick = (t: T3, l: Loc) => t[l] ?? t.vi;
 
-type MenuItem = { icon: string; label: T3; vet?: boolean };
+type MenuItem = { icon: string; label: T3; vet?: boolean; href?: string };
 type Card = { img: string; title: T3; sub?: T3; lock?: boolean; badge?: T3 };
 type Collection = { img: string; color: string; title: T3; author: T3; role: T3 };
 
@@ -37,9 +37,9 @@ export const homeContent = {
   mega: {
     anatomyH: { vi: "Giải phẫu", en: "Anatomy", zh: "解剖" },
     anatomy: [
-      { icon: "i-region", label: { vi: "Giải phẫu theo vùng", en: "Anatomy by region", zh: "按区域" } },
-      { icon: "i-system", label: { vi: "Giải phẫu theo hệ", en: "Anatomy by system", zh: "按系统" } },
-      { icon: "i-full", label: { vi: "Giải phẫu toàn thân", en: "Complete anatomy", zh: "完整解剖" } },
+      { icon: "i-region", label: { vi: "Giải phẫu theo vùng", en: "Anatomy by region", zh: "按区域" }, href: "/giai-phau/theo-vung" },
+      { icon: "i-system", label: { vi: "Giải phẫu theo hệ", en: "Anatomy by system", zh: "按系统" }, href: "/giai-phau/theo-he" },
+      { icon: "i-full", label: { vi: "Giải phẫu toàn thân", en: "Complete anatomy", zh: "完整解剖" }, href: "/viewer" },
       { icon: "i-bone", label: { vi: "Mốc xương, nguyên ủy & bám tận", en: "Bony landmarks & insertions", zh: "骨性标志与附着" } },
       { icon: "i-cross", label: { vi: "Lát cắt & vi giải phẫu", en: "Cross sections & microanatomy", zh: "断面与微观解剖" } },
       { icon: "i-quiz", label: { vi: "Trắc nghiệm giải phẫu", en: "Anatomy quizzes", zh: "解剖测验" } },

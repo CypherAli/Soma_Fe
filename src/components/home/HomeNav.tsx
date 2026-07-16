@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useLocale } from "next-intl";
-import { useRouter, usePathname } from "@/i18n/navigation";
+import { useRouter, usePathname, Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { homeContent as C, pick, type Loc } from "@/lib/homeContent";
 import { Icon } from "./IconSprite";
@@ -56,11 +56,17 @@ export default function HomeNav() {
             <div className="mega-grid">
               <div>
                 <p className="mcol-h">{pick(C.mega.anatomyH, locale)}</p>
-                {C.mega.anatomy.map((m, i) => (
-                  <div key={i} className={`mi${m.vet ? " vet" : ""}`}>
-                    <Icon id={m.icon} /> {pick(m.label, locale)}
-                  </div>
-                ))}
+                {C.mega.anatomy.map((m, i) =>
+                  m.href ? (
+                    <Link key={i} href={m.href} className={`mi${m.vet ? " vet" : ""}`} onClick={() => setOpen(false)}>
+                      <Icon id={m.icon} /> {pick(m.label, locale)}
+                    </Link>
+                  ) : (
+                    <div key={i} className={`mi${m.vet ? " vet" : ""}`}>
+                      <Icon id={m.icon} /> {pick(m.label, locale)}
+                    </div>
+                  ),
+                )}
                 <p className="mcol-h mt">{pick(C.mega.communityH, locale)}</p>
                 {C.mega.community.map((m, i) => (
                   <div key={i} className="mi"><Icon id={m.icon} /> {pick(m.label, locale)}</div>
