@@ -9,9 +9,9 @@ export default function Sidebar() {
   const toggleSystem = useAnatomyStore((s) => s.toggleSystem);
 
   return (
-    <aside className="flex w-64 shrink-0 flex-col border-r border-slate-800 bg-slate-900">
+    <aside className="flex w-64 shrink-0 flex-col border-r border-[var(--line)] bg-[var(--surf)]">
       <div className="px-4 py-3">
-        <h2 className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+        <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--muted-2)]">
           {t("systems")}
         </h2>
       </div>
@@ -20,12 +20,12 @@ export default function Sidebar() {
           <button
             key={key}
             onClick={() => toggleSystem(key)}
-            className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm text-slate-300 transition-colors hover:bg-slate-800"
+            className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm text-[var(--body-fg)] transition-colors hover:bg-[var(--surf-2)]"
           >
             <span>{t(key)}</span>
             <span
               className={`h-4 w-8 rounded-full p-0.5 transition-colors ${
-                visibleSystems[key] ? "bg-sky-500" : "bg-slate-700"
+                visibleSystems[key] ? "bg-[var(--blue)]" : "bg-[var(--line)]"
               }`}
             >
               <span

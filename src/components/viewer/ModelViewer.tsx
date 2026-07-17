@@ -14,9 +14,9 @@ const ModelScene = dynamic(() => import("./ModelScene"), {
 function ViewerFallback() {
   const t = useTranslations("viewer");
   return (
-    <div className="flex h-full w-full items-center justify-center">
-      <div className="flex flex-col items-center gap-3 text-slate-400">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-slate-600 border-t-sky-400" />
+    <div className="flex h-full w-full items-center justify-center bg-[var(--surf-3)]">
+      <div className="flex flex-col items-center gap-3 text-[var(--muted)]">
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-[var(--line)] border-t-[var(--blue)]" />
         <p className="text-sm">{t("loading")}</p>
       </div>
     </div>
@@ -43,7 +43,7 @@ export default function ModelViewer({
         autoFocusOnLoad={autoFocusOnLoad}
       />
       {showClipControls && <ClipControls />}
-      <p className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-slate-900/70 px-4 py-1.5 text-xs text-slate-300 backdrop-blur">
+      <p className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full border border-[var(--line)] bg-white/90 px-4 py-1.5 text-xs text-[var(--body-fg)] shadow backdrop-blur">
         {t("selectHint")}
       </p>
     </div>

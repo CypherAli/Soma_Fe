@@ -18,9 +18,9 @@ export default function InfoPanel() {
   const isIsolated = selected ? isolatedId === selected.id : false;
 
   return (
-    <aside className="flex w-72 shrink-0 flex-col border-l border-slate-800 bg-slate-900">
-      <div className="border-b border-slate-800 px-4 py-3">
-        <h2 className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+    <aside className="flex w-72 shrink-0 flex-col border-l border-[var(--line)] bg-[var(--surf)]">
+      <div className="border-b border-[var(--line)] px-4 py-3">
+        <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--muted-2)]">
           {t("title")}
         </h2>
       </div>
@@ -28,11 +28,11 @@ export default function InfoPanel() {
       {selected ? (
         <div className="space-y-4 p-4">
           <div>
-            <h3 className="text-lg font-semibold text-slate-100">
+            <h3 className="text-lg font-semibold text-[var(--ink)]">
               {selected.name}
             </h3>
             {selected.latin && (
-              <p className="mt-0.5 text-sm italic text-sky-400">
+              <p className="mt-0.5 text-sm italic text-[var(--blue)]">
                 {selected.latin}
               </p>
             )}
@@ -43,8 +43,8 @@ export default function InfoPanel() {
               onClick={() => toggleHidden(selected.id)}
               className={`flex-1 rounded border px-2 py-1.5 text-xs font-medium ${
                 isHidden
-                  ? "border-sky-400 bg-sky-500/20 text-sky-300"
-                  : "border-slate-700 text-slate-300 hover:bg-slate-800"
+                  ? "border-[var(--blue)] bg-[color-mix(in_srgb,var(--blue)_12%,white)] text-[var(--blue)]"
+                  : "border-[var(--line)] text-[var(--body-fg)] hover:bg-[var(--surf-2)]"
               }`}
             >
               {isHidden ? t("show") : t("hide")}
@@ -54,8 +54,8 @@ export default function InfoPanel() {
               onClick={() => toggleFaded(selected.id)}
               className={`flex-1 rounded border px-2 py-1.5 text-xs font-medium ${
                 isFaded
-                  ? "border-sky-400 bg-sky-500/20 text-sky-300"
-                  : "border-slate-700 text-slate-300 hover:bg-slate-800"
+                  ? "border-[var(--blue)] bg-[color-mix(in_srgb,var(--blue)_12%,white)] text-[var(--blue)]"
+                  : "border-[var(--line)] text-[var(--body-fg)] hover:bg-[var(--surf-2)]"
               }`}
             >
               {t("fade")}
@@ -65,8 +65,8 @@ export default function InfoPanel() {
               onClick={() => toggleIsolate(selected.id)}
               className={`flex-1 rounded border px-2 py-1.5 text-xs font-medium ${
                 isIsolated
-                  ? "border-sky-400 bg-sky-500/20 text-sky-300"
-                  : "border-slate-700 text-slate-300 hover:bg-slate-800"
+                  ? "border-[var(--blue)] bg-[color-mix(in_srgb,var(--blue)_12%,white)] text-[var(--blue)]"
+                  : "border-[var(--line)] text-[var(--body-fg)] hover:bg-[var(--surf-2)]"
               }`}
             >
               {t("isolate")}
@@ -74,10 +74,10 @@ export default function InfoPanel() {
           </div>
           {selected.description && (
             <div>
-              <p className="mb-1 text-xs font-medium uppercase tracking-wide text-slate-500">
+              <p className="mb-1 text-xs font-medium uppercase tracking-wide text-[var(--muted-2)]">
                 {t("description")}
               </p>
-              <p className="text-sm leading-relaxed text-slate-300">
+              <p className="text-sm leading-relaxed text-[var(--body-fg)]">
                 {selected.description}
               </p>
             </div>
@@ -85,7 +85,7 @@ export default function InfoPanel() {
         </div>
       ) : (
         <div className="flex flex-1 items-center justify-center p-6">
-          <p className="text-center text-sm text-slate-500">{t("empty")}</p>
+          <p className="text-center text-sm text-[var(--muted)]">{t("empty")}</p>
         </div>
       )}
     </aside>

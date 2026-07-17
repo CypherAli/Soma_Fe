@@ -74,6 +74,41 @@ const SYSTEM_FALLBACK_COLOR: Record<SystemKey, string> = {
   joints: "#d9c9a0",
 };
 
+/**
+ * Màu ÉP BUỘC — ghi đè cả material đã có màu thật. Dùng cho lớp "vỏ ngoài"
+ * (Fascia = mạc nông, đóng vai da) để tô tông da ấm giống atlas thương mại
+ * (lựa chọn 3A của user) thay vì màu teal quy ước gốc Z-Anatomy.
+ */
+const FORCED_COLORS: Record<string, string> = {
+  Fascia: "#d8b090",
+  Superficial: "#cfa07e",
+};
+
+/**
+ * Độ nhám bề mặt theo LOẠI MÔ để bớt cảm giác "phẳng nhựa" — tạng/niêm mạc
+ * ẩm & bóng nhẹ (roughness thấp), xương/mạc/gân khô & mờ (roughness cao).
+ * Chưa có texture PBR thật nên đây là cách rẻ nhất tạo chiều sâu chất liệu.
+ */
+const TISSUE_ROUGHNESS: Record<string, number> = {
+  Organ: 0.42,
+  Mucosa: 0.38,
+  Intestine: 0.45,
+  Gallbladder: 0.4,
+  Lung: 0.55,
+  Peritoneum: 0.35,
+  Gland: 0.45,
+  Bone: 0.7,
+  Teeth: 0.35,
+  Cartilage: 0.5,
+  Fascia: 0.78,
+  Superficial: 0.72,
+  Ligament: 0.6,
+  Tendon: 0.55,
+  Artery: 0.5,
+  Vein: 0.5,
+  Nerve: 0.6,
+};
+
 function SystemModel({
   url,
   visible,
@@ -91,7 +126,19 @@ function SystemModel({
   useEffect(() => {
     scene.traverse((o) => {
       const mesh = o as THREE.Mesh;
-      if (!mesh.isMesh || !mesh.material) return;
+      if (!mesh.isMesh) return;
+
+      // Nhãn text 3D của Z-Anatomy (tên hệ nổi lơ lửng "VISCERAL SYSTEMS"...)
+      // KHÔNG phải giải phẫu → ẩn. Bắt theo 2 dấu hiệu vì có nhãn dùng material
+      // "Text", có nhãn lại KHÔNG có material (nên chỉ lọc material sẽ sót):
+      //  - tên mesh (đã sanitize) kết thúc "_systemg"/"_systemsg" (từ "X system(s).g")
+      //  - hoặc material tên "Text".
+      const stdEarly = getStd(mesh);
+      if (/_systems?g$/i.test(mesh.name) || stdEarly?.name === "Text") {
+        mesh.userData.isLabel = true;
+      }
+
+      if (!mesh.material) return;
       // Mỗi mesh một material riêng để highlight độc lập.
       mesh.material = Array.isArray(mesh.material)
         ? mesh.material.map((m) => m.clone())
@@ -99,24 +146,27 @@ function SystemModel({
       const std = getStd(mesh);
       if (!std) return;
 
-      // Nhãn tổ chức Blender ("Text") bị lỡ xuất kèm mesh thật — không phải
-      // giải phẫu, đánh dấu để luôn ẩn thay vì hiển thị lơ lửng trong scene.
-      if (std.name === "Text") {
-        mesh.userData.isLabel = true;
-      }
-
       // Toàn bộ material export đều có emissiveFactor=[1,1,1] (tự phát sáng
       // trắng toàn phần) — lỗi ở bước export đè mất màu mô thật. Tắt hẳn.
       std.emissive.setScalar(0);
       std.emissiveIntensity = 0;
 
-      // Chỉ điền màu khi material KHÔNG có màu thật (còn trắng mặc định).
+      const base = std.name.replace(/-\d+$/, "").trim();
+
+      // Ưu tiên màu ép buộc (vỏ ngoài → da ấm); nếu không, chỉ điền màu khi
+      // material CHƯA có màu thật (còn trắng mặc định theo spec glTF).
       const isDefaultWhite = std.color.r === 1 && std.color.g === 1 && std.color.b === 1;
-      if (isDefaultWhite) {
-        const base = std.name.replace(/-\d+$/, "").trim();
-        const fill = TISSUE_COLORS[base] ?? SYSTEM_FALLBACK_COLOR[systemKey];
-        std.color.set(fill);
+      if (FORCED_COLORS[base]) {
+        std.color.set(FORCED_COLORS[base]);
+      } else if (isDefaultWhite) {
+        std.color.set(TISSUE_COLORS[base] ?? SYSTEM_FALLBACK_COLOR[systemKey]);
       }
+
+      // Chất liệu: không kim loại, độ nhám theo loại mô (bớt phẳng). Tên như
+      // "Lung-3" khớp tiền tố "Lung"; không khớp thì mặc định hơi ẩm 0.5.
+      std.metalness = 0;
+      const roughKey = Object.keys(TISSUE_ROUGHNESS).find((k) => base.startsWith(k));
+      std.roughness = roughKey ? TISSUE_ROUGHNESS[roughKey] : 0.5;
     });
   }, [scene, systemKey]);
 
@@ -289,12 +339,18 @@ export default function ModelScene({
       gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping }}
       onCreated={({ gl }) => {
         gl.localClippingEnabled = true;
+        gl.toneMappingExposure = 1.0;
       }}
     >
-      <color attach="background" args={["#0b1220"]} />
-      <hemisphereLight intensity={0.8} groundColor="#0b1220" />
-      <directionalLight position={[3, 6, 4]} intensity={1.4} />
-      <directionalLight position={[-4, -2, -3]} intensity={0.5} />
+      <color attach="background" args={["#eef1f6"]} />
+      {/* Studio 3-point: key ấm trước-trên-phải, fill lạnh nhẹ trái, rim sau
+          tách khối khỏi nền, hemisphere trời ấm/đất trung tính làm nền dịu.
+          Cường độ giữ vừa phải để mô nhạt (xương/da) không cháy trắng. */}
+      <hemisphereLight args={["#fff4e6", "#c9ccd4", 0.35]} />
+      <ambientLight intensity={0.1} />
+      <directionalLight position={[4, 6, 5]} intensity={1.25} color="#fff3e2" />
+      <directionalLight position={[-5, 1, 2]} intensity={0.35} color="#dbe6f5" />
+      <directionalLight position={[-2, 3, -6]} intensity={0.5} color="#ffffff" />
       <Bounds fit clip observe margin={1.1}>
         <Center>
           <group>
