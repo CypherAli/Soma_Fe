@@ -7,17 +7,19 @@ col_names = argv[1:]
 
 Z_TOP = 1.28     # mặt cắt ngang trên (trên tạng bụng) — mở bụng
 Z_BOT = 0.78     # cắt dưới ~vành chậu, bỏ chân
-X_ARM = 0.20     # mesh có TÂM |X|>ngưỡng = tay/chi bên → xoá
+X_ARM = 0.165    # mesh có TÂM |X|>ngưỡng = tay/vai bên → xoá (thân bụng ~±0.15)
 
-# Bỏ chi (tay/chân) + đầu-cổ theo TÊN (lọc |X| không tách được tay sát thân).
+# Bỏ chi (tay/chân) + vai theo TÊN (lọc |X| không tách hết mẩu vai sát thân).
 LIMB_KW = ["brachi", "humer", "radius", "ulna", "carp", "metacarp", "digitorum",
            "digiti", "pollic", " hand", "finger", "phalan", "antebrach", "forearm",
            "deltoid", "bicep", "tricep", "femor", "femur", "thigh", "patell",
            "tibia", "fibula", "gastrocn", "soleus", "tarsal", " foot", " toe",
            "hallucis", "peroneus", "popliteus", "sartorius", "gracilis",
-           "quadratus femoris", "obturator"]
-# Lớp "vỏ ngoài" (da/mạc) — KHÔNG bịt nắp để hở thành vòng nhìn vào trong.
-NO_CAP_MAT = ["fascia", "superficial", "skin"]
+           "quadratus femoris", "obturator", "teres", "infraspin", "supraspin",
+           "subscapular", "scapula", "clavicle", "coracobrach", "acromio",
+           "supinator", "pronator", "anconeus", "brachii", "brachial", "axilla"]
+# Lớp KHÔNG bịt nắp (để hở nhìn vào trong): da/mạc + peritoneum (bao lớn che tạng).
+NO_CAP_MAT = ["fascia", "superficial", "skin", "peritoneum"]
 
 def limb_name(nm):
     low = nm.lower()
@@ -69,21 +71,31 @@ print("KEPT", len(kept), "DELETED", deleted)
 
 # Bisect từng object đang chồng lên dải: cắt trên (bỏ phần trên, bịt nắp),
 # cắt dưới (bỏ phần dưới). Dùng bmesh để ổn định hơn bpy.ops.
+X_CLIP = 0.19    # cắt phẳng đứng 2 bên bỏ overhang lateral (mẩu vai/tay sát thân)
+
 def bisect_obj(o, do_cap):
     me = o.data
     bm = bmesh.new(); bm.from_mesh(me)
     mw = o.matrix_world; mwi = mw.inverted()
-    # local plane co/no cho Z_TOP (bỏ phần z>Z_TOP, fill)
-    for zc, keep_below in ((Z_TOP, True), (Z_BOT, False)):
-        co_local = mwi @ Vector((0,0,zc))
-        no_local = (mwi.to_3x3() @ Vector((0,0,1))).normalized()
+    # Danh sách mặt phẳng cắt (world): (điểm, pháp tuyến, giữ-nửa-cùng-chiều-pháp?, có-bịt-nắp?)
+    #  - Z_TOP: giữ dưới, bịt nắp (nếu do_cap)   - Z_BOT: giữ trên, không nắp
+    #  - X=±X_CLIP: bỏ phần lệch ngoài, không nắp (dứt mẩu vai/tay)
+    # keep_neg=True → giữ nửa ÂM của trục (clear_outer=True, đối chiếu code cũ đã chạy).
+    planes = [
+        (Vector((0,0,Z_TOP)),  Vector((0,0,1)),  True,  do_cap),   # giữ z<top, bỏ trên
+        (Vector((0,0,Z_BOT)),  Vector((0,0,1)),  False, False),    # giữ z>bot, bỏ dưới
+        (Vector((X_CLIP,0,0)), Vector((1,0,0)),  True,  False),    # giữ x<+clip
+        (Vector((-X_CLIP,0,0)),Vector((1,0,0)),  False, False),    # giữ x>-clip
+    ]
+    for co_w, no_w, keep_neg, cap in planes:
+        co_local = mwi @ co_w
+        no_local = (mwi.to_3x3() @ no_w).normalized()
         geom = bm.verts[:] + bm.edges[:] + bm.faces[:]
         res = bmesh.ops.bisect_plane(bm, geom=geom, dist=1e-6,
                                      plane_co=co_local, plane_no=no_local,
-                                     clear_inner=(not keep_below),
-                                     clear_outer=keep_below)
-        # Bịt nắp mặt cắt TRÊN — trừ lớp da/mạc (để hở nhìn vào trong).
-        if keep_below and do_cap:
+                                     clear_inner=(not keep_neg),
+                                     clear_outer=keep_neg)
+        if cap:
             cut = [e for e in res['geom_cut'] if isinstance(e, bmesh.types.BMEdge)]
             if cut:
                 try: bmesh.ops.edgeloop_fill(bm, edges=cut)
