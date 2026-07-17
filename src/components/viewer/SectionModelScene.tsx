@@ -16,14 +16,13 @@ function SectionModel({ url }: { url: string }) {
   const isolatedId = useAnatomyStore((s) => s.isolatedId);
 
   // Model cắt trộn nhiều loại mô (xương/cơ/tạng) — màu lấy theo TÊN material
-  // nên fallback "visceral" chỉ dùng cho mesh trắng lạ. Thêm DoubleSide vì
-  // mặt cắt cần lộ cả mặt trong (đặc), và phòng normal chưa hoàn hảo → cull.
+  // nên fallback "visceral" chỉ dùng cho mesh trắng lạ.
+  // KHÔNG ép DoubleSide toàn cục nữa: script Blender đã recalc_face_normals
+  // cho mọi mesh (kể cả mặt nắp mới bịt) nên FrontSide mặc định đã đúng —
+  // DoubleSide làm GPU vẽ gấp đôi số mặt, chính là nguyên nhân "load rồi
+  // trắng" (WebGL Context Lost) trên GPU tích hợp yếu.
   useEffect(() => {
     prepareAnatomyScene(scene, "visceral");
-    scene.traverse((o) => {
-      const std = getStd(o as THREE.Mesh);
-      if (std) std.side = THREE.DoubleSide;
-    });
   }, [scene]);
 
   useEffect(() => {
