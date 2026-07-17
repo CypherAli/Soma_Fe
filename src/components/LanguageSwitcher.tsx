@@ -18,7 +18,7 @@ export default function LanguageSwitcher() {
   const [isPending, startTransition] = useTransition();
 
   return (
-    <div className="flex items-center gap-1 rounded-lg border border-slate-700 bg-slate-800/60 p-0.5">
+    <div className="flex items-center gap-1 rounded-lg border border-[var(--line)] bg-[var(--surf-2)] p-0.5">
       {routing.locales.map((l) => (
         <button
           key={l}
@@ -28,8 +28,8 @@ export default function LanguageSwitcher() {
           }
           className={`rounded-md px-2.5 py-1 text-xs font-medium transition-colors ${
             l === locale
-              ? "bg-sky-500 text-white"
-              : "text-slate-300 hover:bg-slate-700"
+              ? "bg-[var(--blue)] text-white"
+              : "text-[var(--muted)] hover:bg-[var(--surf-3)]"
           }`}
           title={LABELS[l]}
         >

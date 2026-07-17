@@ -16,14 +16,14 @@ export default function ClipControls() {
   const toggleClipDirection = useAnatomyStore((s) => s.toggleClipDirection);
 
   return (
-    <div className="absolute left-4 top-4 z-10 w-64 rounded-lg border border-slate-800 bg-slate-900/90 p-3 backdrop-blur">
-      <label className="flex items-center justify-between text-xs font-semibold uppercase tracking-wide text-slate-400">
+    <div className="absolute left-4 top-4 z-10 w-64 rounded-lg border border-[var(--line)] bg-white/95 p-3 shadow-lg backdrop-blur">
+      <label className="flex items-center justify-between text-xs font-semibold uppercase tracking-wide text-[var(--muted-2)]">
         {t("title")}
         <input
           type="checkbox"
           checked={clipEnabled}
           onChange={(e) => setClipEnabled(e.target.checked)}
-          className="h-4 w-4 accent-sky-500"
+          className="h-4 w-4 accent-[var(--blue)]"
         />
       </label>
 
@@ -37,8 +37,8 @@ export default function ClipControls() {
                 onClick={() => setClipAxis(axis)}
                 className={`flex-1 rounded border px-2 py-1 text-xs font-medium uppercase ${
                   clipAxis === axis
-                    ? "border-sky-400 bg-sky-500/20 text-sky-300"
-                    : "border-slate-700 text-slate-300 hover:bg-slate-800"
+                    ? "border-[var(--blue)] bg-[color-mix(in_srgb,var(--blue)_12%,white)] text-[var(--blue)]"
+                    : "border-[var(--line)] text-[var(--body-fg)] hover:bg-[var(--surf-2)]"
                 }`}
               >
                 {axis}
@@ -52,13 +52,13 @@ export default function ClipControls() {
             max={100}
             value={clipPercent}
             onChange={(e) => setClipPercent(Number(e.target.value))}
-            className="w-full accent-sky-500"
+            className="w-full accent-[var(--blue)]"
           />
 
           <button
             type="button"
             onClick={toggleClipDirection}
-            className="w-full rounded border border-slate-700 px-2 py-1 text-xs font-medium text-slate-300 hover:bg-slate-800"
+            className="w-full rounded border border-[var(--line)] px-2 py-1 text-xs font-medium text-[var(--body-fg)] hover:bg-[var(--surf-2)]"
           >
             {t("flip")}
           </button>

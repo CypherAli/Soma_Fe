@@ -3,6 +3,7 @@ import TopBar from "@/components/TopBar";
 import Sidebar from "@/components/Sidebar";
 import InfoPanel from "@/components/InfoPanel";
 import ModelViewer from "@/components/viewer/ModelViewer";
+import "../../home.css";
 
 export default async function ViewerPage({
   params,
@@ -13,11 +14,11 @@ export default async function ViewerPage({
   setRequestLocale(locale);
 
   return (
-    <div className="flex h-screen flex-col bg-slate-950">
+    <div className="bd flex h-screen flex-col bg-[var(--surf-3)]">
       <TopBar />
       <div className="flex flex-1 overflow-hidden">
         <Sidebar />
-        <main className="relative flex-1 bg-slate-950">
+        <main className="relative flex-1 bg-[var(--surf-3)]">
           <ModelViewer />
         </main>
         <InfoPanel />
