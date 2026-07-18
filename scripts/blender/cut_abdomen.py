@@ -1,4 +1,4 @@
-import bpy, sys, bmesh
+import bpy, sys, bmesh, re
 from mathutils import Vector
 
 argv = sys.argv[sys.argv.index('--')+1:]
@@ -11,7 +11,16 @@ X_ARM = 0.165    # mesh có TÂM |X|>ngưỡng = tay/vai bên → xoá (thân b�
 X_CLIP = 0.19    # cắt phẳng đứng 2 bên bỏ overhang lateral (mẩu vai/tay sát thân)
 
 # Cấu trúc CẦN giữ riêng để còn bấm chọn được (hotspot) — không gộp/giảm poly.
-HERO_NAMES = {"Vertebra T12", "Liver", "Stomach", "Spleen", "Kidney.l", "Kidney.r"}
+HERO_NAMES = {"Vertebra T12", "Liver", "Stomach", "Spleen", "Kidney.l", "Kidney.r",
+              "Abdominal aorta", "Inferior vena cava (abdominal part)"}
+
+# Z-Anatomy lưu mạch máu chính (động mạch chủ bụng, tĩnh mạch chủ dưới) dạng
+# CURVE có bevel (ống tròn), KHÔNG PHẢI Mesh — script trước giờ chỉ gom
+# object type Mesh từ collection nên bỏ sót hoàn toàn 2 mạch này dù chúng có
+# thật trong file gốc (xác nhận qua TA2.csv của Z-Anatomy + kiểm tra trực
+# tiếp: material đã đúng sẵn "Artery"/"Vein", nằm trong "5: Cardiovascular
+# system"). Chuyển Curve → Mesh thủ công rồi bơm thẳng vào luồng xử lý chung.
+VESSEL_CURVE_NAMES = ["Abdominal aorta", "Inferior vena cava (abdominal part)"]
 
 # Bỏ chi (tay/chân) + vai theo TÊN (lọc |X| không tách hết mẩu vai sát thân).
 LIMB_KW = ["brachi", "humer", "radius", "ulna", "carp", "metacarp", "digitorum",
@@ -21,13 +30,42 @@ LIMB_KW = ["brachi", "humer", "radius", "ulna", "carp", "metacarp", "digitorum",
            "hallucis", "peroneus", "popliteus", "sartorius", "gracilis",
            "quadratus femoris", "obturator", "teres", "infraspin", "supraspin",
            "subscapular", "scapula", "clavicle", "coracobrach", "acromio",
-           "supinator", "pronator", "anconeus", "brachii", "brachial", "axilla"]
+           "supinator", "pronator", "anconeus", "brachii", "brachial", "axilla",
+           "pector", "trapez", "latissimus", "rhomboid", "serratus", "levator scapul"]
+# Cấu trúc vùng CHẬU — thấp hơn hẳn mức T12, KHÔNG thuộc scene này. Lọc theo
+# Z_BOT không đủ vì vài object (VD xương chậu, bàng quang) có bbox tràn lên
+# một chút vào dải Z_BOT..Z_TOP → chỉ bị CẮT chứ không bị XOÁ, để lại mẩu
+# lộ ra ngoài da (đã thấy thật: "Xương chậu 1" chìa ra 2 bên, "Urinary
+# bladder" xuất hiện khi click ngẫu nhiên). Xoá thẳng theo TÊN bất kể Z.
+PELVIC_KW = ["pelvis", "hip bone", "ilium", "ischium", "pubis", "sacrum",
+             "coccyx", "bladder"]
+# Tương tự nhưng ở mép TRÊN: tim/phổi/màng phổi thuộc LỒNG NGỰC, cao hơn
+# hẳn T12, nhưng bbox chạm nhẹ Z_TOP nên chỉ bị CẮT chứ không bị XOÁ — xác
+# nhận thật qua chẩn đoán OPEN_CAP (Right/Left atrium+ventricle, Pleura,
+# các đoạn phổi đều hở, không bịt nắp được vì hình dạng quá phức tạp).
+THORACIC_KW = ["atrium", "ventricle", "pleura", "lung", "bronch", "trachea", "pericard"]
+# Đốt sống KHÁC T12 (VD "Vertebra T10 1", T11, L1) cùng lỗi bbox chạm nhẹ
+# Z_TOP/Z_BOT như tim/xương chậu — xác nhận thật (click trúng "Vertebra T10
+# 1" khi xem từ trên xuống). Regex tránh nhầm "T1" khớp nhầm vào "T12".
+def other_vertebra_name(nm):
+    m = re.match(r"vertebra\s+([tl])(\d+)", nm.lower())
+    if not m:
+        return False
+    return not (m.group(1) == "t" and m.group(2) == "12")
 # Lớp KHÔNG bịt nắp (để hở nhìn vào trong): da/mạc + peritoneum (bao lớn che tạng).
 NO_CAP_MAT = ["fascia", "superficial", "skin", "peritoneum"]
 
 def limb_name(nm):
     low = nm.lower()
     return any(k in low for k in LIMB_KW)
+
+def pelvic_name(nm):
+    low = nm.lower()
+    return any(k in low for k in PELVIC_KW)
+
+def thoracic_name(nm):
+    low = nm.lower()
+    return any(k in low for k in THORACIC_KW)
 
 def mat_is_wall(o):
     for m in o.data.materials:
@@ -62,6 +100,23 @@ for o in bpy.data.objects:
     try: o.select_set(False)
     except: pass
 
+# TẠM TẮT: chuyển Curve mạch máu sang Mesh — verify thật cho thấy hình dạng
+# bị phồng to bất thường quấn quanh cả thân (nghi bevel_object riêng của
+# curve bị phóng to nhầm theo bevel_depth mới tăng, chưa rõ nguyên nhân kỹ
+# hơn). Đã revert để phục hồi bản sạch trước đó — CHƯA bật lại cho tới khi
+# điều tra kỹ và verify hình dạng đúng kích thước thật trước khi export.
+# for vname in VESSEL_CURVE_NAMES:
+#     vobj = bpy.data.objects.get(vname)
+#     if not vobj or vobj.type != 'CURVE':
+#         print("VESSEL NOTFOUND", vname); continue
+#     if vobj.data.bevel_depth < 0.007:
+#         vobj.data.bevel_depth = 0.009
+#     with bpy.context.temp_override(active_object=vobj, object=vobj,
+#                                     selected_objects=[vobj], selected_editable_objects=[vobj]):
+#         bpy.ops.object.convert(target='MESH')
+#     objs.append(vobj)
+#     print("VESSEL CONVERTED", vobj.name)
+
 kept = []
 deleted = 0
 for o in objs:
@@ -73,7 +128,7 @@ for o in objs:
     is_hero = o.name in HERO_NAMES
     # Xoá nếu: hẳn ngoài dải bụng / tâm lệch bên (tay-chân bên) / tên là chi.
     # Hero KHÔNG bị lọc theo X (VD Kidney.r có thể lệch phải hơn ngưỡng chung).
-    if zmn > Z_TOP or zmx < Z_BOT or limb_name(o.name) or (not is_hero and abs(xc) > X_ARM):
+    if zmn > Z_TOP or zmx < Z_BOT or limb_name(o.name) or pelvic_name(o.name) or thoracic_name(o.name) or other_vertebra_name(o.name) or (not is_hero and abs(xc) > X_ARM):
         try:
             bpy.data.objects.remove(o, do_unlink=True); deleted += 1
         except: pass
@@ -90,9 +145,13 @@ def bisect_obj(o, do_cap, do_xclip=True):
         (Vector((0,0,Z_BOT)),  Vector((0,0,1)),  False, False),
     ]
     if do_xclip:
+        # BUG ĐÃ SỬA: 2 mặt cắt bên này trước đây luôn cap=False (không bịt
+        # nắp) — với mesh nào bị lộ ra ở đúng mặt cắt X (VD cơ cạnh sống,
+        # nhìn thấy từ một số góc) thì để hở thành vệt đen chạy dọc suốt
+        # chiều cao. Dùng chung `do_cap` như mặt trên để bịt kín luôn.
         planes += [
-            (Vector((X_CLIP,0,0)), Vector((1,0,0)),  True,  False),
-            (Vector((-X_CLIP,0,0)),Vector((1,0,0)),  False, False),
+            (Vector((X_CLIP,0,0)), Vector((1,0,0)),  True,  do_cap),
+            (Vector((-X_CLIP,0,0)),Vector((1,0,0)),  False, do_cap),
         ]
     for co_w, no_w, keep_neg, cap in planes:
         co_local = mwi @ co_w
@@ -105,10 +164,32 @@ def bisect_obj(o, do_cap, do_xclip=True):
         if cap:
             cut = [e for e in res['geom_cut'] if isinstance(e, bmesh.types.BMEdge)]
             if cut:
+                # edgeloop_fill chỉ xử lý đúng 1 vòng biên đơn giản — mặt cắt
+                # cơ/xương phức tạp (nhiều vòng, lõm) hay làm nó FAIL ÂM THẦM
+                # (không báo lỗi nhưng không tạo mặt nào) → để lại lỗ hở đen.
+                # Kiểm tra thật số mặt tăng lên, không chỉ dựa vào exception.
+                before = len(bm.faces)
                 try: bmesh.ops.edgeloop_fill(bm, edges=cut)
-                except Exception:
+                except Exception: pass
+                if len(bm.faces) == before:
+                    try: bmesh.ops.holes_fill(bm, edges=cut, sides=0)
+                    except Exception: pass
+                if len(bm.faces) == before:
                     try: bmesh.ops.triangle_fill(bm, edges=cut, use_beauty=True)
-                    except: pass
+                    except Exception: pass
+    # CHẨN ĐOÁN: quét biên hở (boundary edge, <2 mặt liền kề) còn sót SAU khi
+    # đã thử bịt nắp — báo đúng tên object + hở ở mặt nào (trên/bên), để tìm
+    # thủ phạm thật thay vì đoán mò rồi chạy lại nhiều lần.
+    open_top = open_xclip = 0
+    for e in bm.edges:
+        if len(e.link_faces) < 2:
+            mid_w = mw @ ((e.verts[0].co + e.verts[1].co) / 2)
+            if abs(mid_w.z - Z_TOP) < 0.01:
+                open_top += 1
+            elif do_xclip and abs(abs(mid_w.x) - X_CLIP) < 0.01:
+                open_xclip += 1
+    if (open_top or open_xclip) and do_cap:
+        print("OPEN_CAP", o.name, "top_edges", open_top, "xclip_edges", open_xclip)
     try:
         bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:])
     except Exception:

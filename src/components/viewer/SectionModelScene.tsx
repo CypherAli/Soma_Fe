@@ -4,10 +4,10 @@ import { useRef, useEffect } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls, useGLTF, Center, Bounds } from "@react-three/drei";
 import * as THREE from "three";
-import { useAnatomyStore, type SelectedPart } from "@/store/useAnatomyStore";
+import { useAnatomyStore } from "@/store/useAnatomyStore";
 import type { SceneHotspot } from "@/lib/sceneModules";
-import Hotspots, { cleanName } from "./Hotspots";
-import { getStd, prepareAnatomyScene, applyVisibility } from "./materials";
+import Hotspots from "./Hotspots";
+import { getAllStd, prepareAnatomyScene, applyVisibility } from "./materials";
 
 function SectionModel({ url }: { url: string }) {
   const { scene } = useGLTF(url, "/draco/");
@@ -35,6 +35,7 @@ function SectionModel({ url }: { url: string }) {
 /** Raycast hover + click cho model cắt (R3F event trên cây gltf ngoài không đáng tin). */
 function Picker() {
   const { camera, gl, raycaster, scene } = useThree();
+  const setActiveHotspotKey = useAnatomyStore((s) => s.setActiveHotspotKey);
   const setSelected = useAnatomyStore((s) => s.setSelected);
   const setHovered = useAnatomyStore((s) => s.setHovered);
   const hoverRef = useRef<THREE.Mesh | null>(null);
@@ -47,8 +48,7 @@ function Picker() {
     const HL_SEL = new THREE.Color("#38bdf8");
     const paint = (mesh: THREE.Mesh | null, color: THREE.Color | null, intensity: number) => {
       if (!mesh) return;
-      const std = getStd(mesh);
-      if (std) {
+      for (const std of getAllStd(mesh)) {
         std.emissive.copy(color ?? new THREE.Color("#000000"));
         std.emissiveIntensity = intensity;
       }
@@ -86,9 +86,14 @@ function Picker() {
       selRef.current = m;
       if (m) {
         paint(m, HL_SEL, 0.6);
-        const payload: SelectedPart = { id: m.name, name: cleanName(m.name), latin: m.name.replace(/_/g, " ") };
-        setSelected(payload);
+        // Zoom + hiện tên: giao lại cho Hotspots xử lý (đã có sẵn animation
+        // camera + set InfoPanel), tránh viết 1 bộ camera-fly thứ 2 ở đây.
+        setActiveHotspotKey(m.name);
       } else {
+        // Click trượt ra khoảng trống (rất dễ xảy ra khi đang xoay mô hình)
+        // CHỈ xoá thông tin đang hiện — KHÔNG kéo camera về vị trí gốc, vì
+        // đó gây cảm giác "vừa zoom xong tự nhảy về" rất khó chịu. Muốn về
+        // lại toàn cảnh, bấm lại đúng nhãn đang chọn (bỏ chọn tường minh).
         setSelected(null);
       }
     };
@@ -100,7 +105,7 @@ function Picker() {
       el.removeEventListener("pointerdown", onDown);
       el.removeEventListener("pointerup", onUp);
     };
-  }, [camera, gl, raycaster, scene, setSelected, setHovered]);
+  }, [camera, gl, raycaster, scene, setActiveHotspotKey, setSelected, setHovered]);
 
   return null;
 }
