@@ -59,7 +59,13 @@ export const SYSTEM_FALLBACK_COLOR: Record<SystemKey, string> = {
   joints: "#d9c9a0",
 };
 
-/** Màu ép buộc lớp "vỏ ngoài" (Fascia/Superficial) → tông da ấm (lựa chọn 3A). */
+/**
+ * Màu ép buộc lớp "vỏ ngoài" (Fascia/Superficial) → tông da ấm (lựa chọn 3A).
+ * CHỈ áp cho scene KHÔNG PHẢI muscular — Z-Anatomy dùng lại đúng tên material
+ * "Superficial" cho các cơ nằm lớp nông (VD Platysma, Frontalis) trong hệ
+ * cơ, hoàn toàn khác nghĩa với lớp da/mạc ngoài ở scene mặt cắt cơ thể. Nếu
+ * ép màu da cho scene cơ, cơ nông sẽ lẫn màu da thay vì màu cơ thống nhất.
+ */
 export const FORCED_COLORS: Record<string, string> = {
   Fascia: "#d8b090",
   Superficial: "#cfa07e",
@@ -181,7 +187,7 @@ export function prepareAnatomyScene(scene: THREE.Object3D, fallbackSystem: Syste
         std.color.set(segmentColor);
       } else if (heroKey) {
         std.color.set(HERO_ORGAN_COLORS[heroKey]);
-      } else if (FORCED_COLORS[base]) {
+      } else if (FORCED_COLORS[base] && fallbackSystem !== "muscular") {
         std.color.set(FORCED_COLORS[base]);
       } else if (isDefaultWhite) {
         std.color.set(TISSUE_COLORS[base] ?? SYSTEM_FALLBACK_COLOR[fallbackSystem]);
