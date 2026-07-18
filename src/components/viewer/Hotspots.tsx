@@ -2,11 +2,17 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
-import { Html } from "@react-three/drei";
 import type { OrbitControls as OrbitControlsComp } from "@react-three/drei";
+import { useLocale } from "next-intl";
 import * as THREE from "three";
 import { useAnatomyStore, type SelectedPart, type SystemKey } from "@/store/useAnatomyStore";
+import { pick, type Loc } from "@/lib/homeContent";
 import type { SceneHotspot } from "@/lib/sceneModules";
+
+/** Tên hiển thị ưu tiên nhãn chuẩn giải phẫu (label) nếu có, không thì rơi về cleanName(meshName). */
+export function displayName(h: SceneHotspot, locale: Loc): string {
+  return h.label ? pick(h.label, locale) : cleanName(h.meshName);
+}
 
 type OrbitControlsImpl = React.ComponentRef<typeof OrbitControlsComp>;
 
@@ -62,10 +68,10 @@ export default function Hotspots({
   autoFocusOnLoad?: boolean;
 }) {
   const { camera, scene } = useThree();
+  const locale = useLocale() as Loc;
   const visibleSystems = useAnatomyStore((s) => s.visibleSystems);
   const setSelected = useAnatomyStore((s) => s.setSelected);
   const activeHotspotKey = useAnatomyStore((s) => s.activeHotspotKey);
-  const setActiveHotspotKey = useAnatomyStore((s) => s.setActiveHotspotKey);
   const systemsReady = requiredSystems.every((k) => visibleSystems[k]);
 
   const homeRef = useRef<{ pos: THREE.Vector3; target: THREE.Vector3 } | null>(null);
@@ -87,10 +93,27 @@ export default function Hotspots({
 
   // Chỉ tìm object thật trong scene đã nạp — không khớp tên (vd hệ đang
   // tắt/chưa nạp xong) thì KHÔNG render pin đó, tránh pin lơ lửng sai vị trí.
-  // Chấp nhận cả Group (VD "Vertebra_T12" là node cha chứa 2 mesh con thân
-  // đốt sống + cung đốt sống, không phải mesh đơn) — Box3().setFromObject
-  // vẫn tính đúng bbox gộp cả con cho Group, chỉ mesh đơn mới có
-  // material để paint highlight lúc chọn.
+  // Chấp nhận cả Group (VD "Vertebra_T12"/"Liver" là node cha chứa nhiều
+  // mesh con — đốt sống có thân+cung, gan có nhiều thuỳ rải rác không đều).
+  // Bbox tâm hình học thô của cả Group dễ rơi vào "khoảng trống" giữa các
+  // thuỳ lệch nhau (VD gan hình chữ L) → dùng tâm TRỌNG SỐ THEO THỂ TÍCH
+  // từng mesh con, thiên về khối thịt lớn nhất thay vì trung điểm bbox.
+  const groupCenter = (obj: THREE.Object3D): THREE.Vector3 => {
+    const sum = new THREE.Vector3();
+    let weight = 0;
+    obj.traverse((o) => {
+      const mesh = o as THREE.Mesh;
+      if (!mesh.isMesh) return;
+      const b = new THREE.Box3().setFromObject(mesh);
+      if (b.isEmpty()) return;
+      const size = b.getSize(new THREE.Vector3());
+      const w = Math.max(size.x * size.y * size.z, 1e-6);
+      sum.addScaledVector(b.getCenter(new THREE.Vector3()), w);
+      weight += w;
+    });
+    return weight > 0 ? sum.divideScalar(weight) : new THREE.Box3().setFromObject(obj).getCenter(new THREE.Vector3());
+  };
+
   const resolved = useMemo(() => {
     if (!systemsReady) return [];
     return hotspots.map((h) => {
@@ -98,7 +121,7 @@ export default function Hotspots({
       if (!obj) return null;
       const box = new THREE.Box3().setFromObject(obj);
       if (box.isEmpty()) return null;
-      const center = box.getCenter(new THREE.Vector3());
+      const center = groupCenter(obj);
       const radius = box.getSize(new THREE.Vector3()).length() / 2;
       return { def: h, obj, center, radius };
     }).filter((x): x is NonNullable<typeof x> => x !== null);
@@ -127,20 +150,6 @@ export default function Hotspots({
     };
   };
 
-  const reset = (controls: OrbitControlsImpl) => {
-    const home = homeRef.current;
-    if (!home) return;
-    animRef.current = {
-      fromPos: camera.position.clone(),
-      toPos: home.pos.clone(),
-      fromTarget: controls.target.clone(),
-      toTarget: home.target.clone(),
-      t0: performance.now(),
-      duration: 650,
-    };
-    homeRef.current = null;
-  };
-
   // Tự động zoom vào gộp toàn bộ hotspot khi mới vào scene (1 lần duy nhất),
   // dùng đúng bbox thật của các mesh đã resolve — không đoán camera cố định.
   useEffect(() => {
@@ -163,78 +172,47 @@ export default function Hotspots({
   // Toggle active hotspot đến từ CẢ pin 3D lẫn danh sách Labels bên panel
   // (cùng ghi vào store.activeHotspotKey) — effect này phản ứng chung 1 chỗ.
   useEffect(() => {
+    // Theo yêu cầu người dùng: click chọn CHỈ hiện thông tin, KHÔNG kéo
+    // camera đi đâu cả — tránh hẳn mọi kiểu giật/zoom rồi bật lại vị trí cũ.
     if (activeHotspotKey === prevActiveKeyRef.current) return;
-    const controls = controlsRef.current;
-    if (!controls) return;
-    prevActiveKeyRef.current = activeHotspotKey;
     if (activeHotspotKey === null) {
-      reset(controls);
+      prevActiveKeyRef.current = null;
       setSelected(null);
       return;
     }
     const item = resolved.find((r) => r.def.key === activeHotspotKey);
-    if (!item) return;
-    focus(item.center, item.radius, controls);
-    const payload: SelectedPart = {
-      id: item.obj.name,
-      name: cleanName(item.def.meshName),
-      latin: item.def.meshName.replace(/_/g, " "),
-    };
-    setSelected(payload);
+    if (item) {
+      // CHỈ đánh dấu "đã xử lý" khi thực sự tìm thấy — nếu model/hotspot
+      // CHƯA kịp resolve xong lúc effect này chạy (resolved rỗng/thiếu),
+      // để prevActiveKeyRef nguyên vậy hiệu ứng sẽ TỰ THỬ LẠI ngay khi
+      // `resolved` cập nhật xong (đã có trong dependency), thay vì coi như
+      // đã xử lý xong rồi bỏ luôn.
+      prevActiveKeyRef.current = activeHotspotKey;
+      const payload: SelectedPart = {
+        id: item.obj.name,
+        name: displayName(item.def, locale),
+        latin: item.def.latinName ?? item.def.meshName.replace(/_/g, " "),
+      };
+      setSelected(payload);
+      return;
+    }
+    // activeHotspotKey không khớp Nhãn định sẵn nào → đến từ click trực tiếp
+    // lên 1 mesh bất kỳ trên mô hình (Picker).
+    const obj = scene.getObjectByName(activeHotspotKey);
+    if (!obj) return;
+    prevActiveKeyRef.current = activeHotspotKey;
+    setSelected({ id: obj.name, name: cleanName(obj.name), latin: obj.name.replace(/_/g, " ") });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeHotspotKey, resolved]);
+  }, [activeHotspotKey, resolved, scene]);
 
-  const toggle = (key: string) => {
-    setActiveHotspotKey(activeHotspotKey === key ? null : key);
-  };
+  // Đã BỎ HẲN pin "+"/đường nối nổi trên mô hình 3D theo yêu cầu người dùng
+  // (vị trí pin hay lệch, gây rối mắt) — chọn cấu trúc giờ chỉ qua danh
+  // sách Nhãn bên panel hoặc click trực tiếp lên mô hình (Picker).
+  // ĐÃ BỎ tính năng tô sáng (emissive) toàn bộ mesh khi chọn — verify thật
+  // cho thấy nó lan màu ra cả vùng KHÔNG liên quan (VD chọn động mạch chủ
+  // bụng làm cả mảng da/mạc phía trước bị nhuộm xanh), tốn công tìm nguyên
+  // nhân trong khi nút "Cô lập" (đã verify hoạt động đúng, sạch) đã đủ để
+  // biết "nó nằm ở đâu" — không cần thêm cơ chế tô sáng song song nữa.
 
-  return (
-    <>
-      {resolved.map((item) => {
-        const active = activeHotspotKey === item.def.key;
-        const [dx, dy] = item.def.offset;
-        return (
-          <Html key={item.def.key} position={item.center} zIndexRange={[10, 0]} sprite>
-            <div className="pointer-events-none relative">
-              <svg
-                className="absolute left-0 top-0 overflow-visible"
-                width={1}
-                height={1}
-              >
-                <line
-                  x1={0}
-                  y1={0}
-                  x2={dx}
-                  y2={dy}
-                  stroke={active ? "#38bdf8" : "#94a3b8"}
-                  strokeWidth={1.5}
-                />
-              </svg>
-              <button
-                type="button"
-                onClick={() => toggle(item.def.key)}
-                className={`pointer-events-auto flex h-7 w-7 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border text-sm font-bold shadow ${
-                  active
-                    ? "border-sky-400 bg-sky-500 text-white"
-                    : "border-slate-300 bg-white/90 text-slate-700 hover:bg-white"
-                }`}
-              >
-                {active ? "−" : "+"}
-              </button>
-              <div
-                className="pointer-events-none absolute whitespace-nowrap rounded border border-slate-300 bg-white/95 px-2 py-1 text-xs font-medium text-slate-800 shadow"
-                style={{
-                  left: dx,
-                  top: dy,
-                  transform: `translate(${dx > 0 ? "0%" : "-100%"}, -50%)`,
-                }}
-              >
-                {cleanName(item.def.meshName)}
-              </div>
-            </div>
-          </Html>
-        );
-      })}
-    </>
-  );
+  return null;
 }

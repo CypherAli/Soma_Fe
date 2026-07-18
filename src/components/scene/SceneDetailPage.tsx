@@ -5,10 +5,11 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { pick, type Loc } from "@/lib/homeContent";
 import type { SceneModule } from "@/lib/sceneModules";
-import { cleanName } from "../viewer/Hotspots";
+import { displayName } from "../viewer/Hotspots";
 import { useAnatomyStore } from "@/store/useAnatomyStore";
 import ModelViewer from "../viewer/ModelViewer";
 import SectionModelViewer from "../viewer/SectionModelViewer";
+import InfoPanel from "../InfoPanel";
 import "../../app/home.css";
 
 export default function SceneDetailPage({
@@ -59,7 +60,7 @@ export default function SceneDetailPage({
             <h3 className="mb-2 text-xs font-semibold uppercase tracking-wider text-[var(--muted-2)]">
               {t("labels")}
             </h3>
-            <div className="space-y-1">
+            <div className="space-y-2">
               {sceneModule.hotspots.map((h) => {
                 const active = activeHotspotKey === h.key;
                 return (
@@ -67,22 +68,22 @@ export default function SceneDetailPage({
                     key={h.key}
                     type="button"
                     onClick={() => setActiveHotspotKey(active ? null : h.key)}
-                    className={`flex w-full items-center gap-2 rounded-lg px-2 py-2 text-left text-sm transition-colors ${
+                    className={`block w-full rounded-lg px-3 py-2.5 text-left transition-colors ${
                       active
-                        ? "bg-[color-mix(in_srgb,var(--blue)_10%,white)] text-[var(--blue)]"
-                        : "text-[var(--body-fg)] hover:bg-[var(--surf-2)]"
+                        ? "bg-[color-mix(in_srgb,var(--blue)_10%,white)]"
+                        : "hover:bg-[var(--surf-2)]"
                     }`}
                   >
                     <span
-                      className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-xs font-bold ${
-                        active
-                          ? "border-[var(--blue)] bg-[var(--blue)] text-white"
-                          : "border-[var(--line)] text-[var(--muted)]"
-                      }`}
+                      className={`text-sm font-semibold ${active ? "text-[var(--blue)]" : "text-[var(--body-fg)]"}`}
                     >
-                      {active ? "−" : "+"}
+                      {displayName(h, locale)}
                     </span>
-                    {cleanName(h.meshName)}
+                    {h.note && (
+                      <p className="mt-1 text-xs leading-relaxed text-[var(--muted)]">
+                        {pick(h.note, locale)}
+                      </p>
+                    )}
                   </button>
                 );
               })}
@@ -107,6 +108,8 @@ export default function SceneDetailPage({
             />
           )}
         </main>
+
+        <InfoPanel />
       </div>
     </div>
   );
