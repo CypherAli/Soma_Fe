@@ -88,6 +88,11 @@ export const HERO_ORGAN_COLORS: Record<string, string> = {
   appendix: "#c96b6b",
   suprarenal: "#e8c860",
   bladder: "#e0b87c",
+  hypophysis: "#c88a9a",
+  pineal: "#b58ac8",
+  thyroid: "#c0504a",
+  thymus: "#e0a5a5",
+  pancreas: "#d9a878",
 };
 
 /**
