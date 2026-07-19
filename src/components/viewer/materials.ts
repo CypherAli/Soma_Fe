@@ -47,6 +47,9 @@ export const TISSUE_COLORS: Record<string, string> = {
   Gallbladder: "#7a8a3f",
   Intestine: "#d99a8a",
   Cartilage: "#e8e0d0",
+  Lung: "#d98a94",
+  "Lung-base": "#d98a94",
+  Diaphragm: "#a85a4a",
 };
 
 export const SYSTEM_FALLBACK_COLOR: Record<SystemKey, string> = {
@@ -117,6 +120,19 @@ export const HEART_CHAMBER_COLORS: Record<string, string> = {
   Inferior_papillary_muscle_of_left_ventricle: "#9c2b22",
 };
 
+/**
+ * Scene "Lung Anatomy": 5 thuỳ phổi (trái 2, phải 3) dùng chung material
+ * "Lung-*" nên đồng màu nếu không ép riêng. Tô 5 màu phân biệt theo TÊN MESH
+ * đã sanitize (khoảng trắng → "_") để dạy ranh giới thuỳ, giống atlas hô hấp.
+ */
+export const LUNG_LOBE_COLORS: Record<string, string> = {
+  Superior_lobe_of_left_lung: "#d98a94",
+  Inferior_lobe_of_left_lung: "#b56a8a",
+  Superior_lobe_of_right_lung: "#e0a07c",
+  Middle_lobe_of_right_lung: "#c97c6b",
+  Inferior_lobe_of_right_lung: "#a85a6a",
+};
+
 export const LIVER_SEGMENT_COLORS: Record<string, string> = {
   "Posterior_segment_of_liver_(I)": "#b5651d",
   "Left_posterior_lateral_segment_of_liver_(II)": "#4a7fc9",
@@ -175,7 +191,10 @@ export function prepareAnatomyScene(scene: THREE.Object3D, fallbackSystem: Syste
     // nhiều thuỳ/tạng phức tạp (VD Gan) thường có thêm slot cho mạch/ống
     // bên trong, bỏ sót slot nào thì slot đó giữ màu gốc (hay là đen/trắng
     // lạ), nhìn như lỗ thủng dù mesh vẫn nguyên vẹn.
-    const segmentColor = LIVER_SEGMENT_COLORS[mesh.name] ?? HEART_CHAMBER_COLORS[mesh.name];
+    const segmentColor =
+      LIVER_SEGMENT_COLORS[mesh.name] ??
+      HEART_CHAMBER_COLORS[mesh.name] ??
+      LUNG_LOBE_COLORS[mesh.name];
     const heroKey = Object.keys(HERO_ORGAN_COLORS).find((k) => mesh.name.toLowerCase().includes(k));
     for (const std of getAllStd(mesh)) {
       std.emissive.setScalar(0);
@@ -196,6 +215,14 @@ export function prepareAnatomyScene(scene: THREE.Object3D, fallbackSystem: Syste
       std.metalness = 0;
       const roughKey = Object.keys(TISSUE_ROUGHNESS).find((k) => base.startsWith(k));
       std.roughness = roughKey ? TISSUE_ROUGHNESS[roughKey] : 0.5;
+
+      // Màng cơ MỎNG hình vòm/tấm (cơ hoành, màng phổi) là bề mặt 1 lớp — nhìn
+      // vào mặt lõm sẽ thấy mặt sau bị cull thành mảng đen. Bật DoubleSide RIÊNG
+      // cho từng mesh mỏng này (an toàn: chỉ vài nghìn tris/mesh, KHÁC hẳn bug
+      // ép DoubleSide toàn cục cho scene 2600 mesh gây WebGL Context Lost).
+      if (base === "Diaphragm" || base === "Pleura") {
+        std.side = THREE.DoubleSide;
+      }
     }
   });
 }
@@ -221,7 +248,7 @@ export function applyVisibility(
   fadedIds: Record<string, boolean>,
   isolatedId: string | null,
 ) {
-  const isolatedRoot = isolatedId ? scene.getObjectByName(isolatedId) : null;
+  const isolatedRoot = isolatedId ? scene.getObjectByName(isolatedId) ?? null : null;
   scene.traverse((o) => {
     const mesh = o as THREE.Mesh;
     if (!mesh.isMesh) return;
