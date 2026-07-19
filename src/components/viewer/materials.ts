@@ -135,6 +135,20 @@ export const LUNG_LOBE_COLORS: Record<string, string> = {
   Inferior_lobe_of_right_lung: "#a85a6a",
 };
 
+/**
+ * Scene "Eye Anatomy": các lớp nhãn cầu dùng material chung ("Eye"/"Cornea"/
+ * "Iris") nên đồng màu nếu không ép riêng. Tô theo TÊN MESH đã sanitize
+ * (khoảng trắng + dấu chấm → "_"). Củng mạc trắng (lòng trắng), giác mạc xanh
+ * trong, thuỷ tinh thể trong, võng mạc cam-đỏ (lớp mạch máu trong cùng).
+ */
+export const EYE_STRUCTURE_COLORS: Record<string, string> = {
+  // sanitizeGltfName XOÁ dấu "." (không đổi "_") → "Sclera.l" thành "Scleral".
+  Scleral: "#f2ede2",
+  Corneal: "#b6d6e6",
+  Lensl: "#cfe4ee",
+  Retinal: "#c76b4a",
+};
+
 export const LIVER_SEGMENT_COLORS: Record<string, string> = {
   "Posterior_segment_of_liver_(I)": "#b5651d",
   "Left_posterior_lateral_segment_of_liver_(II)": "#4a7fc9",
@@ -196,7 +210,8 @@ export function prepareAnatomyScene(scene: THREE.Object3D, fallbackSystem: Syste
     const segmentColor =
       LIVER_SEGMENT_COLORS[mesh.name] ??
       HEART_CHAMBER_COLORS[mesh.name] ??
-      LUNG_LOBE_COLORS[mesh.name];
+      LUNG_LOBE_COLORS[mesh.name] ??
+      EYE_STRUCTURE_COLORS[mesh.name];
     const heroKey = Object.keys(HERO_ORGAN_COLORS).find((k) => mesh.name.toLowerCase().includes(k));
     for (const std of getAllStd(mesh)) {
       std.emissive.setScalar(0);
@@ -222,7 +237,13 @@ export function prepareAnatomyScene(scene: THREE.Object3D, fallbackSystem: Syste
       // vào mặt lõm sẽ thấy mặt sau bị cull thành mảng đen. Bật DoubleSide RIÊNG
       // cho từng mesh mỏng này (an toàn: chỉ vài nghìn tris/mesh, KHÁC hẳn bug
       // ép DoubleSide toàn cục cho scene 2600 mesh gây WebGL Context Lost).
-      if (base === "Diaphragm" || base === "Pleura") {
+      if (
+        base === "Diaphragm" ||
+        base === "Pleura" ||
+        base === "Eye" ||
+        base === "Iris" ||
+        base === "Cornea"
+      ) {
         std.side = THREE.DoubleSide;
       }
     }
