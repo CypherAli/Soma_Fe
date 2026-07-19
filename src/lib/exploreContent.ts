@@ -41,6 +41,10 @@ export type ResultCard = {
   href?: string;
   real?: boolean;
   type?: ContentType;
+  /** Ảnh thumbnail chụp thật từ model 3D (public/thumbnails/<slug>.jpg). Không có = dùng gradient giữ chỗ. */
+  thumb?: string;
+  /** Icon id (IconSprite) hiển thị trên nền gradient khi chưa có thumb — ghi đè fallback theo img class. */
+  icon?: string;
 };
 
 export type CategoryData = {
@@ -92,23 +96,23 @@ const systemFilters: FilterTab[] = [
 ];
 
 const systemCards: ResultCard[] = [
-  { img: "an-heart", title: { vi: "Hệ tuần hoàn", en: "Cardiovascular system", zh: "心血管系统" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/giai-phau-tim", real: true, type: "anatomy" },
-  { img: "an-skel", title: { vi: "Hệ xương", en: "Skeletal system", zh: "骨骼系统" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/giai-phau-so", real: true, type: "anatomy" },
-  { img: "an-muscle", title: { vi: "Hệ cơ", en: "Muscular system", zh: "肌肉系统" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/co-mat", real: true, type: "anatomy" },
-  { img: "an-skel", title: { vi: "Hệ cơ xương", en: "Musculoskeletal system", zh: "肌肉骨骼系统" }, filters: ["male", "female"], type: "anatomy" },
-  { img: "an-nerve", title: { vi: "Hệ thần kinh", en: "Nervous system", zh: "神经系统" }, filters: ["male", "female"], href: "/viewer", real: true, type: "anatomy" },
-  { img: "an-organ", title: { vi: "Hệ tiêu hóa", en: "Digestive system", zh: "消化系统" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/tong-quan-he-tieu-hoa", real: true, type: "anatomy" },
-  { img: "an-lung", title: { vi: "Hệ hô hấp", en: "Respiratory system", zh: "呼吸系统" }, filters: ["male", "female"], type: "anatomy" },
-  { img: "an-vessel", title: { vi: "Hệ bạch huyết", en: "Lymphatic system", zh: "淋巴系统" }, filters: ["male", "female"], href: "/viewer", real: true, type: "anatomy" },
-  { img: "an-organ", title: { vi: "Hệ nội tiết", en: "Endocrine system", zh: "内分泌系统" }, filters: ["male", "female"], type: "anatomy" },
-  { img: "an-organ", title: { vi: "Hệ tiết niệu", en: "Urinary system", zh: "泌尿系统" }, filters: ["male", "female"], type: "anatomy" },
-  { img: "an-organ", title: { vi: "Hệ sinh sản", en: "Reproductive system", zh: "生殖系统" }, filters: ["female"], type: "anatomy" },
-  { img: "an-organ", title: { vi: "Hệ sinh sản", en: "Reproductive system", zh: "生殖系统" }, filters: ["male"], type: "anatomy" },
-  { img: "an-cell", title: { vi: "Mô liên kết", en: "Connective tissue", zh: "结缔组织" }, filters: ["male", "female"], type: "anatomy" },
-  { img: "an-cell", title: { vi: "Mô mỡ", en: "Fat", zh: "脂肪" }, filters: ["male", "female"], type: "anatomy" },
-  { img: "an-cell", title: { vi: "Mạc", en: "Fascia", zh: "筋膜" }, filters: ["male", "female"], type: "anatomy" },
-  { img: "an-cell", title: { vi: "Hệ thính giác", en: "Auditory system", zh: "听觉系统" }, filters: ["male", "female"], type: "anatomy" },
-  { img: "an-brain", title: { vi: "Hệ thị giác", en: "Visual system", zh: "视觉系统" }, filters: ["male", "female"], type: "anatomy" },
+  { img: "an-heart", icon: "i-heart", thumb: "/thumbnails/giai-phau-tim.jpg", title: { vi: "Hệ tuần hoàn", en: "Cardiovascular system", zh: "心血管系统" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/giai-phau-tim", real: true, type: "anatomy" },
+  { img: "an-skel", icon: "i-bone", thumb: "/thumbnails/giai-phau-so.jpg", title: { vi: "Hệ xương", en: "Skeletal system", zh: "骨骼系统" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/giai-phau-so", real: true, type: "anatomy" },
+  { img: "an-muscle", icon: "i-muscle", title: { vi: "Hệ cơ", en: "Muscular system", zh: "肌肉系统" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/co-mat", real: true, type: "anatomy" },
+  { img: "an-skel", icon: "i-bone", title: { vi: "Hệ cơ xương", en: "Musculoskeletal system", zh: "肌肉骨骼系统" }, filters: ["male", "female"], type: "anatomy" },
+  { img: "an-nerve", icon: "i-brain", title: { vi: "Hệ thần kinh", en: "Nervous system", zh: "神经系统" }, filters: ["male", "female"], href: "/viewer", real: true, type: "anatomy" },
+  { img: "an-organ", icon: "i-stomach", title: { vi: "Hệ tiêu hóa", en: "Digestive system", zh: "消化系统" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/tong-quan-he-tieu-hoa", real: true, type: "anatomy" },
+  { img: "an-lung", icon: "i-lungs", title: { vi: "Hệ hô hấp", en: "Respiratory system", zh: "呼吸系统" }, filters: ["male", "female"], type: "anatomy" },
+  { img: "an-vessel", icon: "i-droplet", title: { vi: "Hệ bạch huyết", en: "Lymphatic system", zh: "淋巴系统" }, filters: ["male", "female"], href: "/viewer", real: true, type: "anatomy" },
+  { img: "an-organ", icon: "i-cell", title: { vi: "Hệ nội tiết", en: "Endocrine system", zh: "内分泌系统" }, filters: ["male", "female"], type: "anatomy" },
+  { img: "an-organ", icon: "i-nephro", title: { vi: "Hệ tiết niệu", en: "Urinary system", zh: "泌尿系统" }, filters: ["male", "female"], type: "anatomy" },
+  { img: "an-organ", icon: "i-gyn", title: { vi: "Hệ sinh sản", en: "Reproductive system", zh: "生殖系统" }, filters: ["female"], type: "anatomy" },
+  { img: "an-organ", icon: "i-gyn", title: { vi: "Hệ sinh sản", en: "Reproductive system", zh: "生殖系统" }, filters: ["male"], type: "anatomy" },
+  { img: "an-cell", icon: "i-cell", title: { vi: "Mô liên kết", en: "Connective tissue", zh: "结缔组织" }, filters: ["male", "female"], type: "anatomy" },
+  { img: "an-cell", icon: "i-droplet", title: { vi: "Mô mỡ", en: "Fat", zh: "脂肪" }, filters: ["male", "female"], type: "anatomy" },
+  { img: "an-cell", icon: "i-cell", title: { vi: "Mạc", en: "Fascia", zh: "筋膜" }, filters: ["male", "female"], type: "anatomy" },
+  { img: "an-cell", icon: "i-ear", title: { vi: "Hệ thính giác", en: "Auditory system", zh: "听觉系统" }, filters: ["male", "female"], type: "anatomy" },
+  { img: "an-brain", icon: "i-eye", title: { vi: "Hệ thị giác", en: "Visual system", zh: "视觉系统" }, filters: ["male", "female"], type: "anatomy" },
 ];
 
 const crossSectionCards: ResultCard[] = [
