@@ -112,7 +112,7 @@ const systemCards: ResultCard[] = [
   { img: "an-cell", icon: "i-droplet", title: { vi: "Mô mỡ", en: "Fat", zh: "脂肪" }, filters: ["male", "female"], type: "anatomy" },
   { img: "an-cell", icon: "i-cell", title: { vi: "Mạc", en: "Fascia", zh: "筋膜" }, filters: ["male", "female"], type: "anatomy" },
   { img: "an-cell", icon: "i-ear", title: { vi: "Hệ thính giác", en: "Auditory system", zh: "听觉系统" }, filters: ["male", "female"], type: "anatomy" },
-  { img: "an-brain", icon: "i-eye", title: { vi: "Hệ thị giác", en: "Visual system", zh: "视觉系统" }, filters: ["male", "female"], type: "anatomy" },
+  { img: "an-brain", icon: "i-eye", title: { vi: "Hệ thị giác", en: "Visual system", zh: "视觉系统" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/giai-phau-mat", real: true, type: "anatomy" },
 ];
 
 const crossSectionCards: ResultCard[] = [
@@ -389,6 +389,15 @@ const crossSectionCards: ResultCard[] = [
     title: { vi: "Hệ tiết niệu", en: "Urinary System", zh: "泌尿系统" },
     filters: [],
     href: "/giai-phau/mo-hinh/he-tiet-nieu",
+    real: true,
+    type: "anatomy",
+  },
+  {
+    img: "an-brain",
+    icon: "i-eye",
+    title: { vi: "Giải phẫu Mắt", en: "Eye Anatomy", zh: "眼解剖" },
+    filters: [],
+    href: "/giai-phau/mo-hinh/giai-phau-mat",
     real: true,
     type: "anatomy",
   },
