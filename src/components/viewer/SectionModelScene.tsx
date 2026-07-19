@@ -123,14 +123,14 @@ export default function SectionModelScene({
     <Canvas
       dpr={[1, 1.75]}
       camera={{ position: [0, 0.95, 1.35], fov: 42, near: 0.01, far: 100 }}
-      gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping }}
+      gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping, preserveDrawingBuffer: true }}
       onCreated={({ gl }) => {
         gl.localClippingEnabled = true;
       }}
     >
       <color attach="background" args={["#eef1f6"]} />
-      <hemisphereLight args={["#fff4e6", "#c9ccd4", 0.35]} />
-      <ambientLight intensity={0.1} />
+      <hemisphereLight args={["#fff4e6", "#c9ccd4", 0.55]} />
+      <ambientLight intensity={0.5} />
       <directionalLight position={[4, 6, 5]} intensity={1.25} color="#fff3e2" />
       <directionalLight position={[-5, 1, 2]} intensity={0.35} color="#dbe6f5" />
       <directionalLight position={[-2, 3, -6]} intensity={0.5} color="#ffffff" />

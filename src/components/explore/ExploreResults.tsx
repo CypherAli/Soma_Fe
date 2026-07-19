@@ -3,8 +3,25 @@
 import { useMemo, useState } from "react";
 import { useRouter } from "@/i18n/navigation";
 import { pick, type Loc } from "@/lib/homeContent";
-import { contentTypeTabs, type CategoryData } from "@/lib/exploreContent";
+import { contentTypeTabs, type CategoryData, type ResultCard } from "@/lib/exploreContent";
 import { Icon } from "../home/IconSprite";
+
+/** Icon mặc định theo img class khi card chưa khai báo icon riêng. */
+const IMG_ICON_FALLBACK: Record<string, string> = {
+  "an-heart": "i-heart",
+  "an-skel": "i-bone",
+  "an-muscle": "i-muscle",
+  "an-nerve": "i-brain",
+  "an-organ": "i-stomach",
+  "an-lung": "i-lungs",
+  "an-vessel": "i-droplet",
+  "an-cell": "i-cell",
+  "an-brain": "i-brain",
+};
+
+function systemPlaceholderIcon(c: ResultCard): string {
+  return c.icon ?? IMG_ICON_FALLBACK[c.img] ?? "i-cell";
+}
 
 export default function ExploreResults({
   data,
@@ -102,7 +119,13 @@ export default function ExploreResults({
               className="result-card"
               onClick={() => c.href && router.push(c.href)}
             >
-              <div className={`thumb ${c.img}`}>
+              <div className={`thumb ${c.img}${c.thumb ? " has-photo" : ""}`}>
+                {c.thumb ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={c.thumb} alt={pick(c.title, locale)} loading="lazy" />
+                ) : (
+                  <Icon id={systemPlaceholderIcon(c)} className="isvg fill thumb-icon" />
+                )}
                 {c.real ? (
                   <span className="badge-real">
                     {locale === "vi" ? "MÔ HÌNH THẬT" : locale === "zh" ? "真实模型" : "REAL MODEL"}

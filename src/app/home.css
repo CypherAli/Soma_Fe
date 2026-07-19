@@ -136,6 +136,10 @@
 .bd .an-organ{background:radial-gradient(70% 70% at 48% 42%,#e0a98a,#b06f4c 72%,#6f4227)}
 .bd .an-vet{background:radial-gradient(70% 70% at 48% 45%,#e7d29a,#b39a55 72%,#6f5d2c)}
 .bd .img .figline{position:absolute; inset:0; opacity:.32; background:radial-gradient(closest-side,transparent 60%,rgba(0,0,0,.28))}
+.bd .result-card .thumb{display:flex; align-items:center; justify-content:center}
+.bd .result-card .thumb img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+.bd .result-card .thumb.has-photo{background:#1a2230}
+.bd .result-card .thumb .thumb-icon{width:38%; height:38%; max-width:64px; max-height:64px; opacity:.55; fill:rgba(255,255,255,.9); stroke:rgba(255,255,255,.9); position:relative; z-index:1}
 
 .bd .feat{display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:36px; align-items:stretch}
 .bd .fbig{border-radius:12px; overflow:hidden; position:relative; min-height:300px; display:flex; flex-direction:column; padding:32px}

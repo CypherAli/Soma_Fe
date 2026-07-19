@@ -41,6 +41,7 @@ export default function IconSprite() {
         <symbol id="i-sort" viewBox="0 0 24 24"><path d="M7 5v14M7 19l-3-3M7 19l3-3" /><path d="M17 19V5M17 5l-3 3M17 5l3 3" /></symbol>
         <symbol id="i-dots" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.4" className="fill" /><circle cx="12" cy="12" r="1.4" className="fill" /><circle cx="19" cy="12" r="1.4" className="fill" /></symbol>
         <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><ellipse cx="12" cy="12" rx="4" ry="9" /><line x1="3" y1="12" x2="21" y2="12" /></symbol>
+        <symbol id="i-muscle" viewBox="0 0 24 24"><path className="fill" d="M5 14c0-3 1-6 3.5-7.8C10 5 11.5 4.5 13 5c1.8.6 2.6 2.3 2.3 4-.2 1.1-1 1.9-1 3 0 1.8 1.5 2.3 2.7 1.8 1.7-.7 2-3 2-3l1 1.4c0 3-1.4 5.6-4 6.6-2 .8-3.8.2-4.5-1-.5.6-1.3.9-2.2.7-2-.5-4.3-2.3-4.3-5.5z" /></symbol>
       </defs>
     </svg>
   );

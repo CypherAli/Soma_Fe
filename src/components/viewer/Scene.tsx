@@ -144,7 +144,7 @@ export default function Scene() {
       dpr={[1, 1.75]}
       camera={{ position: [0, 0.5, 8], fov: 42 }}
       onPointerMissed={() => clearSelection(null)}
-      gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping }}
+      gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping, preserveDrawingBuffer: true }}
     >
       <color attach="background" args={["#0b1220"]} />
       <hemisphereLight intensity={0.6} groundColor="#0b1220" />
