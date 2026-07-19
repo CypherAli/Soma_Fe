@@ -86,6 +86,8 @@ export const HERO_ORGAN_COLORS: Record<string, string> = {
   spleen: "#602f56",
   stomach: "#f2b9c2",
   appendix: "#c96b6b",
+  suprarenal: "#e8c860",
+  bladder: "#e0b87c",
 };
 
 /**
