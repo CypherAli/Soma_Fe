@@ -299,3 +299,9 @@
   .bd .row.scroller > .card{flex:0 0 calc((100% - 40px)/3)}
   .bd .stat-row{gap:36px}
 }
+
+/* Gradient cho 4 hệ dựng sau cùng */
+.bd .g-ear{background:radial-gradient(70% 70% at 48% 42%,#e6cdb4,#b0855f 72%,#6b4d33)}
+.bd .g-repro{background:radial-gradient(70% 70% at 50% 45%,#d9a8b0,#a35f70 72%,#63353f)}
+.bd .g-fascia{background:radial-gradient(70% 75% at 50% 38%,#eee7da,#c8b79c 72%,#8e7f68)}
+.bd .g-connective{background:radial-gradient(65% 65% at 48% 42%,#cfe0e2,#8aa8b0 72%,#4e6870)}

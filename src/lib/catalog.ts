@@ -22,7 +22,11 @@ export type SystemGroupKey =
   | "respiratory"
   | "urinary"
   | "endocrine"
-  | "visual";
+  | "visual"
+  | "auditory"
+  | "reproductive"
+  | "fascia"
+  | "connective";
 
 export type SystemGroup = {
   key: SystemGroupKey;
@@ -46,6 +50,10 @@ export const systemGroups: SystemGroup[] = [
   { key: "urinary", slug: "he-tiet-nieu", label: { vi: "Hệ tiết niệu", en: "Urinary system", zh: "泌尿系统" }, icon: "i-nephro", accent: "g-kidney" },
   { key: "endocrine", slug: "he-noi-tiet", label: { vi: "Hệ nội tiết", en: "Endocrine system", zh: "内分泌系统" }, icon: "i-cell", accent: "g-endo" },
   { key: "visual", slug: "he-thi-giac", label: { vi: "Hệ thị giác", en: "Visual system", zh: "视觉系统" }, icon: "i-eye", accent: "g-eye" },
+  { key: "auditory", slug: "he-thinh-giac-nhom", label: { vi: "Hệ thính giác", en: "Auditory system", zh: "听觉系统" }, icon: "i-ear", accent: "g-ear" },
+  { key: "reproductive", slug: "he-sinh-san", label: { vi: "Hệ sinh sản", en: "Reproductive system", zh: "生殖系统" }, icon: "i-gyn", accent: "g-repro" },
+  { key: "fascia", slug: "he-mac-nhom", label: { vi: "Hệ mạc", en: "Fascial system", zh: "筋膜系统" }, icon: "i-cell", accent: "g-fascia" },
+  { key: "connective", slug: "mo-lien-ket-nhom", label: { vi: "Mô liên kết", en: "Connective tissue", zh: "结缔组织" }, icon: "i-cell", accent: "g-connective" },
 ];
 
 export const systemBySlug = new Map(systemGroups.map((g) => [g.slug, g]));
@@ -99,6 +107,11 @@ const sceneSystem: Record<string, SystemGroupKey> = {
   "he-noi-tiet": "endocrine",
   "he-tiet-nieu": "urinary",
   "giai-phau-mat": "visual",
+  // Các hệ dựng sau cùng
+  "he-thinh-giac": "auditory",
+  "he-sinh-san-nam": "reproductive",
+  "he-mac": "fascia",
+  "mo-lien-ket": "connective",
 };
 
 export type CatalogScene = {

@@ -50,6 +50,9 @@ export const TISSUE_COLORS: Record<string, string> = {
   Lung: "#d98a94",
   "Lung-base": "#d98a94",
   Diaphragm: "#a85a4a",
+  // Túi hoạt dịch chứa dịch — tông xanh nhạt để tách hẳn khỏi gân (#e0c98a)
+  // và dây chằng (#e0d3a0) vốn nằm ngay cạnh nó trong scene mô liên kết.
+  Bursa: "#a8ccd4",
 };
 
 export const SYSTEM_FALLBACK_COLOR: Record<SystemKey, string> = {
@@ -242,12 +245,17 @@ export function prepareAnatomyScene(scene: THREE.Object3D, fallbackSystem: Syste
       // vào mặt lõm sẽ thấy mặt sau bị cull thành mảng đen. Bật DoubleSide RIÊNG
       // cho từng mesh mỏng này (an toàn: chỉ vài nghìn tris/mesh, KHÁC hẳn bug
       // ép DoubleSide toàn cục cho scene 2600 mesh gây WebGL Context Lost).
+      // Mạc và túi hoạt dịch cũng là tấm/bao mỏng một lớp, cùng lý do như trên:
+      // scene Hệ mạc gồm 38 tấm mạc cong bao quanh cơ, nhìn từ trong ra sẽ
+      // thủng thành mảng đen nếu để FrontSide.
       if (
         base === "Diaphragm" ||
         base === "Pleura" ||
         base === "Eye" ||
         base === "Iris" ||
-        base === "Cornea"
+        base === "Cornea" ||
+        base === "Fascia" ||
+        base === "Bursa"
       ) {
         std.side = THREE.DoubleSide;
       }
