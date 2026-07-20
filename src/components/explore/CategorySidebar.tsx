@@ -1,14 +1,23 @@
 import { pick, homeContent, type Loc } from "@/lib/homeContent";
 import { sidebarAllModels, sidebarAnatomy, type CategorySlug } from "@/lib/exploreContent";
+import { systemGroups, scenesOfSystem } from "@/lib/catalog";
 import { Link } from "@/i18n/navigation";
 import { Icon } from "../home/IconSprite";
 
+/**
+ * Sidebar danh mục của trang Khám phá.
+ *
+ * Trước đây có 3 khối "Chuyên khoa" (20 mục), "Cộng đồng", "Bộ sưu tập
+ * chuyên gia" render bằng <div> không dẫn đi đâu — đã bỏ. Mọi mục còn lại
+ * đều là <Link> tới trang có nội dung thật.
+ */
 export default function CategorySidebar({
   locale,
   active,
 }: {
   locale: Loc;
-  active: CategorySlug;
+  /** Slug đang mở — khớp CategorySlug hoặc slug hệ cơ quan. */
+  active: CategorySlug | string;
 }) {
   return (
     <aside className="cat-sidebar">
@@ -37,28 +46,17 @@ export default function CategorySidebar({
         </Link>
       ))}
 
-      <p className="cat-label">{pick(homeContent.mega.specialtiesH, locale)}</p>
-      {homeContent.mega.specialties.map((sp, i) => (
-        <div key={i} className="cat-item">
-          <Icon id={sp.icon} />
-          {pick(sp.label, locale)}
-        </div>
-      ))}
-
-      <p className="cat-label">{pick(homeContent.mega.communityH, locale)}</p>
-      {homeContent.mega.community.map((c, i) => (
-        <div key={i} className="cat-item">
-          <Icon id={c.icon} />
-          {pick(c.label, locale)}
-        </div>
-      ))}
-
-      <p className="cat-label">{pick(homeContent.mega.collectionsH, locale)}</p>
-      {homeContent.collections.map((c, i) => (
-        <div key={i} className="cat-item cat-collection">
-          <div className="t">{pick(c.title, locale)}</div>
-          <div className="c">{pick(c.author, locale)}</div>
-        </div>
+      <p className="cat-label">{pick(homeContent.mega.systemsH, locale)}</p>
+      {systemGroups.map((group) => (
+        <Link
+          key={group.key}
+          href={`/giai-phau/${group.slug}`}
+          className={`cat-item${group.slug === active ? " active" : ""}`}
+        >
+          <Icon id={group.icon} />
+          {pick(group.label, locale)}
+          <span className="cat-count">{scenesOfSystem(group.key).length}</span>
+        </Link>
       ))}
     </aside>
   );

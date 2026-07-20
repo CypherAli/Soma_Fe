@@ -1,4 +1,5 @@
 import type { T3 } from "./homeContent";
+import { scenesOfSystem, systemGroups } from "./catalog";
 
 export type CategorySlug =
   | "tat-ca"
@@ -23,13 +24,17 @@ export const sidebarAllModels: SidebarItem = {
   href: "/giai-phau/tat-ca",
 };
 
+/**
+ * Chỉ liệt kê mục có trang thật. Hai mục cũ "Mốc xương, nguyên ủy & bám tận"
+ * và "Trắc nghiệm giải phẫu" đã bỏ khỏi đây vì `/giai-phau/moc-xuong` và
+ * `/giai-phau/trac-nghiem` chưa tồn tại — chúng trả về 404 khi bấm vào.
+ * Khi dựng xong hai trang đó thì thêm lại.
+ */
 export const sidebarAnatomy: SidebarItem[] = [
   { slug: "theo-vung", icon: "i-region", label: { vi: "Giải phẫu theo vùng", en: "Anatomy by region", zh: "按区域" }, href: "/giai-phau/theo-vung" },
   { slug: "theo-he", icon: "i-system", label: { vi: "Giải phẫu theo hệ", en: "Anatomy by system", zh: "按系统" }, href: "/giai-phau/theo-he" },
   { slug: "toan-than", icon: "i-full", label: { vi: "Giải phẫu toàn thân", en: "Complete anatomy", zh: "完整解剖" }, href: "/viewer" },
-  { slug: "moc-xuong", icon: "i-bone", label: { vi: "Mốc xương, nguyên ủy & bám tận", en: "Bony landmarks & insertions", zh: "骨性标志与附着" }, href: "/giai-phau/moc-xuong" },
   { slug: "lat-cat", icon: "i-cross", label: { vi: "Lát cắt & vi giải phẫu", en: "Cross sections & microanatomy", zh: "断面与微观解剖" }, href: "/giai-phau/lat-cat" },
-  { slug: "trac-nghiem", icon: "i-quiz", label: { vi: "Trắc nghiệm giải phẫu", en: "Anatomy quizzes", zh: "解剖测验" }, href: "/giai-phau/trac-nghiem" },
 ];
 
 export type FilterTab = { key: string; label: T3 };
@@ -412,7 +417,36 @@ const crossSectionCards: ResultCard[] = [
   },
 ];
 
-export const categoryData: Record<"tat-ca" | "theo-vung" | "theo-he" | "lat-cat", CategoryData> = {
+/**
+ * Trang duyệt cho từng hệ cơ quan — sinh tự động từ `catalog` nên luôn khớp
+ * với số scene thật, không phải chép tay lại danh sách card.
+ */
+const systemCategories: Record<string, CategoryData> = Object.fromEntries(
+  systemGroups.map((group) => [
+    group.slug,
+    {
+      slug: "theo-he" as CategorySlug,
+      icon: group.icon,
+      title: group.label,
+      filters: [],
+      cards: scenesOfSystem(group.key).map(
+        (scene): ResultCard => ({
+          img: "an-organ",
+          icon: group.icon,
+          thumb: scene.thumb,
+          title: scene.title,
+          filters: [],
+          href: scene.href,
+          real: true,
+          type: "anatomy",
+        }),
+      ),
+    },
+  ]),
+);
+
+export const categoryData: Record<string, CategoryData> = {
+  ...systemCategories,
   "tat-ca": {
     slug: "tat-ca",
     icon: "i-grid",
