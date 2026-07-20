@@ -147,4 +147,7 @@ export default function SectionModelScene({
   );
 }
 
-useGLTF.preload("/models/abdomen_section.glb", "/draco/");
+// KHÔNG preload cứng một file ở đây. Trước đây dòng này preload
+// "abdomen_section.glb" cho MỌI scene, nên mở scene bất kỳ (thính giác, mạc…)
+// vẫn tải model bụng vô ích. Model đúng được nạp qua `useGLTF(modelUrl)`
+// trong <SectionModel>, tức mỗi scene chỉ tải đúng file của nó.

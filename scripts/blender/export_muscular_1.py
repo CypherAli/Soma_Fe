@@ -24,6 +24,10 @@ SCENES = {
         "Bucinator.l", "Bucinator.r",
         "Platysma.l", "Platysma.r",
         "Temporoparietalis muscle.l", "Temporoparietalis muscle.r",
+        # Xương nền làm mốc tham chiếu điểm bám của các cơ mặt vùng dưới.
+        # Thiếu mesh này thì nhãn "Xương hàm dưới (nền)" trong scene co-mat
+        # không khớp được với vật thể nào (phát hiện qua verify-scenes.mjs).
+        "Mandible",
     ],
     "thigh_gluteal_muscles": [
         "Gluteus maximus muscle.l", "Gluteus maximus muscle.r",
