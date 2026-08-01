@@ -18,6 +18,7 @@ import { miscScenes } from "./scenes/misc";
 import { auditoryScenes } from "./scenes/auditory";
 import { reproductiveScenes } from "./scenes/reproductive";
 import { connectiveScenes } from "./scenes/connective";
+import { nervousScenes } from "./scenes/nervous";
 import type { SceneHotspot, SceneModule } from "./scenes/types";
 
 export type { SceneHotspot, SceneModule };
@@ -36,6 +37,7 @@ export const sceneModules: Record<string, SceneModule> = {
   ...auditoryScenes,
   ...reproductiveScenes,
   ...connectiveScenes,
+  ...nervousScenes,
 };
 
 export function getSceneModule(slug: string): SceneModule | undefined {

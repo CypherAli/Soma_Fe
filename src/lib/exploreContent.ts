@@ -105,7 +105,7 @@ const systemCards: ResultCard[] = [
   { img: "an-skel", icon: "i-bone", thumb: "/thumbnails/giai-phau-so.jpg", title: { vi: "Hệ xương", en: "Skeletal system", zh: "骨骼系统" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/giai-phau-so", real: true, type: "anatomy" },
   { img: "an-muscle", icon: "i-muscle", title: { vi: "Hệ cơ", en: "Muscular system", zh: "肌肉系统" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/co-mat", real: true, type: "anatomy" },
   { img: "an-skel", icon: "i-bone", title: { vi: "Hệ cơ xương", en: "Musculoskeletal system", zh: "肌肉骨骼系统" }, filters: ["male", "female"], type: "anatomy" },
-  { img: "an-nerve", icon: "i-brain", title: { vi: "Hệ thần kinh", en: "Nervous system", zh: "神经系统" }, filters: ["male", "female"], href: "/viewer", real: true, type: "anatomy" },
+  { img: "an-nerve", icon: "i-brain", title: { vi: "Hệ thần kinh", en: "Nervous system", zh: "神经系统" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/than-nao-day-so", real: true, type: "anatomy" },
   { img: "an-organ", icon: "i-stomach", title: { vi: "Hệ tiêu hóa", en: "Digestive system", zh: "消化系统" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/tong-quan-he-tieu-hoa", real: true, type: "anatomy" },
   { img: "an-lung", icon: "i-lungs", title: { vi: "Hệ hô hấp", en: "Respiratory system", zh: "呼吸系统" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/giai-phau-phoi", real: true, type: "anatomy" },
   { img: "an-vessel", icon: "i-droplet", title: { vi: "Hệ bạch huyết", en: "Lymphatic system", zh: "淋巴系统" }, filters: ["male", "female"], href: "/viewer", real: true, type: "anatomy" },
