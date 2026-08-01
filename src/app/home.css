@@ -131,13 +131,21 @@
 .bd .result-card .thumb .thumb-icon{width:38%; height:38%; max-width:64px; max-height:64px; opacity:.55; fill:rgba(255,255,255,.9); stroke:rgba(255,255,255,.9); position:relative; z-index:1}
 
 
-.bd .foot{margin-top:72px; background:var(--navy); color:#c6d2e6; padding:56px 0 46px}
-.bd .foot .grid{display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:30px}
-.bd .foot h4{font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#7f90ad; margin:0 0 14px; font-weight:700}
-.bd .foot a{display:block; color:#c6d2e6; font-size:14px; padding:5px 0; cursor:pointer}
+/* Footer — editorial tối (serif wordmark, cột muted, giãn thoáng) */
+.bd .foot{margin-top:96px; background:#111114; color:#b8b8bf; padding:72px 0 32px; border-top:1px solid rgba(255,255,255,.06)}
+.bd .foot .grid{display:grid; grid-template-columns:1.7fr 1fr 1fr 1fr; gap:40px; align-items:start}
+.bd .foot .brandmark{font-family:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,'Times New Roman',serif; font-size:32px; font-weight:500; letter-spacing:-.01em; color:#f4f4f5; line-height:1}
+.bd .foot h4{font-size:11.5px; letter-spacing:.18em; text-transform:uppercase; color:#6b6b74; margin:2px 0 20px; font-weight:600}
+.bd .foot a{display:block; color:#c9c9d0; font-size:14.5px; padding:7px 0; cursor:pointer; transition:color .18s ease}
 .bd .foot a:hover{color:#fff}
-.bd .foot .lic{font-size:12.5px; color:#8593a8; max-width:36ch; line-height:1.6; margin-top:10px}
-.bd .foot .bottom{margin-top:40px; padding-top:22px; border-top:1px solid rgba(255,255,255,.08); display:flex; justify-content:space-between; font-size:12.5px; color:#7f90ad; font-family:var(--mono)}
+.bd .foot .lic{font-size:13px; color:#7d7d86; max-width:42ch; line-height:1.7; margin-top:18px}
+.bd .foot .bottom{margin-top:56px; padding-top:24px; border-top:1px solid rgba(255,255,255,.07); display:flex; justify-content:space-between; align-items:center; gap:20px; font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:#5c5c65}
+@media (max-width:760px){
+  .bd .foot{padding:52px 0 28px; margin-top:64px}
+  .bd .foot .grid{grid-template-columns:1fr 1fr; gap:32px}
+  .bd .foot .grid > :first-child{grid-column:1 / -1}
+  .bd .foot .bottom{flex-direction:column; align-items:flex-start; gap:10px}
+}
 
 /* EXPLORE RESULTS PAGE (danh sách theo danh mục) */
 .bd .explore-shell{display:grid; grid-template-columns:272px 1fr; align-items:start}
@@ -263,6 +271,7 @@
 .bd .g-kidney{background:radial-gradient(70% 70% at 50% 45%,#d9a06a,#a2653a 72%,#633c1f)}
 .bd .g-endo{background:radial-gradient(60% 60% at 45% 40%,#bfe0d4,#5fa891 72%,#2f6e5c)}
 .bd .g-eye{background:radial-gradient(70% 70% at 50% 45%,#a8c4e8,#4f6fa8 72%,#2b3f66)}
+.bd .g-nerve{background:radial-gradient(70% 70% at 50% 40%,#e8d49a,#b8933f 72%,#6f5522)}
 
 /* Lưới duyệt theo hệ cơ quan */
 .bd .sys-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:20px}
@@ -305,3 +314,214 @@
 .bd .g-repro{background:radial-gradient(70% 70% at 50% 45%,#d9a8b0,#a35f70 72%,#63353f)}
 .bd .g-fascia{background:radial-gradient(70% 75% at 50% 38%,#eee7da,#c8b79c 72%,#8e7f68)}
 .bd .g-connective{background:radial-gradient(65% 65% at 48% 42%,#cfe0e2,#8aa8b0 72%,#4e6870)}
+
+/* ============================================================
+   THEME EDITORIAL "Atlas kem" — override home người
+   Nền giấy ấm + serif tương phản cao (Playfair) + đỏ gạch nhấn.
+   Đặt cuối file để thắng các rule navy phía trên (cùng specificity).
+   ============================================================ */
+.bd{
+  --paper:#f4efe6; --paper-2:#efe8dc; --paper-3:#e9e0d1;
+  --ink-e:#1c1813; --sub-e:#544b3d; --line-e:#ddd2c0;
+  --maxw:1560px;
+  --acc:#9a3324; --acc-soft:#b0563f;
+  --serif:var(--font-serif),'Playfair Display','Iowan Old Style',Palatino,Georgia,serif;
+  background:var(--paper); color:var(--ink-e); overflow-x:clip;
+}
+
+/* NAV editorial */
+.bd .nav{background:var(--paper); border-bottom:1px solid var(--line-e)}
+.bd .nav-inner{height:76px; padding:0 40px; gap:32px; max-width:var(--maxw); margin:0 auto; width:100%}
+.bd .nav-word{font-family:var(--serif); font-size:24px; font-weight:600; color:var(--ink-e); letter-spacing:.01em; white-space:nowrap; background:none; width:auto; height:auto; display:inline-flex; align-items:center}
+.bd .nav-word:hover{color:var(--acc)}
+.bd .menu{gap:28px; font-size:15px; letter-spacing:0; text-transform:none; color:#3a342b; font-weight:400; font-family:var(--serif)}
+.bd .menu > a:hover, .bd .menu > .explore-group:hover{color:var(--ink-e)}
+.bd .menu > a.active, .bd .menu > .explore-group.active{color:var(--ink-e); border-bottom-color:var(--acc)}
+.bd .lang-trigger{border-color:var(--line-e); color:var(--sub-e)}
+.bd .lang-trigger:hover{border-color:var(--acc); color:var(--ink-e)}
+.bd .btn-signin{background:var(--ink-e); color:#f4efe6; border-radius:9999px; height:44px; padding:0 24px; font-size:14px; font-weight:500; font-family:var(--serif)}
+.bd .btn-signin:hover{background:#000}
+.bd .mega{background:var(--paper); border-top:1px solid var(--line-e)}
+.bd .mcol-h{font-family:var(--serif); color:var(--ink-e)}
+.bd .mi{color:var(--ink-e)} .bd .mi:hover{background:var(--paper-3)}
+.bd .mi .isvg{color:var(--acc)}
+
+/* HERO editorial — canh giữa, nền giấy */
+.bd .hero{background-color:var(--paper); background-image:none}
+.bd .hero .wrap{padding:44px 40px 52px; text-align:center}
+.bd .hero-copy{max-width:940px; margin:0 auto}
+.bd .hero-eyebrow{font-size:12px; letter-spacing:.28em; text-transform:uppercase; color:var(--acc); font-weight:600; margin-bottom:26px}
+.bd .hero .hero-display{font-family:var(--serif); color:var(--ink-e); font-weight:600; font-size:clamp(38px,4.6vw,66px); line-height:1.12; letter-spacing:-.01em; max-width:16ch; margin-left:auto; margin-right:auto}
+.bd .hero .hero-display em{font-style:italic; color:var(--acc); font-weight:500}
+.bd .hero-lede{margin:18px auto 0; color:var(--sub-e); font-size:18px; line-height:1.6; max-width:64ch}
+/* search giữ chức năng, đổi áo cho nền kem */
+.bd .hero .search{margin:26px auto 0; background:#fff; border:1px solid var(--line-e); box-shadow:0 12px 40px rgba(60,40,20,.08)}
+.bd .hero .search .sp{color:var(--acc)}
+.bd .hero .search input{color:var(--ink-e); font-size:16px}
+.bd .hero .search .go{background:var(--ink-e); color:#f4efe6; border-radius:9999px; font-family:var(--serif)}
+.bd .hero .search .go:hover{background:#000}
+.bd .search-panel{box-shadow:0 18px 50px rgba(60,40,20,.16); left:50%; transform:translateX(-50%)}
+.bd .search-hit{color:var(--ink-e)} .bd .search-hit:hover{background:var(--paper-2)}
+.bd .hero-cta{margin-top:34px; display:flex; gap:16px; justify-content:center; flex-wrap:wrap}
+.bd .pill{display:inline-flex; align-items:center; gap:8px; height:56px; padding:0 34px; border-radius:9999px; font-family:var(--serif); font-size:17px; font-weight:500; cursor:pointer; transition:all .18s ease}
+.bd .pill-solid{background:var(--ink-e); color:#f4efe6}
+.bd .pill-solid:hover{background:#000}
+.bd .pill-ghost{background:transparent; color:var(--ink-e); border:1px solid var(--ink-e)}
+.bd .pill-ghost:hover{background:var(--ink-e); color:#f4efe6}
+.bd .hero-fig{display:none}
+
+/* STATS + tiêu đề section — serif editorial trên nền giấy */
+.bd .stats{background:var(--paper-2); border-color:var(--line-e); border-top:1px solid var(--line-e)}
+.bd .stat b{font-family:var(--serif); color:var(--ink-e); font-weight:600}
+.bd .stat span{color:var(--sub-e); letter-spacing:.16em; text-transform:uppercase; font-size:11px}
+.bd .sec-head h2, .bd .sec-head-text h2{font-family:var(--serif); color:var(--ink-e); font-weight:600; font-size:34px; letter-spacing:-.01em}
+.bd .sec-sub{color:var(--sub-e); font-size:15px}
+.bd .src-block h2, .bd .src-block h3{font-family:var(--serif); color:var(--ink-e)}
+
+@media(max-width:760px){
+  .bd .nav-inner{padding:0 20px; height:64px}
+  .bd .nav-word{font-size:20px}
+  .bd .hero .wrap{padding:56px 20px 64px}
+  .bd .hero-lede{font-size:16px}
+  .bd .hero-cta{flex-direction:column}
+  .bd .pill{width:100%; justify-content:center}
+}
+
+/* ============================================================
+   ĐỒNG BỘ NỐT KHỐI DƯỚI — dứt điểm loạn tông (navy/xanh → kem)
+   ============================================================ */
+/* Link + mũi tên: đỏ gạch thay xanh dương */
+.bd .sec-all{color:var(--acc); font-weight:500}
+.bd .arrow{border-color:var(--line-e); color:var(--sub-e)}
+.bd .arrow:hover{border-color:var(--acc); color:var(--acc)}
+
+/* Thẻ hệ cơ quan → lưới bento giấy, tiêu đề serif, bỏ gradient chữ trắng */
+.bd .sys-grid{gap:0; border-top:1px solid var(--line-e); border-left:1px solid var(--line-e)}
+.bd .sys-grid .sys-card{background-color:var(--paper); background-image:none; color:var(--ink-e);
+  border-right:1px solid var(--line-e); border-bottom:1px solid var(--line-e); border-radius:0;
+  padding:26px 24px; min-height:186px}
+.bd .sys-grid .sys-card:hover{transform:none; box-shadow:none; background:var(--paper-2)}
+.bd .sys-grid .sys-card h3{font-family:var(--serif); font-size:23px; font-weight:600; color:var(--ink-e); margin-top:auto}
+.bd .sys-grid .sys-card p{color:var(--sub-e); opacity:1; margin-top:6px; font-size:11px; letter-spacing:.14em; text-transform:uppercase; font-family:var(--sans)}
+.bd .sys-grid .sys-icon{width:auto; height:auto; background:none; border-radius:0; color:var(--acc); fill:var(--acc); stroke:var(--acc); justify-items:start}
+.bd .sys-grid .sys-icon .isvg{font-size:24px}
+
+/* Khối nguồn → nền giấy, chữ nâu xám */
+.bd .src-block{background:var(--paper-2); border:1px solid var(--line-e); border-radius:0}
+.bd .src-block p{color:var(--sub-e)}
+.bd .src-gaps{border-left-color:var(--line-e)}
+
+/* Thẻ scene (carousel) → tiêu đề serif, chú thích nâu xám */
+.bd .card.sm .cap .t{font-family:var(--serif); color:var(--ink-e); font-size:16px; font-weight:600}
+.bd .card.sm .cap .s{color:var(--sub-e)}
+
+/* FOOTER → kem editorial (thay nền đen cho liền mạch cả trang) */
+.bd .foot{background:var(--paper); color:var(--sub-e); border-top:1px solid var(--line-e)}
+.bd .foot .brandmark{font-family:var(--serif); color:var(--ink-e)}
+.bd .foot h4{color:var(--sub-e)}
+.bd .foot a{color:var(--ink-e)}
+.bd .foot a:hover{color:var(--acc)}
+.bd .foot .lic{color:var(--sub-e)}
+.bd .foot .bottom{border-top-color:var(--line-e); color:var(--sub-e)}
+
+/* ============================================================
+   KHỐI 2 CỘT (Corpus · Anima) — trang chủ, như mẫu Corpus & Anima
+   .tc-fig = ô chờ ảnh khắc giải phẫu cổ điển (cắm background-image sau)
+   ============================================================ */
+.bd .twocol{border-top:1px solid var(--line-e); border-bottom:1px solid var(--line-e); background:var(--paper)}
+.bd .twocol-inner{max-width:var(--maxw); margin:0 auto; display:grid; grid-template-columns:1fr 1fr}
+.bd .tc-panel{position:relative; overflow:hidden; padding:64px 48px 56px; min-height:430px; color:var(--ink-e); transition:background .18s ease}
+.bd .tc-panel:first-child{border-right:1px solid var(--line-e)}
+.bd .tc-panel:hover{background:var(--paper-2)}
+.bd .tc-copy{position:relative; z-index:2; width:100%}
+.bd .tc-top{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:52px}
+.bd .tc-kicker{font-size:12px; letter-spacing:.24em; text-transform:uppercase; color:var(--acc); font-weight:600}
+.bd .tc-meta{font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--sub-e); font-family:var(--sans)}
+.bd .tc-title{font-family:var(--serif); font-size:clamp(32px,3.6vw,50px); font-weight:600; color:var(--ink-e); line-height:1.05; max-width:62%}
+.bd .tc-latin{font-family:var(--serif); font-style:italic; color:var(--sub-e); font-size:19px; margin-top:10px}
+.bd .tc-text{margin-top:22px; color:var(--sub-e); font-size:16px; line-height:1.7; max-width:54%}
+.bd .tc-cta{display:inline-flex; align-items:center; gap:10px; margin-top:38px; color:var(--acc); font-size:16px; font-weight:500; border-bottom:1px solid var(--acc); padding-bottom:3px}
+.bd .tc-arrow{transition:transform .2s ease}
+.bd .tc-panel:hover .tc-arrow{transform:translateX(5px)}
+.bd .tc-fig{position:absolute; top:0; right:2%; bottom:0; width:44%; z-index:1;
+  background-repeat:no-repeat; background-size:contain; background-position:center right; opacity:.7;
+  mix-blend-mode:multiply;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 46%); mask-image:linear-gradient(90deg,transparent,#000 46%)}
+
+/* ============================================================
+   HERO TRANG NGƯỜI — chữ trái · ảnh phải (.human-fig = ô chờ ảnh)
+   ============================================================ */
+.bd .human-hero{border-bottom:1px solid var(--line-e); background:var(--paper)}
+.bd .human-hero-inner{display:grid; grid-template-columns:1.05fr 1fr; gap:56px; align-items:center; padding:64px 40px 76px}
+.bd .human-hero-title{font-family:var(--serif); font-size:clamp(44px,5.6vw,80px); font-weight:600; color:var(--ink-e); line-height:1.02; letter-spacing:-.01em}
+.bd .human-hero-title em{font-style:italic; color:var(--acc); font-weight:500}
+.bd .human-hero-lede{margin:24px 0 0; text-align:left; max-width:48ch; color:var(--sub-e); font-size:18px}
+.bd .human-hero-cta{justify-content:flex-start; margin-top:34px}
+.bd .human-stats{display:flex; gap:52px; margin-top:48px; border-top:1px solid var(--line-e); padding-top:28px}
+.bd .hstat b{font-family:var(--serif); font-size:42px; font-weight:600; color:var(--ink-e); display:block; line-height:1}
+.bd .hstat span{font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--sub-e); margin-top:6px; display:block}
+.bd .human-fig{min-height:520px; background:var(--paper-2); border:1px solid var(--line-e); border-radius:2px;
+  background-size:cover; background-position:center}
+
+@media(max-width:860px){
+  .bd .twocol-inner{grid-template-columns:1fr}
+  .bd .tc-panel:first-child{border-right:0; border-bottom:1px solid var(--line-e)}
+  .bd .tc-title,.bd .tc-text{max-width:100%}
+  .bd .tc-fig{opacity:.28}
+  .bd .human-hero-inner{grid-template-columns:1fr; gap:32px; padding:44px 20px 56px}
+  .bd .human-fig{min-height:300px; order:-1}
+  .bd .human-stats{gap:32px}
+}
+
+/* ============================================================
+   FIX: hàng chip gợi ý — canh giữa + áo editorial (hết lệch)
+   ============================================================ */
+.bd .hero .search-wrap{margin:0 auto; max-width:720px}
+.bd .hero .chips{justify-content:center; margin-top:20px}
+.bd .hero .chip{background:var(--paper-3); color:var(--ink-e); border:1px solid var(--line-e); font-size:13px; padding:8px 14px}
+.bd .hero .chip:hover{background:var(--paper-2); border-color:var(--acc); color:var(--acc)}
+.bd .hero .chip .isvg{color:var(--sub-e); opacity:1}
+.bd .hero-cta{margin-top:24px}
+
+/* ============================================================
+   FIX đợt 3: nav bớt trống (menu ra giữa) + 2 nút bằng nhau
+   ============================================================ */
+/* Menu canh giữa thanh nav để lấp khoảng trống giữa logo và nút phải */
+.bd .nav-inner{position:relative}
+.bd .nav-inner .menu{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%)}
+/* 2 nút hero rộng bằng nhau */
+.bd .hero-cta .pill{min-width:230px; justify-content:center}
+
+/* FIX: đẩy CTA 2 cột xuống đáy để ngang hàng nhau + ảnh không chặn click */
+.bd .tc-panel{display:flex}
+.bd .tc-copy{display:flex; flex-direction:column}
+.bd .tc-cta{margin-top:auto; align-self:flex-start}
+.bd .tc-fig{pointer-events:none}
+
+/* Trang Người: giữ 2 cột (chữ trái · ảnh phải), cắm écorché Vesalius vào ô */
+.bd .human-hero-title{font-size:clamp(40px,4.6vw,66px)}
+.bd .human-fig{min-height:520px; background-color:var(--paper-2); border:1px solid var(--line-e); border-radius:2px;
+  background-image:url(/plates/skull-human.png); background-repeat:no-repeat; background-size:82%; background-position:center;
+  mix-blend-mode:multiply}
+
+/* Thumbnail model bớt trống: icon to & rõ hơn (chờ render thật thay sau) */
+.bd .card.sm .thumb-icon, .bd .result-card .thumb .thumb-icon{width:48%; max-width:84px; opacity:.85}
+
+/* Ô sọ 3D turntable: khung giấy, canvas lấp đầy (thay ảnh tĩnh) */
+.bd .human-fig-3d{background-color:var(--paper); border:0; border-radius:2px;
+  background-image:none; mix-blend-mode:normal; position:relative; height:540px; min-height:540px; overflow:hidden; display:block; align-self:stretch}
+.bd .human-fig-3d canvas{touch-action:none; display:block; transform:translateY(-8px)}
+.bd .skull-loading{position:absolute; inset:0; background:var(--paper-2)}
+
+/* Thanh search trong hero trang Người (style giống home, canh trái cột) */
+.bd .human-hero-search{margin-top:26px; max-width:560px}
+.bd .human-hero-search .search-wrap{margin:0}
+.bd .human-hero-search .search{display:flex; align-items:center; gap:10px; background:#fff;
+  border:1px solid var(--line-e); border-radius:8px; padding:0 8px 0 18px; height:52px;
+  box-shadow:0 12px 40px rgba(60,40,20,.08)}
+.bd .human-hero-search .search input{flex:1; border:0; outline:0; font-size:15px; color:var(--ink-e);
+  background:transparent; height:100%; font-family:var(--sans)}
+.bd .human-hero-search .search .go{background:var(--ink-e); color:#f4efe6; border:0; border-radius:9999px;
+  padding:11px 20px; font-weight:500; font-size:14px; font-family:var(--serif); cursor:pointer}
+.bd .human-hero-search .search .go:hover{background:#000}
+.bd .human-hero-search .search-panel{left:0; transform:none; width:100%; max-width:560px}

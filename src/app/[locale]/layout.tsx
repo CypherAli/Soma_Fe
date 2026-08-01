@@ -2,11 +2,17 @@ import type { Metadata } from "next";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { Inter } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+const inter = Inter({ subsets: ["latin", "vietnamese"], variable: "--font-sans" });
+const playfair = Playfair_Display({
+  subsets: ["latin", "vietnamese"],
+  style: ["normal", "italic"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-serif",
+});
 
 export const metadata: Metadata = {
   title: "Soma 3D — Atlas giải phẫu 3D tương tác",
@@ -32,7 +38,7 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
 
   return (
-    <html lang={locale} className={`${inter.variable} h-full`}>
+    <html lang={locale} className={`${inter.variable} ${playfair.variable} h-full`}>
       <body className="h-full antialiased">
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
