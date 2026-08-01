@@ -21,18 +21,81 @@ export const homeContent = {
     quiz: { vi: "Trắc nghiệm", en: "Quizzes", zh: "测验" },
     signIn: { vi: "Đăng nhập", en: "Sign in", zh: "登录" },
     signOut: { vi: "Đăng xuất", en: "Sign out", zh: "退出" },
+    cta: { vi: "Truy cập thư viện", en: "Enter library", zh: "进入图书馆" },
+  },
+  // Menu chính editorial — 4 mục như mẫu Corpus & Anima
+  mainMenu: [
+    { label: { vi: "Giải phẫu người", en: "Human anatomy", zh: "人体解剖" }, href: "/nguoi" },
+    { label: { vi: "Động vật nuôi", en: "Animals", zh: "动物" }, href: "/giai-phau/theo-vung" },
+    { label: { vi: "Hệ cơ quan", en: "Organ systems", zh: "器官系统" }, href: "/giai-phau/theo-he" },
+    { label: { vi: "Phương pháp", en: "Method", zh: "方法" }, href: "/nguoi#phuong-phap" },
+  ],
+  // Khối 2 cột: Corpus (người) · Anima (thú y)
+  twoCol: {
+    corpus: {
+      kicker: { vi: "Corpus", en: "Corpus", zh: "Corpus" },
+      meta: { vi: "Mô hình thật · nhiều hệ", en: "Real models · multi-system", zh: "真实模型 · 多系统" },
+      title: { vi: "Giải phẫu người", en: "Human anatomy", zh: "人体解剖" },
+      latin: { vi: "Anatomia Humana", en: "Anatomia Humana", zh: "Anatomia Humana" },
+      body: {
+        vi: "Bản đồ đầy đủ hệ xương, cơ, thần kinh, tuần hoàn và các cơ quan nội tạng của Homo sapiens — có tham chiếu chéo lâm sàng.",
+        en: "A complete map of the skeletal, muscular, nervous, cardiovascular and visceral systems of Homo sapiens — with clinical cross-reference.",
+        zh: "涵盖智人骨骼、肌肉、神经、循环与内脏系统的完整图谱——附临床交叉参考。",
+      },
+      cta: { vi: "Vào atlas người", en: "Enter human atlas", zh: "进入人体图谱" },
+      href: "/nguoi",
+      img: "/plates/skull-human.png",
+    },
+    anima: {
+      kicker: { vi: "Anima", en: "Anima", zh: "Anima" },
+      meta: { vi: "Đang phát triển", en: "In development", zh: "开发中" },
+      title: { vi: "Giải phẫu động vật", en: "Animal anatomy", zh: "动物解剖" },
+      latin: { vi: "Anatomia Veterinaria", en: "Anatomia Veterinaria", zh: "Anatomia Veterinaria" },
+      body: {
+        vi: "Nghiên cứu so sánh trên chó, mèo, ngựa, gia cầm và động vật ngoại lai — phục vụ chẩn đoán và can thiệp lâm sàng.",
+        en: "Comparative study across dogs, cats, horses, poultry and exotics — for clinical diagnosis and intervention.",
+        zh: "涵盖犬、猫、马、家禽及外来动物的比较研究——服务于临床诊断与干预。",
+      },
+      cta: { vi: "Sắp ra mắt", en: "Coming soon", zh: "即将推出" },
+      href: "/giai-phau/theo-vung",
+      img: "/plates/skull-cat.jpg",
+    },
+  },
+  // Hero trang Giải phẫu người
+  humanHero: {
+    eyebrow: { vi: "Corpus · Anatomia Humana", en: "Corpus · Anatomia Humana", zh: "Corpus · Anatomia Humana" },
+    titlePre: { vi: "Atlas giải phẫu", en: "Human anatomy", zh: "人体解剖" },
+    titleAccent: { vi: "người", en: "atlas", zh: "图谱" },
+    lede: {
+      vi: "Thư viện tham chiếu về cấu trúc cơ thể Homo sapiens — từ hệ cơ quan đến từng vùng giải phẫu, được đối chiếu với dữ liệu lâm sàng.",
+      en: "A reference library of the Homo sapiens body — from organ systems to individual regions, verified against clinical data.",
+      zh: "关于智人身体结构的参考库——从器官系统到各个解剖区域，均对照临床数据核验。",
+    },
+    ctaSystem: { vi: "Duyệt theo hệ cơ quan", en: "Browse by system", zh: "按系统浏览" },
+    ctaRegion: { vi: "Duyệt theo vùng cơ thể", en: "Browse by region", zh: "按区域浏览" },
   },
   hero: {
+    eyebrow: {
+      vi: "Volumen I · Atlas tham chiếu",
+      en: "Volumen I · Reference Atlas",
+      zh: "第一卷 · 参考图谱",
+    },
+    // Tiêu đề editorial 3 phần — phần giữa in nghiêng đỏ nhấn
+    titlePre: { vi: "Cấu trúc của sự sống,", en: "The structure of life,", zh: "生命的结构，" },
+    titleAccent: { vi: "được ghi chép", en: "recorded", zh: "被精确" },
+    titlePost: { vi: "một cách chính xác.", en: "with precision.", zh: "地记录。" },
     title: {
       vi: "Trực quan hóa giải phẫu người bằng mô hình 3D tương tác",
       en: "Visualize human anatomy with interactive 3D models",
       zh: "以交互式 3D 模型呈现人体解剖",
     },
     lede: {
-      vi: "Mô hình dựng từ dữ liệu giải phẫu mở Z-Anatomy và BodyParts3D, thuật ngữ theo chuẩn Terminologia Anatomica.",
-      en: "Models built from the open Z-Anatomy and BodyParts3D datasets, with terminology following Terminologia Anatomica.",
-      zh: "模型基于开放数据集 Z-Anatomy 与 BodyParts3D 构建，术语遵循 Terminologia Anatomica 标准。",
+      vi: "Atlas kỹ thuật số cho sinh viên y khoa, bác sĩ và bác sĩ thú y — hợp nhất giải phẫu người và giải phẫu so sánh trong một thư viện tham chiếu, dựng từ dữ liệu mở và đối chiếu chuẩn Terminologia Anatomica.",
+      en: "A digital atlas for medical students, physicians and veterinarians — unifying human and comparative anatomy in one reference library, built from open data and verified against Terminologia Anatomica.",
+      zh: "面向医学生、医生与兽医的数字图谱——在同一参考库中统一人体与比较解剖，基于开放数据并对照 Terminologia Anatomica 标准。",
     },
+    ctaPrimary: { vi: "Vào atlas người", en: "Enter human atlas", zh: "进入人体图谱" },
+    ctaSecondary: { vi: "Xem động vật nuôi", en: "View animals", zh: "查看动物" },
     search: {
       vi: "Tìm theo cấu trúc, hệ cơ quan hoặc tên Latin",
       en: "Search by structure, organ system, or Latin name",

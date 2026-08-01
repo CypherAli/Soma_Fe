@@ -38,7 +38,6 @@ export default function HomeSearch({ locale }: { locale: Loc }) {
           goToFirstResult();
         }}
       >
-        <Icon id="i-spark" className="isvg sp" />
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -84,21 +83,6 @@ export default function HomeSearch({ locale }: { locale: Loc }) {
         </div>
       )}
 
-      <div className="chips">
-        {C.hero.chips.map((chip, i) => (
-          <button
-            key={i}
-            type="button"
-            className="chip"
-            onClick={() => {
-              setQuery(pick(chip, locale));
-              setFocused(true);
-            }}
-          >
-            <Icon id="i-search" /> {pick(chip, locale)}
-          </button>
-        ))}
-      </div>
     </div>
   );
 }

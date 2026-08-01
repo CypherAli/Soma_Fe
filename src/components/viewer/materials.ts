@@ -53,6 +53,121 @@ export const TISSUE_COLORS: Record<string, string> = {
   // Túi hoạt dịch chứa dịch — tông xanh nhạt để tách hẳn khỏi gân (#e0c98a)
   // và dây chằng (#e0d3a0) vốn nằm ngay cạnh nó trong scene mô liên kết.
   Bursa: "#a8ccd4",
+  // Scene "Thân não & Dây TK sọ": Z-Anatomy đặt tên material theo CHỨC NĂNG
+  // (không theo tên mô như Bone/Muscle) — tận dụng luôn để tô đúng quy ước
+  // atlas thần kinh học: đỏ = nhân vận động (efferent), xanh = nhân cảm giác
+  // (afferent), tan = nhân trung chuyển khác (nhân đỏ, củ não sinh tư, olive).
+  "Nucleus (efferent fibers)": "#c25a4a",
+  "Nucleus (afferent fibers)": "#4a7fc9",
+  Nucleus: "#d9a86a",
+  // "Brain-Inner": material riêng cho nhân dây XI (phụ) — cùng nhóm vận động.
+  "Brain-Inner": "#c25a4a",
+  // Chất não (thân não) — tông hồng-xám phân biệt với màu vàng của dây TK.
+  Brain: "#d9b3a8",
+  // Z-Anatomy tái sử dụng material "Frontal lobe" cho Midbrain (bug đặt tên
+  // gốc, không phải do ta) — cùng tông chất não cho nhất quán.
+  "Frontal lobe": "#d9b3a8",
+  // Dịch não tuỷ trong hệ não thất (Aqueduct of midbrain, Fourth ventricle).
+  LCR: "#bcdcec",
+  // Chất trắng (bó sợi liên kết vùng não) — scene Gian não/Hệ viền dùng
+  // material riêng "White matter" cho Hypothalamus/Fornix/Stria medullaris.
+  "White matter": "#e8e2d0",
+};
+
+/**
+ * BUG DỮ LIỆU Z-Anatomy đã xác nhận: "Hypoglossal nerve (XII).l/.r" bị gán
+ * NHẦM material "Bone-4" (vốn dùng cho xương thật ở Hệ xương) thay vì
+ * "Nerve-*" như 11 dây thần kinh sọ còn lại — nếu không ép riêng, dây XII sẽ
+ * lên màu xương be nhạt thay vì màu vàng dây thần kinh, sai giải phẫu. Ép
+ * theo TÊN MESH CHÍNH XÁC (không phải material) để không ảnh hưởng xương
+ * thật dùng chung material "Bone-4" ở scene khác.
+ */
+export const NERVE_FIX_COLORS: Record<string, string> = {
+  "Hypoglossal_nerve_(XII)l": "#e8c468",
+  "Hypoglossal_nerve_(XII)r": "#e8c468",
+};
+
+/**
+ * Scene "Tiểu não": mọi thuỳ dùng chung 1 material "Cerebellum" (không bug
+ * trùng tên như Liver/Heart, nhưng đồng màu hết sẽ mất giá trị dạy 3 thuỳ
+ * chức năng kinh điển) — tô riêng theo phân loại giải phẫu chuẩn: thuỳ trước
+ * (vận động, cổ), thuỳ sau (lớn nhất, phối hợp tinh vi chi), thuỳ nốt-cuống
+ * (thăng bằng, liên hệ nhân tiền đình). Cuống tiểu não trên là BÓ SỢI
+ * (không phải thuỳ) nên tô tách biệt bằng tông chất trắng.
+ */
+export const CEREBELLUM_LOBE_COLORS: Record<string, string> = {
+  // Thuỳ trước (anterior lobe)
+  Lingula_of_cerebellum: "#c9a25a",
+  Central_lobule: "#c9a25a",
+  Wing_of_central_lobulel: "#c9a25a",
+  Wing_of_central_lobuler: "#c9a25a",
+  Culmen: "#c9a25a",
+  Anterior_quadrangular_lobulel: "#c9a25a",
+  Anterior_quadrangular_lobuler: "#c9a25a",
+  // Thuỳ sau (posterior lobe) — chiếm phần lớn thể tích tiểu não người trưởng thành
+  Posterior_quadrangular_lobulel: "#d9b878",
+  Posterior_quadrangular_lobuler: "#d9b878",
+  Declive: "#d9b878",
+  Folium_of_vermis: "#d9b878",
+  Tuber_of_vermis: "#d9b878",
+  Pyramis_of_vermis: "#d9b878",
+  Uvula_of_vermis: "#d9b878",
+  Superior_semilunar_lobulel: "#d9b878",
+  Superior_semilunar_lobuler: "#d9b878",
+  Inferior_semilunar_lobulel: "#d9b878",
+  Inferior_semilunar_lobuler: "#d9b878",
+  Gracile_lobulel: "#d9b878",
+  Gracile_lobuler: "#d9b878",
+  Biventral_lobulel: "#d9b878",
+  Biventral_lobuler: "#d9b878",
+  Tonsil_of_cerebelluml: "#c0785a",
+  Tonsil_of_cerebellumr: "#c0785a",
+  // Thuỳ nốt-cuống (flocculonodular lobe) — cổ nhất về tiến hoá, liên hệ thăng bằng
+  Nodule_of_vermis: "#6a8fc9",
+  Flocculusl: "#6a8fc9",
+  Flocculusr: "#6a8fc9",
+  Peduncle_of_flocculusl: "#6a8fc9",
+  Peduncle_of_flocculusr: "#6a8fc9",
+  // Cuống tiểu não trên (bó sợi, không phải thuỳ)
+  Superior_cerebellar_pedunclel: "#e8ddc8",
+  Superior_cerebellar_peduncler: "#e8ddc8",
+};
+
+/**
+ * Scene "Gian não, Nhân nền & Hệ viền": mọi nhân xám dùng chung material
+ * "Nucleus" (đã có màu tan mặc định) — quá đồng màu sẽ mất giá trị dạy 4
+ * nhóm chức năng nằm sát nhau: đồi thị (xanh xám, trạm trung chuyển cảm
+ * giác), vùng dưới đồi (cam đỏ, điều hoà nội tiết/tự chủ), nhân nền (3 sắc
+ * vàng-nâu đậm dần, vận động ngoài tháp), hệ viền (xanh lá, cảm xúc/trí nhớ).
+ */
+export const DIENCEPHALON_LIMBIC_COLORS: Record<string, string> = {
+  Thalamusl: "#8a9bc9",
+  Thalamusr: "#8a9bc9",
+  Lateral_geniculate_bodyl: "#8a9bc9",
+  Lateral_geniculate_bodyr: "#8a9bc9",
+  Medial_geniculate_bodyl: "#8a9bc9",
+  Medial_geniculate_bodyr: "#8a9bc9",
+  Habenula: "#8a9bc9",
+  Stria_medullaris_thalamil: "#8a9bc9",
+  Stria_medullaris_thalamir: "#8a9bc9",
+  Hypothalamus: "#c97a5a",
+  Mamillary_bodyl: "#c97a5a",
+  Mamillary_bodyr: "#c97a5a",
+  Caudate_nucleusl: "#c9a25a",
+  Caudate_nucleusr: "#c9a25a",
+  Putamenl: "#b58a4a",
+  Putamenr: "#b58a4a",
+  Globus_pallidusl: "#8a6a3a",
+  Globus_pallidusr: "#8a6a3a",
+  Amygdaloid_bodyl: "#6a9c6a",
+  Amygdaloid_bodyr: "#6a9c6a",
+  Hippocampusl: "#5a8c7a",
+  Hippocampusr: "#5a8c7a",
+  Fornixl: "#7ab08a",
+  Fornixr: "#7ab08a",
+  Septal_nuclei: "#6a9c6a",
+  Stria_terminalisl: "#7ab08a",
+  Stria_terminalisr: "#7ab08a",
 };
 
 export const SYSTEM_FALLBACK_COLOR: Record<SystemKey, string> = {
@@ -219,7 +334,10 @@ export function prepareAnatomyScene(scene: THREE.Object3D, fallbackSystem: Syste
       LIVER_SEGMENT_COLORS[mesh.name] ??
       HEART_CHAMBER_COLORS[mesh.name] ??
       LUNG_LOBE_COLORS[mesh.name] ??
-      EYE_STRUCTURE_COLORS[mesh.name];
+      EYE_STRUCTURE_COLORS[mesh.name] ??
+      NERVE_FIX_COLORS[mesh.name] ??
+      CEREBELLUM_LOBE_COLORS[mesh.name] ??
+      DIENCEPHALON_LIMBIC_COLORS[mesh.name];
     const heroKey = Object.keys(HERO_ORGAN_COLORS).find((k) => mesh.name.toLowerCase().includes(k));
     for (const std of getAllStd(mesh)) {
       std.emissive.setScalar(0);

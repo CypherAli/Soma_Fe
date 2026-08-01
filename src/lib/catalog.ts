@@ -17,6 +17,7 @@ import { sceneModules, type SceneModule } from "./sceneModules";
 export type SystemGroupKey =
   | "skeletal"
   | "muscular"
+  | "nervous"
   | "cardiovascular"
   | "digestive"
   | "respiratory"
@@ -42,6 +43,7 @@ export type SystemGroup = {
 export const systemGroups: SystemGroup[] = [
   { key: "skeletal", slug: "he-xuong", label: { vi: "Hệ xương", en: "Skeletal system", zh: "骨骼系统" }, icon: "i-bone", accent: "g-bone" },
   { key: "muscular", slug: "he-co", label: { vi: "Hệ cơ", en: "Muscular system", zh: "肌肉系统" }, icon: "i-muscle", accent: "g-muscle" },
+  { key: "nervous", slug: "he-than-kinh", label: { vi: "Hệ thần kinh", en: "Nervous system", zh: "神经系统" }, icon: "i-brain", accent: "g-nerve" },
   { key: "cardiovascular", slug: "he-tuan-hoan", label: { vi: "Hệ tuần hoàn", en: "Cardiovascular system", zh: "心血管系统" }, icon: "i-heart", accent: "g-heart" },
   { key: "digestive", slug: "he-tieu-hoa", label: { vi: "Hệ tiêu hóa", en: "Digestive system", zh: "消化系统" }, icon: "i-stomach", accent: "g-organ" },
   { key: "respiratory", slug: "he-ho-hap", label: { vi: "Hệ hô hấp", en: "Respiratory system", zh: "呼吸系统" }, icon: "i-lungs", accent: "g-lung" },
@@ -107,11 +109,19 @@ const sceneSystem: Record<string, SystemGroupKey> = {
   "he-noi-tiet": "endocrine",
   "he-tiet-nieu": "urinary",
   "giai-phau-mat": "visual",
+  "giai-phau-canh-tay": "muscular",
+  "giai-phau-dau": "skeletal",
+  "giai-phau-co": "muscular",
+  "giai-phau-than": "muscular",
   // Các hệ dựng sau cùng
   "he-thinh-giac": "auditory",
   "he-sinh-san-nam": "reproductive",
   "he-mac": "fascia",
   "mo-lien-ket": "connective",
+  // Thần kinh
+  "than-nao-day-so": "nervous",
+  "tieu-nao": "nervous",
+  "gian-nao-he-vien": "nervous",
 };
 
 export type CatalogScene = {
@@ -133,6 +143,7 @@ export type CatalogScene = {
 const thumbnails: Record<string, string> = {
   "giai-phau-tim": "/thumbnails/giai-phau-tim.jpg",
   "giai-phau-so": "/thumbnails/giai-phau-so.jpg",
+  "giai-phau-canh-tay": "/thumbnails/giai-phau-canh-tay.jpg",
 };
 
 function buildSearchText(scene: SceneModule): string {
@@ -154,7 +165,13 @@ export const catalogScenes: CatalogScene[] = Object.values(sceneModules).map((sc
   title: scene.title,
   description: scene.description,
   system: sceneSystem[scene.slug] ?? "skeletal",
-  href: `/giai-phau/mo-hinh/${scene.slug}`,
+  // Cánh tay flagship mở thẳng viewer nhiều lớp (bảng bật/tắt/mờ) thay vì trang scene thường
+  href:
+    scene.slug === "giai-phau-canh-tay" ? "/xem-canh-tay"
+    : scene.slug === "giai-phau-dau" ? "/xem-dau"
+    : scene.slug === "giai-phau-co" ? "/xem-co"
+    : scene.slug === "giai-phau-than" ? "/xem-than"
+    : `/giai-phau/mo-hinh/${scene.slug}`,
   thumb: thumbnails[scene.slug],
   structureCount: scene.hotspots.length,
   searchText: buildSearchText(scene),
@@ -178,8 +195,8 @@ export const scenesOfSystem = (key: SystemGroupKey): CatalogScene[] =>
 export const featuredSlugs = [
   "giai-phau-tim",
   "giai-phau-gan",
-  "giai-phau-so",
-  "giai-phau-mat",
+  "giai-phau-dau",
+  "giai-phau-canh-tay",
   "da-giac-willis",
 ] as const;
 

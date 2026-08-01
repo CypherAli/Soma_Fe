@@ -37,26 +37,18 @@ export default function HomeNav() {
     <>
       <nav className="nav">
         <div className="nav-inner">
-          <Link href="/" className="nav-logo" aria-label="Soma 3D">S</Link>
+          <Link href="/" className="nav-word" aria-label="Soma 3D">Soma&nbsp;3D</Link>
 
           <div className="menu">
-            <span className={`explore-group${section === "explore" ? " active" : ""}`}>
-              <Link href="/giai-phau/tat-ca" className="explore-link">
-                {pick(C.nav.explore, locale)}
-              </Link>
-              <button
-                type="button"
-                className="explore-chev"
-                aria-expanded={megaOpen}
-                aria-label={pick(C.nav.explore, locale)}
-                onClick={() => setMegaOpen((o) => !o)}
+            {C.mainMenu.map((m) => (
+              <Link
+                key={m.href}
+                href={m.href}
+                className={pathname.startsWith(m.href.split("#")[0]) && m.href !== "/" ? "active" : ""}
               >
-                <Icon id="i-chev" className="isvg cx" />
-              </button>
-            </span>
-            <Link href="/thu-vien" className={section === "library" ? "active" : ""}>
-              {pick(C.nav.library, locale)}
-            </Link>
+                {pick(m.label, locale)}
+              </Link>
+            ))}
           </div>
 
           <div className="nav-r">
