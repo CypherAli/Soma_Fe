@@ -15,6 +15,25 @@ import {
 
 export type LayerState = Record<CatKey, { visible: boolean; faded: boolean }>;
 
+/** Trạng thái biến đổi mô hình do cử chỉ điều khiển (đọc mỗi khung hình, không qua React). */
+export type Transform = {
+  rotX: number; // ngửa/cúi (quanh trục ngang)
+  rotY: number; // quay trái/phải (quanh trục dọc)
+  zoom: number; // 1 = kích thước gốc
+  panX: number;
+  panY: number;
+  explode: number; // 0 = gộp, 1 = tách lớp
+};
+
+export const defaultTransform = (): Transform => ({
+  rotX: 0,
+  rotY: 0,
+  zoom: 1,
+  panX: 0,
+  panY: 0,
+  explode: 0,
+});
+
 /** Vật liệu tô sáng cấu trúc đang được ngón trỏ nhắm tới. */
 const HIGHLIGHT = new THREE.MeshStandardMaterial({
   color: "#ffb347",
@@ -37,15 +56,13 @@ function ForearmModel({
   layers,
   cursorRef,
   onHover,
-  rotationRef,
-  explodeRef,
+  transformRef,
 }: {
   url: string;
   layers: LayerState;
   cursorRef: React.RefObject<{ x: number; y: number; active: boolean }>;
   onHover: (info: { name: string; cat: CatKey } | null) => void;
-  rotationRef: React.RefObject<number>;
-  explodeRef: React.RefObject<number>;
+  transformRef: React.RefObject<Transform>;
 }) {
   const { scene } = useGLTF(url, "/draco/");
   const { camera, size } = useThree();
@@ -92,11 +109,20 @@ function ForearmModel({
   }, [scn, layers]);
 
   useFrame(() => {
+    const t = transformRef.current;
     const group = groupRef.current;
-    if (group) group.rotation.y = rotationRef.current ?? 0;
+    if (group && t) {
+      // làm mượt: tiến dần tới giá trị đích thay vì nhảy (đỡ giật khi tay rung)
+      group.rotation.y += (t.rotY - group.rotation.y) * 0.25;
+      group.rotation.x += (t.rotX - group.rotation.x) * 0.25;
+      const s = group.scale.x + (t.zoom - group.scale.x) * 0.25;
+      group.scale.setScalar(s);
+      group.position.x += (t.panX - group.position.x) * 0.25;
+      group.position.y += (t.panY - group.position.y) * 0.25;
+    }
 
     // "tách lớp": đẩy từng nhóm ra xa tâm theo hệ số explode
-    const k = explodeRef.current ?? 0;
+    const k = t?.explode ?? 0;
     const offsets: Record<string, number> = {
       skin: 0.16, muscle: 0.09, artery: 0.045, vein: 0.03, nerve: 0.015, bone: 0,
     };
@@ -152,8 +178,7 @@ export default function GestureArmScene(props: {
   layers: LayerState;
   cursorRef: React.RefObject<{ x: number; y: number; active: boolean }>;
   onHover: (info: { name: string; cat: CatKey } | null) => void;
-  rotationRef: React.RefObject<number>;
-  explodeRef: React.RefObject<number>;
+  transformRef: React.RefObject<Transform>;
 }) {
   const { url = "/models/forearm.glb", ...rest } = props;
   return (
@@ -168,7 +193,8 @@ export default function GestureArmScene(props: {
       <ambientLight intensity={0.45} />
       <directionalLight position={[3, 5, 4]} intensity={1.15} color="#fff3e2" />
       <directionalLight position={[-4, 2, -3]} intensity={0.5} color="#e7d9c4" />
-      <Bounds fit clip observe margin={1.1}>
+      {/* KHÔNG dùng observe: Bounds sẽ căn lại khung mỗi khi cử chỉ phóng to/thu nhỏ */}
+      <Bounds fit clip margin={1.1}>
         <Center>
           <ForearmModel url={url} {...rest} />
         </Center>

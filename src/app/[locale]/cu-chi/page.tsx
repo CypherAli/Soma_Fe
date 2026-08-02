@@ -2,25 +2,39 @@
 
 import { useCallback, useRef, useState } from "react";
 import GestureArmScene, {
+  defaultTransform,
   type LayerState,
 } from "@/components/gesture/GestureArmScene";
 import { CATS, type CatKey } from "@/lib/anatomy/layers";
+import { detectMode, twoHandSpan, type GestureMode } from "@/lib/gesture/gestures";
 import {
   HAND_BONES,
-  LM,
   useHandTracking,
   type FrameInfo,
   type TrackedHand,
 } from "@/lib/gesture/useHandTracking";
 import "../../home.css";
 
-// ĐIỀU KHIỂN GIẢI PHẪU BẰNG CỬ CHỈ (bước 3)
-// Ngón trỏ = con trỏ · giữ yên 1,5s = chọn · chụm ngón cái–trỏ rồi kéo = xoay mô hình.
-// Mọi tính toán chạy trong onFrame (ref-based) để không kích re-render mỗi khung hình.
+// ĐIỀU KHIỂN GIẢI PHẪU BẰNG CỬ CHỈ
+//   Ngón trỏ            → con trỏ, giữ yên 1,5s = chọn
+//   Chụm ngón + kéo     → xoay (ngang = quay, dọc = ngửa/cúi)
+//   Nắm tay + kéo       → di chuyển mô hình
+//   Hai tay chụm, dang  → phóng to / thu nhỏ
+// Toàn bộ tính trong onFrame (ref-based) để không re-render mỗi khung hình.
 
 const DWELL_MS = 1500;
 const DWELL_MOVE_TOL_PX = 55;
 const SHOWN_CATS: CatKey[] = ["skin", "muscle", "artery", "vein", "nerve", "bone"];
+const ZOOM_MIN = 0.35;
+const ZOOM_MAX = 3.5;
+
+const MODE_LABEL: Record<GestureMode, string> = {
+  idle: "Chưa thấy tay",
+  point: "Trỏ / chọn",
+  rotate: "Đang xoay",
+  pan: "Đang di chuyển",
+  zoom: "Đang phóng to/thu nhỏ",
+};
 
 export default function GestureControlPage() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -31,6 +45,7 @@ export default function GestureControlPage() {
   const [enabled, setEnabled] = useState(false);
   const [hovered, setHovered] = useState<{ name: string; cat: CatKey } | null>(null);
   const [picked, setPicked] = useState<{ name: string; cat: CatKey } | null>(null);
+  const [mode, setMode] = useState<GestureMode>("idle");
   const [layers, setLayers] = useState<LayerState>(
     () =>
       Object.fromEntries(
@@ -38,28 +53,36 @@ export default function GestureControlPage() {
       ) as LayerState,
   );
 
-  // ref dùng cho vòng lặp 3D (không gây re-render)
-  const cursorRef = useRef({ x: 0.5, y: 0.5, active: false }); // toạ độ trong khung 3D
-  const rotationRef = useRef(0);
-  const explodeRef = useRef(0);
+  // ref cho vòng lặp 3D — không gây re-render
+  const cursorRef = useRef({ x: 0.5, y: 0.5, active: false });
+  const transformRef = useRef(defaultTransform());
   const dwellRef = useRef({ key: "", start: 0, x: 0, y: 0, progress: 0 });
-  const pinchRef = useRef({ active: false, lastX: 0 });
+  const dragRef = useRef({ mode: "idle" as GestureMode, x: 0, y: 0, span: 0, zoom: 1 });
   const hoveredRef = useRef<{ name: string; cat: CatKey } | null>(null);
+  const modeRef = useRef<GestureMode>("idle");
 
   const toggleLayer = useCallback((key: CatKey, field: "visible" | "faded") => {
     setLayers((s) => ({ ...s, [key]: { ...s[key], [field]: !s[key][field] } }));
   }, []);
 
   const handleHover = useCallback((info: { name: string; cat: CatKey } | null) => {
-    const prev = hoveredRef.current;
-    if (prev?.name === info?.name) return;
+    if (hoveredRef.current?.name === info?.name) return;
     hoveredRef.current = info;
     setHovered(info);
   }, []);
 
+  const resetView = useCallback(() => {
+    const t = transformRef.current;
+    t.rotX = 0;
+    t.rotY = 0;
+    t.zoom = 1;
+    t.panX = 0;
+    t.panY = 0;
+  }, []);
+
   const handleFrame = useCallback(
     (hands: TrackedHand[], frame: FrameInfo, now: number) => {
-      // ---- 1) vẽ khung xương tay trong ô webcam nhỏ ----
+      // ---- 1) khung xương tay trong ô webcam nhỏ ----
       const cam = camCanvasRef.current;
       if (cam) {
         const cw = cam.clientWidth;
@@ -102,9 +125,6 @@ export default function GestureControlPage() {
         }
       }
 
-      const primary = hands.find((h) => h.handedness === "Right") ?? hands[0];
-
-      // ---- 2) con trỏ toàn màn hình + dwell trên nút có data-gesture-target ----
       const overlay = cursorCanvasRef.current;
       const ow = overlay?.clientWidth ?? 0;
       const oh = overlay?.clientHeight ?? 0;
@@ -115,52 +135,83 @@ export default function GestureControlPage() {
       const octx = overlay?.getContext("2d");
       octx?.clearRect(0, 0, ow, oh);
 
+      // ---- 2) xác định chế độ thao tác ----
+      const gm = detectMode(hands);
+      if (gm !== modeRef.current) {
+        modeRef.current = gm;
+        setMode(gm);
+      }
+
+      const primary = hands.find((h) => h.handedness === "Right") ?? hands[0];
       if (!primary) {
         cursorRef.current.active = false;
         dwellRef.current.key = "";
         dwellRef.current.progress = 0;
-        pinchRef.current.active = false;
+        dragRef.current.mode = "idle";
         return;
       }
 
       const sx = primary.cursor.x * ow;
       const sy = primary.cursor.y * oh;
+      const t = transformRef.current;
+      const drag = dragRef.current;
 
-      // toạ độ chuẩn hoá bên trong khung 3D (để raycast)
+      // ---- 3) áp cử chỉ vào biến đổi mô hình ----
+      if (gm === "zoom") {
+        const span = twoHandSpan(hands);
+        if (span !== null) {
+          if (drag.mode !== "zoom") {
+            drag.mode = "zoom";
+            drag.span = span;
+            drag.zoom = t.zoom;
+          } else if (drag.span > 0.02) {
+            const ratio = span / drag.span;
+            t.zoom = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, drag.zoom * ratio));
+          }
+        }
+      } else if (gm === "rotate") {
+        if (drag.mode !== "rotate") {
+          drag.mode = "rotate";
+          drag.x = sx;
+          drag.y = sy;
+        } else {
+          t.rotY += ((sx - drag.x) / Math.max(ow, 1)) * Math.PI * 2.4; // ngang: quay trái/phải
+          t.rotX += ((sy - drag.y) / Math.max(oh, 1)) * Math.PI * 2.0; // dọc: ngửa/cúi
+          t.rotX = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, t.rotX));
+          drag.x = sx;
+          drag.y = sy;
+        }
+      } else if (gm === "pan") {
+        if (drag.mode !== "pan") {
+          drag.mode = "pan";
+          drag.x = sx;
+          drag.y = sy;
+        } else {
+          t.panX += ((sx - drag.x) / Math.max(ow, 1)) * 2.2;
+          t.panY -= ((sy - drag.y) / Math.max(oh, 1)) * 2.2;
+          drag.x = sx;
+          drag.y = sy;
+        }
+      } else {
+        drag.mode = "idle";
+      }
+
+      // ---- 4) con trỏ trong khung 3D (để raycast) ----
       const box = sceneBoxRef.current?.getBoundingClientRect();
       if (box) {
         const rx = (sx - box.left) / box.width;
         const ry = (sy - box.top) / box.height;
         cursorRef.current.x = rx;
         cursorRef.current.y = ry;
-        cursorRef.current.active = rx >= 0 && rx <= 1 && ry >= 0 && ry <= 1;
+        cursorRef.current.active = gm === "point" && rx >= 0 && rx <= 1 && ry >= 0 && ry <= 1;
       }
 
-      // ---- 3) chụm ngón cái–trỏ rồi kéo ngang = xoay mô hình ----
-      const tip = primary.landmarks[LM.INDEX_TIP];
-      const thumb = primary.landmarks[LM.THUMB_TIP];
-      const pinchDist = Math.hypot(tip.x - thumb.x, tip.y - thumb.y);
-      const pinching = pinchDist < 0.06;
-      if (pinching) {
-        if (!pinchRef.current.active) {
-          pinchRef.current.active = true;
-          pinchRef.current.lastX = sx;
-        } else {
-          rotationRef.current += ((sx - pinchRef.current.lastX) / ow) * Math.PI * 2.2;
-          pinchRef.current.lastX = sx;
-        }
-      } else {
-        pinchRef.current.active = false;
-      }
-
-      // ---- 4) dwell: giữ yên trên nút hoặc trên cấu trúc 3D ----
+      // ---- 5) dwell: chỉ khi đang ở chế độ trỏ ----
       const d = dwellRef.current;
       let targetKey = "";
-      let targetEl: HTMLElement | null = null;
-      if (!pinching) {
+      if (gm === "point") {
         const el = document.elementFromPoint(sx, sy) as HTMLElement | null;
-        targetEl = el?.closest<HTMLElement>("[data-gesture-target]") ?? null;
-        targetKey = targetEl?.dataset.gestureTarget ?? "";
+        targetKey = el?.closest<HTMLElement>("[data-gesture-target]")?.dataset.gestureTarget ?? "";
         if (!targetKey && cursorRef.current.active && hoveredRef.current) {
           targetKey = `mesh:${hoveredRef.current.name}`;
         }
@@ -181,7 +232,6 @@ export default function GestureControlPage() {
           d.progress = 0;
           d.start = now;
           d.key = "";
-          // kích hoạt hành động
           if (targetKey.startsWith("mesh:")) {
             setPicked(hoveredRef.current);
           } else if (targetKey.startsWith("layer:")) {
@@ -190,19 +240,20 @@ export default function GestureControlPage() {
           } else if (targetKey === "clear") {
             setPicked(null);
           } else if (targetKey === "explode") {
-            explodeRef.current = explodeRef.current > 0 ? 0 : 1;
+            t.explode = t.explode > 0 ? 0 : 1;
           } else if (targetKey === "reset") {
-            rotationRef.current = 0;
-            explodeRef.current = 0;
+            resetView();
           }
         }
       }
 
-      // ---- 5) vẽ con trỏ + vòng tiến trình ----
+      // ---- 6) vẽ con trỏ + vòng tiến trình ----
       if (octx) {
+        const color =
+          gm === "rotate" ? "#ffb347" : gm === "pan" ? "#7fb2ff" : gm === "zoom" ? "#b98cff" : "#ffffff";
         octx.beginPath();
         octx.arc(sx, sy, 9, 0, Math.PI * 2);
-        octx.fillStyle = pinching ? "#ffb347" : "rgba(255,255,255,.95)";
+        octx.fillStyle = color;
         octx.fill();
         octx.strokeStyle = "rgba(0,0,0,.45)";
         octx.lineWidth = 1.5;
@@ -216,12 +267,12 @@ export default function GestureControlPage() {
         }
       }
     },
-    [toggleLayer],
+    [resetView, toggleLayer],
   );
 
   const { fps, handCount, status, error } = useHandTracking(videoRef, enabled, {
     onFrame: handleFrame,
-    maxHands: 1,
+    maxHands: 2, // cần 2 tay cho cử chỉ phóng to/thu nhỏ
   });
 
   return (
@@ -230,12 +281,13 @@ export default function GestureControlPage() {
         <h1 className="text-sm font-semibold text-[var(--ink)]">
           Giải phẫu cẳng tay · điều khiển bằng cử chỉ
         </h1>
-        <span className="hidden text-xs text-[var(--muted)] lg:inline">
-          Ngón trỏ để trỏ · giữ yên 1,5s để chọn · chụm ngón rồi kéo để xoay
+        <span className="hidden rounded-full bg-[var(--surf-2)] px-3 py-1 text-xs text-[var(--body-fg)] md:inline">
+          {MODE_LABEL[mode]}
         </span>
         <div className="ml-auto flex items-center gap-3">
           <span className="text-xs text-[var(--muted)]">
-            FPS <b style={{ color: fps >= 24 ? "#0f8a7c" : fps >= 15 ? "#a9701a" : "#c0453b" }}>{fps}</b>
+            FPS{" "}
+            <b style={{ color: fps >= 24 ? "#0f8a7c" : fps >= 15 ? "#a9701a" : "#c0453b" }}>{fps}</b>
             {" · "}tay {handCount}
           </span>
           <button
@@ -256,18 +308,15 @@ export default function GestureControlPage() {
             layers={layers}
             cursorRef={cursorRef}
             onHover={handleHover}
-            rotationRef={rotationRef}
-            explodeRef={explodeRef}
+            transformRef={transformRef}
           />
 
-          {/* tên cấu trúc đang nhắm */}
           {hovered && (
             <div className="pointer-events-none absolute left-1/2 top-4 -translate-x-1/2 rounded-lg bg-[#1c1813]/85 px-4 py-2 text-sm font-semibold text-[#f4efe6]">
               {hovered.name}
             </div>
           )}
 
-          {/* webcam nhỏ góc dưới-trái */}
           <div className="absolute bottom-3 left-3 w-52 overflow-hidden rounded-lg border border-[var(--line)] bg-black">
             <div className="relative aspect-[4/3]">
               <video
@@ -358,30 +407,37 @@ export default function GestureControlPage() {
             <div className="space-y-2">
               <button
                 data-gesture-target="explode"
-                onClick={() => (explodeRef.current = explodeRef.current > 0 ? 0 : 1)}
+                onClick={() =>
+                  (transformRef.current.explode = transformRef.current.explode > 0 ? 0 : 1)
+                }
                 className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm hover:bg-[var(--surf-2)]"
               >
                 Tách lớp / gộp lại
               </button>
               <button
                 data-gesture-target="reset"
-                onClick={() => {
-                  rotationRef.current = 0;
-                  explodeRef.current = 0;
-                }}
+                onClick={resetView}
                 className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm hover:bg-[var(--surf-2)]"
               >
                 Về vị trí ban đầu
               </button>
             </div>
-            <p className="mt-3 text-xs leading-relaxed text-[var(--muted)]">
-              Đưa ngón trỏ tới nút và giữ yên 1,5 giây để bấm bằng cử chỉ.
-            </p>
+          </div>
+
+          <div className="rounded-xl border border-[var(--line)] bg-[var(--surf)] p-4">
+            <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-[var(--muted-2)]">
+              Cử chỉ
+            </h2>
+            <ul className="space-y-1.5 text-xs leading-relaxed text-[var(--body-fg)]">
+              <li>• <b>Ngón trỏ</b> di chuyển → con trỏ; giữ yên 1,5s để chọn</li>
+              <li>• <b>Chụm ngón cái–trỏ rồi kéo</b> → xoay: ngang là quay, dọc là ngửa/cúi</li>
+              <li>• <b>Nắm tay rồi kéo</b> → di chuyển mô hình lên xuống, trái phải</li>
+              <li>• <b>Hai tay cùng chụm, dang ra/khép vào</b> → phóng to / thu nhỏ</li>
+            </ul>
           </div>
         </aside>
       </div>
 
-      {/* lớp phủ con trỏ toàn màn hình — không chặn chuột */}
       <canvas
         ref={cursorCanvasRef}
         className="pointer-events-none fixed inset-0 z-50 h-full w-full"
