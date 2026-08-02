@@ -50,6 +50,14 @@ type Options = {
   onFrame?: (hands: TrackedHand[], frame: FrameInfo, timestampMs: number) => void;
   /** Số tay tối đa cần theo dõi (1 nhẹ hơn, 2 cho cử chỉ hai tay). */
   maxHands?: number;
+  /**
+   * Giãn cách tối thiểu giữa 2 lần nhận diện (ms). Nhận diện là khâu tốn nhất;
+   * chạy ~20 lần/giây là đủ mượt cho cử chỉ mà nhẹ hơn hẳn so với mỗi khung hình.
+   */
+  detectIntervalMs?: number;
+  /** Độ phân giải webcam yêu cầu — thấp hơn = nhận diện nhanh hơn nhiều. */
+  videoWidth?: number;
+  videoHeight?: number;
 };
 
 export type HandTrackingState = {
@@ -71,7 +79,12 @@ export function useHandTracking(
   enabled: boolean,
   options: Options = {},
 ) {
-  const { maxHands = 2 } = options;
+  const {
+    maxHands = 2,
+    detectIntervalMs = 45,
+    videoWidth = 480,
+    videoHeight = 360,
+  } = options;
   const [state, setState] = useState<HandTrackingState>({
     fps: 0,
     handCount: 0,
@@ -85,6 +98,7 @@ export function useHandTracking(
   const landmarkerRef = useRef<HandLandmarker | null>(null);
   const rafRef = useRef<number | null>(null);
   const lastVideoTimeRef = useRef(-1);
+  const lastDetectRef = useRef(0);
   const filtersRef = useRef<Map<string, Point2DFilter>>(new Map());
 
   const stop = useCallback(() => {
@@ -128,7 +142,11 @@ export function useHandTracking(
         landmarkerRef.current = landmarker;
 
         const stream = await navigator.mediaDevices.getUserMedia({
-          video: { width: { ideal: 640 }, height: { ideal: 480 }, frameRate: { ideal: 30 } },
+          video: {
+            width: { ideal: videoWidth },
+            height: { ideal: videoHeight },
+            frameRate: { ideal: 30 },
+          },
           audio: false,
         });
         if (cancelled) {
@@ -148,10 +166,12 @@ export function useHandTracking(
           const v = videoRef.current;
           const lm = landmarkerRef.current;
           if (!v || !lm || v.readyState < 2) return;
-          if (v.currentTime === lastVideoTimeRef.current) return;
-          lastVideoTimeRef.current = v.currentTime;
-
           const now = performance.now();
+          // giới hạn tần suất nhận diện (khâu nặng nhất) + bỏ qua khung hình trùng
+          if (now - lastDetectRef.current < detectIntervalMs) return;
+          if (v.currentTime === lastVideoTimeRef.current) return;
+          lastDetectRef.current = now;
+          lastVideoTimeRef.current = v.currentTime;
           let result: HandLandmarkerResult;
           try {
             result = lm.detectForVideo(v, now);
@@ -212,7 +232,7 @@ export function useHandTracking(
       landmarkerRef.current?.close();
       landmarkerRef.current = null;
     };
-  }, [enabled, maxHands, stop, videoRef]);
+  }, [enabled, maxHands, detectIntervalMs, videoWidth, videoHeight, stop, videoRef]);
 
   return state;
 }
