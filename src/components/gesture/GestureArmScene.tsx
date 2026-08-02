@@ -65,7 +65,7 @@ function ForearmModel({
   transformRef: React.RefObject<Transform>;
 }) {
   const { scene } = useGLTF(url, "/draco/");
-  const { camera, size } = useThree();
+  const { camera } = useThree();
   const groupRef = useRef<THREE.Group>(null);
   const raycaster = useMemo(() => new THREE.Raycaster(), []);
   const hoveredRef = useRef<THREE.Mesh | null>(null);
@@ -163,7 +163,6 @@ function ForearmModel({
         onHover(null);
       }
     }
-    void size;
   });
 
   // Center phải nằm BÊN TRONG nhóm biến đổi: có vậy tâm xoay/phóng mới là tâm

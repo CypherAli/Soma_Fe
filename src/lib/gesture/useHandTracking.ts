@@ -67,6 +67,8 @@ export type HandTrackingState = {
   error: string | null;
 };
 
+const IDLE_STATE: HandTrackingState = { fps: 0, handCount: 0, status: "idle", error: null };
+
 /**
  * Bật webcam + MediaPipe HandLandmarker, chạy vòng lặp nhận diện theo rAF.
  * Model & WASM nạp từ /public (không phụ thuộc CDN).
@@ -92,8 +94,12 @@ export function useHandTracking(
     error: null,
   });
 
+  // Giữ callback mới nhất mà không phải nạp lại model: cập nhật trong effect,
+  // KHÔNG gán thẳng lúc render (vi phạm quy tắc ref của React).
   const onFrameRef = useRef(options.onFrame);
-  onFrameRef.current = options.onFrame;
+  useEffect(() => {
+    onFrameRef.current = options.onFrame;
+  }, [options.onFrame]);
 
   const landmarkerRef = useRef<HandLandmarker | null>(null);
   const rafRef = useRef<number | null>(null);
@@ -112,8 +118,9 @@ export function useHandTracking(
 
   useEffect(() => {
     if (!enabled) {
+      // Chỉ dừng thiết bị. KHÔNG setState ở đây — trạng thái "nghỉ" được suy ra
+      // lúc trả về, tránh chuỗi render lồng nhau.
       stop();
-      setState((s) => ({ ...s, status: "idle", handCount: 0, fps: 0 }));
       return;
     }
 
@@ -234,5 +241,6 @@ export function useHandTracking(
     };
   }, [enabled, maxHands, detectIntervalMs, videoWidth, videoHeight, stop, videoRef]);
 
-  return state;
+  // Tắt camera thì luôn báo "nghỉ" — suy ra tại chỗ nên không cần lưu vào state.
+  return enabled ? state : IDLE_STATE;
 }
