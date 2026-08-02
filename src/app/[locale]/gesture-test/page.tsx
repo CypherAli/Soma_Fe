@@ -1,132 +1,171 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import { HAND_BONES, LM, useHandTracking, type TrackedHand } from "@/lib/gesture/useHandTracking";
+import { useCallback, useRef, useState } from "react";
+import {
+  HAND_BONES,
+  LM,
+  useHandTracking,
+  type FrameInfo,
+  type TrackedHand,
+} from "@/lib/gesture/useHandTracking";
 import "../../home.css";
 
 // P0 SPIKE — kiểm chứng hiệu năng & cơ chế điều khiển bằng cử chỉ trước khi build thật.
-// Đo: FPS, độ mượt con trỏ ngón trỏ, cơ chế "dừng 1.8s để chọn" (dwell).
+// Đo: FPS, độ mượt con trỏ ngón trỏ, cơ chế "dừng để chọn" (dwell).
+// HIỆU NĂNG: mọi thứ chạy trong onFrame (ref-based) — KHÔNG setState mỗi khung hình.
 
-const DWELL_MS = 1800; // thời gian giữ yên để chọn
-const DWELL_RADIUS = 0.045; // bán kính "đứng yên" (toạ độ chuẩn hoá)
+const DWELL_MS = 1500; // thời gian giữ yên để chọn
+const DWELL_MOVE_TOL = 0.05; // di quá ngưỡng này coi như rời mục tiêu
+const TARGET_HIT = 0.08; // bán kính "chạm" mục tiêu (toạ độ chuẩn hoá)
 
 type Target = { id: string; label: string; x: number; y: number };
 const TARGETS: Target[] = [
-  { id: "skin", label: "Da", x: 0.16, y: 0.24 },
-  { id: "muscle", label: "Cơ", x: 0.16, y: 0.5 },
-  { id: "bone", label: "Xương", x: 0.16, y: 0.76 },
+  { id: "skin", label: "Da", x: 0.14, y: 0.24 },
+  { id: "muscle", label: "Cơ", x: 0.14, y: 0.5 },
+  { id: "bone", label: "Xương", x: 0.14, y: 0.76 },
 ];
 
 export default function GestureTestPage() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [enabled, setEnabled] = useState(false);
-  const { hands, fps, status, error } = useHandTracking(videoRef, enabled);
 
   const [selected, setSelected] = useState<string | null>(null);
   const [log, setLog] = useState<string[]>([]);
-  const dwellRef = useRef<{ id: string | null; start: number; x: number; y: number }>({
-    id: null,
-    start: 0,
-    x: 0,
-    y: 0,
-  });
-  const [dwellProgress, setDwellProgress] = useState(0);
+  const dwellRef = useRef({ id: null as string | null, start: 0, x: 0, y: 0, progress: 0 });
 
-  // tay điều khiển: ưu tiên tay phải (tay thuận), không có thì lấy tay đầu tiên
-  const primary: TrackedHand | undefined = useMemo(
-    () => hands.find((h) => h.handedness === "Right") ?? hands[0],
-    [hands],
+  /**
+   * Ánh xạ toạ độ chuẩn hoá của landmark → pixel canvas, bù đúng cách video bị
+   * cắt bởi object-cover (nếu không, con trỏ sẽ lệch khỏi ngón tay thật).
+   */
+  const mapper = useCallback((frame: FrameInfo, cw: number, ch: number) => {
+    const va = frame.width / frame.height;
+    const ca = cw / ch;
+    let scale: number, ox: number, oy: number;
+    if (ca > va) {
+      scale = cw / frame.width;
+      ox = 0;
+      oy = (ch - frame.height * scale) / 2;
+    } else {
+      scale = ch / frame.height;
+      ox = (cw - frame.width * scale) / 2;
+      oy = 0;
+    }
+    return (nx: number, ny: number) => ({
+      x: ox + nx * frame.width * scale,
+      y: oy + ny * frame.height * scale,
+    });
+  }, []);
+
+  const handleFrame = useCallback(
+    (hands: TrackedHand[], frame: FrameInfo, now: number) => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      const cw = canvas.clientWidth;
+      const ch = canvas.clientHeight;
+      if (canvas.width !== cw || canvas.height !== ch) {
+        canvas.width = cw;
+        canvas.height = ch;
+      }
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+      const toPx = mapper(frame, cw, ch);
+      ctx.clearRect(0, 0, cw, ch);
+
+      // tay điều khiển: ưu tiên tay phải, không có thì lấy tay đầu tiên
+      const primary = hands.find((h) => h.handedness === "Right") ?? hands[0];
+
+      for (const hand of hands) {
+        const isPrimary = hand === primary;
+        ctx.strokeStyle = isPrimary ? "rgba(55,201,179,.95)" : "rgba(140,170,205,.5)";
+        ctx.lineWidth = isPrimary ? 2.5 : 1.5;
+        for (const [a, b] of HAND_BONES) {
+          const pa = toPx(hand.landmarks[a].x, hand.landmarks[a].y);
+          const pb = toPx(hand.landmarks[b].x, hand.landmarks[b].y);
+          ctx.beginPath();
+          ctx.moveTo(pa.x, pa.y);
+          ctx.lineTo(pb.x, pb.y);
+          ctx.stroke();
+        }
+        ctx.fillStyle = isPrimary ? "#37c9b3" : "#8caacd";
+        for (const p of hand.landmarks) {
+          const q = toPx(p.x, p.y);
+          ctx.beginPath();
+          ctx.arc(q.x, q.y, isPrimary ? 3.5 : 2.5, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        const wrist = toPx(hand.landmarks[LM.WRIST].x, hand.landmarks[LM.WRIST].y);
+        ctx.fillStyle = "rgba(255,255,255,.9)";
+        ctx.font = "12px system-ui";
+        ctx.fillText(hand.handedness === "Right" ? "Tay phải" : "Tay trái", wrist.x + 10, wrist.y);
+      }
+
+      // ---- cơ chế dwell: giữ con trỏ yên trên một mục tiêu đủ lâu = chọn ----
+      const d = dwellRef.current;
+      if (!primary) {
+        d.id = null;
+        d.progress = 0;
+      } else {
+        const { x, y } = primary.cursor;
+        const hit = TARGETS.find((t) => Math.hypot(t.x - x, t.y - y) < TARGET_HIT);
+        if (!hit) {
+          d.id = null;
+          d.progress = 0;
+        } else if (d.id !== hit.id || Math.hypot(x - d.x, y - d.y) > DWELL_MOVE_TOL) {
+          d.id = hit.id;
+          d.start = now;
+          d.x = x;
+          d.y = y;
+          d.progress = 0;
+        } else {
+          d.progress = Math.min((now - d.start) / DWELL_MS, 1);
+          if (d.progress >= 1) {
+            d.id = null;
+            d.progress = 0;
+            d.start = now;
+            setSelected(hit.id); // sự kiện thật -> mới được setState
+            setLog((l) =>
+              [`Chọn “${hit.label}” · ${new Date().toLocaleTimeString()}`, ...l].slice(0, 6),
+            );
+          }
+        }
+
+        // con trỏ + vòng tiến trình
+        const c = toPx(primary.cursor.x, primary.cursor.y);
+        ctx.beginPath();
+        ctx.arc(c.x, c.y, 8, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255,255,255,.95)";
+        ctx.fill();
+        ctx.strokeStyle = "rgba(0,0,0,.35)";
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+        if (d.progress > 0) {
+          ctx.beginPath();
+          ctx.arc(c.x, c.y, 19, -Math.PI / 2, -Math.PI / 2 + d.progress * Math.PI * 2);
+          ctx.strokeStyle = "#37c9b3";
+          ctx.lineWidth = 4;
+          ctx.stroke();
+        }
+      }
+
+      // viền sáng mục tiêu đang được nhắm
+      for (const t of TARGETS) {
+        if (t.id !== d.id) continue;
+        const p = toPx(t.x, t.y);
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 46, 0, Math.PI * 2);
+        ctx.strokeStyle = "rgba(55,201,179,.7)";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      }
+    },
+    [mapper],
   );
 
-  // ---- cơ chế dwell: giữ con trỏ yên trên 1 mục tiêu đủ lâu = chọn ----
-  useEffect(() => {
-    if (!primary) {
-      dwellRef.current.id = null;
-      setDwellProgress(0);
-      return;
-    }
-    const { x, y } = primary.cursor;
-    const hit = TARGETS.find((t) => Math.hypot(t.x - x, t.y - y) < 0.075);
-    const now = performance.now();
-    const d = dwellRef.current;
-
-    if (!hit) {
-      d.id = null;
-      setDwellProgress(0);
-      return;
-    }
-    const moved = Math.hypot(x - d.x, y - d.y) > DWELL_RADIUS;
-    if (d.id !== hit.id || moved) {
-      d.id = hit.id;
-      d.start = now;
-      d.x = x;
-      d.y = y;
-      setDwellProgress(0);
-      return;
-    }
-    const p = Math.min((now - d.start) / DWELL_MS, 1);
-    setDwellProgress(p);
-    if (p >= 1) {
-      setSelected(hit.id);
-      setLog((l) => [`Đã chọn "${hit.label}" · ${new Date().toLocaleTimeString()}`, ...l].slice(0, 5));
-      d.id = null;
-      d.start = now;
-      setDwellProgress(0);
-    }
-  }, [primary]);
-
-  // ---- vẽ overlay: khung xương tay + con trỏ + vòng tiến trình ----
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-    const w = canvas.width;
-    const h = canvas.height;
-    ctx.clearRect(0, 0, w, h);
-
-    for (const hand of hands) {
-      const isPrimary = hand === primary;
-      ctx.strokeStyle = isPrimary ? "rgba(55,201,179,.9)" : "rgba(120,160,200,.55)";
-      ctx.lineWidth = 2;
-      for (const [a, b] of HAND_BONES) {
-        const pa = hand.landmarks[a];
-        const pb = hand.landmarks[b];
-        ctx.beginPath();
-        ctx.moveTo(pa.x * w, pa.y * h);
-        ctx.lineTo(pb.x * w, pb.y * h);
-        ctx.stroke();
-      }
-      ctx.fillStyle = isPrimary ? "#37c9b3" : "#7aa0c8";
-      for (const p of hand.landmarks) {
-        ctx.beginPath();
-        ctx.arc(p.x * w, p.y * h, 3, 0, Math.PI * 2);
-        ctx.fill();
-      }
-      // nhãn tay trái/phải ở cổ tay
-      const wrist = hand.landmarks[LM.WRIST];
-      ctx.fillStyle = "rgba(255,255,255,.85)";
-      ctx.font = "12px system-ui";
-      ctx.fillText(hand.handedness === "Right" ? "Tay phải" : "Tay trái", wrist.x * w + 8, wrist.y * h);
-    }
-
-    if (primary) {
-      const cx = primary.cursor.x * w;
-      const cy = primary.cursor.y * h;
-      ctx.beginPath();
-      ctx.arc(cx, cy, 9, 0, Math.PI * 2);
-      ctx.fillStyle = "rgba(255,255,255,.95)";
-      ctx.fill();
-      if (dwellProgress > 0) {
-        ctx.beginPath();
-        ctx.arc(cx, cy, 20, -Math.PI / 2, -Math.PI / 2 + dwellProgress * Math.PI * 2);
-        ctx.strokeStyle = "#37c9b3";
-        ctx.lineWidth = 4;
-        ctx.stroke();
-      }
-    }
-  }, [hands, primary, dwellProgress]);
+  const { fps, handCount, status, error } = useHandTracking(videoRef, enabled, {
+    onFrame: handleFrame,
+    maxHands: 2,
+  });
 
   return (
     <div className="bd flex h-screen flex-col bg-[var(--surf-3)]">
@@ -134,7 +173,7 @@ export default function GestureTestPage() {
         <h1 className="text-sm font-semibold text-[var(--ink)]">
           P0 · Kiểm chứng điều khiển bằng cử chỉ
         </h1>
-        <span className="text-xs text-[var(--muted)]">
+        <span className="hidden text-xs text-[var(--muted)] md:inline">
           Đo FPS · độ mượt con trỏ · cơ chế dừng-để-chọn
         </span>
         <button
@@ -154,27 +193,20 @@ export default function GestureTestPage() {
             className="absolute inset-0 h-full w-full object-cover"
             style={{ transform: "scaleX(-1)" }}
           />
-          <canvas
-            ref={canvasRef}
-            width={960}
-            height={720}
-            className="absolute inset-0 h-full w-full"
-          />
+          <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
 
-          {/* mục tiêu để test dwell */}
           {TARGETS.map((t) => {
-            const active = dwellRef.current.id === t.id;
             const isSel = selected === t.id;
             return (
               <div
                 key={t.id}
-                className="absolute -translate-x-1/2 -translate-y-1/2 rounded-xl px-5 py-3 text-sm font-semibold transition-colors"
+                className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 rounded-xl px-5 py-3 text-sm font-semibold"
                 style={{
                   left: `${t.x * 100}%`,
                   top: `${t.y * 100}%`,
-                  background: isSel ? "#37c9b3" : "rgba(255,255,255,.14)",
+                  background: isSel ? "#37c9b3" : "rgba(255,255,255,.16)",
                   color: isSel ? "#06231f" : "#fff",
-                  border: `2px solid ${active ? "#37c9b3" : "rgba(255,255,255,.3)"}`,
+                  border: "2px solid rgba(255,255,255,.35)",
                   backdropFilter: "blur(4px)",
                 }}
               >
@@ -184,11 +216,13 @@ export default function GestureTestPage() {
           })}
 
           {!enabled && (
-            <div className="absolute inset-0 grid place-items-center text-center text-sm text-white/70">
+            <div className="absolute inset-0 grid place-items-center px-6 text-center text-sm text-white/70">
               <div>
-                <p className="mb-2 text-base font-semibold text-white">Bấm “Bật camera” để bắt đầu</p>
-                <p>Giơ bàn tay lên trước webcam, dùng ngón trỏ làm con trỏ.</p>
-                <p>Giữ yên trên một ô ~1.8 giây để chọn.</p>
+                <p className="mb-2 text-base font-semibold text-white">
+                  Bấm “Bật camera” để bắt đầu
+                </p>
+                <p>Giơ bàn tay lên trước webcam, ngón trỏ làm con trỏ.</p>
+                <p>Giữ yên trên một ô ~1,5 giây để chọn.</p>
               </div>
             </div>
           )}
@@ -221,17 +255,23 @@ export default function GestureTestPage() {
               </div>
               <div className="flex items-center justify-between">
                 <dt className="text-[var(--muted)]">Số tay thấy</dt>
-                <dd className="font-semibold tabular-nums">{hands.length}</dd>
+                <dd className="font-semibold tabular-nums">{handCount}</dd>
               </div>
               <div className="flex items-center justify-between">
                 <dt className="text-[var(--muted)]">Trạng thái</dt>
                 <dd className="font-semibold">
-                  {status === "running" ? "Đang chạy" : status === "loading" ? "Đang nạp" : status === "error" ? "Lỗi" : "Chờ"}
+                  {status === "running"
+                    ? "Đang chạy"
+                    : status === "loading"
+                      ? "Đang nạp"
+                      : status === "error"
+                        ? "Lỗi"
+                        : "Chờ"}
                 </dd>
               </div>
             </dl>
             <p className="mt-3 text-xs leading-relaxed text-[var(--muted)]">
-              FPS ≥ 24 là mượt · 15–23 dùng được · dưới 15 phải tối ưu.
+              FPS ≥ 24 mượt · 15–23 dùng được · dưới 15 phải tối ưu.
             </p>
           </div>
 

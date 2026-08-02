@@ -31,16 +31,30 @@ export const HAND_BONES: [number, number][] = [
 
 export type Landmark = { x: number; y: number; z: number };
 export type TrackedHand = {
-  /** "Left" | "Right" theo MediaPipe (đã tính ảnh gương). */
+  /** "Left" | "Right" — đã đảo cho khớp ảnh gương người dùng thấy. */
   handedness: string;
   landmarks: Landmark[];
   /** Đầu ngón trỏ đã lọc rung, toạ độ chuẩn hoá 0..1 (x đã lật gương). */
   cursor: { x: number; y: number };
 };
 
+/** Kích thước khung video thật, cần để ánh xạ landmark ↔ pixel màn hình. */
+export type FrameInfo = { width: number; height: number };
+
+type Options = {
+  /**
+   * Gọi MỖI KHUNG HÌNH với dữ liệu tay mới. Chạy ngoài vòng đời React —
+   * TUYỆT ĐỐI không setState ở đây trừ khi có sự kiện thật (chọn/hủy),
+   * nếu không sẽ gây bão re-render và tụt FPS.
+   */
+  onFrame?: (hands: TrackedHand[], frame: FrameInfo, timestampMs: number) => void;
+  /** Số tay tối đa cần theo dõi (1 nhẹ hơn, 2 cho cử chỉ hai tay). */
+  maxHands?: number;
+};
+
 export type HandTrackingState = {
-  hands: TrackedHand[];
   fps: number;
+  handCount: number;
   status: "idle" | "loading" | "running" | "error";
   error: string | null;
 };
@@ -48,20 +62,30 @@ export type HandTrackingState = {
 /**
  * Bật webcam + MediaPipe HandLandmarker, chạy vòng lặp nhận diện theo rAF.
  * Model & WASM nạp từ /public (không phụ thuộc CDN).
+ *
+ * Hiệu năng: dữ liệu tay trả về qua callback `onFrame` (ref-based), KHÔNG qua
+ * state — React chỉ render lại khi FPS/trạng thái đổi (2 lần/giây).
  */
-export function useHandTracking(videoRef: React.RefObject<HTMLVideoElement | null>, enabled: boolean) {
+export function useHandTracking(
+  videoRef: React.RefObject<HTMLVideoElement | null>,
+  enabled: boolean,
+  options: Options = {},
+) {
+  const { maxHands = 2 } = options;
   const [state, setState] = useState<HandTrackingState>({
-    hands: [],
     fps: 0,
+    handCount: 0,
     status: "idle",
     error: null,
   });
+
+  const onFrameRef = useRef(options.onFrame);
+  onFrameRef.current = options.onFrame;
 
   const landmarkerRef = useRef<HandLandmarker | null>(null);
   const rafRef = useRef<number | null>(null);
   const lastVideoTimeRef = useRef(-1);
   const filtersRef = useRef<Map<string, Point2DFilter>>(new Map());
-  const fpsRef = useRef({ frames: 0, last: performance.now(), value: 0 });
 
   const stop = useCallback(() => {
     if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
@@ -75,11 +99,12 @@ export function useHandTracking(videoRef: React.RefObject<HTMLVideoElement | nul
   useEffect(() => {
     if (!enabled) {
       stop();
-      setState((s) => ({ ...s, status: "idle", hands: [] }));
+      setState((s) => ({ ...s, status: "idle", handCount: 0, fps: 0 }));
       return;
     }
 
     let cancelled = false;
+    const fps = { frames: 0, last: performance.now(), value: 0, hands: 0 };
 
     (async () => {
       try {
@@ -90,10 +115,11 @@ export function useHandTracking(videoRef: React.RefObject<HTMLVideoElement | nul
         const landmarker = await vision.HandLandmarker.createFromOptions(fileset, {
           baseOptions: { modelAssetPath: "/mediapipe/hand_landmarker.task", delegate: "GPU" },
           runningMode: "VIDEO",
-          numHands: 2,
-          minHandDetectionConfidence: 0.5,
-          minHandPresenceConfidence: 0.5,
-          minTrackingConfidence: 0.5,
+          numHands: maxHands,
+          // ngưỡng cao hơn để không nhận nhầm cẳng tay/khuôn mặt thành bàn tay
+          minHandDetectionConfidence: 0.7,
+          minHandPresenceConfidence: 0.7,
+          minTrackingConfidence: 0.6,
         });
         if (cancelled) {
           landmarker.close();
@@ -122,44 +148,54 @@ export function useHandTracking(videoRef: React.RefObject<HTMLVideoElement | nul
           const v = videoRef.current;
           const lm = landmarkerRef.current;
           if (!v || !lm || v.readyState < 2) return;
+          if (v.currentTime === lastVideoTimeRef.current) return;
+          lastVideoTimeRef.current = v.currentTime;
 
           const now = performance.now();
-          if (v.currentTime !== lastVideoTimeRef.current) {
-            lastVideoTimeRef.current = v.currentTime;
-            let result: HandLandmarkerResult;
-            try {
-              result = lm.detectForVideo(v, now);
-            } catch {
-              return;
-            }
+          let result: HandLandmarkerResult;
+          try {
+            result = lm.detectForVideo(v, now);
+          } catch {
+            return;
+          }
 
-            const hands: TrackedHand[] = result.landmarks.map((points, i) => {
-              // MediaPipe trả handedness theo ảnh gốc; video hiển thị lật gương nên đảo lại
-              const raw = result.handedness[i]?.[0]?.categoryName ?? "Right";
-              const handedness = raw === "Left" ? "Right" : "Left";
-              const key = `${handedness}-${i}`;
-              let filter = filtersRef.current.get(key);
-              if (!filter) {
-                filter = new Point2DFilter(1.2, 0.03);
-                filtersRef.current.set(key, filter);
-              }
-              const tip = points[LM.INDEX_TIP];
-              const cursor = filter.filter(1 - tip.x, tip.y, now); // lật x cho khớp ảnh gương
-              return {
-                handedness,
-                landmarks: points.map((p) => ({ x: 1 - p.x, y: p.y, z: p.z })),
-                cursor,
-              };
-            });
-
-            const f = fpsRef.current;
-            f.frames += 1;
-            if (now - f.last >= 500) {
-              f.value = Math.round((f.frames * 1000) / (now - f.last));
-              f.frames = 0;
-              f.last = now;
+          const hands: TrackedHand[] = result.landmarks.map((points, i) => {
+            // MediaPipe trả handedness theo ảnh gốc; hiển thị lật gương nên đảo lại
+            const raw = result.handedness[i]?.[0]?.categoryName ?? "Right";
+            const handedness = raw === "Left" ? "Right" : "Left";
+            const key = `${handedness}-${i}`;
+            let filter = filtersRef.current.get(key);
+            if (!filter) {
+              filter = new Point2DFilter(1.2, 0.03);
+              filtersRef.current.set(key, filter);
             }
-            setState((s) => ({ ...s, hands, fps: f.value }));
+            const tip = points[LM.INDEX_TIP];
+            const cursor = filter.filter(1 - tip.x, tip.y, now); // lật x cho khớp ảnh gương
+            return {
+              handedness,
+              landmarks: points.map((p) => ({ x: 1 - p.x, y: p.y, z: p.z })),
+              cursor,
+            };
+          });
+
+          onFrameRef.current?.(
+            hands,
+            { width: v.videoWidth, height: v.videoHeight },
+            now,
+          );
+
+          // chỉ đẩy state 2 lần/giây (FPS + số tay) để không kích re-render liên tục
+          fps.frames += 1;
+          fps.hands = hands.length;
+          if (now - fps.last >= 500) {
+            fps.value = Math.round((fps.frames * 1000) / (now - fps.last));
+            fps.frames = 0;
+            fps.last = now;
+            const v2 = fps.value;
+            const h2 = fps.hands;
+            setState((s) =>
+              s.fps === v2 && s.handCount === h2 ? s : { ...s, fps: v2, handCount: h2 },
+            );
           }
         };
         rafRef.current = requestAnimationFrame(loop);
@@ -176,7 +212,7 @@ export function useHandTracking(videoRef: React.RefObject<HTMLVideoElement | nul
       landmarkerRef.current?.close();
       landmarkerRef.current = null;
     };
-  }, [enabled, stop, videoRef]);
+  }, [enabled, maxHands, stop, videoRef]);
 
   return state;
 }
