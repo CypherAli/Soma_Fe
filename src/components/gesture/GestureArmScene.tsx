@@ -166,9 +166,14 @@ function ForearmModel({
     void size;
   });
 
+  // Center phải nằm BÊN TRONG nhóm biến đổi: có vậy tâm xoay/phóng mới là tâm
+  // mô hình. Nếu đặt ngược lại, tâm xoay rơi vào gốc toạ độ Blender ở rất xa và
+  // mô hình bị văng khỏi khung ngay khi xoay hoặc phóng to.
   return (
     <group ref={groupRef}>
-      <primitive object={scn} />
+      <Center>
+        <primitive object={scn} />
+      </Center>
     </group>
   );
 }
@@ -185,7 +190,8 @@ export default function GestureArmScene(props: {
     <Canvas
       dpr={[1, 1.5]}
       camera={{ position: [0, 0, 2.4], fov: 40, near: 0.01, far: 100 }}
-      gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping }}
+      // preserveDrawingBuffer: cho phép đọc lại khung đã vẽ để tự kiểm chứng/chụp ảnh
+      gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping, preserveDrawingBuffer: true }}
       style={{ width: "100%", height: "100%" }}
     >
       <color attach="background" args={["#f4efe6"]} />
@@ -193,11 +199,10 @@ export default function GestureArmScene(props: {
       <ambientLight intensity={0.45} />
       <directionalLight position={[3, 5, 4]} intensity={1.15} color="#fff3e2" />
       <directionalLight position={[-4, 2, -3]} intensity={0.5} color="#e7d9c4" />
-      {/* KHÔNG dùng observe: Bounds sẽ căn lại khung mỗi khi cử chỉ phóng to/thu nhỏ */}
-      <Bounds fit clip margin={1.1}>
-        <Center>
-          <ForearmModel url={url} {...rest} />
-        </Center>
+      {/* KHÔNG dùng observe (căn lại khung mỗi lần zoom) và KHÔNG dùng clip
+          (siết near/far sát mô hình -> vừa xoay/zoom là bị cắt mất hình) */}
+      <Bounds fit margin={1.1}>
+        <ForearmModel url={url} {...rest} />
       </Bounds>
     </Canvas>
   );

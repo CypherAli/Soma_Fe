@@ -71,6 +71,37 @@ export const MODE_LABEL: Record<HandMode, string> = {
   pan: "Di chuyển",
 };
 
+/**
+ * Giữ chế độ ổn định: chỉ đổi khi tư thế mới lặp lại đủ số khung hình.
+ * Không có bước này, nhận diện ngón chập chờn sẽ làm chế độ nhảy liên tục
+ * và mọi thao tác "lộn hết cả lên".
+ */
+export class ModeStabilizer {
+  private current: HandMode = "point";
+  private candidate: HandMode = "point";
+  private count = 0;
+  constructor(private needed = 4) {}
+
+  push(mode: HandMode): HandMode {
+    if (mode === this.current) {
+      this.candidate = mode;
+      this.count = 0;
+      return this.current;
+    }
+    if (mode === this.candidate) {
+      this.count += 1;
+      if (this.count >= this.needed) {
+        this.current = mode;
+        this.count = 0;
+      }
+    } else {
+      this.candidate = mode;
+      this.count = 1;
+    }
+    return this.current;
+  }
+}
+
 /** Gói dữ liệu một bàn tay đã phân tích, dùng trực tiếp trong vòng lặp. */
 export type AnalyzedHand = {
   hand: TrackedHand;
@@ -78,9 +109,29 @@ export type AnalyzedHand = {
   mode: HandMode;
 };
 
-export function analyze(hands: TrackedHand[]): AnalyzedHand[] {
+export function analyze(
+  hands: TrackedHand[],
+  stabilizers?: Map<string, ModeStabilizer>,
+): AnalyzedHand[] {
   return hands.map((hand) => {
     const fingers = readHand(hand.landmarks);
-    return { hand, fingers, mode: detectHandMode(fingers) };
+    let mode = detectHandMode(fingers);
+    if (stabilizers) {
+      let st = stabilizers.get(hand.handedness);
+      if (!st) {
+        st = new ModeStabilizer();
+        stabilizers.set(hand.handedness, st);
+      }
+      mode = st.push(mode);
+    }
+    return { hand, fingers, mode };
   });
+}
+
+/** Độ mở hai ngón → hệ số phóng to, ánh xạ TUYỆT ĐỐI nên không bao giờ trôi. */
+export function zoomFromSpan(span: number, min = 0.5, max = 2.6): number {
+  const SPAN_MIN = 0.3;
+  const SPAN_MAX = 1.7;
+  const k = Math.min(1, Math.max(0, (span - SPAN_MIN) / (SPAN_MAX - SPAN_MIN)));
+  return min + k * (max - min);
 }

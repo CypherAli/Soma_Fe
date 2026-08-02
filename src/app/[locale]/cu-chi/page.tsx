@@ -1,12 +1,18 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import GestureArmScene, {
   defaultTransform,
   type LayerState,
 } from "@/components/gesture/GestureArmScene";
 import { CATS, type CatKey } from "@/lib/anatomy/layers";
-import { MODE_LABEL, analyze, type AnalyzedHand, type HandMode } from "@/lib/gesture/gestures";
+import {
+  MODE_LABEL,
+  ModeStabilizer,
+  analyze,
+  zoomFromSpan,
+  type HandMode,
+} from "@/lib/gesture/gestures";
 import {
   HAND_BONES,
   useHandTracking,
@@ -25,8 +31,10 @@ import "../../home.css";
 const DWELL_MS = 1500;
 const DWELL_MOVE_TOL_PX = 55;
 const SHOWN_CATS: CatKey[] = ["skin", "muscle", "artery", "vein", "nerve", "bone"];
-const ZOOM_MIN = 0.35;
-const ZOOM_MAX = 3.5;
+// Giới hạn di chuyển: đo thực tế cho thấy quá 0.3 là mô hình gần như ra khỏi khung.
+const PAN_LIMIT = 0.28;
+const ROT_STEP_MAX = 0.25; // chặn bước xoay mỗi khung hình, tránh giật văng
+const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
 
 const CURSOR_COLOR: Record<HandMode, string> = {
   point: "#ffffff",
@@ -63,6 +71,13 @@ export default function GestureControlPage() {
   >(new Map());
   const hoveredRef = useRef<{ name: string; cat: CatKey } | null>(null);
   const modeTextRef = useRef("");
+  const stabilizersRef = useRef<Map<string, ModeStabilizer>>(new Map());
+
+  // Móc gỡ lỗi: cho phép thử biến đổi mô hình từ console mà không cần webcam
+  // (kiểm chứng mô hình không bao giờ trôi mất khi xoay/zoom tới biên).
+  useEffect(() => {
+    (window as unknown as { somaGesture?: unknown }).somaGesture = transformRef.current;
+  }, []);
 
   const toggleLayer = useCallback((key: CatKey, field: "visible" | "faded") => {
     setLayers((s) => ({ ...s, [key]: { ...s[key], [field]: !s[key][field] } }));
@@ -100,7 +115,7 @@ export default function GestureControlPage() {
 
   const handleFrame = useCallback(
     (hands: TrackedHand[], frame: FrameInfo, now: number) => {
-      const analyzed = analyze(hands);
+      const analyzed = analyze(hands, stabilizersRef.current);
 
       // ---- webcam nhỏ: khung xương + nhãn chế độ từng tay ----
       const cam = camCanvasRef.current;
@@ -201,23 +216,29 @@ export default function GestureControlPage() {
         }
 
         if (a.mode === "zoom") {
-          // độ mở ngón cái–trỏ so với lúc bắt đầu = hệ số phóng to
-          const ratio = a.fingers.pinchSpan / Math.max(drag.span, 0.15);
-          t.zoom = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, drag.base * ratio));
+          // Ánh xạ TUYỆT ĐỐI: độ mở hai ngón quyết định luôn cỡ mô hình.
+          // Không dùng tỉ lệ so với lúc bắt đầu nữa — kiểu đó nhân dồn và văng mất mô hình.
+          t.zoom = zoomFromSpan(a.fingers.pinchSpan);
         } else if (a.mode === "rotate") {
           // xoay bàn tay trong mặt phẳng camera → quay mô hình
           let dA = a.fingers.angle - drag.angle;
           while (dA > Math.PI) dA -= Math.PI * 2;
           while (dA < -Math.PI) dA += Math.PI * 2;
-          t.rotY = drag.base + dA * 2.2;
-          // đồng thời nâng/hạ bàn tay → ngửa/cúi mô hình
-          t.rotX = Math.max(
+          const targetY = drag.base + dA * 1.8;
+          t.rotY += clamp(targetY - t.rotY, -ROT_STEP_MAX, ROT_STEP_MAX);
+          // nâng/hạ bàn tay → ngửa/cúi mô hình
+          const targetX = clamp(
+            drag.baseX + ((sy - drag.y) / Math.max(oh, 1)) * Math.PI * 1.2,
             -Math.PI / 2,
-            Math.min(Math.PI / 2, drag.baseX + ((sy - drag.y) / Math.max(oh, 1)) * Math.PI * 1.6),
+            Math.PI / 2,
           );
+          t.rotX += clamp(targetX - t.rotX, -ROT_STEP_MAX, ROT_STEP_MAX);
         } else if (a.mode === "pan") {
-          t.panX += ((sx - drag.x) / Math.max(ow, 1)) * 2.2;
-          t.panY -= ((sy - drag.y) / Math.max(oh, 1)) * 2.2;
+          // cộng dồn nhưng LUÔN kẹp trong giới hạn -> không thể trôi mất.
+          // Mô hình càng thu nhỏ thì cho di chuyển càng ít, để luôn còn trong khung.
+          const lim = PAN_LIMIT * Math.min(1, t.zoom);
+          t.panX = clamp(t.panX + ((sx - drag.x) / Math.max(ow, 1)) * 1.8, -lim, lim);
+          t.panY = clamp(t.panY - ((sy - drag.y) / Math.max(oh, 1)) * 1.8, -lim, lim);
           drag.x = sx;
           drag.y = sy;
         }
@@ -272,25 +293,55 @@ export default function GestureControlPage() {
           if (id === "Right") cursorRef.current.active = false;
         }
 
-        // ---- vẽ con trỏ của tay này ----
+        // ---- vẽ con trỏ: vòng ngắm + chữ thập + nhãn, nhìn là biết ngay ----
         if (octx) {
+          const color = CURSOR_COLOR[a.mode];
+          octx.save();
+          // vòng ngoài tối để nổi trên nền sáng
           octx.beginPath();
-          octx.arc(sx, sy, 9, 0, Math.PI * 2);
-          octx.fillStyle = CURSOR_COLOR[a.mode];
-          octx.fill();
-          octx.strokeStyle = "rgba(0,0,0,.45)";
-          octx.lineWidth = 1.5;
+          octx.arc(sx, sy, 16, 0, Math.PI * 2);
+          octx.strokeStyle = "rgba(0,0,0,.55)";
+          octx.lineWidth = 3;
           octx.stroke();
-          octx.fillStyle = "rgba(0,0,0,.65)";
-          octx.font = "11px system-ui";
-          octx.fillText(id === "Right" ? "A" : "B", sx + 13, sy - 10);
+          octx.beginPath();
+          octx.arc(sx, sy, 16, 0, Math.PI * 2);
+          octx.strokeStyle = color;
+          octx.lineWidth = 2;
+          octx.stroke();
+          // chữ thập giữa
+          octx.beginPath();
+          octx.moveTo(sx - 7, sy);
+          octx.lineTo(sx + 7, sy);
+          octx.moveTo(sx, sy - 7);
+          octx.lineTo(sx, sy + 7);
+          octx.strokeStyle = color;
+          octx.lineWidth = 2;
+          octx.stroke();
+          // chấm tâm
+          octx.beginPath();
+          octx.arc(sx, sy, 3, 0, Math.PI * 2);
+          octx.fillStyle = color;
+          octx.fill();
+          // nhãn: tay nào + đang làm gì
+          const text = `${id === "Right" ? "A" : "B"} · ${MODE_LABEL[a.mode]}`;
+          octx.font = "600 12px system-ui";
+          const tw = octx.measureText(text).width;
+          octx.fillStyle = "rgba(20,16,12,.82)";
+          octx.beginPath();
+          octx.roundRect(sx + 22, sy - 22, tw + 14, 22, 6);
+          octx.fill();
+          octx.fillStyle = "#fff";
+          octx.fillText(text, sx + 29, sy - 7);
+          // vòng tiến trình chọn
           if (dwell.progress > 0) {
             octx.beginPath();
-            octx.arc(sx, sy, 20, -Math.PI / 2, -Math.PI / 2 + dwell.progress * Math.PI * 2);
+            octx.arc(sx, sy, 26, -Math.PI / 2, -Math.PI / 2 + dwell.progress * Math.PI * 2);
             octx.strokeStyle = "#37c9b3";
-            octx.lineWidth = 4;
+            octx.lineWidth = 5;
+            octx.lineCap = "round";
             octx.stroke();
           }
+          octx.restore();
         }
       }
     },
