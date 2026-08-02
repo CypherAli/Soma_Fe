@@ -1,58 +1,86 @@
 import { LM, type Landmark, type TrackedHand } from "./useHandTracking";
 
-// Nhận dạng tư thế bàn tay từ 21 landmark. Toạ độ chuẩn hoá, y hướng XUỐNG.
+// Nhận dạng tư thế bàn tay từ 21 landmark.
+// MỌI phép đo đều chia cho "cỡ bàn tay" (cổ tay → khớp bàn ngón trỏ) nên
+// ngưỡng không đổi khi tay ở xa hay gần camera — đây là chìa khoá để cử chỉ
+// bắt ổn định.
 
-/** Ngón có duỗi không: đầu ngón cao hơn (y nhỏ hơn) khớp giữa. */
-function isExtended(lms: Landmark[], tip: number, pip: number): boolean {
-  return lms[tip].y < lms[pip].y - 0.02;
+const dist = (a: Landmark, b: Landmark) => Math.hypot(a.x - b.x, a.y - b.y);
+
+/** Cỡ bàn tay dùng để chuẩn hoá mọi khoảng cách. */
+export function handScale(lms: Landmark[]): number {
+  return Math.max(dist(lms[LM.WRIST], lms[LM.INDEX_MCP]), 1e-4);
 }
 
-/** Đếm số ngón đang duỗi (không tính ngón cái). */
-export function countExtendedFingers(lms: Landmark[]): number {
-  let n = 0;
-  if (isExtended(lms, LM.INDEX_TIP, LM.INDEX_PIP)) n++;
-  if (isExtended(lms, LM.MIDDLE_TIP, LM.MIDDLE_PIP)) n++;
-  if (isExtended(lms, LM.RING_TIP, LM.RING_PIP)) n++;
-  if (isExtended(lms, LM.PINKY_TIP, LM.PINKY_PIP)) n++;
-  return n;
+/** Ngón duỗi hay gập: đo khoảng cách đầu ngón tới cổ tay so với khớp giữa. */
+function fingerExtended(lms: Landmark[], tip: number, pip: number): boolean {
+  const w = lms[LM.WRIST];
+  return dist(lms[tip], w) > dist(lms[pip], w) * 1.15;
 }
 
-/** Chụm ngón cái với ngón trỏ. */
-export function isPinching(lms: Landmark[], threshold = 0.06): boolean {
-  const a = lms[LM.INDEX_TIP];
-  const b = lms[LM.THUMB_TIP];
-  return Math.hypot(a.x - b.x, a.y - b.y) < threshold;
+export type FingerState = {
+  index: boolean;
+  middle: boolean;
+  ring: boolean;
+  pinky: boolean;
+  thumbOut: boolean;
+  /** Khoảng cách ngón cái–ngón trỏ đã chuẩn hoá (0 = chạm nhau, ~1.5 = mở hết). */
+  pinchSpan: number;
+  /** Góc nghiêng bàn tay trong mặt phẳng camera (radian). */
+  angle: number;
+};
+
+export function readHand(lms: Landmark[]): FingerState {
+  const s = handScale(lms);
+  return {
+    index: fingerExtended(lms, LM.INDEX_TIP, LM.INDEX_PIP),
+    middle: fingerExtended(lms, LM.MIDDLE_TIP, LM.MIDDLE_PIP),
+    ring: fingerExtended(lms, LM.RING_TIP, LM.RING_PIP),
+    pinky: fingerExtended(lms, LM.PINKY_TIP, LM.PINKY_PIP),
+    // ngón cái xoè ra xa khớp bàn ngón trỏ = đang mở, khép sát = đang thu
+    thumbOut: dist(lms[LM.THUMB_TIP], lms[LM.INDEX_MCP]) / s > 1.05,
+    pinchSpan: dist(lms[LM.THUMB_TIP], lms[LM.INDEX_TIP]) / s,
+    angle: Math.atan2(
+      lms[LM.MIDDLE_PIP].y - lms[LM.WRIST].y,
+      lms[LM.MIDDLE_PIP].x - lms[LM.WRIST].x,
+    ),
+  };
 }
 
-/** Nắm tay: cả 4 ngón đều gập. */
-export function isFist(lms: Landmark[]): boolean {
-  return countExtendedFingers(lms) === 0;
-}
+export type HandMode = "point" | "zoom" | "rotate" | "pan";
 
-/** Bàn tay xoè: cả 4 ngón đều duỗi. */
-export function isOpenPalm(lms: Landmark[]): boolean {
-  return countExtendedFingers(lms) === 4;
-}
-
-/** Khoảng cách giữa cổ tay hai bàn tay — dùng cho cử chỉ zoom hai tay. */
-export function twoHandSpan(hands: TrackedHand[]): number | null {
-  if (hands.length < 2) return null;
-  const a = hands[0].landmarks[LM.WRIST];
-  const b = hands[1].landmarks[LM.WRIST];
-  return Math.hypot(a.x - b.x, a.y - b.y);
-}
-
-export type GestureMode = "idle" | "point" | "rotate" | "pan" | "zoom";
-
-/** Xác định chế độ thao tác hiện tại từ (các) bàn tay đang thấy. */
-export function detectMode(hands: TrackedHand[]): GestureMode {
-  if (hands.length === 0) return "idle";
-  if (hands.length >= 2) {
-    // hai tay cùng chụm = phóng to/thu nhỏ
-    if (hands.every((h) => isPinching(h.landmarks))) return "zoom";
-  }
-  const primary = hands.find((h) => h.handedness === "Right") ?? hands[0];
-  if (isFist(primary.landmarks)) return "pan";
-  if (isPinching(primary.landmarks)) return "rotate";
+/**
+ * Chế độ của TỪNG bàn tay (mỗi tay độc lập → hai tay có thể làm hai việc khác nhau):
+ *   nắm tay              → di chuyển
+ *   xoè cả bàn tay       → xoay (theo góc nghiêng bàn tay)
+ *   ngón cái + trỏ mở    → phóng to/thu nhỏ (theo độ mở hai ngón)
+ *   chỉ ngón trỏ         → con trỏ / chọn
+ */
+export function detectHandMode(f: FingerState): HandMode {
+  const fingers = [f.index, f.middle, f.ring, f.pinky].filter(Boolean).length;
+  if (fingers === 0) return "pan";
+  if (fingers >= 3) return "rotate";
+  if (f.index && !f.middle && !f.ring && !f.pinky && f.thumbOut) return "zoom";
   return "point";
+}
+
+export const MODE_LABEL: Record<HandMode, string> = {
+  point: "Trỏ",
+  zoom: "Phóng to / thu nhỏ",
+  rotate: "Xoay",
+  pan: "Di chuyển",
+};
+
+/** Gói dữ liệu một bàn tay đã phân tích, dùng trực tiếp trong vòng lặp. */
+export type AnalyzedHand = {
+  hand: TrackedHand;
+  fingers: FingerState;
+  mode: HandMode;
+};
+
+export function analyze(hands: TrackedHand[]): AnalyzedHand[] {
+  return hands.map((hand) => {
+    const fingers = readHand(hand.landmarks);
+    return { hand, fingers, mode: detectHandMode(fingers) };
+  });
 }
