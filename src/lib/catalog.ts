@@ -12,6 +12,7 @@
 
 import { pick, type Loc, type T3 } from "./homeContent";
 import { sceneModules, type SceneModule } from "./sceneModules";
+import { regionViewerConfig } from "./scenes/regions";
 
 /** Nhóm hệ cơ quan dùng để gom scene trên trang chủ. */
 export type SystemGroupKey =
@@ -110,6 +111,8 @@ const sceneSystem: Record<string, SystemGroupKey> = {
   "he-tiet-nieu": "urinary",
   "giai-phau-mat": "visual",
   "giai-phau-canh-tay": "muscular",
+  "giai-phau-cang-tay": "muscular",
+  "giai-phau-dai-vai": "muscular",
   "giai-phau-dau": "skeletal",
   "giai-phau-co": "muscular",
   "giai-phau-than": "muscular",
@@ -118,6 +121,32 @@ const sceneSystem: Record<string, SystemGroupKey> = {
   "he-sinh-san-nam": "reproductive",
   "he-mac": "fascia",
   "mo-lien-ket": "connective",
+  // Vùng cơ thể nhiều lớp (export_region.py)
+  "giai-phau-ban-tay": "muscular",
+  "khop-vai-khuyu": "skeletal",
+  "so-nen-so": "skeletal",
+  "hoc-mat": "visual",
+  "tai-day-du": "auditory",
+  "mui-xoang": "respiratory",
+  "mieng-luoi-rang": "digestive",
+  "hau-thanh-quan": "respiratory",
+  "co-hoanh-day-du": "respiratory",
+  "thanh-bung": "muscular",
+  "dai-nao": "nervous",
+  "than-nao-day-so-full": "nervous",
+  "tieu-nao-day-du": "nervous",
+  "tuy-song-dam-roi": "nervous",
+  "he-dong-mach-chu": "cardiovascular",
+  "he-bach-huyet": "cardiovascular",
+  "tim-day-du": "cardiovascular",
+  "phoi-cay-phe-quan": "respiratory",
+  "trung-that": "respiratory",
+  "gan-duong-mat": "digestive",
+  "da-day-ta-trang": "digestive",
+  "ruot-non-ruot-gia": "digestive",
+  "tuy-lach": "digestive",
+  "than-nieu-quan": "urinary",
+  "phuc-mac-mac-treo": "digestive",
   // Thần kinh
   "than-nao-day-so": "nervous",
   "tieu-nao": "nervous",
@@ -144,6 +173,35 @@ const thumbnails: Record<string, string> = {
   "giai-phau-tim": "/thumbnails/giai-phau-tim.jpg",
   "giai-phau-so": "/thumbnails/giai-phau-so.jpg",
   "giai-phau-canh-tay": "/thumbnails/giai-phau-canh-tay.jpg",
+  // Render offline bằng scripts/blender/render_glb_preview.py (ẩn lớp da) —
+  // không phải ảnh chụp màn hình, nhưng cùng bảng màu với viewer.
+  "giai-phau-cang-tay": "/thumbnails/giai-phau-cang-tay.png",
+  "giai-phau-dai-vai": "/thumbnails/giai-phau-dai-vai.png",
+  "so-nen-so": "/thumbnails/so-nen-so.png",
+  "hoc-mat": "/thumbnails/hoc-mat.png",
+  "tai-day-du": "/thumbnails/tai-day-du.png",
+  "mui-xoang": "/thumbnails/mui-xoang.png",
+  "mieng-luoi-rang": "/thumbnails/mieng-luoi-rang.png",
+  "hau-thanh-quan": "/thumbnails/hau-thanh-quan.png",
+  "co-hoanh-day-du": "/thumbnails/co-hoanh-day-du.png",
+  "thanh-bung": "/thumbnails/thanh-bung.png",
+  "dai-nao": "/thumbnails/dai-nao.png",
+  "than-nao-day-so-full": "/thumbnails/than-nao-day-so-full.png",
+  "tieu-nao-day-du": "/thumbnails/tieu-nao-day-du.png",
+  "tuy-song-dam-roi": "/thumbnails/tuy-song-dam-roi.png",
+  "he-dong-mach-chu": "/thumbnails/he-dong-mach-chu.png",
+  "he-bach-huyet": "/thumbnails/he-bach-huyet.png",
+  "tim-day-du": "/thumbnails/tim-day-du.png",
+  "phoi-cay-phe-quan": "/thumbnails/phoi-cay-phe-quan.png",
+  "trung-that": "/thumbnails/trung-that.png",
+  "gan-duong-mat": "/thumbnails/gan-duong-mat.png",
+  "da-day-ta-trang": "/thumbnails/da-day-ta-trang.png",
+  "ruot-non-ruot-gia": "/thumbnails/ruot-non-ruot-gia.png",
+  "tuy-lach": "/thumbnails/tuy-lach.png",
+  "than-nieu-quan": "/thumbnails/than-nieu-quan.png",
+  "phuc-mac-mac-treo": "/thumbnails/phuc-mac-mac-treo.png",
+  "giai-phau-ban-tay": "/thumbnails/giai-phau-ban-tay.png",
+  "khop-vai-khuyu": "/thumbnails/khop-vai-khuyu.png",
 };
 
 function buildSearchText(scene: SceneModule): string {
@@ -168,9 +226,12 @@ export const catalogScenes: CatalogScene[] = Object.values(sceneModules).map((sc
   // Cánh tay flagship mở thẳng viewer nhiều lớp (bảng bật/tắt/mờ) thay vì trang scene thường
   href:
     scene.slug === "giai-phau-canh-tay" ? "/xem-canh-tay"
+    : scene.slug === "giai-phau-cang-tay" ? "/xem-cang-tay"
+    : scene.slug === "giai-phau-dai-vai" ? "/xem-vai"
     : scene.slug === "giai-phau-dau" ? "/xem-dau"
     : scene.slug === "giai-phau-co" ? "/xem-co"
     : scene.slug === "giai-phau-than" ? "/xem-than"
+    : regionViewerConfig[scene.slug] ? `/xem/${scene.slug}`
     : `/giai-phau/mo-hinh/${scene.slug}`,
   thumb: thumbnails[scene.slug],
   structureCount: scene.hotspots.length,

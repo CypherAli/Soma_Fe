@@ -54,7 +54,7 @@ function parseScenes(source) {
 
 const sceneFiles = [
   "digestive", "cardiovascular", "skeletal", "muscular", "respiratory",
-  "misc", "auditory", "reproductive", "connective", "nervous",
+  "misc", "auditory", "reproductive", "connective", "nervous", "regions",
 ];
 
 let totalHotspots = 0;

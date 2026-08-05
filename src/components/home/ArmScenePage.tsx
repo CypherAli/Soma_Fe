@@ -94,7 +94,7 @@ export default function ArmScenePage({
           <ul className="space-y-2 text-sm leading-relaxed text-[var(--body-fg)]">
             <li>• Kéo chuột để <b>xoay</b>, lăn để <b>phóng to</b>.</li>
             <li>• Bảng <b>Lớp giải phẫu</b> (góc trên-phải): bấm <b>Ẩn/Hiện</b> hoặc <b>Rõ/Mờ</b> từng lớp để bóc tách.</li>
-            <li>• Thứ tự peel: Da → Cơ → Mạch → Thần kинh → Xương.</li>
+            <li>• Thứ tự peel: Da → Cơ → Mạch → Thần kinh → Xương.</li>
           </ul>
           <h3 className="mb-2 mt-6 text-xs font-semibold uppercase tracking-wider text-[var(--muted-2)]">
             Nguồn dữ liệu

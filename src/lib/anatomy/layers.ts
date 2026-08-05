@@ -81,14 +81,21 @@ const ORGAN_KEYS = ["lung", "lobe of", "pleura", "bronch", "trachea", "liver", "
 
 export function pickCat(name: string): CatKey {
   const n = name.toLowerCase();
-  if (n.includes("skin") || n.includes("envelope") || n.includes("fascia")) return "skin";
+  // Cân/mạc (fascia, aponeurosis) xếp cùng lớp DA: đó là lớp bọc nông, bóc
+  // cùng da mới lộ được cơ bên dưới (VD cân gan tay che kín các cơ bàn tay).
+  if (n.includes("skin") || n.includes("envelope") || n.includes("fascia") ||
+      n.includes("aponeurosis")) return "skin";
   if (n.includes("lymph") || n.includes("node")) return "lymph";
   if (EYE_KEYS.some((k) => n.includes(k))) return "eye";
-  // mạch lớn trước để không nhầm sang tạng
-  if (n.includes("artery") || n.includes("arterial") || n.includes("aorta") ||
-      n.includes("pulmonary trunk") || n.includes("palmar arch")) return "artery";
-  if (n.includes("vein") || n.includes("venous") || n.includes("vena cava") ||
-      n.includes("venae")) return "vein";
+  // mạch lớn trước để không nhầm sang tạng.
+  // Xét TĨNH MẠCH trước trong cùng một bước vì có tên vừa chứa từ khoá động
+  // mạch vừa chứa "venous" ("Deep venous palmar arch" — cung TĨNH mạch).
+  const isVein = n.includes("vein") || n.includes("venous") || n.includes("vena cava") ||
+    n.includes("venae");
+  // "arter" (không phải "artery") để bắt cả số nhiều "arteries" và "arteriole".
+  if (!isVein && (n.includes("arter") || n.includes("aorta") || n.includes("pulmonary trunk") ||
+      n.includes("palmar arch") || n.includes("carpal arch") || n.includes("anastomosis"))) return "artery";
+  if (isVein) return "vein";
   if (ORGAN_KEYS.some((k) => n.includes(k))) return "organ";
   if (NERVE_KEYS.some((k) => n.includes(k))) return "nerve";
   if (BRAIN_KEYS.some((k) => n.includes(k))) return "brain";

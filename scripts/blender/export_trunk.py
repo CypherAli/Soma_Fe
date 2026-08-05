@@ -4,7 +4,7 @@ from mathutils import Vector
 # THÂN TRÊN (flagship, ĐẦY ĐỦ CẢ TẠNG) — nhiều lớp bóc tách:
 #   Xương (sườn/ức/cột sống ngực-thắt lưng/đòn) + Cơ (ngực/lưng/bụng/liên sườn/hoành) +
 #   NỘI TẠNG (tim + phổi + gan + dạ dày + ruột + thận + tụy + túi mật…) +
-#   Động/tĩnh mạch (chủ, chủ dưới, phổi…) + thần kинh (liên sườn, giao cảm) + hạch + da.
+#   Động/tĩnh mạch (chủ, chủ dưới, phổi…) + thần kinh (liên sườn, giao cảm) + hạch + da.
 # Lọc theo bbox thân (sườn+ức+đốt sống T/L) -> bỏ chi/đầu/cơ quan chậu.
 # Dùng: blender --background Startup.blend --python export_trunk.py -- out.glb [fast]
 
