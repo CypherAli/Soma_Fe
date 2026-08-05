@@ -14,18 +14,27 @@ HIDE = set((args[4].split(",") if len(args) > 4 else []))  # cat ẩn, vd "skin,
 bpy.ops.wm.read_factory_settings(use_empty=True)
 bpy.ops.import_scene.gltf(filepath=GLB)
 
-BONE = ["frontal","parietal","occipital","temporal","sphenoid","ethmoid","nasal","lacrimal",
+# Giữ ĐỒNG BỘ với BONE_KEYS trong src/lib/anatomy/layers.ts — nếu thiếu tên
+# xương chi (radius/ulna/phalanx…) thì preview tô nhầm chúng thành cơ.
+BONE = ["humerus","radius","ulna","scaphoid","lunate","triquetrum","pisiform","trapezium",
+        "trapezoid","capitate","hamate","metacarpal","phalanx","clavicle","scapula",
+        "frontal","parietal","occipital","temporal bone","sphenoid","ethmoid","nasal","lacrimal",
         "maxilla","zygomatic","palatine","vomer","mandible","hyoid","concha","incus","malleus",
         "stapes","tooth","incisor","canine","premolar","molar","cartilage","tarsus","bone"]
 def cat(n):
     n=n.lower()
-    if "skin" in n or "envelope" in n or "fascia" in n: return "skin"
+    if "skin" in n or "envelope" in n or "fascia" in n or "aponeurosis" in n: return "skin"
     if "cornea" in n: return "cornea"
     if "iris" in n: return "iris"
     if "vitreous" in n or "posterior segment" in n: return "vitreous"
     if any(k in n for k in ["sclera","eyeball","lens"]): return "eye"
-    if "artery" in n or "arterial" in n or "aorta" in n or "pulmonary trunk" in n: return "artery"
-    if "vein" in n or "venous" in n or "vena cava" in n: return "vein"
+    # giống pickCat của viewer: xét tĩnh mạch TRƯỚC ("Deep venous palmar arch" là
+    # cung tĩnh mạch), và bắt "arter" để khớp cả số nhiều "arteries".
+    is_vein = "vein" in n or "venous" in n or "vena cava" in n
+    if not is_vein and ("arter" in n or "aorta" in n or "pulmonary trunk" in n
+                        or "palmar arch" in n or "carpal arch" in n or "anastomosis" in n):
+        return "artery"
+    if is_vein: return "vein"
     if any(k in n for k in ["atrium","ventricle","papillary","leaflet","valve","chordae"]): return "heart"
     if any(k in n for k in ["lung","lobe of","pleura","bronch","trachea"]): return "lung"
     if "liver" in n or "hepat" in n: return "liver"
