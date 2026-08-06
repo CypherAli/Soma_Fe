@@ -278,13 +278,12 @@ REGIONS = {
         out="fullbody_skin.glb", side=None,
         box=(-0.45, 0.45, -0.35, 0.35, -0.02, 1.80),
         muscle_kw=True,
-        # Cơ đáy chậu và cơ sinh dục nằm THÒ ra ngoài bóng của thân/đùi nên
-        # sau khi bọc voxel chúng thành các mảnh vá lởm chởm ở háng — bỏ hẳn
-        # khỏi khối bọc (chúng vẫn còn trong hệ cơ, chỉ không tính vào dáng da).
-        muscle_drop=["bursa", "sheath", "retinaculum", "fascia", "aponeurosis",
-                     "cremaster", "bulbospongiosus", "ischiocavernosus", "perine",
-                     "anal", "levator ani", "coccygeus", "pubo", "sphincter",
-                     "obturator internus", "gemellus", "quadratus femoris",
+        # Nhóm cơ đáy chậu/sinh dục và các túi hoạt dịch TỪNG bị loại vì bọc một
+        # lượt thì chúng thành cục lởm chởm ở háng. Nay bọc hai lượt đã nuốt gọn
+        # nên phải lấy lại: bỏ chúng ra khỏi khối bọc thì da không phủ tới, trên
+        # trang toàn thân chúng chọc lòi ra thành mảng đỏ ở háng và đốm xanh ở
+        # gối (đã thấy trong trình duyệt).
+        muscle_drop=["sheath", "retinaculum", "fascia", "aponeurosis",
                      # tấm cơ MỎNG kết thúc lơ lửng ở háng/đùi: mép tự do của
                      # chúng biến thành vạt rách sau khi bọc voxel (đã truy ra
                      # bằng cách đếm đỉnh nằm trong vùng vạt)
@@ -315,7 +314,12 @@ REGIONS = {
                  "talus", "calcaneus", "navicular", "cuboid", "cuneiform", "hip bone"],
         vessels=False, nerves=False, lymph=False,
         skin=True, skin_bones=True, skin_only=True,
-        skin_extra_kw=["segment of eyeball"],   # lấp hốc mắt
+        # Mảnh của hệ khác phải nằm trong khối bọc, nếu không da không phủ tới và
+        # chúng chọc lòi ra ngoài: nhãn cầu (lấp hốc mắt), cơ quan sinh dục
+        # ngoài, sụn/tuyến giáp và xương móng ở mặt trước cổ.
+        skin_extra_kw=["segment of eyeball", "penis", "scrotum", "testis", "epididymis",
+                       "spermatic cord", "corpus cavernosum", "corpus spongiosum", "glans",
+                       "thyroid", "cricoid cartilage", "hyoid"],
         # MỘT lượt bọc (bọc hai lượt làm bàn tay dính thành găng, đã thử và bỏ).
         # Phồng THEO VÙNG: thân mình cần dày mới lấp được khe giữa các bó cơ,
         # còn bàn tay/bàn chân/mặt chỉ chịu được vài mm. Phồng đều 13mm khắp
@@ -328,15 +332,20 @@ REGIONS = {
             ((0.16, 0.45, -0.30, 0.30, 0.60, 0.93), 0.005, 0.001),     # bàn tay trái
             ((-0.45, 0.45, -0.35, 0.35, -0.05, 0.14), 0.006, 0.002),   # hai bàn chân
             ((-0.45, 0.45, -0.35, 0.35, 1.52, 1.85), 0.009, 0.005),    # đầu – mặt
-            ((-0.24, 0.24, -0.35, 0.35, 0.86, 1.50), 0.020),    # thân mình + háng
+            # thân mình + háng: chừa 10mm đệm vì bước làm mượt gọt mất gờ mào
+            # chậu, để 6mm thì cơ chéo bụng ngoài chọc lòi ra hai bên háng
+            ((-0.24, 0.24, -0.35, 0.35, 0.86, 1.50), 0.020, 0.010),
         ],
         # phồng rồi co lại đúng bằng ấy để nuốt vạt mỏng ở nếp bẹn. Làm mượt ở
         # lượt 2 phải NHẸ: chính bước phồng-co đã xử lý vạt rồi, mượt mạnh nữa
         # là mặt bị xoá sạch nét, đầu thành khối ma-nơ-canh.
-        two_pass=True, voxel2=0.006, smooth2=2, shrink_ratio=1.0,
+        # CO ÍT HƠN PHỒNG ở mọi vùng: hiệu số chính là lớp mỡ dưới da (~5–6mm).
+        # Co đúng bằng lượng phồng thì mặt da trùng khít mặt cơ, và trên trang
+        # toàn thân cơ chọc xuyên qua da lỗ chỗ khắp thân mình và tứ chi.
+        two_pass=True, voxel2=0.006, smooth2=2, shrink_ratio=0.62,
         inflate_fade=0.07,   # dải chuyển tiếp giữa các vùng, tránh gờ theo mép hộp
         # đánh bóng ở bước cuối: xoá vẻ gồ ghề của khối cơ bên dưới và khép các
         # rãnh hẹp giữa hai bó cơ (rãnh dọc giữa ngực/bụng, khe giữa hai đùi)
-        polish=4, polish_factor=0.6,
+        polish=2, polish_factor=0.6,
     ),
 }
