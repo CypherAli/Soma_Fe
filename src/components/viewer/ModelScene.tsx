@@ -170,18 +170,20 @@ function SystemModel({
   const isolatedId = useAnatomyStore((s) => s.isolatedId);
 
   useEffect(() => {
+    const labels: THREE.Mesh[] = [];
     scene.traverse((o) => {
       const mesh = o as THREE.Mesh;
       if (!mesh.isMesh) return;
 
       // Nhãn text 3D của Z-Anatomy (tên hệ nổi lơ lửng "VISCERAL SYSTEMS"...)
-      // KHÔNG phải giải phẫu → ẩn. Bắt theo 2 dấu hiệu vì có nhãn dùng material
+      // KHÔNG phải giải phẫu. Bắt theo 2 dấu hiệu vì có nhãn dùng material
       // "Text", có nhãn lại KHÔNG có material (nên chỉ lọc material sẽ sót):
       //  - tên mesh (đã sanitize) kết thúc "_systemg"/"_systemsg" (từ "X system(s).g")
       //  - hoặc material tên "Text".
       const stdEarly = getStd(mesh);
       if (/_systems?g$/i.test(mesh.name) || stdEarly?.name === "Text") {
-        mesh.userData.isLabel = true;
+        labels.push(mesh);
+        return;   // nhãn sắp bị gỡ khỏi cây, không cần đụng tới material của nó
       }
 
       // Lớp "da giả" cũ: Z-Anatomy không có da nên trước đây mạc nông (Fascia,
@@ -226,6 +228,32 @@ function SystemModel({
       const roughKey = Object.keys(TISSUE_ROUGHNESS).find((k) => base.startsWith(k));
       std.roughness = roughKey ? TISSUE_ROUGHNESS[roughKey] : 0.5;
     });
+
+    // Nhãn hệ phải bị GỠ KHỎI CÂY, không được chỉ đặt visible=false.
+    //
+    // Trong file export, mesh nhãn ("Skeletal system.g"…) chính là node CHA của
+    // toàn bộ hệ — 277 mesh xương, 593 mesh cơ, 333 mesh thần kinh nằm dưới nó.
+    // Mà three.js cho con thừa hưởng `visible` của cha, nên ẩn nhãn là ẩn sạch
+    // cả hệ: đó là lý do trang toàn thân từ trước tới nay chỉ hiện mỗi tim (hệ
+    // tuần hoàn là file DUY NHẤT không có mesh nhãn).
+    //
+    // Nhãn còn nằm lệch 1m sang bên cạnh cơ thể nên nó kéo lệch cả khung ngắm
+    // của <Bounds> (Box3.setFromObject không bỏ qua object ẩn) — thêm một lý do
+    // phải gỡ hẳn chứ không ẩn. Thay bằng Group giữ nguyên biến đổi cục bộ để
+    // các mesh con đứng đúng chỗ cũ.
+    for (const label of labels) {
+      const parent = label.parent;
+      if (!parent) continue;
+      const group = new THREE.Group();
+      group.name = label.name;
+      group.position.copy(label.position);
+      group.quaternion.copy(label.quaternion);
+      group.scale.copy(label.scale);
+      while (label.children.length) group.add(label.children[0]);
+      parent.add(group);
+      parent.remove(label);
+      label.geometry.dispose();
+    }
   }, [scene, systemKey]);
 
   // Ẩn/Mờ/Cô lập tra đúng theo TÊN MESH THẬT (m.name = tên giải phẫu gốc
@@ -235,8 +263,7 @@ function SystemModel({
       const mesh = o as THREE.Mesh;
       if (!mesh.isMesh) return;
       const isolatedOut = isolatedId !== null && mesh.name !== isolatedId;
-      mesh.visible =
-        !mesh.userData.isLabel && !mesh.userData.isOldSkin && !hiddenIds[mesh.name] && !isolatedOut;
+      mesh.visible = !mesh.userData.isOldSkin && !hiddenIds[mesh.name] && !isolatedOut;
       const std = getStd(mesh);
       if (std) {
         // mờ theo mesh (nút Mờ ở panel thông tin) HOẶC mờ cả hệ (bảng lớp bên trái)
