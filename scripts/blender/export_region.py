@@ -226,7 +226,8 @@ class Region:
         env = bpy.context.view_layer.objects.active
         rm = env.modifiers.new("rm", 'REMESH'); rm.mode = 'VOXEL'
         rm.voxel_size = self.cfg.get("voxel", 0.005)
-        sm = env.modifiers.new("sm", 'SMOOTH'); sm.iterations = 4; sm.factor = 0.85
+        sm = env.modifiers.new("sm", 'SMOOTH')
+        sm.iterations = self.cfg.get("smooth", 4); sm.factor = self.cfg.get("smooth_factor", 0.85)
         env.modifiers.new("dec", 'DECIMATE').ratio = 0.5
         dg = bpy.context.evaluated_depsgraph_get()
         me = bpy.data.meshes.new_from_object(env.evaluated_get(dg))
@@ -234,6 +235,27 @@ class Region:
         for v in bm.verts:
             v.co += v.normal * self.cfg.get("inflate", 0.010)
         bm.to_mesh(me); bm.free()
+
+        # HAI LƯỢT (tuỳ chọn) — kỹ thuật đã dùng cho model đầu: lượt 1 phồng to
+        # để bắc cầu qua khe và NUỐT các mảnh cơ mỏng thò ra, lượt 2 remesh lại
+        # rồi co vào. Bọc một lượt sẽ giữ nguyên mấy mảnh đó thành vạt lởm chởm
+        # (đo được ở háng của model toàn thân).
+        if self.cfg.get("two_pass"):
+            tmp = bpy.data.objects.new("skin_pass1", me)
+            bpy.context.scene.collection.objects.link(tmp)
+            tmp.matrix_world = env.matrix_world.copy()
+            r2 = tmp.modifiers.new("rm2", 'REMESH'); r2.mode = 'VOXEL'
+            r2.voxel_size = self.cfg.get("voxel2", 0.008)
+            s2 = tmp.modifiers.new("sm2", 'SMOOTH')
+            s2.iterations = self.cfg.get("smooth2", 12); s2.factor = 1.0
+            tmp.modifiers.new("dec2", 'DECIMATE').ratio = 0.6
+            dg = bpy.context.evaluated_depsgraph_get()
+            me = bpy.data.meshes.new_from_object(tmp.evaluated_get(dg))
+            bm = bmesh.new(); bm.from_mesh(me); bm.normal_update()
+            for v in bm.verts:
+                v.co -= v.normal * self.cfg.get("shrink", 0.012)
+            bm.to_mesh(me); bm.free()
+            bpy.data.objects.remove(tmp, do_unlink=True)
         for p in me.polygons:
             p.use_smooth = True
         skin = bpy.data.objects.new("Skin envelope", me)
@@ -275,6 +297,9 @@ class Region:
                     self.clip(o, self.cfg.get("skin_margin", 0.006) if o is skin else 0.0)
                 except Exception as e:
                     print(f"[{self.key}] CLIP_FAIL {o.name} {e!r}")
+        # skin_only: chỉ xuất lớp da (dùng cho model toàn thân — 7 hệ đã có file riêng)
+        if self.cfg.get("skin_only") and skin is not None:
+            self.kept = [skin]
         self.kept = [o for o in self.kept if o.type != 'MESH' or len(o.data.polygons) > 0]
 
         out = os.path.join(OUTDIR, self.cfg["out"])

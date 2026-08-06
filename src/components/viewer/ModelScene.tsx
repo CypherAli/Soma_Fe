@@ -109,13 +109,59 @@ const TISSUE_ROUGHNESS: Record<string, number> = {
   Nerve: 0.6,
 };
 
+/**
+ * Lớp DA toàn thân — một mesh duy nhất bọc voxel quanh cơ + xương chi/sọ
+ * (`scripts/blender/region_config.py`, vùng "fullbody_skin").
+ *
+ * Trước đây lớp ngoài cùng của model toàn thân là "Fascia" của Z-Anatomy: hở
+ * ở cổ tay, cổ chân, háng và không có hình đầu, nên nhìn như ma-nơ-canh vỡ.
+ * Lớp da này chỉ thêm ĐÚNG MỘT draw call nên không ảnh hưởng hiệu năng của
+ * scene 7 hệ, và không tham gia raycast để bấm vẫn chọn được cấu trúc bên dưới.
+ */
+const SKIN_URL = "/models/fullbody_skin.glb";
+
+const SKIN_MATERIAL = new THREE.MeshStandardMaterial({
+  color: "#e7b697",
+  roughness: 0.72,
+  metalness: 0,
+});
+
+function SkinLayer() {
+  const { scene } = useGLTF(SKIN_URL, "/draco/");
+  const skinVisible = useAnatomyStore((s) => s.skinVisible);
+  const skinFaded = useAnatomyStore((s) => s.skinFaded);
+
+  const prepared = useMemo(() => {
+    scene.traverse((o) => {
+      const mesh = o as THREE.Mesh;
+      if (!mesh.isMesh) return;
+      mesh.material = SKIN_MATERIAL;
+      mesh.raycast = () => {};      // không chắn chuột khi chọn cấu trúc bên trong
+      mesh.renderOrder = 10;        // vẽ sau cùng để phần trong suốt chồng đúng
+    });
+    return scene;
+  }, [scene]);
+
+  useEffect(() => {
+    SKIN_MATERIAL.transparent = skinFaded;
+    SKIN_MATERIAL.opacity = skinFaded ? 0.16 : 1;
+    SKIN_MATERIAL.depthWrite = !skinFaded;
+    SKIN_MATERIAL.needsUpdate = true;
+  }, [skinFaded]);
+
+  return <primitive object={prepared} visible={skinVisible} />;
+}
+
 function SystemModel({
   url,
   visible,
+  faded,
   systemKey,
 }: {
   url: string;
   visible: boolean;
+  /** Cả hệ đang ở trạng thái mờ — để nhìn xuyên qua mà không phải tắt hẳn. */
+  faded: boolean;
   systemKey: SystemKey;
 }) {
   const { scene } = useGLTF(url, "/draco/");
@@ -136,6 +182,18 @@ function SystemModel({
       const stdEarly = getStd(mesh);
       if (/_systems?g$/i.test(mesh.name) || stdEarly?.name === "Text") {
         mesh.userData.isLabel = true;
+      }
+
+      // Lớp "da giả" cũ: Z-Anatomy không có da nên trước đây mạc nông (Fascia,
+      // Superficial) bị tô tông da để đóng vai lớp ngoài — nhưng nó hở ở cổ
+      // tay, cổ chân, háng và không có mặt. Giờ đã có lớp da voxel thật
+      // (fullbody_skin.glb) nên ẩn hẳn mạc nông đi, nếu không hai lớp chồng
+      // nhau và bấm "mờ da" trông như không có tác dụng.
+      // Lọc theo TÊN MESH, không theo tên material: "Superficial" trong
+      // Z-Anatomy là tên NHÓM CƠ NÔNG (platysma, cơ trán…) chứ không phải mạc
+      // — lọc theo material sẽ ẩn nhầm hàng trăm cơ thật (đã dính bug này).
+      if (/fascia|aponeurosis/i.test(mesh.name)) {
+        mesh.userData.isOldSkin = true;
       }
 
       if (!mesh.material) return;
@@ -177,15 +235,18 @@ function SystemModel({
       const mesh = o as THREE.Mesh;
       if (!mesh.isMesh) return;
       const isolatedOut = isolatedId !== null && mesh.name !== isolatedId;
-      mesh.visible = !mesh.userData.isLabel && !hiddenIds[mesh.name] && !isolatedOut;
+      mesh.visible =
+        !mesh.userData.isLabel && !mesh.userData.isOldSkin && !hiddenIds[mesh.name] && !isolatedOut;
       const std = getStd(mesh);
       if (std) {
-        const faded = !!fadedIds[mesh.name];
-        std.transparent = faded;
-        std.opacity = faded ? 0.15 : 1;
+        // mờ theo mesh (nút Mờ ở panel thông tin) HOẶC mờ cả hệ (bảng lớp bên trái)
+        const dim = faded || !!fadedIds[mesh.name];
+        std.transparent = dim;
+        std.opacity = dim ? 0.15 : 1;
+        std.depthWrite = !dim;
       }
     });
-  }, [scene, hiddenIds, fadedIds, isolatedId]);
+  }, [scene, hiddenIds, fadedIds, isolatedId, faded]);
 
   return <primitive object={scene} visible={visible} />;
 }
@@ -331,6 +392,7 @@ export default function ModelScene({
 }) {
   const controls = useRef<React.ComponentRef<typeof OrbitControls>>(null);
   const visibleSystems = useAnatomyStore((s) => s.visibleSystems);
+  const fadedSystems = useAnatomyStore((s) => s.fadedSystems);
 
   return (
     <Canvas
@@ -342,7 +404,7 @@ export default function ModelScene({
         gl.toneMappingExposure = 1.0;
       }}
     >
-      <color attach="background" args={["#eef1f6"]} />
+      <color attach="background" args={["#f4efe6"]} />
       {/* Studio 3-point: key ấm trước-trên-phải, fill lạnh nhẹ trái, rim sau
           tách khối khỏi nền, hemisphere trời ấm/đất trung tính làm nền dịu.
           Cường độ giữ vừa phải để mô nhạt (xương/da) không cháy trắng. */}
@@ -354,11 +416,13 @@ export default function ModelScene({
       <Bounds fit clip observe margin={1.1}>
         <Center>
           <group>
+            <SkinLayer />
             {(Object.keys(SYSTEM_FILES) as SystemKey[]).map((key) => (
               <SystemModel
                 key={key}
                 url={SYSTEM_FILES[key]}
                 visible={visibleSystems[key]}
+                faded={fadedSystems[key]}
                 systemKey={key}
               />
             ))}
@@ -379,3 +443,4 @@ export default function ModelScene({
 }
 
 Object.values(SYSTEM_FILES).forEach((url) => useGLTF.preload(url, "/draco/"));
+useGLTF.preload(SKIN_URL, "/draco/");

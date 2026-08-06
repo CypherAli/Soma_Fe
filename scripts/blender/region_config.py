@@ -268,4 +268,43 @@ REGIONS = {
         organ_kw=["thymus", "tonsil"], organ6_kw=True,
         vessels=False, nerves=False, lymph=True, skin=False, clip=False,
     ),
+
+    # ---------- Toàn thân: chỉ dựng LỚP DA để đắp lên model 7 hệ ở /viewer ----------
+    # Model toàn thân cũ lấy lớp ngoài là "Fascia" của Z-Anatomy nên hở ở cổ
+    # tay, cổ chân, háng và không có hình đầu. Ở đây bọc voxel toàn bộ cơ +
+    # xương chi/sọ thành MỘT lớp da kín, xuất riêng để nạp thêm chứ không phải
+    # export lại cả 7 hệ (giữ số draw call của /viewer như cũ, chỉ +1 mesh).
+    "fullbody_skin": dict(
+        out="fullbody_skin.glb", side=None,
+        box=(-0.45, 0.45, -0.35, 0.35, -0.02, 1.80),
+        muscle_kw=True,
+        # Cơ đáy chậu và cơ sinh dục nằm THÒ ra ngoài bóng của thân/đùi nên
+        # sau khi bọc voxel chúng thành các mảnh vá lởm chởm ở háng — bỏ hẳn
+        # khỏi khối bọc (chúng vẫn còn trong hệ cơ, chỉ không tính vào dáng da).
+        muscle_drop=["bursa", "sheath", "retinaculum", "fascia", "aponeurosis",
+                     "cremaster", "bulbospongiosus", "ischiocavernosus", "perine",
+                     "anal", "levator ani", "coccygeus", "pubo", "sphincter",
+                     "obturator internus", "gemellus", "quadratus femoris",
+                     # tấm cơ MỎNG kết thúc lơ lửng ở háng/đùi: mép tự do của
+                     # chúng biến thành vạt rách sau khi bọc voxel (đã truy ra
+                     # bằng cách đếm đỉnh nằm trong vùng vạt)
+                     "iliotibial", "transversus abdominis", "internal abdominal oblique",
+                     "investing", "transversalis"],
+        # KHÔNG lấy sườn/đốt sống/xương ức: chúng phá level set của OpenVDB
+        # (đã đo ở vùng vai) mà lại nằm trong lòng khối cơ nên không đổi dáng.
+        bone_kw=["skull", "cranium", "frontal bone", "parietal", "occipital", "temporal bone",
+                 "sphenoid", "ethmoid", "nasal bone", "maxilla", "zygomatic", "mandible",
+                 "humerus", "radius", "ulna", "carpal", "metacarpal", "phalanx", "scaphoid",
+                 "lunate", "triquetrum", "pisiform", "trapezium", "trapezoid", "capitate",
+                 "hamate", "femur", "patella", "tibia", "fibula", "tarsal", "metatarsal",
+                 "talus", "calcaneus", "navicular", "cuboid", "cuneiform", "hip bone"],
+        vessels=False, nerves=False, lymph=False,
+        skin=True, skin_bones=True, skin_only=True,
+        # làm mượt mạnh + phồng thêm để nuốt các mẩu cơ chậu thò ra ở háng
+        # lượt 1: phồng +26mm nuốt các mẩu cơ thò ra ở háng; lượt 2: remesh
+        # thô hơn, làm mượt mạnh rồi co lại −20mm để dáng bám sát cơ thể
+        # MỘT lượt: phồng 13mm đủ liền mạch mà vẫn giữ được ngón tay, ngón chân
+        # và nét mặt (bọc hai lượt làm bàn tay dính thành găng, đã thử và bỏ)
+        voxel=0.0055, inflate=0.013, smooth=10, smooth_factor=1.0, clip=False,
+    ),
 }
