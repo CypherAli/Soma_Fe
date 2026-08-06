@@ -525,3 +525,32 @@
   padding:11px 20px; font-weight:500; font-size:14px; font-family:var(--serif); cursor:pointer}
 .bd .human-hero-search .search .go:hover{background:#000}
 .bd .human-hero-search .search-panel{left:0; transform:none; width:100%; max-width:560px}
+.bd button.cat-sidebar-title:hover{color:var(--acc)}
+
+/* ---------- Trang giải phẫu toàn thân: bảng LỚP GIẢI PHẪU bên trái ----------
+   Cùng ngôn ngữ thiết kế với các trang atlas (nền giấy, tiêu đề serif, đường
+   kẻ mảnh) thay vì kiểu bảng cài đặt công tắc xanh trước đây. */
+.bd .viewer-rail{width:268px;flex-shrink:0;display:flex;flex-direction:column;
+  background:var(--paper);border-right:1px solid var(--line-e);overflow-y:auto}
+.bd .vr-head{padding:22px 20px 16px;border-bottom:1px solid var(--line-e)}
+.bd .vr-kicker{font-size:9px;letter-spacing:.22em;color:var(--sub-e);font-weight:700}
+.bd .vr-title{font:500 22px/1.2 var(--serif);color:var(--ink-e);margin:8px 0 6px}
+.bd .vr-sub{font-size:11.5px;color:var(--sub-e)}
+.bd .vr-list{padding:10px 12px 4px}
+.bd .vr-label{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--sub-e);
+  font-weight:700;padding:16px 8px 6px}
+.bd .vr-row{display:flex;align-items:center;gap:10px;padding:9px 8px;border-radius:3px;
+  font-size:13px;color:var(--ink-e);transition:background .18s,opacity .18s}
+.bd .vr-row:hover{background:color-mix(in srgb,var(--acc) 6%,transparent)}
+.bd .vr-row.off{opacity:.45}
+.bd .vr-row.vr-skin{border-bottom:1px dashed var(--line-e);border-radius:3px 3px 0 0;padding-bottom:12px}
+.bd .vr-dot{width:11px;height:11px;border-radius:2px;flex-shrink:0;
+  border:1px solid color-mix(in srgb,var(--ink-e) 18%,transparent)}
+.bd .vr-name{flex:1;line-height:1.25}
+.bd .vr-act{width:26px;height:26px;display:grid;place-items:center;border:1px solid transparent;
+  border-radius:3px;background:transparent;color:var(--sub-e);cursor:pointer;transition:all .16s}
+.bd .vr-act:hover{border-color:var(--line-e);color:var(--ink-e);background:var(--paper-2)}
+.bd .vr-act.on{color:var(--acc)}
+.bd .vr-hint{margin-top:auto;padding:16px 20px 22px;font-size:11px;line-height:1.65;
+  color:var(--sub-e);border-top:1px solid var(--line-e)}
+.bd .vr-hint b{color:var(--ink-e);font-weight:600}
