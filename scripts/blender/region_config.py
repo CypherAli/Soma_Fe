@@ -289,22 +289,54 @@ REGIONS = {
                      # chúng biến thành vạt rách sau khi bọc voxel (đã truy ra
                      # bằng cách đếm đỉnh nằm trong vùng vạt)
                      "iliotibial", "transversus abdominis", "internal abdominal oblique",
-                     "investing", "transversalis"],
+                     "investing", "transversalis",
+                     # Dây chằng / cân / cung gân KHÔNG BAO GIỜ là đường viền
+                     # ngoài của cơ thể, nhưng vì mỏng nên bọc voxel xong thành
+                     # gờ nổi: dây chằng bẹn thành hai cục ở háng, đường trắng
+                     # (linea alba) thành sống dọc giữa bụng.
+                     "ligament", "linea alba", "iliopectineal", "tendinous arch",
+                     "interosseous membrane"],
+        # Ba tấm này khớp từ khoá loại trừ ở trên nhưng phải GIỮ vì chúng đúng là
+        # mặt ngoài cơ thể chỗ đó: cân đùi phủ tam giác đùi (bỏ đi là hõm sâu ở
+        # háng), dây chằng bẹn khép nếp bẹn, cân sọ là da đầu (bỏ đi là lõm đỉnh
+        # đầu). Cân gan tay/gan chân làm phẳng lòng bàn tay và gan bàn chân.
+        keep_kw=["fascia lata", "inguinal ligament", "epicranial aponeurosis",
+                 "palmar aponeurosis", "plantar aponeurosis"],
         # KHÔNG lấy sườn/đốt sống/xương ức: chúng phá level set của OpenVDB
         # (đã đo ở vùng vai) mà lại nằm trong lòng khối cơ nên không đổi dáng.
         bone_kw=["skull", "cranium", "frontal bone", "parietal", "occipital", "temporal bone",
                  "sphenoid", "ethmoid", "nasal bone", "maxilla", "zygomatic", "mandible",
+                 # sụn mũi nằm ở hệ 1 chứ không phải hệ 4 — thiếu nó thì giữa
+                 # mặt chỉ còn hốc mũi của sọ, bọc xong thành mặt phẳng lì
+                 "alar cartilage", "nasal septal cartilage",
                  "humerus", "radius", "ulna", "carpal", "metacarpal", "phalanx", "scaphoid",
                  "lunate", "triquetrum", "pisiform", "trapezium", "trapezoid", "capitate",
                  "hamate", "femur", "patella", "tibia", "fibula", "tarsal", "metatarsal",
                  "talus", "calcaneus", "navicular", "cuboid", "cuneiform", "hip bone"],
         vessels=False, nerves=False, lymph=False,
         skin=True, skin_bones=True, skin_only=True,
-        # làm mượt mạnh + phồng thêm để nuốt các mẩu cơ chậu thò ra ở háng
-        # lượt 1: phồng +26mm nuốt các mẩu cơ thò ra ở háng; lượt 2: remesh
-        # thô hơn, làm mượt mạnh rồi co lại −20mm để dáng bám sát cơ thể
-        # MỘT lượt: phồng 13mm đủ liền mạch mà vẫn giữ được ngón tay, ngón chân
-        # và nét mặt (bọc hai lượt làm bàn tay dính thành găng, đã thử và bỏ)
+        skin_extra_kw=["segment of eyeball"],   # lấp hốc mắt
+        # MỘT lượt bọc (bọc hai lượt làm bàn tay dính thành găng, đã thử và bỏ).
+        # Phồng THEO VÙNG: thân mình cần dày mới lấp được khe giữa các bó cơ,
+        # còn bàn tay/bàn chân/mặt chỉ chịu được vài mm. Phồng đều 13mm khắp
+        # người cho ra dáng "độn bông" — đó là lý do có bảng inflate_zones.
         voxel=0.0055, inflate=0.013, smooth=10, smooth_factor=1.0, clip=False,
+        inflate_zones=[
+            # (hộp, phồng, co) — bàn tay/bàn chân phồng vừa phải rồi co rất ít
+            # để vẫn còn lớp đệm, phồng mạnh là các ngón dính thành găng
+            ((-0.45, -0.16, -0.30, 0.30, 0.60, 0.93), 0.005, 0.001),   # bàn tay phải
+            ((0.16, 0.45, -0.30, 0.30, 0.60, 0.93), 0.005, 0.001),     # bàn tay trái
+            ((-0.45, 0.45, -0.35, 0.35, -0.05, 0.14), 0.006, 0.002),   # hai bàn chân
+            ((-0.45, 0.45, -0.35, 0.35, 1.52, 1.85), 0.009, 0.005),    # đầu – mặt
+            ((-0.24, 0.24, -0.35, 0.35, 0.86, 1.50), 0.020),    # thân mình + háng
+        ],
+        # phồng rồi co lại đúng bằng ấy để nuốt vạt mỏng ở nếp bẹn. Làm mượt ở
+        # lượt 2 phải NHẸ: chính bước phồng-co đã xử lý vạt rồi, mượt mạnh nữa
+        # là mặt bị xoá sạch nét, đầu thành khối ma-nơ-canh.
+        two_pass=True, voxel2=0.006, smooth2=2, shrink_ratio=1.0,
+        inflate_fade=0.07,   # dải chuyển tiếp giữa các vùng, tránh gờ theo mép hộp
+        # đánh bóng ở bước cuối: xoá vẻ gồ ghề của khối cơ bên dưới và khép các
+        # rãnh hẹp giữa hai bó cơ (rãnh dọc giữa ngực/bụng, khe giữa hai đùi)
+        polish=4, polish_factor=0.6,
     ),
 }

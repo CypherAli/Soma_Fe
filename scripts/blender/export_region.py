@@ -95,6 +95,7 @@ class Region:
             ("6:", c.get("organ6_kw"), [], None, "organ"),   # lách nằm ở nhóm bạch huyết
             ("7:", c.get("sense_kw"), c.get("sense_drop", []), None, "organ"),  # mắt/tai/não
         ]
+        keep = [k.lower() for k in c.get("keep_kw", [])]
         counts = {}
         for prefix, kws, drop, names, tag in specs:
             if kws is None and names is None:
@@ -107,7 +108,13 @@ class Region:
                 if not side_ok(nm, self.side):
                     continue
                 ok = (names is not None and nm in names) or (kws is not None and hit_kw(nm, kws))
-                if not ok or any(k in nm for k in drop):
+                if not ok:
+                    continue
+                # keep_kw thắng *_drop: vài tấm cân/dây chằng tuy khớp từ khoá
+                # loại trừ chung ("fascia", "ligament", "aponeurosis") nhưng lại
+                # CHÍNH LÀ bề mặt cơ thể ở chỗ đó — cân đùi, dây chằng bẹn, cân
+                # sọ. Bỏ chúng đi là thủng một mảng đúng chỗ ấy.
+                if any(k in nm for k in drop) and not any(k in nm for k in keep):
                     continue
                 # mesh phụ điểm bám tên dạng .el/.o1r -> chỉ nhận hậu tố bên hoặc không hậu tố
                 tail = nm.rsplit('.', 1)[-1] if '.' in nm else ''
@@ -203,6 +210,19 @@ class Region:
         else:
             names = [n.lower() for n in want]
             src = self.muscles + [b for b in self.bones if b.name.lower() in names]
+        # Mảnh của hệ KHÁC được đắp thêm vào khối bọc (không xuất ra như một lớp
+        # riêng): nhãn cầu lấp hốc mắt, nếu không mặt có hai hố sâu hoắm.
+        extra = [k.lower() for k in self.cfg.get("skin_extra_kw", [])]
+        if extra:
+            n = 0
+            for o in bpy.data.objects:
+                if not is_body_mesh(o) or o in src:
+                    continue
+                nm = o.name.lower()
+                if any(k in nm for k in extra) and side_ok(nm, self.side) and self.overlaps(o):
+                    src.append(o)
+                    n += 1
+            print(f"[{self.key}] skin extra {n}")
         if not src:
             print(f"[{self.key}] SKIN_SKIP (không có cơ)")
             return None
@@ -231,15 +251,70 @@ class Region:
         env.modifiers.new("dec", 'DECIMATE').ratio = 0.5
         dg = bpy.context.evaluated_depsgraph_get()
         me = bpy.data.meshes.new_from_object(env.evaluated_get(dg))
-        bm = bmesh.new(); bm.from_mesh(me); bm.normal_update()
-        for v in bm.verts:
-            v.co += v.normal * self.cfg.get("inflate", 0.010)
-        bm.to_mesh(me); bm.free()
+        mw = env.matrix_world
+        # Phồng theo VÙNG chứ không đều toàn thân: thân mình cần phồng nhiều để
+        # lấp khe giữa các bó cơ (nếu không sẽ có rãnh dọc giữa ngực/bụng và
+        # hõm ở mặt trong đùi), còn bàn tay/bàn chân/mặt chỉ chịu được vài mm —
+        # phồng bằng nhau là ngón tay dính thành găng, mặt phù thành khối.
+        #   inflate_zones = [((x0,x1,y0,y1,z0,z1), giá_trị), ...]  — xét theo TOẠ
+        #   ĐỘ THẾ GIỚI; không vùng nào trùm thì dùng `inflate`.
+        #
+        # Ranh giới vùng phải CHUYỂN MƯỢT: cắt cứng thì chênh lệch vài mm giữa
+        # hai vùng in ra thành gờ nổi đúng theo hình cái hộp — đã thấy một vệt
+        # chữ V vắt ngang háng đúng mặt phẳng z của hộp thân mình.
+        base = self.cfg.get("inflate", 0.010)
+        zones = self.cfg.get("inflate_zones", [])
+        fade = self.cfg.get("inflate_fade", 0.06)
 
-        # HAI LƯỢT (tuỳ chọn) — kỹ thuật đã dùng cho model đầu: lượt 1 phồng to
-        # để bắc cầu qua khe và NUỐT các mảnh cơ mỏng thò ra, lượt 2 remesh lại
-        # rồi co vào. Bọc một lượt sẽ giữ nguyên mấy mảnh đó thành vạt lởm chởm
-        # (đo được ở háng của model toàn thân).
+        def zone_weight(w, box):
+            """1 ở giữa hộp, giảm dần về 0 trong dải `fade` quanh mép hộp."""
+            zx0, zx1, zy0, zy1, zz0, zz1 = box
+            k = 1.0
+            for c, lo, hi in ((w.x, zx0, zx1), (w.y, zy0, zy1), (w.z, zz0, zz1)):
+                d = min(c - (lo - fade), (hi + fade) - c)
+                if d <= 0:
+                    return 0.0
+                t = min(1.0, d / (2 * fade))
+                k *= t * t * (3 - 2 * t)      # smoothstep
+            return k
+
+        # Mỗi vùng khai báo (hộp, lượng_phồng) hoặc (hộp, lượng_phồng, lượng_co).
+        # Co ÍT hơn phồng là chừa lại một lớp đệm dưới da — bàn tay/bàn chân cần
+        # thế, vì co đúng bằng lượng phồng thì da bám sát xương, ngón tay trông
+        # khẳng khiu như bộ xương.
+        ratio_default = self.cfg.get("shrink_ratio", 1.0)
+
+        def amount_at(w, shrink):
+            if not zones:
+                return base * (ratio_default if shrink else 1.0)
+            best_k, best_zone = 0.0, None
+            for z in zones:
+                k = zone_weight(w, z[0])
+                if k > best_k:
+                    best_k, best_zone = k, z
+            if best_zone is None:
+                return base * (ratio_default if shrink else 1.0)
+            val = best_zone[2] if (shrink and len(best_zone) > 2) else best_zone[1]
+            if shrink and len(best_zone) <= 2:
+                val *= ratio_default
+            b = base * (ratio_default if shrink else 1.0)
+            return b + (val - b) * best_k
+
+        def offset(mesh, sign):
+            """Đẩy mọi đỉnh theo pháp tuyến, lượng đẩy tra theo vùng."""
+            bm = bmesh.new(); bm.from_mesh(mesh); bm.normal_update()
+            for v in bm.verts:
+                v.co += v.normal * (sign * amount_at(mw @ v.co, sign < 0))
+            bm.to_mesh(mesh); bm.free()
+
+        offset(me, +1)
+
+        # HAI LƯỢT (tuỳ chọn): lượt 1 phồng, lượt 2 remesh lại rồi CO ĐÚNG BẰNG
+        # lượng đã phồng. Đây là cách duy nhất xoá được vạt mỏng rìa rách (cân
+        # đùi, dây chằng bẹn ở nếp bẹn): tấm mỏng phồng hai mặt thành khối dày
+        # 2·d, co d là biến mất, còn thân người phồng d rồi co d thì về nguyên.
+        # Vì lượng phồng đã theo vùng nên lượng co cũng phải theo vùng — co đều
+        # một con số là bàn tay teo mất ngón.
         if self.cfg.get("two_pass"):
             tmp = bpy.data.objects.new("skin_pass1", me)
             bpy.context.scene.collection.objects.link(tmp)
@@ -251,11 +326,23 @@ class Region:
             tmp.modifiers.new("dec2", 'DECIMATE').ratio = 0.6
             dg = bpy.context.evaluated_depsgraph_get()
             me = bpy.data.meshes.new_from_object(tmp.evaluated_get(dg))
-            bm = bmesh.new(); bm.from_mesh(me); bm.normal_update()
-            for v in bm.verts:
-                v.co -= v.normal * self.cfg.get("shrink", 0.012)
-            bm.to_mesh(me); bm.free()
+            offset(me, -1)
             bpy.data.objects.remove(tmp, do_unlink=True)
+
+        # ĐÁNH BÓNG sau khi phồng. Phồng theo pháp tuyến giữ nguyên mọi chỗ gồ
+        # ghề của khối cơ nên bề mặt trông "độn" — làm mượt nhẹ ở BƯỚC CUỐI mới
+        # xoá được, làm mượt trước khi phồng (modifier ở trên) thì không.
+        polish = self.cfg.get("polish", 0)
+        if polish:
+            tmp = bpy.data.objects.new("skin_polish", me)
+            bpy.context.scene.collection.objects.link(tmp)
+            tmp.matrix_world = env.matrix_world.copy()
+            sp = tmp.modifiers.new("sp", 'SMOOTH')
+            sp.iterations = polish; sp.factor = self.cfg.get("polish_factor", 0.6)
+            dg = bpy.context.evaluated_depsgraph_get()
+            me = bpy.data.meshes.new_from_object(tmp.evaluated_get(dg))
+            bpy.data.objects.remove(tmp, do_unlink=True)
+
         for p in me.polygons:
             p.use_smooth = True
         skin = bpy.data.objects.new("Skin envelope", me)
