@@ -19,13 +19,15 @@ from mathutils import Vector
 #     chỉ bọc từ cơ + vài xương chỉ định trong `skin_bones`.
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from region_config import REGIONS, DROP_CURVE_KW  # noqa: E402
+from region_config import REGIONS, DROP_CURVE_KW, FULLBODY  # noqa: E402
 
 _args = sys.argv[sys.argv.index('--') + 1:]
 OUTDIR = _args[0]
 WANTED = _args[1:]
 if WANTED == ["ALL"]:
     WANTED = list(REGIONS)
+elif WANTED == ["FULLBODY"]:
+    WANTED = list(FULLBODY)
 
 sysmap = {}
 for col in bpy.data.collections:
@@ -137,7 +139,12 @@ class Region:
     # ---- 2) mạch / thần kinh (curve -> ống) ----
     def collect_tubes(self):
         c = self.cfg
-        drop = DROP_CURVE_KW + list(c.get("curve_drop", []))
+        # DROP_CURVE_KW sinh ra để chặn mạch VÙNG KHÁC lọt vào hộp của một vùng
+        # nhỏ. Với vùng toàn thân thì nó lại cắt mất đúng những mạch cần lấy
+        # (chậu, đùi, thận, tạng…) — đặt curve_drop_default=False để tắt.
+        drop = list(c.get("curve_drop", []))
+        if c.get("curve_drop_default", True):
+            drop = DROP_CURVE_KW + drop
         keep_names = [k.lower() for k in c.get("curve_keep_names", [])]
         # Hệ 8 cũng có CURVE (thực quản, phế quản, ống mật, niệu quản) — không lấy
         # thì scene thiếu hẳn các ống này mà không có dấu hiệu gì.
@@ -167,6 +174,12 @@ class Region:
             if getattr(o.data, "bevel_depth", 0.0) == 0.0 and getattr(o.data, "bevel_object", None) is None:
                 o.data.bevel_depth = depth
                 o.data.bevel_resolution = 1
+            # Số phân đoạn DỌC theo đường cong. Mặc định của Blender là 12 —
+            # thừa cho ống bán kính 1,3mm và là lý do file mạch toàn thân phình
+            # lên 9,4MB. Hạ xuống còn đủ mượt mà nhẹ hơn nhiều.
+            res = self.cfg.get("curve_res")
+            if res:
+                o.data.resolution_u = res
             dg = bpy.context.evaluated_depsgraph_get()
             try:
                 me = bpy.data.meshes.new_from_object(o.evaluated_get(dg))

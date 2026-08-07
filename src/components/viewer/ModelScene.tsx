@@ -126,7 +126,13 @@ function SystemModel({
   const fadedIds = useAnatomyStore((s) => s.fadedIds);
   const isolatedId = useAnatomyStore((s) => s.isolatedId);
 
-  useEffect(() => {
+  // useMemo chứ KHÔNG useEffect: <Center> và <Bounds> đo bbox trong layout
+  // effect, tức TRƯỚC khi effect của component con chạy. Gỡ nhãn trong effect
+  // thì lúc đo bbox nhãn vẫn còn — mà nhãn nằm lệch 1m sang bên nên <Center>
+  // dịch cả model đi 0,33m và không bao giờ dịch lại: mặt cắt trục X ở 50%
+  // cắt trượt ra ngoài người, khung ngắm cũng lệch. useMemo chạy trong lúc
+  // render nên cây đã sạch trước khi ai đo.
+  useMemo(() => {
     const labels: THREE.Mesh[] = [];
     scene.traverse((o) => {
       const mesh = o as THREE.Mesh;
@@ -275,7 +281,17 @@ function ClipRig() {
       if (!std) return;
       std.clippingPlanes = plane ? [plane] : null;
       std.clipShadows = true;
-      std.side = plane ? THREE.DoubleSide : THREE.FrontSide;
+      const side = plane ? THREE.DoubleSide : THREE.FrontSide;
+      if (std.side !== side) {
+        std.side = side;
+        // BẮT BUỘC: đổi `side` sau khi material đã biên dịch thì three chỉ tắt
+        // culling chứ KHÔNG định nghĩa lại DOUBLE_SIDED trong shader, nên mặt
+        // trong được chiếu sáng bằng pháp tuyến ngược -> lát cắt ra một mảng
+        // ĐEN SÌ. Phải bump needsUpdate để shader biên dịch lại.
+        // (Trang mặt cắt cánh tay không dính lỗi này vì nó TẠO material với
+        //  side: DoubleSide ngay từ đầu — xem CrossSectionArm.tsx.)
+        std.needsUpdate = true;
+      }
     });
   }, [scene, plane]);
 
@@ -381,13 +397,15 @@ export default function ModelScene({
     <Canvas
       dpr={[1, 1.75]}
       camera={{ position: [0, 0, 2.6], fov: 40, near: 0.01, far: 100 }}
-      gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping }}
+      gl={{ antialias: true, alpha: true, toneMapping: THREE.ACESFilmicToneMapping }}
       onCreated={({ gl }) => {
         gl.localClippingEnabled = true;
         gl.toneMappingExposure = 1.0;
       }}
     >
-      <color attach="background" args={["#f4efe6"]} />
+      {/* KHÔNG đặt màu nền cho scene: canvas để trong suốt (`alpha: true`) cho
+          lộ nền ca-rô vẽ bằng CSS ở lớp dưới — xem .viewer-stage trong home.css.
+          Đặt <color attach="background"> ở đây sẽ tô kín và che mất nền đó. */}
       {/* Studio 3-point: key ấm trước-trên-phải, fill lạnh nhẹ trái, rim sau
           tách khối khỏi nền, hemisphere trời ấm/đất trung tính làm nền dịu.
           Cường độ giữ vừa phải để mô nhạt (xương/da) không cháy trắng. */}

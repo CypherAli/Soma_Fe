@@ -36,7 +36,7 @@ export default function ModelViewer({
 }) {
   const t = useTranslations("viewer");
   return (
-    <div className="relative h-full w-full">
+    <div className="viewer-stage relative h-full w-full">
       <ModelScene
         hotspots={hotspots}
         requiredSystems={requiredSystems}
