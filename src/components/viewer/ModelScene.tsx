@@ -109,49 +109,6 @@ const TISSUE_ROUGHNESS: Record<string, number> = {
   Nerve: 0.6,
 };
 
-/**
- * Lớp DA toàn thân — một mesh duy nhất bọc voxel quanh cơ + xương chi/sọ
- * (`scripts/blender/region_config.py`, vùng "fullbody_skin").
- *
- * Trước đây lớp ngoài cùng của model toàn thân là "Fascia" của Z-Anatomy: hở
- * ở cổ tay, cổ chân, háng và không có hình đầu, nên nhìn như ma-nơ-canh vỡ.
- * Lớp da này chỉ thêm ĐÚNG MỘT draw call nên không ảnh hưởng hiệu năng của
- * scene 7 hệ, và không tham gia raycast để bấm vẫn chọn được cấu trúc bên dưới.
- */
-const SKIN_URL = "/models/fullbody_skin.glb";
-
-const SKIN_MATERIAL = new THREE.MeshStandardMaterial({
-  color: "#e7b697",
-  roughness: 0.72,
-  metalness: 0,
-});
-
-function SkinLayer() {
-  const { scene } = useGLTF(SKIN_URL, "/draco/");
-  const skinVisible = useAnatomyStore((s) => s.skinVisible);
-  const skinFaded = useAnatomyStore((s) => s.skinFaded);
-
-  const prepared = useMemo(() => {
-    scene.traverse((o) => {
-      const mesh = o as THREE.Mesh;
-      if (!mesh.isMesh) return;
-      mesh.material = SKIN_MATERIAL;
-      mesh.raycast = () => {};      // không chắn chuột khi chọn cấu trúc bên trong
-      mesh.renderOrder = 10;        // vẽ sau cùng để phần trong suốt chồng đúng
-    });
-    return scene;
-  }, [scene]);
-
-  useEffect(() => {
-    SKIN_MATERIAL.transparent = skinFaded;
-    SKIN_MATERIAL.opacity = skinFaded ? 0.16 : 1;
-    SKIN_MATERIAL.depthWrite = !skinFaded;
-    SKIN_MATERIAL.needsUpdate = true;
-  }, [skinFaded]);
-
-  return <primitive object={prepared} visible={skinVisible} />;
-}
-
 function SystemModel({
   url,
   visible,
@@ -186,11 +143,10 @@ function SystemModel({
         return;   // nhãn sắp bị gỡ khỏi cây, không cần đụng tới material của nó
       }
 
-      // Lớp "da giả" cũ: Z-Anatomy không có da nên trước đây mạc nông (Fascia,
-      // Superficial) bị tô tông da để đóng vai lớp ngoài — nhưng nó hở ở cổ
-      // tay, cổ chân, háng và không có mặt. Giờ đã có lớp da voxel thật
-      // (fullbody_skin.glb) nên ẩn hẳn mạc nông đi, nếu không hai lớp chồng
-      // nhau và bấm "mờ da" trông như không có tác dụng.
+      // Mạc nông (Fascia, aponeurosis) từng bị tô tông da để đóng vai LỚP DA —
+      // nhưng nó hở ở cổ tay, cổ chân, háng và không có mặt, nhìn như ma-nơ-canh
+      // vỡ. Ẩn đi, để lớp ngoài cùng của trang toàn thân là hệ cơ (đúng cách
+      // các atlas giải phẫu vẫn trình bày) thay vì một lớp vỏ thủng lỗ chỗ.
       // Lọc theo TÊN MESH, không theo tên material: "Superficial" trong
       // Z-Anatomy là tên NHÓM CƠ NÔNG (platysma, cơ trán…) chứ không phải mạc
       // — lọc theo material sẽ ẩn nhầm hàng trăm cơ thật (đã dính bug này).
@@ -443,7 +399,6 @@ export default function ModelScene({
       <Bounds fit clip observe margin={1.1}>
         <Center>
           <group>
-            <SkinLayer />
             {(Object.keys(SYSTEM_FILES) as SystemKey[]).map((key) => (
               <SystemModel
                 key={key}
@@ -470,4 +425,3 @@ export default function ModelScene({
 }
 
 Object.values(SYSTEM_FILES).forEach((url) => useGLTF.preload(url, "/draco/"));
-useGLTF.preload(SKIN_URL, "/draco/");
