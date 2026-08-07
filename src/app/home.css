@@ -553,3 +553,22 @@
 .bd .vr-hint{margin-top:auto;padding:16px 20px 22px;font-size:11px;line-height:1.65;
   color:var(--sub-e);border-top:1px solid var(--line-e)}
 .bd .vr-hint b{color:var(--ink-e);font-weight:600}
+
+/* ---------- Nền sân khấu 3D: ca-rô kiểu cửa sổ Scene của Unity ----------
+   Canvas WebGL để trong suốt (gl.alpha + không đặt <color attach="background">),
+   nền này nằm dưới nó. Hai lớp: ô lớn 96px chia bốn bởi lưới mảnh 24px, cộng
+   một vệt sáng toả từ giữa để khối 3D không bị chìm vào lưới. */
+.viewer-stage{
+  --grid-a:#efe9de; --grid-b:#e7e0d3; --grid-line:#0000000f; --grid-glow:#fffdf8;
+  background-color:var(--grid-a);
+  background-image:
+    radial-gradient(ellipse 70% 60% at 50% 45%, var(--grid-glow), transparent 70%),
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
+    conic-gradient(var(--grid-b) 0 25%, transparent 0 50%, var(--grid-b) 0 75%, transparent 0);
+  background-size:100% 100%, 24px 24px, 24px 24px, 96px 96px;
+  background-position:center, center, center, center;
+}
+html[data-theme="dark"] .viewer-stage{
+  --grid-a:#1b1a17; --grid-b:#211f1b; --grid-line:#ffffff10; --grid-glow:#2a2721;
+}

@@ -27,6 +27,9 @@ DROP_CURVE_KW = [
     "hepatic", "cystic", "pancreatic", "rectal", "vesical", "prostatic",
 ]
 
+# Hộp trùm cả người, dùng cho 7 hệ toàn thân ở cuối file (không cắt gì).
+FULLBODY_BOX = (-0.45, 0.45, -0.35, 0.35, -0.05, 1.80)
+
 REGIONS = {
     # ---------- Nhóm B: chi trên ----------
     "hand": dict(
@@ -269,4 +272,62 @@ REGIONS = {
         vessels=False, nerves=False, lymph=True, skin=False, clip=False,
     ),
 
+    # ---------- Nhóm Z: 7 hệ TOÀN THÂN cho trang /viewer ----------
+    # Bản export tháng 7/2026 dùng export_system.py chỉ lấy object MESH, mà mạch
+    # máu và thần kinh ngoại biên trong Z-Anatomy là CURVE nên mất sạch:
+    # cardiovascular.glb cũ chỉ có 22 cấu trúc (quả tim + 4 mảnh lạc ở đầu),
+    # nervous.glb cũ chỉ có não/tuỷ, không một dây thần kinh chi nào. Ở đây dựng
+    # lại bằng export_region.py vì nó có collect_tubes() đổi curve thành ống.
+    #
+    # Giữ nguyên MỘT FILE MỖI HỆ đúng tên cũ để bảng lớp của viewer không phải
+    # sửa gì. curve_drop_default=False vì DROP_CURVE_KW vốn để chặn mạch vùng
+    # khác lọt vào hộp nhỏ — với toàn thân nó cắt mất đúng thứ cần lấy.
+    "fb_skeletal": dict(
+        out="skeletal.glb", side=None, box=FULLBODY_BOX,
+        bone_kw=True, vessels=False, nerves=False, skin=False, clip=False,
+    ),
+    "fb_joints": dict(
+        out="joints.glb", side=None, box=FULLBODY_BOX,
+        joint_kw=True, vessels=False, nerves=False, skin=False, clip=False,
+    ),
+    "fb_muscular": dict(
+        out="muscular.glb", side=None, box=FULLBODY_BOX,
+        muscle_kw=True, vessels=False, nerves=False, skin=False, clip=False,
+    ),
+    # curve_res=4: ống mạch/thần kinh chỉ dày 1,3–1,4mm, để mặc định 12 phân
+    # đoạn dọc là thừa và làm file mạch toàn thân nặng 9,4MB.
+    # curve_drop: bỏ luôn mạch và thần kinh của dương vật cho khớp với việc đã
+    # bỏ cơ quan sinh dục ngoài ở hệ Nội tạng.
+    "fb_cardiovascular": dict(
+        out="cardiovascular.glb", side=None, box=FULLBODY_BOX,
+        heart_kw=True, vessels=True, nerves=False, skin=False, clip=False,
+        curve_drop_default=False, curve_res=4,
+        curve_drop=["penis", "scrot", "testicular", "deferential", "cremasteric"],
+    ),
+    "fb_nervous": dict(
+        out="nervous.glb", side=None, box=FULLBODY_BOX,
+        sense_kw=True, vessels=False, nerves=True, skin=False, clip=False,
+        curve_drop_default=False, curve_res=4,
+        curve_drop=["penis", "scrot"],
+    ),
+    "fb_visceral": dict(
+        out="visceral.glb", side=None, box=FULLBODY_BOX,
+        organ_kw=True, organ_tubes=True,
+        # Bỏ hẳn cơ quan sinh dục ngoài khỏi model toàn thân (quyết định của
+        # chủ đồ án). Dữ liệu vẫn còn trong Startup.blend nếu sau này cần.
+        organ_drop=["penis", "scrot", "testis", "epididym", "spermatic", "seminal",
+                    "prostat", "cavernosum", "spongiosum", "glans", "bulbourethral",
+                    "ductus deferens", "vas deferens"],
+        vessels=False, nerves=False, skin=False, clip=False,
+    ),
+    "fb_lymphoid": dict(
+        out="lymphoid.glb", side=None, box=FULLBODY_BOX,
+        organ6_kw=True, lymph=True,
+        vessels=False, nerves=False, skin=False, clip=False,
+        curve_drop_default=False,
+    ),
 }
+
+# 7 hệ toàn thân — chạy: export_region.py -- public/models FULLBODY
+FULLBODY = ["fb_skeletal", "fb_joints", "fb_muscular", "fb_cardiovascular",
+            "fb_nervous", "fb_visceral", "fb_lymphoid"]
