@@ -32,13 +32,8 @@ type AnatomyState = {
   fadedIds: Record<string, boolean>;
   /** id duy nhất đang Cô lập — khi set, mọi mesh khác trong scene tạm ẩn. */
   isolatedId: string | null;
-  /** Lớp DA bọc ngoài toàn thân (fullbody_skin.glb) — tách riêng khỏi 7 hệ
-   *  vì nó không phải một hệ cơ quan, chỉ là lớp vỏ để bóc dần vào trong. */
   /** Hệ đang được làm MỜ (khác `fadedIds` vốn theo từng mesh riêng lẻ). */
   fadedSystems: Record<SystemKey, boolean>;
-  skinVisible: boolean;
-  /** Da đang ở trạng thái mờ (nhìn xuyên vào các hệ bên dưới). */
-  skinFaded: boolean;
   /** Mặt cắt lát (clipping plane) toàn thân. */
   clipEnabled: boolean;
   clipAxis: "x" | "y" | "z";
@@ -52,8 +47,6 @@ type AnatomyState = {
   setHovered: (id: string | null) => void;
   toggleSystem: (key: SystemKey) => void;
   toggleSystemFaded: (key: SystemKey) => void;
-  toggleSkin: () => void;
-  toggleSkinFaded: () => void;
   setSearchQuery: (q: string) => void;
   toggleHidden: (id: string) => void;
   toggleFaded: (id: string) => void;
@@ -88,8 +81,6 @@ export const useAnatomyStore = create<AnatomyState>((set) => ({
   fadedIds: {},
   isolatedId: null,
   fadedSystems: Object.fromEntries(allSystems.map((s) => [s, false])) as Record<SystemKey, boolean>,
-  skinVisible: true,
-  skinFaded: false,
   clipEnabled: false,
   clipAxis: "y",
   clipPercent: 50,
@@ -108,8 +99,6 @@ export const useAnatomyStore = create<AnatomyState>((set) => ({
     set((state) => ({
       fadedSystems: { ...state.fadedSystems, [key]: !state.fadedSystems[key] },
     })),
-  toggleSkin: () => set((state) => ({ skinVisible: !state.skinVisible })),
-  toggleSkinFaded: () => set((state) => ({ skinFaded: !state.skinFaded })),
   setSearchQuery: (q) => set({ searchQuery: q }),
   toggleHidden: (id) =>
     set((state) => ({
