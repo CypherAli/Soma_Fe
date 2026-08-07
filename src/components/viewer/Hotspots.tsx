@@ -29,7 +29,8 @@ export function sanitizeGltfName(raw: string): string {
 
 /** Bỏ hậu tố .l/.r/.j và ngoặc trong tên mesh Z-Anatomy gốc → tên hiển thị gọn. */
 export function cleanName(raw: string): string {
-  let n = raw.replace(/_/g, " ");
+  // ".001": hậu tố Blender tự thêm khi nhân bản, không thuộc tên giải phẫu.
+  let n = raw.replace(/\.\d{3,}$/, "").replace(/_/g, " ");
   const m = n.match(/\.(ol|or|l|r|j)$/i);
   let side = "";
   if (m) {
@@ -201,7 +202,10 @@ export default function Hotspots({
     const obj = scene.getObjectByName(activeHotspotKey);
     if (!obj) return;
     prevActiveKeyRef.current = activeHotspotKey;
-    setSelected({ id: obj.name, name: cleanName(obj.name), latin: obj.name.replace(/_/g, " ") });
+    // tên GỐC ở userData.name — obj.name đã bị GLTFLoader sanitize mất dấu chấm
+    // nên cleanName không tách được hậu tố bên (xem rawName trong ModelScene).
+    const raw = (obj.userData?.name as string | undefined) || obj.name;
+    setSelected({ id: obj.name, name: cleanName(raw), latin: raw.replace(/\.\d{3,}$/, "").replace(/_/g, " ") });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeHotspotKey, resolved, scene]);
 

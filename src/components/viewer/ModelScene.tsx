@@ -18,9 +18,24 @@ export const SYSTEM_FILES: Record<SystemKey, string> = {
   joints: "/models/joints.glb",
 };
 
+/**
+ * Tên GỐC của mesh, chưa bị three cắt xén.
+ *
+ * GLTFLoader đặt `mesh.name` = tên đã sanitize (bỏ dấu chấm, khoảng trắng thành
+ * gạch dưới) nên "Patellar anastomosis.l.001" thành "Patellar_anastomosisl001",
+ * và cleanName ở dưới không còn thấy dấu chấm để tách hậu tố bên — panel hiện
+ * ra "Patellar anastomosisl001". Tên gốc vẫn được loader giữ ở userData.name.
+ * CHỈ dùng cho phần hiển thị; `mesh.name` vẫn là ID để tra ẩn/mờ/cô lập.
+ */
+function rawName(o: THREE.Object3D): string {
+  return (o.userData?.name as string | undefined) || o.name;
+}
+
 /** Bỏ hậu tố .l/.r/.j và ngoặc trong tên mesh Z-Anatomy → tên hiển thị gọn. */
 function cleanName(raw: string): string {
-  let n = raw.replace(/_/g, " ");
+  // ".001" là hậu tố Blender tự thêm khi nhân bản (ống mạch/thần kinh dựng từ
+  // curve đều có), không phải một phần của tên giải phẫu.
+  let n = raw.replace(/\.\d{3,}$/, "").replace(/_/g, " ");
   const m = n.match(/\.(ol|or|l|r|j)$/i);
   let side = "";
   if (m) {
@@ -298,6 +313,21 @@ function ClipRig() {
   return null;
 }
 
+/**
+ * Mesh có THỰC SỰ hiện trên màn hình không — phải xét cả tổ tiên.
+ *
+ * `mesh.visible` chỉ nói về chính nó. Tắt một hệ ở bảng lớp là đặt visible=false
+ * lên GROUP bọc cả hệ, còn từng mesh con vẫn visible=true; nếu picker chỉ xét
+ * mesh thì bấm vào khoảng trống lại chọn trúng cơ đang bị ẩn (đã dính: tắt Hệ
+ * cơ mà vẫn chọn được "Vastus medialis muscle").
+ */
+function shownOnScreen(o: THREE.Object3D): boolean {
+  for (let n: THREE.Object3D | null = o; n; n = n.parent) {
+    if (!n.visible) return false;
+  }
+  return true;
+}
+
 /** Tự raycast hover + click (R3F event không nhận cây gltf ngoài đáng tin cậy). */
 function Picker() {
   const { camera, gl, raycaster, scene } = useThree();
@@ -331,7 +361,7 @@ function Picker() {
       const hits = raycaster.intersectObjects(scene.children, true);
       for (const h of hits) {
         const m = h.object as THREE.Mesh;
-        if (m.isMesh && m.name && m.visible) return m;
+        if (m.isMesh && m.name && shownOnScreen(m)) return m;
       }
       return null;
     };
@@ -360,7 +390,12 @@ function Picker() {
       selRef.current = m;
       if (m) {
         paint(m, HL_SEL, 0.6);
-        const payload: SelectedPart = { id: m.name, name: cleanName(m.name), latin: m.name.replace(/_/g, " ") };
+        const raw = rawName(m);
+        const payload: SelectedPart = {
+          id: m.name,                       // ID tra cứu vẫn là tên đã sanitize
+          name: cleanName(raw),
+          latin: raw.replace(/\.\d{3,}$/, "").replace(/_/g, " "),
+        };
         setSelected(payload);
       } else {
         setSelected(null);
