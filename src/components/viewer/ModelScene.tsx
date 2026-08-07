@@ -487,7 +487,18 @@ export default function ModelScene({
         requiredSystems={requiredSystems}
         autoFocusOnLoad={autoFocusOnLoad}
       />
-      <OrbitControls ref={controls} makeDefault enablePan={false} minDistance={0.15} maxDistance={10} />
+      {/* zoomToCursor: lăn chuột phóng về phía CON TRỎ chứ không phải về tâm
+          quay. Không có nó thì muốn xem kỹ cái đầu vẫn cứ phóng vào giữa bụng.
+          Đi kèm với việc bấm chọn một bộ phận sẽ dời tâm quay sang đó (xem
+          Hotspots.tsx) — hai thứ này bù nhau. */}
+      <OrbitControls
+        ref={controls}
+        makeDefault
+        enablePan={false}
+        zoomToCursor
+        minDistance={0.05}
+        maxDistance={10}
+      />
     </Canvas>
   );
 }
