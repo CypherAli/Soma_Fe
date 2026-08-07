@@ -19,6 +19,19 @@ export const SYSTEM_FILES: Record<SystemKey, string> = {
 };
 
 /**
+ * File BÙ cho hệ Nội tạng, nạp thêm cùng lớp đó.
+ *
+ * Z-Anatomy không có hồi tràng, manh tràng và trực tràng — ruột đứt đoạn giữa
+ * hỗng tràng và đại tràng lên. Ba đoạn này lấy từ BodyParts3D (CC BY-SA 2.1 JP)
+ * bằng `scripts/blender/import_bp3d_gut.py`, căn khớp bằng phép dời đo trên 4
+ * tạng có ở cả hai nguồn. Để RIÊNG một file thay vì trộn vào visceral.glb để
+ * nguồn gốc và giấy phép của phần này luôn truy được.
+ */
+const EXTRA_FILES: Partial<Record<SystemKey, string[]>> = {
+  visceral: ["/models/visceral_gut_bp3d.glb"],
+};
+
+/**
  * Tên GỐC của mesh, chưa bị three cắt xén.
  *
  * GLTFLoader đặt `mesh.name` = tên đã sanitize (bỏ dấu chấm, khoảng trắng thành
@@ -452,15 +465,17 @@ export default function ModelScene({
       <Bounds fit clip observe margin={1.1}>
         <Center>
           <group>
-            {(Object.keys(SYSTEM_FILES) as SystemKey[]).map((key) => (
-              <SystemModel
-                key={key}
-                url={SYSTEM_FILES[key]}
-                visible={visibleSystems[key]}
-                faded={fadedSystems[key]}
-                systemKey={key}
-              />
-            ))}
+            {(Object.keys(SYSTEM_FILES) as SystemKey[]).flatMap((key) =>
+              [SYSTEM_FILES[key], ...(EXTRA_FILES[key] ?? [])].map((url) => (
+                <SystemModel
+                  key={url}
+                  url={url}
+                  visible={visibleSystems[key]}
+                  faded={fadedSystems[key]}
+                  systemKey={key}
+                />
+              )),
+            )}
           </group>
         </Center>
       </Bounds>
@@ -477,4 +492,6 @@ export default function ModelScene({
   );
 }
 
-Object.values(SYSTEM_FILES).forEach((url) => useGLTF.preload(url, "/draco/"));
+[...Object.values(SYSTEM_FILES), ...Object.values(EXTRA_FILES).flat()].forEach((url) =>
+  useGLTF.preload(url, "/draco/"),
+);
