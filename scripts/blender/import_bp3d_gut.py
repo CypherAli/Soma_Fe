@@ -95,7 +95,10 @@ def fit(objs):
     bpy.context.view_layer.update()
 
 # ---- 2) nhập các đoạn thiếu và áp đúng phép biến đổi đó ----
-NAMES = {"ileum": "Ileum", "cecum": "Caecum", "rectum": "Rectum"}
+# KHÔNG thêm "mesentery of small intestine": trong BodyParts3D nó dùng CHUNG
+# file phần tử FJ3396 với phúc mạc, nhập cả hai là trùng geometry.
+NAMES = {"ileum": "Ileum", "cecum": "Caecum", "rectum": "Rectum",
+         "peritoneum": "Peritoneum"}
 kept = []
 for key, nice in NAMES.items():
     if not MANIFEST.get(key):
