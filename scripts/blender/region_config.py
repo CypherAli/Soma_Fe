@@ -283,15 +283,15 @@ REGIONS = {
     # sửa gì. curve_drop_default=False vì DROP_CURVE_KW vốn để chặn mạch vùng
     # khác lọt vào hộp nhỏ — với toàn thân nó cắt mất đúng thứ cần lấy.
     "fb_skeletal": dict(
-        out="skeletal.glb", side=None, box=FULLBODY_BOX,
+        out="skeletal.glb", side=None, box=FULLBODY_BOX, min_verts=1,
         bone_kw=True, vessels=False, nerves=False, skin=False, clip=False,
     ),
     "fb_joints": dict(
-        out="joints.glb", side=None, box=FULLBODY_BOX,
+        out="joints.glb", side=None, box=FULLBODY_BOX, min_verts=1,
         joint_kw=True, vessels=False, nerves=False, skin=False, clip=False,
     ),
     "fb_muscular": dict(
-        out="muscular.glb", side=None, box=FULLBODY_BOX,
+        out="muscular.glb", side=None, box=FULLBODY_BOX, min_verts=1,
         muscle_kw=True, vessels=False, nerves=False, skin=False, clip=False,
     ),
     # curve_res=4: ống mạch/thần kinh chỉ dày 1,3–1,4mm, để mặc định 12 phân
@@ -299,19 +299,19 @@ REGIONS = {
     # curve_drop: bỏ luôn mạch và thần kinh của dương vật cho khớp với việc đã
     # bỏ cơ quan sinh dục ngoài ở hệ Nội tạng.
     "fb_cardiovascular": dict(
-        out="cardiovascular.glb", side=None, box=FULLBODY_BOX,
+        out="cardiovascular.glb", side=None, box=FULLBODY_BOX, min_verts=1,
         heart_kw=True, vessels=True, nerves=False, skin=False, clip=False,
         curve_drop_default=False, curve_res=4,
         curve_drop=["penis", "scrot", "testicular", "deferential", "cremasteric"],
     ),
     "fb_nervous": dict(
-        out="nervous.glb", side=None, box=FULLBODY_BOX,
+        out="nervous.glb", side=None, box=FULLBODY_BOX, min_verts=1,
         sense_kw=True, vessels=False, nerves=True, skin=False, clip=False,
         curve_drop_default=False, curve_res=4,
         curve_drop=["penis", "scrot"],
     ),
     "fb_visceral": dict(
-        out="visceral.glb", side=None, box=FULLBODY_BOX,
+        out="visceral.glb", side=None, box=FULLBODY_BOX, min_verts=1,
         organ_kw=True, organ_tubes=True,
         # Bỏ hẳn cơ quan sinh dục ngoài khỏi model toàn thân (quyết định của
         # chủ đồ án). Dữ liệu vẫn còn trong Startup.blend nếu sau này cần.
@@ -321,7 +321,7 @@ REGIONS = {
         vessels=False, nerves=False, skin=False, clip=False,
     ),
     "fb_lymphoid": dict(
-        out="lymphoid.glb", side=None, box=FULLBODY_BOX,
+        out="lymphoid.glb", side=None, box=FULLBODY_BOX, min_verts=1,
         organ6_kw=True, lymph=True,
         vessels=False, nerves=False, skin=False, clip=False,
         curve_drop_default=False,

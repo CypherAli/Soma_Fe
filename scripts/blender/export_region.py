@@ -98,13 +98,19 @@ class Region:
             ("7:", c.get("sense_kw"), c.get("sense_drop", []), None, "organ"),  # mắt/tai/não
         ]
         keep = [k.lower() for k in c.get("keep_kw", [])]
+        # Ngưỡng số đỉnh: mặc định 10 để loại mảnh rác, NHƯNG Z-Anatomy dựng
+        # nhiều dây chằng bằng đúng 4–9 đỉnh (dây chằng cùng-đòn, ức-đòn,
+        # sên-mác…) và tuyến cận giáp 9 đỉnh. Với vùng toàn thân phải hạ xuống,
+        # nếu không mất 114 dây chằng khớp và cả 4 tuyến cận giáp. Mesh không có
+        # mặt nào vẫn bị loại ở bước cuối của run() nên không sợ rác.
+        min_verts = c.get("min_verts", 10)
         counts = {}
         for prefix, kws, drop, names, tag in specs:
             if kws is None and names is None:
                 continue          # vùng này không lấy nhóm đó
             n = 0
             for o in bpy.data.objects:
-                if not is_body_mesh(o) or not sysmap.get(o.name, "").startswith(prefix):
+                if not is_body_mesh(o, min_verts) or not sysmap.get(o.name, "").startswith(prefix):
                     continue
                 nm = o.name.lower()
                 if not side_ok(nm, self.side):
