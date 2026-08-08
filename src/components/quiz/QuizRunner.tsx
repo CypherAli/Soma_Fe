@@ -1,0 +1,239 @@
+"use client";
+
+import { useMemo, useState } from "react";
+import Link from "next/link";
+import { buildQuiz, quizSystems, type QuizItem } from "@/lib/anatomy/quiz";
+import type { Loc } from "@/lib/homeContent";
+import type { SystemKey } from "@/store/useAnatomyStore";
+
+/**
+ * Bộ làm bài trắc nghiệm. Đề được SINH RA từ kho hotspot đã biên soạn
+ * (`src/lib/anatomy/quiz.ts`) chứ không phải danh sách câu hỏi chép tay, nên
+ * mỗi câu luôn kèm giải thích thật và một nút mở đúng cấu trúc trên mô hình 3D.
+ *
+ * Toàn bộ chạy phía client, không gọi API — trang quiz vẫn dùng được khi backend
+ * chưa bật. Khi nào cần lưu điểm/lịch sử thì nối vào module `quizzes` sẵn có.
+ */
+const TXT = {
+  vi: {
+    eyebrow: "KIỂM TRA KIẾN THỨC",
+    title: "Quiz giải phẫu",
+    lead: "Đề được sinh từ thư viện cấu trúc 3D của Soma — mỗi câu đều mở được đúng cấu trúc trên mô hình.",
+    all: "Tất cả",
+    start: "Bắt đầu làm bài",
+    restart: "Làm đề khác",
+    next: "Câu tiếp",
+    finish: "Xem kết quả",
+    q: "Câu",
+    of: "/",
+    correct: "Chính xác",
+    wrong: "Chưa đúng",
+    view: "Xem trên mô hình 3D",
+    scoreTitle: "Kết quả",
+    scoreBody: (a: number, b: number) => `Đúng ${a}/${b} câu`,
+    review: "Xem lại từng câu",
+    numQ: "Số câu",
+    empty: "Chưa đủ dữ liệu để ra đề cho mục này.",
+  },
+  en: {
+    eyebrow: "KNOWLEDGE CHECK", title: "Anatomy quiz",
+    lead: "Questions are generated from Soma's 3D structure library — every item opens the exact structure on the model.",
+    all: "All", start: "Start quiz", restart: "New set", next: "Next", finish: "See results",
+    q: "Question", of: "/", correct: "Correct", wrong: "Not quite", view: "View on the 3D model",
+    scoreTitle: "Result", scoreBody: (a: number, b: number) => `${a}/${b} correct`,
+    review: "Review answers", numQ: "Questions", empty: "Not enough data to build a quiz here.",
+  },
+  zh: {
+    eyebrow: "知识测试", title: "解剖学测验",
+    lead: "题目由 Soma 三维结构库生成——每题都可直接在模型上打开对应结构。",
+    all: "全部", start: "开始测验", restart: "换一套", next: "下一题", finish: "查看结果",
+    q: "第", of: "/", correct: "正确", wrong: "不对", view: "在三维模型中查看",
+    scoreTitle: "结果", scoreBody: (a: number, b: number) => `答对 ${a}/${b} 题`,
+    review: "回顾答案", numQ: "题数", empty: "该分类数据不足，暂时无法出题。",
+  },
+} as const;
+
+export default function QuizRunner({ locale }: { locale: Loc }) {
+  const t = TXT[locale] ?? TXT.vi;
+  const systems = useMemo(() => quizSystems(locale), [locale]);
+
+  const [system, setSystem] = useState<SystemKey | "all">("all");
+  const [count, setCount] = useState(10);
+  const [seed, setSeed] = useState<number | null>(null);
+  const [idx, setIdx] = useState(0);
+  const [picked, setPicked] = useState<Record<number, string>>({});
+  const [done, setDone] = useState(false);
+
+  const items: QuizItem[] = useMemo(
+    () => (seed === null ? [] : buildQuiz({ locale, system, count, seed })),
+    [seed, locale, system, count],
+  );
+
+  const start = () => {
+    setSeed(Math.floor(Math.random() * 2 ** 31));
+    setIdx(0);
+    setPicked({});
+    setDone(false);
+  };
+
+  const score = items.reduce(
+    (n, it, i) => n + (it.options.find((o) => o.id === picked[i])?.correct ? 1 : 0),
+    0,
+  );
+
+  if (seed === null) {
+    return (
+      <main className="quiz-shell">
+        <span className="quiz-eyebrow">{t.eyebrow}</span>
+        <h1>{t.title}</h1>
+        <p className="quiz-lead">{t.lead}</p>
+
+        <div className="quiz-setup">
+          <div className="quiz-field">
+            <label>{t.numQ}</label>
+            <div className="quiz-chips">
+              {[5, 10, 20].map((n) => (
+                <button
+                  key={n}
+                  type="button"
+                  className={`quiz-chip${count === n ? " on" : ""}`}
+                  onClick={() => setCount(n)}
+                >
+                  {n}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="quiz-field">
+            <label>{t.all === "All" ? "System" : "Hệ cơ quan"}</label>
+            <div className="quiz-chips">
+              <button
+                type="button"
+                className={`quiz-chip${system === "all" ? " on" : ""}`}
+                onClick={() => setSystem("all")}
+              >
+                {t.all}
+              </button>
+              {systems.map((s) => (
+                <button
+                  key={s.key}
+                  type="button"
+                  className={`quiz-chip${system === s.key ? " on" : ""}`}
+                  onClick={() => setSystem(s.key)}
+                >
+                  {s.label} <i>{s.count}</i>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <button type="button" className="quiz-start" onClick={start}>
+            {t.start}
+          </button>
+        </div>
+      </main>
+    );
+  }
+
+  if (!items.length) {
+    return (
+      <main className="quiz-shell">
+        <h1>{t.title}</h1>
+        <p className="quiz-lead">{t.empty}</p>
+        <button type="button" className="quiz-start" onClick={() => setSeed(null)}>
+          {t.restart}
+        </button>
+      </main>
+    );
+  }
+
+  if (done) {
+    return (
+      <main className="quiz-shell">
+        <span className="quiz-eyebrow">{t.scoreTitle}</span>
+        <h1>{t.scoreBody(score, items.length)}</h1>
+        <div className="quiz-review">
+          {items.map((it, i) => {
+            const chosen = it.options.find((o) => o.id === picked[i]);
+            const ok = !!chosen?.correct;
+            return (
+              <article key={it.id} className={`quiz-rev${ok ? " ok" : " no"}`}>
+                <b>{i + 1}. {it.prompt.split("\n")[0]}</b>
+                <p className="quiz-rev-q">{it.prompt.split("\n").slice(1).join(" ").trim()}</p>
+                <p>
+                  <span>{ok ? t.correct : t.wrong}</span>
+                  {" · "}
+                  {it.options.find((o) => o.correct)?.text}
+                </p>
+                <p className="quiz-exp">{it.explanation}</p>
+                <Link className="quiz-link" href={`/xem/${it.sceneSlug}`}>
+                  {t.view} →
+                </Link>
+              </article>
+            );
+          })}
+        </div>
+        <button type="button" className="quiz-start" onClick={start}>
+          {t.restart}
+        </button>
+      </main>
+    );
+  }
+
+  const item = items[idx];
+  const chosen = picked[idx];
+  const answered = chosen !== undefined;
+  const chosenOpt = item.options.find((o) => o.id === chosen);
+
+  return (
+    <main className="quiz-shell">
+      <div className="quiz-progress">
+        <span>{t.q} {idx + 1} {t.of} {items.length}</span>
+        <i style={{ width: `${((idx + (answered ? 1 : 0)) / items.length) * 100}%` }} />
+      </div>
+
+      <h2 className="quiz-prompt">{item.prompt.split("\n")[0]}</h2>
+      {item.prompt.split("\n").slice(1).join(" ").trim() && (
+        <p className="quiz-desc">{item.prompt.split("\n").slice(1).join(" ").trim()}</p>
+      )}
+
+      <div className="quiz-options">
+        {item.options.map((o) => {
+          const state = !answered ? "" : o.correct ? " ok" : o.id === chosen ? " no" : " dim";
+          return (
+            <button
+              key={o.id}
+              type="button"
+              className={`quiz-opt${state}`}
+              disabled={answered}
+              onClick={() => setPicked({ ...picked, [idx]: o.id })}
+            >
+              {o.text}
+            </button>
+          );
+        })}
+      </div>
+
+      {answered && (
+        <div className={`quiz-feedback${chosenOpt?.correct ? " ok" : " no"}`}>
+          <b>{chosenOpt?.correct ? t.correct : t.wrong}</b>
+          <p>{item.explanation}</p>
+          <Link className="quiz-link" href={`/xem/${item.sceneSlug}`}>
+            {t.view} — {item.sceneTitle} →
+          </Link>
+        </div>
+      )}
+
+      {answered && (
+        <button
+          type="button"
+          className="quiz-start"
+          onClick={() => (idx + 1 < items.length ? setIdx(idx + 1) : setDone(true))}
+        >
+          {idx + 1 < items.length ? t.next : t.finish}
+        </button>
+      )}
+    </main>
+  );
+}
