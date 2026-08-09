@@ -90,35 +90,78 @@ export function fold(s: string): string {
     .toLowerCase();
 }
 
+const escapeRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+/** Khớp cả TỪ, không khớp lẫn vào giữa từ khác ("gan" không được trúng "ngang"). */
+function wordHits(haystack: string, term: string): boolean {
+  return new RegExp(`(^|[^\\p{L}\\p{N}])${escapeRe(term)}([^\\p{L}\\p{N}]|$)`, "u").test(haystack);
+}
+
+function scoreAgainst(f: AnatomyFact, locale: Loc, q: string, terms: string[], folded: boolean) {
+  const norm = (s: string) => (folded ? fold(s) : s.toLowerCase());
+  const name = norm(`${pick(f.label, locale)} ${f.latinName ?? ""} ${f.meshName}`);
+  const body = norm(pick(f.note, locale));
+  const scene = norm(pick(f.sceneTitle, locale));
+  let score = 0;
+  for (const t of terms) {
+    if (wordHits(name, t)) score += 12;
+    else if (name.includes(t)) score += 4;      // khớp một phần từ: yếu hơn hẳn
+    if (wordHits(scene, t)) score += 3;
+    if (wordHits(body, t)) score += 2;
+  }
+  // Tên TRÙNG KHÍT câu hỏi phải đứng trên tên chỉ CHỨA câu hỏi: hỏi "thần kinh
+  // giữa" thì "Thần kinh giữa" phải xếp trước "Nhánh gan tay của thần kinh giữa".
+  if (norm(pick(f.label, locale)) === q) score += 40;
+  else if (name.includes(q)) score += 25;
+  else if (body.includes(q)) score += 6;
+  return score;
+}
+
 /**
- * Tìm kiếm không cần LLM: chấm điểm theo số từ khoá khớp, ưu tiên khớp ở TÊN
- * hơn ở phần giải thích, và cộng điểm cho cụm khớp nguyên vẹn. Đủ tốt để trả
- * lời "gan nằm ở đâu", "cơ nào gấp cẳng tay" mà không tốn một đồng API nào.
+ * Tìm kiếm không cần LLM: chấm điểm theo từ khoá khớp, ưu tiên khớp ở TÊN hơn
+ * ở phần giải thích và khớp NGUYÊN TỪ hơn khớp lọt giữa từ.
+ *
+ * ƯU TIÊN ĐÚNG DẤU. Bỏ dấu tiếng Việt làm nhập nhằng những cặp khác hẳn nhau:
+ * "gân" bỏ dấu thành "gan", nên hỏi "gan" từng trả về cơ nhị đầu và cân sọ.
+ * Vì thế chỉ hạ xuống so khớp không dấu KHI so khớp đúng dấu không ra gì —
+ * lúc đó mới đoán là người dùng gõ thiếu dấu.
  */
 export function searchFacts(query: string, locale: Loc, limit = 6): AnatomyFact[] {
-  const q = fold(query.trim());
-  if (!q) return [];
-  const terms = q.split(/\s+/).filter((t) => t.length > 1);
-  if (!terms.length) return [];
+  const raw = query.trim().toLowerCase();
+  if (!raw) return [];
+  const facts = allFacts();
 
-  const scored = allFacts().map((f) => {
-    const name = fold(`${pick(f.label, locale)} ${f.latinName ?? ""} ${f.meshName}`);
-    const body = fold(pick(f.note, locale));
-    const scene = fold(pick(f.sceneTitle, locale));
-    let score = 0;
-    for (const t of terms) {
-      if (name.includes(t)) score += 10;
-      if (scene.includes(t)) score += 3;
-      if (body.includes(t)) score += 2;
-    }
-    if (name.includes(q)) score += 25;      // khớp nguyên cụm ở tên: gần như chắc chắn đúng
-    if (body.includes(q)) score += 6;
-    return { f, score };
-  });
+  // Chấm CẢ HAI cách rồi cộng lại, không dùng cách này thay cách kia: chỉ cần
+  // một từ khớp đúng dấu là sẽ không bao giờ rơi sang so khớp không dấu nữa,
+  // nên gõ "than kinh giua" từng không ra "Thần kinh giữa" (từ "kinh" đã khớp
+  // đúng dấu ở hàng loạt dây thần kinh khác). Điểm không dấu nhân 0,5 để bản
+  // gõ đúng dấu vẫn luôn được xếp trên.
+  const termsOf = (q: string) => q.split(/\s+/).filter((t) => t.length > 1);
+  const exactTerms = termsOf(raw);
+  const foldedQ = fold(raw);
+  const foldedTerms = termsOf(foldedQ);
 
-  return scored
+  const hits = facts
+    .map((f) => ({
+      f,
+      score:
+        (exactTerms.length ? scoreAgainst(f, locale, raw, exactTerms, false) : 0) +
+        (foldedTerms.length ? 0.5 * scoreAgainst(f, locale, foldedQ, foldedTerms, true) : 0),
+    }))
     .filter((s) => s.score > 0)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, limit)
-    .map((s) => s.f);
+    .sort((a, b) => b.score - a.score);
+
+  // Một cấu trúc có thể xuất hiện ở nhiều scene (VD "Gan" có trong cả scene
+  // gan-đường mật lẫn scene ổ bụng) — chỉ giữ bản điểm cao nhất, nếu không cả
+  // 5 kết quả trả về đều là cùng một thứ.
+  const seen = new Set<string>();
+  const out: AnatomyFact[] = [];
+  for (const { f } of hits) {
+    const key = fold(pick(f.label, locale));
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(f);
+    if (out.length >= limit) break;
+  }
+  return out;
 }
