@@ -1,8 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { buildQuiz, quizSystems, type QuizItem } from "@/lib/anatomy/quiz";
+import { loadExamBank, examRegions, examToQuizItems, type ExamBank } from "@/lib/anatomy/examBank";
 import type { Loc } from "@/lib/homeContent";
 import type { SystemKey } from "@/store/useAnatomyStore";
 
@@ -34,6 +35,11 @@ const TXT = {
     review: "Xem lại từng câu",
     numQ: "Số câu",
     empty: "Chưa đủ dữ liệu để ra đề cho mục này.",
+    src: "Nguồn đề",
+    srcModel: "Sinh từ mô hình 3D",
+    srcBook: "Đề giáo trình",
+    region: "Vùng cơ thể",
+    loading: "Đang nạp ngân hàng đề…",
   },
   en: {
     eyebrow: "KNOWLEDGE CHECK", title: "Anatomy quiz",
@@ -42,6 +48,8 @@ const TXT = {
     q: "Question", of: "/", correct: "Correct", wrong: "Not quite", view: "View on the 3D model",
     scoreTitle: "Result", scoreBody: (a: number, b: number) => `${a}/${b} correct`,
     review: "Review answers", numQ: "Questions", empty: "Not enough data to build a quiz here.",
+    src: "Question source", srcModel: "From the 3D library", srcBook: "Textbook bank",
+    region: "Body region", loading: "Loading question bank…",
   },
   zh: {
     eyebrow: "知识测试", title: "解剖学测验",
@@ -50,6 +58,8 @@ const TXT = {
     q: "第", of: "/", correct: "正确", wrong: "不对", view: "在三维模型中查看",
     scoreTitle: "结果", scoreBody: (a: number, b: number) => `答对 ${a}/${b} 题`,
     review: "回顾答案", numQ: "题数", empty: "该分类数据不足，暂时无法出题。",
+    src: "题目来源", srcModel: "由三维库生成", srcBook: "教材题库",
+    region: "身体部位", loading: "正在加载题库…",
   },
 } as const;
 
@@ -57,6 +67,9 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
   const t = TXT[locale] ?? TXT.vi;
   const systems = useMemo(() => quizSystems(locale), [locale]);
 
+  const [source, setSource] = useState<"model" | "book">("model");
+  const [bank, setBank] = useState<ExamBank | null>(null);
+  const [region, setRegion] = useState<string>("all");
   const [system, setSystem] = useState<SystemKey | "all">("all");
   const [count, setCount] = useState(10);
   const [seed, setSeed] = useState<number | null>(null);
@@ -64,10 +77,22 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
   const [picked, setPicked] = useState<Record<number, string>>({});
   const [done, setDone] = useState(false);
 
-  const items: QuizItem[] = useMemo(
-    () => (seed === null ? [] : buildQuiz({ locale, system, count, seed })),
-    [seed, locale, system, count],
-  );
+  // Nạp ngân hàng đề giáo trình khi người dùng chọn nguồn đó (lười nạp: 135KB
+  // JSON không nên tải cho người chỉ làm đề sinh từ mô hình).
+  useEffect(() => {
+    if (source !== "book" || bank) return;
+    let alive = true;
+    loadExamBank().then((b) => alive && setBank(b)).catch(() => alive && setBank(null));
+    return () => { alive = false; };
+  }, [source, bank]);
+
+  const items: QuizItem[] = useMemo(() => {
+    if (seed === null) return [];
+    if (source === "book") {
+      return bank ? examToQuizItems(bank, { region, count, seed }) : [];
+    }
+    return buildQuiz({ locale, system, count, seed });
+  }, [seed, locale, system, count, source, bank, region]);
 
   const start = () => {
     setSeed(Math.floor(Math.random() * 2 ** 31));
@@ -106,6 +131,39 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
           </div>
 
           <div className="quiz-field">
+            <label>{t.src}</label>
+            <div className="quiz-chips">
+              <button type="button" className={`quiz-chip${source === "model" ? " on" : ""}`}
+                onClick={() => setSource("model")}>{t.srcModel}</button>
+              <button type="button" className={`quiz-chip${source === "book" ? " on" : ""}`}
+                onClick={() => setSource("book")}>{t.srcBook}</button>
+            </div>
+          </div>
+
+          {source === "book" ? (
+            <div className="quiz-field">
+              <label>{t.region}</label>
+              {!bank ? (
+                <p className="quiz-lead">{t.loading}</p>
+              ) : (
+                <>
+                  <div className="quiz-chips">
+                    <button type="button" className={`quiz-chip${region === "all" ? " on" : ""}`}
+                      onClick={() => setRegion("all")}>{t.all}</button>
+                    {examRegions(bank).map((r) => (
+                      <button key={r.key} type="button"
+                        className={`quiz-chip${region === r.key ? " on" : ""}`}
+                        onClick={() => setRegion(r.key)}>
+                        {r.key} <i>{r.count}</i>
+                      </button>
+                    ))}
+                  </div>
+                  <p className="quiz-srcnote">{bank.source.title} — {bank.source.section}</p>
+                </>
+              )}
+            </div>
+          ) : (
+          <div className="quiz-field">
             <label>{t.all === "All" ? "System" : "Hệ cơ quan"}</label>
             <div className="quiz-chips">
               <button
@@ -127,8 +185,10 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
               ))}
             </div>
           </div>
+          )}
 
-          <button type="button" className="quiz-start" onClick={start}>
+          <button type="button" className="quiz-start" onClick={start}
+            disabled={source === "book" && !bank}>
             {t.start}
           </button>
         </div>
@@ -167,9 +227,11 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
                   {it.options.find((o) => o.correct)?.text}
                 </p>
                 <p className="quiz-exp">{it.explanation}</p>
-                <Link className="quiz-link" href={`/xem/${it.sceneSlug}`}>
-                  {t.view} →
-                </Link>
+                {it.sceneSlug && (
+                  <Link className="quiz-link" href={`/xem/${it.sceneSlug}`}>
+                    {t.view} →
+                  </Link>
+                )}
               </article>
             );
           })}
@@ -219,9 +281,11 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
         <div className={`quiz-feedback${chosenOpt?.correct ? " ok" : " no"}`}>
           <b>{chosenOpt?.correct ? t.correct : t.wrong}</b>
           <p>{item.explanation}</p>
-          <Link className="quiz-link" href={`/xem/${item.sceneSlug}`}>
-            {t.view} — {item.sceneTitle} →
-          </Link>
+          {item.sceneSlug && (
+            <Link className="quiz-link" href={`/xem/${item.sceneSlug}`}>
+              {t.view} — {item.sceneTitle} →
+            </Link>
+          )}
         </div>
       )}
 
