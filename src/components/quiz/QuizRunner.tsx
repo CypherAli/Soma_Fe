@@ -63,6 +63,9 @@ const TXT = {
   },
 } as const;
 
+/** Nhãn phương án kiểu đề thi — A, B, C, D, E. */
+const LETTERS = ["A", "B", "C", "D", "E", "F"];
+
 export default function QuizRunner({ locale }: { locale: Loc }) {
   const t = TXT[locale] ?? TXT.vi;
   const systems = useMemo(() => quizSystems(locale), [locale]);
@@ -212,7 +215,18 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
     return (
       <main className="quiz-shell">
         <span className="quiz-eyebrow">{t.scoreTitle}</span>
-        <h1>{t.scoreBody(score, items.length)}</h1>
+        <div className="quiz-score">
+          <div
+            className="quiz-ring"
+            style={{ "--p": Math.round((score / items.length) * 100) } as React.CSSProperties}
+          >
+            <span>{Math.round((score / items.length) * 100)}%</span>
+          </div>
+          <div className="quiz-score-txt">
+            <b>{t.scoreBody(score, items.length)}</b>
+            <p>{items[0]?.sceneTitle ? `${t.review}` : ""}</p>
+          </div>
+        </div>
         <div className="quiz-review">
           {items.map((it, i) => {
             const chosen = it.options.find((o) => o.id === picked[i]);
@@ -221,7 +235,7 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
               <article key={it.id} className={`quiz-rev${ok ? " ok" : " no"}`}>
                 <b>{i + 1}. {it.prompt.split("\n")[0]}</b>
                 <p className="quiz-rev-q">{it.prompt.split("\n").slice(1).join(" ").trim()}</p>
-                <p>
+                <p className="quiz-rev-a">
                   <span>{ok ? t.correct : t.wrong}</span>
                   {" · "}
                   {it.options.find((o) => o.correct)?.text}
@@ -250,8 +264,13 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
 
   return (
     <main className="quiz-shell">
-      <div className="quiz-progress">
-        <span>{t.q} {idx + 1} {t.of} {items.length}</span>
+      <div className="quiz-head">
+        <span className="quiz-count">
+          <b>{idx + 1}</b> {t.of} {items.length}
+        </span>
+        <span className="quiz-tag">{item.sceneTitle}</span>
+      </div>
+      <div className="quiz-bar">
         <i style={{ width: `${((idx + (answered ? 1 : 0)) / items.length) * 100}%` }} />
       </div>
 
@@ -261,7 +280,7 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
       )}
 
       <div className="quiz-options">
-        {item.options.map((o) => {
+        {item.options.map((o, i) => {
           const state = !answered ? "" : o.correct ? " ok" : o.id === chosen ? " no" : " dim";
           return (
             <button
@@ -271,7 +290,8 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
               disabled={answered}
               onClick={() => setPicked({ ...picked, [idx]: o.id })}
             >
-              {o.text}
+              <kbd>{LETTERS[i]}</kbd>
+              <span>{o.text}</span>
             </button>
           );
         })}
@@ -290,13 +310,15 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
       )}
 
       {answered && (
-        <button
-          type="button"
-          className="quiz-start"
-          onClick={() => (idx + 1 < items.length ? setIdx(idx + 1) : setDone(true))}
-        >
-          {idx + 1 < items.length ? t.next : t.finish}
-        </button>
+        <div className="quiz-actions">
+          <button
+            type="button"
+            className="quiz-start"
+            onClick={() => (idx + 1 < items.length ? setIdx(idx + 1) : setDone(true))}
+          >
+            {idx + 1 < items.length ? t.next : t.finish}
+          </button>
+        </div>
       )}
     </main>
   );
