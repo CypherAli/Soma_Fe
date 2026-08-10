@@ -40,6 +40,11 @@ const TXT = {
     srcBook: "Đề giáo trình",
     region: "Vùng cơ thể",
     loading: "Đang nạp ngân hàng đề…",
+    mode: "Chế độ", modePractice: "Ôn tập", modeExam: "Thi thử",
+    modeHintPractice: "Hiện đáp án và giải thích ngay sau mỗi câu.",
+    modeHintExam: "Có đếm giờ, không hiện đáp án cho tới khi nộp bài.",
+    minutes: "phút", submit: "Nộp bài", timeUp: "Hết giờ — bài đã tự nộp.",
+    unanswered: "chưa trả lời", prev: "Câu trước",
   },
   en: {
     eyebrow: "KNOWLEDGE CHECK", title: "Anatomy quiz",
@@ -50,6 +55,11 @@ const TXT = {
     review: "Review answers", numQ: "Questions", empty: "Not enough data to build a quiz here.",
     src: "Question source", srcModel: "From the 3D library", srcBook: "Textbook bank",
     region: "Body region", loading: "Loading question bank…",
+    mode: "Mode", modePractice: "Practice", modeExam: "Mock exam",
+    modeHintPractice: "Shows the answer and explanation after each question.",
+    modeHintExam: "Timed; answers stay hidden until you submit.",
+    minutes: "min", submit: "Submit", timeUp: "Time is up — submitted automatically.",
+    unanswered: "unanswered", prev: "Previous",
   },
   zh: {
     eyebrow: "知识测试", title: "解剖学测验",
@@ -60,6 +70,11 @@ const TXT = {
     review: "回顾答案", numQ: "题数", empty: "该分类数据不足，暂时无法出题。",
     src: "题目来源", srcModel: "由三维库生成", srcBook: "教材题库",
     region: "身体部位", loading: "正在加载题库…",
+    mode: "模式", modePractice: "练习", modeExam: "模拟考试",
+    modeHintPractice: "每题作答后立即显示答案与解析。",
+    modeHintExam: "限时作答，交卷后才显示答案。",
+    minutes: "分钟", submit: "交卷", timeUp: "时间到——已自动交卷。",
+    unanswered: "未作答", prev: "上一题",
   },
 } as const;
 
@@ -70,6 +85,9 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
   const t = TXT[locale] ?? TXT.vi;
   const systems = useMemo(() => quizSystems(locale), [locale]);
 
+  const [mode, setMode] = useState<"practice" | "exam">("practice");
+  const [left, setLeft] = useState<number | null>(null);   // giây còn lại
+  const [timedOut, setTimedOut] = useState(false);
   const [source, setSource] = useState<"model" | "book">("model");
   const [bank, setBank] = useState<ExamBank | null>(null);
   const [region, setRegion] = useState<string>("all");
@@ -102,7 +120,21 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
     setIdx(0);
     setPicked({});
     setDone(false);
+    setTimedOut(false);
+    // 45 giây mỗi câu — bằng nhịp đề thi giải phẫu thường gặp (40 câu / 30 phút)
+    setLeft(mode === "exam" ? count * 45 : null);
   };
+
+  // Đồng hồ chỉ chạy ở chế độ thi và khi chưa nộp bài.
+  useEffect(() => {
+    if (left === null || done) return;
+    if (left <= 0) { setTimedOut(true); setDone(true); return; }
+    const id = setTimeout(() => setLeft((v) => (v === null ? null : v - 1)), 1000);
+    return () => clearTimeout(id);
+  }, [left, done]);
+
+  const mmss = (sec: number) =>
+    `${Math.floor(sec / 60)}:${String(Math.max(0, sec % 60)).padStart(2, "0")}`;
 
   const score = items.reduce(
     (n, it, i) => n + (it.options.find((o) => o.id === picked[i])?.correct ? 1 : 0),
@@ -130,6 +162,23 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
                   {n}
                 </button>
               ))}
+            </div>
+          </div>
+
+          <div className="quiz-field">
+            <label>{t.mode}</label>
+            <div>
+              <div className="quiz-chips">
+                <button type="button" className={`quiz-chip${mode === "practice" ? " on" : ""}`}
+                  onClick={() => setMode("practice")}>{t.modePractice}</button>
+                <button type="button" className={`quiz-chip${mode === "exam" ? " on" : ""}`}
+                  onClick={() => setMode("exam")}>
+                  {t.modeExam} <i>{Math.round((count * 45) / 60)} {t.minutes}</i>
+                </button>
+              </div>
+              <p className="quiz-srcnote">
+                {mode === "exam" ? t.modeHintExam : t.modeHintPractice}
+              </p>
             </div>
           </div>
 
@@ -215,6 +264,7 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
     return (
       <main className="quiz-shell">
         <span className="quiz-eyebrow">{t.scoreTitle}</span>
+        {timedOut && <p className="quiz-timeup">{t.timeUp}</p>}
         <div className="quiz-score">
           <div
             className="quiz-ring"
@@ -259,7 +309,9 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
 
   const item = items[idx];
   const chosen = picked[idx];
-  const answered = chosen !== undefined;
+  // Ở chế độ thi, chọn xong vẫn KHÔNG lộ đáp án — chỉ đánh dấu ô đã chọn.
+  const answered = chosen !== undefined && mode === "practice";
+  const examPicked = chosen !== undefined && mode === "exam";
   const chosenOpt = item.options.find((o) => o.id === chosen);
 
   return (
@@ -268,7 +320,10 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
         <span className="quiz-count">
           <b>{idx + 1}</b> {t.of} {items.length}
         </span>
-        <span className="quiz-tag">{item.sceneTitle}</span>
+        <span className="quiz-tag">
+          {left !== null && <b className={`quiz-clock${left <= 60 ? " warn" : ""}`}>{mmss(left)}</b>}
+          {item.sceneTitle}
+        </span>
       </div>
       <div className="quiz-bar">
         <i style={{ width: `${((idx + (answered ? 1 : 0)) / items.length) * 100}%` }} />
@@ -281,7 +336,9 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
 
       <div className="quiz-options">
         {item.options.map((o, i) => {
-          const state = !answered ? "" : o.correct ? " ok" : o.id === chosen ? " no" : " dim";
+          const state = answered
+            ? o.correct ? " ok" : o.id === chosen ? " no" : " dim"
+            : o.id === chosen ? " picked" : "";
           return (
             <button
               key={o.id}
@@ -309,15 +366,27 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
         </div>
       )}
 
-      {answered && (
+      {(answered || mode === "exam") && (
         <div className="quiz-actions">
-          <button
-            type="button"
-            className="quiz-start"
-            onClick={() => (idx + 1 < items.length ? setIdx(idx + 1) : setDone(true))}
-          >
-            {idx + 1 < items.length ? t.next : t.finish}
-          </button>
+          {mode === "exam" && idx > 0 && (
+            <button type="button" className="quiz-ghost" onClick={() => setIdx(idx - 1)}>
+              ← {t.prev}
+            </button>
+          )}
+          {idx + 1 < items.length ? (
+            <button type="button" className="quiz-start" onClick={() => setIdx(idx + 1)}>
+              {t.next}
+            </button>
+          ) : (
+            <button type="button" className="quiz-start" onClick={() => setDone(true)}>
+              {mode === "exam" ? t.submit : t.finish}
+            </button>
+          )}
+          {mode === "exam" && (
+            <span className="quiz-left">
+              {items.length - Object.keys(picked).length} {t.unanswered}
+            </span>
+          )}
         </div>
       )}
     </main>
