@@ -27,6 +27,10 @@ export type QuizItem = {
   sceneSlug: string;
   meshName: string;
   sceneTitle: string;
+  /** câu hỏi dạng ẢNH: bản vẽ atlas đã che nhãn */
+  image?: string;
+  /** bản gốc còn nguyên nhãn, hiện lại sau khi trả lời để đối chiếu */
+  imageAnswer?: string;
 };
 
 const PROMPT: Record<QuizKind, T3> = {

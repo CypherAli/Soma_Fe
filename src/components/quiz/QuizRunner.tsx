@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import Link from "next/link";
 import { buildQuiz, quizSystems, type QuizItem } from "@/lib/anatomy/quiz";
 import { loadExamBank, examRegions, examToQuizItems, type ExamBank } from "@/lib/anatomy/examBank";
+import { loadAtlasBank, atlasToQuizItems, type AtlasBank } from "@/lib/anatomy/atlasBank";
 import type { Loc } from "@/lib/homeContent";
+import { regionViewerConfig } from "@/lib/scenes/regions";
 import type { SystemKey } from "@/store/useAnatomyStore";
 
 /**
@@ -40,6 +41,9 @@ const TXT = {
     srcBook: "Đề giáo trình",
     region: "Vùng cơ thể",
     loading: "Đang nạp ngân hàng đề…",
+    srcAtlas: "Hình atlas", open3d: "Mở mô hình 3D", close3d: "Đóng",
+    atlasNote: "Hình đã che nhãn; trả lời xong sẽ hiện bản đầy đủ để đối chiếu.",
+    keepPlace: "Đóng lại vẫn ở nguyên câu này.",
     mode: "Chế độ", modePractice: "Ôn tập", modeExam: "Thi thử",
     modeHintPractice: "Hiện đáp án và giải thích ngay sau mỗi câu.",
     modeHintExam: "Có đếm giờ, không hiện đáp án cho tới khi nộp bài.",
@@ -55,6 +59,9 @@ const TXT = {
     review: "Review answers", numQ: "Questions", empty: "Not enough data to build a quiz here.",
     src: "Question source", srcModel: "From the 3D library", srcBook: "Textbook bank",
     region: "Body region", loading: "Loading question bank…",
+    srcAtlas: "Atlas figure", open3d: "Open the 3D model", close3d: "Close",
+    atlasNote: "Labels are hidden; the full plate is shown after you answer.",
+    keepPlace: "Closing returns you to this same question.",
     mode: "Mode", modePractice: "Practice", modeExam: "Mock exam",
     modeHintPractice: "Shows the answer and explanation after each question.",
     modeHintExam: "Timed; answers stay hidden until you submit.",
@@ -70,6 +77,9 @@ const TXT = {
     review: "回顾答案", numQ: "题数", empty: "该分类数据不足，暂时无法出题。",
     src: "题目来源", srcModel: "由三维库生成", srcBook: "教材题库",
     region: "身体部位", loading: "正在加载题库…",
+    srcAtlas: "图谱图片", open3d: "打开三维模型", close3d: "关闭",
+    atlasNote: "标注已隐藏；作答后显示完整图片以供对照。",
+    keepPlace: "关闭后仍停留在本题。",
     mode: "模式", modePractice: "练习", modeExam: "模拟考试",
     modeHintPractice: "每题作答后立即显示答案与解析。",
     modeHintExam: "限时作答，交卷后才显示答案。",
@@ -77,6 +87,17 @@ const TXT = {
     unanswered: "未作答", prev: "上一题",
   },
 } as const;
+
+/**
+ * Scene nào MỞ ĐƯỢC trong lớp phủ 3D.
+ *
+ * Trang /xem/<slug> trả về null nếu slug không có trong regionViewerConfig —
+ * mở ra chỉ thấy khung trắng. Nên phải kiểm tra trước, đừng hiện cái nút dẫn
+ * tới trang rỗng.
+ */
+function canOpen3d(slug: string): boolean {
+  return !!slug && !!regionViewerConfig[slug];
+}
 
 /** Nhãn phương án kiểu đề thi — A, B, C, D, E. */
 const LETTERS = ["A", "B", "C", "D", "E", "F"];
@@ -88,8 +109,11 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
   const [mode, setMode] = useState<"practice" | "exam">("practice");
   const [left, setLeft] = useState<number | null>(null);   // giây còn lại
   const [timedOut, setTimedOut] = useState(false);
-  const [source, setSource] = useState<"model" | "book">("model");
+  const [source, setSource] = useState<"model" | "book" | "atlas">("model");
   const [bank, setBank] = useState<ExamBank | null>(null);
+  const [atlas, setAtlas] = useState<AtlasBank | null>(null);
+  // slug scene đang mở trong lớp phủ 3D; null = đang đóng
+  const [view3d, setView3d] = useState<string | null>(null);
   const [region, setRegion] = useState<string>("all");
   const [system, setSystem] = useState<SystemKey | "all">("all");
   const [count, setCount] = useState(10);
@@ -100,6 +124,13 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
 
   // Nạp ngân hàng đề giáo trình khi người dùng chọn nguồn đó (lười nạp: 135KB
   // JSON không nên tải cho người chỉ làm đề sinh từ mô hình).
+  useEffect(() => {
+    if (source !== "atlas" || atlas) return;
+    let alive = true;
+    loadAtlasBank().then((b) => alive && setAtlas(b)).catch(() => alive && setAtlas(null));
+    return () => { alive = false; };
+  }, [source, atlas]);
+
   useEffect(() => {
     if (source !== "book" || bank) return;
     let alive = true;
@@ -112,8 +143,11 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
     if (source === "book") {
       return bank ? examToQuizItems(bank, { region, count, seed }) : [];
     }
+    if (source === "atlas") {
+      return atlas ? atlasToQuizItems(atlas, { count, seed, locale }) : [];
+    }
     return buildQuiz({ locale, system, count, seed });
-  }, [seed, locale, system, count, source, bank, region]);
+  }, [seed, locale, system, count, source, bank, region, atlas]);
 
   const start = () => {
     setSeed(Math.floor(Math.random() * 2 ** 31));
@@ -189,10 +223,27 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
                 onClick={() => setSource("model")}>{t.srcModel}</button>
               <button type="button" className={`quiz-chip${source === "book" ? " on" : ""}`}
                 onClick={() => setSource("book")}>{t.srcBook}</button>
+              <button type="button" className={`quiz-chip${source === "atlas" ? " on" : ""}`}
+                onClick={() => setSource("atlas")}>
+                {t.srcAtlas}{atlas ? <i>{atlas.shots.length}</i> : null}
+              </button>
             </div>
           </div>
 
-          {source === "book" ? (
+          {source === "atlas" ? (
+            <div className="quiz-field">
+              <label>{t.src}</label>
+              <div>
+                {!atlas ? (
+                  <p className="quiz-lead">{t.loading}</p>
+                ) : (
+                  <p className="quiz-srcnote">
+                    {t.atlasNote} — {atlas.source.title}
+                  </p>
+                )}
+              </div>
+            </div>
+          ) : source === "book" ? (
             <div className="quiz-field">
               <label>{t.region}</label>
               {!bank ? (
@@ -240,7 +291,7 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
           )}
 
           <button type="button" className="quiz-start" onClick={start}
-            disabled={source === "book" && !bank}>
+            disabled={(source === "book" && !bank) || (source === "atlas" && !atlas)}>
             {t.start}
           </button>
         </div>
@@ -291,10 +342,10 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
                   {it.options.find((o) => o.correct)?.text}
                 </p>
                 <p className="quiz-exp">{it.explanation}</p>
-                {it.sceneSlug && (
-                  <Link className="quiz-link" href={`/xem/${it.sceneSlug}`}>
-                    {t.view} →
-                  </Link>
+                {canOpen3d(it.sceneSlug) && (
+                  <button type="button" className="quiz-link" onClick={() => setView3d(it.sceneSlug)}>
+                    {t.open3d} →
+                  </button>
                 )}
               </article>
             );
@@ -334,6 +385,18 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
         <p className="quiz-desc">{item.prompt.split("\n").slice(1).join(" ").trim()}</p>
       )}
 
+      {item.image && (
+        <figure className="quiz-fig">
+          {/* Trả lời xong thì đổi sang bản GỐC còn nguyên nhãn để đối chiếu. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={answered && item.imageAnswer ? item.imageAnswer : item.image}
+            alt={answered ? item.sceneTitle : ""}
+            loading="lazy"
+          />
+        </figure>
+      )}
+
       <div className="quiz-options">
         {item.options.map((o, i) => {
           const state = answered
@@ -358,11 +421,25 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
         <div className={`quiz-feedback${chosenOpt?.correct ? " ok" : " no"}`}>
           <b>{chosenOpt?.correct ? t.correct : t.wrong}</b>
           <p>{item.explanation}</p>
-          {item.sceneSlug && (
-            <Link className="quiz-link" href={`/xem/${item.sceneSlug}`}>
-              {t.view} — {item.sceneTitle} →
-            </Link>
+          {canOpen3d(item.sceneSlug) && (
+            <button type="button" className="quiz-link" onClick={() => setView3d(item.sceneSlug)}>
+              {t.open3d} — {item.sceneTitle} →
+            </button>
           )}
+        </div>
+      )}
+
+      {view3d && (
+        <div className="quiz-3d" role="dialog" aria-modal="true">
+          <div className="quiz-3d-bar">
+            <span>{item.sceneTitle}</span>
+            <em>{t.keepPlace}</em>
+            <button type="button" onClick={() => setView3d(null)}>{t.close3d}</button>
+          </div>
+          {/* Nhúng bằng iframe CHỦ Ý: trang xem 3D là một tài liệu riêng nên
+              component câu hỏi không bị gỡ khỏi cây — đóng lớp phủ lại là vẫn
+              nguyên câu hỏi, nguyên đáp án đã chọn, nguyên đồng hồ đang chạy. */}
+          <iframe src={`/xem/${view3d}`} title={item.sceneTitle} />
         </div>
       )}
 
