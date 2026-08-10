@@ -1,0 +1,459 @@
+{
+ "source": {
+  "title": "Atlas Giải Phẫu Người — Frank H. Netter",
+  "publisher": "Bản dịch tiếng Việt",
+  "usage": "Ảnh dùng cho mục đích học tập trong đồ án; mỗi ảnh ghi rõ số trang nguồn."
+ },
+ "shots": [
+  {
+   "page": 14,
+   "title": "Xương thái dương",
+   "file": "p0014.jpg",
+   "label": "Xương thái dương",
+   "meshName": "Temporal bone.r",
+   "sceneSlug": "giai-phau-dau",
+   "hotspotKey": "temporal"
+  },
+  {
+   "page": 16,
+   "title": "Xương Hàm Dưới",
+   "file": "p0016.jpg",
+   "label": "Xương hàm dưới",
+   "meshName": "Mandible",
+   "sceneSlug": "giai-phau-so",
+   "hotspotKey": "mandible"
+  },
+  {
+   "page": 34,
+   "title": "Động Mạch Dưới Đòn",
+   "file": "p0034.jpg",
+   "label": "Động mạch dưới đòn",
+   "meshName": "Right subclavian artery.001",
+   "sceneSlug": "giai-phau-dai-vai",
+   "hotspotKey": "subclavian-artery"
+  },
+  {
+   "page": 59,
+   "title": "Lưng lưỡi Nắp thanh môn",
+   "file": "p0059.jpg",
+   "label": "Nắp thanh môn",
+   "meshName": "Epiglottis",
+   "sceneSlug": "thanh-quan",
+   "hotspotKey": "epiglottis"
+  },
+  {
+   "page": 75,
+   "title": "Tuyến Giáp: Nhìn Trước",
+   "file": "p0075.jpg",
+   "label": "Tuyến giáp",
+   "meshName": "Thyroid gland",
+   "sceneSlug": "he-noi-tiet",
+   "hotspotKey": "thyroid"
+  },
+  {
+   "page": 84,
+   "title": "Mạc Ổ Mắt và Nhãn Cầu",
+   "file": "p0084.jpg",
+   "label": "Nhãn cầu",
+   "meshName": "Sclera.r",
+   "sceneSlug": "giai-phau-dau",
+   "hotspotKey": "eyeball"
+  },
+  {
+   "page": 121,
+   "title": "Thần Kinh Thị Giác (II) (Đường Thị Giác): Sơ Đồ",
+   "file": "p0121.jpg",
+   "label": "Thần kinh thị giác (II)",
+   "meshName": "Optic nerve (II).r.001",
+   "sceneSlug": "hoc-mat",
+   "hotspotKey": "optic-nerve"
+  },
+  {
+   "page": 122,
+   "title": "Các Thần Kinh Vận Nhãn (III) Ròng Rọc (IV)",
+   "file": "p0122.jpg",
+   "label": "Thần kinh vận nhãn (III)",
+   "meshName": "Oculomotor nerve (III).r.001",
+   "sceneSlug": "hoc-mat",
+   "hotspotKey": "oculomotor"
+  },
+  {
+   "page": 123,
+   "title": "Thần Kinh Sinh Ba (V): Sơ Đồ",
+   "file": "p0123.jpg",
+   "label": "Thần kinh sinh ba (V)",
+   "meshName": "Trigeminal nerve (V).r.001",
+   "sceneSlug": "giai-phau-dau",
+   "hotspotKey": "trigeminal"
+  },
+  {
+   "page": 124,
+   "title": "Thần Kinh Mặt (VII): Sơ Đồ",
+   "file": "p0124.jpg",
+   "label": "Thần kinh mặt (VII)",
+   "meshName": "Facial nerve (VII).r.001",
+   "sceneSlug": "so-nen-so",
+   "hotspotKey": "facial-nerve"
+  },
+  {
+   "page": 125,
+   "title": "Thần Kinh Tiền Đình Ốc Tai (VIII): Sơ Đồ",
+   "file": "p0125.jpg",
+   "label": "Tiền đình",
+   "meshName": "Vestibule.l",
+   "sceneSlug": "he-thinh-giac",
+   "hotspotKey": "vestibule"
+  },
+  {
+   "page": 127,
+   "title": "Thần Kinh Lang Thang (X): Sơ Đồ",
+   "file": "p0127.jpg",
+   "label": "Thần kinh lang thang (X)",
+   "meshName": "Vagus nerve (X).l.001",
+   "sceneSlug": "giai-phau-co",
+   "hotspotKey": "vagus"
+  },
+  {
+   "page": 128,
+   "title": "Thần Kinh Phụ (XI): Sơ Đồ",
+   "file": "p0128.jpg",
+   "label": "Thần kinh phụ (XI)",
+   "meshName": "Accessory nerve (XI).r.001",
+   "sceneSlug": "giai-phau-co",
+   "hotspotKey": "accessory"
+  },
+  {
+   "page": 129,
+   "title": "Thần Kinh Hạ Thiệt (XII): Sơ Đồ",
+   "file": "p0129.jpg",
+   "label": "Thần kinh hạ thiệt (XII)",
+   "meshName": "Hypoglossal nerve (XII).r.001",
+   "sceneSlug": "so-nen-so",
+   "hotspotKey": "hypoglossal"
+  },
+  {
+   "page": 158,
+   "title": "Xương Cùng và Xương Cụt",
+   "file": "p0158.jpg",
+   "label": "Xương cùng",
+   "meshName": "Sacrum",
+   "sceneSlug": "cot-song",
+   "hotspotKey": "sacrum"
+  },
+  {
+   "page": 187,
+   "title": "Các Xương Sườn và Khớp Xương Ức",
+   "file": "p0187.jpg",
+   "label": "Xương sườn",
+   "meshName": "Sixth rib.r",
+   "sceneSlug": "giai-phau-than",
+   "hotspotKey": "ribs"
+  },
+  {
+   "page": 191,
+   "title": "Đặt Ống Dẫn Lưu Màng Phổi",
+   "file": "p0191.jpg",
+   "label": "Màng phổi",
+   "meshName": "Pleura",
+   "sceneSlug": "phoi-cay-phe-quan",
+   "hotspotKey": "pleura"
+  },
+  {
+   "page": 195,
+   "title": "Cơ Hoành: Mặt Ngực",
+   "file": "p0195.jpg",
+   "label": "Cơ hoành",
+   "meshName": "Diaphragm",
+   "sceneSlug": "co-hoanh",
+   "hotspotKey": "diaphragm"
+  },
+  {
+   "page": 203,
+   "title": "Khí Quản và Phế Quản Chính",
+   "file": "p0203.jpg",
+   "label": "Khí quản",
+   "meshName": "Trachea",
+   "sceneSlug": "giai-phau-phoi",
+   "hotspotKey": "trachea"
+  },
+  {
+   "page": 223,
+   "title": "Tâm Nhĩ và Các Tâm Thất Phải",
+   "file": "p0223.jpg",
+   "label": "Tâm thất phải",
+   "meshName": "Right ventricle",
+   "sceneSlug": "giai-phau-tim",
+   "hotspotKey": "right-ventricle"
+  },
+  {
+   "page": 224,
+   "title": "Tâm Nhĩ và Các Tâm Thất Trái",
+   "file": "p0224.jpg",
+   "label": "Tâm thất trái",
+   "meshName": "Left ventricle",
+   "sceneSlug": "giai-phau-tim",
+   "hotspotKey": "left-ventricle"
+  },
+  {
+   "page": 236,
+   "title": "Thực Quản ở Tại Chổ",
+   "file": "p0236.jpg",
+   "label": "Thực quản",
+   "meshName": "Oesophagus.001",
+   "sceneSlug": "trung-that",
+   "hotspotKey": "oesophagus"
+  },
+  {
+   "page": 274,
+   "title": "Mạc nối lớn (lật lên)",
+   "file": "p0274.jpg",
+   "label": "Mạc nối lớn",
+   "meshName": "Greater omentum",
+   "sceneSlug": "phuc-mac",
+   "hotspotKey": "greater-omentum"
+  },
+  {
+   "page": 277,
+   "title": "Túi Mạc Nối: Dạ Dày Được Lật Lên",
+   "file": "p0277.jpg",
+   "label": "Dạ dày",
+   "meshName": "Stomach",
+   "sceneSlug": "mat-cat-ngang-bung",
+   "hotspotKey": "stomach"
+  },
+  {
+   "page": 283,
+   "title": "Tá Tràng ở Tại Chỗ",
+   "file": "p0283.jpg",
+   "label": "Tá tràng",
+   "meshName": "Duodenum",
+   "sceneSlug": "mat-cat-da-day",
+   "hotspotKey": "duodenum"
+  },
+  {
+   "page": 288,
+   "title": "Ruột thừa dài bất thường",
+   "file": "p0288.jpg",
+   "label": "Ruột thừa",
+   "meshName": "Vermiform appendix",
+   "sceneSlug": "mat-cat-ruot-gia",
+   "hotspotKey": "vermiform-appendix"
+  },
+  {
+   "page": 301,
+   "title": "Các Dạng của Ống Túi Mật và Ống Gan",
+   "file": "p0301.jpg",
+   "label": "Túi mật",
+   "meshName": "Gallbladder",
+   "sceneSlug": "giai-phau-gan",
+   "hotspotKey": "gallbladder"
+  },
+  {
+   "page": 303,
+   "title": "Tĩnh mạch chủ dưới Động mạch chủ Động mạch thân tạng",
+   "file": "p0303.jpg",
+   "label": "Tĩnh mạch chủ dưới",
+   "meshName": "Inferior vena cava (thoracic part).001",
+   "sceneSlug": "giai-phau-than",
+   "hotspotKey": "ivc"
+  },
+  {
+   "page": 308,
+   "title": "Phim Chụp Động Mạch Thân Tạng",
+   "file": "p0308.jpg",
+   "label": "Thân tạng",
+   "meshName": "Coeliac trunk.001",
+   "sceneSlug": "he-dong-mach-chu",
+   "hotspotKey": "coeliac"
+  },
+  {
+   "page": 317,
+   "title": "Các Nhánh Tĩnh Mạch Cửa Gan: Các Vòng Nổi Cửa Chủ",
+   "file": "p0317.jpg",
+   "label": "Tĩnh mạch cửa",
+   "meshName": "Hepatic portal vein.001",
+   "sceneSlug": "gan-duong-mat",
+   "hotspotKey": "portal-vein"
+  },
+  {
+   "page": 340,
+   "title": "Các Động Mạch Thận và Các Phân Thùy Thận",
+   "file": "p0340.jpg",
+   "label": "Động mạch thận",
+   "meshName": "Anterior branch of renal artery.r.001",
+   "sceneSlug": "he-dong-mach-chu",
+   "hotspotKey": "renal"
+  },
+  {
+   "page": 345,
+   "title": "Các Niệu Quản",
+   "file": "p0345.jpg",
+   "label": "Niệu quản",
+   "meshName": "Ureter.l",
+   "sceneSlug": "he-tiet-nieu",
+   "hotspotKey": "ureter-l"
+  },
+  {
+   "page": 346,
+   "title": "Các Động Mạch của Niệu Quản và Bàng Quang",
+   "file": "p0346.jpg",
+   "label": "Bàng quang",
+   "meshName": "Urinary bladder",
+   "sceneSlug": "he-tiet-nieu",
+   "hotspotKey": "bladder"
+  },
+  {
+   "page": 347,
+   "title": "Tá tràng Góc tá hổng tràng Động và tĩnh mạch thận trái",
+   "file": "p0347.jpg",
+   "label": "Thận trái",
+   "meshName": "Kidney.l",
+   "sceneSlug": "mat-cat-ngang-bung",
+   "hotspotKey": "kidney-l"
+  },
+  {
+   "page": 351,
+   "title": "Các Thần Kinh của Tuyến Thượng Thận: Phẫu Tích và Sơ Đồ",
+   "file": "p0351.jpg",
+   "label": "Tuyến thượng thận",
+   "meshName": "Suprarenal gland.l",
+   "sceneSlug": "he-noi-tiet",
+   "hotspotKey": "suprarenal"
+  },
+  {
+   "page": 387,
+   "title": "Lỗ ngoài niệu đạo",
+   "file": "p0387.jpg",
+   "label": "Niệu đạo",
+   "meshName": "Urethra",
+   "sceneSlug": "he-tiet-nieu",
+   "hotspotKey": "urethra"
+  },
+  {
+   "page": 389,
+   "title": "Tuyến Tiền Liệt và Các Túi Tỉnh",
+   "file": "p0389.jpg",
+   "label": "Tuyến tiền liệt",
+   "meshName": "Prostate",
+   "sceneSlug": "he-sinh-san-nam",
+   "hotspotKey": "prostate"
+  },
+  {
+   "page": 395,
+   "title": "Tỉnh Hoàn, Mào Tỉnh và Các Ống Dẫn Tinh",
+   "file": "p0395.jpg",
+   "label": "Ống dẫn tinh",
+   "meshName": "Ductus deferens.l",
+   "sceneSlug": "he-sinh-san-nam",
+   "hotspotKey": "ductus-deferens"
+  },
+  {
+   "page": 396,
+   "title": "Trực Tràng Ở Tại Chổ: Nam và Nữ",
+   "file": "p0396.jpg",
+   "label": "Trực tràng",
+   "meshName": "Rectum",
+   "sceneSlug": "mat-cat-ruot-gia",
+   "hotspotKey": "rectum"
+  },
+  {
+   "page": 400,
+   "title": "Cơ Thắt Ngoài Hậu Môn: Nhìn Từ Đáy Chậu",
+   "file": "p0400.jpg",
+   "label": "Cơ thắt ngoài hậu môn",
+   "meshName": "External anal sphincter.l",
+   "sceneSlug": "co-that-hau-mon",
+   "hotspotKey": "external-anal-sphincter"
+  },
+  {
+   "page": 424,
+   "title": "Các Xương Đòn và Khớp Ức - Đòn",
+   "file": "p0424.jpg",
+   "label": "Xương đòn",
+   "meshName": "Clavicle.r",
+   "sceneSlug": "giai-phau-dai-vai",
+   "hotspotKey": "clavicle"
+  },
+  {
+   "page": 425,
+   "title": "Xương Cánh Tay và Xương Vai: Nhìn Trước",
+   "file": "p0425.jpg",
+   "label": "Xương cánh tay",
+   "meshName": "Humerus.r",
+   "sceneSlug": "giai-phau-canh-tay",
+   "hotspotKey": "humerus"
+  },
+  {
+   "page": 432,
+   "title": "Động Mạch Nách và Vòng Nối Quanh Xương Vai",
+   "file": "p0432.jpg",
+   "label": "Động mạch nách",
+   "meshName": "Axillary artery.r.001",
+   "sceneSlug": "giai-phau-dai-vai",
+   "hotspotKey": "axillary-artery"
+  },
+  {
+   "page": 438,
+   "title": "Động Mạch Cánh Tay ở Tại Chỗ",
+   "file": "p0438.jpg",
+   "label": "Động mạch cánh tay",
+   "meshName": "tube_Brachial artery.r",
+   "sceneSlug": "giai-phau-canh-tay",
+   "hotspotKey": "brachial-artery"
+  },
+  {
+   "page": 445,
+   "title": "Các Cơ Riêng Biệt của Cắng Tay: Các Cơ Xoay Xương Quay",
+   "file": "p0445.jpg",
+   "label": "Xương quay",
+   "meshName": "Radius.r",
+   "sceneSlug": "giai-phau-canh-tay",
+   "hotspotKey": "radius"
+  },
+  {
+   "page": 455,
+   "title": "Các Chổ Bám Xương của Các Cơ Cắng Tay: Nhìn Trước",
+   "file": "p0455.jpg",
+   "label": "Cơ cắn",
+   "meshName": "Superficial part of masseter.r",
+   "sceneSlug": "giai-phau-dau",
+   "hotspotKey": "masseter"
+  },
+  {
+   "page": 468,
+   "title": "Các Cơ Giun và Các Túi, Khoang, Bao: Sơ Đồ",
+   "file": "p0468.jpg",
+   "label": "Cơ giun",
+   "meshName": "Lumbrical muscles of hand.r",
+   "sceneSlug": "giai-phau-cang-tay",
+   "hotspotKey": "lumbricals"
+  },
+  {
+   "page": 481,
+   "title": "Thần Kinh Trụ",
+   "file": "p0481.jpg",
+   "label": "Thần kinh trụ",
+   "meshName": "tube_Ulnar nerve.r",
+   "sceneSlug": "giai-phau-canh-tay",
+   "hotspotKey": "ulnar-nerve"
+  },
+  {
+   "page": 482,
+   "title": "Thần Kinh Quay ở Cánh Tay và các Thần Kinh của Khu Vai Sau",
+   "file": "p0482.jpg",
+   "label": "Thần kinh quay",
+   "meshName": "tube_Radial nerve.r",
+   "sceneSlug": "giai-phau-canh-tay",
+   "hotspotKey": "radial-nerve"
+  },
+  {
+   "page": 501,
+   "title": "Các Cơ Thắt Lưng và Cơ Chậu",
+   "file": "p0501.jpg",
+   "label": "Cơ chậu",
+   "meshName": "Iliacus muscle.l",
+   "sceneSlug": "co-dui-mong",
+   "hotspotKey": "iliacus"
+  }
+ ]
+}
