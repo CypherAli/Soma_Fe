@@ -12,7 +12,9 @@
    "label": "Xương thái dương",
    "meshName": "Temporal bone.r",
    "sceneSlug": "giai-phau-dau",
-   "hotspotKey": "temporal"
+   "hotspotKey": "temporal",
+   "fileQuiz": "qp0014.jpg",
+   "hasMarker": true
   },
   {
    "page": 16,
@@ -21,7 +23,9 @@
    "label": "Xương hàm dưới",
    "meshName": "Mandible",
    "sceneSlug": "giai-phau-so",
-   "hotspotKey": "mandible"
+   "hotspotKey": "mandible",
+   "fileQuiz": "qp0016.jpg",
+   "hasMarker": true
   },
   {
    "page": 34,
@@ -30,7 +34,9 @@
    "label": "Động mạch dưới đòn",
    "meshName": "Right subclavian artery.001",
    "sceneSlug": "giai-phau-dai-vai",
-   "hotspotKey": "subclavian-artery"
+   "hotspotKey": "subclavian-artery",
+   "fileQuiz": "qp0034.jpg",
+   "hasMarker": true
   },
   {
    "page": 59,
@@ -39,7 +45,9 @@
    "label": "Nắp thanh môn",
    "meshName": "Epiglottis",
    "sceneSlug": "thanh-quan",
-   "hotspotKey": "epiglottis"
+   "hotspotKey": "epiglottis",
+   "fileQuiz": "qp0059.jpg",
+   "hasMarker": true
   },
   {
    "page": 75,
@@ -48,7 +56,9 @@
    "label": "Tuyến giáp",
    "meshName": "Thyroid gland",
    "sceneSlug": "he-noi-tiet",
-   "hotspotKey": "thyroid"
+   "hotspotKey": "thyroid",
+   "fileQuiz": "qp0075.jpg",
+   "hasMarker": true
   },
   {
    "page": 84,
@@ -57,7 +67,9 @@
    "label": "Nhãn cầu",
    "meshName": "Sclera.r",
    "sceneSlug": "giai-phau-dau",
-   "hotspotKey": "eyeball"
+   "hotspotKey": "eyeball",
+   "fileQuiz": "qp0084.jpg",
+   "hasMarker": true
   },
   {
    "page": 121,
@@ -66,7 +78,9 @@
    "label": "Thần kinh thị giác (II)",
    "meshName": "Optic nerve (II).r.001",
    "sceneSlug": "hoc-mat",
-   "hotspotKey": "optic-nerve"
+   "hotspotKey": "optic-nerve",
+   "fileQuiz": "qp0121.jpg",
+   "hasMarker": true
   },
   {
    "page": 122,
@@ -75,7 +89,9 @@
    "label": "Thần kinh vận nhãn (III)",
    "meshName": "Oculomotor nerve (III).r.001",
    "sceneSlug": "hoc-mat",
-   "hotspotKey": "oculomotor"
+   "hotspotKey": "oculomotor",
+   "fileQuiz": "qp0122.jpg",
+   "hasMarker": false
   },
   {
    "page": 123,
@@ -84,7 +100,9 @@
    "label": "Thần kinh sinh ba (V)",
    "meshName": "Trigeminal nerve (V).r.001",
    "sceneSlug": "giai-phau-dau",
-   "hotspotKey": "trigeminal"
+   "hotspotKey": "trigeminal",
+   "fileQuiz": "qp0123.jpg",
+   "hasMarker": true
   },
   {
    "page": 124,
@@ -93,7 +111,9 @@
    "label": "Thần kinh mặt (VII)",
    "meshName": "Facial nerve (VII).r.001",
    "sceneSlug": "so-nen-so",
-   "hotspotKey": "facial-nerve"
+   "hotspotKey": "facial-nerve",
+   "fileQuiz": "qp0124.jpg",
+   "hasMarker": false
   },
   {
    "page": 125,
@@ -102,7 +122,9 @@
    "label": "Tiền đình",
    "meshName": "Vestibule.l",
    "sceneSlug": "he-thinh-giac",
-   "hotspotKey": "vestibule"
+   "hotspotKey": "vestibule",
+   "fileQuiz": "qp0125.jpg",
+   "hasMarker": true
   },
   {
    "page": 127,
@@ -111,7 +133,9 @@
    "label": "Thần kinh lang thang (X)",
    "meshName": "Vagus nerve (X).l.001",
    "sceneSlug": "giai-phau-co",
-   "hotspotKey": "vagus"
+   "hotspotKey": "vagus",
+   "fileQuiz": "qp0127.jpg",
+   "hasMarker": true
   },
   {
    "page": 128,
@@ -120,7 +144,9 @@
    "label": "Thần kinh phụ (XI)",
    "meshName": "Accessory nerve (XI).r.001",
    "sceneSlug": "giai-phau-co",
-   "hotspotKey": "accessory"
+   "hotspotKey": "accessory",
+   "fileQuiz": "qp0128.jpg",
+   "hasMarker": false
   },
   {
    "page": 129,
@@ -129,7 +155,9 @@
    "label": "Thần kinh hạ thiệt (XII)",
    "meshName": "Hypoglossal nerve (XII).r.001",
    "sceneSlug": "so-nen-so",
-   "hotspotKey": "hypoglossal"
+   "hotspotKey": "hypoglossal",
+   "fileQuiz": "qp0129.jpg",
+   "hasMarker": true
   },
   {
    "page": 158,
@@ -138,7 +166,9 @@
    "label": "Xương cùng",
    "meshName": "Sacrum",
    "sceneSlug": "cot-song",
-   "hotspotKey": "sacrum"
+   "hotspotKey": "sacrum",
+   "fileQuiz": "qp0158.jpg",
+   "hasMarker": true
   },
   {
    "page": 187,
@@ -147,7 +177,9 @@
    "label": "Xương sườn",
    "meshName": "Sixth rib.r",
    "sceneSlug": "giai-phau-than",
-   "hotspotKey": "ribs"
+   "hotspotKey": "ribs",
+   "fileQuiz": "qp0187.jpg",
+   "hasMarker": true
   },
   {
    "page": 191,
@@ -156,7 +188,9 @@
    "label": "Màng phổi",
    "meshName": "Pleura",
    "sceneSlug": "phoi-cay-phe-quan",
-   "hotspotKey": "pleura"
+   "hotspotKey": "pleura",
+   "fileQuiz": "qp0191.jpg",
+   "hasMarker": true
   },
   {
    "page": 195,
@@ -165,7 +199,9 @@
    "label": "Cơ hoành",
    "meshName": "Diaphragm",
    "sceneSlug": "co-hoanh",
-   "hotspotKey": "diaphragm"
+   "hotspotKey": "diaphragm",
+   "fileQuiz": "qp0195.jpg",
+   "hasMarker": false
   },
   {
    "page": 203,
@@ -174,7 +210,9 @@
    "label": "Khí quản",
    "meshName": "Trachea",
    "sceneSlug": "giai-phau-phoi",
-   "hotspotKey": "trachea"
+   "hotspotKey": "trachea",
+   "fileQuiz": "qp0203.jpg",
+   "hasMarker": true
   },
   {
    "page": 223,
@@ -183,7 +221,9 @@
    "label": "Tâm thất phải",
    "meshName": "Right ventricle",
    "sceneSlug": "giai-phau-tim",
-   "hotspotKey": "right-ventricle"
+   "hotspotKey": "right-ventricle",
+   "fileQuiz": "qp0223.jpg",
+   "hasMarker": false
   },
   {
    "page": 224,
@@ -192,7 +232,9 @@
    "label": "Tâm thất trái",
    "meshName": "Left ventricle",
    "sceneSlug": "giai-phau-tim",
-   "hotspotKey": "left-ventricle"
+   "hotspotKey": "left-ventricle",
+   "fileQuiz": "qp0224.jpg",
+   "hasMarker": true
   },
   {
    "page": 236,
@@ -201,7 +243,9 @@
    "label": "Thực quản",
    "meshName": "Oesophagus.001",
    "sceneSlug": "trung-that",
-   "hotspotKey": "oesophagus"
+   "hotspotKey": "oesophagus",
+   "fileQuiz": "qp0236.jpg",
+   "hasMarker": true
   },
   {
    "page": 274,
@@ -210,7 +254,9 @@
    "label": "Mạc nối lớn",
    "meshName": "Greater omentum",
    "sceneSlug": "phuc-mac",
-   "hotspotKey": "greater-omentum"
+   "hotspotKey": "greater-omentum",
+   "fileQuiz": "qp0274.jpg",
+   "hasMarker": true
   },
   {
    "page": 277,
@@ -219,7 +265,9 @@
    "label": "Dạ dày",
    "meshName": "Stomach",
    "sceneSlug": "mat-cat-ngang-bung",
-   "hotspotKey": "stomach"
+   "hotspotKey": "stomach",
+   "fileQuiz": "qp0277.jpg",
+   "hasMarker": true
   },
   {
    "page": 283,
@@ -228,7 +276,9 @@
    "label": "Tá tràng",
    "meshName": "Duodenum",
    "sceneSlug": "mat-cat-da-day",
-   "hotspotKey": "duodenum"
+   "hotspotKey": "duodenum",
+   "fileQuiz": "qp0283.jpg",
+   "hasMarker": true
   },
   {
    "page": 288,
@@ -237,7 +287,9 @@
    "label": "Ruột thừa",
    "meshName": "Vermiform appendix",
    "sceneSlug": "mat-cat-ruot-gia",
-   "hotspotKey": "vermiform-appendix"
+   "hotspotKey": "vermiform-appendix",
+   "fileQuiz": "qp0288.jpg",
+   "hasMarker": true
   },
   {
    "page": 301,
@@ -246,7 +298,9 @@
    "label": "Túi mật",
    "meshName": "Gallbladder",
    "sceneSlug": "giai-phau-gan",
-   "hotspotKey": "gallbladder"
+   "hotspotKey": "gallbladder",
+   "fileQuiz": "qp0301.jpg",
+   "hasMarker": true
   },
   {
    "page": 303,
@@ -255,7 +309,9 @@
    "label": "Tĩnh mạch chủ dưới",
    "meshName": "Inferior vena cava (thoracic part).001",
    "sceneSlug": "giai-phau-than",
-   "hotspotKey": "ivc"
+   "hotspotKey": "ivc",
+   "fileQuiz": "qp0303.jpg",
+   "hasMarker": true
   },
   {
    "page": 308,
@@ -264,7 +320,9 @@
    "label": "Thân tạng",
    "meshName": "Coeliac trunk.001",
    "sceneSlug": "he-dong-mach-chu",
-   "hotspotKey": "coeliac"
+   "hotspotKey": "coeliac",
+   "fileQuiz": "qp0308.jpg",
+   "hasMarker": true
   },
   {
    "page": 317,
@@ -273,7 +331,9 @@
    "label": "Tĩnh mạch cửa",
    "meshName": "Hepatic portal vein.001",
    "sceneSlug": "gan-duong-mat",
-   "hotspotKey": "portal-vein"
+   "hotspotKey": "portal-vein",
+   "fileQuiz": "qp0317.jpg",
+   "hasMarker": true
   },
   {
    "page": 340,
@@ -282,7 +342,9 @@
    "label": "Động mạch thận",
    "meshName": "Anterior branch of renal artery.r.001",
    "sceneSlug": "he-dong-mach-chu",
-   "hotspotKey": "renal"
+   "hotspotKey": "renal",
+   "fileQuiz": "qp0340.jpg",
+   "hasMarker": true
   },
   {
    "page": 345,
@@ -291,7 +353,9 @@
    "label": "Niệu quản",
    "meshName": "Ureter.l",
    "sceneSlug": "he-tiet-nieu",
-   "hotspotKey": "ureter-l"
+   "hotspotKey": "ureter-l",
+   "fileQuiz": "qp0345.jpg",
+   "hasMarker": true
   },
   {
    "page": 346,
@@ -300,7 +364,9 @@
    "label": "Bàng quang",
    "meshName": "Urinary bladder",
    "sceneSlug": "he-tiet-nieu",
-   "hotspotKey": "bladder"
+   "hotspotKey": "bladder",
+   "fileQuiz": "qp0346.jpg",
+   "hasMarker": true
   },
   {
    "page": 347,
@@ -309,7 +375,9 @@
    "label": "Thận trái",
    "meshName": "Kidney.l",
    "sceneSlug": "mat-cat-ngang-bung",
-   "hotspotKey": "kidney-l"
+   "hotspotKey": "kidney-l",
+   "fileQuiz": "qp0347.jpg",
+   "hasMarker": true
   },
   {
    "page": 351,
@@ -318,7 +386,9 @@
    "label": "Tuyến thượng thận",
    "meshName": "Suprarenal gland.l",
    "sceneSlug": "he-noi-tiet",
-   "hotspotKey": "suprarenal"
+   "hotspotKey": "suprarenal",
+   "fileQuiz": "qp0351.jpg",
+   "hasMarker": true
   },
   {
    "page": 387,
@@ -327,7 +397,9 @@
    "label": "Niệu đạo",
    "meshName": "Urethra",
    "sceneSlug": "he-tiet-nieu",
-   "hotspotKey": "urethra"
+   "hotspotKey": "urethra",
+   "fileQuiz": "qp0387.jpg",
+   "hasMarker": true
   },
   {
    "page": 389,
@@ -336,7 +408,9 @@
    "label": "Tuyến tiền liệt",
    "meshName": "Prostate",
    "sceneSlug": "he-sinh-san-nam",
-   "hotspotKey": "prostate"
+   "hotspotKey": "prostate",
+   "fileQuiz": "qp0389.jpg",
+   "hasMarker": true
   },
   {
    "page": 395,
@@ -345,7 +419,9 @@
    "label": "Ống dẫn tinh",
    "meshName": "Ductus deferens.l",
    "sceneSlug": "he-sinh-san-nam",
-   "hotspotKey": "ductus-deferens"
+   "hotspotKey": "ductus-deferens",
+   "fileQuiz": "qp0395.jpg",
+   "hasMarker": false
   },
   {
    "page": 396,
@@ -354,7 +430,9 @@
    "label": "Trực tràng",
    "meshName": "Rectum",
    "sceneSlug": "mat-cat-ruot-gia",
-   "hotspotKey": "rectum"
+   "hotspotKey": "rectum",
+   "fileQuiz": "qp0396.jpg",
+   "hasMarker": true
   },
   {
    "page": 400,
@@ -363,7 +441,9 @@
    "label": "Cơ thắt ngoài hậu môn",
    "meshName": "External anal sphincter.l",
    "sceneSlug": "co-that-hau-mon",
-   "hotspotKey": "external-anal-sphincter"
+   "hotspotKey": "external-anal-sphincter",
+   "fileQuiz": "qp0400.jpg",
+   "hasMarker": true
   },
   {
    "page": 424,
@@ -372,7 +452,9 @@
    "label": "Xương đòn",
    "meshName": "Clavicle.r",
    "sceneSlug": "giai-phau-dai-vai",
-   "hotspotKey": "clavicle"
+   "hotspotKey": "clavicle",
+   "fileQuiz": "qp0424.jpg",
+   "hasMarker": true
   },
   {
    "page": 425,
@@ -381,7 +463,9 @@
    "label": "Xương cánh tay",
    "meshName": "Humerus.r",
    "sceneSlug": "giai-phau-canh-tay",
-   "hotspotKey": "humerus"
+   "hotspotKey": "humerus",
+   "fileQuiz": "qp0425.jpg",
+   "hasMarker": true
   },
   {
    "page": 432,
@@ -390,7 +474,9 @@
    "label": "Động mạch nách",
    "meshName": "Axillary artery.r.001",
    "sceneSlug": "giai-phau-dai-vai",
-   "hotspotKey": "axillary-artery"
+   "hotspotKey": "axillary-artery",
+   "fileQuiz": "qp0432.jpg",
+   "hasMarker": true
   },
   {
    "page": 438,
@@ -399,7 +485,9 @@
    "label": "Động mạch cánh tay",
    "meshName": "tube_Brachial artery.r",
    "sceneSlug": "giai-phau-canh-tay",
-   "hotspotKey": "brachial-artery"
+   "hotspotKey": "brachial-artery",
+   "fileQuiz": "qp0438.jpg",
+   "hasMarker": true
   },
   {
    "page": 445,
@@ -408,7 +496,9 @@
    "label": "Xương quay",
    "meshName": "Radius.r",
    "sceneSlug": "giai-phau-canh-tay",
-   "hotspotKey": "radius"
+   "hotspotKey": "radius",
+   "fileQuiz": "qp0445.jpg",
+   "hasMarker": true
   },
   {
    "page": 455,
@@ -417,7 +507,9 @@
    "label": "Cơ cắn",
    "meshName": "Superficial part of masseter.r",
    "sceneSlug": "giai-phau-dau",
-   "hotspotKey": "masseter"
+   "hotspotKey": "masseter",
+   "fileQuiz": "qp0455.jpg",
+   "hasMarker": false
   },
   {
    "page": 468,
@@ -426,7 +518,9 @@
    "label": "Cơ giun",
    "meshName": "Lumbrical muscles of hand.r",
    "sceneSlug": "giai-phau-cang-tay",
-   "hotspotKey": "lumbricals"
+   "hotspotKey": "lumbricals",
+   "fileQuiz": "qp0468.jpg",
+   "hasMarker": true
   },
   {
    "page": 481,
@@ -435,7 +529,9 @@
    "label": "Thần kinh trụ",
    "meshName": "tube_Ulnar nerve.r",
    "sceneSlug": "giai-phau-canh-tay",
-   "hotspotKey": "ulnar-nerve"
+   "hotspotKey": "ulnar-nerve",
+   "fileQuiz": "qp0481.jpg",
+   "hasMarker": true
   },
   {
    "page": 482,
@@ -444,7 +540,9 @@
    "label": "Thần kinh quay",
    "meshName": "tube_Radial nerve.r",
    "sceneSlug": "giai-phau-canh-tay",
-   "hotspotKey": "radial-nerve"
+   "hotspotKey": "radial-nerve",
+   "fileQuiz": "qp0482.jpg",
+   "hasMarker": true
   },
   {
    "page": 501,
@@ -453,7 +551,9 @@
    "label": "Cơ chậu",
    "meshName": "Iliacus muscle.l",
    "sceneSlug": "co-dui-mong",
-   "hotspotKey": "iliacus"
+   "hotspotKey": "iliacus",
+   "fileQuiz": "qp0501.jpg",
+   "hasMarker": true
   }
  ]
 }
