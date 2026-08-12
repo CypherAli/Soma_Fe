@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { buildQuiz, quizSystems, type QuizItem } from "@/lib/anatomy/quiz";
+import { buildQuiz, quizQuestionCount, quizSystems, type QuizItem } from "@/lib/anatomy/quiz";
 import { loadExamBank, examQuestionCount, examRegions, examToQuizItems, type ExamBank } from "@/lib/anatomy/examBank";
-import { loadAtlasBank, atlasToQuizItems, type AtlasBank } from "@/lib/anatomy/atlasBank";
+import { loadAtlasBank, atlasQuestionCount, atlasToQuizItems, type AtlasBank } from "@/lib/anatomy/atlasBank";
 import type { Loc } from "@/lib/homeContent";
 import { regionViewerConfig } from "@/lib/scenes/regions";
 import type { SystemKey } from "@/store/useAnatomyStore";
@@ -43,6 +43,7 @@ const TXT = {
     loading: "Đang nạp ngân hàng đề…",
     srcAtlas: "Hình atlas", open3d: "Mở mô hình 3D", close3d: "Đóng",
     atlasNote: "Hình đã che nhãn; trả lời xong sẽ hiện bản đầy đủ để đối chiếu.",
+    onlyAvailable: (n: number) => `Nguồn đề đang chọn chỉ có ${n} câu`,
     keepPlace: "Đóng lại vẫn ở nguyên câu này.",
     mode: "Chế độ", modePractice: "Ôn tập", modeExam: "Thi thử",
     modeHintPractice: "Hiện đáp án và giải thích ngay sau mỗi câu.",
@@ -61,6 +62,7 @@ const TXT = {
     region: "Body region", loading: "Loading question bank…",
     srcAtlas: "Atlas figure", open3d: "Open the 3D model", close3d: "Close",
     atlasNote: "Labels are hidden; the full plate is shown after you answer.",
+    onlyAvailable: (n: number) => `The selected source only has ${n} questions`,
     keepPlace: "Closing returns you to this same question.",
     mode: "Mode", modePractice: "Practice", modeExam: "Mock exam",
     modeHintPractice: "Shows the answer and explanation after each question.",
@@ -79,6 +81,7 @@ const TXT = {
     region: "身体部位", loading: "正在加载题库…",
     srcAtlas: "图谱图片", open3d: "打开三维模型", close3d: "关闭",
     atlasNote: "标注已隐藏；作答后显示完整图片以供对照。",
+    onlyAvailable: (n: number) => `所选题源只有 ${n} 道题`,
     keepPlace: "关闭后仍停留在本题。",
     mode: "模式", modePractice: "练习", modeExam: "模拟考试",
     modeHintPractice: "每题作答后立即显示答案与解析。",
@@ -153,28 +156,43 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
     return () => { alive = false; };
   }, [source, bank]);
 
-  const availableBookQuestions = bank ? examQuestionCount(bank, region) : 0;
+  /**
+   * Số câu nguồn đang chọn thực sự ra được; `null` khi ngân hàng chưa nạp xong
+   * nên chưa biết.
+   *
+   * CẢ BA NGUỒN đều cắt `slice(0, count)` từ kho của mình, nên chọn 60 câu ở
+   * kho 19 câu thì bài lặng lẽ ngắn hơn số đã chọn — không riêng gì đề giáo
+   * trình. Vì vậy tính ở một chỗ theo nguồn, đừng vá riêng cho từng nguồn.
+   */
+  const available = useMemo(() => {
+    if (source === "book") return bank ? examQuestionCount(bank, region) : null;
+    if (source === "atlas") return atlas ? atlasQuestionCount(atlas) : null;
+    return quizQuestionCount(locale, system);
+  }, [source, bank, region, atlas, locale, system]);
 
-  const selectBookRegion = (nextRegion: string) => {
-    setRegion(nextRegion);
-    if (!bank) return;
-    const available = examQuestionCount(bank, nextRegion);
-    if (count > available) {
-      const fallback = [...QUESTION_COUNTS].reverse().find((value) => value <= available);
-      setCount(fallback ?? Math.max(1, available));
-    }
-  };
+  /**
+   * Số câu THỰC SỰ ra đề: hạ xuống mức cao nhất kho hiện tại còn đáp ứng được.
+   *
+   * Tính ra chứ không lưu thành state riêng, nên đổi vùng, đổi nguồn, đổi hệ,
+   * ngân hàng nạp xong hay AI soạn đề đều tự đúng — không phải nhớ gọi hàm hạ
+   * số câu ở từng nút. `count` vẫn giữ nguyên lựa chọn của người dùng: quay lại
+   * vùng nhiều câu là số cũ trở về.
+   */
+  const effectiveCount = useMemo(() => {
+    if (available === null || count <= available) return count;
+    return QUESTION_COUNTS.findLast((value) => value <= available) ?? Math.max(1, available);
+  }, [available, count]);
 
   const items: QuizItem[] = useMemo(() => {
     if (seed === null) return [];
     if (source === "book") {
-      return bank ? examToQuizItems(bank, { region, count, seed }) : [];
+      return bank ? examToQuizItems(bank, { region, count: effectiveCount, seed }) : [];
     }
     if (source === "atlas") {
-      return atlas ? atlasToQuizItems(atlas, { count, seed, locale }) : [];
+      return atlas ? atlasToQuizItems(atlas, { count: effectiveCount, seed, locale }) : [];
     }
-    return buildQuiz({ locale, system, count, seed });
-  }, [seed, locale, system, count, source, bank, region, atlas]);
+    return buildQuiz({ locale, system, count: effectiveCount, seed });
+  }, [seed, locale, system, effectiveCount, source, bank, region, atlas]);
 
   const start = () => {
     setSeed(Math.floor(Math.random() * 2 ** 31));
@@ -183,7 +201,7 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
     setDone(false);
     setTimedOut(false);
     // 45 giây mỗi câu — bằng nhịp đề thi giải phẫu thường gặp (40 câu / 30 phút)
-    setLeft(mode === "exam" ? count * 45 : null);
+    setLeft(mode === "exam" ? effectiveCount * 45 : null);
   };
 
   const composeQuiz = async () => {
@@ -347,12 +365,10 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
                 <button
                   key={n}
                   type="button"
-                  className={`quiz-chip${count === n ? " on" : ""}`}
+                  className={`quiz-chip${effectiveCount === n ? " on" : ""}`}
                   onClick={() => setCount(n)}
-                  disabled={source === "book" && !!bank && n > availableBookQuestions}
-                  title={source === "book" && !!bank && n > availableBookQuestions
-                    ? `${availableBookQuestions} ${locale === "vi" ? "câu khả dụng trong vùng này" : "questions available in this region"}`
-                    : undefined}
+                  disabled={available !== null && n > available}
+                  title={available !== null && n > available ? t.onlyAvailable(available) : undefined}
                 >
                   {n}
                 </button>
@@ -368,7 +384,7 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
                   onClick={() => setMode("practice")}>{t.modePractice}</button>
                 <button type="button" className={`quiz-chip${mode === "exam" ? " on" : ""}`}
                   onClick={() => setMode("exam")}>
-                  {t.modeExam} <i>{Math.round((count * 45) / 60)} {t.minutes}</i>
+                  {t.modeExam} <i>{Math.round((effectiveCount * 45) / 60)} {t.minutes}</i>
                 </button>
               </div>
               <p className="quiz-srcnote">
@@ -413,11 +429,11 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
                 <>
                   <div className="quiz-chips">
                     <button type="button" className={`quiz-chip${region === "all" ? " on" : ""}`}
-                      onClick={() => selectBookRegion("all")}>{t.all}</button>
+                      onClick={() => setRegion("all")}>{t.all}</button>
                     {examRegions(bank).map((r) => (
                       <button key={r.key} type="button"
                         className={`quiz-chip${region === r.key ? " on" : ""}`}
-                        onClick={() => selectBookRegion(r.key)}>
+                        onClick={() => setRegion(r.key)}>
                         {r.key} <i>{r.count}</i>
                       </button>
                     ))}
@@ -460,9 +476,9 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
           <span className="quiz-session-kicker">{locale === "vi" ? "PHIÊN HIỆN TẠI" : locale === "zh" ? "当前环节" : "CURRENT SESSION"}</span>
           <h2>{mode === "exam" ? t.modeExam : t.modePractice}</h2>
           <dl>
-            <div><dt>{t.numQ}</dt><dd>{count}</dd></div>
+            <div><dt>{t.numQ}</dt><dd>{effectiveCount}</dd></div>
             <div><dt>{t.src}</dt><dd>{source === "model" ? t.srcModel : source === "book" ? t.srcBook : t.srcAtlas}</dd></div>
-            <div><dt>{locale === "vi" ? "Thời lượng" : locale === "zh" ? "时长" : "Duration"}</dt><dd>{mode === "exam" ? `${Math.round((count * 45) / 60)} ${t.minutes}` : locale === "vi" ? "Không giới hạn" : locale === "zh" ? "无限制" : "Untimed"}</dd></div>
+            <div><dt>{locale === "vi" ? "Thời lượng" : locale === "zh" ? "时长" : "Duration"}</dt><dd>{mode === "exam" ? `${Math.round((effectiveCount * 45) / 60)} ${t.minutes}` : locale === "vi" ? "Không giới hạn" : locale === "zh" ? "无限制" : "Untimed"}</dd></div>
           </dl>
           <div className="quiz-session-note"><i />{mode === "exam" ? t.modeHintExam : t.modeHintPractice}</div>
         </aside>

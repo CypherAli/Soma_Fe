@@ -1,4 +1,5 @@
 import type { QuizItem } from "./quiz";
+import { rng, shuffle } from "./random";
 
 /**
  * NGÂN HÀNG CÂU HỎI ẢNH — bản vẽ atlas đã che nhãn.
@@ -40,23 +41,9 @@ export async function loadAtlasBank(): Promise<AtlasBank> {
   return cache;
 }
 
-function rng(seed: number) {
-  let s = seed >>> 0 || 1;
-  return () => {
-    s ^= s << 13; s >>>= 0;
-    s ^= s >> 17;
-    s ^= s << 5; s >>>= 0;
-    return s / 4294967296;
-  };
-}
-
-function shuffle<T>(a: T[], rand: () => number): T[] {
-  const r = [...a];
-  for (let i = r.length - 1; i > 0; i--) {
-    const j = Math.floor(rand() * (i + 1));
-    [r[i], r[j]] = [r[j], r[i]];
-  }
-  return r;
+/** Số câu nhiều nhất ngân hàng ảnh ra được — dùng để chặn chọn quá số câu. */
+export function atlasQuestionCount(bank: AtlasBank): number {
+  return bank.shots.length;
 }
 
 const PROMPT = {
