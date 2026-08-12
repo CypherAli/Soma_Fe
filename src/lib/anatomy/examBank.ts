@@ -4,9 +4,9 @@ import type { QuizItem } from "./quiz";
  * NGÂN HÀNG ĐỀ TỪ GIÁO TRÌNH — nguồn câu hỏi thứ hai, song song với đề sinh
  * từ thư viện 3D (`quiz.ts`).
  *
- * 215 câu bóc từ "Phần III: Bộ câu hỏi trắc nghiệm" của giáo trình Giải Phẫu
- * Người (ĐH Y Hà Nội) bằng `scripts/kb/parse_anatomy_mcq.py`, mỗi câu đã kèm
- * sẵn đáp án và lời giải của chính sách.
+ * Ngân hàng được bóc từ "Phần III: Bộ câu hỏi trắc nghiệm" của giáo trình
+ * Giải Phẫu Người (ĐH Y Hà Nội), sau đó đi qua cổng kiểm tra cấu trúc, đáp án,
+ * phương án, lời giải và dấu vết trang nguồn.
  *
  * Nạp bằng fetch chứ KHÔNG import thẳng: 135KB JSON mà import tĩnh là nằm luôn
  * trong bundle của mọi trang, trong khi chỉ trang quiz mới cần.
@@ -19,10 +19,12 @@ export type ExamQuestion = {
   options: Record<string, string>;
   answer: string;
   explanation: string | null;
+  source?: { title: string; questionPage: number; answerPage: number };
 };
 
 export type ExamBank = {
-  source: { title: string; section: string; note: string };
+  schemaVersion?: number;
+  source: { title: string; section: string; note: string; qualityPolicy?: string };
   questions: ExamQuestion[];
 };
 
@@ -32,8 +34,25 @@ export async function loadExamBank(): Promise<ExamBank> {
   if (cache) return cache;
   const res = await fetch("/kb/anatomy-mcq.json");
   if (!res.ok) throw new Error(`exam bank ${res.status}`);
-  cache = (await res.json()) as ExamBank;
+  const candidate = (await res.json()) as ExamBank;
+  assertExamBank(candidate);
+  cache = candidate;
   return cache;
+}
+
+function assertExamBank(bank: ExamBank): asserts bank is ExamBank {
+  if (!bank?.source?.title || !Array.isArray(bank.questions) || bank.questions.length === 0) {
+    throw new Error("Ngân hàng đề không đúng định dạng hoặc đang rỗng");
+  }
+  const ids = new Set<string>();
+  for (const question of bank.questions) {
+    const letters = Object.keys(question.options ?? {}).sort().join("");
+    if (!question.id || ids.has(question.id)) throw new Error(`ID câu hỏi bị thiếu hoặc trùng: ${question.id}`);
+    if (!question.stem.trim() || !question.explanation?.trim()) throw new Error(`Câu ${question.id} thiếu nội dung hoặc lời giải`);
+    if (letters !== "ABCDE") throw new Error(`Câu ${question.id} phải có đúng năm phương án A–E`);
+    if (!(question.answer in question.options)) throw new Error(`Câu ${question.id} có khóa đáp án không hợp lệ`);
+    ids.add(question.id);
+  }
 }
 
 /** Danh sách vùng cơ thể có thật trong ngân hàng, kèm số câu — không bịa nút lọc. */
@@ -43,6 +62,12 @@ export function examRegions(bank: ExamBank): { key: string; count: number }[] {
   return [...m.entries()]
     .map(([key, count]) => ({ key, count }))
     .sort((a, b) => b.count - a.count);
+}
+
+export function examQuestionCount(bank: ExamBank, region = "all"): number {
+  return region === "all"
+    ? bank.questions.length
+    : bank.questions.filter((question) => question.region === region).length;
 }
 
 function shuffle<T>(a: T[], rand: () => number): T[] {
