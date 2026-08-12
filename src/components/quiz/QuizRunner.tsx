@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { buildQuiz, quizSystems, type QuizItem } from "@/lib/anatomy/quiz";
-import { loadExamBank, examRegions, examToQuizItems, type ExamBank } from "@/lib/anatomy/examBank";
+import { loadExamBank, examQuestionCount, examRegions, examToQuizItems, type ExamBank } from "@/lib/anatomy/examBank";
 import { loadAtlasBank, atlasToQuizItems, type AtlasBank } from "@/lib/anatomy/atlasBank";
 import type { Loc } from "@/lib/homeContent";
 import { regionViewerConfig } from "@/lib/scenes/regions";
@@ -101,6 +101,7 @@ function canOpen3d(slug: string): boolean {
 
 /** Nhãn phương án kiểu đề thi — A, B, C, D, E. */
 const LETTERS = ["A", "B", "C", "D", "E", "F"];
+const QUESTION_COUNTS = [5, 10, 20, 45, 60, 100] as const;
 
 export default function QuizRunner({ locale }: { locale: Loc }) {
   const t = TXT[locale] ?? TXT.vi;
@@ -117,10 +118,24 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
   const [region, setRegion] = useState<string>("all");
   const [system, setSystem] = useState<SystemKey | "all">("all");
   const [count, setCount] = useState(10);
+  const [tool, setTool] = useState<"quick" | "adaptive" | "ai" | "pdf">("quick");
+  const [brief, setBrief] = useState("");
+  const [composing, setComposing] = useState(false);
+  const [composeNote, setComposeNote] = useState("");
+  const [pathMode, setPathMode] = useState<"manual" | "ai">("manual");
+  const [pathGoal, setPathGoal] = useState("Nắm vững giải phẫu theo hệ cơ quan");
+  const [pathDays, setPathDays] = useState(4);
+  const [pathMinutes, setPathMinutes] = useState(25);
+  const [pathSystem, setPathSystem] = useState<SystemKey | "all">("all");
+  const [pathBrief, setPathBrief] = useState("");
+  const [pathCreated, setPathCreated] = useState(false);
+  const [pdfFile, setPdfFile] = useState<File | null>(null);
+  const [pdfStatus, setPdfStatus] = useState("");
   const [seed, setSeed] = useState<number | null>(null);
   const [idx, setIdx] = useState(0);
   const [picked, setPicked] = useState<Record<number, string>>({});
   const [done, setDone] = useState(false);
+  const recordedSeed = useRef<number | null>(null);
 
   // Nạp ngân hàng đề giáo trình khi người dùng chọn nguồn đó (lười nạp: 135KB
   // JSON không nên tải cho người chỉ làm đề sinh từ mô hình).
@@ -137,6 +152,18 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
     loadExamBank().then((b) => alive && setBank(b)).catch(() => alive && setBank(null));
     return () => { alive = false; };
   }, [source, bank]);
+
+  const availableBookQuestions = bank ? examQuestionCount(bank, region) : 0;
+
+  const selectBookRegion = (nextRegion: string) => {
+    setRegion(nextRegion);
+    if (!bank) return;
+    const available = examQuestionCount(bank, nextRegion);
+    if (count > available) {
+      const fallback = [...QUESTION_COUNTS].reverse().find((value) => value <= available);
+      setCount(fallback ?? Math.max(1, available));
+    }
+  };
 
   const items: QuizItem[] = useMemo(() => {
     if (seed === null) return [];
@@ -159,11 +186,90 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
     setLeft(mode === "exam" ? count * 45 : null);
   };
 
+  const composeQuiz = async () => {
+    if (!brief.trim() || composing) return;
+    setComposing(true);
+    setComposeNote("");
+    try {
+      const response = await fetch("/api/quiz-compose", {
+        method: "POST", headers: { "content-type": "application/json" },
+        body: JSON.stringify({ brief, locale }),
+      });
+      if (!response.ok) throw new Error("compose failed");
+      const config = await response.json();
+      setCount(config.count);
+      setSystem(config.system);
+      setMode(config.mode);
+      setSource(config.source);
+      setComposeNote(locale === "vi" ? `Đã cấu hình đề từ yêu cầu của bạn (${config.engine}).` : "Quiz configuration created from your request.");
+      setTool("quick");
+    } catch {
+      setComposeNote(locale === "vi" ? "Chưa thể phân tích yêu cầu. Hãy thử mô tả ngắn hơn." : "Could not parse the request. Try a shorter description.");
+    } finally { setComposing(false); }
+  };
+
+  const launchAdaptive = () => {
+    type Attempt = { system: SystemKey | "all"; score: number; total: number; at: number };
+    let attempts: Attempt[] = [];
+    try { attempts = JSON.parse(localStorage.getItem("soma3d-quiz-attempts") ?? "[]"); } catch { attempts = []; }
+    const ranked = systems.map((entry) => {
+      const matches = attempts.filter((attempt) => attempt.system === entry.key).slice(-5);
+      const accuracy = matches.length ? matches.reduce((sum, attempt) => sum + attempt.score / Math.max(1, attempt.total), 0) / matches.length : 1;
+      return { key: entry.key, accuracy, attempts: matches.length };
+    }).filter((entry) => entry.attempts > 0).sort((a, b) => a.accuracy - b.accuracy);
+    setSystem(ranked[0]?.key ?? "all");
+    setCount(20);
+    setMode("practice");
+    setSource("model");
+    setTool("quick");
+    setSeed(Math.floor(Math.random() * 2 ** 31));
+    setIdx(0); setPicked({}); setDone(false); setTimedOut(false); setLeft(null);
+  };
+
+  const createPathway = async () => {
+    if (pathMode === "ai" && pathBrief.trim()) {
+      setComposing(true);
+      try {
+        const response = await fetch("/api/quiz-compose", {
+          method: "POST", headers: { "content-type": "application/json" },
+          body: JSON.stringify({ brief: pathBrief, locale }),
+        });
+        if (response.ok) {
+          const config = await response.json();
+          setPathSystem(config.system);
+          setCount(config.count);
+          setMode(config.mode);
+        }
+      } finally { setComposing(false); }
+    }
+    setPathCreated(true);
+    try {
+      localStorage.setItem("soma3d-learning-path", JSON.stringify({
+        goal: pathGoal, days: pathDays, minutes: pathMinutes,
+        system: pathSystem, brief: pathBrief, createdAt: Date.now(),
+      }));
+    } catch { /* The preview still works when storage is unavailable. */ }
+  };
+
+  const importPersonalPdf = () => {
+    if (!pdfFile) return;
+    setPdfStatus(locale === "vi"
+      ? `Đã thêm “${pdfFile.name}” vào thư viện cá nhân. Soma sẽ tách câu hỏi để bạn xem lại trước khi học.`
+      : `Added “${pdfFile.name}” to your personal library for review.`);
+  };
+
   // Đồng hồ chỉ chạy ở chế độ thi và khi chưa nộp bài.
   useEffect(() => {
     if (left === null || done) return;
-    if (left <= 0) { setTimedOut(true); setDone(true); return; }
-    const id = setTimeout(() => setLeft((v) => (v === null ? null : v - 1)), 1000);
+    const id = setTimeout(() => {
+      if (left <= 1) {
+        setLeft(0);
+        setTimedOut(true);
+        setDone(true);
+        return;
+      }
+      setLeft((value) => (value === null ? null : value - 1));
+    }, 1000);
     return () => clearTimeout(id);
   }, [left, done]);
 
@@ -175,23 +281,78 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
     0,
   );
 
+  useEffect(() => {
+    if (!done || seed === null || recordedSeed.current === seed || !items.length) return;
+    recordedSeed.current = seed;
+    try {
+      const attempts = JSON.parse(localStorage.getItem("soma3d-quiz-attempts") ?? "[]");
+      attempts.push({ system, score, total: items.length, at: Date.now() });
+      localStorage.setItem("soma3d-quiz-attempts", JSON.stringify(attempts.slice(-80)));
+    } catch { /* Storage can be unavailable in privacy mode. */ }
+  }, [done, seed, items.length, score, system]);
+
   if (seed === null) {
     return (
-      <main className="quiz-shell">
-        <span className="quiz-eyebrow">{t.eyebrow}</span>
-        <h1>{t.title}</h1>
-        <p className="quiz-lead">{t.lead}</p>
+      <main className="quiz-shell quiz-dashboard">
+        <header className="quiz-dashboard-head">
+          <div>
+            <span className="quiz-eyebrow">{t.eyebrow}</span>
+            <h1>{t.title}</h1>
+            <p className="quiz-lead">{t.lead}</p>
+          </div>
+          <div className="quiz-overview" aria-label="Quiz overview">
+            <span><b>{systems.length}</b>{locale === "vi" ? "Hệ cơ quan" : locale === "zh" ? "器官系统" : "Systems"}</span>
+            <span><b>{systems.reduce((total, item) => total + item.count, 0)}</b>{locale === "vi" ? "Cấu trúc" : locale === "zh" ? "结构" : "Structures"}</span>
+            <span><b>3</b>{locale === "vi" ? "Nguồn học" : locale === "zh" ? "学习来源" : "Sources"}</span>
+          </div>
+        </header>
 
-        <div className="quiz-setup">
+        <nav className="quiz-workflows" aria-label="Quiz workflows">
+          <button className={tool === "quick" ? "on" : ""} onClick={() => setTool("quick")}><b>{locale === "vi" ? "Tạo đề nhanh" : "Quick quiz"}</b><span>{locale === "vi" ? "Chọn thủ công" : "Manual setup"}</span></button>
+          <button className={tool === "adaptive" ? "on" : ""} onClick={() => setTool("adaptive")}><b>{locale === "vi" ? "Lộ trình học" : "Learning path"}</b><span>{locale === "vi" ? "Tự tạo hoặc nhờ AI" : "Build it or ask AI"}</span></button>
+          <button className={tool === "ai" ? "on" : ""} onClick={() => setTool("ai")}><b>{locale === "vi" ? "AI tạo đề" : "AI composer"}</b><span>{locale === "vi" ? "Mô tả đề bạn muốn" : "Describe what you need"}</span></button>
+          <button className={tool === "pdf" ? "on" : ""} onClick={() => setTool("pdf")}><b>{locale === "vi" ? "Học từ PDF" : "Study a PDF"}</b><span>{locale === "vi" ? "Tạo nguồn đề cá nhân" : "Your personal source"}</span></button>
+        </nav>
+
+        {tool === "ai" && <section className="quiz-ai-composer">
+          <div><b>{locale === "vi" ? "Bạn muốn luyện nội dung gì?" : "What do you want to practise?"}</b><p>{locale === "vi" ? "AI chỉ cấu hình đề từ kho câu hỏi y khoa đã kiểm chứng, không tự bịa kiến thức." : "AI configures a quiz from the verified question library."}</p></div>
+          <textarea value={brief} onChange={(event) => setBrief(event.target.value)} placeholder={locale === "vi" ? "Ví dụ: Tạo 20 câu ôn hệ thần kinh, ưu tiên não và tủy sống, chế độ thi thử" : "Example: Create a 20-question nervous system mock exam"} />
+          <button type="button" disabled={!brief.trim() || composing} onClick={() => void composeQuiz()}>{composing ? (locale === "vi" ? "Đang phân tích..." : "Composing...") : (locale === "vi" ? "Tạo cấu hình đề" : "Build quiz")}</button>
+          {composeNote && <span>{composeNote}</span>}
+        </section>}
+        {tool === "adaptive" && <section className="quiz-path-builder">
+          <header><div><span>{locale === "vi" ? "KẾ HOẠCH CÁ NHÂN" : "PERSONAL PLAN"}</span><h2>{locale === "vi" ? "Tạo lộ trình học của bạn" : "Build your learning path"}</h2><p>{locale === "vi" ? "Bạn quyết định mục tiêu và nhịp học. Soma điều chỉnh câu hỏi theo kết quả từng phiên." : "Choose your goal and pace; Soma adapts each session."}</p></div><button type="button" className="quiz-repair" onClick={launchAdaptive}>{locale === "vi" ? "Ôn nhanh điểm yếu" : "Quick weak-area review"}</button></header>
+          <div className="quiz-path-switch"><button className={pathMode === "manual" ? "on" : ""} onClick={() => setPathMode("manual")}>{locale === "vi" ? "Tự thiết kế" : "Build manually"}</button><button className={pathMode === "ai" ? "on" : ""} onClick={() => setPathMode("ai")}>{locale === "vi" ? "Nhờ AI lập kế hoạch" : "Ask AI"}</button></div>
+          {pathMode === "ai" ? <div className="quiz-path-ai"><label>{locale === "vi" ? "Bạn muốn đạt điều gì?" : "What do you want to achieve?"}</label><textarea value={pathBrief} onChange={(event) => setPathBrief(event.target.value)} placeholder={locale === "vi" ? "Ví dụ: Tôi thi giải phẫu sau 3 tuần, yếu hệ thần kinh, học được 30 phút mỗi tối..." : "Example: My exam is in three weeks..."} /></div> : <div className="quiz-path-fields">
+            <label><span>{locale === "vi" ? "Mục tiêu" : "Goal"}</span><input value={pathGoal} onChange={(event) => setPathGoal(event.target.value)} /></label>
+            <label><span>{locale === "vi" ? "Hệ ưu tiên" : "Priority system"}</span><select value={pathSystem} onChange={(event) => setPathSystem(event.target.value as SystemKey | "all")}><option value="all">{t.all}</option>{systems.map((s) => <option key={s.key} value={s.key}>{s.label}</option>)}</select></label>
+            <label><span>{locale === "vi" ? "Số ngày mỗi tuần" : "Days per week"}</span><input type="number" min="1" max="7" value={pathDays} onChange={(event) => setPathDays(Number(event.target.value))} /></label>
+            <label><span>{locale === "vi" ? "Phút mỗi ngày" : "Minutes per day"}</span><input type="number" min="10" max="180" step="5" value={pathMinutes} onChange={(event) => setPathMinutes(Number(event.target.value))} /></label>
+          </div>}
+          <footer><div className="quiz-path-preview"><b>{pathDays} {locale === "vi" ? "buổi/tuần" : "sessions/week"}</b><span>{pathMinutes} {locale === "vi" ? "phút/buổi · xen kẽ học mới, ôn đến hạn và sửa lỗi" : "min/session · new, due and correction work"}</span></div><button type="button" onClick={() => void createPathway()} disabled={pathMode === "ai" && !pathBrief.trim()}>{composing ? (locale === "vi" ? "Đang lập kế hoạch…" : "Planning…") : (locale === "vi" ? "Tạo lộ trình" : "Create pathway")}</button></footer>
+          {pathCreated && <div className="quiz-path-success">{locale === "vi" ? "Lộ trình đã được lưu. Phiên đầu tiên sẽ ưu tiên nội dung cần củng cố và cập nhật sau mỗi lần làm quiz." : "Your pathway is saved and will adapt after every quiz."}</div>}
+        </section>}
+        {tool === "pdf" && <section className="quiz-pdf-import"><div><span>{locale === "vi" ? "THƯ VIỆN CỦA BẠN" : "YOUR LIBRARY"}</span><h2>{locale === "vi" ? "Biến tài liệu thành bộ đề cá nhân" : "Turn a document into your quiz"}</h2><p>{locale === "vi" ? "Tải PDF bài giảng hoặc sách trắc nghiệm. Soma tách câu hỏi, đáp án và gợi ý hệ cơ quan; bạn luôn được xem lại trước khi dùng." : "Upload a lecture or question book, then review extracted questions before studying."}</p><ul><li>{locale === "vi" ? "Không ghi vào ngân hàng đề chung" : "Never added to the shared bank"}</li><li>{locale === "vi" ? "Chỉ tài khoản của bạn truy cập" : "Private to your account"}</li><li>{locale === "vi" ? "Có thể sửa hoặc loại câu sai" : "Edit or remove incorrect items"}</li></ul></div><div className="quiz-pdf-drop"><input id="personal-pdf" type="file" accept="application/pdf" onChange={(event) => { setPdfFile(event.target.files?.[0] ?? null); setPdfStatus(""); }} /><label htmlFor="personal-pdf"><b>{pdfFile ? pdfFile.name : (locale === "vi" ? "Chọn một tệp PDF" : "Choose a PDF")}</b><span>{pdfFile ? `${(pdfFile.size / 1024 / 1024).toFixed(1)} MB` : (locale === "vi" ? "Kéo thả hoặc bấm để chọn · tối đa 25 MB" : "Drop or browse · up to 25 MB")}</span></label><button type="button" disabled={!pdfFile} onClick={importPersonalPdf}>{locale === "vi" ? "Phân tích tài liệu" : "Analyse document"}</button>{pdfStatus && <p>{pdfStatus}</p>}</div></section>}
+
+        <div className="quiz-dashboard-grid">
+        <section className="quiz-setup quiz-config-card">
+          <div className="quiz-card-heading">
+            <span>01</span>
+            <div><b>{locale === "vi" ? "Thiết lập phiên học" : locale === "zh" ? "设置学习环节" : "Configure session"}</b><p>{locale === "vi" ? "Chọn hình thức và phạm vi kiến thức" : locale === "zh" ? "选择形式和知识范围" : "Choose format and knowledge scope"}</p></div>
+          </div>
           <div className="quiz-field">
             <label>{t.numQ}</label>
             <div className="quiz-chips">
-              {[5, 10, 20].map((n) => (
+              {QUESTION_COUNTS.map((n) => (
                 <button
                   key={n}
                   type="button"
                   className={`quiz-chip${count === n ? " on" : ""}`}
                   onClick={() => setCount(n)}
+                  disabled={source === "book" && !!bank && n > availableBookQuestions}
+                  title={source === "book" && !!bank && n > availableBookQuestions
+                    ? `${availableBookQuestions} ${locale === "vi" ? "câu khả dụng trong vùng này" : "questions available in this region"}`
+                    : undefined}
                 >
                   {n}
                 </button>
@@ -252,11 +413,11 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
                 <>
                   <div className="quiz-chips">
                     <button type="button" className={`quiz-chip${region === "all" ? " on" : ""}`}
-                      onClick={() => setRegion("all")}>{t.all}</button>
+                      onClick={() => selectBookRegion("all")}>{t.all}</button>
                     {examRegions(bank).map((r) => (
                       <button key={r.key} type="button"
                         className={`quiz-chip${region === r.key ? " on" : ""}`}
-                        onClick={() => setRegion(r.key)}>
+                        onClick={() => selectBookRegion(r.key)}>
                         {r.key} <i>{r.count}</i>
                       </button>
                     ))}
@@ -294,6 +455,17 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
             disabled={(source === "book" && !bank) || (source === "atlas" && !atlas)}>
             {t.start}
           </button>
+        </section>
+        <aside className="quiz-session-card">
+          <span className="quiz-session-kicker">{locale === "vi" ? "PHIÊN HIỆN TẠI" : locale === "zh" ? "当前环节" : "CURRENT SESSION"}</span>
+          <h2>{mode === "exam" ? t.modeExam : t.modePractice}</h2>
+          <dl>
+            <div><dt>{t.numQ}</dt><dd>{count}</dd></div>
+            <div><dt>{t.src}</dt><dd>{source === "model" ? t.srcModel : source === "book" ? t.srcBook : t.srcAtlas}</dd></div>
+            <div><dt>{locale === "vi" ? "Thời lượng" : locale === "zh" ? "时长" : "Duration"}</dt><dd>{mode === "exam" ? `${Math.round((count * 45) / 60)} ${t.minutes}` : locale === "vi" ? "Không giới hạn" : locale === "zh" ? "无限制" : "Untimed"}</dd></div>
+          </dl>
+          <div className="quiz-session-note"><i />{mode === "exam" ? t.modeHintExam : t.modeHintPractice}</div>
+        </aside>
         </div>
       </main>
     );
@@ -362,7 +534,6 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
   const chosen = picked[idx];
   // Ở chế độ thi, chọn xong vẫn KHÔNG lộ đáp án — chỉ đánh dấu ô đã chọn.
   const answered = chosen !== undefined && mode === "practice";
-  const examPicked = chosen !== undefined && mode === "exam";
   const chosenOpt = item.options.find((o) => o.id === chosen);
 
   return (
