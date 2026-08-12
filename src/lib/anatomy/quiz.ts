@@ -1,4 +1,5 @@
 import { allFacts, factsBySystem, SYSTEM_LABEL, type AnatomyFact } from "./knowledge";
+import { rng, shuffle } from "./random";
 import { pick, type Loc, type T3 } from "@/lib/homeContent";
 import type { SystemKey } from "@/store/useAnatomyStore";
 
@@ -51,27 +52,6 @@ const PROMPT: Record<QuizKind, T3> = {
   },
 };
 
-/** Bộ sinh số giả ngẫu nhiên CÓ HẠT — cùng hạt cho ra cùng đề, để còn làm lại
- *  đúng đề cũ mà đối chiếu, và để máy chủ/máy khách không lệch nhau. */
-function rng(seed: number) {
-  let s = seed >>> 0 || 1;
-  return () => {
-    s ^= s << 13; s >>>= 0;
-    s ^= s >> 17;
-    s ^= s << 5; s >>>= 0;
-    return s / 4294967296;
-  };
-}
-
-function shuffle<T>(arr: T[], rand: () => number): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(rand() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
-
 /** Cắt ghi chú thành một đoạn mô tả gọn, BỎ tên cấu trúc để khỏi lộ đáp án. */
 function describe(fact: AnatomyFact, locale: Loc): string {
   const note = pick(fact.note, locale);
@@ -114,6 +94,24 @@ function distractors(
   return shuffle([...pool.values()], rand).slice(0, n);
 }
 
+/**
+ * Kho cấu trúc ra được đề cho một hệ: chỉ giữ cấu trúc có ghi chú đủ dài để
+ * viết được câu hỏi nhận dạng tử tế.
+ *
+ * Một nơi duy nhất định nghĩa "ra được đề" — `buildQuiz` sinh đề, `quizSystems`
+ * dựng nút lọc và `quizQuestionCount` báo số câu khả dụng đều hỏi hàm này. Ba
+ * nơi tự lọc riêng thì chỉnh ngưỡng ở một chỗ là hai chỗ kia nói sai số câu.
+ */
+function quizPool(locale: Loc, system: SystemKey | "all"): AnatomyFact[] {
+  const pool = system === "all" ? allFacts() : (factsBySystem().get(system) ?? []);
+  return pool.filter((f) => pick(f.note, locale).length > 60);
+}
+
+/** Số câu nhiều nhất có thể sinh cho một hệ — dùng để chặn chọn quá số câu. */
+export function quizQuestionCount(locale: Loc, system: SystemKey | "all" = "all"): number {
+  return quizPool(locale, system).length;
+}
+
 export function buildQuiz(opts: {
   locale: Loc;
   system?: SystemKey | "all";
@@ -124,10 +122,7 @@ export function buildQuiz(opts: {
   const rand = rng(opts.seed ?? Date.now());
   const bySystem = factsBySystem();
 
-  let pool = allFacts();
-  if (system !== "all") pool = (bySystem.get(system) ?? []).slice();
-  // chỉ giữ cấu trúc có ghi chú đủ dài để ra được câu hỏi nhận dạng tử tế
-  pool = pool.filter((f) => pick(f.note, locale).length > 60);
+  const pool = quizPool(locale, system);
   if (!pool.length) return [];
 
   const chosen = shuffle(pool, rand).slice(0, count);
@@ -199,12 +194,7 @@ export function buildQuiz(opts: {
 
 /** Các hệ thực sự có đủ dữ liệu để ra đề — dùng dựng bộ lọc, không bịa nút. */
 export function quizSystems(locale: Loc): { key: SystemKey; label: string; count: number }[] {
-  const bySystem = factsBySystem();
   return (Object.keys(SYSTEM_LABEL) as SystemKey[])
-    .map((k) => ({
-      key: k,
-      label: pick(SYSTEM_LABEL[k], locale),
-      count: (bySystem.get(k) ?? []).filter((f) => pick(f.note, locale).length > 60).length,
-    }))
+    .map((k) => ({ key: k, label: pick(SYSTEM_LABEL[k], locale), count: quizQuestionCount(locale, k) }))
     .filter((s) => s.count >= 4);
 }

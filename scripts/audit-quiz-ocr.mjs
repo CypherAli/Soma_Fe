@@ -29,7 +29,7 @@ const SYLLABLE = /^(ngh|ng|nh|gh|gi|qu|ch|kh|ph|th|tr|[bcdghklmnprstvx])?[aeiouy
 
 /** Từ mượn/viết tắt có thật trong ngân hàng, không phải rác OCR. */
 const ALLOW = new Set([
-  "tk", "dm", "tm", "l", "s", "c", "t", "d",
+  "tk", "dm", "tm",
   "noradrenaline", "elip", "synap", "delta", "sigma",
   // Tên riêng trong giải phẫu — không phải chữ hỏng.
   "erb", "duchenne", "vater", "scarpa", "mc", "burney", "bell",
