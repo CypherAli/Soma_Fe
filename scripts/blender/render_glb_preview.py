@@ -1,11 +1,15 @@
-import bpy, sys, math
+import bpy, os, sys, math
 from mathutils import Vector
 
 # Render a quick preview of a glb, coloring meshes by the same category rules
 # as the web viewer (skin/muscle/brain/bone). Usage:
 #   blender -b --python render_glb_preview.py -- in.glb out.png [skinalpha]
 args = sys.argv[sys.argv.index('--')+1:]
-GLB, OUT = args[0], args[1]
+# Đổi sang đường dẫn TUYỆT ĐỐI trước khi giao cho Blender: đường dẫn tương đối
+# trong render.filepath được Blender hiểu là tương đối với tệp .blend, mà ở đây
+# ta đã read_factory_settings nên gốc thành ổ đĩa — ảnh ghi lạc vào C:\public\
+# và báo "RENDERED" như thường, không hề có lỗi để mà biết.
+GLB, OUT = os.path.abspath(args[0]), os.path.abspath(args[1])
 SKIN_ALPHA = float(args[2]) if len(args) > 2 else 1.0
 FRAME = args[3] if len(args) > 3 else "head"   # "head" | "eye"
 HIDE = set((args[4].split(",") if len(args) > 4 else []))  # cat ẩn, vd "skin,muscle,bone"
@@ -20,7 +24,12 @@ BONE = ["humerus","radius","ulna","scaphoid","lunate","triquetrum","pisiform","t
         "trapezoid","capitate","hamate","metacarpal","phalanx","clavicle","scapula",
         "frontal","parietal","occipital","temporal bone","sphenoid","ethmoid","nasal","lacrimal",
         "maxilla","zygomatic","palatine","vomer","mandible","hyoid","concha","incus","malleus",
-        "stapes","tooth","incisor","canine","premolar","molar","cartilage","tarsus","bone"]
+        "stapes","tooth","incisor","canine","premolar","molar","cartilage","tarsus","bone",
+        # Giữ đồng bộ với BONE_KEYS của layers.ts: thiếu nhóm này thì preview tô
+        # đốt sống, xương cùng, xương ức và xương đùi thành màu cơ.
+        "vertebra","atlas","axis","sacrum","coccyx","sternum","manubrium","xiphoid",
+        "rib","costal","femur","patella","tibia","fibula","calcaneus","talus",
+        "navicular","cuboid","cuneiform","metatarsal","ilium","ischium","pubis"]
 def cat(n):
     n=n.lower()
     if "skin" in n or "envelope" in n or "fascia" in n or "aponeurosis" in n: return "skin"
@@ -35,6 +44,11 @@ def cat(n):
                         or "palmar arch" in n or "carpal arch" in n or "anastomosis" in n):
         return "artery"
     if is_vein: return "vein"
+    # Giống pickCat: nhận đích danh khoang não TRƯỚC nhánh tim, vì "ventricle"
+    # dùng chung cho buồng tim lẫn não thất.
+    if any(k in n for k in ["lateral ventricle","third ventricle","fourth ventricle",
+                            "choroid plexus","septum pellucidum","aqueduct","falx",
+                            "tentorium","dura","arachnoid","pia mater"]): return "brain"
     if any(k in n for k in ["atrium","ventricle","papillary","leaflet","valve","chordae"]): return "heart"
     if any(k in n for k in ["lung","lobe of","pleura","bronch","trachea"]): return "lung"
     if "liver" in n or "hepat" in n: return "liver"

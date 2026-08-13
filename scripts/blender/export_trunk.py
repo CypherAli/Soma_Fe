@@ -1,5 +1,8 @@
 import bpy, sys, bmesh
 from mathutils import Vector
+import os as _os
+sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
+from clip_box import clip_box as _clip_box, clip_above_z as _clip_above_z, clip_ellipse_z as _clip_ellipse_z  # noqa: E402
 
 # THÂN TRÊN (flagship, ĐẦY ĐỦ CẢ TẠNG) — nhiều lớp bóc tách:
 #   Xương (sườn/ức/cột sống ngực-thắt lưng/đòn) + Cơ (ngực/lưng/bụng/liên sườn/hoành) +
@@ -164,14 +167,8 @@ def clip_sides(o, is_skin):
     ry = 0.150 if is_skin else 0.140
     zhi = 1.450 if is_skin else 1.440   # cắt mẩu cơ cổ thò lên trên vai
     zlo = 0.995 if is_skin else 1.005   # cắt mẩu cơ chậu/đùi thò xuống dưới bụng
-    me = o.data; mw = o.matrix_world
-    bm = bmesh.new(); bm.from_mesh(me); kill = []
-    for f in bm.faces:
-        c = mw @ f.calc_center_median()
-        if ((c.x - cx) / rx) ** 2 + ((c.y - cy) / ry) ** 2 > 1.0 or c.z > zhi or c.z < zlo:
-            kill.append(f)
-    if kill: bmesh.ops.delete(bm, geom=kill, context='FACES')
-    bm.to_mesh(me); bm.free()
+    # Trụ elip + hai mặt phẳng ngang, cắt bisect rồi bịt nắp (clip_box.py).
+    _clip_ellipse_z(o, cx, cy, rx, ry, z_lo=zlo, z_hi=zhi)
 for o in list(kept):
     if o.type == 'MESH':
         try: clip_sides(o, o.name == "Skin envelope")

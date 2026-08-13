@@ -27,6 +27,22 @@ DROP_CURVE_KW = [
     "hepatic", "cystic", "pancreatic", "rectal", "vesical", "prostatic",
 ]
 
+# Mạch/ống của LỒNG NGỰC và CHẬU HÔNG hay lọt vào hộp của các scene tạng bụng:
+# mạch phổi, phế quản phân thuỳ, mạch vành, mạch mông và mạch sinh dục ngoài đều
+# là đường cong DÀI, tâm bbox của chúng rơi vào ổ bụng dù bản thân mạch nằm hẳn
+# ở ngực hoặc đáy chậu. Đã đo trên file cũ: peritoneum_full.glb có 25 mạch phổi,
+# 22 mạch chậu–sinh dục và 7 mạch vành trên tổng 115 mesh.
+THORAX_PELVIS_DROP_KW = [
+    "pulmonary", "lobar", "lingular", "segmental", "basal", "bronch",
+    # Z-Anatomy đặt tên vài tĩnh mạch phổi KHÔNG có chữ "pulmonary"
+    # ("Medial vein of right lung") nên phải chặn thêm theo cụm này.
+    "of right lung", "of left lung",
+    "coronary artery", "coronary sinus", "cardiac vein", "interventricular",
+    "circumflex artery of heart",
+    "ventricle", "atrial", "penis", "penile", "gluteal", "iliolumbar",
+    "intercostal", "azygos", "phrenic", "subcostal", "thoracic",
+]
+
 # Hộp trùm cả người, dùng cho 7 hệ toàn thân ở cuối file (không cắt gì).
 FULLBODY_BOX = (-0.45, 0.45, -0.35, 0.35, -0.05, 1.80)
 
@@ -50,7 +66,193 @@ REGIONS = {
         vessels=False, nerves=False, skin=False,
     ),
 
+    # ---------- Nhóm B2: chi dưới ----------
+    # Toạ độ đo bằng query_bbox.py (bên PHẢI cơ thể là X ÂM):
+    #   xương đùi z 0.430–0.884 · dây chằng chéo z 0.414–0.457 · bánh chè z 0.347–0.564
+    #   · khớp háng z 0.804–0.889 · cơ mông z 0.709–0.997 · cơ dép z 0.134–0.410
+    #   · gân gót z 0.025–0.245 · xương gót z 0.011–0.063 · xương bàn chân z 0.006–0.072.
+    "knee": dict(
+        out="knee_joint.glb", side="r", min_verts=4,
+        box=(-0.150, -0.005, -0.075, 0.105, 0.330, 0.580),
+        bone_kw=True, joint_kw=True,
+        muscle_kw=["quadriceps", "vastus", "rectus femoris", "biceps femoris",
+                   "semitendinosus", "semimembranosus", "gastrocnemius", "popliteus",
+                   "sartorius", "gracilis", "plantaris", "retinaculum"],
+        vessels=True, nerves=True, skin=False,
+        curve_keep_names=["popliteal", "genicular", "sural", "saphenous", "tibial nerve",
+                          "fibular nerve", "peroneal nerve"],
+    ),
+    "hip_thigh": dict(
+        out="hip_thigh.glb", side="r", min_verts=4,
+        box=(-0.160, -0.005, -0.085, 0.125, 0.560, 1.000),
+        bone_kw=["femur", "hip bone", "ilium", "ischium", "pubis", "sacrum", "patella"],
+        joint_kw=True,
+        joint_drop=["shoulder", "elbow", "wrist", "carpal", "sterno", "acromio", "costo",
+                    "intervertebral", "ankle", "tarsal", "longitudinal ligament",
+                    "intercornual", "ligamenta flava", "nucleus pulposus"],
+        muscle_kw=True,
+        # Mép trên hộp chạm thành bụng và sàn chậu: cơ chéo bụng, cơ dựng sống,
+        # cơ nâng hậu môn không thuộc bài "khớp háng – đùi" mà lại che kín khối
+        # mông khi xem từ sau.
+        muscle_drop=["abdominal oblique", "transversus abdominis", "rectus abdominis",
+                     "thoracolumbar", "iliocostalis", "longissimus", "multifidus",
+                     "intertransversarii", "interspinales", "anal sphincter", "coccygeus",
+                     "levator ani", "iliococcygeus", "pubococcygeus", "puborectalis",
+                     "bulbospongiosus", "ischiocavernosus", "urethral sphincter",
+                     "cremaster", "dartos", "latissimus", "quadratus lumborum",
+                     "rotatores", "pyramidalis", "pubo-analis", "linea alba",
+                     "transversalis", "investing abdominal"],
+        vessels=True, nerves=True, skin=False,
+        curve_keep_names=["femoral", "profunda femoris", "obturator", "gluteal", "sciatic",
+                          "saphenous", "circumflex femoral", "perforating"],
+        curve_drop=["appendicular", "ileocolic", "colic", "mesenteric", "penis", "penile",
+                    "cauda equina", "rectal", "vesical", "prostatic", "uterine"],
+    ),
+    "leg_foot": dict(
+        out="leg_foot.glb", side="r", min_verts=4,
+        # z1 dừng ở 0.410 (dưới khe khớp gối) để không lặp lại chính khớp gối —
+        # dây chằng chéo, sụn chêm đã là nội dung của scene "khop-goi".
+        box=(-0.150, -0.005, -0.100, 0.110, 0.000, 0.410),
+        bone_kw=True, joint_kw=True, muscle_kw=True,
+        vessels=True, nerves=True, skin=False,
+        curve_keep_names=["tibial", "fibular", "peroneal", "dorsalis pedis", "plantar",
+                          "saphenous", "sural", "arcuate artery"],
+    ),
+
+    # ---------- Nhóm B3: chậu hông, lưng, thành ngực ----------
+    # Đo bằng query_bbox.py: cơ nâng hậu môn z 0.819–0.868 · bàng quang z 0.829–0.882
+    # · cơ thang z 1.120–1.575 · cơ lưng rộng z 0.932–1.342 · cơ gian sườn z 0.982–1.442
+    # · xương ức z 1.240–1.404 · đám rối cánh tay z 1.378–1.505 · cơ delta z 1.251–1.436.
+    "pelvis_perineum": dict(
+        out="pelvis_perineum.glb", side=None, min_verts=4,
+        box=(-0.140, 0.140, -0.095, 0.105, 0.755, 0.960),
+        bone_kw=["hip bone", "sacrum", "coccyx", "ilium", "ischium", "pubis", "femur"],
+        joint_kw=True,
+        muscle_kw=["levator ani", "coccygeus", "iliococcygeus", "pubococcygeus",
+                   "puborectalis", "pubo-analis", "sphincter", "bulbospongiosus",
+                   "ischiocavernosus", "transverse perineal", "obturator internus",
+                   "piriformis"],
+        organ_kw=["bladder", "urethra", "rectum", "anal", "prostate", "seminal",
+                  "ductus deferens", "ejaculatory"],
+        vessels=True, nerves=True, skin=False,
+        curve_keep_names=["pudendal", "internal iliac", "vesical", "rectal", "prostatic",
+                          "obturator", "gluteal", "sacral"],
+        curve_drop=["appendicular", "ileocolic", "mesenteric", "colic", "femoral artery",
+                    "profunda"],
+    ),
+    "back_muscles": dict(
+        out="back_muscles.glb", side=None, min_verts=4,
+        # y0=0.005 giữ lại đúng nửa SAU thân mình — vùng lưng theo nghĩa lâm sàng.
+        box=(-0.200, 0.200, 0.005, 0.145, 0.900, 1.580),
+        bone_kw=["vertebra", "rib", "scapula", "sacrum", "ilium", "hip bone", "occipital"],
+        muscle_kw=True,
+        # Hộp trải từ mông tới gáy nên chạm cả khối mông và gốc chi trên: không
+        # loại thì scene "cơ lưng" có nguyên cơ mông lớn và cơ nhị đầu cánh tay.
+        muscle_drop=["pectoralis", "sternocleidomastoid", "abdominis", "external abdominal",
+                     "internal abdominal", "transversus abdominis", "scalene", "platysma",
+                     "gluteus", "iliacus", "psoas", "piriformis", "gemellus", "obturator",
+                     "quadratus femoris", "deltoid", "brachii", "brachialis",
+                     "coracobrachialis", "supinator", "pronator", "anconeus"],
+        vessels=True, nerves=True, skin=False,
+        curve_keep_names=["dorsal", "posterior intercostal", "lumbar", "transverse cervical",
+                          "dorsal scapular", "thoracodorsal", "suprascapular"],
+    ),
+    "thoracic_wall": dict(
+        out="thoracic_wall.glb", side=None, min_verts=4,
+        box=(-0.170, 0.170, -0.145, 0.170, 0.980, 1.450),
+        bone_kw=["rib", "sternum", "costal", "xiphoid", "vertebra t", "clavicle"],
+        joint_kw=True, joint_drop=["shoulder", "elbow", "hip", "knee", "sacro"],
+        muscle_kw=["intercostal", "transversus thoracis", "subcostal", "serratus posterior",
+                   "levatores costarum", "diaphragm"],
+        vessels=True, nerves=True, skin=False,
+        curve_keep_names=["intercostal", "internal thoracic", "musculophrenic",
+                          "superior epigastric", "thoracic"],
+        curve_drop=["pulmonary", "lobar", "bronch", "coronary artery", "cardiac vein"],
+    ),
+    "shoulder_axilla": dict(
+        out="shoulder_axilla.glb", side="r", min_verts=4,
+        box=(-0.250, -0.015, -0.095, 0.135, 1.190, 1.530),
+        bone_kw=["scapula", "clavicle", "humerus", "rib", "sternum"],
+        joint_kw=True, joint_drop=["hip", "knee", "ankle", "wrist", "carpal", "vertebra"],
+        muscle_kw=["deltoid", "pectoralis", "serratus anterior", "subscapularis",
+                   "supraspinatus", "infraspinatus", "teres", "coracobrachialis",
+                   "biceps brachii", "triceps brachii", "latissimus dorsi", "subclavius",
+                   "trapezius", "rhomboid", "levator scapulae", "omohyoid"],
+        vessels=True, nerves=True, skin=False,
+        curve_keep_names=["axillary", "brachial", "subclavian", "thoraco-acromial",
+                          "circumflex humeral", "subscapular", "suprascapular", "cephalic",
+                          "median nerve", "ulnar nerve", "radial nerve", "musculocutaneous",
+                          "plexus", "trunk of brachial", "cord", "lateral thoracic",
+                          "thoracodorsal", "long thoracic"],
+        curve_drop=["pulmonary", "lobar", "lingular", "of right lung", "of left lung",
+                    "bronch", "coronary", "cardiac vein", "mesenteric", "colic"],
+    ),
+    "inguinal_region": dict(
+        out="inguinal_region.glb", side="r", min_verts=4,
+        box=(-0.135, -0.005, -0.115, 0.025, 0.850, 1.070),
+        bone_kw=["hip bone", "pubis", "ilium", "femur"],
+        joint_kw=True,
+        muscle_kw=["abdominal oblique", "transversus abdominis", "rectus abdominis",
+                   "cremaster", "pyramidalis", "iliacus", "psoas", "pectineus", "sartorius",
+                   "inguinal ligament", "lacunar", "pectineal ligament", "conjoint"],
+        organ_kw=["spermatic", "ductus deferens", "testis", "epididymis"],
+        vessels=True, nerves=True, skin=False,
+        curve_keep_names=["epigastric", "femoral", "circumflex iliac", "external iliac",
+                          "ilio-inguinal", "iliohypogastric", "genitofemoral", "cremasteric",
+                          "testicular"],
+        curve_drop=["mesenteric", "colic", "appendicular", "marginal artery", "ileal",
+                    "pulmonary", "bronch"],
+    ),
+
     # ---------- Nhóm C: đầu – mặt – cổ ----------
+    "face_muscles": dict(
+        out="face_muscles.glb", side=None, min_verts=4,
+        box=(-0.090, 0.090, -0.115, 0.025, 1.460, 1.665),
+        bone_kw=["maxilla", "mandible", "zygomatic", "nasal", "frontal bone"],
+        muscle_kw=["orbicularis", "zygomaticus", "levator labii", "levator anguli",
+                   "depressor", "risorius", "buccinator", "mentalis", "nasalis",
+                   "procerus", "corrugator", "platysma", "occipitofrontalis", "frontalis",
+                   "auricular"],
+        vessels=True, nerves=True, skin=False,
+        curve_keep_names=["facial", "labial", "angular", "infra-orbital", "mental",
+                          "buccal", "zygomatic", "temporal branch", "marginal mandibular",
+                          "cervical branch"],
+    ),
+    "tmj_mastication": dict(
+        out="tmj_mastication.glb", side=None, min_verts=4,
+        box=(-0.095, 0.095, -0.085, 0.045, 1.470, 1.610),
+        bone_kw=["mandible", "temporal bone", "zygomatic", "sphenoid", "maxilla", "hyoid"],
+        joint_kw=True,
+        muscle_kw=["masseter", "temporalis", "pterygoid", "mylohyoid", "digastric",
+                   "geniohyoid", "stylohyoid"],
+        vessels=True, nerves=True, skin=False,
+        curve_keep_names=["maxillary", "masseteric", "deep temporal", "mandibular nerve",
+                          "inferior alveolar", "lingual nerve", "buccal", "auriculotemporal",
+                          "trigeminal", "facial"],
+    ),
+    "cervical_spine": dict(
+        out="cervical_spine.glb", side=None, min_verts=4,
+        box=(-0.070, 0.070, -0.030, 0.095, 1.410, 1.580),
+        bone_kw=["vertebra c", "atlas", "axis", "occipital"],
+        joint_kw=True,
+        muscle_kw=["longus colli", "longus capitis", "rectus capitis", "obliquus capitis",
+                   "scalene", "splenius", "semispinalis", "multifidus", "intertransversarii"],
+        vessels=True, nerves=True, skin=False,
+        curve_keep_names=["vertebral", "spinal", "cervical", "occipital"],
+    ),
+    "lumbar_spine": dict(
+        out="lumbar_spine.glb", side=None, min_verts=4,
+        box=(-0.090, 0.090, -0.035, 0.095, 0.930, 1.160),
+        bone_kw=["vertebra l", "sacrum", "coccyx", "ilium", "hip bone", "rib"],
+        joint_kw=True,
+        muscle_kw=["psoas", "quadratus lumborum", "multifidus", "erector spinae",
+                   "iliocostalis", "longissimus", "spinalis", "intertransversarii",
+                   "interspinales", "rotatores"],
+        vessels=True, nerves=True, skin=False,
+        curve_keep_names=["lumbar", "spinal", "cauda equina", "iliolumbar", "sacral"],
+        curve_drop=["mesenteric", "colic", "appendicular", "renal", "gonadal"],
+    ),
+
     "skull_base": dict(
         out="skull_base.glb", side=None,
         box=(-0.105, 0.105, -0.135, 0.125, 1.480, 1.735),
@@ -172,6 +374,10 @@ REGIONS = {
         organ_tubes=True,
         vessels=True, nerves=False, skin=False,
         curve_keep_names=["hepatic", "portal", "cystic", "coeliac", "celiac", "gastric"],
+        # organ_tubes kéo theo CURVE của hệ 8, trong đó có phế quản phân thuỳ
+        # (phổi nằm ngay trên gan nên tâm bbox rơi vào hộp) — file cũ có 18 ống
+        # phế quản nằm lửng lơ trên lá gan.
+        curve_drop=THORAX_PELVIS_DROP_KW,
     ),
     "stomach": dict(
         out="stomach_duodenum.glb", side=None,
@@ -181,6 +387,10 @@ REGIONS = {
         vessels=True, nerves=True, skin=False,
         curve_keep_names=["gastric", "gastro", "splenic", "coeliac", "celiac", "hepatic",
                           "pancreaticoduodenal", "vagus"],
+        # Cùng lý do như vùng gan, thêm thần kinh THÀNH BỤNG/THÀNH NGỰC (gian
+        # sườn, chậu–hạ vị) vốn không liên quan dạ dày — thần kinh cần giữ ở đây
+        # là dây X (vagus), đã nằm trong curve_keep_names.
+        curve_drop=THORAX_PELVIS_DROP_KW + ["iliohypogastric", "ilioinguinal", "genitofemoral"],
     ),
     "intestines": dict(
         out="intestines_full.glb", side=None,
@@ -207,19 +417,45 @@ REGIONS = {
         curve_keep_names=["renal", "suprarenal", "ureteric", "gonadal", "testicular", "aorta",
                           "vena cava", "lumbar"],
     ),
+    # Scene này KHÔNG chỉ có mấy tấm mạc: mạc nối lớn rủ từ bờ cong lớn dạ dày,
+    # mạc treo đại tràng ngang căng giữa hai tầng — không có dạ dày, gan, ruột
+    # làm mốc thì các tấm mạc lơ lửng, người học không đọc ra được chúng bám vào
+    # đâu. Vì vậy lấy thêm các tạng lân cận làm KHUNG THAM CHIẾU (người dùng vẫn
+    # tắt được bằng lớp "Nội tạng" trên bảng Lớp giải phẫu).
+    # Hộp: z0 nâng từ 0.790 lên 0.940 (ngang eo chậu) — mức cũ thò xuống tận đáy
+    # chậu nên kéo theo mạch mông và mạch sinh dục ngoài.
     "peritoneum": dict(
         out="peritoneum_full.glb", side=None,
-        box=(-0.155, 0.155, -0.125, 0.105, 0.790, 1.290),
+        box=(-0.155, 0.155, -0.125, 0.105, 0.940, 1.290),
         organ_kw=["omentum", "mesent", "mesocolon", "peritone", "falciform",
-                  "ligament of liver", "coronary ligament", "gastrosplenic", "gastrocolic"],
+                  "ligament of liver", "coronary ligament", "gastrosplenic", "gastrocolic",
+                  "stomach", "duoden", "liver", "hepat", "gallbladder",
+                  "jejun", "ileum", "ileal", "colon", "caecum", "cecum", "taenia",
+                  "appendix"],
+        organ6_kw=["spleen"],
+        # Ruột non trong Z-Anatomy là CURVE (hỗng tràng), chỉ ra mesh khi bật
+        # organ_tubes — mà "ruột treo lơ lửng trên mạc treo" là ý chính của bài.
+        organ_tubes=True,
         vessels=True, nerves=False, skin=False,
-        curve_keep_names=["mesenteric", "gastro", "splenic"],
+        # Mạch đi TRONG mạc treo chính là nội dung bài học ("mạc treo là con
+        # đường của mạch máu"), nên giữ trọn bộ mạch tiêu hoá và bộ ba cửa ở bờ
+        # tự do mạc nối nhỏ; chặn hẳn mạch ngực và chậu.
+        curve_keep_names=["mesenteric", "colic", "ileocolic", "appendicular", "marginal",
+                          "sigmoid", "gastro", "gastric", "splenic", "hepatic", "portal",
+                          "coeliac", "celiac", "cystic", "pancreatic"],
+        curve_drop=THORAX_PELVIS_DROP_KW,
     ),
 
     # ---------- Nhóm F: thần kinh ----------
     "cerebrum": dict(
         out="cerebrum_full.glb", side=None,
-        box=(-0.095, 0.095, -0.095, 0.095, 1.545, 1.760),
+        # z0 hạ từ 1.545 xuống 1.528: vùng dưới đồi nằm vắt qua mức cũ nên bản
+        # cắt cũ chỉ giữ được một mẩu, còn bản cắt mới (bisect đúng mặt phẳng)
+        # cắt sạch làm mất hẳn mesh — nhãn "Vùng dưới đồi" trỏ vào khoảng không.
+        box=(-0.095, 0.095, -0.095, 0.095, 1.528, 1.760),
+        # keep_kw: lấy theo phép GIAO thay vì theo tâm — bbox của Hypothalamus
+        # trong Startup.blend trải từ z 1,148 tới 1,624 m nên tâm rơi tận ngực.
+        keep_kw=["hypothalamus"],
         sense_kw=["cerebr", "gyrus", "lobe", "cortex", "insula", "corpus callosum", "fornix",
                   "hippocamp", "amygdala", "ventricle", "septum pellucidum", "white matter",
                   "caudate", "putamen", "pallidus", "thalam", "claustrum"],
@@ -270,6 +506,145 @@ REGIONS = {
         box=(-0.225, 0.225, -0.155, 0.135, 0.700, 1.640),
         organ_kw=["thymus", "tonsil"], organ6_kw=True,
         vessels=False, nerves=False, lymph=True, skin=False, clip=False,
+    ),
+
+    # ---------- Nhóm H: đợt vùng thứ ba ----------
+    # Bảy vùng dưới đây lấp đúng những chỗ 34 vùng trước bỏ trống: đường về của
+    # máu (mới có cây động mạch), dịch não tuỷ, nội tiết, đám rối chi dưới (mới
+    # có đám rối cánh tay ở shoulder_axilla), cổ tay, vùng mông và sinh dục nam.
+
+    "ventricles_meninges": dict(
+        out="ventricles_meninges.glb", side=None,
+        box=(-0.100, 0.100, -0.105, 0.125, 1.520, 1.730),
+        # Vòm sọ để người xem định vị được não thất nằm sâu tới đâu.
+        bone_kw=["frontal bone", "parietal bone", "occipital bone", "temporal bone",
+                 "sphenoid", "ethmoid"],
+        # Xoang trán/bướm và các nhóm tế bào sàng là hốc chứa KHÍ, không dính
+        # gì tới đường dịch não tuỷ; để lại chỉ làm rối hình vòm sọ.
+        bone_drop=["cells of", "sinus of"],
+        sense_kw=["ventricle", "choroid plexus", "aqueduct", "septum pellucidum",
+                  "corpus callosum", "falx", "tentorium", "dura", "cerebral peduncle"],
+        # Màng cứng tuỷ trải từ z 1,055 tới 1,545 nên TÂM của nó rơi tận ngực và
+        # phép xét tâm loại mất — ép sang phép giao để lấy đúng đoạn trong sọ.
+        keep_kw=["dura"],
+        vessels=False, nerves=False, skin=False,
+    ),
+
+    "venous_portal": dict(
+        out="venous_portal.glb", side=None,
+        box=(-0.170, 0.170, -0.115, 0.115, 0.900, 1.500),
+        vessels=True, nerves=False, skin=False, clip=True,
+        # DROP_CURVE_KW mặc định chặn "renal"/"hepatic"/"mesenteric"/"splenic" —
+        # với vùng khác đó là mạch tạng lọt vào hộp, nhưng ở ĐÂY chúng chính là
+        # nội dung bài học (tĩnh mạch thận, tĩnh mạch gan, hệ cửa). Phải tắt.
+        curve_drop_default=False,
+        curve_keep_names=["vena cava", "portal", "azygos", "vein", "venous"],
+        # Chỉ giữ đường VỀ: động mạch cùng hộp sẽ che kín cây tĩnh mạch, mà cây
+        # động mạch đã có scene riêng (`he-dong-mach-chu`).
+        curve_drop=["artery", "arteries", "arterial", "aorta", "aortic", "trunk",
+                    "nerve", "duct", "lymphatic"],
+    ),
+
+    "endocrine_glands": dict(
+        out="endocrine_glands.glb", side=None, min_verts=4,
+        box=(-0.140, 0.140, -0.115, 0.115, 0.700, 1.700),
+        # Cột sống + xương ức làm mốc: tuyến nội tiết nằm rải khắp người, thả
+        # trôi trong không gian trống thì không định vị được tuyến nào ở đâu.
+        bone_kw=["vertebra", "sternum", "sacrum"],
+        organ_kw=["thyroid gland", "parathyroid", "suprarenal gland", "pineal gland",
+                  "adenohypophysis", "neurohypophysis", "pancreas", "testis",
+                  "islet", "hypophysis"],
+        organ6_kw=["thymus"],
+        vessels=False, nerves=False, skin=False,
+    ),
+
+    "lumbosacral_plexus": dict(
+        out="lumbosacral_plexus.glb", side="r", min_verts=4,
+        box=(-0.165, 0.020, -0.075, 0.125, 0.480, 1.270),
+        bone_kw=["lumbar vertebra", "vertebra l", "sacrum", "coccyx", "hip bone",
+                 "ilium", "ischium", "pubis", "femur"],
+        muscle_kw=["psoas", "iliacus", "quadratus lumborum", "piriformis",
+                   "obturator internus", "gluteus"],
+        # Túi hoạt dịch và mạc cơ bám quanh mấu chuyển lọt vào theo từ khoá cơ
+        # ("Trochanteric bursa of gluteus maximus muscle") — 8 khối tròn nhỏ
+        # che mất đúng chỗ dây toạ chui ra dưới cơ hình lê.
+        muscle_drop=["bursa", "fascia"],
+        vessels=False, nerves=True, skin=False,
+        # Y HỆT lý do ở venous_portal: DROP_CURVE_KW chặn sẵn "sciatic",
+        # "obturator", "pudendal", "sacral" — đúng bốn thứ vùng này cần nhất.
+        curve_drop_default=False,
+        curve_keep_names=["femoral nerve", "obturator nerve", "sciatic", "gluteal nerve",
+                          "pudendal", "genitofemoral", "iliohypogastric", "ilio-inguinal",
+                          "lateral cutaneous nerve of thigh", "posterior cutaneous nerve",
+                          "tibial nerve", "common fibular", "lumbar plexus", "sacral plexus",
+                          "nerve to", "lumbosacral trunk"],
+        curve_drop=["intercostal", "sural"],
+    ),
+
+    "wrist_carpal": dict(
+        out="wrist_carpal.glb", side="r", min_verts=4,
+        box=(-0.325, -0.190, -0.070, 0.020, 0.795, 0.905),
+        bone_kw=["carpal", "scaphoid", "lunate", "triquetrum", "pisiform", "trapezium",
+                 "trapezoid", "capitate", "hamate", "radius", "ulna", "metacarpal"],
+        joint_kw=True,
+        muscle_kw=["retinaculum", "flexor digitorum", "flexor pollicis", "flexor carpi",
+                   "extensor carpi", "extensor digitorum", "palmaris", "abductor pollicis",
+                   "pronator quadratus", "lumbrical", "thenar", "hypothenar"],
+        vessels=True, nerves=True, skin=False,
+        curve_keep_names=["median", "ulnar", "radial", "palmar", "interosseous", "digital"],
+    ),
+
+    "gluteal_region": dict(
+        out="gluteal_region.glb", side="r", min_verts=4,
+        box=(-0.165, 0.005, -0.005, 0.135, 0.690, 1.030),
+        bone_kw=["hip bone", "ilium", "ischium", "pubis", "sacrum", "coccyx", "femur"],
+        joint_kw=True,
+        # Mép trên hộp chạm đoạn thắt lưng cùng nên kéo theo cả đĩa đệm L3–S1,
+        # dây chằng dọc và dây chằng vàng: đó là nội dung của scene cột sống
+        # thắt lưng, không phải vùng mông.
+        joint_drop=["knee", "elbow", "shoulder", "ankle", "wrist", "intervertebral",
+                    "longitudinal ligament", "flava", "interspinous", "intercornual",
+                    "nucleus pulposus", "supraspinous"],
+        muscle_kw=["gluteus", "piriformis", "gemellus", "obturator internus",
+                   "quadratus femoris", "tensor fasciae latae", "sacrotuberous"],
+        muscle_drop=["bursa"],
+        vessels=True, nerves=True, skin=False,
+        curve_drop_default=False,
+        curve_keep_names=["gluteal", "sciatic", "pudendal", "internal iliac",
+                          "posterior cutaneous nerve of thigh", "nerve to", "obturator"],
+        curve_drop=["mesenteric", "colic", "renal", "hepatic", "cerebral", "coronary",
+                    "appendicular", "median sacral", "iliolumbar",
+                    # Mạch tinh hoàn và mạch trực tràng trên chỉ đi NGANG qua hộp
+                    # trên đường xuống chậu; đuôi ngựa thì nằm hẳn trong ống sống.
+                    "testicular", "anorectal", "cauda equina"],
+    ),
+
+    "male_genital": dict(
+        out="male_genital.glb", side=None, min_verts=4,
+        box=(-0.090, 0.090, -0.125, 0.070, 0.690, 0.910),
+        bone_kw=["pubis", "hip bone", "ischium"],
+        # KHÔNG khai muscle_kw: đã tra Startup.blend, Z-Anatomy không có mesh cơ
+        # bìu, cơ hành xốp, cơ ngồi hang hay cơ thắt niệu đạo. Khai từ khoá chết
+        # ở đây chỉ làm người đọc cấu hình tưởng scene có mà thật ra không.
+        organ_kw=["testis", "epididymis", "corpus cavernosum", "corpus spongiosum",
+                  "penis", "glans", "scrotum", "tunica", "seminal", "prostate",
+                  "bulbo-urethral", "urethra", "ductus deferens", "ejaculatory"],
+        # Ống dẫn tinh, niệu đạo và ống phóng tinh là CURVE ở hệ 8 — không bật
+        # organ_tubes thì scene sinh dục mất đúng cái đường dẫn của nó.
+        organ_tubes=True,
+        vessels=True, nerves=True, skin=False,
+        curve_drop_default=False,
+        curve_keep_names=["penis", "penile", "pudendal", "testicular", "scrotal",
+                          "deferential", "perineal", "urethra", "ductus deferens",
+                          "cremasteric", "vesical"],
+        # Hộp nằm ngay dưới chạc đùi nên mạch và thần kinh CHI DƯỚI có tâm rơi
+        # vào đây rất nhiều (30 đường ở bản chạy đầu: mạch đùi, mạch mông, dây
+        # toạ, dây hiển). Chặn dứt khoát, giữ lại đúng nhánh sinh dục.
+        curve_drop=["mesenteric", "colic", "renal artery", "hepatic", "cerebral",
+                    "coronary", "pulmonary", "popliteal", "femoral", "gluteal",
+                    "circumflex", "perforating", "sciatic", "saphenous",
+                    "lateral sacral", "piriformis", "quadratus femoris",
+                    "obturator", "anorectal", "iliac"],
     ),
 
     # ---------- Nhóm Z: 7 hệ TOÀN THÂN cho trang /viewer ----------

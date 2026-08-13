@@ -66,18 +66,50 @@ const BONE_KEYS = ["humerus", "radius", "ulna", "scaphoid", "lunate", "triquetru
   "clavicle", "scapula", "frontal", "parietal", "occipital", "temporal bone", "sphenoid",
   "ethmoid", "nasal", "lacrimal", "maxilla", "zygomatic", "palatine", "vomer", "mandible",
   "hyoid", "concha", "incus", "malleus", "stapes", "tooth", "incisor", "canine", "premolar",
-  "molar", "cartilage", "tarsus", "bone"];
+  "molar", "cartilage", "tarsus", "bone",
+  // Xương THÂN MÌNH và CHI DƯỚI vốn thiếu hẳn: chỉ những xương có sẵn chữ
+  // "bone" trong tên (Hip bone, Hamate bone) mới lọt qua, còn đốt sống, xương
+  // cùng, xương ức, xương sườn và cả xương đùi đều rơi xuống nhánh cuối và bị
+  // tô màu CƠ — sai ở mọi scene cột sống, chậu hông và chi dưới.
+  "vertebra", "atlas", "axis", "sacrum", "coccyx", "sternum", "manubrium", "xiphoid",
+  "rib", "costal", "femur", "patella", "tibia", "fibula", "calcaneus", "talus",
+  "navicular", "cuboid", "cuneiform", "metatarsal", "ilium", "ischium", "pubis"];
+
+// Mô liên kết bám vào xương: có tên xương trong đó nhưng KHÔNG phải xương
+// ("Ligament of head of femur", "Intervertebral disc"). Xét trước danh sách
+// xương để chúng ở lại lớp mô mềm như từ trước tới nay.
+const CONNECTIVE_KEYS = ["ligament", "membrane", "capsule", "labrum", "retinacul",
+  "disc", "meniscus", "bursa", "tendon", "sheath"];
 const NERVE_KEYS = ["nerve", "plexus", "cord", "trunk of brachial", "division of",
   "sympathetic", "roots of brachial"];
 const BRAIN_KEYS = ["brain", "cerebr", "cerebell", "brainstem", "telencephal", "diencephal",
-  "medulla", "midbrain", "pons", "thalam", "ventricle", "callosum", "gyrus", "white matter"];
+  "medulla", "midbrain", "pons", "thalam", "ventricle", "callosum", "gyrus", "white matter",
+  // Khoang dịch não tuỷ và màng não: không có mấy từ này thì đám rối màng mạch,
+  // vách trong suốt và màng cứng rơi xuống nhánh cuối và bị tô thành CƠ.
+  "septum pellucidum", "aqueduct", "falx", "tentorium",
+  "dura", "arachnoid", "pia mater", "subarachnoid"];
+
+// Não thất tim và não thất não TRÙNG TỪ "ventricle". Vì lớp tạng được xét
+// trước lớp não (mạch vành, cơ nhú phải ra tạng chứ không ra não), phải nhận
+// diện đích danh mấy khoang não trước cả hai — nếu không "Lateral ventricle"
+// bị tô màu nội tạng ngay giữa một scene não.
+const BRAIN_CAVITY_NAMES = ["lateral ventricle", "third ventricle", "fourth ventricle",
+  // "plexus" là từ khoá THẦN KINH nên đám rối màng mạch phải nhận đích danh ở
+  // đây, không thì nó bị xếp vào lớp thần kinh giữa một scene não thất.
+  "choroid plexus"];
 const EYE_KEYS = ["sclera", "cornea", "iris", "eyeball", "vitreous", "lens of"];
 const ORGAN_KEYS = ["lung", "lobe of", "pleura", "bronch", "trachea", "liver", "hepat",
   "stomach", "gastric", "colon", "intestine", "duoden", "jejunum", "ileum", "caecum",
   "cecum", "appendix", "rectum", "taenia", "omentum", "mesocolon", "mesentery", "meso-",
   "kidney", "renal pelvis", "ureter", "adrenal", "suprarenal", "pancrea", "spleen",
   "splenic", "gallbladder", "bile", "cystic", "oesophagus", "esophagus", "atrium",
-  "ventricle", "papillary", "leaflet", "valve of", "chordae", "heart"];
+  "ventricle", "papillary", "leaflet", "valve of", "chordae", "heart",
+  // Tuyến nội tiết và cơ quan sinh dục – tiết niệu: trước đây không có từ nào,
+  // nên tuyến giáp, tuyến yên, tinh hoàn, tuyến tiền liệt đều bị tô thành cơ.
+  "thyroid", "parathyroid", "hypophysis", "pituitary", "pineal", "thymus", "islet",
+  "bladder", "urethra", "testis", "epididymis", "prostate", "seminal", "deferens",
+  "ejaculatory", "penis", "penile", "cavernosum", "spongiosum", "glans", "scrotum",
+  "uterus", "ovary", "vagina"];
 
 export function pickCat(name: string): CatKey {
   const n = name.toLowerCase();
@@ -90,15 +122,26 @@ export function pickCat(name: string): CatKey {
   // mạch lớn trước để không nhầm sang tạng.
   // Xét TĨNH MẠCH trước trong cùng một bước vì có tên vừa chứa từ khoá động
   // mạch vừa chứa "venous" ("Deep venous palmar arch" — cung TĨNH mạch).
+  // "Coronary sinus" là tĩnh mạch lớn nhất của tim nhưng trong tên không có chữ
+  // "vein" nào — không kể riêng thì nó rơi xuống nhánh cuối và bị tô thành cơ.
   const isVein = n.includes("vein") || n.includes("venous") || n.includes("vena cava") ||
-    n.includes("venae");
+    n.includes("venae") || n.includes("coronary sinus");
   // "arter" (không phải "artery") để bắt cả số nhiều "arteries" và "arteriole".
   if (!isVein && (n.includes("arter") || n.includes("aorta") || n.includes("pulmonary trunk") ||
       n.includes("palmar arch") || n.includes("carpal arch") || n.includes("anastomosis"))) return "artery";
   if (isVein) return "vein";
+  if (BRAIN_CAVITY_NAMES.some((k) => n.includes(k))) return "brain";
+  // Sụn xét trước lớp tạng: "Thyroid cartilage" là SỤN GIÁP của thanh quản,
+  // không phải tuyến giáp.
+  if (n.includes("cartilage")) return "bone";
+  // Có chữ "nerve" thì chắc chắn là thần kinh. Phải xét trước lớp tạng vì
+  // "Ilio-hypogastric nerve" chứa chuỗi "gastric" nên trước đây bị xếp vào
+  // nội tạng ngay giữa một scene đám rối thần kinh.
+  if (n.includes("nerve")) return "nerve";
   if (ORGAN_KEYS.some((k) => n.includes(k))) return "organ";
   if (NERVE_KEYS.some((k) => n.includes(k))) return "nerve";
   if (BRAIN_KEYS.some((k) => n.includes(k))) return "brain";
+  if (CONNECTIVE_KEYS.some((k) => n.includes(k))) return "muscle";
   if (BONE_KEYS.some((k) => n.includes(k))) return "bone";
   return "muscle";
 }

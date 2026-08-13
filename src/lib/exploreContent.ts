@@ -1,5 +1,7 @@
 import type { T3 } from "./homeContent";
-import { catalogScenes, scenesOfSystem, systemByKey, systemGroups } from "./catalog";
+import {
+  catalogScenes, regionGroups, scenesOfRegion, scenesOfSystem, systemByKey, systemGroups,
+} from "./catalog";
 
 export type CategorySlug =
   | "tat-ca"
@@ -70,29 +72,29 @@ export const contentTypeTabs: { key: "all" | ContentType; label: T3 }[] = [
 
 const regionFilters: FilterTab[] = [
   { key: "all", label: { vi: "Tất cả", en: "All", zh: "全部" } },
-  { key: "head-neck", label: { vi: "Đầu và cổ", en: "Head and neck", zh: "头颈" } },
-  { key: "thorax", label: { vi: "Ngực", en: "Thorax", zh: "胸部" } },
-  { key: "abdomen", label: { vi: "Bụng", en: "Abdomen", zh: "腹部" } },
-  { key: "back", label: { vi: "Lưng", en: "Back", zh: "背部" } },
-  { key: "upper-limb", label: { vi: "Chi trên", en: "Upper limb", zh: "上肢" } },
-  { key: "pelvis", label: { vi: "Xương chậu", en: "Pelvis", zh: "骨盆" } },
-  { key: "lower-limb", label: { vi: "Chi dưới", en: "Lower limb", zh: "下肢" } },
+  ...regionGroups.map((g) => ({ key: g.key as string, label: g.label })),
 ];
 
-const regionCards: ResultCard[] = [
-  { img: "an-muscle", title: { vi: "Lưng", en: "Back", zh: "背部" }, filters: ["back"], type: "anatomy" },
-  { img: "an-brain", title: { vi: "Não", en: "Brain", zh: "脑" }, filters: ["head-neck"], type: "anatomy" },
-  { img: "an-organ", title: { vi: "Bụng nữ", en: "Female abdomen", zh: "女性腹部" }, filters: ["abdomen"], type: "anatomy" },
-  { img: "an-vessel", title: { vi: "Xương chậu nữ", en: "Female pelvis", zh: "女性骨盆" }, filters: ["pelvis"], type: "anatomy" },
-  { img: "an-heart", title: { vi: "Ngực nữ", en: "Female thorax", zh: "女性胸部" }, filters: ["thorax"], type: "anatomy" },
-  { img: "an-skel", title: { vi: "Đầu và cổ", en: "Head and neck", zh: "头颈部" }, filters: ["head-neck"], type: "anatomy" },
-  { img: "an-muscle", title: { vi: "Chi dưới", en: "Lower limb", zh: "下肢" }, filters: ["lower-limb"], type: "anatomy" },
-  { img: "an-organ", title: { vi: "Bụng nam", en: "Male abdomen", zh: "男性腹部" }, filters: ["abdomen"], type: "anatomy" },
-  { img: "an-vessel", title: { vi: "Xương chậu nam", en: "Male pelvis", zh: "男性骨盆" }, filters: ["pelvis"], type: "anatomy" },
-  { img: "an-heart", title: { vi: "Ngực nam", en: "Male thorax", zh: "男性胸部" }, filters: ["thorax"], type: "anatomy" },
-  { img: "an-muscle", title: { vi: "Chi trên", en: "Upper limb", zh: "上肢" }, filters: ["upper-limb"], type: "anatomy" },
-  { img: "an-vessel", title: { vi: "Động mạch chủ bụng", en: "Abdominal aorta", zh: "腹主动脉" }, filters: ["abdomen"], type: "anatomy" },
-];
+/**
+ * Thẻ của trang "Giải phẫu theo vùng" — DẪN XUẤT từ catalog theo vùng cơ thể.
+ * Trước đây là 12 thẻ viết tay ("Ngực nữ", "Bụng nam"…) không có href nên bấm
+ * vào không đi đâu, lại còn chia nam/nữ trong khi dữ liệu nguồn chỉ có cơ thể
+ * nam. Nay mỗi thẻ là một scene có model thật, bấm vào mở được ngay.
+ */
+const regionCards: ResultCard[] = regionGroups.flatMap((group) =>
+  scenesOfRegion(group.key).map(
+    (scene): ResultCard => ({
+      img: "an-organ",
+      icon: systemByKey.get(scene.system)?.icon ?? group.icon,
+      thumb: scene.thumb,
+      title: scene.title,
+      filters: [group.key],
+      href: scene.href,
+      real: true,
+      type: "anatomy",
+    }),
+  ),
+);
 
 const systemFilters: FilterTab[] = [
   { key: "all", label: { vi: "Tất cả", en: "All", zh: "全部" } },
@@ -104,7 +106,7 @@ const systemCards: ResultCard[] = [
   { img: "an-heart", icon: "i-heart", thumb: "/thumbnails/giai-phau-tim.jpg", title: { vi: "Hệ tuần hoàn", en: "Cardiovascular system", zh: "心血管系统" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/giai-phau-tim", real: true, type: "anatomy" },
   { img: "an-skel", icon: "i-bone", thumb: "/thumbnails/giai-phau-so.jpg", title: { vi: "Hệ xương", en: "Skeletal system", zh: "骨骼系统" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/giai-phau-so", real: true, type: "anatomy" },
   { img: "an-muscle", icon: "i-muscle", title: { vi: "Hệ cơ", en: "Muscular system", zh: "肌肉系统" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/co-mat", real: true, type: "anatomy" },
-  { img: "an-skel", icon: "i-bone", title: { vi: "Hệ cơ xương", en: "Musculoskeletal system", zh: "肌肉骨骼系统" }, filters: ["male", "female"], type: "anatomy" },
+  { img: "an-skel", icon: "i-bone", title: { vi: "Hệ cơ xương", en: "Musculoskeletal system", zh: "肌肉骨骼系统" }, filters: ["male", "female"], href: "/viewer", real: true, type: "anatomy" },
   { img: "an-nerve", icon: "i-brain", title: { vi: "Hệ thần kinh", en: "Nervous system", zh: "神经系统" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/than-nao-day-so", real: true, type: "anatomy" },
   { img: "an-organ", icon: "i-stomach", title: { vi: "Hệ tiêu hóa", en: "Digestive system", zh: "消化系统" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/tong-quan-he-tieu-hoa", real: true, type: "anatomy" },
   { img: "an-lung", icon: "i-lungs", title: { vi: "Hệ hô hấp", en: "Respiratory system", zh: "呼吸系统" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/giai-phau-phoi", real: true, type: "anatomy" },
@@ -113,11 +115,11 @@ const systemCards: ResultCard[] = [
   { img: "an-organ", icon: "i-nephro", title: { vi: "Hệ tiết niệu", en: "Urinary system", zh: "泌尿系统" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/he-tiet-nieu", real: true, type: "anatomy" },
   // Sinh sản nữ KHÔNG có dữ liệu: Z-Anatomy và BodyParts3D đều dựng trên cơ
   // thể nam. Giữ thẻ ở trạng thái chưa có mô hình thay vì dùng tạm model nam.
-  { img: "an-organ", icon: "i-gyn", title: { vi: "Hệ sinh sản (nữ)", en: "Reproductive system (female)", zh: "生殖系统（女）" }, filters: ["female"], type: "anatomy" },
+  { img: "an-organ", icon: "i-gyn", title: { vi: "Hệ sinh sản (nữ)", en: "Reproductive system (female)", zh: "生殖系统（女）" }, filters: ["female"], href: "/nguoi#gioi-han-du-lieu", type: "anatomy" },
   { img: "an-organ", icon: "i-gyn", title: { vi: "Hệ sinh sản (nam)", en: "Reproductive system (male)", zh: "生殖系统（男）" }, filters: ["male"], href: "/giai-phau/mo-hinh/he-sinh-san-nam", real: true, type: "anatomy" },
   { img: "an-cell", icon: "i-cell", title: { vi: "Mô liên kết", en: "Connective tissue", zh: "结缔组织" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/mo-lien-ket", real: true, type: "anatomy" },
   // Mô mỡ: 0 mesh trong Z-Anatomy, không có nguồn thay thế.
-  { img: "an-cell", icon: "i-droplet", title: { vi: "Mô mỡ", en: "Fat", zh: "脂肪" }, filters: ["male", "female"], type: "anatomy" },
+  { img: "an-cell", icon: "i-droplet", title: { vi: "Mô mỡ", en: "Fat", zh: "脂肪" }, filters: ["male", "female"], href: "/nguoi#gioi-han-du-lieu", type: "anatomy" },
   { img: "an-cell", icon: "i-cell", title: { vi: "Mạc", en: "Fascia", zh: "筋膜" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/he-mac", real: true, type: "anatomy" },
   { img: "an-cell", icon: "i-ear", title: { vi: "Hệ thính giác", en: "Auditory system", zh: "听觉系统" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/he-thinh-giac", real: true, type: "anatomy" },
   { img: "an-brain", icon: "i-eye", title: { vi: "Hệ thị giác", en: "Visual system", zh: "视觉系统" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/giai-phau-mat", real: true, type: "anatomy" },

@@ -124,6 +124,25 @@ const sceneSystem: Record<string, SystemGroupKey> = {
   // Vùng cơ thể nhiều lớp (export_region.py)
   "giai-phau-ban-tay": "muscular",
   "khop-vai-khuyu": "skeletal",
+  "khop-goi": "skeletal",
+  "chau-hong-day-chau": "skeletal",
+  "vung-lung": "muscular",
+  "thanh-nguc": "skeletal",
+  "vai-ho-nach": "muscular",
+  "vung-ben": "muscular",
+  "co-mat-than-kinh-vii": "muscular",
+  "khop-thai-duong-ham": "skeletal",
+  "cot-song-co": "skeletal",
+  "cot-song-that-lung": "skeletal",
+  "nao-that-mang-nao": "nervous",
+  "he-tinh-mach-chu-cua": "cardiovascular",
+  "tuyen-noi-tiet": "endocrine",
+  "dam-roi-that-lung-cung": "nervous",
+  "co-tay-ong-co-tay": "skeletal",
+  "vung-mong": "muscular",
+  "co-quan-sinh-duc-nam": "reproductive",
+  "khop-hang-dui": "muscular",
+  "cang-chan-ban-chan": "muscular",
   "so-nen-so": "skeletal",
   "hoc-mat": "visual",
   "tai-day-du": "auditory",
@@ -202,6 +221,25 @@ const thumbnails: Record<string, string> = {
   "phuc-mac-mac-treo": "/thumbnails/phuc-mac-mac-treo.jpg",
   "giai-phau-ban-tay": "/thumbnails/giai-phau-ban-tay.jpg",
   "khop-vai-khuyu": "/thumbnails/khop-vai-khuyu.jpg",
+  "khop-goi": "/thumbnails/khop-goi.jpg",
+  "chau-hong-day-chau": "/thumbnails/chau-hong-day-chau.jpg",
+  "vung-lung": "/thumbnails/vung-lung.jpg",
+  "thanh-nguc": "/thumbnails/thanh-nguc.jpg",
+  "vai-ho-nach": "/thumbnails/vai-ho-nach.jpg",
+  "vung-ben": "/thumbnails/vung-ben.jpg",
+  "co-mat-than-kinh-vii": "/thumbnails/co-mat-than-kinh-vii.jpg",
+  "khop-thai-duong-ham": "/thumbnails/khop-thai-duong-ham.jpg",
+  "cot-song-co": "/thumbnails/cot-song-co.jpg",
+  "cot-song-that-lung": "/thumbnails/cot-song-that-lung.jpg",
+  "nao-that-mang-nao": "/thumbnails/nao-that-mang-nao.jpg",
+  "he-tinh-mach-chu-cua": "/thumbnails/he-tinh-mach-chu-cua.jpg",
+  "tuyen-noi-tiet": "/thumbnails/tuyen-noi-tiet.jpg",
+  "dam-roi-that-lung-cung": "/thumbnails/dam-roi-that-lung-cung.jpg",
+  "co-tay-ong-co-tay": "/thumbnails/co-tay-ong-co-tay.jpg",
+  "vung-mong": "/thumbnails/vung-mong.jpg",
+  "co-quan-sinh-duc-nam": "/thumbnails/co-quan-sinh-duc-nam.jpg",
+  "khop-hang-dui": "/thumbnails/khop-hang-dui.jpg",
+  "cang-chan-ban-chan": "/thumbnails/cang-chan-ban-chan.jpg",
 };
 
 function buildSearchText(scene: SceneModule): string {
@@ -241,6 +279,70 @@ export const catalogScenes: CatalogScene[] = Object.values(sceneModules).map((sc
 const byslug = new Map(catalogScenes.map((s) => [s.slug, s]));
 
 export const getScene = (slug: string): CatalogScene | undefined => byslug.get(slug);
+
+/** Vùng cơ thể — dùng cho trang "Giải phẫu theo vùng". */
+export type RegionKey =
+  | "head-neck" | "thorax" | "abdomen" | "back" | "upper-limb" | "pelvis" | "lower-limb";
+
+export const regionGroups: { key: RegionKey; label: T3; icon: string }[] = [
+  { key: "head-neck", label: { vi: "Đầu và cổ", en: "Head and neck", zh: "头颈部" }, icon: "i-brain" },
+  { key: "thorax", label: { vi: "Ngực", en: "Thorax", zh: "胸部" }, icon: "i-heart" },
+  { key: "abdomen", label: { vi: "Bụng", en: "Abdomen", zh: "腹部" }, icon: "i-stomach" },
+  { key: "back", label: { vi: "Lưng và cột sống", en: "Back and spine", zh: "背部与脊柱" }, icon: "i-bone" },
+  { key: "upper-limb", label: { vi: "Chi trên", en: "Upper limb", zh: "上肢" }, icon: "i-muscle" },
+  { key: "pelvis", label: { vi: "Chậu hông", en: "Pelvis", zh: "骨盆" }, icon: "i-bone" },
+  { key: "lower-limb", label: { vi: "Chi dưới", en: "Lower limb", zh: "下肢" }, icon: "i-muscle" },
+];
+
+/**
+ * Scene nằm ở vùng cơ thể nào. Khai báo tường minh vì một scene có thể thuộc
+ * hệ này nhưng nằm ở vùng khác (VD "he-bach-huyet" thuộc hệ tuần hoàn nhưng
+ * trải khắp người, "co-hoanh" thuộc hô hấp nhưng nằm ở ranh giới ngực–bụng).
+ * Scene toàn thân (hệ động mạch chủ, hệ bạch huyết, hệ mạc…) cố ý KHÔNG gán
+ * vùng — chúng xuất hiện ở "Tất cả mô hình" chứ không thuộc vùng nào.
+ */
+const sceneRegion: Record<string, RegionKey> = {
+  // Đầu – mặt – cổ
+  "giai-phau-dau": "head-neck", "giai-phau-co": "head-neck", "so-nen-so": "head-neck",
+  "giai-phau-so": "head-neck", "hoc-mat": "head-neck", "giai-phau-mat": "head-neck",
+  "tai-day-du": "head-neck", "he-thinh-giac": "head-neck", "xuong-con-tai-giua": "head-neck",
+  "mui-xoang": "head-neck", "mieng-luoi-rang": "head-neck", "bo-rang": "head-neck",
+  "hau-thanh-quan": "head-neck", "thanh-quan": "head-neck", "co-mat": "head-neck",
+  "dai-nao": "head-neck", "than-nao-day-so": "head-neck", "than-nao-day-so-full": "head-neck",
+  "tieu-nao": "head-neck", "tieu-nao-day-du": "head-neck", "gian-nao-he-vien": "head-neck",
+  "da-giac-willis": "head-neck",
+  // Ngực
+  "giai-phau-than": "thorax", "tim-day-du": "thorax", "giai-phau-tim": "thorax",
+  "mat-cat-vanh-tim": "thorax", "dong-mach-vanh": "thorax", "phoi-cay-phe-quan": "thorax",
+  "giai-phau-phoi": "thorax", "trung-that": "thorax", "long-nguc": "thorax",
+  "co-hoanh-day-du": "thorax", "co-hoanh": "thorax",
+  // Bụng
+  "thanh-bung": "abdomen", "co-bung": "abdomen", "mat-cat-ngang-bung": "abdomen",
+  "gan-duong-mat": "abdomen", "giai-phau-gan": "abdomen", "mat-cat-tui-mat": "abdomen",
+  "da-day-ta-trang": "abdomen", "mat-cat-da-day": "abdomen", "ruot-non-ruot-gia": "abdomen",
+  "mat-cat-ruot-non": "abdomen", "mat-cat-ruot-gia": "abdomen", "tuy-lach": "abdomen",
+  "giai-phau-tuy": "abdomen", "than-nieu-quan": "abdomen", "he-tiet-nieu": "abdomen",
+  "phuc-mac-mac-treo": "abdomen", "phuc-mac": "abdomen", "tong-quan-he-tieu-hoa": "abdomen",
+  "mat-cat-dong-mach": "abdomen", "mat-cat-tinh-mach": "abdomen",
+  // Lưng và cột sống
+  "cot-song": "back", "tuy-song-dam-roi": "back",
+  // Chi trên
+  "giai-phau-dai-vai": "upper-limb", "giai-phau-canh-tay": "upper-limb",
+  "giai-phau-cang-tay": "upper-limb", "giai-phau-ban-tay": "upper-limb",
+  "khop-vai-khuyu": "upper-limb", "co-canh-tay": "upper-limb",
+  "dai-vai-chi-tren": "upper-limb", "ban-tay": "upper-limb",
+  // Chậu hông
+  "xuong-chau": "pelvis", "he-sinh-san-nam": "pelvis", "co-that-hau-mon": "pelvis",
+  // Chi dưới
+  "co-dui-mong": "lower-limb", "chi-duoi": "lower-limb", "ban-chan": "lower-limb",
+};
+
+export const scenesOfRegion = (key: RegionKey): CatalogScene[] =>
+  catalogScenes.filter((s) => sceneRegion[s.slug] === key);
+
+/** Scene không gắn vùng nào (toàn thân) — kiểm tra để không bỏ sót khi thêm scene mới. */
+export const scenesWithoutRegion = (): CatalogScene[] =>
+  catalogScenes.filter((s) => !sceneRegion[s.slug]);
 
 /** Scene mới nhất trước. */
 export const recentScenes = (limit: number): CatalogScene[] =>

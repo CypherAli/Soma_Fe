@@ -12,7 +12,7 @@
  * duyệt, nhất là khi WebGL không chạy được trong môi trường kiểm thử.
  */
 
-import { readFileSync, existsSync } from "node:fs";
+import { readFileSync, existsSync, readdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
@@ -52,10 +52,12 @@ function parseScenes(source) {
   return scenes;
 }
 
-const sceneFiles = [
-  "digestive", "cardiovascular", "skeletal", "muscular", "respiratory",
-  "misc", "auditory", "reproductive", "connective", "nervous", "regions",
-];
+// Đọc mọi file scene trong thư mục thay vì liệt kê tay: thêm file mới mà quên
+// khai báo ở đây thì cả nhóm scene đó lặng lẽ KHÔNG được kiểm tra, đúng loại
+// lỗi mà script này sinh ra để chặn.
+const sceneFiles = readdirSync(join(root, "src/lib/scenes"))
+  .filter((f) => f.endsWith(".ts") && f !== "types.ts")
+  .map((f) => f.replace(/\.ts$/, ""));
 
 let totalHotspots = 0;
 let totalProblems = 0;

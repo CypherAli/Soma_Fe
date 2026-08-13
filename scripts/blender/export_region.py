@@ -37,6 +37,17 @@ for col in bpy.data.collections:
 
 MARKER_SUFFIX = ('.j', '.t', '.g')
 
+# Ngân sách tam giác cho MỘT scene vùng (xem Region.decimate_to_budget).
+# 900k là mức CHẶN NGOẠI LỆ chứ không phải mức tối ưu: chỉ vài model phình bất
+# thường (cây động mạch 2,6 triệu, đầu 2,0 triệu) mới bị giảm, còn lại giữ
+# nguyên độ chi tiết. KHÔNG hạ xuống 400k chỉ vì thấy FPS thấp trong môi
+# trường kiểm thử — khung xem ẩn bị trình duyệt giới hạn nhịp vẽ nên mọi scene
+# đều báo 2 FPS, kể cả scene 100k tam giác; đó là phép đo sai, không phải máy yếu.
+TRI_BUDGET = 900_000
+# Mesh dưới ngưỡng này không bị giảm lưới: dây chằng, hạch, ống mạch mỏng vốn
+# đã ít mặt, giảm thêm là méo hẳn hình.
+SMALL_MESH_TRIS = 1_500
+
 
 def wbb(o):
     cs = [o.matrix_world @ Vector(c) for c in o.bound_box]
@@ -128,10 +139,16 @@ class Region:
                 tail = nm.rsplit('.', 1)[-1] if '.' in nm else ''
                 if tail and tail not in ('l', 'r') and not tail.isdigit():
                     continue
-                # xương/cơ/khớp lấy theo GIAO NHAU với hộp (cắt lấy phần trong
+                # Xương/cơ/khớp lấy theo GIAO NHAU với hộp (cắt lấy phần trong
                 # hộp là hợp lý); tạng lấy theo TÂM, nếu không gan/phổi/dạ dày
                 # chỉ cần chạm mép hộp là lọt vào mọi scene lân cận.
-                if not (self.center_in(o) if tag == "organ" else self.overlaps(o)):
+                # Tạng lấy theo TÂM, xương/cơ/khớp lấy theo GIAO NHAU (xem ghi
+                # chú bên dưới). NGOẠI LỆ: tên nằm trong keep_kw thì luôn dùng
+                # phép giao — vài object của Z-Anatomy có bbox hỏng trải dài
+                # khắp thân (VD "Hypothalamus" bbox z 1,148–1,624 m) nên phép
+                # xét tâm loại nhầm chúng ra khỏi đúng vùng của mình.
+                is_keep = any(k in nm for k in keep)
+                if not (self.overlaps(o) if (tag != "organ" or is_keep) else self.center_in(o)):
                     continue
                 self.kept.append(o)
                 if tag == "muscle":
@@ -148,9 +165,11 @@ class Region:
         # DROP_CURVE_KW sinh ra để chặn mạch VÙNG KHÁC lọt vào hộp của một vùng
         # nhỏ. Với vùng toàn thân thì nó lại cắt mất đúng những mạch cần lấy
         # (chậu, đùi, thận, tạng…) — đặt curve_drop_default=False để tắt.
-        drop = list(c.get("curve_drop", []))
-        if c.get("curve_drop_default", True):
-            drop = DROP_CURVE_KW + drop
+        # `curve_drop` của vùng là loại trừ DỨT KHOÁT, thắng cả curve_keep_names —
+        # vì so khớp là so CHUỖI CON, một từ khoá giữ lại vô tình nuốt luôn thứ
+        # muốn bỏ ("ilioHYPOGASTRIC nerve" chứa "gastric" của scene dạ dày).
+        drop_force = [k.lower() for k in c.get("curve_drop", [])]
+        drop = DROP_CURVE_KW if c.get("curve_drop_default", True) else []
         keep_names = [k.lower() for k in c.get("curve_keep_names", [])]
         # Hệ 8 cũng có CURVE (thực quản, phế quản, ống mật, niệu quản) — không lấy
         # thì scene thiếu hẳn các ống này mà không có dấu hiệu gì.
@@ -164,12 +183,31 @@ class Region:
             for o in bpy.data.collections[coll].all_objects:
                 if o.type != 'CURVE' or o.name.endswith(MARKER_SUFFIX):
                     continue
+                # Trong Startup.blend có vài object tên hỏng toàn dấu "?"
+                # (mất mã hoá ở nguồn) — không tra cứu được là gì, để lọt vào
+                # thì panel thông tin hiện đúng chữ "????????".
+                if o.name.lstrip('(').startswith('?'):
+                    continue
                 nm = o.name.lower()
+                if any(k in nm for k in drop_force):
+                    continue
                 named = any(k in nm for k in keep_names)
-                if not named:
-                    if not side_ok(nm, self.side) or any(k in nm for k in drop):
-                        continue
-                if self.center_in(o):
+                # Phép xét BÊN áp dụng cho MỌI đường cong, kể cả tên được chỉ
+                # đích danh: chỉ đích danh là nói "vùng này cần dây thần kinh
+                # toạ", không phải "cần cả hai bên". Bỏ qua bên ở đây thì scene
+                # một bên mọc thêm dây bên kia chạy vắt ngang khoảng không —
+                # đúng lỗi đã thấy ở đám rối thắt lưng cùng (7 dây .l lạc vào
+                # model .r).
+                if not side_ok(nm, self.side):
+                    continue
+                if not named and any(k in nm for k in drop):
+                    continue
+                # Tên nằm trong curve_keep_names là do vùng CHỈ ĐÍCH DANH, nên
+                # bỏ qua phép xét TÂM: mạch và thần kinh dài (thần kinh giữa,
+                # động mạch cánh tay) có tâm nằm tận cẳng tay nên xét tâm sẽ
+                # loại mất chúng khỏi chính vùng chúng bắt đầu. Phần thừa ra
+                # ngoài hộp đã bị bước cắt hộp xử lý.
+                if named or self.center_in(o):
                     src.append(o)
             print(f"[{self.key}] {tag} curves {len(src)} -> tubes {self.tubes(src, depth)}")
 
@@ -374,21 +412,100 @@ class Region:
 
     # ---- 5) cắt hộp ----
     def clip(self, o, margin=0.0):
-        me = o.data; mw = o.matrix_world
-        bm = bmesh.new(); bm.from_mesh(me)
-        kill = []
-        for f in bm.faces:
-            c = mw @ f.calc_center_median()
-            if (c.x < self.x0 - margin or c.x > self.x1 + margin or
-                    c.y < self.y0 - margin or c.y > self.y1 + margin or
-                    c.z < self.z0 - margin or c.z > self.z1 + margin):
-                kill.append(f)
-        if kill:
-            bmesh.ops.delete(bm, geom=kill, context='FACES')
+        """Cắt mesh theo 6 mặt của hộp, cắt ĐÚNG mặt phẳng rồi BỊT NẮP chỗ cắt.
+
+        Cách cũ là xoá nguyên mặt tam giác nào có tâm nằm ngoài hộp. Hệ quả thấy
+        rõ trên thumbnail: mép cắt răng cưa tua rua theo đúng hình tam giác của
+        lưới, và bụng cơ bị cắt hở thành ống rỗng nhìn thủng vào trong. Bisect
+        chia đôi đúng tam giác đang vắt qua mặt phẳng nên mép thẳng, rồi
+        holes_fill vá kín vòng cạnh vừa cắt thành mặt cắt phẳng như tiêu bản.
+        """
+        me = o.data
+        mw = o.matrix_world
+        try:
+            inv = mw.inverted()
+        except ValueError:
+            return  # ma trận suy biến (scale 0) — bỏ qua, không cắt còn hơn hỏng
+        bm = bmesh.new()
+        bm.from_mesh(me)
+        bm.transform(mw)  # cắt trong toạ độ THẾ GIỚI vì hộp là toạ độ thế giới
+        # (điểm trên mặt phẳng, pháp tuyến hướng RA NGOÀI vùng giữ lại)
+        planes = (
+            (Vector((self.x0 - margin, 0, 0)), Vector((-1, 0, 0))),
+            (Vector((self.x1 + margin, 0, 0)), Vector((1, 0, 0))),
+            (Vector((0, self.y0 - margin, 0)), Vector((0, -1, 0))),
+            (Vector((0, self.y1 + margin, 0)), Vector((0, 1, 0))),
+            (Vector((0, 0, self.z0 - margin)), Vector((0, 0, -1))),
+            (Vector((0, 0, self.z1 + margin)), Vector((0, 0, 1))),
+        )
+        for co, no in planes:
+            geom = bm.verts[:] + bm.edges[:] + bm.faces[:]
+            if not geom:
+                break
+            res = bmesh.ops.bisect_plane(
+                bm, geom=geom, dist=1e-6, plane_co=co, plane_no=no,
+                clear_outer=True,  # bỏ phần nằm phía pháp tuyến = phía ngoài hộp
+            )
+            cut = [e for e in res.get("geom_cut", []) if isinstance(e, bmesh.types.BMEdge)]
+            if cut:
+                # sides=0: vá mọi vòng cạnh hở, kể cả vòng nhiều cạnh. Tấm mỏng
+                # (cân, dây chằng) cắt ra chỉ còn một đường hở, không tạo mặt
+                # thừa nào nên gọi chung một hàm là an toàn cho cả hai loại.
+                try:
+                    bmesh.ops.holes_fill(bm, edges=cut, sides=0)
+                except RuntimeError:
+                    pass
         loose = [v for v in bm.verts if not v.link_faces]
         if loose:
             bmesh.ops.delete(bm, geom=loose, context='VERTS')
-        bm.to_mesh(me); bm.free()
+        # Mặt nắp mới sinh ra có thể quay ngược; scene web dùng FrontSide nên
+        # pháp tuyến sai là thủng thành mảng đen (xem ghi chú DoubleSide ở
+        # materials.ts) — phải tính lại pháp tuyến ngay tại đây.
+        if bm.faces:
+            bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:])
+        bm.transform(inv)
+        bm.to_mesh(me)
+        bm.free()
+
+    # ---- 5b) ngân sách tam giác ----
+    def decimate_to_budget(self):
+        """Giảm lưới cho tới khi tổng số tam giác về dưới ngưỡng.
+
+        Vì sao cần: đo thật trên trình duyệt, scene cơ lưng 1,74 triệu tam giác
+        chạy 2 FPS — không dùng được, dù mô hình đúng giải phẫu. Ngân sách ~400
+        nghìn tam giác cho một vùng là đủ mượt trên GPU tích hợp mà mắt thường
+        chưa thấy khác. Chỉ giảm những mesh LỚN; mesh nhỏ (dây chằng, hạch,
+        ống mạch) giữ nguyên vì giảm nữa là mất hình.
+        """
+        budget = self.cfg.get("tri_budget", TRI_BUDGET)
+        if not budget:
+            return
+        meshes = [o for o in self.kept if o.type == 'MESH' and len(o.data.polygons)]
+        tris = {o.name: len(o.data.polygons) for o in meshes}
+        total = sum(tris.values())
+        if total <= budget:
+            return
+        keep_small = sum(t for t in tris.values() if t <= SMALL_MESH_TRIS)
+        big = total - keep_small
+        if big <= 0:
+            return
+        ratio = max(0.10, min(1.0, (budget - keep_small) / big))
+        for o in meshes:
+            if tris[o.name] <= SMALL_MESH_TRIS:
+                continue
+            mod = o.modifiers.new("soma_dec", 'DECIMATE')
+            mod.ratio = ratio
+            dg = bpy.context.evaluated_depsgraph_get()
+            try:
+                me = bpy.data.meshes.new_from_object(o.evaluated_get(dg))
+            except Exception:
+                o.modifiers.remove(mod)
+                continue
+            o.modifiers.remove(mod)
+            if me and len(me.polygons):
+                o.data = me
+        after = sum(len(o.data.polygons) for o in meshes)
+        print(f"[{self.key}] decimate ratio {ratio:.2f}  tris {total} -> {after}")
 
     def run(self):
         self.collect_meshes()
@@ -407,6 +524,7 @@ class Region:
         if self.cfg.get("skin_only") and skin is not None:
             self.kept = [skin]
         self.kept = [o for o in self.kept if o.type != 'MESH' or len(o.data.polygons) > 0]
+        self.decimate_to_budget()
 
         out = os.path.join(OUTDIR, self.cfg["out"])
         bpy.ops.object.select_all(action='DESELECT')

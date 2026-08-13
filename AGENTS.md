@@ -108,6 +108,10 @@ nền** để biết mô hình còn trong khung hay đã trôi.
 - Dữ liệu giải phẫu: Z-Anatomy (CC-BY-SA), thuật ngữ Terminologia Anatomica, đối chiếu giáo
   trình ĐH Y Hà Nội. **Thiếu dữ liệu thì ghi rõ là thiếu, KHÔNG bịa.** Đã xác nhận Z-Anatomy
   không có: manh tràng, trực tràng, ống hậu môn, bóng Vater, mesh da người.
+  Tra thêm ngày 13/08/2026 (bằng `query_bbox.py`), cũng KHÔNG có: cơ bìu, cơ hành xốp,
+  cơ ngồi hang, cơ thắt niệu đạo, cơ ngang đáy chậu, thừng tinh, bìu, màng nhện. Có nhưng
+  dễ tưởng là không vì mesh rất nhỏ: 4 tuyến cận giáp (9 đỉnh — phải hạ `min_verts`),
+  thuỳ trước/sau tuyến yên (tên `Adenohypophysis`/`Neurohypophysis`, không phải "pituitary").
 - Git: **tạo nhánh trước, merge `main` sau** (`--no-ff`). Commit tách theo từng chức năng.
   Không thêm logo hay `Co-Authored-By` của công cụ vào commit.
 - Div nào cần cuộn bằng con lăn chuột thì thêm `data-lenis-prevent`.
