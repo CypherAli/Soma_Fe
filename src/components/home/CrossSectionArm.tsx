@@ -29,7 +29,7 @@ function pickCat(name: string): Cat {
 }
 
 function cleanGeom(src: THREE.BufferGeometry, m: THREE.Matrix4) {
-  let g = src.index ? src.toNonIndexed() : src.clone();
+  const g = src.index ? src.toNonIndexed() : src.clone();
   g.applyMatrix4(m);
   if (!g.getAttribute("normal")) g.computeVertexNormals();
   const out = new THREE.BufferGeometry();
@@ -63,9 +63,8 @@ function stencilGroup(geo: THREE.BufferGeometry, plane: THREE.Plane, order: numb
 
 function Model({ url, cutRef }: { url: string; cutRef: React.MutableRefObject<number> }) {
   const { scene } = useGLTF(url, "/draco/");
-  const capsRef = useRef<THREE.Mesh[]>([]);
 
-  const { root, plane, center, radius } = useMemo(() => {
+  const built = useMemo(() => {
     scene.updateMatrixWorld(true);
     const box = new THREE.Box3().setFromObject(scene);
     const center = box.getCenter(new THREE.Vector3());
@@ -116,20 +115,27 @@ function Model({ url, cutRef }: { url: string; cutRef: React.MutableRefObject<nu
       root.add(cap);
       order += 1;
     });
-    capsRef.current = caps;
-    return { root, plane, center, radius };
+    return { root, plane, caps, center, radius };
   }, [scene]);
 
+  // Mặt phẳng cắt và các nắp bị SỬA mỗi khung hình. Giữ chúng sau một ref rồi
+  // mới sửa: giá trị do useMemo trả về được coi là bất biến, sửa thẳng vào đó
+  // vừa bị lint chặn vừa sai về lâu dài — React Compiler có quyền dùng lại giá
+  // trị memo hoá cũ và những gì ta ghi đè lên nó sẽ biến mất.
+  const liveRef = useRef(built);
+  useEffect(() => { liveRef.current = built; }, [built]);
+
   useFrame(() => {
+    const { plane, caps } = liveRef.current;
     plane.constant = cutRef.current;
     // đặt các nắp lên đúng mặt phẳng cắt
-    for (const cap of capsRef.current) {
+    for (const cap of caps) {
       plane.coplanarPoint(cap.position);
       cap.lookAt(cap.position.clone().add(plane.normal));
     }
   });
 
-  return <primitive object={root} />;
+  return <primitive object={built.root} />;
 }
 
 export default function CrossSectionArm({ url = "/models/arm.glb" }: { url?: string }) {

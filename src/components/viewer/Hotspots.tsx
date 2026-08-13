@@ -146,7 +146,11 @@ export default function Hotspots({
       const radius = box.getSize(new THREE.Vector3()).length() / 2;
       return { def: h, obj, center, radius };
     }).filter((x): x is NonNullable<typeof x> => x !== null);
-    // scene.children.length như một proxy để re-chạy khi model nạp xong.
+    // scene.children.length như một proxy để re-chạy khi model nạp xong: bản
+    // thân `scene` là cùng một object trong suốt vòng đời, thêm mesh vào không
+    // đổi tham chiếu nên chỉ phụ thuộc `scene` là hotspot tính một lần lúc cây
+    // còn rỗng rồi không bao giờ tính lại. Đây là cố ý, không phải dư thừa.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [systemsReady, hotspots, scene, scene.children.length]);
 
   const focus = (

@@ -110,6 +110,10 @@ export default function ExploreResults({ data, locale }: { data: CategoryData; l
           {cards.map((c, i) => (
             <button type="button" key={`${pick(c.title, "en")}-${i}`} className="result-card" onClick={() => c.href && router.push(c.href)} disabled={!c.href}>
               <div className={`thumb ${c.img}${c.thumb ? " has-photo" : ""}`}>
+                {/* Dùng <img> có chủ đích: thumbnail đã được nén sẵn ở bước dựng
+                    bằng scripts/optimize-thumbnails.mjs (JPEG 600px, ~10–70KB) nên
+                    cho next/image tối ưu lại lúc chạy chỉ tốn thêm vòng xử lý. */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 {c.thumb ? <img src={c.thumb} alt={pick(c.title, locale)} loading="lazy" /> : (
                   <div className="anatomy-plate" aria-hidden="true">
                     <span className="plate-kicker">SPECIMEN · {String(i + 1).padStart(3, "0")}</span>
