@@ -12,6 +12,11 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Thư viện của bên thứ ba đặt nguyên xi trong public/ (bộ giải mã Draco của
+    // Google, dạng đã minify). Không bỏ qua thì `npm run lint` báo gần 1.000 lỗi
+    // và cảnh báo của file KHÔNG PHẢI mã của dự án, nhấn chìm mọi lỗi thật —
+    // đúng lý do phần kiểm tra này bị bỏ dùng từ trước tới nay.
+    "public/**",
   ]),
 ]);
 

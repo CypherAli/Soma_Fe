@@ -112,6 +112,7 @@ export function SceneCard({ scene, locale }: { scene: CatalogScene; locale: Loc 
     <Link href={scene.href} className="card sm">
       <div className={`img ${group?.accent ?? "g-organ"}`}>
         {scene.thumb ? (
+          // eslint-disable-next-line @next/next/no-img-element
           <img src={scene.thumb} alt="" loading="lazy" />
         ) : (
           <span className="thumb-icon">
