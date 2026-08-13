@@ -47,3 +47,8 @@ next-env.d.ts
 # Python bytecode sinh ra khi Blender import region_config.py
 __pycache__/
 *.pyc
+
+# Bản sao lưu do công cụ sinh ra khi sửa file (*.backup-YYYYMMDD-HHMMSS)
+*.backup-*
+# Log dev server ghi tại gốc dự án
+soma-dev.log

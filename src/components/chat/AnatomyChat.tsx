@@ -1,131 +1,129 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import type { Loc } from "@/lib/homeContent";
 
-/**
- * Trợ lý hỏi đáp giải phẫu. Gọi /api/chat — tầng tra cứu luôn chạy, tầng
- * Claude chỉ bật khi máy chủ có ANTHROPIC_API_KEY (xem route.ts). Giao diện
- * hiển thị rõ đang chạy tầng nào để người dùng biết câu trả lời đến từ đâu.
- */
-type Source = {
-  id: string; name: string; latin?: string; system: string;
-  scene: string; sceneSlug: string; meshName: string; note: string;
-};
+type Source = { id: string; name: string; latin?: string; system: string; sceneSlug: string };
 type Msg = { role: "user" | "bot"; text: string; sources?: Source[]; engine?: string };
+type SpeechResultEvent = Event & { resultIndex: number; results: ArrayLike<{ 0: { transcript: string } }> };
+type Recognition = EventTarget & {
+  lang: string; continuous: boolean; interimResults: boolean;
+  start(): void; stop(): void; abort(): void;
+  onresult: ((event: SpeechResultEvent) => void) | null;
+  onerror: (() => void) | null; onend: (() => void) | null;
+};
+type RecognitionConstructor = new () => Recognition;
 
 const TXT = {
   vi: {
-    eyebrow: "TRỢ LÝ GIẢI PHẪU", title: "Hỏi đáp cấu trúc",
-    lead: "Hỏi về bất kỳ cấu trúc nào có trong thư viện 3D. Câu trả lời luôn kèm nguồn và nút mở đúng cấu trúc trên mô hình.",
-    ph: "Ví dụ: gan nằm ở đâu, dây thần kinh giữa chi phối cơ nào…",
-    send: "Hỏi", thinking: "Đang tra…", sources: "Nguồn trong thư viện",
-    view: "Mở trên mô hình 3D",
-    lookup: "Tra cứu thư viện", claude: "Claude + thư viện",
-    disclaimer: "Nội dung phục vụ học tập, không thay thế chẩn đoán hay điều trị.",
-    err: "Không gọi được trợ lý. Thử lại giúp tôi.",
+    eyebrow: "TRỢ LÝ HỌC TẬP Y KHOA", title: "Hỏi Soma bằng giọng nói hoặc văn bản",
+    lead: "Tra cứu giải phẫu từ thư viện Soma, nhận giải thích có nguồn và mở trực tiếp cấu trúc liên quan trên mô hình 3D.",
+    ph: "Hỏi về một cấu trúc, chức năng hoặc liên quan lâm sàng…", send: "Gửi câu hỏi", thinking: "Đang tra thư viện…",
+    sources: "Cấu trúc liên quan", view: "Mở mô hình", lookup: "Soma Library", claude: "AI + Soma Library",
+    disclaimer: "Phục vụ học tập; không thay thế chẩn đoán hoặc điều trị.", err: "Chưa thể kết nối trợ lý. Hãy thử lại.",
+    listen: "Bắt đầu nói", stop: "Dừng nghe", listening: "Đang nghe bạn nói…", read: "Đọc câu trả lời", stopRead: "Dừng đọc",
+    history: "Phiên học hiện tại", empty: "Bắt đầu bằng một câu hỏi hoặc chọn gợi ý bên dưới.", clear: "Xóa phiên",
+    capabilities: "Soma có thể giúp gì?", cap1: "Giải thích cấu trúc", cap2: "Đối chiếu thuật ngữ", cap3: "Mở mô hình 3D",
+    prompts: ["Tim có những buồng nào?", "Gan liên quan với các cơ quan nào?", "Dây thần kinh giữa chi phối gì?", "So sánh động mạch và tĩnh mạch"],
   },
   en: {
-    eyebrow: "ANATOMY ASSISTANT", title: "Ask about a structure",
-    lead: "Ask about any structure in the 3D library. Every answer cites its source and opens the structure on the model.",
-    ph: "e.g. where is the liver, what does the median nerve supply…",
-    send: "Ask", thinking: "Searching…", sources: "Library sources",
-    view: "Open on the 3D model",
-    lookup: "Library lookup", claude: "Claude + library",
-    disclaimer: "For learning only — not a substitute for diagnosis or treatment.",
-    err: "Could not reach the assistant. Please try again.",
+    eyebrow: "MEDICAL STUDY ASSISTANT", title: "Ask Soma by voice or text", lead: "Search Soma's anatomy library, get sourced explanations, and open related structures in 3D.",
+    ph: "Ask about a structure, function or clinical relation…", send: "Send question", thinking: "Searching the library…", sources: "Related structures", view: "Open model", lookup: "Soma Library", claude: "AI + Soma Library", disclaimer: "For learning only; not a substitute for diagnosis or treatment.", err: "The assistant is unavailable. Please try again.", listen: "Start speaking", stop: "Stop listening", listening: "Listening…", read: "Read answer", stopRead: "Stop reading", history: "Current study session", empty: "Start with a question or choose a prompt below.", clear: "Clear session", capabilities: "What can Soma do?", cap1: "Explain structures", cap2: "Compare terminology", cap3: "Open 3D models", prompts: ["What are the chambers of the heart?", "What organs relate to the liver?", "What does the median nerve supply?", "Compare arteries and veins"],
   },
   zh: {
-    eyebrow: "解剖助手", title: "结构问答",
-    lead: "可询问三维资料库中的任何结构。每个回答都标注来源并可直接在模型中打开。",
-    ph: "例如：肝在哪里、正中神经支配哪些肌肉…",
-    send: "提问", thinking: "查询中…", sources: "资料库来源",
-    view: "在三维模型中打开",
-    lookup: "资料库检索", claude: "Claude + 资料库",
-    disclaimer: "仅供学习，不能替代诊断或治疗。",
-    err: "无法连接助手，请重试。",
+    eyebrow: "医学学习助手", title: "通过语音或文字询问 Soma", lead: "检索 Soma 解剖资料库，获取有来源的解释并打开相关三维结构。", ph: "询问结构、功能或临床关系…", send: "发送问题", thinking: "正在检索…", sources: "相关结构", view: "打开模型", lookup: "Soma 资料库", claude: "AI + Soma 资料库", disclaimer: "仅供学习，不能替代诊断或治疗。", err: "暂时无法连接助手，请重试。", listen: "开始说话", stop: "停止收听", listening: "正在收听…", read: "朗读回答", stopRead: "停止朗读", history: "当前学习会话", empty: "输入问题或选择下方建议。", clear: "清除会话", capabilities: "Soma 能做什么？", cap1: "解释结构", cap2: "对照术语", cap3: "打开三维模型", prompts: ["心脏有哪些腔室？", "肝脏与哪些器官相关？", "正中神经支配什么？", "比较动脉和静脉"],
   },
 } as const;
+
+function MicIcon() {
+  return <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6.5 11.5a5.5 5.5 0 0 0 11 0M12 17v4m-3 0h6"/></svg>;
+}
 
 export default function AnatomyChat({ locale }: { locale: Loc }) {
   const t = TXT[locale] ?? TXT.vi;
   const [msgs, setMsgs] = useState<Msg[]>([]);
   const [q, setQ] = useState("");
   const [busy, setBusy] = useState(false);
+  const [listening, setListening] = useState(false);
+  const [voiceError, setVoiceError] = useState("");
+  const [speaking, setSpeaking] = useState<number | null>(null);
   const endRef = useRef<HTMLDivElement>(null);
+  const recognitionRef = useRef<Recognition | null>(null);
 
-  const ask = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const question = q.trim();
+  useEffect(() => () => { recognitionRef.current?.abort(); window.speechSynthesis?.cancel(); }, []);
+  useEffect(() => { endRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" }); }, [msgs, busy]);
+
+  async function ask(questionText?: string) {
+    const question = (questionText ?? q).trim();
     if (!question || busy) return;
-    setQ("");
-    setMsgs((m) => [...m, { role: "user", text: question }]);
-    setBusy(true);
+    recognitionRef.current?.stop(); window.speechSynthesis?.cancel(); setSpeaking(null);
+    setQ(""); setMsgs((items) => [...items, { role: "user", text: question }]); setBusy(true);
     try {
-      const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ question, locale }),
-      });
+      const res = await fetch("/api/chat", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ question, locale }) });
+      if (!res.ok) throw new Error("assistant unavailable");
       const data = await res.json();
-      setMsgs((m) => [
-        ...m,
-        { role: "bot", text: data.answer ?? t.err, sources: data.sources, engine: data.engine },
-      ]);
-    } catch {
-      setMsgs((m) => [...m, { role: "bot", text: t.err }]);
-    } finally {
-      setBusy(false);
-      requestAnimationFrame(() => endRef.current?.scrollIntoView({ behavior: "smooth" }));
-    }
-  };
+      setMsgs((items) => [...items, { role: "bot", text: data.answer ?? t.err, sources: data.sources, engine: data.engine }]);
+    } catch { setMsgs((items) => [...items, { role: "bot", text: t.err }]); }
+    finally { setBusy(false); }
+  }
 
-  return (
-    <main className="chat-shell">
-      <span className="quiz-eyebrow">{t.eyebrow}</span>
-      <h1>{t.title}</h1>
-      <p className="quiz-lead">{t.lead}</p>
+  function toggleListening() {
+    if (listening) { recognitionRef.current?.stop(); return; }
+    const browser = window as typeof window & { SpeechRecognition?: RecognitionConstructor; webkitSpeechRecognition?: RecognitionConstructor };
+    const Constructor = browser.SpeechRecognition ?? browser.webkitSpeechRecognition;
+    if (!Constructor) { setVoiceError(locale === "vi" ? "Trình duyệt chưa hỗ trợ nhận dạng giọng nói." : "Voice recognition is not supported."); return; }
+    const recognition = new Constructor();
+    recognition.lang = locale === "vi" ? "vi-VN" : locale === "zh" ? "zh-CN" : "en-US";
+    recognition.continuous = false; recognition.interimResults = true;
+    recognition.onresult = (event) => { let text = ""; for (let i = event.resultIndex; i < event.results.length; i += 1) text += event.results[i][0].transcript; setQ(text.trimStart()); };
+    recognition.onerror = () => { setVoiceError(locale === "vi" ? "Không truy cập được micro. Hãy kiểm tra quyền của trình duyệt." : "Microphone access failed."); setListening(false); };
+    recognition.onend = () => { setListening(false); recognitionRef.current = null; };
+    recognitionRef.current = recognition; setVoiceError(""); setListening(true); recognition.start();
+  }
 
-      <div className="chat-log" data-lenis-prevent>
-        {msgs.map((m, i) => (
-          <div key={i} className={`chat-msg ${m.role}`}>
-            {m.role === "bot" && m.engine && (
-              <span className="chat-engine">
-                {m.engine.startsWith("claude") ? t.claude : t.lookup}
-              </span>
-            )}
-            <p>{m.text}</p>
-            {!!m.sources?.length && (
-              <div className="chat-src">
-                <b>{t.sources}</b>
-                {m.sources.map((s) => (
-                  <div key={s.id} className="chat-src-item">
-                    <span>
-                      {s.name}
-                      {s.latin ? <i> · {s.latin}</i> : null} — {s.system}
-                    </span>
-                    <Link href={`/xem/${s.sceneSlug}`}>{t.view} →</Link>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
-        {busy && <div className="chat-msg bot"><p className="chat-wait">{t.thinking}</p></div>}
-        <div ref={endRef} />
+  function speak(text: string, index: number) {
+    if (speaking === index) { window.speechSynthesis.cancel(); setSpeaking(null); return; }
+    window.speechSynthesis.cancel(); const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = locale === "vi" ? "vi-VN" : locale === "zh" ? "zh-CN" : "en-US"; utterance.rate = .95;
+    utterance.onend = () => setSpeaking(null); utterance.onerror = () => setSpeaking(null);
+    setSpeaking(index); window.speechSynthesis.speak(utterance);
+  }
+
+  return <main className="assistant-page">
+    <section className="assistant-intro">
+      <div><span>{t.eyebrow}</span><h1>{t.title}</h1><p>{t.lead}</p></div>
+      <div className="assistant-mascot"><i/><Image src="/mascot/white-pixel-cat-greet.png" alt="Soma medical cat" width={180} height={180}/><b>SOMA / ONLINE</b></div>
+    </section>
+
+    <section className="assistant-workspace">
+      <aside className="assistant-sidebar">
+        <header><span>01</span><div><b>{t.capabilities}</b><small>Atlas · Terminologia Anatomica · 3D</small></div></header>
+        <ul><li><i>+</i>{t.cap1}</li><li><i>≋</i>{t.cap2}</li><li><i>⌁</i>{t.cap3}</li></ul>
+        <div className="assistant-prompts">{t.prompts.map((prompt) => <button key={prompt} onClick={() => void ask(prompt)}>{prompt}<span>↗</span></button>)}</div>
+        <p>{t.disclaimer}</p>
+      </aside>
+
+      <div className="assistant-chat-card">
+        <header><div><span>{t.history}</span><b>{msgs.length ? `${msgs.length} messages` : "READY"}</b></div><button onClick={() => { setMsgs([]); window.speechSynthesis.cancel(); }} disabled={!msgs.length}>{t.clear}</button></header>
+        <div className="assistant-log" data-lenis-prevent>
+          {!msgs.length && <div className="assistant-empty"><Image src="/mascot/white-pixel-cat-idle.png" alt="" width={80} height={80}/><h2>{t.empty}</h2><p>{t.lead}</p></div>}
+          {msgs.map((message, index) => <article key={`${message.role}-${index}`} className={message.role}>
+            {message.role === "bot" && <header><span>{message.engine?.startsWith("claude") ? t.claude : t.lookup}</span><button onClick={() => speak(message.text, index)}>{speaking === index ? `■ ${t.stopRead}` : `◖)) ${t.read}`}</button></header>}
+            <p>{message.text}</p>
+            {!!message.sources?.length && <div className="assistant-sources"><b>{t.sources}</b>{message.sources.slice(0,4).map((source) => <Link key={source.id} href={`/xem/${source.sceneSlug}`}><span>{source.name}<i>{source.latin}</i></span><em>{t.view} ↗</em></Link>)}</div>}
+          </article>)}
+          {busy && <article className="bot assistant-wait"><i/><i/><i/><span>{t.thinking}</span></article>}
+          <div ref={endRef}/>
+        </div>
+        <form className="assistant-composer" onSubmit={(event) => { event.preventDefault(); void ask(); }}>
+          <button type="button" className={listening ? "voice active" : "voice"} onClick={toggleListening} aria-label={listening ? t.stop : t.listen}><MicIcon/><span>{listening ? t.stop : t.listen}</span></button>
+          <textarea rows={2} value={q} onChange={(event) => setQ(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter" && !event.shiftKey) { event.preventDefault(); void ask(); } }} placeholder={listening ? t.listening : t.ph}/>
+          <button className="submit" type="submit" disabled={!q.trim() || busy}><span>{t.send}</span>↑</button>
+        </form>
+        {(listening || voiceError) && <div className={`assistant-voice-status${listening ? " active" : ""}`}><i/>{listening ? t.listening : voiceError}</div>}
       </div>
-
-      <form className="chat-form" onSubmit={ask}>
-        <input
-          value={q}
-          onChange={(e) => setQ(e.target.value)}
-          placeholder={t.ph}
-          aria-label={t.title}
-        />
-        <button type="submit" disabled={busy || !q.trim()}>{t.send}</button>
-      </form>
-      <p className="chat-note">{t.disclaimer}</p>
-    </main>
-  );
+    </section>
+  </main>;
 }

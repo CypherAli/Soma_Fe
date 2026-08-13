@@ -11,7 +11,7 @@ export default function HomePage({ locale }: { locale: Loc }) {
   return (
     <div className="bd">
       <IconSprite />
-      <HomeNav />
+      <HomeNav minimal />
 
       <header className="hero">
         <div className="wrap">
@@ -23,14 +23,6 @@ export default function HomePage({ locale }: { locale: Loc }) {
             </h1>
             <p className="hero-lede">{pick(C.hero.lede, locale)}</p>
             <HomeSearch locale={locale} />
-            <div className="hero-cta">
-              <Link href="/nguoi" className="pill pill-solid">
-                {pick(C.hero.ctaPrimary, locale)}
-              </Link>
-              <Link href="/giai-phau/theo-vung" className="pill pill-ghost">
-                {pick(C.hero.ctaSecondary, locale)}
-              </Link>
-            </div>
           </div>
         </div>
       </header>

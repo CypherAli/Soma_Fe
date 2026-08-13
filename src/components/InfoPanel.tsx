@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { useAnatomyStore } from "@/store/useAnatomyStore";
+import ViewerPathologyPanel from "./pathology/ViewerPathologyPanel";
 
 export default function InfoPanel() {
   const t = useTranslations("info");
@@ -18,7 +19,10 @@ export default function InfoPanel() {
   const isIsolated = selected ? isolatedId === selected.id : false;
 
   return (
-    <aside className="flex w-72 shrink-0 flex-col border-l border-[var(--line)] bg-[var(--surf)]">
+    <aside
+      className="viewer-info-panel flex w-80 shrink-0 flex-col overflow-y-auto border-l border-[var(--line)] bg-[var(--surf)]"
+      data-lenis-prevent
+    >
       <div className="border-b border-[var(--line)] px-4 py-3">
         <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--muted-2)]">
           {t("title")}
@@ -82,6 +86,7 @@ export default function InfoPanel() {
               </p>
             </div>
           )}
+          <ViewerPathologyPanel />
         </div>
       ) : (
         <div className="flex flex-1 items-center justify-center p-6">

@@ -118,7 +118,9 @@ export default function HumanPage({ locale }: { locale: Loc }) {
               <h2>{pick(C.sources.heading, locale)}</h2>
               <p>{pick(C.sources.body, locale)}</p>
             </div>
-            <div className="src-gaps">
+            {/* id để thẻ "chưa có dữ liệu" ở trang Giải phẫu trỏ thẳng tới đây
+                (Mô mỡ, Hệ sinh sản nữ) thay vì bấm vào không phản ứng gì. */}
+            <div className="src-gaps" id="gioi-han-du-lieu">
               <h3>{pick(C.sources.gapsHeading, locale)}</h3>
               <p>{pick(C.sources.gapsBody, locale)}</p>
             </div>

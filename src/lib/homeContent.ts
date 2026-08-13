@@ -26,9 +26,10 @@ export const homeContent = {
   // Menu chính editorial — 4 mục như mẫu Corpus & Anima
   mainMenu: [
     { label: { vi: "Giải phẫu người", en: "Human anatomy", zh: "人体解剖" }, href: "/nguoi" },
-    { label: { vi: "Động vật nuôi", en: "Animals", zh: "动物" }, href: "/giai-phau/theo-vung" },
     { label: { vi: "Hệ cơ quan", en: "Organ systems", zh: "器官系统" }, href: "/giai-phau/theo-he" },
-    { label: { vi: "Phương pháp", en: "Method", zh: "方法" }, href: "/nguoi#phuong-phap" },
+    { label: { vi: "Quiz", en: "Quiz", zh: "测验" }, href: "/quiz" },
+    { label: { vi: "Vision AI", en: "Vision AI", zh: "视觉 AI" }, href: "/cu-chi" },
+    { label: { vi: "Bệnh lý", en: "Pathology", zh: "病理" }, href: "/benh-ly" },
   ],
   // Khối 2 cột: Corpus (người) · Anima (thú y)
   twoCol: {
@@ -57,7 +58,7 @@ export const homeContent = {
         zh: "涵盖犬、猫、马、家禽及外来动物的比较研究——服务于临床诊断与干预。",
       },
       cta: { vi: "Sắp ra mắt", en: "Coming soon", zh: "即将推出" },
-      href: "/giai-phau/theo-vung",
+      href: "/dong-vat",
       img: "/plates/skull-cat.jpg",
     },
   },
@@ -127,9 +128,14 @@ export const homeContent = {
     systemsH: { vi: "Hệ cơ quan", en: "Organ systems", zh: "器官系统" },
     /** Mục "Hệ cơ quan" trong mega-menu được sinh từ catalog, không khai ở đây. */
     upcomingH: { vi: "Đang xây dựng", en: "In progress", zh: "建设中" },
+    /**
+     * Hai mục này từng render bằng <div> trơ vì chưa có trang. Nay `/dong-vat`
+     * và `/quiz` đã tồn tại nên gắn href — mục nào có href thì HomeNav render
+     * thành <Link> bấm được, mục nào chưa có vẫn để trạng thái mờ.
+     */
     upcoming: [
-      { icon: "i-paw", label: { vi: "Giải phẫu thú y", en: "Veterinary anatomy", zh: "兽医解剖" }, vet: true },
-      { icon: "i-quiz", label: { vi: "Trắc nghiệm giải phẫu", en: "Anatomy quizzes", zh: "解剖测验" } },
+      { icon: "i-paw", label: { vi: "Giải phẫu thú y", en: "Veterinary anatomy", zh: "兽医解剖" }, href: "/dong-vat", vet: true },
+      { icon: "i-quiz", label: { vi: "Trắc nghiệm giải phẫu", en: "Anatomy quizzes", zh: "解剖测验" }, href: "/quiz" },
     ] as MenuItem[],
   },
   sections: {
