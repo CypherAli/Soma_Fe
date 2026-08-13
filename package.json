@@ -9,7 +9,8 @@
     "lint": "eslint",
     "verify:quiz-bank": "node scripts/verify-quiz-bank.mjs",
     "audit:quiz-ocr": "node scripts/audit-quiz-ocr.mjs",
-    "verify:scenes": "node scripts/verify-scenes.mjs"
+    "verify:scenes": "node scripts/verify-scenes.mjs",
+    "structures": "node scripts/model-structures.mjs"
   },
   "dependencies": {
     "@mediapipe/tasks-vision": "^1.0.1",

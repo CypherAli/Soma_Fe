@@ -48,9 +48,9 @@ export const cardiovascularScenes: Record<string, SceneModule> = {
         label: { vi: "Tâm thất trái", en: "Left Ventricle", zh: "左心室" },
         latinName: "Ventriculus sinister",
         note: {
-          vi: "Buồng bơm chính của tim, thành cơ dày nhất (8-12mm, dày gấp 2-3 lần thất phải) vì phải tạo đủ áp lực đẩy máu đi khắp cơ thể qua động mạch chủ. Huyết áp đo được (VD 120/80) phản ánh trực tiếp áp lực buồng này tạo ra.",
-          en: "The heart's main pumping chamber, with the thickest muscular wall (8-12mm, 2-3x thicker than the right ventricle) because it must generate enough pressure to push blood through the aorta to the entire body. Measured blood pressure (e.g., 120/80) directly reflects the pressure this chamber generates.",
-          zh: "心脏的主要泵血腔室，肌壁最厚（8-12毫米，比右心室厚2-3倍），因为它必须产生足够压力将血液经主动脉泵向全身。测得的血压（如120/80）直接反映此腔室产生的压力。",
+          vi: "Buồng bơm chính của tim, thành cơ dày nhất (8-12mm, dày gấp 2-3 lần thất phải) vì phải tạo đủ áp lực đẩy máu đi khắp cơ thể qua động mạch chủ. Số huyết áp TÂM THU (VD 120 mmHg) chính là áp lực đỉnh buồng này tạo ra; còn số tâm trương (80) là áp lực còn lại trong động mạch chủ lúc thất giãn — thất trái phải bóp vượt qua mức đó thì van động mạch chủ mới mở ra được (Guyton, tr.133 bản tiếng Việt).",
+          en: "The heart's main pumping chamber, with the thickest muscular wall (8-12mm, 2-3x thicker than the right ventricle) because it must generate enough pressure to push blood through the aorta to the entire body. The SYSTOLIC figure of blood pressure (e.g., 120 mmHg) is the peak pressure this chamber generates; the diastolic figure (80) is the pressure remaining in the aorta while the ventricle relaxes — the left ventricle must climb past it before the aortic valve can open.",
+          zh: "心脏的主要泵血腔室，肌壁最厚（8-12毫米，比右心室厚2-3倍），因为它必须产生足够压力将血液经主动脉泵向全身。血压中的收缩压（如120 mmHg）即此腔室产生的峰值压力；舒张压（80）则是心室舒张时主动脉内残留的压力——左心室须超过该值，主动脉瓣才会开放。",
         },
       },
       {

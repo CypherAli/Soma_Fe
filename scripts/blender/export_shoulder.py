@@ -1,5 +1,8 @@
 import bpy, sys, bmesh
 from mathutils import Vector
+import os as _os
+sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
+from clip_box import clip_box as _clip_box, clip_above_z as _clip_above_z, clip_ellipse_z as _clip_ellipse_z  # noqa: E402
 
 # ĐAI VAI – NÁCH (bên PHẢI): xương đòn – xương vai – đầu trên xương cánh tay,
 # cơ vai/ngực/lưng bám vai, ĐÁM RỐI CÁNH TAY đầy đủ (rễ → thân → ngành → bó),
@@ -189,16 +192,9 @@ for o in muscles + [b for b in bones if b.name.lower() in KEY_BONES]:
 
 # ---- 6) CẮT HỘP xương + cơ (bản gốc) về đúng khối vai ----
 def clip_box(o, margin=0.0):
-    me = o.data; mw = o.matrix_world
-    bm = bmesh.new(); bm.from_mesh(me)
-    kill = []
-    for f in bm.faces:
-        c = mw @ f.calc_center_median()
-        if (c.z > Z_TOP + margin or c.z < Z_BOT - margin or c.x < X_MED - margin
-                or c.x > X_LAT + margin or c.y < Y_BACK - margin or c.y > Y_FRONT + margin):
-            kill.append(f)
-    if kill:
-        bmesh.ops.delete(bm, geom=kill, context='FACES')
+    # Cắt bằng bisect + bịt nắp (clip_box.py).
+    _clip_box(o, X_MED, X_LAT, Y_BACK, Y_FRONT, Z_BOT, Z_TOP, margin)
+    return
     # BẮT BUỘC dọn đỉnh mồ côi: xoá mặt vẫn để lại đỉnh ở vị trí cũ (tận thắt
     # lưng), làm bbox mesh vẫn khổng lồ -> voxel remesh bọc da bị vượt hạn mức.
     loose = [v for v in bm.verts if not v.link_faces]

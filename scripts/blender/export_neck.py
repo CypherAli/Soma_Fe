@@ -1,5 +1,8 @@
 import bpy, sys, bmesh
 from mathutils import Vector
+import os as _os
+sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
+from clip_box import clip_box as _clip_box, clip_above_z as _clip_above_z, clip_ellipse_z as _clip_ellipse_z  # noqa: E402
 
 # CỔ (flagship) — đầy đủ nhiều lớp như Đầu/Tay:
 #   Đốt sống cổ C1-C7 + xương móng + SỤN THANH QUẢN (giáp/nhẫn/phễu) +
@@ -185,16 +188,8 @@ def clip_column(o, is_skin):
     # da clip RỘNG hơn cơ -> da phủ trùm mép cắt (không lòi cơ răng cưa)
     rx = 0.078 if is_skin else 0.069
     ry = 0.076 if is_skin else 0.067
-    me = o.data; mw = o.matrix_world
-    bm = bmesh.new(); bm.from_mesh(me)
-    kill = []
-    for f in bm.faces:
-        c = mw @ f.calc_center_median()
-        if ((c.x - cx) / rx) ** 2 + ((c.y - cy) / ry) ** 2 > 1.0:  # CHỈ tỉa hai bên
-            kill.append(f)
-    if kill:
-        bmesh.ops.delete(bm, geom=kill, context='FACES')
-    bm.to_mesh(me); bm.free()
+    # Trụ elip xấp xỉ bằng 28 mặt phẳng tiếp tuyến rồi bịt nắp (clip_box.py).
+    _clip_ellipse_z(o, cx, cy, rx, ry)
 for o in list(kept):
     if o.type == 'MESH':
         try: clip_column(o, o.name == "Skin envelope")

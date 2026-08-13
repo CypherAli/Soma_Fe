@@ -1,5 +1,8 @@
 import bpy, sys, bmesh
 from mathutils import Vector
+import os as _os
+sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
+from clip_box import clip_box as _clip_box, clip_above_z as _clip_above_z, clip_ellipse_z as _clip_ellipse_z  # noqa: E402
 
 # CẲNG TAY – BÀN TAY (mẫu cho điều khiển cử chỉ): từ KHUỶU đến hết NGÓN TAY.
 # Nhiều lớp bóc tách: da → cơ → động mạch → tĩnh mạch → thần kinh → xương.
@@ -142,14 +145,9 @@ except Exception as e:
 
 # ---- 4) CẮT NGANG tại khuỷu cho mọi mesh (mặt cắt gọn, không thò lên cánh tay) ----
 def clip_top(o, is_skin):
-    zc = CUT_Z + (0.004 if is_skin else 0.0)
-    me = o.data; mw = o.matrix_world
-    bm = bmesh.new(); bm.from_mesh(me); kill = []
-    for f in bm.faces:
-        if (mw @ f.calc_center_median()).z > zc:
-            kill.append(f)
-    if kill: bmesh.ops.delete(bm, geom=kill, context='FACES')
-    bm.to_mesh(me); bm.free()
+    # Cắt bằng bisect + bịt nắp (clip_box.py) — bản cũ xoá nguyên mặt tam giác
+    # nên mép khuỷu răng cưa và bụng cơ hở thành ống rỗng.
+    _clip_above_z(o, CUT_Z, 0.004 if is_skin else 0.0)
 for o in list(kept):
     if o.type == 'MESH':
         try: clip_top(o, o.name == "Skin envelope")
