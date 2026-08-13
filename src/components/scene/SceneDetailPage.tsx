@@ -10,6 +10,8 @@ import { useAnatomyStore } from "@/store/useAnatomyStore";
 import ModelViewer from "../viewer/ModelViewer";
 import SectionModelViewer from "../viewer/SectionModelViewer";
 import InfoPanel from "../InfoPanel";
+import LanguageSwitcher from "../LanguageSwitcher";
+import ThemeToggle from "../home/ThemeToggle";
 import "../../app/home.css";
 
 export default function SceneDetailPage({
@@ -47,6 +49,10 @@ export default function SceneDetailPage({
           {t("back")}
         </Link>
         <h1 className="text-sm font-semibold text-[var(--ink)]">{pick(sceneModule.title, locale)}</h1>
+        <div className="ml-auto flex items-center gap-2">
+          <ThemeToggle />
+          <LanguageSwitcher />
+        </div>
       </header>
 
       <div className="flex flex-1 overflow-hidden">

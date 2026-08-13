@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { Canvas } from "@react-three/fiber";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Canvas, useThree } from "@react-three/fiber";
 import { useGLTF, Center, Bounds, OrbitControls } from "@react-three/drei";
+import { useLocale } from "next-intl";
 import * as THREE from "three";
 
 import {
@@ -17,16 +18,50 @@ import {
   pickCat,
   type CatKey,
 } from "@/lib/anatomy/layers";
+import { isSelfOrDescendantOf } from "@/components/viewer/materials";
+import { cleanName, displayName, namedNode, sanitizeGltfName } from "@/components/viewer/Hotspots";
+import { useAnatomyStore, type SelectedPart } from "@/store/useAnatomyStore";
+import type { SceneHotspot } from "@/lib/sceneModules";
+import { pick, type Loc } from "@/lib/homeContent";
 
 type LayerState = Record<CatKey, { visible: boolean; faded: boolean }>;
 
+const HL_HOVER = new THREE.Color("#0ea5e9");
+const HL_SEL = new THREE.Color("#38bdf8");
+
+/** Mesh nhãn text 3D của Z-Anatomy — không phải cấu trúc giải phẫu, không cho chọn. */
+function isLabelMesh(m: THREE.Mesh, matName: string): boolean {
+  return /_systems?g$/i.test(m.name) || matName === "Text";
+}
+
+/**
+ * Vật liệu RIÊNG của một mesh, nhân bản từ vật liệu dùng chung của lớp.
+ * Bắt buộc phải có: `MAT[cat]` được CẢ LỚP dùng chung, nên tô sáng/làm mờ
+ * thẳng lên nó sẽ ăn vào toàn bộ lớp (chọn 1 cơ là sáng hết mọi cơ).
+ */
+function ownMat(m: THREE.Mesh): THREE.MeshStandardMaterial {
+  let own = m.userData.ownMat as THREE.MeshStandardMaterial | undefined;
+  if (!own) {
+    own = (m.userData.baseMat as THREE.MeshStandardMaterial).clone();
+    m.userData.ownMat = own;
+  }
+  return own;
+}
+
 function ArmModel({ url, layers }: { url: string; layers: LayerState }) {
   const { scene } = useGLTF(url, "/draco/");
+  const hiddenIds = useAnatomyStore((s) => s.hiddenIds);
+  const fadedIds = useAnatomyStore((s) => s.fadedIds);
+  const isolatedId = useAnatomyStore((s) => s.isolatedId);
+  const selectedId = useAnatomyStore((s) => s.selected?.id ?? null);
+  const hovered = useAnatomyStore((s) => s.hovered);
 
   const scn = useMemo(() => {
     scene.traverse((o) => {
       const m = o as THREE.Mesh;
       if (m.isMesh) {
+        const matName = (Array.isArray(m.material) ? m.material[0] : m.material)?.name ?? "";
+        m.userData.isLabel = isLabelMesh(m, matName);
         const cat = pickCat(`${m.name} ${m.parent?.name ?? ""}`);
         m.userData.cat = cat;
         m.material = MAT[cat];
@@ -40,6 +75,9 @@ function ArmModel({ url, layers }: { url: string; layers: LayerState }) {
         } else if (cat === "organ") {
           m.material = organMat(m.name); // mỗi tạng một màu
         }
+        // Vật liệu "gốc" của mesh = vật liệu dùng chung của lớp. Mọi hiệu ứng
+        // riêng lẻ (chọn/rê chuột/làm mờ 1 cấu trúc) đi qua bản sao, xem ownMat().
+        m.userData.baseMat = m.material;
       }
     });
     return scene;
@@ -78,24 +116,211 @@ function ArmModel({ url, layers }: { url: string; layers: LayerState }) {
       }
       mat.needsUpdate = true;
     });
+  }, [layers]);
+
+  /**
+   * Trạng thái TỪNG CẤU TRÚC (Ẩn/Mờ/Cô lập/đang chọn/đang rê chuột) chồng lên
+   * trạng thái TỪNG LỚP ở trên. So khớp theo CÂY CON chứ không theo tên tuyệt
+   * đối: nhiều "cấu trúc" trong Z-Anatomy là node cha chứa nhiều mesh con
+   * (gan 8 phân thuỳ, đốt sống có thân + cung) — so tên tuyệt đối thì bấm Cô
+   * lập sẽ ẩn sạch cả mô hình.
+   */
+  useEffect(() => {
+    const rootOf = (id: string | null) => (id ? scn.getObjectByName(id) ?? null : null);
+    const isolatedRoot = rootOf(isolatedId);
+    const selRoot = rootOf(selectedId);
+    const hoverRoot = rootOf(hovered);
+    const hiddenRoots = Object.keys(hiddenIds)
+      .filter((id) => hiddenIds[id])
+      .map((id) => scn.getObjectByName(id))
+      .filter((o): o is THREE.Object3D => !!o);
+    const fadedRoots = Object.keys(fadedIds)
+      .filter((id) => fadedIds[id])
+      .map((id) => scn.getObjectByName(id))
+      .filter((o): o is THREE.Object3D => !!o);
+
     scn.traverse((o) => {
       const m = o as THREE.Mesh;
-      if (m.isMesh) m.visible = layers[m.userData.cat as CatKey]?.visible ?? true;
+      if (!m.isMesh) return;
+      const st = layers[m.userData.cat as CatKey];
+      const isolatedOut = isolatedRoot !== null && !isSelfOrDescendantOf(m, isolatedRoot);
+      const hidden = hiddenRoots.some((r) => isSelfOrDescendantOf(m, r));
+      m.visible = (st?.visible ?? true) && !hidden && !isolatedOut;
+
+      const base = m.userData.baseMat as THREE.MeshStandardMaterial | undefined;
+      if (!base) return;
+      const isSel = selRoot !== null && isSelfOrDescendantOf(m, selRoot);
+      const isHover = !isSel && hoverRoot !== null && isSelfOrDescendantOf(m, hoverRoot);
+      const isFaded = fadedRoots.some((r) => isSelfOrDescendantOf(m, r));
+
+      if (!isSel && !isHover && !isFaded) {
+        if (m.material !== base) m.material = base;
+        return;
+      }
+      const own = ownMat(m);
+      own.color.copy(base.color);
+      own.roughness = base.roughness;
+      own.metalness = base.metalness;
+      own.side = base.side;
+      own.transparent = base.transparent;
+      own.opacity = base.opacity;
+      own.depthWrite = base.depthWrite;
+      own.emissive.setScalar(0);
+      own.emissiveIntensity = 0;
+      if (isFaded) {
+        // "Làm mờ" phải THẮNG trạng thái đang chọn: nút này luôn bấm lên đúng
+        // cấu trúc vừa chọn, nếu để lựa chọn ghi đè thì bấm xong không thấy gì
+        // đổi. Vẫn giữ ánh xanh để biết cấu trúc mờ đó là cái đang xem.
+        own.transparent = true; own.opacity = 0.12; own.depthWrite = false;
+        if (isSel) { own.emissive.copy(HL_SEL); own.emissiveIntensity = 0.5; }
+      } else if (isSel) {
+        // Cấu trúc đang chọn luôn hiện RÕ, kể cả khi cả lớp của nó đang để mờ —
+        // nếu không, bấm vào một nhãn trong lớp đang mờ sẽ như không có gì xảy ra.
+        own.transparent = false; own.opacity = 1; own.depthWrite = true;
+        own.emissive.copy(HL_SEL); own.emissiveIntensity = 0.55;
+      } else {
+        own.emissive.copy(HL_HOVER); own.emissiveIntensity = 0.3;
+      }
+      own.needsUpdate = true;
+      m.material = own;
     });
-  }, [scn, layers]);
+  }, [scn, layers, hiddenIds, fadedIds, isolatedId, selectedId, hovered]);
+
+  // Móc tự kiểm chứng (chỉ ở dev, giống `window.somaGesture` của trang /cu-chi):
+  // cho phép đếm mesh còn hiển thị sau khi bấm Ẩn/Cô lập mà không cần mắt người.
+  useEffect(() => {
+    if (process.env.NODE_ENV === "production") return;
+    (window as unknown as { somaScene?: THREE.Object3D }).somaScene = scn;
+  }, [scn]);
 
   return <primitive object={scn} />;
+}
+
+/**
+ * Raycast hover + click trên mô hình vùng. Cùng cơ chế với model mặt cắt
+ * (`SectionModelScene`) — sự kiện R3F gắn thẳng lên cây glTF nạp ngoài không
+ * đáng tin nên bắt pointer trên canvas rồi tự raycast.
+ */
+function Picker({ hotspots, locale }: { hotspots: SceneHotspot[]; locale: Loc }) {
+  const { camera, gl, raycaster, scene } = useThree();
+  const setSelected = useAnatomyStore((s) => s.setSelected);
+  const setHovered = useAnatomyStore((s) => s.setHovered);
+  const downRef = useRef<[number, number] | null>(null);
+
+  // Tra cứu nhãn đã biên soạn theo tên mesh ĐÃ sanitize — GLTFLoader đổi
+  // khoảng trắng thành "_" và xoá dấu chấm lúc chạy.
+  const byMesh = useMemo(() => {
+    const map = new Map<string, SceneHotspot>();
+    hotspots.forEach((h) => map.set(sanitizeGltfName(h.meshName), h));
+    return map;
+  }, [hotspots]);
+
+  useEffect(() => {
+    const el = gl.domElement;
+    const visibleUpTree = (o: THREE.Object3D): boolean => {
+      let cur: THREE.Object3D | null = o;
+      while (cur) {
+        if (!cur.visible) return false;
+        cur = cur.parent;
+      }
+      return true;
+    };
+    const pickAt = (cx: number, cy: number): THREE.Mesh | null => {
+      const rect = el.getBoundingClientRect();
+      const ndc = new THREE.Vector2(
+        ((cx - rect.left) / rect.width) * 2 - 1,
+        -((cy - rect.top) / rect.height) * 2 + 1,
+      );
+      raycaster.setFromCamera(ndc, camera);
+      const hits = raycaster.intersectObjects(scene.children, true);
+      for (const h of hits) {
+        const m = h.object as THREE.Mesh;
+        // Ẩn một lớp là đặt visible=false lên MESH, nhưng cây glTF còn các
+        // Group cha có thể bị ẩn — phải duyệt ngược lên tổ tiên, không thì
+        // bấm trúng thứ đang không nhìn thấy.
+        if (!m.isMesh || !m.name || m.userData.isLabel || !visibleUpTree(m)) continue;
+        // Lớp/cấu trúc đang để MỜ coi như "nhìn xuyên qua": người dùng làm mờ
+        // da chính là để xem lớp cơ bên dưới, nếu vẫn bắt tia thì bấm chỗ nào
+        // cũng chỉ ra tấm da. Bỏ qua để tia đi tiếp xuống lớp phía dưới.
+        // Xét CẢ vật liệu gốc của lớp (trạng thái Rõ/Mờ của cả lớp) lẫn vật
+        // liệu riêng đang gắn (Làm mờ từng cấu trúc) — mesh đang được chọn
+        // dùng bản sao luôn để opacity 1, chỉ nhìn bản sao sẽ bỏ sót lớp mờ.
+        const cur = (Array.isArray(m.material) ? m.material[0] : m.material) as
+          | THREE.MeshStandardMaterial
+          | undefined;
+        const base = m.userData.baseMat as THREE.MeshStandardMaterial | undefined;
+        const ghost = (mat?: THREE.MeshStandardMaterial) => !!mat?.transparent && mat.opacity < 0.5;
+        if (ghost(cur) || ghost(base)) continue;
+        return m;
+      }
+      return null;
+    };
+    /** Mesh vừa bấm có thể là một mảnh con của cấu trúc đã có nhãn (VD 1 thuỳ gan). */
+    const resolve = (m: THREE.Mesh): { obj: THREE.Object3D; def?: SceneHotspot } => {
+      let cur: THREE.Object3D | null = m;
+      while (cur) {
+        const def = byMesh.get(cur.name);
+        if (def) return { obj: cur, def };
+        cur = cur.parent;
+      }
+      return { obj: namedNode(m) };
+    };
+    const onMove = (e: PointerEvent) => {
+      const m = pickAt(e.clientX, e.clientY);
+      setHovered(m ? resolve(m).obj.name : null);
+      el.style.cursor = m ? "pointer" : "default";
+    };
+    const onDown = (e: PointerEvent) => { downRef.current = [e.clientX, e.clientY]; };
+    const onUp = (e: PointerEvent) => {
+      const d = downRef.current; downRef.current = null;
+      if (!d) return;
+      // Kéo để xoay mô hình thì KHÔNG tính là một cú bấm chọn.
+      if (Math.abs(e.clientX - d[0]) > 5 || Math.abs(e.clientY - d[1]) > 5) return;
+      const m = pickAt(e.clientX, e.clientY);
+      if (!m) { setSelected(null); return; }
+      const { obj, def } = resolve(m);
+      // Tên gốc (còn dấu chấm phân biệt trái/phải) nằm ở userData.name.
+      const raw = (obj.userData?.name as string | undefined) || obj.name;
+      const payload: SelectedPart = def
+        ? {
+            id: obj.name,
+            name: displayName(def, locale),
+            latin: def.latinName ?? def.meshName.replace(/_/g, " "),
+            description: def.note ? pick(def.note, locale) : undefined,
+          }
+        : {
+            id: obj.name,
+            name: cleanName(raw),
+            latin: raw.replace(/^tube[_ ]/i, "").replace(/\.\d{3,}$/, "").replace(/_/g, " "),
+          };
+      setSelected(payload);
+    };
+    el.addEventListener("pointermove", onMove);
+    el.addEventListener("pointerdown", onDown);
+    el.addEventListener("pointerup", onUp);
+    return () => {
+      el.removeEventListener("pointermove", onMove);
+      el.removeEventListener("pointerdown", onDown);
+      el.removeEventListener("pointerup", onUp);
+    };
+  }, [camera, gl, raycaster, scene, byMesh, locale, setSelected, setHovered]);
+
+  return null;
 }
 
 export default function ArmViewer({
   url = "/models/arm.glb",
   cats,
   defaultFaded,
+  hotspots = [],
 }: {
   url?: string;
   cats?: CatKey[]; // giới hạn lớp hiện trong bảng (mặc định: đủ 8)
   defaultFaded?: CatKey[]; // lớp mở ra ở trạng thái MỜ sẵn (vd da) để lộ chi tiết bên trong
+  hotspots?: SceneHotspot[]; // nhãn đã biên soạn — để click trúng mesh nào thì hiện đúng tên tiếng Việt
 }) {
+  const locale = useLocale() as Loc;
+  const selected = useAnatomyStore((s) => s.selected);
   const shown = cats ? CATS.filter((c) => cats.includes(c.key)) : CATS;
   const [layers, setLayers] = useState<LayerState>(() =>
     Object.fromEntries(
@@ -115,14 +340,13 @@ export default function ArmViewer({
     setLayers((s) => ({ ...s, [k]: { ...s[k], [field]: !s[k][field] } }));
 
   return (
-    <div style={{ position: "relative", width: "100%", height: "100%" }}>
+    <div className="viewer-stage" style={{ position: "relative", width: "100%", height: "100%" }}>
       <Canvas
         dpr={[1, 1.6]}
         camera={{ position: [0, 0.1, 2.6], fov: 40, near: 0.01, far: 100 }}
-        gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping }}
-        style={{ width: "100%", height: "100%" }}
+        gl={{ antialias: true, alpha: true, toneMapping: THREE.ACESFilmicToneMapping }}
+        style={{ width: "100%", height: "100%", background: "transparent" }}
       >
-        <color attach="background" args={["#f4efe6"]} />
         <hemisphereLight args={["#fff6ea", "#cbb9a0", 0.75]} />
         <ambientLight intensity={0.4} />
         <directionalLight position={[3, 5, 4]} intensity={1.2} color="#fff3e2" />
@@ -133,8 +357,11 @@ export default function ArmViewer({
             <ArmModel url={url} layers={layers} />
           </Center>
         </Bounds>
+        <Picker hotspots={hotspots} locale={locale} />
+        {/* Đang xem một cấu trúc cụ thể thì DỪNG tự xoay — mô hình trôi dưới
+            con trỏ làm việc bấm chọn từng nhánh mạch/thần kinh gần như bất khả. */}
         <OrbitControls makeDefault enablePan minDistance={0.3} maxDistance={8}
-          autoRotate autoRotateSpeed={0.4} />
+          autoRotate={!selected} autoRotateSpeed={0.4} />
       </Canvas>
 
       {/* Bảng điều khiển lớp */}
@@ -158,15 +385,19 @@ export default function ArmViewer({
           );
         })}
       </div>
+
+      <p style={hintStyle}>
+        {selected ? selected.name : "Nhấp vào một bộ phận để xem thông tin"}
+      </p>
     </div>
   );
 }
 
 const panelStyle: React.CSSProperties = {
   position: "absolute", top: 20, right: 20, width: 230, padding: "14px 16px", zIndex: 5,
-  background: "rgba(255,253,248,.92)", border: "1px solid #ddd2c0", borderRadius: 10,
-  boxShadow: "0 10px 30px rgba(60,40,20,.12)", fontFamily: "var(--font-sans, sans-serif)",
-  color: "#1c1813", backdropFilter: "blur(6px)",
+  background: "rgba(27,25,22,.9)", border: "1px solid #3c3831", borderRadius: 10,
+  boxShadow: "0 14px 36px rgba(0,0,0,.3)", fontFamily: "var(--font-sans, sans-serif)",
+  color: "#eee8dc", backdropFilter: "blur(8px)",
 };
 const rowStyle: React.CSSProperties = {
   display: "flex", alignItems: "center", gap: 8, padding: "5px 0", fontSize: 13.5,
@@ -176,8 +407,14 @@ const dotStyle: React.CSSProperties = {
 };
 const btnStyle = (on: boolean): React.CSSProperties => ({
   fontSize: 11, padding: "3px 9px", borderRadius: 6, cursor: "pointer",
-  border: "1px solid #ddd2c0", background: on ? "#1c1813" : "transparent",
-  color: on ? "#f4efe6" : "#6f665a", minWidth: 40,
+  border: "1px solid #4a453c", background: on ? "#eee8dc" : "transparent",
+  color: on ? "#171512" : "#aaa195", minWidth: 40,
 });
+const hintStyle: React.CSSProperties = {
+  position: "absolute", bottom: 16, left: "50%", transform: "translateX(-50%)", zIndex: 5,
+  pointerEvents: "none", padding: "6px 16px", borderRadius: 999, fontSize: 12,
+  background: "rgba(27,25,22,.9)", border: "1px solid #3c3831", color: "#ddd5c8",
+  boxShadow: "0 8px 22px rgba(0,0,0,.28)", whiteSpace: "nowrap",
+};
 
 useGLTF.preload("/models/arm.glb", "/draco/");

@@ -146,7 +146,6 @@ export default function Scene() {
       onPointerMissed={() => clearSelection(null)}
       gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping, preserveDrawingBuffer: true }}
     >
-      <color attach="background" args={["#0b1220"]} />
       <hemisphereLight intensity={0.6} groundColor="#0b1220" />
       <directionalLight
         position={[4, 8, 5]}

@@ -27,10 +27,30 @@ export function sanitizeGltfName(raw: string): string {
   return raw.replace(/\s/g, "_").replace(/[[\].:/]/g, "");
 }
 
+/**
+ * Trình xuất glTF tách một mesh NHIỀU MATERIAL thành nhiều primitive tên
+ * "<tên gốc>_1", "<tên gốc>_2"… nằm dưới một Group mang đúng tên cấu trúc, và
+ * các primitive đó KHÔNG có `userData.name`. Bấm trúng chúng mà không leo lên
+ * thì panel hiện "Liver 1" thay vì "Gan". Chỉ leo khi tên con đúng dạng
+ * "<tên cha>_<số>" nên không bao giờ leo vượt lên node không liên quan.
+ */
+export function namedNode(o: THREE.Object3D): THREE.Object3D {
+  // Tên gốc nằm ở userData.name. Còn nguyên thì đây đã là node cấu trúc.
+  if (o.userData?.name) return o;
+  // Không có: đây là primitive do trình xuất tách ra, cha mới là cấu trúc thật.
+  // CHỈ leo đúng MỘT bậc và chỉ khi cha có tên gốc — không leo tiếp lên Scene.
+  const parent = o.parent;
+  if (parent?.userData?.name) return parent;
+  return o;
+}
+
 /** Bỏ hậu tố .l/.r/.j và ngoặc trong tên mesh Z-Anatomy gốc → tên hiển thị gọn. */
 export function cleanName(raw: string): string {
+  // "tube_": tiền tố do `collect_tubes()` trong script export đặt khi đổi curve
+  // (mạch máu, dây thần kinh) thành ống — 218/418 mesh của model cánh tay mang
+  // tiền tố này, để nguyên thì panel hiện "tube Femoral artery".
   // ".001": hậu tố Blender tự thêm khi nhân bản, không thuộc tên giải phẫu.
-  let n = raw.replace(/\.\d{3,}$/, "").replace(/_/g, " ");
+  let n = raw.replace(/^tube[_ ]/i, "").replace(/\.\d{3,}$/, "").replace(/_/g, " ");
   const m = n.match(/\.(ol|or|l|r|j)$/i);
   let side = "";
   if (m) {
@@ -181,7 +201,9 @@ export default function Hotspots({
       setSelected(null);
       return;
     }
-    const item = resolved.find((r) => r.def.key === activeHotspotKey);
+    const item = resolved.find(
+      (r) => r.def.key === activeHotspotKey || r.obj.name === activeHotspotKey,
+    );
     if (item) {
       // CHỈ đánh dấu "đã xử lý" khi thực sự tìm thấy — nếu model/hotspot
       // CHƯA kịp resolve xong lúc effect này chạy (resolved rỗng/thiếu),
@@ -199,13 +221,18 @@ export default function Hotspots({
     }
     // activeHotspotKey không khớp Nhãn định sẵn nào → đến từ click trực tiếp
     // lên 1 mesh bất kỳ trên mô hình (Picker).
-    const obj = scene.getObjectByName(activeHotspotKey);
-    if (!obj) return;
+    const hit = scene.getObjectByName(activeHotspotKey);
+    if (!hit) return;
+    const obj = namedNode(hit);
     prevActiveKeyRef.current = activeHotspotKey;
     // tên GỐC ở userData.name — obj.name đã bị GLTFLoader sanitize mất dấu chấm
     // nên cleanName không tách được hậu tố bên (xem rawName trong ModelScene).
     const raw = (obj.userData?.name as string | undefined) || obj.name;
-    setSelected({ id: obj.name, name: cleanName(raw), latin: raw.replace(/\.\d{3,}$/, "").replace(/_/g, " ") });
+    setSelected({
+      id: obj.name,
+      name: cleanName(raw),
+      latin: raw.replace(/^tube[_ ]/i, "").replace(/\.\d{3,}$/, "").replace(/_/g, " "),
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeHotspotKey, resolved, scene]);
 

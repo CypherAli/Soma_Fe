@@ -381,7 +381,7 @@ export function prepareAnatomyScene(scene: THREE.Object3D, fallbackSystem: Syste
   });
 }
 
-function isSelfOrDescendantOf(obj: THREE.Object3D, root: THREE.Object3D): boolean {
+export function isSelfOrDescendantOf(obj: THREE.Object3D, root: THREE.Object3D): boolean {
   let cur: THREE.Object3D | null = obj;
   while (cur) {
     if (cur === root) return true;

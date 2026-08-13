@@ -7,19 +7,23 @@ import { routing } from "@/i18n/routing";
 import { homeContent as C, pick, type Loc } from "@/lib/homeContent";
 import { systemGroups, scenesOfSystem, catalogStats } from "@/lib/catalog";
 import { Icon } from "./IconSprite";
+import { AUTH_CHANGED_EVENT, authRequest, clearAuth, getToken, type AuthUser } from "@/lib/auth";
+import ThemeToggle from "./ThemeToggle";
 
 const LANG_CODE: Record<Loc, string> = { vi: "VI", en: "EN", zh: "中" };
 
-export default function HomeNav() {
+export default function HomeNav({ minimal = false }: { minimal?: boolean }) {
   const locale = useLocale() as Loc;
   const router = useRouter();
   const pathname = usePathname();
   const [megaOpen, setMegaOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
+  const [user, setUser] = useState<AuthUser | null>(null);
+  const [accountOpen, setAccountOpen] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
+  const accountRef = useRef<HTMLDivElement>(null);
 
   const otherLocales = routing.locales.filter((l) => l !== locale);
-  const section = pathname.startsWith("/thu-vien") ? "library" : "explore";
 
   useEffect(() => {
     if (!langOpen) return;
@@ -30,8 +34,38 @@ export default function HomeNav() {
     return () => document.removeEventListener("mousedown", onClickOutside);
   }, [langOpen]);
 
-  // Đóng mega-menu khi chuyển trang, tránh menu treo lại sau điều hướng
-  useEffect(() => setMegaOpen(false), [pathname]);
+  useEffect(() => {
+    async function loadUser() {
+      await Promise.resolve();
+      if (!getToken()) return setUser(null);
+      try {
+        const result = await authRequest<{ user: AuthUser }>("/auth/me");
+        setUser(result.user);
+      } catch {
+        clearAuth();
+        setUser(null);
+      }
+    }
+    void loadUser();
+    window.addEventListener(AUTH_CHANGED_EVENT, loadUser);
+    return () => window.removeEventListener(AUTH_CHANGED_EVENT, loadUser);
+  }, []);
+
+  useEffect(() => {
+    if (!accountOpen) return;
+    const close = (event: MouseEvent) => {
+      if (accountRef.current && !accountRef.current.contains(event.target as Node)) setAccountOpen(false);
+    };
+    document.addEventListener("mousedown", close);
+    return () => document.removeEventListener("mousedown", close);
+  }, [accountOpen]);
+
+  async function logout() {
+    try { await authRequest("/auth/logout", { method: "POST" }); } catch { /* Xóa phiên cục bộ kể cả khi API ngoại tuyến. */ }
+    clearAuth();
+    setUser(null);
+    setAccountOpen(false);
+  }
 
   return (
     <>
@@ -39,7 +73,7 @@ export default function HomeNav() {
         <div className="nav-inner">
           <Link href="/" className="nav-word" aria-label="Soma 3D">Soma&nbsp;3D</Link>
 
-          <div className="menu">
+          {!minimal && <div className="menu">
             {C.mainMenu.map((m) => (
               <Link
                 key={m.href}
@@ -49,9 +83,10 @@ export default function HomeNav() {
                 {pick(m.label, locale)}
               </Link>
             ))}
-          </div>
+          </div>}
 
           <div className="nav-r">
+            <ThemeToggle />
             <div className="lang" ref={langRef}>
               <button
                 type="button"
@@ -78,9 +113,16 @@ export default function HomeNav() {
                 </div>
               )}
             </div>
-            <Link href="/dang-nhap" className="btn-signin">
-              {pick(C.nav.signIn, locale)}
-            </Link>
+            {user ? (
+              <div className="account" ref={accountRef}>
+                <button type="button" className="btn-signin account-trigger" onClick={() => setAccountOpen((open) => !open)} aria-expanded={accountOpen}>
+                  {user.name.split(" ").slice(-1)[0]}
+                </button>
+                {accountOpen && <div className="account-menu"><strong>{user.name}</strong><span>{user.email}</span><button type="button" onClick={logout}>Đăng xuất</button></div>}
+              </div>
+            ) : (
+              <Link href="/dang-nhap" className="btn-signin">{pick(C.nav.signIn, locale)}</Link>
+            )}
           </div>
         </div>
 
@@ -96,11 +138,17 @@ export default function HomeNav() {
                 ))}
 
                 <p className="mcol-h mt">{pick(C.mega.upcomingH, locale)}</p>
-                {C.mega.upcoming.map((m, i) => (
-                  <div key={i} className={`mi disabled${m.vet ? " vet" : ""}`}>
-                    <Icon id={m.icon} /> {pick(m.label, locale)}
-                  </div>
-                ))}
+                {C.mega.upcoming.map((m, i) =>
+                  m.href ? (
+                    <Link key={i} href={m.href} className={`mi${m.vet ? " vet" : ""}`}>
+                      <Icon id={m.icon} /> {pick(m.label, locale)}
+                    </Link>
+                  ) : (
+                    <div key={i} className={`mi disabled${m.vet ? " vet" : ""}`}>
+                      <Icon id={m.icon} /> {pick(m.label, locale)}
+                    </div>
+                  ),
+                )}
               </div>
 
               <div className="mega-systems">

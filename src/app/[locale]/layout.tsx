@@ -4,6 +4,8 @@ import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Inter, Playfair_Display } from "next/font/google";
 import { routing } from "@/i18n/routing";
+import ThemeToggle from "@/components/home/ThemeToggle";
+import FloatingSomaBot from "@/components/chat/FloatingSomaBot";
 import "../globals.css";
 
 const inter = Inter({ subsets: ["latin", "vietnamese"], variable: "--font-sans" });
@@ -38,9 +40,21 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
 
   return (
-    <html lang={locale} className={`${inter.variable} ${playfair.variable} h-full`}>
+    <html
+      lang={locale}
+      data-theme="dark"
+      suppressHydrationWarning
+      className={`${inter.variable} ${playfair.variable} h-full`}
+    >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{document.documentElement.dataset.theme=localStorage.getItem("soma3d-theme")||"dark"}catch{document.documentElement.dataset.theme="dark"}`,
+          }}
+        />
+      </head>
       <body className="h-full antialiased">
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider>{children}<ThemeToggle fallback /><FloatingSomaBot /></NextIntlClientProvider>
       </body>
     </html>
   );

@@ -24,7 +24,7 @@ function ViewerFallback() {
 export default function AnatomyViewer() {
   const t = useTranslations("viewer");
   return (
-    <div className="relative h-full w-full">
+    <div className="viewer-stage relative h-full w-full">
       <Scene />
       <p className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-slate-900/70 px-4 py-1.5 text-xs text-slate-300 backdrop-blur">
         {t("selectHint")}

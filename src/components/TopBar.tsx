@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { useAnatomyStore } from "@/store/useAnatomyStore";
 import LanguageSwitcher from "./LanguageSwitcher";
+import ThemeToggle from "./home/ThemeToggle";
 
 export default function TopBar() {
   const t = useTranslations();
@@ -46,6 +47,7 @@ export default function TopBar() {
         />
       </div>
 
+      <ThemeToggle />
       <LanguageSwitcher />
     </header>
   );
