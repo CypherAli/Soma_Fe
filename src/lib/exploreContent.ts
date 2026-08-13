@@ -1,6 +1,6 @@
 import type { T3 } from "./homeContent";
 import {
-  catalogScenes, regionGroups, scenesOfRegion, scenesOfSystem, systemByKey, systemGroups,
+  catalogScenes, getScene, regionGroups, scenesOfRegion, scenesOfSystem, systemByKey, systemGroups,
 } from "./catalog";
 
 export type CategorySlug =
@@ -102,11 +102,27 @@ const systemFilters: FilterTab[] = [
   { key: "female", label: { vi: "Nữ", en: "Female", zh: "女性" } },
 ];
 
-const systemCards: ResultCard[] = [
-  { img: "an-heart", icon: "i-heart", thumb: "/thumbnails/giai-phau-tim.jpg", title: { vi: "Hệ tuần hoàn", en: "Cardiovascular system", zh: "心血管系统" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/giai-phau-tim", real: true, type: "anatomy" },
-  { img: "an-skel", icon: "i-bone", thumb: "/thumbnails/giai-phau-so.jpg", title: { vi: "Hệ xương", en: "Skeletal system", zh: "骨骼系统" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/giai-phau-so", real: true, type: "anatomy" },
+/**
+ * Ảnh của thẻ NHÓM HỆ lấy thẳng từ scene mà thẻ trỏ tới.
+ *
+ * Trước đây `thumb` khai tay từng thẻ nên chỉ hai thẻ có ảnh, mười lăm thẻ còn
+ * lại rơi về hình minh hoạ mặc định dù scene đích của chúng ĐÃ có ảnh chụp
+ * thật. Suy ra từ href thì thêm ảnh cho scene nào là thẻ hệ tương ứng tự có
+ * ảnh, không phải nhớ sửa hai chỗ.
+ */
+function thumbOfHref(href: string): string | undefined {
+  const slug = href.startsWith("/giai-phau/mo-hinh/") ? href.slice("/giai-phau/mo-hinh/".length) : null;
+  return slug ? getScene(slug)?.thumb : undefined;
+}
+
+const rawSystemCards: ResultCard[] = [
+  { img: "an-heart", icon: "i-heart", title: { vi: "Hệ tuần hoàn", en: "Cardiovascular system", zh: "心血管系统" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/giai-phau-tim", real: true, type: "anatomy" },
+  { img: "an-skel", icon: "i-bone", title: { vi: "Hệ xương", en: "Skeletal system", zh: "骨骼系统" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/giai-phau-so", real: true, type: "anatomy" },
   { img: "an-muscle", icon: "i-muscle", title: { vi: "Hệ cơ", en: "Muscular system", zh: "肌肉系统" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/co-mat", real: true, type: "anatomy" },
-  { img: "an-skel", icon: "i-bone", title: { vi: "Hệ cơ xương", en: "Musculoskeletal system", zh: "肌肉骨骼系统" }, filters: ["male", "female"], href: "/viewer", real: true, type: "anatomy" },
+  // Thẻ này trỏ vào /viewer (atlas toàn thân) chứ không vào một scene nào nên
+  // không suy được ảnh từ href — phải khai tay. Dùng ảnh bộ xương toàn thân:
+  // ảnh hệ cơ toàn thân bị lớp mạc bọc ngoài che kín, nhìn ra ma-nơ-canh trắng.
+  { img: "an-skel", icon: "i-bone", thumb: "/thumbnails/he-co-xuong.jpg", title: { vi: "Hệ cơ xương", en: "Musculoskeletal system", zh: "肌肉骨骼系统" }, filters: ["male", "female"], href: "/viewer", real: true, type: "anatomy" },
   { img: "an-nerve", icon: "i-brain", title: { vi: "Hệ thần kinh", en: "Nervous system", zh: "神经系统" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/than-nao-day-so", real: true, type: "anatomy" },
   { img: "an-organ", icon: "i-stomach", title: { vi: "Hệ tiêu hóa", en: "Digestive system", zh: "消化系统" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/tong-quan-he-tieu-hoa", real: true, type: "anatomy" },
   { img: "an-lung", icon: "i-lungs", title: { vi: "Hệ hô hấp", en: "Respiratory system", zh: "呼吸系统" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/giai-phau-phoi", real: true, type: "anatomy" },
@@ -124,6 +140,11 @@ const systemCards: ResultCard[] = [
   { img: "an-cell", icon: "i-ear", title: { vi: "Hệ thính giác", en: "Auditory system", zh: "听觉系统" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/he-thinh-giac", real: true, type: "anatomy" },
   { img: "an-brain", icon: "i-eye", title: { vi: "Hệ thị giác", en: "Visual system", zh: "视觉系统" }, filters: ["male", "female"], href: "/giai-phau/mo-hinh/giai-phau-mat", real: true, type: "anatomy" },
 ];
+
+const systemCards: ResultCard[] = rawSystemCards.map((card) => ({
+  ...card,
+  thumb: card.thumb ?? thumbOfHref(card.href ?? ""),
+}));
 
 /**
  * Thẻ cho mọi scene có model 3D thật — DẪN XUẤT từ `catalog` thay vì liệt kê

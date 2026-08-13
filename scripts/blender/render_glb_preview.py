@@ -13,6 +13,14 @@ GLB, OUT = os.path.abspath(args[0]), os.path.abspath(args[1])
 SKIN_ALPHA = float(args[2]) if len(args) > 2 else 1.0
 FRAME = args[3] if len(args) > 3 else "head"   # "head" | "eye"
 HIDE = set((args[4].split(",") if len(args) > 4 else []))  # cat ẩn, vd "skin,muscle,bone"
+# Hệ số khoảng cách camera. <1 là thu gần lại: cấu trúc nhỏ và rải rác (hạch
+# bạch huyết, tuyến nội tiết, xương con tai giữa) có hộp bao trải rộng nhưng
+# vật thể chỉ là mấy chấm, khung mặc định chụp ra gần như một tấm ảnh trống.
+ZOOM = float(args[5]) if len(args) > 5 else 1.0
+# "r"/"l" = chỉ giữ một bên cơ thể. Model đối xứng (hai bàn tay, hai nhãn cầu,
+# hai chuỗi xương con) có hộp bao trùm cả KHOẢNG TRỐNG giữa hai bên, nên khung
+# hình phải lùi thật xa và mỗi bên chỉ còn một chấm nhỏ ở góc.
+SIDE = args[6] if len(args) > 6 else ""
 
 # wipe default scene
 bpy.ops.wm.read_factory_settings(use_empty=True)
@@ -86,6 +94,15 @@ for k,c in COL.items():
     mats[k]=m
 
 objs=[o for o in bpy.data.objects if o.type=='MESH']
+if SIDE in ("r", "l"):
+    other = ".l" if SIDE == "r" else ".r"
+    for o in list(objs):
+        nm = o.name.lower()
+        # tên có dạng "Scaphoid bone.l" hoặc "Median nerve.l.001"
+        if nm.endswith(other) or (other + ".") in nm:
+            bpy.data.objects.remove(o, do_unlink=True)
+    objs=[o for o in bpy.data.objects if o.type=='MESH']
+
 # ẩn (xoá) các mesh thuộc cat trong HIDE (gộp cat con về cat gốc)
 if HIDE:
     for o in list(objs):
@@ -111,8 +128,14 @@ else:
 
 # camera nhìn THẲNG mặt trước (-Y), hơi chếch, ngang tầm -> hợp cả vật thể dọc (cổ) lẫn tròn
 maxd=max(dims.x, dims.z)   # bề rộng biểu kiến mặt trước
-dist=max(maxd, dims.x)*1.9 + rad*0.2
+dist=(max(maxd, dims.x)*1.9 + rad*0.2) * ZOOM
 cam_d=bpy.data.cameras.new("c"); cam=bpy.data.objects.new("c",cam_d)
+# Mặt phẳng cắt phải co theo KÍCH THƯỚC VẬT THỂ. Mặc định của Blender là cắt gần
+# 0,1 m: model nhỏ (xương con tai giữa 4mm, tai trong 4cm, nhãn cầu 3cm) đứng
+# cách camera chưa tới 0,1 m nên bị xén sạch — ảnh ra một màu nền trơn mà render
+# vẫn báo thành công, không có lỗi nào để mà biết.
+cam_d.clip_start = max(dist * 0.001, 1e-5)
+cam_d.clip_end = dist * 100
 bpy.context.scene.collection.objects.link(cam)
 cam.location=ctr+Vector((dims.x*0.5, -dist, dims.z*0.06))
 dir=(ctr-cam.location).normalized()
