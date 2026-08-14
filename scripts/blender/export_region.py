@@ -207,7 +207,14 @@ class Region:
                 # động mạch cánh tay) có tâm nằm tận cẳng tay nên xét tâm sẽ
                 # loại mất chúng khỏi chính vùng chúng bắt đầu. Phần thừa ra
                 # ngoài hộp đã bị bước cắt hộp xử lý.
-                if named or self.center_in(o):
+                # curve_only_named: chỉ giữ đúng những tên đã gọi, KHÔNG lấy thêm
+                # theo tâm hộp. Cần cho vùng đầu và ổ bụng: hộp ở đó bao trùm cả
+                # búi mạch của vùng khác nên phép xét tâm kéo vào hàng trăm mạch
+                # lạc (scene xoang màng cứng có cả động mạch não giữa và mạch sàng).
+                if c.get("curve_only_named", False):
+                    if named:
+                        src.append(o)
+                elif named or self.center_in(o):
                     src.append(o)
             print(f"[{self.key}] {tag} curves {len(src)} -> tubes {self.tubes(src, depth)}")
 

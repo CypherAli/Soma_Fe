@@ -1,6 +1,7 @@
 import type { SceneModule } from "./types";
 import { regionScenes2, regionViewerConfig2 } from "./regions2";
 import { regionScenes3, regionViewerConfig3 } from "./regions3";
+import { regionScenes4, regionViewerConfig4 } from "./regions4";
 
 /**
  * Scene "vùng cơ thể nhiều lớp" — chuẩn dựng theo mô hình cánh tay: mỗi scene
@@ -14,6 +15,7 @@ import { regionScenes3, regionViewerConfig3 } from "./regions3";
 export const regionScenes: Record<string, SceneModule> = {
   ...regionScenes2,
   ...regionScenes3,
+  ...regionScenes4,
   "giai-phau-ban-tay": {
     slug: "giai-phau-ban-tay",
     title: { vi: "Bàn tay chi tiết", en: "The Hand in Detail", zh: "手部精细解剖" },
@@ -983,6 +985,7 @@ export type RegionViewKey =
 export const regionViewerConfig: Record<string, { cats: RegionViewKey[]; faded?: RegionViewKey[] }> = {
   ...regionViewerConfig2,
   ...regionViewerConfig3,
+  ...regionViewerConfig4,
   "giai-phau-ban-tay": { cats: ["skin", "muscle", "artery", "vein", "nerve", "bone"], faded: ["skin"] },
   "khop-vai-khuyu": { cats: ["muscle", "bone"] },
   "so-nen-so": { cats: ["artery", "vein", "nerve", "bone"] },

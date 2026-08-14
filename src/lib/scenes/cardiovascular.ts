@@ -115,71 +115,6 @@ export const cardiovascularScenes: Record<string, SceneModule> = {
       },
     ],
   },
-  "mat-cat-vanh-tim": {
-    slug: "mat-cat-vanh-tim",
-    title: {
-      vi: "Mặt cắt vành tim",
-      en: "Heart Coronal Cross Section",
-      zh: "心脏冠状切面",
-    },
-    description: {
-      vi: "Cả 4 buồng tim được cắt cùng lúc theo 1 mặt phẳng vành (trước-sau) để so sánh trực tiếp độ dày thành cơ và kích thước khoang rỗng — khác với trang \"Giải phẫu Tim\" chỉ xem nguyên khối từng buồng. Sự khác biệt rõ rệt giữa thành thất trái (dày) và thất phải (mỏng) chỉ thấy được qua mặt cắt này.",
-      en: "All 4 heart chambers are sliced together along a single coronal (front-to-back) plane to directly compare wall thickness and chamber volume — unlike the \"Heart Anatomy\" page, which shows each whole, uncut chamber. The stark difference between the thick left ventricular wall and the thin right ventricular wall is only visible in this cross-section.",
-      zh: "4个心腔沿同一冠状面（前后向）一同被切开，以直接比较肌壁厚度与腔室容积——不同于\"心脏解剖\"页面展示的完整、未切开的腔室。左心室壁的厚实与右心室壁的单薄之间的鲜明差异，唯有在此切面中才能看到。",
-    },
-    visibleSystems: ["cardiovascular"],
-    modelFile: "/models/heart_coronal_section.glb",
-    hotspots: [
-      {
-        key: "left-ventricle-wall",
-        meshName: "Left ventricle",
-        offset: [-150, 80],
-        label: { vi: "Thành thất trái (mặt cắt)", en: "Left Ventricular Wall (sectioned)", zh: "左心室壁（切面）" },
-        latinName: "Ventriculus sinister",
-        note: {
-          vi: "Ở mặt cắt này, thành cơ tim trái hiện rõ dày 8-12mm — gấp 2-3 lần thành thất phải bên cạnh — vì phải bơm máu qua toàn bộ vòng tuần hoàn hệ thống (đi khắp cơ thể) chứ không chỉ lên phổi.",
-          en: "In this section, the left ventricular myocardium is clearly 8-12mm thick — 2-3 times thicker than the adjacent right ventricular wall — because it must pump blood through the entire systemic circulation (the whole body), not just to the lungs.",
-          zh: "在此切面中，左心室心肌壁厚度明显达8-12毫米——比相邻的右心室壁厚2-3倍——因为它必须将血液泵送至整个体循环（全身），而不仅仅是肺部。",
-        },
-      },
-      {
-        key: "right-ventricle-wall",
-        meshName: "Right ventricle",
-        offset: [150, 80],
-        label: { vi: "Thành thất phải (mặt cắt)", en: "Right Ventricular Wall (sectioned)", zh: "右心室壁（切面）" },
-        latinName: "Ventriculus dexter",
-        note: {
-          vi: "Thành mỏng hơn hẳn thất trái dù khoang chứa thể tích máu tương đương mỗi nhịp bơm — minh chứng trực quan rằng độ dày cơ tim phản ánh ÁP LỰC cần tạo ra, không phải THỂ TÍCH máu cần bơm.",
-          en: "Its wall is much thinner than the left ventricle's despite pumping a roughly equal blood volume per beat — visual proof that myocardial wall thickness reflects the PRESSURE that must be generated, not the VOLUME of blood pumped.",
-          zh: "尽管每次搏动泵出的血量与左心室大致相当，其壁却薄得多——直观证明心肌壁厚度反映的是需要产生的压力，而非泵出的血量。",
-        },
-      },
-      {
-        key: "left-atrium-wall",
-        meshName: "Left atrium",
-        offset: [-150, -80],
-        label: { vi: "Thành nhĩ trái (mặt cắt)", en: "Left Atrial Wall (sectioned)", zh: "左心房壁（切面）" },
-        latinName: "Atrium sinistrum",
-        note: {
-          vi: "Thành nhĩ mỏng hơn nhiều so với thành thất ngay bên dưới — nhĩ chỉ cần đẩy máu 1 khoảng ngắn xuống thất chứ không phải bơm đi xa.",
-          en: "The atrial wall is much thinner than the ventricular wall just below it — the atrium only needs to push blood a short distance into the ventricle, not pump it far away.",
-          zh: "心房壁远比其下方的心室壁薄——心房只需将血液推送很短的距离进入心室，而无需将其泵送到远处。",
-        },
-      },
-      {
-        key: "right-atrium-wall",
-        meshName: "Right atrium",
-        offset: [150, -80],
-        label: { vi: "Thành nhĩ phải (mặt cắt)", en: "Right Atrial Wall (sectioned)", zh: "右心房壁（切面）" },
-        latinName: "Atrium dextrum",
-        note: {
-          vi: "Khoang rỗng bên trong tiếp nhận máu từ tĩnh mạch chủ trên và dưới — thể tích khoang tương đối lớn so với thành mỏng, đặc trưng của buồng chứa áp lực thấp.",
-          en: "The hollow interior receives blood from the superior and inferior venae cavae — a relatively large chamber volume paired with a thin wall, typical of a low-pressure holding chamber.",
-          zh: "内部空腔接收来自上、下腔静脉的血液——腔室容积相对较大而壁薄，是低压储血腔室的典型特征。",
-        },
-      },
-    ],
-  },
   "dong-mach-vanh": {
     slug: "dong-mach-vanh",
     title: {
@@ -342,64 +277,6 @@ export const cardiovascularScenes: Record<string, SceneModule> = {
           vi: "Tách ra từ động mạch dưới đòn, đi lên qua các lỗ mỏm ngang của 6 đốt sống cổ trên rồi chui vào hộp sọ — 2 động mạch đốt sống trái phải hợp lại thành động mạch nền, tạo nên nguồn cấp máu phía sau của não.",
           en: "Branches off the subclavian artery, ascending through the transverse foramina of the upper 6 cervical vertebrae before entering the skull — the left and right vertebral arteries merge to form the basilar artery, forming the brain's posterior blood supply.",
           zh: "从锁骨下动脉发出，向上穿经上6节颈椎的横突孔后进入颅腔——左右椎动脉汇合形成基底动脉，构成大脑的后部血供。",
-        },
-      },
-    ],
-  },
-  "mat-cat-dong-mach": {
-    slug: "mat-cat-dong-mach",
-    title: {
-      vi: "Mặt cắt động mạch chủ bụng",
-      en: "Abdominal Aorta Cross Section",
-      zh: "腹主动脉横切面",
-    },
-    description: {
-      vi: "Một đoạn động mạch chủ bụng được cắt ngang để lộ khẩu kính lòng mạch. Lưu ý: dữ liệu nguồn thể hiện mạch máu dưới dạng ống trơn 1 lớp (không có 3 lớp thành mạch thật — nội mạc/áo giữa/áo ngoài), nên mặt cắt chỉ cho thấy hình dạng và khẩu kính, không phải cấu trúc mô học thành mạch.",
-      en: "A segment of the abdominal aorta is sliced crosswise to reveal the vessel's lumen caliber. Note: the source data models blood vessels as a single smooth tube (not the true 3-layer wall — intima/media/adventitia), so this section shows shape and caliber only, not the histological wall structure.",
-      zh: "腹主动脉的一段被横向切开，以展示血管管腔的口径。请注意：原始数据将血管建模为单层光滑管道（并非真实的3层管壁结构——内膜/中膜/外膜），因此此切面仅展示形状与口径，并非管壁的组织学结构。",
-    },
-    visibleSystems: ["cardiovascular"],
-    modelFile: "/models/artery_section.glb",
-    hotspots: [
-      {
-        key: "abdominal-aorta",
-        meshName: "Abdominal aorta",
-        offset: [130, 0],
-        label: { vi: "Động mạch chủ bụng (mặt cắt)", en: "Abdominal Aorta (sectioned)", zh: "腹主动脉（切面）" },
-        latinName: "Aorta abdominalis",
-        note: {
-          vi: "Đoạn tiếp theo của động mạch chủ ngực, đi từ cơ hoành xuống tới ngang đốt sống thắt lưng IV thì chia đôi thành 2 động mạch chậu chung — là mạch máu lớn nhất cơ thể, đường kính thật khoảng 2cm ở người trưởng thành. Phình động mạch chủ bụng (AAA) là bệnh lý mạch máu nguy hiểm thường gặp ở người lớn tuổi.",
-          en: "The continuation of the thoracic aorta, running from the diaphragm down to about the level of the 4th lumbar vertebra, where it splits into the two common iliac arteries — the body's largest blood vessel, roughly 2cm in diameter in adults. Abdominal aortic aneurysm (AAA) is a common and dangerous vascular condition in older adults.",
-          zh: "胸主动脉的延续，从膈肌下行至约第4腰椎水平，分为左右髂总动脉——是人体最大的血管，成人直径约2厘米。腹主动脉瘤（AAA）是老年人常见且危险的血管疾病。",
-        },
-      },
-    ],
-  },
-  "mat-cat-tinh-mach": {
-    slug: "mat-cat-tinh-mach",
-    title: {
-      vi: "Mặt cắt tĩnh mạch chủ dưới",
-      en: "Inferior Vena Cava Cross Section",
-      zh: "下腔静脉横切面",
-    },
-    description: {
-      vi: "Một đoạn tĩnh mạch chủ dưới (phần bụng) được cắt ngang để lộ khẩu kính lòng mạch — cùng lưu ý về dữ liệu như scene động mạch chủ bụng: chỉ thể hiện hình dạng/khẩu kính, không có 3 lớp thành mạch thật.",
-      en: "A segment of the inferior vena cava (abdominal part) is sliced crosswise to reveal the vessel's lumen caliber — the same data caveat as the abdominal aorta scene applies: shape/caliber only, not the true 3-layer wall.",
-      zh: "下腔静脉（腹部段）的一段被横向切开，以展示血管管腔的口径——与腹主动脉切面场景相同的说明适用：仅展示形状/口径，并非真实的3层管壁结构。",
-    },
-    visibleSystems: ["cardiovascular"],
-    modelFile: "/models/vein_section.glb",
-    hotspots: [
-      {
-        key: "inferior-vena-cava",
-        meshName: "Inferior vena cava (abdominal part)",
-        offset: [130, 0],
-        label: { vi: "Tĩnh mạch chủ dưới (mặt cắt)", en: "Inferior Vena Cava (sectioned)", zh: "下腔静脉（切面）" },
-        latinName: "Vena cava inferior (pars abdominis)",
-        note: {
-          vi: "Tĩnh mạch lớn nhất cơ thể, thu gom máu từ toàn bộ nửa dưới cơ thể (chi dưới, tạng bụng-chậu) đổ về tâm nhĩ phải — nằm ngay bên phải động mạch chủ bụng, thành mỏng hơn nhiều so với động mạch cùng cỡ vì áp lực trong lòng mạch thấp hơn hẳn.",
-          en: "The body's largest vein, collecting blood from the entire lower half of the body (lower limbs, abdominal-pelvic organs) and returning it to the right atrium — it lies just to the right of the abdominal aorta, with a much thinner wall than an artery of similar size because its internal pressure is far lower.",
-          zh: "人体最大的静脉，收集来自全身下半身（下肢、腹盆腔器官）的血液并送回右心房——位于腹主动脉右侧，管壁比同等大小的动脉薄得多，因为其管腔内压力低得多。",
         },
       },
     ],
