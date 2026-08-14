@@ -647,6 +647,137 @@ REGIONS = {
                     "obturator", "anorectal", "iliac"],
     ),
 
+    # ---------- Nhóm I: đợt vùng thứ tư ----------
+    # Bảy vùng khớp và vùng giải phẫu kinh điển hay hỏi thi, chọn theo chỗ còn
+    # trống sau ba đợt trước. KHÔNG có vùng sinh dục trong đợt này.
+
+    "salivary_glands": dict(
+        curve_only_named=True,
+        out="salivary_glands.glb", side=None, min_verts=4,
+        box=(-0.090, 0.090, -0.090, 0.030, 1.470, 1.610),
+        bone_kw=["mandible", "maxilla", "temporal bone", "styloid", "hyoid"],
+        muscle_kw=["masseter", "buccinator", "digastric", "mylohyoid", "stylohyoid",
+                   "platysma", "pterygoid"],
+        organ_kw=["parotid", "submandibular gland", "sublingual gland", "duct"],
+        organ_tubes=True,
+        vessels=True, nerves=True, skin=False,
+        curve_drop_default=False,
+        curve_keep_names=["facial", "retromandibular", "maxillary", "lingual",
+                          "glossopharyngeal", "auriculotemporal", "external carotid",
+                          "superficial temporal", "duct"],
+        curve_drop=["cerebral", "coronary", "pulmonary", "mesenteric", "iliac", "femoral"],
+    ),
+
+    "dural_sinuses": dict(
+        curve_only_named=True,
+        out="dural_sinuses.glb", side=None, min_verts=4,
+        box=(-0.095, 0.095, -0.100, 0.115, 1.540, 1.730),
+        bone_kw=["frontal bone", "parietal bone", "occipital bone", "temporal bone",
+                 "sphenoid"],
+        bone_drop=["cells of", "sinus of"],
+        sense_kw=["falx", "tentorium"],
+        # Xoang hang là MESH nằm ở hệ 5 (mạch) chứ không phải đường cong, nên
+        # curve_keep_names không với tới — phải gọi qua heart_kw (khoá đọc hệ 5).
+        heart_kw=["cavernous sinus"],
+        vessels=True, nerves=False, skin=False,
+        curve_drop_default=False,
+        # Xoang màng cứng nằm trong hệ mạch (hệ 5) nhưng tên KHÔNG có chữ "vein"
+        # nào — phải gọi đích danh từng xoang, lọc theo từ khoá tĩnh mạch là mất sạch.
+        curve_keep_names=["sagittal sinus", "transverse sinus", "sigmoid sinus",
+                          "straight sinus", "occipital sinus", "cavernous",
+                          "petrosal sinus", "sphenoparietal", "confluence",
+                          "emissary", "diploic"],
+        curve_drop=["coronary", "pulmonary", "mesenteric", "renal", "iliac", "femoral"],
+    ),
+
+    "popliteal_fossa": dict(
+        out="popliteal_fossa.glb", side="r", min_verts=4,
+        box=(-0.150, -0.005, 0.000, 0.115, 0.330, 0.620),
+        bone_kw=["femur", "tibia", "fibula", "patella"],
+        joint_kw=True, joint_drop=["hip", "ankle", "shoulder", "elbow", "wrist", "intervertebral"],
+        muscle_kw=["biceps femoris", "semitendinosus", "semimembranosus", "gastrocnemius",
+                   "popliteus", "plantaris", "sartorius", "gracilis", "soleus"],
+        vessels=True, nerves=True, skin=False,
+        curve_drop_default=False,
+        curve_keep_names=["popliteal", "genicular", "sural", "tibial", "fibular",
+                          "peroneal", "saphenous"],
+        curve_drop=["mesenteric", "renal", "hepatic", "cerebral", "coronary", "pudendal"],
+    ),
+
+    "neck_triangles": dict(
+        curve_only_named=True,
+        out="neck_triangles.glb", side="r", min_verts=4,
+        box=(-0.090, 0.010, -0.085, 0.075, 1.340, 1.600),
+        bone_kw=["clavicle", "hyoid", "mandible", "vertebra c", "sternum", "scapula"],
+        muscle_kw=["sternocleidomastoid", "omohyoid", "sternohyoid", "sternothyroid",
+                   "thyrohyoid", "digastric", "stylohyoid", "mylohyoid", "scalene",
+                   "levator scapulae", "trapezius", "platysma", "longus"],
+        organ_kw=["thyroid gland", "parathyroid", "trachea", "oesophagus", "esophagus",
+                  "larynx", "pharynx"],
+        vessels=True, nerves=True, skin=False,
+        curve_drop_default=False,
+        curve_keep_names=["carotid", "jugular", "subclavian", "vertebral", "thyroid",
+                          "vagus", "accessory", "hypoglossal", "phrenic", "cervical",
+                          "brachial plexus", "ansa"],
+        curve_drop=["cerebral", "coronary", "pulmonary", "mesenteric", "iliac", "femoral",
+                    "renal", "hepatic",
+                    # Mép trên hộp chạm nền sọ: mạch màng não, mạch góc mắt và dây
+                    # VI thuộc vùng mặt – sọ, không phải tam giác cổ.
+                    "meningeal", "angular", "abducens", "ophthalmic", "maxillary",
+                    "temporal", "auricular", "occipital artery", "lingual", "labial"],
+    ),
+
+    "retroperitoneum": dict(
+        curve_only_named=True,
+        out="retroperitoneum.glb", side=None, min_verts=4,
+        box=(-0.150, 0.150, -0.020, 0.120, 0.950, 1.330),
+        bone_kw=["vertebra l", "vertebra t1", "sacrum", "rib", "ilium", "hip bone"],
+        muscle_kw=["psoas", "quadratus lumborum", "iliacus", "diaphragm", "transversus abdominis"],
+        organ_kw=["kidney", "ureter", "suprarenal", "renal pelvis", "calix", "calyx",
+                  "pancreas", "duodenum"],
+        organ_tubes=True,
+        vessels=True, nerves=True, skin=False,
+        curve_drop_default=False,
+        curve_keep_names=["renal", "suprarenal", "gonadal", "testicular", "ovarian",
+                          "lumbar", "aorta", "vena cava", "coeliac", "celiac",
+                          "mesenteric", "splanchnic", "sympathetic", "ureter"],
+        # Phế quản phân thuỳ và mạch phổi là đường cong DÀI, tâm bbox của chúng
+        # rơi vào ổ bụng dù bản thân chúng nằm hẳn trong lồng ngực — bản chạy đầu
+        # có cả "bronchus of left lung" nằm giữa scene khoang sau phúc mạc.
+        curve_drop=["cerebral", "coronary", "pulmonary", "facial", "carotid", "popliteal",
+                    "of left lung", "of right lung", "bronch", "segmental", "lobar",
+                    "cervical", "meningeal", "thyroid", "brachial", "axillary"],
+    ),
+
+    "elbow_joint": dict(
+        out="elbow_joint.glb", side="r", min_verts=4,
+        box=(-0.290, -0.130, -0.090, 0.090, 0.985, 1.175),
+        bone_kw=["humerus", "radius", "ulna"],
+        joint_kw=True,
+        joint_drop=["shoulder", "hip", "knee", "ankle", "wrist", "carpal", "intervertebral",
+                    "sterno", "acromio", "costo"],
+        muscle_kw=["biceps brachii", "brachialis", "brachioradialis", "triceps", "anconeus",
+                   "pronator teres", "supinator", "flexor carpi", "extensor carpi",
+                   "flexor digitorum", "extensor digitorum", "palmaris"],
+        vessels=True, nerves=True, skin=False,
+        curve_keep_names=["brachial", "radial", "ulnar", "interosseous", "median",
+                          "collateral", "recurrent", "cephalic", "basilic"],
+    ),
+
+    "ankle_joint": dict(
+        out="ankle_joint.glb", side="r", min_verts=4,
+        box=(-0.140, -0.010, -0.090, 0.075, 0.000, 0.150),
+        bone_kw=["tibia", "fibula", "talus", "calcaneus", "navicular", "cuboid",
+                 "cuneiform", "metatarsal"],
+        joint_kw=True, joint_drop=["knee", "hip", "shoulder", "elbow", "wrist", "intervertebral"],
+        muscle_kw=["retinaculum", "tibialis", "fibularis", "peroneus", "flexor digitorum",
+                   "flexor hallucis", "extensor digitorum", "extensor hallucis",
+                   "gastrocnemius", "soleus", "plantaris", "calcaneal tendon"],
+        vessels=True, nerves=True, skin=False,
+        curve_keep_names=["tibial", "fibular", "peroneal", "dorsalis pedis", "plantar",
+                          "saphenous", "sural", "malleolar", "tarsal"],
+    ),
+
     # ---------- Nhóm Z: 7 hệ TOÀN THÂN cho trang /viewer ----------
     # Bản export tháng 7/2026 dùng export_system.py chỉ lấy object MESH, mà mạch
     # máu và thần kinh ngoại biên trong Z-Anatomy là CURVE nên mất sạch:

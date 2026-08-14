@@ -160,29 +160,4 @@ export const respiratoryScenes: Record<string, SceneModule> = {
       },
     ],
   },
-  "co-hoanh": {
-    slug: "co-hoanh",
-    title: { vi: "Cơ hoành", en: "Diaphragm", zh: "膈肌" },
-    description: {
-      vi: "Cơ hoành là cơ hô hấp CHÍNH: tấm cơ-gân hình vòm ngăn cách khoang ngực (trên) với khoang bụng (dưới). Khi hít vào, nó co lại và hạ xuống làm phẳng vòm, tăng thể tích lồng ngực để hút khí vào phổi; khi thở ra, nó giãn và trồi lên. Cơ hoành có 3 lỗ cho thực quản, động mạch chủ và tĩnh mạch chủ dưới đi xuyên qua. Được chi phối bởi thần kinh hoành (C3-C5) — nên tổn thương tuỷ cổ cao có thể làm ngừng thở.",
-      en: "The diaphragm is the PRIMARY muscle of respiration: a dome-shaped musculotendinous sheet separating the thoracic cavity (above) from the abdominal cavity (below). On inspiration it contracts and descends, flattening the dome and increasing thoracic volume to draw air into the lungs; on expiration it relaxes and rises. It has 3 openings for the oesophagus, aorta, and inferior vena cava to pass through. Innervated by the phrenic nerve (C3-C5) — so a high cervical spinal cord injury can stop breathing.",
-      zh: "膈是呼吸的主要肌肉：一片穹顶状的肌腱膜，分隔胸腔（上）与腹腔（下）。吸气时收缩下降，使穹顶变平、增大胸腔容积，将空气吸入肺；呼气时松弛上升。膈有3个孔，供食管、主动脉和下腔静脉穿过。由膈神经（C3-C5）支配——故高位颈髓损伤可致呼吸停止。",
-    },
-    visibleSystems: ["muscular"],
-    modelFile: "/models/diaphragm.glb",
-    hotspots: [
-      {
-        key: "diaphragm",
-        meshName: "Diaphragm",
-        offset: [140, 0],
-        label: { vi: "Cơ hoành", en: "Diaphragm", zh: "膈肌" },
-        latinName: "Diaphragma",
-        note: {
-          vi: "Vòm cơ có phần cơ ở ngoại vi (bám vào bờ dưới lồng ngực, xương ức, cột sống thắt lưng) hội tụ vào một tấm gân trung tâm (central tendon) ở đỉnh vòm — chính vùng gân này là nơi tim tựa lên qua màng ngoài tim.",
-          en: "A muscular dome whose peripheral muscle fibers (attaching to the lower rib margin, sternum, and lumbar spine) converge onto a central tendon at the apex of the dome — this tendinous region is where the heart rests via the pericardium.",
-          zh: "肌性穹顶，其周边肌纤维（附着于下肋缘、胸骨和腰椎）汇聚于穹顶顶部的中心腱——此腱性区域是心脏经心包所依托之处。",
-        },
-      },
-    ],
-  },
 };
