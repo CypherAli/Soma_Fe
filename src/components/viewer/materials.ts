@@ -408,9 +408,11 @@ export function applyVisibility(
     if (!mesh.isMesh) return;
     const isolatedOut = isolatedRoot !== null && !isSelfOrDescendantOf(mesh, isolatedRoot);
     mesh.visible = !mesh.userData.isLabel && !hiddenIds[mesh.name] && !isolatedOut;
-    const std = getStd(mesh);
-    if (std) {
-      const faded = !!fadedIds[mesh.name];
+    // getAllStd chứ không phải getStd: 19 mesh xương trong abdomen_section.glb
+    // có HAI slot vật liệu. Chỉ làm mờ slot đầu thì mesh hiện ra nửa mờ nửa
+    // đục — đúng loại vệt lạ mà mắt đọc thành "mesh lỗi".
+    const faded = !!fadedIds[mesh.name];
+    for (const std of getAllStd(mesh)) {
       std.transparent = faded;
       std.opacity = faded ? 0.15 : 1;
     }
