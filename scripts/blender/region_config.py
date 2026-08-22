@@ -48,11 +48,32 @@ FULLBODY_BOX = (-0.45, 0.45, -0.35, 0.35, -0.05, 1.80)
 
 REGIONS = {
     # ---------- Nhóm B: chi trên ----------
+    # Hộp đo lại 2026-08-18 bằng query_bbox.py: khối bàn tay phải nằm trong
+    #   x -0.340..-0.224 · y -0.100..-0.004 · z 0.698..0.868
+    # (đốt xa ngón II–IV z 0.699–0.722, móng z 0.699–0.780). Hộp cũ z0=0.730 CẮT
+    # CỤT ba đầu ngón: model thiếu hẳn đốt xa ngón trỏ/giữa/nhẫn. z0=0.688 lấy
+    # trọn đầu ngón (chừa thêm 12mm cho lớp da voxel phồng ra), z1=0.930 giữ đoạn cổ tay + đầu dưới quay–trụ làm mốc.
     "hand": dict(
         out="hand_detail.glb", side="r",
-        box=(-0.345, -0.185, -0.095, 0.095, 0.730, 0.930),
+        box=(-0.352, -0.185, -0.118, 0.095, 0.676, 0.930),
+        # min_verts=4: Z-Anatomy dựng dây chằng gian cốt cổ tay (thuyền–nguyệt,
+        # nguyệt–tháp, cả–móc…), đĩa sụn khớp quay–trụ dưới (TFCC) và nhiều bao
+        # gân bằng đúng 4–11 đỉnh. Ngưỡng mặc định 10 loại mất ~20 dây chằng cổ
+        # tay — đúng phần "chi tiết" mà scene này tồn tại để dạy.
+        min_verts=4,
         bone_kw=True, joint_kw=True, muscle_kw=True,
+        # Móng tay + mầm móng nằm ở hệ 9 (nhóm "vùng cơ thể"); gọi ĐÍCH DANH,
+        # không lấy cả nhóm vì phần còn lại chỉ là mảng nhãn bề mặt (Palm,
+        # Dorsum of hand…) đắp chồng lên da.
+        region_kw=["nail plate", "perionyx"],
         vessels=True, nerves=True, skin=True, skin_bones=True,
+        # Thân ĐM quay/trụ và thân TK giữa/trụ/quay có tâm bbox nằm tận cẳng tay
+        # nên phép xét tâm loại chúng ra — mà thiếu chúng thì ống cổ tay không
+        # có thần kinh giữa, ống Guyon không có bó mạch–thần kinh trụ.
+        curve_keep_names=["radial artery", "ulnar artery", "median nerve",
+                          "ulnar nerve", "superficial branch of radial nerve",
+                          "princeps pollicis", "radialis indicis",
+                          "cephalic vein", "basilic vein"],
         voxel=0.0035, inflate=0.008,
     ),
     "joints_upper": dict(
@@ -108,6 +129,31 @@ REGIONS = {
         curve_drop=["appendicular", "ileocolic", "colic", "mesenteric", "penis", "penile",
                     "cauda equina", "rectal", "vesical", "prostatic", "uterine"],
     ),
+    # Khớp háng RIÊNG — chi dưới đã có khớp gối, cổ chân, còn khớp háng thì
+    # trước nay chỉ nằm lẫn trong vùng "khớp háng – đùi" cùng toàn bộ khối cơ
+    # mông và cơ đùi, che kín chính cái ổ khớp. Hộp bám sát ổ cối và đầu trên
+    # xương đùi (ổ cối z 0.841–0.889, dây chằng chậu–đùi z 0.811–0.887), lấy
+    # xuống 0.755 để còn mấu chuyển lớn – bé làm mốc.
+    "hip_joint": dict(
+        out="hip_joint.glb", side="r", min_verts=4,
+        box=(-0.145, -0.010, -0.075, 0.080, 0.755, 0.920),
+        bone_kw=["femur", "hip bone", "ilium", "ischium", "pubis", "sacrum"],
+        joint_kw=True,
+        # Khớp mu và khớp cùng–chậu nằm sát trong hộp nhưng là bài khác (chậu
+        # hông); giữ lại thì hình đọc thành "nửa khung chậu" chứ không phải một
+        # khớp háng.
+        joint_drop=["pubic symphysis", "sacro-iliac", "sacroiliac", "intervertebral",
+                    "ligamenta flava", "longitudinal ligament", "knee", "patell",
+                    "ankle", "tarsal", "costo", "shoulder", "elbow", "wrist"],
+        muscle_kw=["obturator", "gemellus", "piriformis", "quadratus femoris",
+                   "iliopsoas", "psoas", "iliacus", "pectineus", "rectus femoris",
+                   "gluteus minimus"],
+        vessels=True, nerves=True, skin=False,
+        curve_keep_names=["obturator", "circumflex femoral", "gluteal", "sciatic",
+                          "femoral artery", "femoral vein", "femoral nerve"],
+        curve_drop=["appendicular", "colic", "mesenteric", "rectal", "vesical",
+                    "prostatic", "penis", "penile", "saphenous", "popliteal"],
+    ),
     "leg_foot": dict(
         out="leg_foot.glb", side="r", min_verts=4,
         # z1 dừng ở 0.410 (dưới khe khớp gối) để không lặp lại chính khớp gối —
@@ -117,6 +163,24 @@ REGIONS = {
         vessels=True, nerves=True, skin=False,
         curve_keep_names=["tibial", "fibular", "peroneal", "dorsalis pedis", "plantar",
                           "saphenous", "sural", "arcuate artery"],
+    ),
+
+    # Bàn chân CHI TIẾT — bản đối xứng của "bàn tay chi tiết" ở chi dưới.
+    # Vùng "cẳng chân – bàn chân" lấy cả khối cơ cẳng chân nên bàn chân chỉ còn
+    # là một mẩu nhỏ cuối hình; ở đây hộp bám sát bàn chân (xương gót z 0.011–
+    # 0.063, sên z 0.050–0.085, đốt bàn z 0.006–0.072, cân gan chân z 0.007–
+    # 0.026) và min_verts=4 để giữ dây chằng gan chân, xương vừng, gân nhỏ.
+    "foot_detail": dict(
+        out="foot_detail.glb", side="r", min_verts=4,
+        box=(-0.152, -0.005, -0.135, 0.105, 0.000, 0.115),
+        bone_kw=True, joint_kw=True, muscle_kw=True,
+        vessels=True, nerves=True, skin=True, skin_bones=True,
+        # Gân cơ chày sau, mác dài, gấp/duỗi ngón dài có thân nằm ở cẳng chân
+        # nên phép xét tâm bbox loại hết — mà thiếu chúng thì gan chân không còn
+        # dây chằng động và vòm bàn chân mất phần giữ chủ động.
+        curve_keep_names=["plantar", "dorsalis pedis", "tibial", "fibular", "peroneal",
+                          "arcuate artery", "sural", "saphenous"],
+        voxel=0.0035, inflate=0.008,
     ),
 
     # ---------- Nhóm B3: chậu hông, lưng, thành ngực ----------
@@ -251,6 +315,45 @@ REGIONS = {
         vessels=True, nerves=True, skin=False,
         curve_keep_names=["lumbar", "spinal", "cauda equina", "iliolumbar", "sacral"],
         curve_drop=["mesenteric", "colic", "appendicular", "renal", "gonadal"],
+    ),
+
+    # Cột sống NGỰC — mảnh còn thiếu giữa cột sống cổ và cột sống thắt lưng.
+    # Đây là đoạn duy nhất có khớp SƯỜN–ĐỐT SỐNG, và cũng là đoạn tuỷ hay bị
+    # tổn thương do gãy lún. Đốt T1–T12 đo được z 1.112–1.453, x ±0.039; nới x
+    # ra ±0.115 để lấy chỏm sườn và khớp sườn–mỏm ngang.
+    "thoracic_spine": dict(
+        out="thoracic_spine.glb", side=None, min_verts=4,
+        box=(-0.115, 0.115, -0.045, 0.115, 1.100, 1.465),
+        bone_kw=["vertebra t", "rib", "costal cartilage"],
+        joint_kw=True,
+        # Đai vai gắn vào lồng ngực NGAY TRONG hộp: dây chằng ức–đòn, quạ–đòn,
+        # gian đòn không thuộc bài cột sống ngực mà lại nằm chắn phía trước.
+        joint_drop=["shoulder", "elbow", "wrist", "carpal", "hip", "knee", "ankle",
+                    "acromio", "clavicul", "conoid", "trapezoid", "temporo",
+                    "crico", "thyro", "C5-C6", "C6-C7", "L1-L2"],
+        muscle_kw=["multifidus", "rotatores", "semispinalis", "spinalis", "longissimus",
+                   "iliocostalis", "levatores costarum", "intertransversarii",
+                   "interspinales", "serratus posterior"],
+        muscle_drop=["capitis"],
+        vessels=True, nerves=True, skin=False,
+        curve_keep_names=["posterior intercostal", "intercostal nerve", "azygos",
+                          "thoracic duct", "sympathetic", "splanchnic", "radicular",
+                          "spinal", "subcostal", "thoracic aorta"],
+        # Lọc theo TÂM bbox kéo vào đủ thứ đi ngang qua ngực: mạch phân thuỳ
+        # phổi, tĩnh mạch tim, đám rối cánh tay, mạch tuyến giáp – cảnh – dưới
+        # đòn. Chúng đều là bài khác, mà lại là đường cong dài nên che kín cột
+        # sống khi xem từ trước.
+        curve_drop=["lung", "pulmonary", "lobar", "lingular", "segmental", "bronch",
+                    "cardiac", "ventricle", "atrial", "coronary", "interventricular",
+                    "circumflex artery of heart", "accessory nerve", "thyrocervical",
+                    "costocervical",
+                    "brachial plexus", "trunk of brachial", "pectoral", "acromial",
+                    "subscapular", "scapular", "long thoracic", "lateral thoracic",
+                    "internal thoracic", "thyroid", "carotid", "jugular", "subclavian",
+                    "brachiocephalic", "axillary", "cervical artery", "suprascapular",
+                    "phrenic", "aortic arch", "ascending aorta", "abdominal aorta",
+                    "vena cava", "gastro-omental", "mesenteric", "renal", "colic",
+                    "gastric", "hepatic", "splenic", "iliac", "femoral"],
     ),
 
     "skull_base": dict(

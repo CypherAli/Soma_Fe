@@ -111,6 +111,9 @@ const sceneSystem: Record<string, SystemGroupKey> = {
   "giai-phau-ban-tay": "muscular",
   "khop-vai-khuyu": "skeletal",
   "khop-goi": "skeletal",
+  "khop-hang": "skeletal",
+  "cot-song-nguc": "skeletal",
+  "ban-chan-chi-tiet": "skeletal",
   "chau-hong-day-chau": "skeletal",
   "vung-lung": "muscular",
   "thanh-nguc": "skeletal",
@@ -273,6 +276,9 @@ const thumbnails: Record<string, string> = {
   "khop-co-chan": "/thumbnails/khop-co-chan.jpg",
   "khop-hang-dui": "/thumbnails/khop-hang-dui.jpg",
   "cang-chan-ban-chan": "/thumbnails/cang-chan-ban-chan.jpg",
+  "khop-hang": "/thumbnails/khop-hang.jpg",
+  "cot-song-nguc": "/thumbnails/cot-song-nguc.jpg",
+  "ban-chan-chi-tiet": "/thumbnails/ban-chan-chi-tiet.jpg",
 };
 
 function buildSearchText(scene: SceneModule): string {
@@ -363,6 +369,24 @@ const sceneRegion: Record<string, RegionKey> = {
   // Chậu hông
   // Chi dưới
   "co-dui-mong": "lower-limb", "chi-duoi": "lower-limb", "ban-chan": "lower-limb",
+  // Bổ sung 2026-08-22: 31 scene của các đợt vùng 2–5 trước nay KHÔNG có mặt
+  // trong "Giải phẫu theo vùng" chỉ vì thiếu dòng khai báo ở đây — model có
+  // thật, nhãn có thật, chỉ là trang duyệt theo vùng không biết tới chúng.
+  "tuyen-nuoc-bot": "head-neck", "xoang-tinh-mach-mang-cung": "head-neck",
+  "tam-giac-co": "head-neck", "co-mat-than-kinh-vii": "head-neck",
+  "khop-thai-duong-ham": "head-neck", "nao-that-mang-nao": "head-neck",
+  "thanh-nguc": "thorax", "phoi-cay-phe-quan": "thorax",
+  "tuy-lach": "abdomen", "than-nieu-quan": "abdomen", "vung-ben": "abdomen",
+  "khoang-sau-phuc-mac": "abdomen", "he-tinh-mach-chu-cua": "abdomen",
+  "cot-song-co": "back", "cot-song-nguc": "back", "cot-song-that-lung": "back",
+  "vung-lung": "back",
+  "vai-ho-nach": "upper-limb", "khop-khuyu": "upper-limb", "co-tay-ong-co-tay": "upper-limb",
+  "chau-hong-day-chau": "pelvis", "co-quan-sinh-duc-nam": "pelvis",
+  "dam-roi-that-lung-cung": "pelvis",
+  "khop-hang": "lower-limb", "khop-hang-dui": "lower-limb", "khop-goi": "lower-limb",
+  "ho-khoeo": "lower-limb", "khop-co-chan": "lower-limb",
+  "cang-chan-ban-chan": "lower-limb", "ban-chan-chi-tiet": "lower-limb",
+  "vung-mong": "lower-limb",
 };
 
 export const scenesOfRegion = (key: RegionKey): CatalogScene[] =>
