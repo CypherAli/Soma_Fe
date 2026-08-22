@@ -66,29 +66,53 @@ function describe(fact: AnatomyFact, locale: Loc): string {
   return masked.length > 240 ? masked.slice(0, 237) + "…" : masked;
 }
 
+/** Bỏ phương án trùng chữ, luôn giữ lại phương án đúng. */
+function dedupeByText(options: QuizOption[]): QuizOption[] {
+  const seen = new Set<string>();
+  const out: QuizOption[] = [];
+  for (const o of [...options].sort((a, b) => Number(b.correct) - Number(a.correct))) {
+    const key = o.text.trim().toLowerCase();
+    if (!key || seen.has(key)) continue;
+    seen.add(key);
+    out.push(o);
+  }
+  // giữ nguyên thứ tự đã trộn, chỉ loại phần tử trùng
+  return options.filter((o) => out.includes(o));
+}
+
 function escapeRe(s: string): string {
   return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
+/**
+ * Gom phương án nhiễu CÙNG HỆ với đáp án.
+ *
+ * `ok` lọc thêm theo yêu cầu của từng dạng câu (dạng Latin chỉ nhận cấu trúc có
+ * tên Latin). Lọc NGAY trong lúc gom chứ không lọc sau khi đã cắt `n` phần tử —
+ * cắt trước rồi lọc thì hay còn dưới 3 phương án và câu bị bỏ oan.
+ */
 function distractors(
   fact: AnatomyFact,
   bySystem: Map<SystemKey, AnatomyFact[]>,
   rand: () => number,
   n: number,
+  ok: (f: AnatomyFact) => boolean = () => true,
 ): AnatomyFact[] {
+  const name = pick(fact.label, "vi");
+  const usable = (other: AnatomyFact) =>
+    other.id !== fact.id && pick(other.label, "vi") !== name && ok(other);
+
   const pool = new Map<string, AnatomyFact>();
   for (const s of fact.systems) {
     for (const other of bySystem.get(s) ?? []) {
-      if (other.id !== fact.id && pick(other.label, "vi") !== pick(fact.label, "vi")) {
-        pool.set(other.id, other);
-      }
+      if (usable(other)) pool.set(other.id, other);
     }
   }
   // không đủ cùng hệ thì mới bù bằng cấu trúc bất kỳ
   if (pool.size < n) {
     for (const other of allFacts()) {
       if (pool.size >= n * 3) break;
-      if (other.id !== fact.id) pool.set(other.id, other);
+      if (usable(other)) pool.set(other.id, other);
     }
   }
   return shuffle([...pool.values()], rand).slice(0, n);
@@ -117,18 +141,33 @@ export function buildQuiz(opts: {
   system?: SystemKey | "all";
   count?: number;
   seed?: number;
+  /**
+   * Chỉ ra đề từ đúng những cấu trúc này (khoá dạng `model:<factId>`).
+   *
+   * Dùng cho buổi ôn theo lịch: hàng đợi đã chỉ đích danh cần gặp lại cấu trúc
+   * nào, ra đề ngẫu nhiên lại thì lịch ôn thành trang trí.
+   */
+  only?: string[];
 }): QuizItem[] {
   const { locale, system = "all", count = 10 } = opts;
   const rand = rng(opts.seed ?? Date.now());
   const bySystem = factsBySystem();
 
-  const pool = quizPool(locale, system);
+  const only = opts.only?.length ? new Set(opts.only) : null;
+  const pool = only
+    ? quizPool(locale, "all").filter((f) => only.has(`model:${f.id}`))
+    : quizPool(locale, system);
   if (!pool.length) return [];
 
-  const chosen = shuffle(pool, rand).slice(0, count);
+  /**
+   * Duyệt HẾT kho đã trộn chứ không cắt sẵn `count` phần tử: câu nào không gom
+   * đủ 4 phương án sẽ bị bỏ ở cuối vòng lặp, cắt trước thì bài lặng lẽ ngắn hơn
+   * số câu người học đã chọn. Duyệt tiếp cho tới khi đủ `count` câu.
+   */
   const items: QuizItem[] = [];
 
-  for (const fact of chosen) {
+  for (const fact of shuffle(pool, rand)) {
+    if (items.length >= count) break;
     const kinds: QuizKind[] = ["identify", "system"];
     if (fact.latinName) kinds.push("latin");
     const kind = kinds[Math.floor(rand() * kinds.length)];
@@ -164,7 +203,10 @@ export function buildQuiz(opts: {
       );
     } else {
       prompt += `\n\n${name}`;
-      const wrong = distractors(fact, bySystem, rand, 8).filter((w) => w.latinName).slice(0, 3);
+      const wrong = distractors(
+        fact, bySystem, rand, 3,
+        (w) => !!w.latinName && w.latinName !== fact.latinName,
+      );
       options = shuffle(
         [
           { id: fact.id, text: fact.latinName!, correct: true },
@@ -173,6 +215,10 @@ export function buildQuiz(opts: {
         rand,
       );
     }
+
+    // Hai phương án trùng chữ là câu hỏi không có đáp án đúng duy nhất (chọn cái
+    // kia cũng đúng mà bị chấm sai), nên bỏ trùng TRƯỚC khi đếm đủ 4 phương án.
+    options = dedupeByText(options);
 
     // câu nào không gom đủ 4 phương án thì bỏ, đừng ra đề 2 lựa chọn
     if (options.length < 4) continue;
