@@ -9,6 +9,7 @@
     "lint": "eslint",
     "verify:quiz-bank": "node scripts/verify-quiz-bank.mjs",
     "audit:quiz-ocr": "node scripts/audit-quiz-ocr.mjs",
+    "verify:quiz-text": "node scripts/verify-quiz-text.mjs",
     "verify:scenes": "node scripts/verify-scenes.mjs",
     "models:frames": "node scripts/build-model-frames.mjs",
     "verify:models": "node scripts/verify-models.mjs",

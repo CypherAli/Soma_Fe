@@ -66,11 +66,16 @@ export function examQuestionCount(bank: ExamBank, region = "all"): number {
  */
 export function examToQuizItems(
   bank: ExamBank,
-  opts: { region?: string; count?: number; seed?: number },
+  opts: { region?: string; count?: number; seed?: number; only?: string[] },
 ): QuizItem[] {
   const { region = "all", count = 10 } = opts;
   const rand = rng(opts.seed ?? Date.now());
-  const pool = bank.questions.filter((q) => region === "all" || q.region === region);
+  // `only` là hàng đợi ôn đã chỉ đích danh câu cần gặp lại — khi có nó thì bỏ
+  // qua bộ lọc vùng, vì buổi ôn không bó theo vùng.
+  const only = opts.only?.length ? new Set(opts.only) : null;
+  const pool = only
+    ? bank.questions.filter((q) => only.has(`book:${q.id}`))
+    : bank.questions.filter((q) => region === "all" || q.region === region);
 
   return shuffle(pool, rand)
     .slice(0, count)

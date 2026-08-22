@@ -54,24 +54,42 @@ const PROMPT = {
 
 export function atlasToQuizItems(
   bank: AtlasBank,
-  opts: { count?: number; seed?: number; locale?: "vi" | "en" | "zh" },
+  opts: { count?: number; seed?: number; locale?: "vi" | "en" | "zh"; only?: string[] },
 ): QuizItem[] {
   const { count = 10, locale = "vi" } = opts;
   const rand = rng(opts.seed ?? Date.now());
-  const pool = shuffle(bank.shots, rand);
+  const only = opts.only?.length ? new Set(opts.only) : null;
+  const source = only
+    ? bank.shots.filter((s) => only.has(`atlas:atlas-${s.page}-${s.hotspotKey}`))
+    : bank.shots;
+  const pool = shuffle(source, rand);
 
-  return pool.slice(0, count).map((s) => {
-    // phương án nhiễu lấy từ chính ngân hàng ảnh -> đều là tên cấu trúc thật
-    const wrong = pool.filter((o) => o.label !== s.label).slice(0, 40);
-    const picks = shuffle(wrong, rand).slice(0, 3);
+  return pool.slice(0, count).map((s, index) => {
+    // Phương án nhiễu lấy từ TOÀN BỘ ngân hàng ảnh, không phải từ `pool`: buổi
+    // ôn theo lịch có khi chỉ còn một hai câu đến hạn, lấy nhiễu trong đó thì
+    // không gom nổi 4 phương án. Nhiễu nào cũng là tên cấu trúc thật nên lấy
+    // rộng ra không làm câu hỏi dở đi.
+    // Bỏ trùng theo TÊN chứ không chỉ khác đáp án: một cấu trúc xuất hiện ở
+    // nhiều trang atlas, để nguyên thì hai phương án y hệt nhau.
+    const seen = new Set([s.label.trim().toLowerCase()]);
+    const picks: AtlasShot[] = [];
+    for (const other of shuffle(bank.shots, rand)) {
+      if (picks.length >= 3) break;
+      const key = other.label.trim().toLowerCase();
+      if (!key || seen.has(key)) continue;
+      seen.add(key);
+      picks.push(other);
+    }
     return {
-      id: `atlas-${s.page}`,
+      // một trang atlas có thể có nhiều mục -> thêm chỉ số cho id thật sự duy
+      // nhất, không thì React dựng lại nhầm câu khi hai câu cùng key.
+      id: `atlas-${s.page}-${s.hotspotKey || index}`,
       kind: "identify" as const,
       prompt: PROMPT[locale],
       options: shuffle(
         [
-          { id: `${s.page}:ok`, text: s.label, correct: true },
-          ...picks.map((w, i) => ({ id: `${s.page}:${i}`, text: w.label, correct: false })),
+          { id: `${s.page}:${index}:ok`, text: s.label, correct: true },
+          ...picks.map((w, i) => ({ id: `${s.page}:${index}:${i}`, text: w.label, correct: false })),
         ],
         rand,
       ),

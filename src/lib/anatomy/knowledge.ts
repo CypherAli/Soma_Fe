@@ -127,6 +127,22 @@ function scoreAgainst(f: AnatomyFact, locale: Loc, q: string, terms: string[], f
  * lúc đó mới đoán là người dùng gõ thiếu dấu.
  */
 export function searchFacts(query: string, locale: Loc, limit = 6): AnatomyFact[] {
+  return searchFactsScored(query, locale, limit).map((h) => h.fact);
+}
+
+/**
+ * Như searchFacts nhưng TRẢ CẢ ĐIỂM, để nơi gọi tự đặt ngưỡng.
+ *
+ * Cần thiết cho trợ lý hợp nhất: khớp một từ trong phần giải thích cũng được
+ * 2 điểm, nên câu "bệnh gout điều trị thế nào" từng lôi về Não thất bên và
+ * Dây thần kinh thị giác. Có điểm thì lọc được: dưới 12 nghĩa là chưa khớp
+ * trọn một từ nào trong TÊN cấu trúc, không đáng coi là nguồn.
+ */
+export function searchFactsScored(
+  query: string,
+  locale: Loc,
+  limit = 6,
+): { fact: AnatomyFact; score: number }[] {
   const raw = query.trim().toLowerCase();
   if (!raw) return [];
   const facts = allFacts();
@@ -155,12 +171,12 @@ export function searchFacts(query: string, locale: Loc, limit = 6): AnatomyFact[
   // gan-đường mật lẫn scene ổ bụng) — chỉ giữ bản điểm cao nhất, nếu không cả
   // 5 kết quả trả về đều là cùng một thứ.
   const seen = new Set<string>();
-  const out: AnatomyFact[] = [];
-  for (const { f } of hits) {
+  const out: { fact: AnatomyFact; score: number }[] = [];
+  for (const { f, score } of hits) {
     const key = fold(pick(f.label, locale));
     if (seen.has(key)) continue;
     seen.add(key);
-    out.push(f);
+    out.push({ fact: f, score });
     if (out.length >= limit) break;
   }
   return out;
