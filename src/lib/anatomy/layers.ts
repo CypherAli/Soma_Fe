@@ -115,8 +115,12 @@ export function pickCat(name: string): CatKey {
   const n = name.toLowerCase();
   // Cân/mạc (fascia, aponeurosis) xếp cùng lớp DA: đó là lớp bọc nông, bóc
   // cùng da mới lộ được cơ bên dưới (VD cân gan tay che kín các cơ bàn tay).
+  // Móng tay/chân và mầm móng là phần phụ của DA (sừng hoá từ thượng bì) —
+  // không có mấy từ này thì chúng rơi xuống nhánh cuối và bị tô màu CƠ, thành
+  // ra năm cái móng đỏ chót ở đầu ngón.
   if (n.includes("skin") || n.includes("envelope") || n.includes("fascia") ||
-      n.includes("aponeurosis")) return "skin";
+      n.includes("aponeurosis") || n.includes("nail") || n.includes("perionyx") ||
+      n.includes("onych")) return "skin";
   if (n.includes("lymph") || n.includes("node")) return "lymph";
   if (EYE_KEYS.some((k) => n.includes(k))) return "eye";
   // mạch lớn trước để không nhầm sang tạng.

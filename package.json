@@ -10,6 +10,8 @@
     "verify:quiz-bank": "node scripts/verify-quiz-bank.mjs",
     "audit:quiz-ocr": "node scripts/audit-quiz-ocr.mjs",
     "verify:scenes": "node scripts/verify-scenes.mjs",
+    "models:frames": "node scripts/build-model-frames.mjs",
+    "verify:models": "node scripts/verify-models.mjs",
     "structures": "node scripts/model-structures.mjs"
   },
   "dependencies": {

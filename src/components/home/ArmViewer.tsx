@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
-import { useGLTF, Center, Bounds, OrbitControls } from "@react-three/drei";
+import { useGLTF, OrbitControls } from "@react-three/drei";
 import { useLocale } from "next-intl";
 import * as THREE from "three";
 
@@ -23,8 +23,15 @@ import { cleanName, displayName, namedNode, sanitizeGltfName } from "@/component
 import { useAnatomyStore, type SelectedPart } from "@/store/useAnatomyStore";
 import type { SceneHotspot } from "@/lib/sceneModules";
 import { pick, type Loc } from "@/lib/homeContent";
+import { fitDistance, modelFrame, VIEW_DIR, type ModelFrame } from "@/lib/anatomy/modelFrame";
 
 type LayerState = Record<CatKey, { visible: boolean; faded: boolean }>;
+
+const VIEWER_TEXT: Record<Loc, { title: string; shown: string; hidden: string; clear: string; faded: string; hint: string; layers: Record<CatKey, string> }> = {
+  vi: { title: "LỚP GIẢI PHẪU", shown: "Hiện", hidden: "Ẩn", clear: "Rõ", faded: "Mờ", hint: "Nhấp vào một bộ phận để xem thông tin", layers: { skin: "Da", muscle: "Cơ", brain: "Não", organ: "Nội tạng", artery: "Động mạch", vein: "Tĩnh mạch", nerve: "Thần kinh", lymph: "Bạch huyết", eye: "Mắt", bone: "Xương" } },
+  en: { title: "ANATOMICAL LAYERS", shown: "Shown", hidden: "Hidden", clear: "Solid", faded: "Faded", hint: "Select a structure to view its details", layers: { skin: "Skin", muscle: "Muscle", brain: "Brain", organ: "Organs", artery: "Arteries", vein: "Veins", nerve: "Nerves", lymph: "Lymphatic", eye: "Eye", bone: "Bone" } },
+  zh: { title: "解剖层", shown: "显示", hidden: "隐藏", clear: "清晰", faded: "淡化", hint: "选择一个结构以查看详细信息", layers: { skin: "皮肤", muscle: "肌肉", brain: "脑", organ: "内脏", artery: "动脉", vein: "静脉", nerve: "神经", lymph: "淋巴", eye: "眼", bone: "骨" } },
+};
 
 const HL_HOVER = new THREE.Color("#0ea5e9");
 const HL_SEL = new THREE.Color("#38bdf8");
@@ -197,6 +204,60 @@ function ArmModel({ url, layers }: { url: string; layers: LayerState }) {
 }
 
 /**
+ * ĐẶT KHUNG HÌNH theo bảng khung chuẩn.
+ *
+ * Chạy lại khi đổi model hoặc đổi tỉ lệ khung, KHÔNG chạy lại khi bật/tắt lớp —
+ * đó là điểm khác căn bản với `<Bounds fit>` cũ: tắt lớp da không được phép làm
+ * mô hình nhảy to lên. Người dùng xoay/kéo xong cũng không bị kéo về, vì effect
+ * chỉ phụ thuộc url và tỉ lệ khung.
+ */
+function FrameCamera({ frame }: { frame: ModelFrame }) {
+  // Lấy camera qua `get()` NGAY TRONG effect chứ không giữ nó từ lúc render:
+  // camera của R3F là một đối tượng ba chiều phải sửa tại chỗ, mà sửa một biến
+  // bắt từ thân render là đúng thứ luật `react-hooks/immutability` chặn.
+  const get = useThree((s) => s.get);
+  const aspect = useThree((s) => s.size.width / Math.max(1, s.size.height));
+  // Chỉ cần biết ĐÃ có OrbitControls hay chưa: có rồi thì đặt tâm xoay cho nó,
+  // chưa có thì camera tự nhìn về tâm.
+  const hasControls = useThree((s) => !!s.controls);
+
+  useEffect(() => {
+    const { camera, controls } = get();
+    const cam = camera as THREE.PerspectiveCamera;
+    const center = new THREE.Vector3(frame.center[0], frame.center[1], frame.center[2]);
+    const dist = fitDistance(frame.size, cam.fov, aspect);
+    const dir = new THREE.Vector3(VIEW_DIR[0], VIEW_DIR[1], VIEW_DIR[2]).normalize();
+
+    cam.position.copy(center).addScaledVector(dir, dist);
+    // Mặt phẳng cắt phải co theo KÍCH THƯỚC vật thể: xương con tai giữa chỉ 4mm,
+    // để near cố định 0,01 m là cắt sạch thành khung trống mà không báo lỗi gì.
+    cam.near = Math.max(frame.radius * 0.005, 1e-5);
+    cam.far = frame.radius * 200;
+    cam.updateProjectionMatrix();
+
+    const orbit = controls as unknown as { target?: THREE.Vector3; update?: () => void } | null;
+    if (orbit?.target) {
+      orbit.target.copy(center);
+      orbit.update?.();
+    } else {
+      cam.lookAt(center);
+    }
+
+    // Móc tự kiểm chứng như `window.somaScene`: đọc được khung hình thật đang
+    // dùng mà không phải đoán qua ảnh chụp màn hình.
+    if (process.env.NODE_ENV !== "production") {
+      (window as unknown as { somaFrame?: unknown }).somaFrame = {
+        center: frame.center, size: frame.size, dist,
+        cam: cam.position.toArray(), target: orbit?.target?.toArray() ?? null,
+        near: cam.near, far: cam.far, hasControls: !!orbit?.target,
+      };
+    }
+  }, [get, hasControls, aspect, frame]);
+
+  return null;
+}
+
+/**
  * Raycast hover + click trên mô hình vùng. Cùng cơ chế với model mặt cắt
  * (`SectionModelScene`) — sự kiện R3F gắn thẳng lên cây glTF nạp ngoài không
  * đáng tin nên bắt pointer trên canvas rồi tự raycast.
@@ -211,7 +272,8 @@ function Picker({ hotspots, locale }: { hotspots: SceneHotspot[]; locale: Loc })
   // khoảng trắng thành "_" và xoá dấu chấm lúc chạy.
   const byMesh = useMemo(() => {
     const map = new Map<string, SceneHotspot>();
-    hotspots.forEach((h) => map.set(sanitizeGltfName(h.meshName), h));
+    const key = (value: string) => sanitizeGltfName(value).replace(/_\d+$/, "").toLowerCase();
+    hotspots.forEach((h) => map.set(key(h.meshName), h));
     return map;
   }, [hotspots]);
 
@@ -259,7 +321,10 @@ function Picker({ hotspots, locale }: { hotspots: SceneHotspot[]; locale: Loc })
     const resolve = (m: THREE.Mesh): { obj: THREE.Object3D; def?: SceneHotspot } => {
       let cur: THREE.Object3D | null = m;
       while (cur) {
-        const def = byMesh.get(cur.name);
+        const normalized = sanitizeGltfName((cur.userData?.name as string | undefined) || cur.name)
+          .replace(/_\d+$/, "")
+          .toLowerCase();
+        const def = byMesh.get(normalized);
         if (def) return { obj: cur, def };
         cur = cur.parent;
       }
@@ -291,7 +356,6 @@ function Picker({ hotspots, locale }: { hotspots: SceneHotspot[]; locale: Loc })
         : {
             id: obj.name,
             name: cleanName(raw),
-            latin: raw.replace(/^tube[_ ]/i, "").replace(/\.\d{3,}$/, "").replace(/_/g, " "),
           };
       setSelected(payload);
     };
@@ -320,7 +384,11 @@ export default function ArmViewer({
   hotspots?: SceneHotspot[]; // nhãn đã biên soạn — để click trúng mesh nào thì hiện đúng tên tiếng Việt
 }) {
   const locale = useLocale() as Loc;
+  const text = VIEWER_TEXT[locale];
   const selected = useAnatomyStore((s) => s.selected);
+  // Khung hình đo sẵn ở `npm run models:frames`. Model chưa có trong bảng thì
+  // rơi về camera mặc định — hiện đúng một model chứ không vỡ cả trang.
+  const frame = useMemo(() => modelFrame(url), [url]);
   const shown = cats ? CATS.filter((c) => cats.includes(c.key)) : CATS;
   const [layers, setLayers] = useState<LayerState>(() =>
     Object.fromEntries(
@@ -352,34 +420,39 @@ export default function ArmViewer({
         <directionalLight position={[3, 5, 4]} intensity={1.2} color="#fff3e2" />
         <directionalLight position={[-4, 2, -3]} intensity={0.5} color="#e7d9c4" />
         <directionalLight position={[0, -3, 2]} intensity={0.3} color="#ffffff" />
-        <Bounds fit clip observe margin={1.15}>
-          <Center>
-            <ArmModel url={url} layers={layers} />
-          </Center>
-        </Bounds>
+        <ArmModel url={url} layers={layers} />
+        {/* Không bọc <Center>/<Bounds> nữa: mô hình giữ nguyên toạ độ thật của
+            cơ thể (nhờ đó nhãn và mặt cắt vẫn đúng chỗ), còn khung hình do
+            bảng khung chuẩn quyết định. */}
+        {frame && <FrameCamera frame={frame} />}
         <Picker hotspots={hotspots} locale={locale} />
         {/* Đang xem một cấu trúc cụ thể thì DỪNG tự xoay — mô hình trôi dưới
             con trỏ làm việc bấm chọn từng nhánh mạch/thần kinh gần như bất khả. */}
-        <OrbitControls makeDefault enablePan minDistance={0.3} maxDistance={8}
+        {/* Giới hạn zoom tính theo BÁN KÍNH model: mốc cứng 0,3–8 m khiến model
+            nhỏ (nhãn cầu 3cm, xương con 4mm) không zoom vào nổi, còn model
+            toàn thân 1,7 m thì không lùi ra đủ. */}
+        <OrbitControls makeDefault enablePan
+          minDistance={(frame?.radius ?? 0.5) * 0.35}
+          maxDistance={(frame?.radius ?? 0.5) * 14}
           autoRotate={!selected} autoRotateSpeed={0.4} />
       </Canvas>
 
       {/* Bảng điều khiển lớp */}
       <div style={panelStyle}>
         <div style={{ fontWeight: 600, fontSize: 13, marginBottom: 10, letterSpacing: ".04em" }}>
-          LỚP GIẢI PHẪU
+          {text.title}
         </div>
         {shown.map((c) => {
           const st = layers[c.key];
           return (
             <div key={c.key} style={rowStyle}>
               <span style={{ ...dotStyle, background: c.color }} />
-              <span style={{ flex: 1, opacity: st.visible ? 1 : 0.4 }}>{c.label}</span>
+              <span style={{ flex: 1, opacity: st.visible ? 1 : 0.4 }}>{text.layers[c.key]}</span>
               <button style={btnStyle(st.visible)} onClick={() => toggle(c.key, "visible")}>
-                {st.visible ? "Hiện" : "Ẩn"}
+                {st.visible ? text.shown : text.hidden}
               </button>
               <button style={btnStyle(!st.faded)} onClick={() => toggle(c.key, "faded")}>
-                {st.faded ? "Mờ" : "Rõ"}
+                {st.faded ? text.faded : text.clear}
               </button>
             </div>
           );
@@ -387,7 +460,7 @@ export default function ArmViewer({
       </div>
 
       <p style={hintStyle}>
-        {selected ? selected.name : "Nhấp vào một bộ phận để xem thông tin"}
+        {selected ? selected.name : text.hint}
       </p>
     </div>
   );
