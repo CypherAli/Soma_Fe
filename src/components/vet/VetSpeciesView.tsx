@@ -6,8 +6,10 @@ import HomeNav from "@/components/home/HomeNav";
 import HomeFooter from "@/components/home/HomeFooter";
 import IconSprite from "@/components/home/IconSprite";
 import { pick, type Loc } from "@/lib/homeContent";
+import VetModelViewer from "./VetModelViewer";
 import { vetCopy } from "@/lib/vet/copy";
 import { VET_REGION_LABEL, VET_SYSTEM_LABEL, relatedAcrossSpecies, speciesInfo } from "@/lib/vet/knowledge";
+import { vetModelsOfSpecies } from "@/lib/vet/models";
 import type { VetFact, VetSpeciesKey, VetSystemKey } from "@/lib/vet/types";
 
 /**
@@ -30,6 +32,7 @@ export default function VetSpeciesView({
   const info = speciesInfo(speciesKey);
   const [system, setSystem] = useState<VetSystemKey | "all">("all");
   const [open, setOpen] = useState<string | null>(facts[0]?.id ?? null);
+  const models = vetModelsOfSpecies(speciesKey);
 
   const systems = useMemo(() => {
     const keys = [...new Set(facts.map((f) => f.system))];
@@ -71,6 +74,15 @@ export default function VetSpeciesView({
           </div>
         </dl>
       </header>
+
+      {models.length > 0 && (
+        <section className="vet-models" aria-labelledby="vet-models-h">
+          <h2 id="vet-models-h">{t.modelH}</h2>
+          {models.map((m) => (
+            <VetModelViewer key={m.slug} locale={locale} model={m} />
+          ))}
+        </section>
+      )}
 
       <div className="vet-filter">
         <button className={system === "all" ? "is-on" : ""} onClick={() => setSystem("all")}>

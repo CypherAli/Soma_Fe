@@ -150,3 +150,40 @@
 .bd .vet-quiz-explain p { margin-top: 8px; font-size: 13.5px; line-height: 1.8; color: var(--body-e, #4a443c); }
 .bd .vet-quiz-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-top: 18px; }
 .bd .vet-quiz-actions a { font-size: 12.5px; color: var(--acc); text-decoration: none; }
+
+/* ---------- mẫu vật 3D ---------- */
+.bd .vet-models {
+  padding: 34px clamp(22px, 5vw, 64px) 8px;
+  border-bottom: 1px solid var(--line-e);
+}
+.bd .vet-models h2 {
+  font: 500 11px/1 var(--sans, inherit); letter-spacing: .16em; text-transform: uppercase;
+  color: var(--sub-e);
+}
+.bd .vet-model { margin: 16px 0 30px; }
+.bd .vet-model-stage {
+  position: relative; aspect-ratio: 16 / 9; min-height: 260px;
+  border: 1px solid var(--line-e); border-radius: 12px; overflow: hidden;
+  background: #0d0f12;
+}
+/* Canvas dựng bằng dynamic import — giữ nguyên chỗ để trang không nhảy layout. */
+.bd .vet-model-loading { width: 100%; height: 100%; background: #0d0f12; }
+.bd .vet-model-hint {
+  position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%);
+  padding: 5px 13px; border-radius: 999px; pointer-events: none;
+  background: rgba(0,0,0,.5); color: rgba(255,255,255,.82);
+  font-size: 11px; letter-spacing: .04em; backdrop-filter: blur(4px);
+}
+.bd .vet-model figcaption { display: grid; gap: 5px; margin-top: 11px; }
+.bd .vet-model figcaption strong { font: 500 15px/1.4 var(--serif); color: var(--ink-e); }
+.bd .vet-model figcaption span { font-size: 11.5px; line-height: 1.7; color: var(--sub-e); }
+.bd .vet-model figcaption a { color: var(--acc); text-decoration: none; }
+.bd .vet-model figcaption a:hover { text-decoration: underline; }
+.bd .vet-model figcaption em {
+  font: italic 12px/1.7 var(--serif); color: var(--body-e, #4a443c); max-width: 68ch;
+}
+/* Dấu cho loài đã có mẫu vật 3D — chỉ 3/6 loài có, người xem cần biết trước. */
+.bd .vet-has-model {
+  margin-left: 9px; padding: 2px 7px; border: 1px solid var(--acc); border-radius: 4px;
+  font: 500 9.5px/1.5 var(--sans, inherit); letter-spacing: .1em; font-style: normal; color: var(--acc);
+}

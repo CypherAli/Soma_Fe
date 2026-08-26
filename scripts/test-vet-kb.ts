@@ -17,6 +17,8 @@ import {
 } from "@/lib/vet/knowledge";
 import { VET_SPECIES } from "@/lib/vet/types";
 import { VET_MODEL_CANDIDATES, vetModels } from "@/lib/vet/models";
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import { buildVetQuiz } from "@/lib/vet/quiz";
 
 let failed = 0;
@@ -117,21 +119,38 @@ console.log("\n5. Ghép chủ đề giữa các loài");
   );
 }
 
-console.log("\n6. Mô hình 3D (nếu có) phải nói được nguồn gốc");
+console.log("\n6. Mô hình 3D phải nói được nguồn gốc");
 {
-  // Kho mô hình đang rỗng là hợp lệ — không có nguồn cấp phép sạch nào phủ đủ
-  // sáu loài. Nhưng mô hình nào ĐƯỢC thêm thì bắt buộc đủ giấy phép, ghi công,
-  // đường dẫn gốc, và mọi hotspot phải trỏ tới một mục tri thức CÓ THẬT.
+  // Mô hình nào ĐƯỢC thêm thì bắt buộc đủ giấy phép, ghi công, đường dẫn gốc,
+  // và mọi hotspot phải trỏ tới một mục tri thức CÓ THẬT.
   const bad = vetModels.filter((m) => !m.license || !m.attribution || !m.sourceUrl);
   check("mọi mô hình ghi đủ giấy phép và nguồn", bad.length === 0, bad.map((m) => m.slug).join(", "));
+
+  // Tệp phải có thật trong public/. Một mục trong sổ đăng ký trỏ tới tệp không
+  // tồn tại thì trang loài hiện một khung đen im lặng — không lỗi, không ảnh.
+  const missing = vetModels.filter((m) => !existsSync(join("public", "models", "vet", m.file)));
+  check("tệp .glb của mọi mô hình có thật", missing.length === 0, missing.map((m) => m.file).join(", "));
+
+  const noTitle = vetModels.filter((m) => !m.title.vi || !m.title.en || !m.title.zh);
+  check("mô hình nào cũng có tên đủ ba ngôn ngữ", noTitle.length === 0, noTitle.map((m) => m.slug).join(", "));
+
+  // ND cấm tác phẩm phái sinh, mà mọi mô hình ở đây đều đã qua giảm lưới.
+  const nd = vetModels.filter((m) => /\\bND\\b|NoDerivatives/i.test(m.license));
+  check("không mô hình nào mang giấy phép ND", nd.length === 0, nd.map((m) => m.slug).join(", "));
+
   const orphan = vetModels.flatMap((m) =>
     m.hotspots.filter((h) => !facts.some((f) => f.id === h.factId)).map((h) => `${m.slug}:${h.factId}`),
   );
   check("mọi hotspot trỏ tới mục tri thức có thật", orphan.length === 0, orphan.join(", "));
-  check(
-    "danh sách ứng viên mô hình có phủ cả sáu loài",
-    VET_SPECIES.every((sp) => VET_MODEL_CANDIDATES.some((c) => c.species === sp)),
+
+  // Bất biến thật sự cần giữ: mỗi loài PHẢI có đường đi rõ ràng — hoặc đã có
+  // mẫu vật, hoặc còn một ứng viên đã rà giấy phép. Không loài nào được rơi
+  // vào khoảng lặng "chưa có gì và cũng không biết lấy ở đâu".
+  const stranded = VET_SPECIES.filter(
+    (sp) => !vetModels.some((m) => m.species === sp) && !VET_MODEL_CANDIDATES.some((c) => c.species === sp),
   );
+  check("loài nào cũng có mẫu vật hoặc ứng viên đã rà", stranded.length === 0, stranded.join(", "));
+
   const noLic = VET_MODEL_CANDIDATES.filter((c) => !c.license || !c.howToGet);
   check("mỗi ứng viên ghi rõ giấy phép và cách lấy", noLic.length === 0);
 }
