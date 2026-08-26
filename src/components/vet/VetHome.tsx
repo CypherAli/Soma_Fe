@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import HomeNav from "@/components/home/HomeNav";
 import HomeFooter from "@/components/home/HomeFooter";
@@ -6,6 +5,7 @@ import IconSprite from "@/components/home/IconSprite";
 import { pick, type Loc } from "@/lib/homeContent";
 import { vetCopy } from "@/lib/vet/copy";
 import { vetModelsOfSpecies } from "@/lib/vet/models";
+import VetSkullFigure from "./VetSkullFigure";
 import {
   SPECIES,
   VET_SYSTEM_LABEL,
@@ -70,13 +70,7 @@ export default function VetHome({ locale }: { locale: Loc }) {
           </div>
         </div>
         <div className="animal-hero-art">
-          <Image
-            src="/plates/skull-cat.jpg"
-            alt="Minh họa giải phẫu sọ động vật"
-            fill
-            priority
-            sizes="(max-width: 800px) 100vw, 48vw"
-          />
+          <VetSkullFigure />
           <div>
             <span>FELIS CATUS</span>
             <i />
