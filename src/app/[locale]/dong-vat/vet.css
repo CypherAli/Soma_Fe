@@ -1,0 +1,152 @@
+/* Khu vực thú y — dùng lại biến màu và nhịp chữ của trang chủ (home.css),
+   chỉ thêm những khối mà bên người không có: thẻ loài, bảng trị số tham chiếu,
+   mục kiến thức mở gập, và lưới đối chiếu giữa các loài. */
+
+.bd .vet-stats {
+  display: flex;
+  gap: 34px;
+  margin-top: 30px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line-e);
+}
+.bd .vet-stats div { display: grid; gap: 3px; }
+.bd .vet-stats b { font: 600 26px/1 var(--serif); color: var(--ink-e); }
+.bd .vet-stats span { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--sub-e); }
+
+.bd .vet-species-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1px;
+  background: var(--line-e);
+  border-top: 1px solid var(--line-e);
+  border-bottom: 1px solid var(--line-e);
+}
+.bd .vet-species-card {
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  padding: 30px 28px 26px;
+  background: var(--bg-e);
+  text-decoration: none;
+  color: var(--ink-e);
+  transition: background .18s ease;
+}
+.bd .vet-species-card:hover { background: var(--surf-e, #f6f1e8); }
+.bd .vet-species-card .vet-no { font-size: 10px; letter-spacing: .18em; color: var(--sub-e); }
+.bd .vet-species-card h3 { font: 500 22px/1.2 var(--serif); }
+.bd .vet-species-card em { font: italic 12px var(--serif); color: var(--sub-e); }
+.bd .vet-species-card p { margin-top: 6px; font-size: 12.5px; line-height: 1.65; color: var(--body-e, #4a443c); }
+.bd .vet-species-card b { margin-top: 10px; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--acc); }
+
+.bd .vet-systems { padding: clamp(56px, 7vw, 96px) clamp(22px, 5vw, 64px); }
+.bd .vet-system-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+.bd .vet-system-card {
+  display: flex; align-items: center; gap: 10px;
+  padding: 11px 17px; border: 1px solid var(--line-e); border-radius: 999px;
+  text-decoration: none; color: var(--ink-e); font-size: 13px;
+  transition: border-color .18s ease, color .18s ease;
+}
+.bd .vet-system-card:hover { border-color: var(--acc); color: var(--acc); }
+.bd .vet-system-card b { font-size: 11px; color: var(--sub-e); }
+
+.bd .vet-note {
+  display: grid; grid-template-columns: minmax(180px, .32fr) 1fr; gap: clamp(20px, 4vw, 56px);
+  padding: clamp(46px, 6vw, 80px) clamp(22px, 5vw, 64px);
+  border-top: 1px solid var(--line-e); background: var(--surf-e, #f6f1e8);
+}
+.bd .vet-note span { font-size: 10px; letter-spacing: .18em; color: var(--sub-e); }
+.bd .vet-note h2 { margin-top: 8px; font: 500 clamp(20px, 2.4vw, 28px)/1.2 var(--serif); }
+.bd .vet-note p { font-size: 13.5px; line-height: 1.8; color: var(--body-e, #4a443c); max-width: 74ch; }
+@media (max-width: 800px) { .bd .vet-note { grid-template-columns: 1fr; } }
+
+/* ---------- trang một loài ---------- */
+.bd .vet-species-head {
+  display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(24px, 5vw, 64px);
+  padding: clamp(40px, 6vw, 80px) clamp(22px, 5vw, 64px);
+  border-bottom: 1px solid var(--line-e);
+}
+.bd .vet-back { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--sub-e); text-decoration: none; }
+.bd .vet-back:hover { color: var(--acc); }
+.bd .vet-species-head h1 { margin-top: 14px; font: 500 clamp(30px, 4.4vw, 52px)/1.1 var(--serif); color: var(--ink-e); }
+.bd .vet-species-head em { display: block; margin-top: 6px; font: italic 14px var(--serif); color: var(--sub-e); }
+.bd .vet-species-head p { margin-top: 16px; max-width: 60ch; font-size: 14px; line-height: 1.75; color: var(--body-e, #4a443c); }
+.bd .vet-vitals { align-self: end; display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line-e); border: 1px solid var(--line-e); }
+.bd .vet-vitals > div { padding: 14px 16px; background: var(--bg-e); }
+.bd .vet-vitals dt { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--sub-e); }
+.bd .vet-vitals dd { margin-top: 5px; font: 500 15px var(--serif); color: var(--ink-e); }
+@media (max-width: 800px) { .bd .vet-species-head { grid-template-columns: 1fr; } }
+
+.bd .vet-filter { display: flex; flex-wrap: wrap; gap: 8px; padding: 20px clamp(22px, 5vw, 64px); border-bottom: 1px solid var(--line-e); }
+.bd .vet-filter button {
+  padding: 8px 15px; border: 1px solid var(--line-e); border-radius: 999px;
+  background: transparent; color: var(--body-e, #4a443c); font-size: 12.5px; cursor: pointer;
+  transition: all .16s ease;
+}
+.bd .vet-filter button:hover { border-color: var(--acc); color: var(--acc); }
+.bd .vet-filter button.is-on { background: var(--ink-e); border-color: var(--ink-e); color: var(--bg-e); }
+
+.bd .vet-facts { padding: 0 clamp(22px, 5vw, 64px) clamp(50px, 7vw, 90px); }
+.bd .vet-fact { border-bottom: 1px solid var(--line-e); }
+.bd .vet-fact > button {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 18px;
+  width: 100%; padding: 20px 0; background: none; border: 0; cursor: pointer; text-align: left;
+}
+.bd .vet-fact h3 { font: 500 18px/1.35 var(--serif); color: var(--ink-e); }
+.bd .vet-fact > button em { font: italic 12px var(--serif); color: var(--sub-e); }
+.bd .vet-fact > button i { flex: none; font-style: normal; font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--sub-e); }
+.bd .vet-fact.is-open > button h3 { color: var(--acc); }
+.bd .vet-fact-body { padding: 0 0 26px; max-width: 82ch; }
+.bd .vet-fact-body h4 { margin: 14px 0 6px; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--sub-e); }
+.bd .vet-fact-body p { font-size: 13.5px; line-height: 1.85; color: var(--body-e, #4a443c); }
+.bd .vet-fact-body .vet-source { margin-top: 16px; font: italic 11.5px var(--serif); color: var(--sub-e); }
+.bd .vet-related { margin-top: 18px; padding-top: 14px; border-top: 1px dashed var(--line-e); }
+.bd .vet-related ul { display: grid; gap: 6px; }
+.bd .vet-related a { font-size: 12.5px; color: var(--acc); text-decoration: none; }
+.bd .vet-related a:hover { text-decoration: underline; }
+.bd .vet-empty { padding: 22px 0; font: italic 13px var(--serif); color: var(--sub-e); }
+
+/* ---------- trang đối chiếu ---------- */
+.bd .vet-compare-head { padding: clamp(40px, 6vw, 80px) clamp(22px, 5vw, 64px) 0; }
+.bd .vet-compare-head h1 { margin-top: 14px; font: 500 clamp(28px, 4vw, 46px)/1.1 var(--serif); color: var(--ink-e); }
+.bd .vet-compare-head > p { margin: 14px 0 22px; max-width: 64ch; font-size: 14px; line-height: 1.75; color: var(--body-e, #4a443c); }
+.bd .vet-compare-head .vet-filter { padding-left: 0; padding-right: 0; }
+
+.bd .vet-compare {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1px;
+  background: var(--line-e); border-top: 1px solid var(--line-e); border-bottom: 1px solid var(--line-e);
+}
+.bd .vet-compare > article { padding: 24px 22px 28px; background: var(--bg-e); }
+.bd .vet-compare > article.is-empty { background: var(--surf-e, #f6f1e8); }
+.bd .vet-compare > article > header h2 { font: 500 19px var(--serif); color: var(--ink-e); }
+.bd .vet-compare > article > header em { font: italic 11.5px var(--serif); color: var(--sub-e); }
+.bd .vet-compare ul { display: grid; gap: 18px; margin-top: 16px; }
+.bd .vet-compare li h3 { font: 500 14.5px/1.4 var(--serif); color: var(--ink-e); }
+.bd .vet-compare li em { font: italic 11.5px var(--serif); color: var(--sub-e); }
+.bd .vet-compare li p { margin-top: 6px; font-size: 12.5px; line-height: 1.7; color: var(--body-e, #4a443c); }
+.bd .vet-compare li a { display: inline-block; margin-top: 7px; font-size: 11.5px; color: var(--acc); text-decoration: none; }
+.bd .vet-compare-foot { display: flex; flex-wrap: wrap; gap: 16px; padding: 26px clamp(22px, 5vw, 64px); }
+.bd .vet-compare-foot a { font-size: 12.5px; color: var(--sub-e); text-decoration: none; }
+.bd .vet-compare-foot a:hover { color: var(--acc); }
+
+/* ---------- trắc nghiệm thú y ---------- */
+.bd .vet-quiz-setup { display: grid; gap: 14px; padding: 24px clamp(22px, 5vw, 64px) 60px; justify-items: start; }
+.bd .vet-quiz-setup .vet-filter { padding: 0; border: 0; }
+.bd .vet-quiz-start { margin-top: 10px; }
+.bd .vet-quiz { max-width: 780px; padding: 30px clamp(22px, 5vw, 64px) 70px; }
+.bd .vet-quiz-progress { font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--sub-e); }
+.bd .vet-quiz h2 { margin: 10px 0 14px; font: 500 clamp(19px, 2.4vw, 26px)/1.35 var(--serif); color: var(--ink-e); }
+.bd .vet-quiz-q { font-size: 15px; line-height: 1.8; color: var(--body-e, #4a443c); }
+.bd .vet-quiz-options { display: grid; gap: 10px; margin-top: 22px; }
+.bd .vet-quiz-option {
+  padding: 14px 18px; border: 1px solid var(--line-e); border-radius: 10px; background: transparent;
+  text-align: left; font-size: 14px; line-height: 1.6; color: var(--ink-e); cursor: pointer;
+  transition: border-color .16s ease, background .16s ease;
+}
+.bd .vet-quiz-option:hover { border-color: var(--acc); }
+.bd .vet-quiz-option.is-right { border-color: #2f8f6f; background: rgba(47,143,111,.09); }
+.bd .vet-quiz-option.is-wrong { border-color: #c0453b; background: rgba(192,69,59,.08); }
+.bd .vet-quiz-explain { margin-top: 22px; padding-top: 18px; border-top: 1px dashed var(--line-e); }
+.bd .vet-quiz-explain b { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--acc); }
+.bd .vet-quiz-explain p { margin-top: 8px; font-size: 13.5px; line-height: 1.8; color: var(--body-e, #4a443c); }
+.bd .vet-quiz-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-top: 18px; }
+.bd .vet-quiz-actions a { font-size: 12.5px; color: var(--acc); text-decoration: none; }

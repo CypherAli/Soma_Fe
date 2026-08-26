@@ -1,0 +1,192 @@
+import type { Loc } from "@/lib/homeContent";
+
+/**
+ * Chữ nghĩa của khu vực thú y, ba thứ tiếng.
+ *
+ * Trang thú y cũ chỉ dịch phần đầu; ba mục "phạm vi học tập", "giải phẫu so
+ * sánh" và "lộ trình" render CÓ ĐIỀU KIỆN `locale === "vi"` nên người xem bằng
+ * tiếng Anh hay tiếng Trung thấy một trang cụt. Gom hết vào đây để không thể
+ * tái diễn: thiếu bản dịch là lỗi biên dịch, không phải mục biến mất im lặng.
+ */
+export function vetCopy(locale: Loc) {
+  if (locale === "en") {
+    return {
+      eyebrow: "ANIMA · ANATOMIA VETERINARIA",
+      title: "Domestic animal anatomy",
+      lead: "Comparative anatomy for veterinary students: what differs between dog, cat, horse, cattle, pig and chicken — and why each difference matters in the clinic.",
+      exploreCta: "Browse species",
+      compareCta: "Compare across species",
+      quizCta: "Quiz yourself",
+      speciesH: "Species",
+      speciesSub: "Each species is organised by organ system, with the veterinary Latin term (NAV) and the clinical consequence of every difference.",
+      entries: (n: number) => `${n} entries`,
+      systemsH: "Organ systems",
+      systemsSub: "The same topic seen across species — this is how comparative anatomy is actually studied.",
+      statsFacts: "entries",
+      statsSpecies: "species",
+      statsSystems: "systems",
+      vitalsH: "Reference values",
+      temp: "Temperature",
+      pulse: "Pulse",
+      resp: "Respiration",
+      lifespan: "Lifespan",
+      noteH: "About the 3D models",
+      note3d: "The human atlas is built on Z-Anatomy, a labelled open dataset. No equivalent labelled, openly licensed dataset exists for veterinary species, so this section is text and comparison first. Where a properly licensed scan can be obtained, it is added with its licence and attribution shown on the page — never a model whose provenance cannot be stated.",
+      compareH: "Compare across species",
+      compareSub: "Pick a system: every species that has an entry for it is shown side by side.",
+      backToSpecies: "All species",
+      readMore: "Detail",
+      note: "Description",
+      difference: "Difference",
+      clinical: "Clinical relevance",
+      source: "Source",
+      navTerm: "NAV term",
+      alsoIn: "Same topic in other species",
+      empty: "No entry for this system yet.",
+      searchPh: "Search a structure, term or species…",
+      allSystems: "All systems",
+      humanLink: "Human atlas",
+    };
+  }
+  if (locale === "zh") {
+    return {
+      eyebrow: "ANIMA · 兽医解剖学",
+      title: "家养动物解剖",
+      lead: "面向兽医学生的比较解剖：犬、猫、马、牛、猪与鸡之间有何差异，以及每一处差异在临床上的意义。",
+      exploreCta: "浏览物种",
+      compareCta: "跨物种比较",
+      quizCta: "做测验",
+      speciesH: "物种",
+      speciesSub: "每个物种按器官系统组织，附兽医拉丁术语（NAV）及各项差异的临床后果。",
+      entries: (n: number) => `${n} 条`,
+      systemsH: "器官系统",
+      systemsSub: "同一主题跨物种对照——比较解剖学正是这样学习的。",
+      statsFacts: "条目",
+      statsSpecies: "物种",
+      statsSystems: "系统",
+      vitalsH: "参考值",
+      temp: "体温",
+      pulse: "脉搏",
+      resp: "呼吸",
+      lifespan: "寿命",
+      noteH: "关于三维模型",
+      note3d: "人体图谱基于已标注的开放数据集 Z-Anatomy。兽医物种尚无同等的、已标注且授权清晰的数据集，因此本部分以文字与比较为主。凡能取得授权明确的扫描模型，均会加入并在页面上标明其许可与出处——绝不使用无法说明来源的模型。",
+      compareH: "跨物种比较",
+      compareSub: "选择一个系统：所有具有该系统条目的物种将并列显示。",
+      backToSpecies: "全部物种",
+      readMore: "详情",
+      note: "描述",
+      difference: "差异",
+      clinical: "临床意义",
+      source: "来源",
+      navTerm: "NAV 术语",
+      alsoIn: "其他物种的同一主题",
+      empty: "该系统尚无条目。",
+      searchPh: "搜索结构、术语或物种…",
+      allSystems: "全部系统",
+      humanLink: "人体图谱",
+    };
+  }
+  return {
+    eyebrow: "ANIMA · ANATOMIA VETERINARIA",
+    title: "Giải phẫu động vật nuôi",
+    lead: "Giải phẫu so sánh cho sinh viên thú y: chó, mèo, ngựa, bò, lợn và gà khác nhau ở đâu — và mỗi khác biệt ấy dẫn tới điều gì trên lâm sàng.",
+    exploreCta: "Xem theo loài",
+    compareCta: "Đối chiếu giữa các loài",
+    quizCta: "Làm trắc nghiệm",
+    speciesH: "Các loài",
+    speciesSub: "Mỗi loài sắp theo hệ cơ quan, kèm thuật ngữ Latin thú y (NAV) và hệ quả lâm sàng của từng khác biệt.",
+    entries: (n: number) => `${n} mục`,
+    systemsH: "Hệ cơ quan",
+    systemsSub: "Cùng một chủ đề nhìn qua nhiều loài — đúng cách người ta học giải phẫu so sánh.",
+    statsFacts: "mục kiến thức",
+    statsSpecies: "loài",
+    statsSystems: "hệ cơ quan",
+    vitalsH: "Trị số tham chiếu",
+    temp: "Thân nhiệt",
+    pulse: "Mạch",
+    resp: "Nhịp thở",
+    lifespan: "Tuổi thọ",
+    noteH: "Về mô hình 3D",
+    note3d: "Atlas người dựng trên Z-Anatomy — bộ dữ liệu mở đã gắn nhãn sẵn. Với thú y KHÔNG có bộ dữ liệu nào tương đương vừa gắn nhãn vừa cấp phép rõ ràng, nên phần này lấy chữ nghĩa và đối chiếu làm gốc. Khi xin được scan có giấy phép sạch, mô hình sẽ được thêm vào kèm giấy phép và ghi công hiện ngay trên trang — tuyệt đối không dùng mô hình không nói được nguồn gốc.",
+    compareH: "Đối chiếu giữa các loài",
+    compareSub: "Chọn một hệ: mọi loài có mục thuộc hệ đó sẽ hiện cạnh nhau.",
+    backToSpecies: "Tất cả các loài",
+    readMore: "Chi tiết",
+    note: "Mô tả",
+    difference: "Khác biệt",
+    clinical: "Ý nghĩa lâm sàng",
+    source: "Nguồn",
+    navTerm: "Thuật ngữ NAV",
+    alsoIn: "Cùng chủ đề ở loài khác",
+    empty: "Hệ này chưa có mục nào.",
+    searchPh: "Tìm cấu trúc, thuật ngữ hoặc loài…",
+    allSystems: "Tất cả các hệ",
+    humanLink: "Atlas người",
+  };
+}
+
+export type VetCopy = ReturnType<typeof vetCopy>;
+
+/**
+ * Chữ nghĩa của bài trắc nghiệm thú y.
+ *
+ * Để ở đây chứ không nằm trong VetQuiz.tsx: trang server cần đúng chuỗi này cho
+ * <title>, mà hằng số khai báo trong một tệp "use client" thì server không đọc
+ * được (đã thử: generateMetadata nhận undefined và trang mất luôn thẻ title).
+ */
+const VET_QUIZ_TXT = {
+  vi: {
+    title: "Trắc nghiệm thú y",
+    lead: "Câu hỏi sinh thẳng từ kho giải phẫu so sánh — mỗi câu đều có giải thích và nguồn giáo trình.",
+    all: "Tất cả các loài",
+    countL: "Số câu",
+    start: "Bắt đầu",
+    again: "Làm đề khác",
+    next: "Câu tiếp",
+    finish: "Xem kết quả",
+    result: (a: number, b: number) => `Đúng ${a}/${b}`,
+    correct: "Chính xác",
+    wrong: "Chưa đúng",
+    source: "Nguồn",
+    openSpecies: "Mở trang loài",
+    of: (a: number, b: number) => `Câu ${a}/${b}`,
+    back: "Về khu thú y",
+  },
+  en: {
+    title: "Veterinary quiz",
+    lead: "Questions generated straight from the comparative anatomy library — every one with an explanation and a textbook source.",
+    all: "All species",
+    countL: "Questions",
+    start: "Start",
+    again: "New set",
+    next: "Next",
+    finish: "See result",
+    result: (a: number, b: number) => `${a}/${b} correct`,
+    correct: "Correct",
+    wrong: "Not quite",
+    source: "Source",
+    openSpecies: "Open species page",
+    of: (a: number, b: number) => `Question ${a}/${b}`,
+    back: "Back to the veterinary section",
+  },
+  zh: {
+    title: "兽医测验",
+    lead: "题目直接由比较解剖资料库生成——每题均附解释与教材出处。",
+    all: "全部物种",
+    countL: "题数",
+    start: "开始",
+    again: "换一套",
+    next: "下一题",
+    finish: "查看结果",
+    result: (a: number, b: number) => `正确 ${a}/${b}`,
+    correct: "正确",
+    wrong: "不对",
+    source: "来源",
+    openSpecies: "打开物种页",
+    of: (a: number, b: number) => `第 ${a}/${b} 题`,
+    back: "返回兽医专区",
+  },
+};
+
+export const vetQuizCopy = (locale: Loc) => VET_QUIZ_TXT[locale] ?? VET_QUIZ_TXT.vi;
