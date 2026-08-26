@@ -36,7 +36,7 @@ export default function VetHome({ locale }: { locale: Loc }) {
   return (
     <div className="bd animal-home">
       <IconSprite />
-      <HomeNav minimal />
+      <HomeNav section="vet" />
 
       <header className="animal-hero">
         <div className="animal-hero-copy">

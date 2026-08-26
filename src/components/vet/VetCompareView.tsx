@@ -41,7 +41,7 @@ export default function VetCompareView({
   return (
     <div className="bd animal-home">
       <IconSprite />
-      <HomeNav minimal />
+      <HomeNav section="vet" />
 
       <header className="vet-compare-head">
         <Link href="/dong-vat" className="vet-back">
