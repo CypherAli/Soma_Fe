@@ -44,7 +44,7 @@ export default function VetSpeciesView({
   return (
     <div className="bd animal-home">
       <IconSprite />
-      <HomeNav minimal />
+      <HomeNav section="vet" />
 
       <header className="vet-species-head">
         <div>

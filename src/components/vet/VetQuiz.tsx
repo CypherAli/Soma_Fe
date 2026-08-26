@@ -78,7 +78,7 @@ export default function VetQuiz({ locale }: { locale: Loc }) {
   return (
     <div className="bd animal-home">
       <IconSprite />
-      <HomeNav minimal />
+      <HomeNav section="vet" />
 
       <header className="vet-compare-head">
         <Link href="/dong-vat" className="vet-back">
