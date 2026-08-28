@@ -13,7 +13,7 @@ export function vetCopy(locale: Loc) {
     return {
       eyebrow: "ANIMA · ANATOMIA VETERINARIA",
       title: "Domestic animal anatomy",
-      lead: "Comparative anatomy for veterinary students: what differs between dog, cat, horse, cattle, pig and chicken — and why each difference matters in the clinic.",
+      lead: "Anatomy of the domestic species, one animal at a time: browse by group, open a species and work through its structures system by system — with the veterinary Latin term and what each one means in the clinic.",
       exploreCta: "Browse species",
       quizCta: "Quiz yourself",
       groupsH: "Animals",
@@ -57,7 +57,7 @@ export function vetCopy(locale: Loc) {
     return {
       eyebrow: "ANIMA · 兽医解剖学",
       title: "家养动物解剖",
-      lead: "面向兽医学生的比较解剖：犬、猫、马、牛、猪与鸡之间有何差异，以及每一处差异在临床上的意义。",
+      lead: "逐一物种的家养动物解剖：按类群浏览，点开某一物种后按系统逐个查看其结构——附兽医拉丁术语及各结构的临床意义。",
       exploreCta: "浏览物种",
       quizCta: "做测验",
       groupsH: "动物",
@@ -100,7 +100,7 @@ export function vetCopy(locale: Loc) {
   return {
     eyebrow: "ANIMA · ANATOMIA VETERINARIA",
     title: "Giải phẫu động vật nuôi",
-    lead: "Giải phẫu so sánh cho sinh viên thú y: chó, mèo, ngựa, bò, lợn và gà khác nhau ở đâu — và mỗi khác biệt ấy dẫn tới điều gì trên lâm sàng.",
+    lead: "Giải phẫu từng loài vật nuôi: xem theo nhóm, mở một loài rồi đi lần lượt từng cấu trúc theo hệ cơ quan — kèm thuật ngữ Latin thú y và ý nghĩa của nó trên lâm sàng.",
     exploreCta: "Xem theo loài",
     quizCta: "Làm trắc nghiệm",
     groupsH: "Động vật",
@@ -153,7 +153,7 @@ export type VetCopy = ReturnType<typeof vetCopy>;
 const VET_QUIZ_TXT = {
   vi: {
     title: "Trắc nghiệm thú y",
-    lead: "Câu hỏi sinh thẳng từ kho giải phẫu so sánh — mỗi câu đều có giải thích và nguồn giáo trình.",
+    lead: "Câu hỏi sinh thẳng từ kho giải phẫu thú y — mỗi câu đều có giải thích và nguồn giáo trình.",
     all: "Tất cả các loài",
     countL: "Số câu",
     start: "Bắt đầu",
@@ -170,7 +170,7 @@ const VET_QUIZ_TXT = {
   },
   en: {
     title: "Veterinary quiz",
-    lead: "Questions generated straight from the comparative anatomy library — every one with an explanation and a textbook source.",
+    lead: "Questions generated straight from the veterinary anatomy library — every one with an explanation and a textbook source.",
     all: "All species",
     countL: "Questions",
     start: "Start",
@@ -187,7 +187,7 @@ const VET_QUIZ_TXT = {
   },
   zh: {
     title: "兽医测验",
-    lead: "题目直接由比较解剖资料库生成——每题均附解释与教材出处。",
+    lead: "题目直接由兽医解剖资料库生成——每题均附解释与教材出处。",
     all: "全部物种",
     countL: "题数",
     start: "开始",

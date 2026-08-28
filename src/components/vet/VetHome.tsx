@@ -38,9 +38,6 @@ export default function VetHome({ locale }: { locale: Loc }) {
             <a href="#dong-vat" className="pill pill-solid">
               {t.exploreCta}
             </a>
-            <Link href="/dong-vat/trac-nghiem" className="pill pill-ghost">
-              {t.quizCta}
-            </Link>
           </div>
           <div className="vet-stats">
             <div>
