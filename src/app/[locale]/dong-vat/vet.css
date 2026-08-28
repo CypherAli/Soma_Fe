@@ -25,7 +25,10 @@
   margin: 18px 0 0;
 }
 .bd.animal-home .animal-hero-copy > p { margin-top: 18px; font-size: 16.5px; max-width: 52ch; }
-.bd.animal-home .animal-hero-art { min-height: 0; }
+/* Ô hero bên phải vốn để nền `--paper-2` cho ảnh in nổi lên. Khung 3D thì nền
+   trong suốt, nên chênh lệch ấy hiện ra thành một mảng màu khác hẳn nửa trái —
+   đúng vệt tối bị chê. Cho về đúng nền trang. */
+.bd.animal-home .animal-hero-art { min-height: 0; background: var(--paper); }
 /* Nút hero: `.pill` có height cố định mà không khoá xuống dòng, nên hễ cột hero
    hẹp là chữ tự ngắt dòng rồi bị chiều cao cắt cụt — đúng thứ đã xảy ra với
    "Xem theo loài" và "Làm trắc nghiệm". */
@@ -43,25 +46,31 @@
 .bd .vet-group-head p { flex: 1 1 20ch; font-size: 13px; line-height: 1.6; color: var(--sub-e); }
 
 .bd .vet-species-grid {
+  /* Thẻ có bề rộng TRẦN (320px) chứ không kéo giãn theo số cột: nhóm Gia cầm
+     mới có một loài, để 1fr thì thẻ Gà rộng 1455px trong khi thẻ bên Gia súc
+     chỉ 484px — cùng một loại thẻ mà ba cỡ khác nhau, nhìn là thấy hỏng.
+     Kèm theo đó bỏ luôn mẹo "nền lưới lộ qua khe 1px": mẹo ấy đòi lưới lúc nào
+     cũng kín ô, mà số loài mỗi nhóm thì không chia hết. Viền đặt thẳng lên thẻ. */
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(268px, 1fr));
-  gap: 1px;
-  background: var(--line-e);
-  border: 1px solid var(--line-e);
-  border-top: 0;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 320px));
+  justify-content: start;
+  gap: 14px;
+  margin-top: 16px;
 }
 .bd .vet-species-card {
   display: grid;
   align-content: start;
   grid-template-rows: auto auto 1fr auto;
   gap: 6px;
-  padding: 26px 26px 22px;
+  padding: 24px 24px 20px;
+  border: 1px solid var(--line-e);
+  border-radius: 4px;
   background: var(--paper);
   text-decoration: none;
   color: var(--ink-e);
-  transition: background .18s ease;
+  transition: background .18s ease, border-color .18s ease;
 }
-.bd .vet-species-card:hover { background: var(--surf-e); }
+.bd .vet-species-card:hover { background: var(--surf-e); border-color: var(--acc); }
 .bd .vet-species-card h4 { font: 500 21px/1.2 var(--serif); color: var(--ink-e); }
 .bd .vet-species-card em { font: italic 12px var(--serif); color: var(--sub-e); }
 .bd .vet-species-card p { margin-top: 4px; font-size: 12.5px; line-height: 1.65; color: var(--body-e); }

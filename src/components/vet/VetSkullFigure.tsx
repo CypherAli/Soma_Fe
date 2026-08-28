@@ -16,13 +16,17 @@ const SkullTurntable = dynamic(() => import("@/components/home/SkullTurntable"),
  * khu dùng cùng một ngôn ngữ hình ảnh, và thứ người xem thấy ở hero đúng là
  * thứ họ mở ra được ở trang Mèo.
  *
- * margin 1.28 chứ không phải 1.13 như sọ người — sọ mèo ngắn và bè hơn nên bán
- * kính lúc xoay lớn hơn so với chiều cao; số đo cụ thể ghi trong SkullTurntable.
+ * margin 1.06 chứ không phải 1.28 như lúc đầu. 1.28 tính theo trường hợp xấu
+ * nhất của một ô dọc hẹp; ô hero thật lại nằm ngang (~920×655) nên cùng con số
+ * ấy đẩy sọ ra xa và mẫu vật bé hẳn so với nửa trái. Dựng lại khung bằng
+ * Blender ở đúng 920×655, fov dọc 38°: ở 1.06 sọ choán gần hết chiều cao mà
+ * không chạm mép — dư 6% chiều dọc và 3% chiều ngang so với bán kính lúc xoay
+ * (đo 253.450 đỉnh: nửa cạnh 0,433 × 0,500 × 0,459 sau khi chuẩn hoá).
  */
 export default function VetSkullFigure() {
   return (
     <div className="human-fig human-fig-3d vet-fig-3d" aria-hidden>
-      <SkullTurntable url="/models/vet/cat-cranium.glb" margin={1.28} />
+      <SkullTurntable url="/models/vet/cat-cranium.glb" margin={1.06} />
     </div>
   );
 }
