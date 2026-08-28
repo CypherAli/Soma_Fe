@@ -7,6 +7,8 @@
 
 import {
   SPECIES,
+  VET_GROUPS,
+  speciesOfGroup,
   VET_REGION_LABEL,
   VET_SYSTEM_LABEL,
   allVetFacts,
@@ -153,6 +155,32 @@ console.log("\n6. Mô hình 3D phải nói được nguồn gốc");
 
   const noLic = VET_MODEL_CANDIDATES.filter((c) => !c.license || !c.howToGet);
   check("mỗi ứng viên ghi rõ giấy phép và cách lấy", noLic.length === 0);
+}
+
+console.log("\nN. Nhóm loài");
+{
+  // Điều hướng của khu thú y là nhóm → loài → cấu trúc. Hai bất biến của tầng
+  // nhóm: không nhóm nào rỗng (bày ra một nhóm bấm vào chẳng có loài nào là
+  // đúng thứ trang tờ rơi cũ từng làm), và không loài nào lọt ra ngoài mọi
+  // nhóm (loài như thế sẽ biến mất khỏi trang chủ mà không ai hay).
+  const empty = VET_GROUPS.filter((g) => speciesOfGroup(g.key).length === 0);
+  check("không nhóm nào rỗng", empty.length === 0, empty.map((g) => g.key).join(", "));
+
+  const grouped = new Set(VET_GROUPS.flatMap((g) => speciesOfGroup(g.key).map((s) => s.key)));
+  const stray = SPECIES.filter((s) => !grouped.has(s.key));
+  check("loài nào cũng thuộc một nhóm", stray.length === 0, stray.map((s) => s.key).join(", "));
+
+  const badLabel = VET_GROUPS.filter(
+    (g) => !g.label.vi || !g.label.en || !g.label.zh || !g.blurb.vi || !g.blurb.en || !g.blurb.zh,
+  );
+  check("nhóm nào cũng có tên và mô tả đủ ba ngôn ngữ", badLabel.length === 0);
+
+  // Tổng số loài trên trang chủ phải khớp kho — chia nhóm mà cộng lại thiếu
+  // thì có loài bị bỏ quên, mà thừa thì có loài hiện hai lần.
+  check(
+    "các nhóm cộng lại đúng bằng số loài",
+    VET_GROUPS.reduce((n, g) => n + speciesOfGroup(g.key).length, 0) === SPECIES.length,
+  );
 }
 
 console.log("\n7. Sinh đề trắc nghiệm");
