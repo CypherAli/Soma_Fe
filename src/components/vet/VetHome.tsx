@@ -1,11 +1,10 @@
-import { Link } from "@/i18n/navigation";
 import HomeNav from "@/components/home/HomeNav";
 import HomeFooter from "@/components/home/HomeFooter";
 import IconSprite from "@/components/home/IconSprite";
 import { pick, type Loc } from "@/lib/homeContent";
 import { vetCopy } from "@/lib/vet/copy";
-import { vetModelsOfSpecies } from "@/lib/vet/models";
 import VetSkullFigure from "./VetSkullFigure";
+import VetGroupBrowser from "./VetGroupBrowser";
 import { VET_GROUPS, speciesOfGroup, vetCounts, vetStats } from "@/lib/vet/knowledge";
 
 /**
@@ -82,19 +81,7 @@ export default function VetHome({ locale }: { locale: Loc }) {
                 <h3>{pick(group.label, locale)}</h3>
                 <p>{pick(group.blurb, locale)}</p>
               </div>
-              <div className="vet-species-grid">
-                {species.map((s) => (
-                  <Link key={s.key} href={`/dong-vat/${s.key}`} className="vet-species-card">
-                    <h4>{pick(s.name, locale)}</h4>
-                    <em>{s.latin}</em>
-                    <p>{pick(s.blurb, locale)}</p>
-                    <b>
-                      {t.entries(counts[s.key])}
-                      {vetModelsOfSpecies(s.key).length > 0 && <i className="vet-has-model">3D</i>}
-                    </b>
-                  </Link>
-                ))}
-              </div>
+              <VetGroupBrowser locale={locale} species={species} counts={counts} />
             </div>
           );
         })}

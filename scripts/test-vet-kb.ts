@@ -19,6 +19,7 @@ import {
 } from "@/lib/vet/knowledge";
 import { VET_SPECIES } from "@/lib/vet/types";
 import { VET_MODEL_CANDIDATES, vetModels } from "@/lib/vet/models";
+import { vetPlates, vetPlateOf } from "@/lib/vet/plates";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { buildVetQuiz } from "@/lib/vet/quiz";
@@ -157,7 +158,7 @@ console.log("\n6. Mô hình 3D phải nói được nguồn gốc");
   check("mỗi ứng viên ghi rõ giấy phép và cách lấy", noLic.length === 0);
 }
 
-console.log("\nN. Nhóm loài");
+console.log("\n7. Nhóm loài");
 {
   // Điều hướng của khu thú y là nhóm → loài → cấu trúc. Hai bất biến của tầng
   // nhóm: không nhóm nào rỗng (bày ra một nhóm bấm vào chẳng có loài nào là
@@ -183,7 +184,31 @@ console.log("\nN. Nhóm loài");
   );
 }
 
-console.log("\n7. Sinh đề trắc nghiệm");
+console.log("\n8. Bản khắc giải phẫu");
+{
+  // Khối "Động vật" ở trang chủ dựa hẳn vào việc loài nào cũng có bản khắc:
+  // thiếu một tấm thì rê vào loài đó ô bên phải trống trơn, trông như hỏng.
+  const missing = VET_SPECIES.filter((sp) => !vetPlateOf(sp));
+  check("loài nào cũng có bản khắc", missing.length === 0, missing.join(", "));
+
+  const noFile = vetPlates.filter((p) => !existsSync(join("public", "plates", "vet", p.file)));
+  check("tệp bản khắc nào cũng có thật", noFile.length === 0, noFile.map((p) => p.file).join(", "));
+
+  // Bản khắc cổ phần lớn thuộc phạm vi công cộng, nhưng tấm ngựa là bản Wellcome
+  // số hoá theo CC BY — bắt buộc ghi công. Thiếu nguồn là sai giấy phép, không
+  // phải sai thẩm mỹ.
+  const noSrc = vetPlates.filter((p) => !p.source || !p.license || !p.sourceUrl);
+  check("bản khắc nào cũng ghi đủ nguồn và giấy phép", noSrc.length === 0, noSrc.map((p) => p.file).join(", "));
+
+  const noTitle = vetPlates.filter((p) => !p.title.vi || !p.title.en || !p.title.zh);
+  check("tên bản khắc đủ ba ngôn ngữ", noTitle.length === 0, noTitle.map((p) => p.file).join(", "));
+
+  const badCaveat = vetPlates.filter((p) => p.caveat && (!p.caveat.vi || !p.caveat.en || !p.caveat.zh));
+  check("ghi chú mẫu vật (nếu có) đủ ba ngôn ngữ", badCaveat.length === 0);
+}
+
+console.log("\n9. Sinh đề trắc nghiệm");
+
 {
   for (const locale of ["vi", "en", "zh"] as const) {
     const items = buildVetQuiz({ locale, count: 12, seed: 42, species: "all" });
