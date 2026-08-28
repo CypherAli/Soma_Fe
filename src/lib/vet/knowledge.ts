@@ -113,6 +113,57 @@ export const SPECIES: SpeciesInfo[] = [
 export const speciesInfo = (key: VetSpeciesKey) =>
   SPECIES.find((s) => s.key === key) ?? SPECIES[0];
 
+export type VetGroupKey = SpeciesInfo["group"];
+
+/**
+ * NHÓM LOÀI — tầng trên cùng của khu thú y.
+ *
+ * Điều hướng của khu này đi theo chiều sâu: nhóm → loài → cấu trúc. Nhóm chia
+ * theo cách ngành thú y vẫn chia trên thực tế (và cũng đúng cách các giáo
+ * trình tách chương), chứ không theo phân loại sinh học: chó mèo đi cùng nhau
+ * vì cùng một loại phòng khám, ngựa–bò–lợn đi cùng nhau vì cùng bối cảnh chăn
+ * nuôi và cùng kiểu thao tác trên con vật đang đứng.
+ *
+ * Thứ tự cố định, KHÔNG sắp theo số mục: người học tra theo nhóm quen thuộc,
+ * đảo chỗ mỗi lần thêm nội dung là mất trí nhớ vị trí.
+ *
+ * Chưa có nhóm lưỡng cư / bò sát / thuỷ sản vì kho chưa có mục nào cho chúng.
+ * Thêm nhóm mới thì thêm nhánh vào `SpeciesInfo["group"]` rồi khai ở đây —
+ * kiểm thử sẽ báo ngay nếu có nhóm không loài nào thuộc về.
+ */
+export const VET_GROUPS: { key: VetGroupKey; label: T3; blurb: T3 }[] = [
+  {
+    key: "large",
+    label: { vi: "Gia súc", en: "Livestock", zh: "家畜" },
+    blurb: {
+      vi: "Thú nuôi lấy sức kéo, thịt và sữa — phần lớn thao tác lâm sàng làm trên con vật đang đứng.",
+      en: "Animals kept for draught, meat and milk — most clinical work is done on the standing animal.",
+      zh: "役用、肉用与乳用家畜——多数临床操作在站立的动物身上完成。",
+    },
+  },
+  {
+    key: "poultry",
+    label: { vi: "Gia cầm", en: "Poultry", zh: "家禽" },
+    blurb: {
+      vi: "Chim nuôi — bộ danh pháp riêng (NAA), phổi không giãn nở, túi khí và ổ nhớp.",
+      en: "Domestic birds — their own nomenclature (NAA), rigid lungs, air sacs and a cloaca.",
+      zh: "家养禽类——自成体系的命名法（NAA）、不扩张的肺、气囊与泄殖腔。",
+    },
+  },
+  {
+    key: "small",
+    label: { vi: "Thú cảnh", en: "Companion animals", zh: "伴侣动物" },
+    blurb: {
+      vi: "Thú nhỏ nuôi trong nhà — nhóm gặp nhiều nhất ở phòng khám thú y.",
+      en: "Small animals kept in the home — the commonest patients in small-animal practice.",
+      zh: "家养小动物——小动物门诊中最常见的患者。",
+    },
+  },
+];
+
+/** Các loài thuộc một nhóm, giữ nguyên thứ tự khai trong `SPECIES`. */
+export const speciesOfGroup = (group: VetGroupKey) => SPECIES.filter((s) => s.group === group);
+
 export const VET_SYSTEM_LABEL: Record<VetSystemKey, T3> = {
   skeletal: { vi: "Hệ xương", en: "Skeletal system", zh: "骨骼系统" },
   muscular: { vi: "Hệ cơ", en: "Muscular system", zh: "肌肉系统" },

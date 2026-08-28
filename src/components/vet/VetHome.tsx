@@ -6,32 +6,23 @@ import { pick, type Loc } from "@/lib/homeContent";
 import { vetCopy } from "@/lib/vet/copy";
 import { vetModelsOfSpecies } from "@/lib/vet/models";
 import VetSkullFigure from "./VetSkullFigure";
-import {
-  SPECIES,
-  VET_SYSTEM_LABEL,
-  allVetFacts,
-  vetCounts,
-  vetStats,
-} from "@/lib/vet/knowledge";
-import type { VetSystemKey } from "@/lib/vet/types";
+import { VET_GROUPS, speciesOfGroup, vetCounts, vetStats } from "@/lib/vet/knowledge";
 
 /**
  * Trang chủ khu vực thú y.
  *
- * Thay cho bản cũ vốn chỉ là tờ rơi: bốn thẻ loài đều đề "ĐANG PHÁT TRIỂN",
- * không dẫn đi đâu, và ba mục nội dung chỉ hiện với tiếng Việt. Bản này lấy số
- * liệu từ kho tri thức thật, mỗi thẻ loài mở ra trang có nội dung.
+ * Điều hướng đi theo MỘT chiều duy nhất: nhóm → loài → cấu trúc. Bản trước có
+ * hai lối song song (lưới loài phẳng, và một lưới "hệ cơ quan" dẫn sang trang
+ * đối chiếu) — hai lối cùng dẫn tới một nơi thì người xem phải tự đoán nên đi
+ * đường nào, và trang đối chiếu bày năm loài cạnh nhau trên một hàng thì cột
+ * nào cũng hẹp, loài nào chưa có mục thì để lại một ô trống giữa bảng.
+ *
+ * Nay chỉ còn một lối. Hệ cơ quan vẫn còn, nhưng đúng chỗ của nó: bộ lọc bên
+ * trong từng trang loài, nơi nó thực sự thu hẹp được thứ đang đọc.
  */
 export default function VetHome({ locale }: { locale: Loc }) {
   const t = vetCopy(locale);
   const counts = vetCounts();
-  const facts = allVetFacts();
-
-  // Hệ nào có mục thì mới hiện — không bày ra ô trống rồi bấm vào chẳng có gì.
-  const systems = (Object.keys(VET_SYSTEM_LABEL) as VetSystemKey[])
-    .map((key) => ({ key, count: facts.filter((f) => f.system === key).length }))
-    .filter((s) => s.count > 0)
-    .sort((a, b) => b.count - a.count);
 
   return (
     <div className="bd animal-home">
@@ -44,12 +35,9 @@ export default function VetHome({ locale }: { locale: Loc }) {
           <h1>{t.title}</h1>
           <p>{t.lead}</p>
           <div className="animal-actions">
-            <a href="#species" className="pill pill-solid">
+            <a href="#dong-vat" className="pill pill-solid">
               {t.exploreCta}
             </a>
-            <Link href="/dong-vat/so-sanh" className="pill pill-ghost">
-              {t.compareCta}
-            </Link>
             <Link href="/dong-vat/trac-nghiem" className="pill pill-ghost">
               {t.quizCta}
             </Link>
@@ -74,51 +62,45 @@ export default function VetHome({ locale }: { locale: Loc }) {
           <div>
             <span>FELIS CATUS</span>
             <i />
-            <span>CRANIUM · LATERALIS</span>
+            <span>CRANIUM</span>
           </div>
         </div>
       </header>
 
-      <section className="animal-species" id="species">
+      <section className="vet-groups" id="dong-vat">
         <div className="animal-section-head">
           <div>
-            <span>SPECIES INDEX</span>
-            <h2>{t.speciesH}</h2>
+            <span>ANIMALIA</span>
+            <h2>{t.groupsH}</h2>
           </div>
-          <p>{t.speciesSub}</p>
+          <p>{t.groupsSub}</p>
         </div>
-        <div className="vet-species-grid">
-          {SPECIES.map((s, i) => (
-            <Link key={s.key} href={`/dong-vat/${s.key}`} className="vet-species-card">
-              <span className="vet-no">{String(i + 1).padStart(2, "0")}</span>
-              <h3>{pick(s.name, locale)}</h3>
-              <em>{s.latin}</em>
-              <p>{pick(s.blurb, locale)}</p>
-              <b>
-                {t.entries(counts[s.key])}
-                {vetModelsOfSpecies(s.key).length > 0 && <i className="vet-has-model">3D</i>}
-              </b>
-            </Link>
-          ))}
-        </div>
-      </section>
 
-      <section className="vet-systems">
-        <div className="animal-section-head">
-          <div>
-            <span>SYSTEMA</span>
-            <h2>{t.systemsH}</h2>
-          </div>
-          <p>{t.systemsSub}</p>
-        </div>
-        <div className="vet-system-grid">
-          {systems.map((s) => (
-            <Link key={s.key} href={`/dong-vat/so-sanh?he=${s.key}`} className="vet-system-card">
-              <span>{pick(VET_SYSTEM_LABEL[s.key], locale)}</span>
-              <b>{s.count}</b>
-            </Link>
-          ))}
-        </div>
+        {VET_GROUPS.map((group) => {
+          const species = speciesOfGroup(group.key);
+          if (species.length === 0) return null;
+          return (
+            <div key={group.key} className="vet-group">
+              <div className="vet-group-head">
+                <h3>{pick(group.label, locale)}</h3>
+                <p>{pick(group.blurb, locale)}</p>
+              </div>
+              <div className="vet-species-grid">
+                {species.map((s) => (
+                  <Link key={s.key} href={`/dong-vat/${s.key}`} className="vet-species-card">
+                    <h4>{pick(s.name, locale)}</h4>
+                    <em>{s.latin}</em>
+                    <p>{pick(s.blurb, locale)}</p>
+                    <b>
+                      {t.entries(counts[s.key])}
+                      {vetModelsOfSpecies(s.key).length > 0 && <i className="vet-has-model">3D</i>}
+                    </b>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          );
+        })}
       </section>
 
       {/* Nói thẳng tình trạng dữ liệu 3D. Trang cũ để bốn thẻ loài mang nhãn
