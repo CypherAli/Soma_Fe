@@ -215,4 +215,62 @@ export const poultryFacts: VetFact[] = [
     source: KING,
     keys: ["mao ga", "tich ga", "comb", "wattle", "tan nhiet"],
   },
+  {
+    id: "chicken-medullary-bone",
+    species: ["chicken"],
+    system: "skeletal",
+    region: "trunk",
+    name: {
+      vi: "Xương tuỷ — kho canxi làm vỏ trứng",
+      en: "Medullary bone — the calcium store for the eggshell",
+      zh: "髓质骨——蛋壳的钙库",
+    },
+    nav: "Os medullare",
+    note: {
+      vi: "Trước khi bắt đầu đẻ, estrogen khiến gà mái lấp đầy lòng tuỷ của xương đùi, xương chày và xương sườn bằng một loại xương xốp riêng gọi là xương tuỷ. Mỗi vỏ trứng cần khoảng 2 g canxi, phần lớn phải huy động trong đêm khi diều đã rỗng — xương tuỷ tan ra để cấp, rồi được xây lại vào ban ngày.",
+      en: "Before lay begins, oestrogen makes the hen fill the marrow cavity of femur, tibiotarsus and ribs with a special spongy bone called medullary bone. Each shell needs about 2 g of calcium, most of it mobilised overnight when the crop is empty — medullary bone dissolves to supply it and is rebuilt during the day.",
+      zh: "开产前，雌激素促使母鸡在股骨、胫跗骨与肋骨的骨髓腔内充填一种特殊的海绵状骨，称髓质骨。每枚蛋壳约需2克钙，其中大部分须于夜间嗉囊排空时动员——髓质骨溶解以供给，白昼再行重建。",
+    },
+    compare: {
+      vi: "Không loài thú có vú nào có mô này. Người mang thai và bò vắt sữa cũng huy động canxi từ xương, nhưng lấy từ chính xương đặc và xương xốp sẵn có chứ không dựng thêm một kho riêng. Xương tuỷ chỉ thấy ở chim mái đang đẻ — đây cũng là cách các nhà cổ sinh vật xác định giới tính và trạng thái sinh sản của hoá thạch khủng long.",
+      en: "No mammal has this tissue. Pregnant women and dairy cows also mobilise skeletal calcium, but from existing cortical and trabecular bone rather than by building a dedicated store. Medullary bone is found only in laying female birds — and is how palaeontologists sex dinosaur fossils and read their reproductive state.",
+      zh: "哺乳类无此组织。孕妇与泌乳奶牛亦动员骨钙，但取自既有的皮质骨与松质骨，而非另建专门储库。髓质骨仅见于产蛋期雌鸟——古生物学家亦据此判定恐龙化石的性别与生殖状态。",
+    },
+    clinical: {
+      vi: "Gà mái đẻ sản lượng cao mà khẩu phần thiếu canxi hoặc vitamin D3 sẽ rút cạn cả xương tuỷ lẫn xương đặc, dẫn tới 'mệt mỏi gà lồng' (cage layer fatigue): gà liệt, xương đùi gãy tự phát. Cho ăn canxi hạt thô vào buổi chiều để canxi còn nằm lại trong mề suốt đêm là biện pháp dựa thẳng trên giải phẫu này.",
+      en: "A high-producing hen on a diet short of calcium or vitamin D3 depletes both medullary and cortical bone, giving cage layer fatigue: the hen goes down and the femur fractures spontaneously. Feeding coarse particulate calcium in the afternoon, so that it stays in the gizzard overnight, is a management measure resting directly on this anatomy.",
+      zh: "高产蛋鸡若日粮缺钙或缺维生素D3，将耗竭髓质骨与皮质骨，导致笼养蛋鸡疲劳症：母鸡瘫痪，股骨自发性骨折。于下午投喂粗颗粒钙源，使其整夜滞留于肌胃，正是直接基于该解剖特点的管理措施。",
+    },
+    source: KING,
+    keys: ["xuong tuy", "medullary bone", "vo trung", "canxi", "cage layer fatigue"],
+  },
+  {
+    id: "chicken-caeca",
+    species: ["chicken"],
+    system: "digestive",
+    region: "trunk",
+    name: {
+      vi: "Hai manh tràng của gà",
+      en: "The paired caeca of the fowl",
+      zh: "鸡的成对盲肠",
+    },
+    nav: "Caeca (intestinum caecum dextrum et sinistrum)",
+    note: {
+      vi: "Gà có HAI manh tràng dài 12–25 cm, mọc đối xứng ở chỗ nối ruột non với ruột già. Chúng lên men vi sinh phần xơ còn sót và hấp thu nước; chỉ nhận được phần dịch mịn vì nhu động ngược lọc lại ở lỗ manh tràng. Manh tràng xả 1–2 lần mỗi ngày, ra phân nhão màu nâu sẫm khác hẳn phân thường.",
+      en: "The fowl has TWO caeca, 12–25 cm long, arising symmetrically at the junction of small and large intestine. They ferment residual fibre and absorb water, receiving only the fine fraction because antiperistalsis sorts material at the caecal openings. They empty once or twice a day as a pasty dark-brown dropping quite unlike normal faeces.",
+      zh: "鸡有两条盲肠，长12–25厘米，对称起于小肠与大肠交界处。其发酵残余纤维并吸收水分，因盲肠口的逆蠕动筛选，仅接纳细微食糜。盲肠每日排空一至两次，排出糊状深褐色粪便，与常粪迥异。",
+    },
+    compare: {
+      vi: "Người chỉ còn một manh tràng ngắn với ruột thừa tiêu giảm. Ngựa có một manh tràng khổng lồ 25–35 lít là thùng lên men chính. Chó mèo manh tràng nhỏ, gần như vô dụng. Bò không có manh tràng đáng kể vì việc lên men đã làm ở dạ cỏ. Kiểu MỘT ĐÔI manh tràng là đặc trưng của chim.",
+      en: "Humans keep a single short caecum with a vestigial appendix. The horse has one enormous 25–35 litre caecum as its main fermentation vat. Dog and cat have a small, nearly functionless caecum. Cattle have no caecum worth the name, fermentation happening in the rumen. The PAIRED pattern is characteristic of birds.",
+      zh: "人仅保留一条短盲肠及退化的阑尾。马有一条25–35升的巨大盲肠，为其主要发酵罐。犬猫盲肠短小，近乎无功能。牛无值得一提的盲肠，发酵在瘤胃完成。成对盲肠则为鸟类特征。",
+    },
+    clinical: {
+      vi: "Manh tràng là nơi cư trú của Eimeria tenella (cầu trùng manh tràng) và của Histomonas meleagridis — phân manh tràng lẫn máu là dấu hiệu kinh điển của cầu trùng manh tràng. Đây cũng là ổ chứa Salmonella và Campylobacter trong chuỗi thực phẩm, nên lấy mẫu giám sát an toàn thực phẩm là lấy dịch manh tràng chứ không lấy phân trực tràng.",
+      en: "The caeca house Eimeria tenella (caecal coccidiosis) and Histomonas meleagridis — bloody caecal droppings are the classic sign of caecal coccidiosis. They are also the reservoir of Salmonella and Campylobacter in the food chain, which is why food-safety surveillance samples caecal content rather than rectal faeces.",
+      zh: "盲肠是柔嫩艾美耳球虫（盲肠球虫病）与火鸡组织滴虫的寄居部位——血性盲肠粪便是盲肠球虫病的典型征象。盲肠亦为食物链中沙门氏菌与弯曲菌的贮存所，故食品安全监测采集盲肠内容物而非直肠粪便。",
+    },
+    source: KING,
+    keys: ["manh trang", "caeca", "cau trung", "coccidiosis", "salmonella"],
+  },
 ];
