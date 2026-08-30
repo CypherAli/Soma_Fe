@@ -42,7 +42,11 @@ export const vetModels: VetModel[] = [
     license: "CC BY 4.0",
     attribution: "agancz — “Canis Familiaris (Dog) Skull”, mẫu vật phòng thí nghiệm khảo cổ, UNC-Chapel Hill",
     sourceUrl: "https://zenodo.org/records/10327538",
-    hotspots: [],
+    hotspots: [
+      { factId: "dog-dental-formula", position: [-0.587, -0.235, 0.304] },
+      { factId: "dogcat-third-eyelid", position: [-0.047, 0.094, 0.196] },
+      { factId: "dog-tympanic-bulla", position: [0.611, -0.188, 0.401] },
+    ],
   },
   {
     slug: "cat-cranium",
@@ -56,7 +60,10 @@ export const vetModels: VetModel[] = [
     license: "CC BY 4.0",
     attribution: "CUDAP — “Cat Cranium (CUDAP_6_28)”, quét Artec Space Spider, Castleton University",
     sourceUrl: "https://zenodo.org/records/10231479",
-    hotspots: [],
+    hotspots: [
+      { factId: "dogcat-third-eyelid", position: [13.878, 0, -12.132] },
+      { factId: "cat-dental-formula", position: [-6.939, -26.368, 28.492] },
+    ],
   },
   {
     slug: "horse-skull",
@@ -70,7 +77,10 @@ export const vetModels: VetModel[] = [
     license: "CC BY 4.0",
     attribution: "matousekfoto / ảnh Aleš Bárta — “Lebka koně”, Bảo tàng Thành phố Ústí nad Labem",
     sourceUrl: "https://zenodo.org/records/10302350",
-    hotspots: [],
+    hotspots: [
+      { factId: "dogcat-third-eyelid", position: [-417.514, 626.271, 595.13] },
+      { factId: "horse-guttural-pouch", position: [-974.2, 69.586, 550.346] },
+    ],
   },
 ];
 
