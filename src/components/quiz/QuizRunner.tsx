@@ -15,6 +15,8 @@ import { getToken, AUTH_CHANGED_EVENT } from "@/lib/auth";
 import { isSignedIn, itemKeyOf, recordAttempt, type QuizSourceKey, type StudySession } from "@/lib/study";
 import { pick, type Loc } from "@/lib/homeContent";
 import { SYSTEM_LABEL } from "@/lib/anatomy/knowledge";
+import { speciesInfo } from "@/lib/vet/knowledge";
+import { VET_SPECIES, type VetSpeciesKey } from "@/lib/vet/types";
 import { quizText } from "./quizText";
 import PathPanel from "./PathPanel";
 import SignInGate from "./SignInGate";
@@ -54,7 +56,14 @@ const QUESTION_COUNTS = [5, 10, 20, 45, 60, 100] as const;
 /** 45 giây mỗi câu — bằng nhịp đề thi giải phẫu thường gặp (40 câu / 30 phút). */
 const SECONDS_PER_QUESTION = 45;
 
-export default function QuizRunner({ locale }: { locale: Loc }) {
+export default function QuizRunner({
+  locale,
+  defaultSource = "model",
+}: {
+  locale: Loc;
+  /** Nguồn đề mở sẵn khi vào trang (trang /quiz để mặc định "model"). */
+  defaultSource?: QuizSourceKey;
+}) {
   const t = quizText(locale);
   const systems = useMemo(() => quizSystems(locale), [locale]);
   /**
@@ -66,7 +75,9 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
   const [mode, setMode] = useState<"practice" | "exam">("practice");
   const [left, setLeft] = useState<number | null>(null);   // giây còn lại
   const [timedOut, setTimedOut] = useState(false);
-  const [source, setSource] = useState<QuizSourceKey>("model");
+  // `defaultSource` để trang "Trắc nghiệm giải phẫu" trong mục Giải phẫu mở
+  // thẳng bộ đề sinh từ thư viện 3D, còn trang /quiz vẫn giữ mặc định cũ.
+  const [source, setSource] = useState<QuizSourceKey>(defaultSource);
   const [bank, setBank] = useState<ExamBank | null>(null);
   const [atlas, setAtlas] = useState<AtlasBank | null>(null);
   const [personal, setPersonal] = useState<PersonalBank | null>(null);
@@ -370,7 +381,14 @@ export default function QuizRunner({ locale }: { locale: Loc }) {
     // bạch huyết) — tra tiếp bảng tên chung, không thì bảng kế hoạch hiện mã
     // thô "joints" giữa những dòng tiếng Việt.
     const known = SYSTEM_LABEL[scope as SystemKey];
-    return known ? pick(known, locale) : scope;
+    if (known) return pick(known, locale);
+    // Lượt làm bài bên thú y ghi `scope` là MÃ LOÀI ("cattle", "chicken"), không
+    // phải mã hệ cơ quan — tra hai bảng trên đều trượt, và bảng lịch sử hiện ra
+    // "cattle" trần giữa những dòng tiếng Việt. Tra tiếp bảng loài.
+    if (VET_SPECIES.includes(scope as VetSpeciesKey)) {
+      return pick(speciesInfo(scope as VetSpeciesKey).name, locale);
+    }
+    return scope;
   };
 
   // Đồng hồ chỉ chạy ở chế độ thi và khi chưa nộp bài.
