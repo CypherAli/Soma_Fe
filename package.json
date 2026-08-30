@@ -11,9 +11,17 @@
     "audit:quiz-ocr": "node scripts/audit-quiz-ocr.mjs",
     "verify:quiz-text": "node scripts/verify-quiz-text.mjs",
     "verify:scenes": "node scripts/verify-scenes.mjs",
+    "test:vet-kb": "node --import ./scripts/ts-resolve.mjs scripts/test-vet-kb.ts && npm run verify:vet-export",
+    "test:site-kb": "node --import ./scripts/ts-resolve.mjs scripts/test-site-kb.ts",
+    "test:gestures": "node --import ./scripts/ts-resolve.mjs scripts/test-gestures.ts",
     "models:frames": "node scripts/build-model-frames.mjs",
     "verify:models": "node scripts/verify-models.mjs",
-    "structures": "node scripts/model-structures.mjs"
+    "structures": "node scripts/model-structures.mjs",
+    "verify:lesions": "node scripts/verify_lesions.mjs",
+    "meshes": "node scripts/list_meshes.mjs --json",
+    "render:lesions": "node scripts/render_all_lesions.mjs",
+    "export:vet": "node --import ./scripts/ts-resolve.mjs scripts/vet/export-vet-data.ts",
+    "verify:vet-export": "node --import ./scripts/ts-resolve.mjs scripts/vet/export-vet-data.ts --check"
   },
   "dependencies": {
     "@mediapipe/tasks-vision": "^1.0.1",
