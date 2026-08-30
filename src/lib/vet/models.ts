@@ -30,6 +30,63 @@ import type { VetModel, VetSpeciesKey } from "./types";
  *      mỗi hotspot trỏ tới `factId` có thật trong kho tri thức.
  */
 export const vetModels: VetModel[] = [
+  // ── BỘ XƯƠNG TOÀN THÂN ───────────────────────────────────────────────────
+  // Ba mẫu này giấy phép CC BY (cho phép tác phẩm phái sinh) nên GIẢM LƯỚI ĐƯỢC,
+  // khác hẳn bộ xương rời của LMU vốn mang ND. Nhờ vậy bộ xương chó 13,8 MB
+  // xuống 1,1 MB và mèo 18,9 MB xuống 1,2 MB mà vẫn còn 260.000 tam giác — đủ
+  // chi tiết để đọc từng đốt sống. Đã dựng lại ba trục bằng Blender để chắc
+  // giảm lưới không làm vỡ hình.
+  {
+    slug: "dog-skeleton",
+    species: "dog",
+    title: {
+      vi: "Bộ xương chó, toàn thân",
+      en: "Dog skeleton, whole body",
+      zh: "犬全身骨骼",
+    },
+    file: "dog-skeleton.glb",
+    license: "CC BY 4.0",
+    attribution: "PratyushParag — “Dog Skeleton” (đã giảm lưới cho web)",
+    sourceUrl: "https://sketchfab.com/3d-models/dog-skeleton-9d8a370acbd04f93a7a6fcd15ef36eda",
+    hotspots: [
+      { factId: "dogcat-vertebral-formula", position: [0.001, 0.19, -0.127] },
+      { factId: "dogcat-clavicle", position: [0.072, 0.106, 0.233] },
+    ],
+  },
+  {
+    slug: "cat-skeleton",
+    species: "cat",
+    title: {
+      vi: "Bộ xương mèo, toàn thân",
+      en: "Cat skeleton, whole body",
+      zh: "猫全身骨骼",
+    },
+    file: "cat-skeleton.glb",
+    license: "CC BY 4.0",
+    attribution: "westerly — “Feline Skeleton Dec” (đã giảm lưới cho web)",
+    sourceUrl: "https://sketchfab.com/3d-models/feline-skeleton-dec-a5d0bb8f55dc4f49b103cd20d65e0b17",
+    hotspots: [
+      { factId: "dogcat-vertebral-formula", position: [0.038, 0.794, -0.209] },
+      { factId: "dogcat-clavicle", position: [0.225, 0.585, 0.92] },
+    ],
+  },
+  {
+    slug: "horse-skeleton",
+    species: "horse",
+    title: {
+      vi: "Bộ xương ngựa, toàn thân",
+      en: "Horse skeleton, whole body",
+      zh: "马全身骨骼",
+    },
+    file: "horse-skeleton.glb",
+    license: "CC BY 4.0",
+    attribution: "Diego Luján García — “Horse Skeleton”",
+    sourceUrl: "https://sketchfab.com/3d-models/horse-skeleton-eaca504567604e879b8ab2cf2763025e",
+    hotspots: [
+      { factId: "horse-stay-apparatus", position: [0.62, -0.157, -2.192] },
+      { factId: "horse-large-colon", position: [0.774, 0.391, -0.391] },
+    ],
+  },
   {
     slug: "dog-skull",
     species: "dog",
