@@ -148,7 +148,12 @@ function main() {
       console.error(`\n✗ Chưa có ${OUT}. Chạy: npm run export:vet\n`);
       process.exit(1);
     }
-    if (current !== text) {
+    // So theo NỘI DUNG chứ không so từng byte: git ở máy Windows đổi tệp đã
+    // commit sang CRLF, mà bộ xuất luôn ghi LF — so byte thì lần nào cũng báo
+    // lệch trong khi dữ liệu y hệt nhau, và một cảnh báo luôn sai thì chẳng mấy
+    // chốc không ai thèm đọc.
+    const norm = (v: string) => v.split("\r").join("").trim();
+    if (norm(current) !== norm(text)) {
       console.error(
         "\n✗ vet.json đã lệch với kho tri thức trong src/lib/vet/.\n" +
           "  Nội dung vừa sửa chưa được xuất sang backend. Chạy: npm run export:vet\n",

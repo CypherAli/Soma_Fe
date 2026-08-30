@@ -273,3 +273,14 @@ html[data-theme="dark"] .bd .vet-plate img { filter: invert(1) hue-rotate(180deg
   .bd .vet-group-body { grid-template-columns: 1fr; }
   .bd .vet-plate { display: none; }
 }
+
+/* Bảng hiện ra khi bấm vào một điểm chú giải trên mẫu vật. */
+.bd .vet-model-pick {
+  display: grid; gap: 5px; margin-top: 12px; padding: 16px 18px;
+  border: 1px solid var(--acc); border-radius: 6px; background: var(--surf-e);
+}
+.bd .vet-model-pick h4 { font: 500 15px/1.35 var(--serif); color: var(--ink-e); }
+.bd .vet-model-pick em { font: italic 12px var(--serif); color: var(--sub-e); }
+.bd .vet-model-pick p { font-size: 13px; line-height: 1.75; color: var(--body-e); }
+.bd .vet-model-pick-clin b { color: var(--acc); }
+.bd .vet-model-pick small { font-size: 11px; color: var(--sub-e); }
