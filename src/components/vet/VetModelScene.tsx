@@ -99,11 +99,21 @@ export default function VetModelScene({
   hotspots = [],
   active = null,
   onPick,
+  refitKey,
 }: {
   url: string;
   hotspots?: SceneHotspot[];
   active?: string | null;
   onPick?: (factId: string) => void;
+  /**
+   * Đổi giá trị này thì <Bounds> gắn lại và ngắm lại khung cho mẫu mới.
+   *
+   * Cố ý KHÔNG đặt key lên chính <Canvas>: làm thế là dựng lại ngữ cảnh WebGL
+   * mỗi lần đổi xương, mà trình duyệt chỉ cho giữ khoảng 16 ngữ cảnh — bấm qua
+   * vài chục cái xương là cảnh trắng bóc và không có lỗi nào báo ra. Gắn lại
+   * phần bên trong thì ngữ cảnh giữ nguyên.
+   */
+  refitKey?: string;
 }) {
   return (
     <Canvas camera={{ position: [0, 0, 3], fov: 40 }} dpr={[1, 2]} gl={{ antialias: true }}>
@@ -114,7 +124,7 @@ export default function VetModelScene({
       <directionalLight position={[3, 4, 5]} intensity={1.5} />
       <directionalLight position={[-4, -1, -3]} intensity={0.6} />
       <Suspense fallback={null}>
-        <Bounds fit clip observe margin={1.15}>
+        <Bounds key={refitKey} fit clip observe margin={1.15}>
           <Specimen
             url={url}
             hotspots={hotspots}

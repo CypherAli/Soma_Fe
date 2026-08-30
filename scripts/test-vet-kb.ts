@@ -21,6 +21,7 @@ import { VET_SPECIES } from "@/lib/vet/types";
 import { VET_MODEL_CANDIDATES, vetModels } from "@/lib/vet/models";
 import { vetPlates, vetPlateOf } from "@/lib/vet/plates";
 import { vetDiseases } from "@/lib/vet/diseases";
+import { lmuModels, lmuGroupOf, lmuName, lmuOfSpecies } from "@/lib/vet/lmu";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { buildVetQuiz } from "@/lib/vet/quiz";
@@ -206,6 +207,43 @@ console.log("\n8. Bản khắc giải phẫu");
 
   const badCaveat = vetPlates.filter((p) => p.caveat && (!p.caveat.vi || !p.caveat.en || !p.caveat.zh));
   check("ghi chú mẫu vật (nếu có) đủ ba ngôn ngữ", badCaveat.length === 0);
+}
+
+console.log("\n10. Bộ xương LMU");
+{
+  const missing = lmuModels.filter(
+    (m) => !existsSync(join("public", "models", "vet", "lmu", m.file)),
+  );
+  check("tệp .glb của mọi xương có thật", missing.length === 0,
+    missing.slice(0, 5).map((m) => m.file).join(", "));
+
+  // Giấy phép phần lớn là CC BY-NC-ND: ghi công là ĐIỀU KIỆN, không phải phép
+  // lịch sự. Thiếu một trong ba trường này là dùng sai giấy phép.
+  const noCredit = lmuModels.filter((m) => !m.license || !m.author || !m.sourceUrl);
+  check("xương nào cũng ghi đủ giấy phép, tác giả, nguồn", noCredit.length === 0,
+    noCredit.slice(0, 5).map((m) => m.file).join(", "));
+
+  // KHÔNG được có giấy phép ND mà lại bị giảm lưới: bộ nạp tải thẳng .glb của
+  // Sketchfab nên điều này chỉ sai nếu ai đó sửa tay. Chốt lại bằng kiểm thử.
+  const budget = lmuModels.filter((m) => m.faces > 1_800_000);
+  check("không xương nào vượt ngân sách tam giác", budget.length === 0);
+
+  const badSpecies = lmuModels.filter((m) => !VET_SPECIES.includes(m.species as never));
+  check("loài của xương nằm trong sáu loài", badSpecies.length === 0,
+    badSpecies.slice(0, 5).map((m) => `${m.file}:${m.species}`).join(", "));
+
+  const grouped = lmuModels.every((m) => lmuGroupOf(m));
+  check("xương nào cũng rơi vào một nhóm", grouped);
+
+  // Tên chưa dịch thì hiện nguyên tiếng Anh — chấp nhận được, nhưng đừng để
+  // quá nhiều: quá nửa mà chưa dịch thì bảng dịch coi như chưa làm.
+  const untranslated = lmuModels.filter((m) => lmuName(m).vi === m.nameEn);
+  check(`phần lớn tên xương đã dịch (chưa dịch: ${untranslated.length}/${lmuModels.length})`,
+    untranslated.length * 2 < lmuModels.length,
+    untranslated.slice(0, 6).map((m) => m.nameEn).join(", "));
+
+  const empty = VET_SPECIES.filter((sp) => lmuOfSpecies(sp).length === 0);
+  check("loài nào cũng có ít nhất một xương", empty.length === 0, empty.join(", "));
 }
 
 console.log("\n9. Bệnh neo vào giải phẫu");
