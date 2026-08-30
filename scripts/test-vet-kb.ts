@@ -20,6 +20,7 @@ import {
 import { VET_SPECIES } from "@/lib/vet/types";
 import { VET_MODEL_CANDIDATES, vetModels } from "@/lib/vet/models";
 import { vetPlates, vetPlateOf } from "@/lib/vet/plates";
+import { vetDiseases } from "@/lib/vet/diseases";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { buildVetQuiz } from "@/lib/vet/quiz";
@@ -205,6 +206,41 @@ console.log("\n8. Bản khắc giải phẫu");
 
   const badCaveat = vetPlates.filter((p) => p.caveat && (!p.caveat.vi || !p.caveat.en || !p.caveat.zh));
   check("ghi chú mẫu vật (nếu có) đủ ba ngôn ngữ", badCaveat.length === 0);
+}
+
+console.log("\n9. Bệnh neo vào giải phẫu");
+{
+  // Đây là bất biến GIỮ CHO KHU BỆNH THUỘC VỀ MỘT ATLAS: mỗi bệnh phải trỏ tới
+  // một mục giải phẫu CÓ THẬT. Mất mối nối ấy thì trang bệnh chỉ còn là một
+  // quyển sổ tay, không liên quan gì tới phần còn lại của dự án.
+  const orphan = vetDiseases.filter((d) => !facts.some((f) => f.id === d.factId));
+  check("mọi bệnh neo vào mục giải phẫu có thật", orphan.length === 0,
+    orphan.map((d) => `${d.id} → ${d.factId}`).join(", "));
+
+  // Loài của bệnh phải nằm trong loài của chính mục giải phẫu ấy — nếu không,
+  // trang hiện ra một bệnh của bò kèm giải phẫu chỉ đúng cho chó.
+  const mismatch = vetDiseases.filter((d) => {
+    const f = facts.find((x) => x.id === d.factId);
+    return f ? !d.species.some((sp) => f.species.includes(sp)) : false;
+  });
+  check("loài của bệnh khớp loài của mục giải phẫu", mismatch.length === 0,
+    mismatch.map((d) => d.id).join(", "));
+
+  const badLang = vetDiseases.filter((d) =>
+    [d.name, d.mechanism, d.signs, d.management].some((t) => !t.vi || !t.en || !t.zh));
+  check("bệnh nào cũng đủ ba ngôn ngữ", badLang.length === 0, badLang.map((d) => d.id).join(", "));
+
+  const noSrc = vetDiseases.filter((d) => !d.source || !d.term);
+  check("bệnh nào cũng có nguồn giáo trình và thuật ngữ", noSrc.length === 0,
+    noSrc.map((d) => d.id).join(", "));
+
+  const dupe = vetDiseases.map((d) => d.id).filter((id, i, a) => a.indexOf(id) !== i);
+  check("mã bệnh không trùng nhau", dupe.length === 0, dupe.join(", "));
+
+  // Không loài nào được rỗng: thanh lọc theo loài mà bấm vào ra trang trắng thì
+  // người dùng tưởng hỏng.
+  const empty = VET_SPECIES.filter((sp) => !vetDiseases.some((d) => d.species.includes(sp)));
+  check("loài nào cũng có ít nhất một bệnh", empty.length === 0, empty.join(", "));
 }
 
 console.log("\n9. Sinh đề trắc nghiệm");

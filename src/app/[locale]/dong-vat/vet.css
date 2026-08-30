@@ -287,3 +287,41 @@ html[data-theme="dark"] .bd .vet-plate img { filter: invert(1); }
 .bd .vet-model-pick p { font-size: 13px; line-height: 1.75; color: var(--body-e); }
 .bd .vet-model-pick-clin b { color: var(--acc); }
 .bd .vet-model-pick small { font-size: 11px; color: var(--sub-e); }
+
+/* ---------- khu bệnh ---------- */
+.bd .vet-disease-head { grid-template-columns: 1fr; }
+.bd .vet-filter-sev { padding-top: 0; border-top: 0; }
+/* Ba màu mức độ phải khai RIÊNG cho từng theme. Một bộ màu dùng chung thì hoặc
+   chìm trên nền tối hoặc chìm trên nền kem — bản đầu dùng #3f7fa8 cho cả hai và
+   đo ra 3,61:1 ở theme tối, 4,05:1 ở theme sáng, hụt chuẩn AA ở cả hai. */
+.bd {
+  --sev-critical: #a8332a;
+  --sev-warning: #8a5f14;
+  --sev-info: #2c5f80;
+}
+html[data-theme="dark"] .bd {
+  --sev-critical: #e8776b;
+  --sev-warning: #d9a441;
+  --sev-info: #6fb0d8;
+}
+/* Nút đang bật là viên thuốc NỀN ĐẶC (`.is-on` đặt background:var(--ink-e),
+   color:var(--paper)). Bản đầu mình đổi màu CHỮ sang màu mức độ trên chính nền
+   đặc ấy — chữ sáng trên nền sáng, đo ra 1,86–3,13:1. Đúng cách là đổi NỀN,
+   giữ chữ ở var(--paper): --paper đảo theo theme cùng nhịp với ba màu mức độ
+   nên cặp nào cũng là sáng-trên-tối hoặc tối-trên-sáng. */
+.bd .vet-filter-sev button.sev-critical.is-on { background: var(--sev-critical); border-color: var(--sev-critical); }
+.bd .vet-filter-sev button.sev-warning.is-on { background: var(--sev-warning); border-color: var(--sev-warning); }
+.bd .vet-filter-sev button.sev-info.is-on { background: var(--sev-info); border-color: var(--sev-info); }
+/* Chấm mức độ: đọc được cả khi không phân biệt được màu, vì ngay cạnh nó là
+   nhãn chữ trong bộ lọc và mô tả đầy đủ khi mở ra. */
+.bd .vet-sev {
+  display: inline-block; width: 9px; height: 9px; margin-right: 9px;
+  border-radius: 50%; vertical-align: middle; flex: none;
+}
+.bd .vet-sev.sev-critical { background: var(--sev-critical); }
+.bd .vet-sev.sev-warning { background: var(--sev-warning); }
+.bd .vet-sev.sev-info { background: var(--sev-info); }
+.bd .vet-disease h3 { display: flex; align-items: center; }
+.bd .vet-disease-anatomy { border-left: 2px solid var(--acc); padding-left: 16px; }
+.bd .vet-disease-fact strong { color: var(--ink-e); font-weight: 500; }
+.bd .vet-disease-fact em { font: italic 12px var(--serif); color: var(--sub-e); margin-left: 6px; }
