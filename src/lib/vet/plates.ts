@@ -18,8 +18,10 @@ import type { VetSpeciesKey } from "./types";
  *   • Lợn phải lấy của Pander & D'Alton, mèo của The Book of the Cat, gà của
  *     A. B. Meyer, ngựa của một bản khắc 1802 do Wellcome số hoá.
  *
- * Ảnh đã cắt khỏi trang sách, chuyển xám và cân sáng bằng scripts/vet/proc3.py.
- * Riêng tấm ngựa còn phải san nền vì giấy ố nặng.
+ * Ảnh cắt khỏi trang sách, chuyển xám, cân sáng rồi xuất PNG NỀN TRONG SUỐT
+ * bằng scripts/vet/prepare-plates.py — mực thành độ đục, giấy thành trong. Nhờ
+ * vậy cùng một tệp dùng được cho cả hai theme (theme tối chỉ cần đảo RGB, alpha
+ * giữ nguyên) và ô ảnh không còn là một hình chữ nhật khác màu dán lên trang.
  */
 export type VetPlate = {
   species: VetSpeciesKey;
@@ -39,7 +41,7 @@ export type VetPlate = {
 export const vetPlates: VetPlate[] = [
   {
     species: "horse",
-    file: "horse.jpg",
+    file: "horse.png",
     title: {
       vi: "Bộ xương ngựa, nhìn ngang",
       en: "Skeleton of the horse, lateral view",
@@ -51,7 +53,7 @@ export const vetPlates: VetPlate[] = [
   },
   {
     species: "cattle",
-    file: "cattle.jpg",
+    file: "cattle.png",
     title: {
       vi: "Bộ xương bò, nhìn ngang",
       en: "Skeleton of the ox, lateral view",
@@ -63,7 +65,7 @@ export const vetPlates: VetPlate[] = [
   },
   {
     species: "pig",
-    file: "pig.jpg",
+    file: "pig.png",
     title: {
       vi: "Bộ xương lợn, nhìn ngang",
       en: "Skeleton of the pig, lateral view",
@@ -75,7 +77,7 @@ export const vetPlates: VetPlate[] = [
   },
   {
     species: "chicken",
-    file: "chicken.jpg",
+    file: "chicken.png",
     title: {
       vi: "Bộ xương gà, nhìn ngang",
       en: "Skeleton of the fowl, lateral view",
@@ -93,7 +95,7 @@ export const vetPlates: VetPlate[] = [
   },
   {
     species: "dog",
-    file: "dog.jpg",
+    file: "dog.png",
     title: {
       vi: "Bộ xương chó, nhìn ngang",
       en: "Skeleton of the dog, lateral view",
@@ -105,7 +107,7 @@ export const vetPlates: VetPlate[] = [
   },
   {
     species: "cat",
-    file: "cat.jpg",
+    file: "cat.png",
     title: {
       vi: "Bộ xương mèo, nhìn ngang",
       en: "Skeleton of the cat, lateral view",
