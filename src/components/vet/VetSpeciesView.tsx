@@ -7,6 +7,7 @@ import HomeFooter from "@/components/home/HomeFooter";
 import IconSprite from "@/components/home/IconSprite";
 import { pick, type Loc } from "@/lib/homeContent";
 import VetModelViewer from "./VetModelViewer";
+import VetBoneBrowser from "./VetBoneBrowser";
 import { vetCopy } from "@/lib/vet/copy";
 import { VET_REGION_LABEL, VET_SYSTEM_LABEL, relatedAcrossSpecies, speciesInfo } from "@/lib/vet/knowledge";
 import { vetModelsOfSpecies } from "@/lib/vet/models";
@@ -83,6 +84,8 @@ export default function VetSpeciesView({
           ))}
         </section>
       )}
+
+      <VetBoneBrowser locale={locale} species={speciesKey} />
 
       <div className="vet-filter">
         <button className={system === "all" ? "is-on" : ""} onClick={() => setSystem("all")}>
