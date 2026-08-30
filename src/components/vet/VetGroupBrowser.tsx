@@ -35,7 +35,15 @@ export default function VetGroupBrowser({
   // client được ("Functions cannot be passed directly to Client Components").
   const t = vetCopy(locale);
   const [hover, setHover] = useState<VetSpeciesKey | null>(null);
-  const shown = hover ?? null;
+  /*
+   * Chưa rê vào đâu thì hiện bản khắc của loài ĐẦU NHÓM, không để trống.
+   *
+   * Bản trước để ô rỗng cho tới khi rê chuột, mà ô ấy chiếm gần một nửa bề
+   * ngang — nên lúc bình thường hàng nào cũng hở một mảng to bên phải, nhìn
+   * như trang bị vỡ. Luôn có ảnh thì khoảng đó thành minh hoạ thật, và rê
+   * chuột chỉ là ĐỔI ảnh chứ không phải làm nó xuất hiện.
+   */
+  const shown = hover ?? species[0]?.key ?? null;
   const plate = shown ? vetPlateOf(shown) : undefined;
   const info = shown ? species.find((s) => s.key === shown) : undefined;
 
@@ -67,6 +75,10 @@ export default function VetGroupBrowser({
         {plate && info && (
           <>
             <Image
+              // key theo tệp: đổi loài là ảnh được gắn lại, nhờ đó hoạt ảnh
+              // trượt vào chạy lại từ đầu — không có key thì đổi ảnh tại chỗ,
+              // trông giống nhấp nháy hơn là một chuyển động.
+              key={plate.file}
               src={`/plates/vet/${plate.file}`}
               alt={pick(plate.title, locale)}
               width={1500}
