@@ -323,6 +323,7 @@
 .bd{
   --paper:#f4efe6; --paper-2:#efe8dc; --paper-3:#e9e0d1;
   --ink-e:#1c1813; --sub-e:#544b3d; --line-e:#ddd2c0;
+  --body-e:#4a443c; --surf-e:#f6f1e8;
   --maxw:1560px;
   --acc:#9a3324; --acc-soft:#b0563f;
   --serif:var(--font-serif),'Playfair Display','Iowan Old Style',Palatino,Georgia,serif;
@@ -453,12 +454,21 @@
    HERO TRANG NGƯỜI — chữ trái · ảnh phải (.human-fig = ô chờ ảnh)
    ============================================================ */
 .bd .human-hero{border-bottom:1px solid var(--line-e); background:var(--paper)}
-.bd .human-hero-inner{display:grid; grid-template-columns:1.05fr 1fr; gap:56px; align-items:center; padding:64px 40px 76px}
-.bd .human-hero-title{font-family:var(--serif); font-size:clamp(44px,5.6vw,80px); font-weight:600; color:var(--ink-e); line-height:1.02; letter-spacing:-.01em}
+.bd .human-hero-inner{display:grid;grid-template-columns:minmax(0,1fr) minmax(440px,.84fr);gap:24px;align-items:center;padding:44px 40px}
+/* Một "measure" duy nhất cho lede · ô tìm kiếm · khối số, để chúng chung mép phải.
+   Trước đây mỗi phần tử một chiều rộng nên đường kẻ của .human-stats chạy dài
+   ra tận mép cột (1134px) trong khi nội dung chỉ tới 741px → trông vẹo. */
+.bd .human-hero-copy{--measure:min(100%,700px)}
+.bd .human-hero-copy .hero-eyebrow{font-size:13px;margin-bottom:32px}
+/* Bỏ white-space:nowrap: cột phải rộng ra nên tiêu đề một dòng sẽ đâm vào ô sọ
+   ở khoảng 900–1030px. Để nó tự xuống dòng, text-wrap:balance chia dòng cho cân. */
+.bd .human-hero-title{font-family:var(--serif);font-size:clamp(46px,5.3vw,76px);font-weight:600;color:var(--ink-e);line-height:1.04;letter-spacing:-.018em;text-wrap:balance}
 .bd .human-hero-title em{font-style:italic; color:var(--acc); font-weight:500}
-.bd .human-hero-lede{margin:24px 0 0; text-align:left; max-width:48ch; color:var(--sub-e); font-size:18px}
+/* .human-hero-lede mang cả class .hero-lede, mà .bd .hero-lede còn được khai báo lại
+   ở cuối file (max-width:76ch) → phải tăng độ đặc hiệu, không thì measure bị đè. */
+.bd .human-hero-copy .human-hero-lede{margin:24px 0 0;text-align:left;max-width:var(--measure);color:var(--sub-e);font-size:18px}
 .bd .human-hero-cta{justify-content:flex-start; margin-top:34px}
-.bd .human-stats{display:flex; gap:52px; margin-top:48px; border-top:1px solid var(--line-e); padding-top:28px}
+.bd .human-stats{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; width:var(--measure); margin-top:40px; border-top:1px solid var(--line-e); padding-top:26px}
 .bd .hstat b{font-family:var(--serif); font-size:42px; font-weight:600; color:var(--ink-e); display:block; line-height:1}
 .bd .hstat span{font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--sub-e); margin-top:6px; display:block}
 .bd .human-fig{min-height:520px; background:var(--paper-2); border:1px solid var(--line-e); border-radius:2px;
@@ -471,7 +481,13 @@
   .bd .tc-fig{opacity:.28}
   .bd .human-hero-inner{grid-template-columns:1fr; gap:32px; padding:44px 20px 56px}
   .bd .human-fig{min-height:300px; order:-1}
-  .bd .human-stats{gap:32px}
+  /* .human-fig.human-fig-3d chứ không phải .human-fig-3d: rule desktop nằm SAU
+     trong file, cùng độ đặc hiệu thì nó thắng và mobile ăn nguyên 580px. */
+  .bd .human-fig.human-fig-3d{height:min(78vw,380px); min-height:0}
+  /* Giữ đúng 3 cột trên mobile, không để số thứ 3 rơi xuống hàng riêng. */
+  .bd .human-stats{grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin-top:36px}
+  .bd .hstat b{font-size:34px}
+  .bd .hstat span{font-size:10px; letter-spacing:.1em}
 }
 
 /* ============================================================
@@ -500,7 +516,7 @@
 .bd .tc-fig{pointer-events:none}
 
 /* Trang Người: giữ 2 cột (chữ trái · ảnh phải), cắm écorché Vesalius vào ô */
-.bd .human-hero-title{font-size:clamp(40px,4.6vw,66px)}
+.bd .human-hero-title{font-size:clamp(46px,5.3vw,76px)}
 .bd .human-fig{min-height:520px; background-color:var(--paper-2); border:1px solid var(--line-e); border-radius:2px;
   background-image:url(/plates/skull-human.png); background-repeat:no-repeat; background-size:82%; background-position:center;
   mix-blend-mode:multiply}
@@ -509,13 +525,17 @@
 .bd .card.sm .thumb-icon, .bd .result-card .thumb .thumb-icon{width:48%; max-width:84px; opacity:.85}
 
 /* Ô sọ 3D turntable: khung giấy, canvas lấp đầy (thay ảnh tĩnh) */
-.bd .human-fig-3d{background-color:var(--paper); border:0; border-radius:2px;
-  background-image:none; mix-blend-mode:normal; position:relative; height:540px; min-height:540px; overflow:hidden; display:block; align-self:stretch}
-.bd .human-fig-3d canvas{touch-action:none; display:block; transform:translateY(-8px)}
+/* Chiều CAO ô này mới quyết định cỡ sọ: maxSize của bbox là trục cao (0.2092)
+   nên Bounds fit luôn căn theo chiều cao — nới ngang chỉ thêm lề trái/phải.
+   Sọ hiển thị ≈ height / margin (xem SkullTurntable): 560/1.13 ≈ 496px. */
+.bd .human-fig-3d{background-color:var(--paper);border:0;border-radius:2px;background-image:none;mix-blend-mode:normal;position:relative;height:560px;min-height:560px;overflow:hidden;display:block;align-self:center}
+/* KHÔNG translateY canvas: khung overflow:hidden nên dịch lên là xén thẳng 8px
+   đỉnh render, ăn gần hết phần dư an toàn của Bounds margin. */
+.bd .human-fig-3d canvas{touch-action:none; display:block}
 .bd .skull-loading{position:absolute; inset:0; background:var(--paper-2)}
 
 /* Thanh search trong hero trang Người (style giống home, canh trái cột) */
-.bd .human-hero-search{margin-top:26px; max-width:560px}
+.bd .human-hero-search{margin-top:28px; max-width:var(--measure,680px)}
 .bd .human-hero-search .search-wrap{margin:0}
 .bd .human-hero-search .search{display:flex; align-items:center; gap:10px; background:#fff;
   border:1px solid var(--line-e); border-radius:8px; padding:0 8px 0 18px; height:52px;
@@ -526,6 +546,56 @@
   padding:11px 20px; font-weight:500; font-size:14px; font-family:var(--serif); cursor:pointer}
 .bd .human-hero-search .search .go:hover{background:#000}
 .bd .human-hero-search .search-panel{left:0; transform:none; width:100%; max-width:560px}
+
+/* Brand atlas: biểu tượng giải phẫu nét mảnh + wordmark hai tầng. */
+.bd .brand-signature{display:inline-flex;align-items:center;gap:11px;flex:0 0 auto;color:var(--ink-e);transition:color .22s cubic-bezier(.22,1,.36,1)}
+.bd .brand-signature-mark{width:36px;height:36px;overflow:visible;fill:none;stroke:currentColor;stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s cubic-bezier(.22,1,.36,1)}
+.bd .brand-signature-mark path:first-child{fill:color-mix(in srgb,var(--acc) 12%,transparent);stroke:var(--acc)}
+.bd .brand-signature-copy{display:grid;line-height:1}
+.bd .brand-signature-copy strong{font:600 25px/.9 var(--serif);letter-spacing:-.025em}
+.bd .brand-signature-copy small{margin-top:6px;font:650 8px/1 var(--sans);letter-spacing:.19em;text-transform:uppercase;color:var(--sub-e)}
+.bd .brand-signature:hover{color:var(--acc)}
+.bd .brand-signature:hover .brand-signature-mark{transform:rotate(-4deg) scale(1.04)}
+
+/* Bộ chọn ngôn ngữ dùng chung cho landing và viewer. */
+.bd .language-select{position:relative;flex:0 0 auto}
+.bd .language-select-trigger{height:42px;min-width:142px;display:flex;align-items:center;gap:8px;padding:0 11px;border:1px solid var(--line-e);border-radius:10px;background:color-mix(in srgb,var(--paper-2) 62%,transparent);color:var(--ink-e);cursor:pointer;font:600 12px var(--sans);transition:background .2s,border-color .2s,transform .2s}
+.bd .language-select-trigger:hover{border-color:color-mix(in srgb,var(--acc) 55%,var(--line-e));background:var(--paper-2)}
+.bd .language-select-trigger:active{transform:scale(.98)}
+.bd .language-select-trigger:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+.bd .language-select-trigger:disabled{opacity:.55;cursor:wait}
+.bd .language-globe{width:16px;height:16px;stroke-width:1.45;color:var(--acc)}
+.bd .language-select-trigger>span{flex:1;text-align:left;white-space:nowrap}
+.bd .language-select-trigger>em{font:650 9px var(--sans);letter-spacing:.08em;color:var(--sub-e);font-style:normal}
+.bd .language-chevron{width:13px;height:13px;transition:transform .25s cubic-bezier(.22,1,.36,1)}
+.bd .language-chevron.is-open{transform:rotate(180deg)}
+.bd .language-select-menu{position:absolute;top:calc(100% + 9px);right:0;z-index:80;width:218px;padding:8px;border:1px solid var(--line-e);border-radius:13px;background:var(--paper);color:var(--ink-e);box-shadow:0 20px 55px rgba(31,25,18,.18);animation:language-menu-in .2s cubic-bezier(.22,1,.36,1)}
+.bd .language-select-menu>p{padding:7px 9px 9px;font:650 9px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--sub-e)}
+.bd .language-select-option{width:100%;min-height:40px;display:grid;grid-template-columns:1fr auto 18px;align-items:center;gap:9px;padding:0 10px;border:0;border-radius:8px;background:transparent;color:inherit;text-align:left;cursor:pointer;font:550 13px var(--sans);transition:background .18s,color .18s}
+.bd .language-select-option:hover{background:var(--paper-2)}
+.bd .language-select-option[aria-current="true"]{color:var(--acc);background:color-mix(in srgb,var(--acc) 8%,transparent)}
+.bd .language-select-option em{font:650 9px var(--sans);letter-spacing:.08em;color:var(--sub-e);font-style:normal}
+.bd .language-select-option b{font-size:12px;text-align:right}
+@keyframes language-menu-in{from{opacity:0;transform:translateY(-5px) scale(.98)}to{opacity:1;transform:none}}
+
+/* Tìm kiếm: một bề mặt duy nhất, icon dẫn hướng và CTA có trạng thái rõ ràng. */
+.bd .human-hero-search .search{height:64px;padding:6px 7px 6px 18px;gap:13px;border-radius:14px;border:1px solid color-mix(in srgb,var(--line-e) 85%,transparent);background:color-mix(in srgb,var(--paper-2) 74%,transparent);box-shadow:inset 0 1px rgba(255,255,255,.05);transition:border-color .22s,box-shadow .22s,background .22s}
+.bd .human-hero-search .search:focus-within{border-color:color-mix(in srgb,var(--acc) 60%,var(--line-e));background:var(--paper-2);box-shadow:0 0 0 3px color-mix(in srgb,var(--acc) 11%,transparent)}
+.bd .human-hero-search .search-leading-icon{width:20px;height:20px;flex:0 0 auto;color:var(--acc);stroke-width:1.7}
+.bd .human-hero-search .search input{min-width:0;background:transparent;color:var(--ink-e);font-size:15px}
+.bd .human-hero-search .search input::placeholder{color:color-mix(in srgb,var(--sub-e) 82%,transparent)}
+.bd .human-hero-search .search .go{height:50px;min-width:126px;display:flex;align-items:center;justify-content:center;gap:9px;padding:0 18px;border-radius:10px;background:var(--ink-e);color:var(--paper);font:650 13px var(--sans);transition:transform .2s,background .2s,opacity .2s}
+.bd .human-hero-search .search .go svg{width:16px;height:16px;stroke-width:1.8;transition:transform .2s}
+.bd .human-hero-search .search .go:not(:disabled):hover svg{transform:translateX(3px)}
+.bd .human-hero-search .search .go:not(:disabled):active{transform:scale(.98)}
+.bd .human-hero-search .search .go:disabled{opacity:.34;cursor:not-allowed}
+.bd .human-hero-search .search-panel{top:72px;border:1px solid var(--line-e);background:var(--paper);box-shadow:0 22px 58px rgba(31,25,18,.2)}
+
+@media(max-width:760px){
+  .bd .brand-signature-mark{width:31px;height:31px}.bd .brand-signature-copy strong{font-size:21px}.bd .brand-signature-copy small{font-size:7px}
+  .bd .language-select-trigger{min-width:44px;width:44px;padding:0;justify-content:center}.bd .language-select-trigger>span,.bd .language-select-trigger>em{display:none}.bd .language-select-menu{right:0}
+  .bd .human-hero-search .search{height:58px;padding-left:14px}.bd .human-hero-search .search .go{min-width:48px;width:48px;height:46px;padding:0}.bd .human-hero-search .search .go span{display:none}
+}
 
 /* HOME 2026 — split editorial hero; CORPUS / ANIMA bên dưới được giữ nguyên. */
 .bd .home-hero-new{border-bottom:1px solid var(--line-e);background:var(--paper);min-height:calc(100svh - 76px)}
@@ -592,7 +662,7 @@
 .bd .theme-toggle svg{position:absolute;width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;transition:opacity .2s,transform .25s}
 .bd .theme-moon{opacity:0;transform:rotate(-35deg) scale(.65)}
 html[data-theme="dark"]{color-scheme:dark}
-html[data-theme="dark"] .bd{--paper:#171613;--paper-2:#201e1a;--paper-3:#29261f;--ink-e:#f0e9dc;--sub-e:#b9b0a2;--line-e:#3c3831;--acc:#d06a50;--acc-soft:#bd604b;--ink:#f0e9dc;--body-fg:#d8d1c5;--muted:#a9a195;--muted-2:#7f796f;--line:#3c3831;--surf:#1b1916;--surf-2:#24211d;--surf-3:#12110f}
+html[data-theme="dark"] .bd{--body-e:#d8d1c5;--surf-e:#201e1a;--paper:#171613;--paper-2:#201e1a;--paper-3:#29261f;--ink-e:#f0e9dc;--sub-e:#b9b0a2;--line-e:#3c3831;--acc:#d06a50;--acc-soft:#bd604b;--ink:#f0e9dc;--body-fg:#d8d1c5;--muted:#a9a195;--muted-2:#7f796f;--line:#3c3831;--surf:#1b1916;--surf-2:#24211d;--surf-3:#12110f}
 html[data-theme="dark"] .bd .theme-sun{opacity:0;transform:rotate(35deg) scale(.65)}
 html[data-theme="dark"] .bd .theme-moon{opacity:1;transform:rotate(0) scale(1)}
 html[data-theme="dark"] .bd .nav,html[data-theme="dark"] .bd .hero,html[data-theme="dark"] .bd .twocol,html[data-theme="dark"] .bd .foot{background:var(--paper)}
@@ -693,66 +763,414 @@ html[data-theme="dark"] .bd .tc-fig{filter:invert(.9) sepia(.15);opacity:.48;mix
 .bd .result-card:hover .rc-label>b{transform:translate(2px,-2px);color:var(--acc)}
 html[data-theme="dark"] .bd .result-card:hover{box-shadow:0 22px 48px rgba(0,0,0,.22)}
 html[data-theme="dark"] .bd .menu{color:#b9b0a2}
+/* Mục thú y trong mega menu dùng màu đất --lab-clay (#a8664a), đo trên nền
+   tối được 4,02:1 — dưới ngưỡng AA cho chữ nhỏ (4,5:1). Cùng sắc nhưng sáng
+   hơn để đạt chuẩn mà không đổi nhận diện màu của mục. */
+html[data-theme="dark"] .bd .mi.vet{color:#d08a63}
+/* Nút đăng ký ở footer: chữ trắng trên nền --acc. Ở theme tối --acc sáng lên
+   thành #d06a50 nên trắng-trên-nền-ấy chỉ còn 3,58:1, dưới ngưỡng AA. Đổi
+   sang chữ tối trên chính nền ấy được 4,65:1 mà không phải đổi màu nút. */
+html[data-theme="dark"] .bd .footer-subscribe button{color:#221c17}
 html[data-theme="dark"] .bd .menu>a:hover,html[data-theme="dark"] .bd .menu>.explore-group:hover,html[data-theme="dark"] .bd .menu>a.active{color:#f0e9dc}
 
 @media(max-width:1240px){.bd .explore-shell{grid-template-columns:230px minmax(0,1fr)}.bd .explore-main{padding-left:32px;padding-right:32px}.bd .results-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:980px){.bd .explore-shell{grid-template-columns:1fr}.bd .cat-sidebar{display:none}.bd .explore-main{padding:42px 24px 64px}.bd .explore-heading-foot{padding-left:0}}
 @media(max-width:620px){.bd .explore-main{padding:34px 16px 55px}.bd .page-head .ic{width:40px;height:40px}.bd .page-head h1{font-size:38px}.bd .explore-heading-foot{align-items:flex-start;flex-direction:column;gap:13px}.bd .toolbar{grid-template-columns:1fr}.bd .tb-right{justify-content:space-between}.bd .results-grid{grid-template-columns:1fr}.bd .filter-tabs{gap:20px;overflow-x:auto;flex-wrap:nowrap}.bd .filter-tab{white-space:nowrap}.bd .result-card .thumb{aspect-ratio:1.6/1}}
 
-/* PATHOLOGY LIBRARY */
-.bd .pathology-page{min-height:calc(100svh - 82px);background:var(--paper);padding:clamp(50px,6vw,92px) clamp(28px,6vw,110px) 100px}
-.bd .pathology-hero{display:grid;grid-template-columns:1fr auto;gap:28px;max-width:1500px;margin:auto;padding-bottom:42px;border-bottom:1px solid var(--line-e)}
-.bd .pathology-hero>span{grid-column:1/-1;color:var(--acc);font-size:10px;font-weight:700;letter-spacing:.24em}.bd .pathology-hero h1{font:500 clamp(52px,6vw,88px)/.95 var(--serif);letter-spacing:-.035em;color:var(--ink-e)}
-.bd .pathology-hero p{margin-top:22px;color:var(--sub-e);font-size:17px;line-height:1.65;max-width:650px}.bd .pathology-hero aside{display:flex;align-items:baseline;gap:9px;align-self:end;color:var(--sub-e)}.bd .pathology-hero aside b{font:500 42px var(--serif);color:var(--ink-e)}.bd .pathology-hero aside small{text-transform:uppercase;letter-spacing:.15em;font-size:9px}
-.bd .pathology-tools{max-width:1500px;margin:28px auto 35px}.bd .pathology-tools>label{height:56px;display:flex;align-items:center;gap:12px;border:1px solid var(--line-e);padding:0 18px}.bd .pathology-tools>label span{font-size:22px;color:var(--sub-e)}.bd .pathology-tools input{width:100%;border:0;outline:0;background:transparent;color:var(--ink-e);font-size:15px}.bd .pathology-tools input::placeholder{color:var(--sub-e)}
-.bd .system-filters{display:flex;gap:25px;overflow-x:auto;border-bottom:1px solid var(--line-e);margin-top:12px}.bd .system-filters button{white-space:nowrap;padding:13px 1px 11px;border:0;border-bottom:2px solid transparent;background:transparent;color:var(--sub-e);font:500 12px var(--sans);cursor:pointer}.bd .system-filters button.active{color:var(--ink-e);border-color:var(--acc)}
-.bd .pathology-grid{max-width:1500px;margin:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.bd .pathology-card{--sev:#6d8377;min-height:430px;border:1px solid var(--line-e);background:var(--paper-2);display:flex;flex-direction:column;position:relative;overflow:hidden}.bd .pathology-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--sev)}.bd .pathology-card.severity-warning{--sev:#b98237}.bd .pathology-card.severity-critical{--sev:#b54b3a}
-.bd .path-card-top{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;border-bottom:1px solid var(--line-e)}.bd .path-index{font:italic 13px var(--serif);color:var(--sub-e)}.bd .severity-badge{display:flex;align-items:center;gap:7px;text-transform:uppercase;letter-spacing:.12em;font-size:8px;color:var(--sev)}.bd .severity-badge i{width:6px;height:6px;border-radius:50%;background:var(--sev);box-shadow:0 0 0 4px color-mix(in srgb,var(--sev) 13%,transparent)}
-.bd .path-card-body{padding:30px 28px;flex:1}.bd .path-system{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--acc)}.bd .pathology-card h2{font:500 clamp(31px,3vw,45px)/1.04 var(--serif);color:var(--ink-e);margin-top:12px;max-width:16ch}.bd .pathology-card em{display:block;margin-top:8px;font:italic 16px var(--serif);color:var(--sub-e)}.bd .path-meta{display:grid;grid-template-columns:130px 1fr;gap:18px;margin-top:30px;padding-top:20px;border-top:1px solid var(--line-e)}.bd .path-meta span{display:grid;gap:5px}.bd .path-meta small,.bd .pathology-card footer small{font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--sub-e)}.bd .path-meta b{font:500 13px var(--sans);color:var(--ink-e)}.bd .path-description{margin-top:18px;color:var(--sub-e);font-size:13px;line-height:1.65}
-.bd .pathology-card footer{position:relative;padding:19px 76px 20px 28px;border-top:1px solid var(--line-e);display:grid;gap:5px}.bd .pathology-card cite{font:400 11px/1.5 var(--serif);color:var(--sub-e)}.bd .pathology-card footer a{position:absolute;right:22px;top:50%;transform:translateY(-50%);font:600 11px var(--sans);color:var(--acc)}.bd .pathology-state{max-width:1500px;margin:45px auto;padding:60px;text-align:center;border:1px solid var(--line-e);color:var(--sub-e)}.bd .pathology-state.error{color:#b54b3a}
-@media(max-width:850px){.bd .pathology-grid{grid-template-columns:1fr}.bd .pathology-hero{grid-template-columns:1fr}.bd .pathology-hero aside{justify-self:start}.bd .pathology-page{padding:45px 20px 70px}}@media(max-width:520px){.bd .pathology-hero h1{font-size:50px}.bd .path-meta{grid-template-columns:1fr}.bd .pathology-card{min-height:0}}
+/* ============================================================
+   PATHOLOGY LIBRARY — chỉ mục lâm sàng 106 bệnh
+   Dùng token của site, KHÔNG tô cứng bảng màu riêng.
+
+   Bố cục hàng đi theo ĐỘ BIẾN THIÊN THẬT của dữ liệu (đo trên 106 bản ghi):
+     icdCode  100 giá trị khác nhau → cột chính
+     page      95 giá trị khác nhau → cột phụ
+     structure 25 giá trị, 78/106   → chỉ hiện nhãn "3D" khi CÓ
+     severity   3 giá trị, 16/106   → chấm màu, không phải cột chữ
+     source     4 giá trị, 106/106  → bỏ hẳn khỏi bảng, chỉ còn trong hồ sơ
+   Bản trước dựng lưới 5 cột trong khi 4 cột lặp lại y hệt trong mỗi nhóm.
+   ============================================================ */
+/* Bố cục hai cột: cột trái là BỘ LỌC của riêng trang này (hệ lâm sàng, mức
+   độ, đã lưu). Điều hướng chung vẫn ở thanh trên — không nhân bản xuống đây,
+   vì hai tầng menu chỉ vào cùng một chỗ là nguồn nhầm lẫn chứ không phải lối
+   tắt. Dùng chung ngôn ngữ thị giác với .cat-sidebar của trang Khám phá. */
+.bd .pth-shell{
+  --sev-info:#4a6b57; --sev-warning:#8a5a12; --sev-critical:#8c1d14;
+  display:grid; grid-template-columns:262px minmax(0,1fr); align-items:start;
+  min-height:calc(100svh - 82px); background:var(--paper); color:var(--ink-e);
+}
+html[data-theme="dark"] .bd .pth-shell{
+  --sev-info:#7fae90; --sev-warning:#d0a256; --sev-critical:#e59288;
+}
+.bd .pth{
+  min-width:0; max-width:1180px; padding:clamp(38px,5vw,60px) clamp(28px,4vw,56px) 88px;
+  display:flex; flex-direction:column; gap:28px;
+}
+
+/* ---- Cột trái ---- */
+.bd .pth-side{
+  /* align-self:stretch để NỀN phủ kín chiều cao cột — không còn mảng hở dưới
+     đáy. Phần dính (sticky) nằm ở lớp con .pth-side-in, nhờ vậy nội dung bám
+     theo màn hình mà KHÔNG bị ép cao đúng một màn hình như bản trước, vốn để
+     thừa cả khoảng trống lớn bên dưới mục cuối. */
+  align-self:stretch;
+  padding:0; background:var(--paper-2);
+  border-right:1px solid var(--line-e);
+}
+.bd .pth-side-in{
+  position:sticky; top:82px;
+  /* Cao đúng một màn hình VÀ cho danh mục giãn ra lấp kín: trước đây nội dung
+     chỉ cao 539px trong khung 718px nên chừa một mảng trống lớn ở đáy. Giãn
+     bằng flex thay vì tăng cứng chiều cao từng mục, để màn hình thấp thì mục
+     tự co lại chứ không sinh thanh cuộn. */
+  min-height:calc(100svh - 82px); max-height:calc(100svh - 82px); overflow-y:auto;
+  padding:26px 16px 22px;
+  display:flex; flex-direction:column;
+  scrollbar-width:thin; scrollbar-color:var(--line-e) transparent;
+}
+.bd .pth-cats{flex:1 1 auto; justify-content:space-evenly; min-height:0}
+.bd .pth-side-title{
+  margin:0 0 6px; padding:0 12px 16px; border-bottom:1px solid var(--line-e);
+  font:500 21px var(--serif); color:var(--ink-e);
+}
+.bd .pth-cats{display:flex; flex-direction:column}
+.bd .pth-cat{
+  display:flex; align-items:center; gap:11px; width:100%;
+  min-height:44px; padding:10px 12px; border:0; border-radius:2px;
+  background:transparent; color:var(--sub-e); font:400 13.5px var(--sans);
+  text-align:left; cursor:pointer; transition:background .18s, color .18s, padding .18s;
+}
+.bd .pth-cat>span{flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.bd .pth-cat .isvg{width:18px; height:18px; flex:0 0 auto; opacity:.82}
+.bd .pth-cat em{
+  flex:0 0 auto; font:400 10.5px var(--mono); font-style:normal;
+  font-variant-numeric:tabular-nums; opacity:.62;
+}
+.bd .pth-cat:hover{
+  padding-left:15px; background:color-mix(in srgb,var(--acc) 6%,transparent); color:var(--ink-e);
+}
+.bd .pth-cat.on{
+  background:var(--ink-e); color:var(--paper); font-weight:600; padding-left:15px;
+}
+.bd .pth-cat.on .isvg{opacity:1}
+/* Mục 0 kết quả vẫn bấm được (để bỏ bộ lọc khác), chỉ mờ đi cho khỏi hút mắt. */
+.bd .pth-cat.is-empty:not(.on){opacity:.42}
+
+/* ---- Đầu trang ---- */
+.bd .pth-head{display:flex; flex-direction:column; gap:12px; max-width:62ch}
+.bd .pth-eyebrow{
+  margin:0; color:var(--acc); font:600 11px/1 var(--sans);
+  letter-spacing:.17em; text-transform:uppercase;
+}
+.bd .pth h1{
+  margin:0; font:600 clamp(34px,4vw,52px)/1.06 var(--serif);
+  letter-spacing:-.02em; color:var(--ink-e); text-wrap:balance;
+}
+.bd .pth-lead{margin:0; color:var(--sub-e); font-size:16px; line-height:1.6}
+
+/* ---- Tìm kiếm ---- */
+.bd .pth-tools{display:flex; flex-wrap:wrap; gap:10px}
+.bd .pth-search{
+  flex:1; min-width:min(100%,280px); display:flex; align-items:center; gap:11px;
+  height:52px; padding:0 16px; background:var(--paper-2);
+  border:1px solid var(--line-e); border-radius:3px;
+  transition:border-color .2s, box-shadow .2s;
+}
+.bd .pth-search:focus-within{
+  border-color:var(--acc);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--acc) 12%,transparent);
+}
+.bd .pth-search>.isvg{width:18px; height:18px; flex:0 0 auto; color:var(--acc); stroke-width:1.7}
+.bd .pth-search input{
+  flex:1; min-width:0; border:0; outline:0; background:transparent;
+  color:var(--ink-e); font:400 15px var(--sans);
+}
+.bd .pth-search input::placeholder{color:var(--sub-e); opacity:.78}
+.bd .pth-search>button{
+  flex:0 0 auto; display:grid; place-items:center; width:26px; height:26px;
+  border:0; border-radius:50%; background:var(--paper-3); color:var(--sub-e); cursor:pointer;
+}
+.bd .pth-search>button:hover{color:var(--ink-e)}
+.bd .pth-search>button .isvg{width:13px; height:13px}
+.bd .pth-sources{
+  display:inline-flex; align-items:center; gap:8px; padding:0 20px; height:52px;
+  border:1px solid var(--line-e); border-radius:3px; background:transparent;
+  color:var(--ink-e); font:600 13px var(--sans); white-space:nowrap;
+  transition:border-color .2s, color .2s;
+}
+.bd .pth-sources:hover{border-color:var(--acc); color:var(--acc)}
+.bd .pth-sources .isvg{width:14px; height:14px}
+
+/* ---- Hàng trạng thái: chỉ hiện bộ lọc ĐANG bật, bấm để bỏ ---- */
+.bd .pth-filters{display:flex; flex-wrap:wrap; gap:9px 12px; align-items:center; min-height:30px}
+.bd .pth-tag{
+  display:inline-flex; align-items:center; gap:7px; padding:6px 11px;
+  border:1px solid var(--line-e); border-radius:999px; background:var(--paper-2);
+  color:var(--ink-e); font:500 12.5px var(--sans); cursor:pointer;
+  transition:border-color .18s, color .18s;
+}
+.bd .pth-tag:hover{border-color:var(--acc); color:var(--acc)}
+.bd .pth-tag .isvg{width:11px; height:11px; opacity:.7}
+.bd .pth-tag i{width:7px; height:7px; border-radius:50%; flex:0 0 auto; background:var(--mark,var(--sub-e))}
+.bd .pth-tag.sev-info{--mark:var(--sev-info)}
+.bd .pth-tag.sev-warning{--mark:var(--sev-warning)}
+.bd .pth-tag.sev-critical{--mark:var(--sev-critical)}
+.bd .pth-saved{
+  display:inline-flex; align-items:center; gap:8px; margin-top:18px; padding:10px 12px;
+  border:1px solid var(--line-e); border-radius:2px; background:transparent;
+  color:var(--sub-e); font:500 12.5px var(--sans); cursor:pointer;
+}
+.bd .pth-saved.on{border-color:var(--acc); color:var(--acc)}
+.bd .pth-saved .isvg{width:13px; height:13px}
+.bd .pth-count{margin-left:auto; color:var(--sub-e); font:400 12.5px var(--sans)}
+.bd .pth-count b{color:var(--ink-e); font-family:var(--mono); font-variant-numeric:tabular-nums}
+
+/* ---- Chỉ mục ---- */
+.bd .pth-index{display:flex; flex-direction:column; gap:30px}
+.bd .pth-group h2{
+  position:sticky; top:0; z-index:2;
+  display:flex; align-items:baseline; gap:10px;
+  margin:0; padding:9px 0; background:var(--paper);
+  border-bottom:1px solid var(--ink-e);
+  font:600 13px var(--sans); letter-spacing:.02em; color:var(--ink-e);
+}
+.bd .pth-group h2 em{
+  font:400 11px var(--mono); font-style:normal; color:var(--sub-e);
+  font-variant-numeric:tabular-nums;
+}
+.bd .pth-group ul{margin:0; padding:0; list-style:none}
+
+.bd .pth-row{display:flex; align-items:center; border-bottom:1px solid var(--line-e)}
+.bd .pth-row:hover{background:var(--paper-2)}
+/* Một dòng, canh theo baseline chữ — đọc lướt được như chỉ mục sách. */
+.bd .pth-open{
+  flex:1; min-width:0; display:flex; align-items:baseline; gap:12px;
+  padding:13px 4px; border:0; background:transparent; text-align:left;
+  color:inherit; font:inherit; cursor:pointer;
+}
+.bd .pth-dot{
+  flex:0 0 auto; align-self:center; width:7px; height:7px; border-radius:50%;
+  background:var(--mark); margin-right:-4px;
+}
+.bd .pth-row.sev-info{--mark:var(--sev-info)}
+.bd .pth-row.sev-warning{--mark:var(--sev-warning)}
+.bd .pth-row.sev-critical{--mark:var(--sev-critical)}
+.bd .pth-name{
+  flex:0 1 auto; min-width:0; font:500 16.5px/1.35 var(--serif); color:var(--ink-e);
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.bd .pth-row:hover .pth-name{color:var(--acc)}
+/* Đường chấm nối tên với mã — quy ước chỉ mục sách, dẫn mắt sang phải. */
+.bd .pth-open::after{
+  content:""; flex:1 1 auto; min-width:14px; align-self:center; height:1px;
+  background-image:radial-gradient(circle,var(--line-e) 1px,transparent 1px);
+  background-size:5px 1px; background-repeat:repeat-x; opacity:.85; order:3;
+}
+.bd .pth-icd{
+  order:4; flex:0 0 auto; min-width:92px; text-align:right;
+  font:500 12.5px var(--mono); color:var(--ink-e);
+  font-variant-numeric:tabular-nums; white-space:nowrap;
+}
+.bd .pth-page{
+  order:5; flex:0 0 auto; min-width:74px; text-align:right;
+  font:400 12px var(--mono); color:var(--sub-e);
+  font-variant-numeric:tabular-nums; white-space:nowrap;
+}
+.bd .pth-3d{
+  order:6; flex:0 0 auto; align-self:center; width:34px; text-align:center; padding:2px 0;
+  border:1px solid color-mix(in srgb,var(--acc) 45%,var(--line-e));
+  border-radius:2px; color:var(--acc); font:600 9.5px var(--sans); letter-spacing:.09em;
+}
+.bd .pth-icd.is-blank,.bd .pth-page.is-blank,.bd .pth-3d.is-blank{visibility:hidden}
+.bd .pth-mark{
+  flex:0 0 auto; width:42px; align-self:stretch; border:0; background:transparent;
+  color:var(--line-e); cursor:pointer; transition:color .18s;
+}
+.bd .pth-mark:hover{color:var(--sub-e)}
+.bd .pth-mark.on{color:var(--acc)}
+.bd .pth-mark .isvg{width:15px; height:15px}
+.bd .pth-mark.on .isvg{fill:currentColor}
+
+/* ---- Trạng thái ---- */
+.bd .pth-loading{display:flex; flex-direction:column; gap:1px}
+.bd .pth-loading span{
+  height:46px; border-bottom:1px solid var(--line-e); background:var(--paper-2);
+  animation:pth-pulse 1.5s ease-in-out infinite;
+}
+.bd .pth-loading p{margin:10px 0 0; color:var(--sub-e); font-size:13px}
+@keyframes pth-pulse{50%{opacity:.45}}
+.bd .pth-empty{
+  margin:0; padding:52px 0; text-align:center; color:var(--sub-e);
+  border-top:1px solid var(--line-e); border-bottom:1px solid var(--line-e);
+}
+.bd .pth-error{display:flex; flex-direction:column; gap:8px; color:var(--sev-critical)}
+.bd .pth-error small{font:400 12px var(--mono); color:var(--sub-e)}
+.bd .pth-disclaimer{
+  margin:0; padding-top:20px; border-top:1px solid var(--line-e);
+  color:var(--sub-e); font-size:12.5px; line-height:1.6; max-width:76ch;
+}
+
+/* ---- Hồ sơ ---- */
+.bd .pth-drawer-back{
+  position:fixed; inset:0; z-index:100; display:flex; justify-content:flex-end;
+  background:rgba(20,16,12,.55); backdrop-filter:blur(3px); animation:pth-fade .2s ease;
+}
+@keyframes pth-fade{from{opacity:0}}
+.bd .pth-drawer{
+  width:min(560px,100%); height:100%; overflow-y:auto;
+  display:flex; flex-direction:column; gap:22px;
+  padding:28px 32px 32px; background:var(--paper);
+  border-left:1px solid var(--line-e); color:var(--ink-e);
+  box-shadow:-24px 0 64px rgba(20,16,12,.24);
+  animation:pth-slide .26s cubic-bezier(.22,1,.36,1);
+}
+@keyframes pth-slide{from{transform:translateX(22px); opacity:.6}}
+.bd .pth-drawer>header{display:flex; align-items:flex-start; gap:18px}
+.bd .pth-drawer>header>div{flex:1; min-width:0; display:flex; flex-direction:column; gap:8px}
+.bd .pth-chip{
+  display:inline-flex; align-items:center; gap:7px; width:max-content;
+  color:var(--mark); font:600 11px var(--sans); letter-spacing:.1em; text-transform:uppercase;
+}
+.bd .pth-chip.sev-info{--mark:var(--sev-info)}
+.bd .pth-chip.sev-warning{--mark:var(--sev-warning)}
+.bd .pth-chip.sev-critical{--mark:var(--sev-critical)}
+.bd .pth-chip i{width:7px; height:7px; border-radius:50%; background:currentColor}
+.bd .pth-drawer h2{
+  margin:0; font:600 clamp(25px,3.2vw,34px)/1.14 var(--serif);
+  letter-spacing:-.018em; color:var(--ink-e); text-wrap:balance;
+}
+.bd .pth-alt{margin:0; color:var(--sub-e); font:400 13.5px/1.5 var(--sans)}
+.bd .pth-drawer>header button{
+  flex:0 0 auto; width:36px; height:36px; display:grid; place-items:center;
+  border:1px solid var(--line-e); border-radius:50%; background:transparent;
+  color:var(--ink-e); cursor:pointer; transition:border-color .2s, color .2s;
+}
+.bd .pth-drawer>header button:hover{border-color:var(--acc); color:var(--acc)}
+.bd .pth-drawer>header button .isvg{width:15px; height:15px}
+
+.bd .pth-fig{margin:0; display:flex; flex-direction:column; gap:8px}
+.bd .pth-fig img{
+  width:100%; height:auto; display:block; border-radius:3px;
+  background:var(--paper-2); border:1px solid var(--line-e);
+}
+.bd .pth-fig figcaption{color:var(--sub-e); font-size:11.5px; line-height:1.5}
+/* Hình quét từ giáo trình: nền TRẮNG cố định, không theo nền tối của trang —
+   ảnh scan có nền giấy trắng sẵn, đặt trên nền tối thì viền ảnh nhảy ra như
+   miếng vá. Chú thích in nằm trong ảnh nên không lặp lại bằng chữ web. */
+.bd .pth-figs{display:flex; flex-direction:column; gap:16px}
+.bd .pth-figs h3{
+  margin:0; font:600 10.5px var(--sans); letter-spacing:.14em;
+  text-transform:uppercase; color:var(--acc);
+}
+.bd .pth-figs .pth-fig img{background:#fff; padding:6px}
+.bd .pth-facts{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+  gap:1px; margin:0; background:var(--line-e);
+  border:1px solid var(--line-e); border-radius:3px; overflow:hidden;
+}
+.bd .pth-facts>div{display:flex; flex-direction:column; gap:5px; padding:12px 14px; background:var(--paper-2)}
+.bd .pth-facts dt{font:600 10.5px var(--sans); letter-spacing:.11em; text-transform:uppercase; color:var(--sub-e)}
+.bd .pth-facts dd{margin:0; font:500 13.5px/1.35 var(--sans); color:var(--ink-e)}
+.bd .pth-facts dd.mono{font-family:var(--mono); font-variant-numeric:tabular-nums}
+
+.bd .pth-drawer section{display:flex; flex-direction:column; gap:9px}
+.bd .pth-drawer h3{
+  margin:0; font:600 11px var(--sans); letter-spacing:.12em;
+  text-transform:uppercase; color:var(--acc);
+}
+.bd .pth-drawer section p{margin:0; color:var(--sub-e); font-size:14.5px; line-height:1.7}
+.bd .pth-incomplete{
+  margin:0; padding:14px 16px; border-left:2px solid var(--line-e);
+  background:var(--paper-2); color:var(--sub-e); font-size:13.5px; line-height:1.6;
+}
+.bd .pth-cite cite{font:400 13px/1.6 var(--serif); color:var(--sub-e); font-style:normal}
+.bd .pth-cite strong{font:600 13px var(--mono); color:var(--ink-e); font-variant-numeric:tabular-nums}
+.bd .pth-cite a{display:block; color:var(--acc); font-size:13px; text-decoration:none}
+.bd .pth-cite a:hover{text-decoration:underline}
+
+/* Điều hướng ngang trong cùng chuyên khoa — thứ hồ sơ có mà dòng danh sách
+   không có, nên mở hồ sơ mới đáng. */
+.bd .pth-related ul{margin:0; padding:0; list-style:none; display:flex; flex-direction:column}
+.bd .pth-related li{border-bottom:1px solid var(--line-e)}
+.bd .pth-related li:first-child{border-top:1px solid var(--line-e)}
+.bd .pth-related button{
+  width:100%; display:flex; align-items:baseline; gap:12px; padding:9px 2px;
+  border:0; background:transparent; color:var(--ink-e); text-align:left; cursor:pointer;
+  font:400 14px var(--sans);
+}
+.bd .pth-related button:hover{color:var(--acc)}
+.bd .pth-related button span{flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.bd .pth-related button em{
+  flex:0 0 auto; font:500 11.5px var(--mono); font-style:normal; color:var(--sub-e);
+  font-variant-numeric:tabular-nums;
+}
+
+.bd .pth-actions{
+  display:grid; grid-auto-flow:column; grid-auto-columns:1fr; gap:9px;
+  padding-top:18px; border-top:1px solid var(--line-e);
+}
+.bd .pth-actions>*{
+  height:46px; display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  border:1px solid var(--line-e); border-radius:3px; background:transparent;
+  color:var(--ink-e); font:600 13px var(--sans); cursor:pointer; text-decoration:none;
+}
+.bd .pth-actions>a{background:var(--ink-e); color:var(--paper); border-color:var(--ink-e)}
+.bd .pth-actions .isvg{width:14px; height:14px}
+
+.bd .pth :focus-visible,.bd .pth-drawer :focus-visible{outline:2px solid var(--acc); outline-offset:2px}
+
+@media(max-width:1180px){
+  .bd .pth-shell{grid-template-columns:224px minmax(0,1fr)}
+}
+/* Hẹp thì cột trái nằm ngang thành dải cuộn trên đầu — vẫn là cùng bộ mục,
+   chỉ đổi trục, không ẩn đi mất bộ lọc như .cat-sidebar bên Khám phá. */
+@media(max-width:900px){
+  .bd .pth-shell{grid-template-columns:minmax(0,1fr)}
+  .bd .pth-side{
+    border-right:0; border-bottom:1px solid var(--line-e);
+  }
+  .bd .pth-side-in{
+    position:static; max-height:none; overflow:visible;
+    flex-direction:row; align-items:center; flex-wrap:nowrap;
+    gap:8px; padding:12px 16px;
+    overflow-x:auto; scrollbar-width:none;
+  }
+  .bd .pth-side-in::-webkit-scrollbar{display:none}
+  .bd .pth-side-title{display:none}
+  .bd .pth-cats{flex-direction:row; gap:6px}
+  .bd .pth-cat{
+    width:auto; min-height:34px; padding:7px 12px; border:1px solid var(--line-e);
+    border-radius:999px; white-space:nowrap;
+  }
+  .bd .pth-cat:hover,.bd .pth-cat.on{padding-left:12px}
+  .bd .pth-cat.on{border-color:var(--ink-e)}
+  .bd .pth-saved{margin:0; white-space:nowrap}
+}
+@media(max-width:640px){
+  .bd .pth{padding:30px 16px 64px; gap:22px}
+  .bd .pth-open{flex-wrap:wrap; gap:6px 10px; padding:12px 2px}
+  .bd .pth-name{flex:1 1 100%; white-space:normal}
+  .bd .pth-open::after{display:none}
+  .bd .pth-page{min-width:0; text-align:left}
+  .bd .pth-count{margin-left:0}
+  .bd .pth-drawer{padding:22px 18px 28px}
+  .bd .pth-actions{grid-auto-flow:row}
+}
+@media(prefers-reduced-motion:reduce){
+  .bd .pth-loading span,.bd .pth-drawer,.bd .pth-drawer-back{animation:none}
+}
 
 /* PATHOLOGY PANEL IN 3D VIEWER */
+/* Mục nội dung trong panel viewer — mở sẵn đúng bệnh đến từ ?pathology=. */
+.bd .vp-sec{margin-bottom:11px}
+.bd .vp-sec small{display:block;margin-bottom:3px;font:600 8px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--acc)}
+.bd .vp-sec p{margin:0;font-size:11px;line-height:1.6;color:var(--sub-e)}
+.bd .vp-pending{font-size:11px;line-height:1.6;color:var(--sub-e);font-style:italic;margin-bottom:11px}
+/* Cảnh báo "chưa dịch" / "dịch máy" trong ngăn bệnh lý của /viewer. Dùng
+   viền trái chứ không phải chữ nghiêng mờ như .vp-pending: đây là điều người
+   đọc PHẢI thấy, không phải một ghi chú cho có. */
+.bd .vp-warn{margin:0 0 10px;padding:7px 10px;border-left:2px solid var(--sev-warning);background:color-mix(in srgb,var(--sev-warning) 8%,transparent);color:var(--ink-e);font:500 11px/1.55 var(--sans)}
+.bd .vp-item.is-focused{background:color-mix(in srgb,var(--acc) 7%,transparent)}
 .bd .viewer-pathology{margin-top:22px;border-top:1px solid var(--line-e);padding-top:18px}.bd .vp-title{display:flex;justify-content:space-between;align-items:center;color:var(--ink-e);font:500 16px var(--serif)}.bd .vp-title b{display:grid;place-items:center;width:24px;height:24px;border:1px solid var(--line-e);border-radius:50%;font:500 10px var(--sans);color:var(--sub-e)}.bd .vp-empty{padding:20px 0;color:var(--sub-e);font-size:12px;line-height:1.6}.bd .vp-list{margin-top:12px;border-top:1px solid var(--line-e)}.bd .vp-item{--sev:#6d8377;border-bottom:1px solid var(--line-e)}.bd .vp-item.severity-warning{--sev:#b98237}.bd .vp-item.severity-critical{--sev:#b54b3a}.bd .vp-item-head{width:100%;display:grid;grid-template-columns:7px 1fr auto;gap:10px;align-items:start;text-align:left;padding:14px 0;border:0;background:transparent;color:var(--ink-e);cursor:pointer}.bd .vp-item-head>i{width:6px;height:6px;border-radius:50%;background:var(--sev);margin-top:6px}.bd .vp-item-head>span{display:grid;gap:3px}.bd .vp-item-head strong{font:500 14px/1.25 var(--serif)}.bd .vp-item-head small{font:500 8px var(--mono);letter-spacing:.08em;color:var(--sub-e)}.bd .vp-item-head>b{font:400 16px var(--sans);color:var(--sub-e)}.bd .vp-detail{padding:0 0 16px 17px}.bd .vp-detail>p{font-size:11px;line-height:1.6;color:var(--sub-e);margin-bottom:11px}.bd .vp-detail>button{width:100%;display:flex;justify-content:space-between;padding:9px 11px;border:1px solid var(--acc);background:transparent;color:var(--acc);font:600 10px var(--sans);cursor:pointer}.bd .vp-detail footer{display:grid;gap:4px;margin-top:13px}.bd .vp-detail footer small{font-size:7px;letter-spacing:.14em;color:var(--sub-e);text-transform:uppercase}.bd .vp-detail cite{font:400 9px/1.45 var(--serif);color:var(--sub-e)}
-
-/* MEDICAL KNOWLEDGE SEARCH */
-.bd .pathology-search-row{display:grid;grid-template-columns:1fr auto;gap:10px}
-.bd .pathology-search-row>label{height:56px;display:flex;align-items:center;gap:12px;border:1px solid var(--line-e);padding:0 18px}
-.bd .clinical-search{position:relative}.bd .clinical-search>label{height:56px;display:flex;align-items:center;gap:12px;border:1px solid var(--line-e);padding:0 18px}.bd .clinical-search>label span{font-size:22px;color:var(--sub-e)}
-.bd .clinical-suggestions{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:30;border:1px solid var(--line-e);background:var(--paper-2);box-shadow:0 18px 45px rgba(0,0,0,.22)}.bd .clinical-suggestions button{width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:13px 17px;border:0;border-bottom:1px solid var(--line-e);background:transparent;color:var(--ink-e);cursor:pointer;text-align:left}.bd .clinical-suggestions button:last-child{border-bottom:0}.bd .clinical-suggestions button:hover{background:var(--paper-3)}.bd .clinical-suggestions small{color:var(--sub-e)}
-.bd .clinical-filter-groups{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:18px}.bd .clinical-filter-groups .system-filters{flex:1;min-width:300px}.bd .severity-filters{justify-content:flex-end}.bd .saved-filter{height:38px;padding:0 14px;border:1px solid var(--line-e);background:transparent;color:var(--sub-e);cursor:pointer}.bd .saved-filter.active{border-color:var(--acc);color:var(--acc);background:color-mix(in srgb,var(--acc) 8%,transparent)}
-.bd .pathology-card{cursor:pointer;transition:transform .2s,border-color .2s}.bd .pathology-card:hover{transform:translateY(-3px);border-color:var(--sub-e)}.bd .path-card-top{gap:12px}.bd .path-bookmark{margin-left:auto;border:0;background:transparent;color:var(--sub-e);font-size:20px;line-height:1;cursor:pointer}.bd .path-bookmark.saved{color:var(--acc)}.bd .pathology-card footer>span{position:absolute;right:22px;top:50%;transform:translateY(-50%);font:600 11px var(--sans);color:var(--acc)}
-.bd .pathology-drawer-backdrop{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);display:flex;justify-content:flex-end}.bd .pathology-drawer{width:min(620px,100%);height:100%;overflow-y:auto;background:var(--paper);border-left:1px solid var(--line-e);padding:34px 38px 42px;color:var(--ink-e);box-shadow:-25px 0 70px rgba(0,0,0,.28)}.bd .pathology-drawer>header{display:flex;justify-content:space-between;gap:24px;padding-bottom:26px;border-bottom:1px solid var(--line-e)}.bd .pathology-drawer>header small{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--acc)}.bd .pathology-drawer h2{font:500 clamp(38px,5vw,58px)/1 var(--serif);margin-top:12px}.bd .pathology-drawer em{display:block;margin-top:8px;color:var(--sub-e);font:italic 16px var(--serif)}.bd .pathology-drawer>header button{size:42px;min-width:42px;height:42px;border:1px solid var(--line-e);border-radius:50%;background:transparent;color:var(--ink-e);font-size:25px;cursor:pointer}.bd .drawer-tags{display:flex;flex-wrap:wrap;gap:8px;padding:20px 0}.bd .drawer-tags span{border:1px solid var(--line-e);padding:7px 10px;color:var(--sub-e);font-size:10px;text-transform:uppercase;letter-spacing:.1em}.bd .pathology-drawer>section{padding:23px 0;border-top:1px solid var(--line-e)}.bd .pathology-drawer h3{font:600 12px var(--sans);letter-spacing:.12em;text-transform:uppercase;margin-bottom:11px}.bd .pathology-drawer section p,.bd .pathology-drawer cite{color:var(--sub-e);font-size:14px;line-height:1.7}.bd .muted-empty{font-style:italic;opacity:.72}.bd .drawer-source a{display:block;margin-top:10px;color:var(--acc);font-size:12px}.bd .drawer-actions{position:sticky;bottom:-42px;margin:12px -38px -42px;padding:18px 38px;background:var(--paper);border-top:1px solid var(--line-e);display:grid;grid-template-columns:1fr 1.4fr;gap:10px}.bd .drawer-actions>*{height:48px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line-e);background:transparent;color:var(--ink-e);font-size:12px;cursor:pointer}.bd .drawer-actions a{background:var(--ink-e);color:var(--paper)}
-@media(max-width:700px){.bd .clinical-filter-groups .system-filters{min-width:100%}.bd .pathology-drawer{padding:26px 22px 34px}.bd .drawer-actions{bottom:-34px;margin:12px -22px -34px;padding:14px 22px}.bd .drawer-actions{grid-template-columns:1fr}}
-.bd .pathology-drawer>header button{width:42px}
-
-/* Clinical index — evidence-first pathology library */
-.bd .pathology-page{--clinical-accent:#62aeb0;--clinical-accent-soft:color-mix(in srgb,var(--clinical-accent) 12%,transparent);--paper:#111513;--paper-2:#151b18;--paper-3:#1b2420;--ink-e:#e6eeea;--sub-e:#99aaa2;--line-e:#2b3632;--ink:#e6eeea;--body-fg:#c6d1cc;--muted:#91a199;--muted-2:#708179;max-width:none;padding:42px clamp(24px,4vw,72px) 90px;background:#111513;color:var(--ink-e)}
-.bd .pathology-hero{max-width:1600px;grid-template-columns:minmax(0,1fr) auto;align-items:end;padding-bottom:28px;border-color:#2b3632}
-.bd .pathology-hero>span{color:var(--clinical-accent);letter-spacing:.18em}
-.bd .pathology-hero h1{font:600 clamp(38px,4vw,64px)/1.02 var(--sans);letter-spacing:-.045em;max-width:16ch}
-.bd .pathology-hero p{margin-top:14px;max-width:760px;font-size:15px;line-height:1.65}
-.bd .pathology-hero aside{padding-left:28px;border-left:1px solid #2b3632}.bd .pathology-hero aside b{font:500 34px/1 var(--mono);font-variant-numeric:tabular-nums}.bd .pathology-hero aside small{letter-spacing:.12em}
-.bd .clinical-summary-strip{max-width:1600px;margin:0 auto;display:grid;grid-template-columns:170px 190px 190px minmax(280px,1fr);border-bottom:1px solid #2b3632}
-.bd .clinical-summary-strip>div{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px 22px;border-right:1px solid #2b3632}.bd .clinical-summary-strip>div:first-child{padding-left:0}.bd .clinical-summary-strip small{font-size:9px;line-height:1.4;text-transform:uppercase;letter-spacing:.12em;color:#7f928b}.bd .clinical-summary-strip strong{font:500 18px var(--mono);font-variant-numeric:tabular-nums;color:#d9e4df}.bd .clinical-summary-strip p{align-self:center;justify-self:end;max-width:520px;padding-left:30px;color:#7f928b;font-size:11px;line-height:1.55;text-align:right}
-.bd .pathology-tools{max-width:1600px;margin:22px auto 30px}.bd .clinical-search>label{height:52px;border-color:#33413c;background:#161c19;padding:0 16px}.bd .clinical-search>label:focus-within{border-color:var(--clinical-accent);box-shadow:inset 3px 0 var(--clinical-accent)}.bd .clinical-search>label span{color:var(--clinical-accent)}
-.bd .knowledge-link{background:#d8e3de;color:#101512;min-width:150px}.bd .knowledge-link:hover{background:#f0f6f3}
-.bd .clinical-filter-groups{margin-top:12px;gap:8px}.bd .clinical-filter-groups .system-filters{display:flex;flex-wrap:wrap;gap:0;border:1px solid #2b3632;min-width:0}.bd .clinical-filter-groups .system-filters button{margin:0;border:0;border-right:1px solid #2b3632;border-bottom:0;padding:9px 13px;color:#8fa099;background:transparent;font-size:10px;letter-spacing:.03em}.bd .clinical-filter-groups .system-filters button:last-child{border-right:0}.bd .clinical-filter-groups .system-filters button.active{background:var(--clinical-accent-soft);color:#9fd1d2;box-shadow:inset 0 -2px var(--clinical-accent)}.bd .severity-filters{flex:0 1 auto!important}.bd .saved-filter{height:36px;border-color:#2b3632;color:#8fa099}.bd .saved-filter.active{border-color:var(--clinical-accent);color:#9fd1d2;background:var(--clinical-accent-soft)}
-.bd .pathology-list-head{max-width:1600px;margin:0 auto;display:grid;grid-template-columns:52px minmax(270px,1.5fr) 110px minmax(190px,.9fr) 120px minmax(180px,.8fr);align-items:center;padding:0 18px 10px;color:#71827b;font-size:8px;font-weight:600;text-transform:uppercase;letter-spacing:.13em}
-.bd .pathology-grid{max-width:1600px;grid-template-columns:1fr;gap:0;border-top:1px solid #33413c}
-.bd .pathology-card{min-height:0;display:grid;grid-template-columns:52px minmax(0,1fr) 96px;background:transparent;border:0;border-bottom:1px solid #26312d;overflow:visible;transition:background .35s cubic-bezier(.32,.72,0,1),transform .35s cubic-bezier(.32,.72,0,1)}.bd .pathology-card::before{width:2px;bottom:-1px;opacity:.75}.bd .pathology-card:hover{transform:none;border-color:#3b4a44;background:#171e1b}
-.bd .path-card-top{display:flex;align-items:flex-start;justify-content:flex-start;padding:24px 14px 0 18px;border:0}.bd .path-index{font:500 11px var(--mono);font-variant-numeric:tabular-nums}.bd .path-card-top .severity-badge{display:none}.bd .path-bookmark{position:absolute;right:24px;top:22px;font-size:17px;z-index:2}
-.bd .path-card-body{padding:21px 18px;display:grid;grid-template-columns:minmax(270px,1.5fr) 110px minmax(190px,.9fr) 120px minmax(180px,.8fr);gap:18px;align-items:center}.bd .path-name{min-width:0}.bd .path-system{font-size:8px;letter-spacing:.13em;color:var(--clinical-accent)}.bd .pathology-card h2{margin-top:6px;font:600 clamp(19px,1.7vw,26px)/1.12 var(--sans);letter-spacing:-.025em;max-width:none}.bd .pathology-card em{margin-top:5px;font:italic 12px var(--serif);color:#879a92}.bd .path-code,.bd .path-structure{display:grid;gap:5px}.bd .path-code small,.bd .path-structure small{display:none}.bd .path-code b{font:500 12px var(--mono);font-variant-numeric:tabular-nums;color:#c8d5cf}.bd .path-structure b{font:500 12px/1.45 var(--sans);color:#aebdb6}.bd .path-evidence{display:grid;gap:5px}.bd .path-evidence>span{width:max-content;padding-left:12px;position:relative;color:#9bc5b2;font-size:10px;font-weight:600}.bd .path-evidence>span::before{content:"";position:absolute;left:0;top:4px;width:5px;height:5px;border-radius:50%;background:#6daa8e}.bd .path-evidence small{display:block;max-width:24ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#6f8179;font-size:9px}
-.bd .pathology-card footer{display:flex;align-items:center;justify-content:flex-end;padding:20px 24px 20px 0;border:0}.bd .pathology-card footer>span{position:static;transform:none;color:#87bfc0;font-size:9px;letter-spacing:.05em;white-space:nowrap}
-.bd .pathology-skeleton{max-width:1600px;margin:auto;border-top:1px solid #2b3632}.bd .pathology-skeleton>div{height:92px;display:grid;grid-template-columns:40px 1fr 160px;gap:24px;align-items:center;border-bottom:1px solid #26312d}.bd .pathology-skeleton i,.bd .pathology-skeleton span,.bd .pathology-skeleton b{display:block;height:9px;background:#202925;animation:clinical-pulse 1.6s cubic-bezier(.32,.72,0,1) infinite}.bd .pathology-skeleton i{width:22px}.bd .pathology-skeleton span{width:42%;height:16px}.bd .pathology-skeleton b{width:110px}@keyframes clinical-pulse{50%{opacity:.42}}
-.bd .clinical-suggestions{background:#171e1b;border-color:#33413c}.bd .clinical-suggestions button{border-color:#29342f}.bd .clinical-suggestions button:hover{background:#202925}
-.bd .pathology-drawer{background:#131916;border-color:#33413c}.bd .pathology-drawer>header small,.bd .drawer-source a{color:var(--clinical-accent)}.bd .drawer-tags span{border-color:#33413c}.bd .drawer-actions{background:#131916;border-color:#33413c}.bd .drawer-actions a{background:#c8d8d1;color:#101512}
-@media(max-width:1100px){.bd .clinical-summary-strip{grid-template-columns:repeat(3,1fr)}.bd .clinical-summary-strip p{grid-column:1/-1;justify-self:start;padding:14px 0;text-align:left}.bd .pathology-list-head{display:none}.bd .path-card-body{grid-template-columns:minmax(230px,1.4fr) 90px minmax(150px,.8fr) 110px}.bd .path-evidence{display:none}}
-@media(max-width:760px){.bd .pathology-page{padding:30px 16px 64px}.bd .pathology-hero{grid-template-columns:1fr}.bd .pathology-hero aside{display:none}.bd .clinical-summary-strip{grid-template-columns:repeat(3,1fr)}.bd .clinical-summary-strip>div{padding:14px 10px;display:grid;gap:6px}.bd .clinical-summary-strip>div:first-child{padding-left:0}.bd .pathology-search-row{grid-template-columns:1fr}.bd .knowledge-link{height:44px}.bd .pathology-card{grid-template-columns:38px minmax(0,1fr)}.bd .path-card-top{padding:20px 8px 0 10px}.bd .path-card-body{grid-template-columns:1fr 80px;padding:17px 12px}.bd .path-structure{grid-column:1/-1}.bd .pathology-card footer{display:none}.bd .path-bookmark{right:12px;top:16px}.bd .severity-filters{display:none!important}}
-@media(prefers-reduced-motion:reduce){.bd .pathology-card,.bd .pathology-skeleton i,.bd .pathology-skeleton span,.bd .pathology-skeleton b{animation:none;transition:none}}
-.bd .path-priority{--priority:#739287;display:flex;align-items:center;gap:7px;color:#9aafa6;font-size:9px;text-transform:uppercase;letter-spacing:.06em}.bd .path-priority i{width:6px;height:6px;border-radius:50%;background:var(--priority);box-shadow:0 0 0 3px color-mix(in srgb,var(--priority) 13%,transparent)}.bd .path-priority.priority-warning{--priority:#b99358;color:#c1a475}.bd .path-priority.priority-critical{--priority:#c3655a;color:#ce837b}
-.bd .pathology-drawer h2{font-family:var(--sans);font-weight:600;font-size:clamp(34px,4vw,50px);letter-spacing:-.04em;max-width:12ch}.bd .clinical-coverage>div{border-top:1px solid #2b3632}.bd .clinical-coverage p{display:grid!important;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:18px;padding:13px 0;border-bottom:1px solid #25302c;font-style:normal!important;opacity:1!important}.bd .clinical-coverage p span{color:#bdcac4;font-size:12px}.bd .clinical-coverage p small{position:relative;padding-left:12px;color:#7d8e86;font-size:9px;text-transform:uppercase;letter-spacing:.06em}.bd .clinical-coverage p small::before{content:"";position:absolute;left:0;top:4px;width:5px;height:5px;border-radius:50%;background:#55665e}
-.bd .knowledge-link{display:flex;align-items:center;padding:0 20px;background:var(--ink-e);color:var(--paper);font-size:12px;white-space:nowrap}
 .bd .knowledge-page{min-height:calc(100svh - 82px);padding:clamp(52px,6vw,92px) clamp(28px,6vw,110px) 100px;background:var(--paper)}
 .bd .knowledge-page>header{max-width:1040px}
 .bd .knowledge-page>header>span{color:var(--acc);font-size:10px;font-weight:700;letter-spacing:.23em}
@@ -979,10 +1397,31 @@ html[data-theme="dark"] .bd .menu>a:hover,html[data-theme="dark"] .bd .menu>.exp
 .bd .assistant-sidebar{display:flex;flex-direction:column;padding:24px;border-right:1px solid var(--line-e);background:color-mix(in srgb,var(--paper) 72%,var(--paper-2))}.bd .assistant-sidebar>header{display:flex;gap:12px;padding-bottom:21px;border-bottom:1px solid var(--line-e)}.bd .assistant-sidebar>header>span{display:grid;place-items:center;width:35px;height:35px;border-radius:11px;background:var(--ink-e);color:var(--paper);font:600 10px var(--mono)}.bd .assistant-sidebar header div{display:grid;gap:4px}.bd .assistant-sidebar header b{font-size:13px}.bd .assistant-sidebar header small{color:var(--sub-e);font-size:8px}.bd .assistant-sidebar ul{display:grid;gap:8px;margin:22px 0;padding:0;list-style:none}.bd .assistant-sidebar li{display:flex;align-items:center;gap:10px;color:var(--sub-e);font-size:12px}.bd .assistant-sidebar li i{display:grid;place-items:center;width:27px;height:27px;border:1px solid var(--line-e);border-radius:9px;color:var(--acc);font-style:normal}.bd .assistant-prompts{display:grid;gap:8px}.bd .assistant-prompts button{display:flex;justify-content:space-between;gap:10px;padding:12px;border:1px solid var(--line-e);border-radius:11px;background:transparent;color:var(--ink-e);font-size:11px;text-align:left;cursor:pointer;transition:transform .4s cubic-bezier(.32,.72,0,1),border-color .4s,background .4s}.bd .assistant-prompts button:hover{transform:translateX(3px);border-color:var(--acc);background:var(--paper)}.bd .assistant-prompts button span{color:var(--acc)}.bd .assistant-sidebar>p{margin-top:auto;padding-top:24px;color:var(--sub-e);font-size:9px;line-height:1.55}
 .bd .assistant-chat-card{display:grid;grid-template-rows:auto 1fr auto auto;min-width:0;background:var(--paper)}.bd .assistant-chat-card>header{display:flex;align-items:center;justify-content:space-between;padding:17px 22px;border-bottom:1px solid var(--line-e)}.bd .assistant-chat-card>header div{display:grid;gap:3px}.bd .assistant-chat-card>header span{font-size:12px;font-weight:650}.bd .assistant-chat-card>header b{color:var(--sub-e);font:600 8px var(--mono);letter-spacing:.12em}.bd .assistant-chat-card>header button{border:0;background:transparent;color:var(--sub-e);font-size:10px;cursor:pointer}.bd .assistant-chat-card>header button:disabled{opacity:.35}
 .bd .assistant-log{min-height:460px;max-height:590px;overflow-y:auto;padding:28px;scrollbar-width:thin;scrollbar-color:var(--line-e) transparent}.bd .assistant-empty{height:100%;min-height:390px;display:grid;place-content:center;justify-items:center;text-align:center}.bd .assistant-empty img{image-rendering:pixelated}.bd .assistant-empty h2{max-width:390px;margin:13px 0 8px;font:500 25px/1.25 var(--serif)}.bd .assistant-empty p{max-width:460px;color:var(--sub-e);font-size:12px;line-height:1.6}.bd .assistant-log article{max-width:82%;margin-bottom:18px}.bd .assistant-log article.user{margin-left:auto;padding:13px 16px;border-radius:15px 15px 3px 15px;background:var(--ink-e);color:var(--paper)}.bd .assistant-log article.bot{padding:17px 18px;border:1px solid var(--line-e);border-radius:3px 16px 16px;background:var(--paper-2)}.bd .assistant-log article>header{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:10px}.bd .assistant-log article>header span{color:var(--acc);font-size:8px;font-weight:700;letter-spacing:.14em}.bd .assistant-log article>header button{border:1px solid var(--line-e);border-radius:8px;background:transparent;color:var(--sub-e);padding:5px 8px;font-size:8px;cursor:pointer}.bd .assistant-log article p{font-size:13.5px;line-height:1.7;white-space:pre-wrap}
+.bd .assistant-line{display:block}
 .bd .assistant-sources{display:grid;margin-top:15px;padding-top:12px;border-top:1px solid var(--line-e)}.bd .assistant-sources>b{padding-bottom:7px;color:var(--sub-e);font-size:8px;letter-spacing:.15em}.bd .assistant-sources>a{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:9px 0;border-top:1px dashed var(--line-e);text-decoration:none;color:var(--ink-e)}.bd .assistant-sources a span{display:grid;font-size:11px}.bd .assistant-sources a i{color:var(--sub-e);font:italic 9px var(--serif)}.bd .assistant-sources a em{color:var(--acc);font-size:9px;font-style:normal}.bd .assistant-wait{display:flex;align-items:center;gap:5px}.bd .assistant-wait>i{width:5px;height:5px;border-radius:50%;background:var(--acc);animation:assistant-dot 1.2s cubic-bezier(.45,0,.55,1) infinite}.bd .assistant-wait>i:nth-child(2){animation-delay:.14s}.bd .assistant-wait>i:nth-child(3){animation-delay:.28s}.bd .assistant-wait span{margin-left:7px;color:var(--sub-e);font-size:10px}
 .bd .assistant-composer{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:9px;margin:0 20px;padding:10px;border:1px solid var(--line-e);border-radius:15px;background:var(--paper-2)}.bd .assistant-composer textarea{min-height:52px;max-height:120px;resize:none;border:0;outline:0;background:transparent;color:var(--ink-e);font:13px/1.55 var(--sans);padding:7px}.bd .assistant-composer button{border:0;cursor:pointer}.bd .assistant-composer .voice{display:flex;align-items:center;gap:8px;align-self:end;height:42px;padding:0 13px;border-radius:11px;background:color-mix(in srgb,var(--acc) 10%,var(--paper));color:var(--acc)}.bd .assistant-composer .voice svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}.bd .assistant-composer .voice span{font-size:9px;font-weight:650}.bd .assistant-composer .voice.active{background:#a74c4c;color:#fff;animation:assistant-mic 1.2s cubic-bezier(.45,0,.55,1) infinite}.bd .assistant-composer .submit{display:flex;align-items:center;gap:10px;align-self:end;height:42px;padding:0 16px;border-radius:11px;background:var(--ink-e);color:var(--paper)}.bd .assistant-composer .submit:disabled{opacity:.32}.bd .assistant-composer .submit span{font-size:10px}.bd .assistant-voice-status{display:flex;align-items:center;gap:7px;padding:8px 26px 13px;color:#a74c4c;font-size:9px}.bd .assistant-voice-status i{width:6px;height:6px;border-radius:50%;background:currentColor}.bd .assistant-voice-status.active{color:var(--acc)}
 @keyframes assistant-float{0%,100%{transform:translateY(1px) rotate(-1deg)}50%{transform:translateY(-8px) rotate(1deg)}}@keyframes assistant-orbit{to{transform:rotateX(68deg) rotateZ(360deg)}}@keyframes assistant-dot{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}@keyframes assistant-mic{50%{box-shadow:0 0 0 6px color-mix(in srgb,currentColor 15%,transparent)}}
 @media(max-width:850px){.bd .assistant-page{padding:28px 16px 60px}.bd .assistant-intro{grid-template-columns:1fr}.bd .assistant-mascot{display:none}.bd .assistant-workspace{grid-template-columns:1fr}.bd .assistant-sidebar{display:none}.bd .assistant-log{padding:18px;max-height:none}.bd .assistant-composer{grid-template-columns:42px minmax(0,1fr) 44px;margin:0 10px}.bd .assistant-composer .voice{width:42px;padding:0;justify-content:center}.bd .assistant-composer .voice span,.bd .assistant-composer .submit span{display:none}.bd .assistant-log article{max-width:94%}}
+
+/* Assistant v2: restrained clinical workspace, reduced decorative AI styling. */
+.bd .assistant-page-v2{max-width:1380px;padding-top:32px}
+.bd .assistant-page-v2 .assistant-intro{grid-template-columns:minmax(0,1fr) minmax(320px,420px);align-items:center;padding:22px 0 28px}
+.bd .assistant-page-v2 .assistant-intro h1{max-width:760px;margin:11px 0 11px;font-family:var(--sans);font-size:clamp(34px,4vw,56px);font-weight:600;line-height:1.02;letter-spacing:-.045em}
+.bd .assistant-page-v2 .assistant-intro p{max-width:690px;font-size:14px;line-height:1.6}
+.bd .assistant-system-status{display:grid;grid-template-columns:repeat(3,1fr);margin:0;border-top:1px solid var(--line-e);border-bottom:1px solid var(--line-e)}
+.bd .assistant-system-status>div{display:grid;gap:6px;padding:14px 16px;border-left:1px solid var(--line-e)}.bd .assistant-system-status dt{color:var(--sub-e);font-size:8px;letter-spacing:.12em;text-transform:uppercase}.bd .assistant-system-status dd{display:flex;align-items:center;gap:6px;margin:0;color:var(--ink-e);font-size:10px;font-weight:600}.bd .assistant-system-status dd i{width:6px;height:6px;border-radius:50%;background:#4cb989;box-shadow:0 0 0 3px color-mix(in srgb,#4cb989 14%,transparent)}
+.bd .assistant-page-v2 .assistant-workspace{grid-template-columns:250px minmax(0,1fr);min-height:650px;margin-top:20px;border-radius:12px;box-shadow:none;background:transparent}
+.bd .assistant-page-v2 .assistant-sidebar{padding:20px;background:color-mix(in srgb,var(--paper-2) 82%,transparent)}
+.bd .assistant-page-v2 .assistant-prompts button{border:0;border-top:1px solid var(--line-e);border-radius:0;padding:12px 3px}.bd .assistant-page-v2 .assistant-prompts button:last-child{border-bottom:1px solid var(--line-e)}.bd .assistant-page-v2 .assistant-prompts button:hover{padding-left:7px;background:transparent;border-color:var(--line-e)}
+.bd .assistant-page-v2 .assistant-chat-card{background:var(--paper)}.bd .assistant-page-v2 .assistant-log{max-height:565px;padding:26px 32px}.bd .assistant-page-v2 .assistant-empty{min-height:400px}.bd .assistant-page-v2 .assistant-empty img{width:64px;height:64px;opacity:.76}.bd .assistant-page-v2 .assistant-empty h2{font-family:var(--sans);font-size:19px;font-weight:600;letter-spacing:-.02em}.bd .assistant-page-v2 .assistant-empty p{font-size:11px}
+.bd .assistant-page-v2 .assistant-log article.bot{border:0;border-left:2px solid var(--acc);border-radius:0;background:var(--paper-2)}.bd .assistant-page-v2 .assistant-log article.user{border-radius:12px 12px 2px 12px}.bd .assistant-page-v2 .assistant-log article p{font-size:13px}
+.bd .assistant-page-v2 .assistant-composer{grid-template-columns:52px minmax(0,1fr) auto;gap:8px;margin:0 22px 18px;padding:7px 8px;border-radius:12px;background:var(--paper);box-shadow:inset 0 0 0 1px var(--line-e)}
+.bd .assistant-page-v2 .assistant-composer textarea{min-height:48px;padding:9px 7px}.bd .assistant-page-v2 .assistant-composer .voice{position:relative;width:46px;height:46px;justify-content:center;padding:0;border:1px solid var(--line-e);border-radius:50%;background:var(--paper-2);color:var(--ink-e);overflow:visible;transition:transform .45s cubic-bezier(.32,.72,0,1),border-color .35s,background .35s,color .35s}.bd .assistant-page-v2 .assistant-composer .voice:hover{transform:translateY(-2px);border-color:var(--acc);color:var(--acc)}.bd .assistant-page-v2 .assistant-composer .voice:active{transform:scale(.94)}.bd .assistant-page-v2 .assistant-composer .voice>span:last-child{position:absolute;left:54px;width:max-content;padding:6px 8px;border-radius:6px;background:var(--ink-e);color:var(--paper);opacity:0;transform:translateX(-4px);pointer-events:none;transition:opacity .25s,transform .35s cubic-bezier(.32,.72,0,1)}.bd .assistant-page-v2 .assistant-composer .voice:hover>span:last-child{opacity:1;transform:none}
+.bd .assistant-mic-glyph{position:relative;display:grid;place-items:center;width:26px;height:26px}.bd .assistant-mic-glyph svg{position:relative;z-index:2;width:20px!important;height:20px!important}.bd .assistant-mic-glyph>i{position:absolute;bottom:2px;width:2px;border-radius:2px;background:currentColor;opacity:0}.bd .assistant-mic-glyph>i:nth-of-type(1){left:2px;height:7px}.bd .assistant-mic-glyph>i:nth-of-type(2){left:7px;height:12px}.bd .assistant-mic-glyph>i:nth-of-type(3){left:12px;height:5px}
+.bd .assistant-page-v2 .assistant-composer .voice.active{border-color:#d06363;background:#a84f4f;color:#fff;box-shadow:0 0 0 5px color-mix(in srgb,#d06363 13%,transparent);animation:none}.bd .assistant-composer .voice.active .assistant-mic-glyph svg{opacity:.3}.bd .assistant-composer .voice.active .assistant-mic-glyph>i{opacity:1;animation:assistant-wave .72s cubic-bezier(.45,0,.55,1) infinite}.bd .assistant-composer .voice.active .assistant-mic-glyph>i:nth-of-type(2){animation-delay:.12s}.bd .assistant-composer .voice.active .assistant-mic-glyph>i:nth-of-type(3){animation-delay:.24s}
+.bd .assistant-page-v2 .assistant-composer .submit{height:46px;border-radius:9px;padding:0 18px}.bd .assistant-page-v2 .assistant-voice-status{padding:0 29px 14px}
+@keyframes assistant-wave{0%,100%{transform:scaleY(.35);opacity:.5}50%{transform:scaleY(1);opacity:1}}
+@media(max-width:850px){.bd .assistant-page-v2 .assistant-intro{grid-template-columns:1fr}.bd .assistant-system-status{display:none}.bd .assistant-page-v2 .assistant-workspace{grid-template-columns:1fr}.bd .assistant-page-v2 .assistant-composer{grid-template-columns:46px minmax(0,1fr) 44px;margin:0 10px 12px}.bd .assistant-page-v2 .assistant-composer .voice>span:last-child{display:none}}
 .bd .quiz-clock{display:inline-block;margin-right:14px;padding:3px 9px;border:1px solid var(--line-e);
   border-radius:2px;font:600 12px var(--sans);color:var(--ink-e);font-variant-numeric:tabular-nums;letter-spacing:.04em}
 .bd .quiz-clock.warn{border-color:#a33a24;color:#a33a24}

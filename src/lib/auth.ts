@@ -1,4 +1,13 @@
-export type AuthUser = { id: string; name: string; email: string };
+/** Vai trên back office. Trùng enum `UserRole` của backend, xếp từ thấp lên cao. */
+export const ROLES = ["user", "editor", "admin", "super_admin"] as const;
+export type Role = (typeof ROLES)[number];
+
+/** Bậc quyền hiện tại có với tới `minimum` không. */
+export function hasAtLeast(role: Role | undefined, minimum: Role) {
+  return role !== undefined && ROLES.indexOf(role) >= ROLES.indexOf(minimum);
+}
+
+export type AuthUser = { id: string; name: string; email: string; role: Role };
 export type AuthResponse = { token: string; expiresAt: string; user: AuthUser };
 
 const TOKEN_KEY = "soma3d_auth_token";
