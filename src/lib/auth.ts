@@ -1,11 +1,12 @@
-/** Vai trên back office. Trùng enum `UserRole` của backend, xếp từ thấp lên cao. */
-export const ROLES = ["user", "editor", "admin", "super_admin"] as const;
-export type Role = (typeof ROLES)[number];
-
-/** Bậc quyền hiện tại có với tới `minimum` không. */
-export function hasAtLeast(role: Role | undefined, minimum: Role) {
-  return role !== undefined && ROLES.indexOf(role) >= ROLES.indexOf(minimum);
-}
+/**
+ * `role` là vai trên back office, do `/auth/me` trả về.
+ *
+ * Trang ngoài KHÔNG dùng nó để quyết định gì — back office là ứng dụng riêng
+ * (repo Soma_Bo) và tự hỏi lại máy chủ. Giữ trường này ở đây chỉ để kiểu dữ
+ * liệu khớp với thân JSON thật; bộ so bậc quyền `hasAtLeast` đã chuyển sang
+ * Soma_Bo cùng với back office.
+ */
+export type Role = "user" | "editor" | "admin" | "super_admin";
 
 export type AuthUser = { id: string; name: string; email: string; role: Role };
 export type AuthResponse = { token: string; expiresAt: string; user: AuthUser };
