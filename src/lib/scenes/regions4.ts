@@ -240,12 +240,12 @@ export const regionScenes4: Record<string, SceneModule> = {
 };
 
 export const regionViewerConfig4: Record<string, { cats: RegionViewKey[]; faded?: RegionViewKey[] }> = {
-  "tuyen-nuoc-bot": { cats: ["muscle", "organ", "artery", "vein", "nerve", "bone"], faded: ["bone"] },
+  "tuyen-nuoc-bot": { cats: ["skin", "muscle", "organ", "artery", "vein", "nerve", "bone"], faded: ["bone"] },
   // Vòm sọ để mờ sẵn: không mờ thì khối xương che kín toàn bộ hệ xoang bên trong.
-  "xoang-tinh-mach-mang-cung": { cats: ["vein", "brain", "bone"], faded: ["bone"] },
+  "xoang-tinh-mach-mang-cung": { cats: ["brain", "vein", "bone"], faded: ["bone"] },
   "ho-khoeo": { cats: ["muscle", "artery", "vein", "nerve", "bone"] },
   "tam-giac-co": { cats: ["muscle", "organ", "artery", "vein", "nerve", "bone"] },
-  "khoang-sau-phuc-mac": { cats: ["muscle", "organ", "artery", "vein", "nerve", "bone"], faded: ["bone"] },
+  "khoang-sau-phuc-mac": { cats: ["skin", "muscle", "organ", "artery", "vein", "nerve", "bone"], faded: ["bone"] },
   "khop-khuyu": { cats: ["muscle", "artery", "vein", "nerve", "bone"], faded: ["muscle"] },
   "khop-co-chan": { cats: ["muscle", "artery", "vein", "nerve", "bone"], faded: ["muscle"] },
 };

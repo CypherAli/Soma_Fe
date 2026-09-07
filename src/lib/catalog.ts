@@ -162,6 +162,42 @@ const sceneSystem: Record<string, SystemGroupKey> = {
   "tuy-lach": "digestive",
   "than-nieu-quan": "urinary",
   "phuc-mac-mac-treo": "digestive",
+  // Đợt vùng thứ năm — 14 vùng chuyên đề (xem scenes/regions6.ts)
+  "dam-roi-canh-tay": "nervous",
+  "than-kinh-tu-chu": "nervous",
+  "duong-thi-giac": "visual",
+  "dong-mach-canh": "cardiovascular",
+  "vung-nguc-tuyen-vu": "muscular",
+  "thuc-quan": "digestive",
+  "bang-quang-tien-liet": "urinary",
+  "khop-cung-chau": "skeletal",
+  "chop-xoay-vai": "muscular",
+  "gan-got-ong-co-chan": "muscular",
+  "tinh-mach-hien": "cardiovascular",
+  "hach-co": "cardiovascular",
+  "mang-phoi": "respiratory",
+  "tuyen-giap": "endocrine",
+  // Đợt vùng thứ sáu — 10 vùng chuyên đề (scenes/regions8–10.ts)
+  "than-kinh-sinh-ba": "nervous",
+  "le-dao": "visual",
+  "ho-duoi-thai-duong": "muscular",
+  "co-vung-gay": "muscular",
+  "khop-uc-don": "skeletal",
+  "ong-song-that-lung": "nervous",
+  "tam-giac-dui": "muscular",
+  "dong-mach-chi-tren": "cardiovascular",
+  "tinh-mach-chi-tren": "cardiovascular",
+  "dong-mach-chi-duoi": "cardiovascular",
+  // Mốc xương – nguyên uỷ – bám tận (scenes/regions13.ts)
+  "moc-xuong-chi-tren": "skeletal",
+  "moc-xuong-chi-duoi": "skeletal",
+  // Đợt vùng thứ bảy — 6 vùng chuyên đề (scenes/regions11–12.ts)
+  "ho-khuyu": "muscular",
+  "mach-mac-treo": "digestive",
+  "goc-cau-tieu-nao": "nervous",
+  "dai-chau-chay": "muscular",
+  "than-kinh-toa": "nervous",
+  "can-nguc-that-lung": "muscular",
   // Thần kinh
   "than-nao-day-so": "nervous",
   "tieu-nao": "nervous",
@@ -186,10 +222,17 @@ export type CatalogScene = {
 /** Thumbnail đã chụp thật. Scene chưa có ảnh sẽ dùng icon theo hệ. */
 const thumbnails: Record<string, string> = {
   // Đợt render 14/08/2026: bổ sung ảnh thật cho 42 scene trước đây rơi về
-  // hình minh hoạ mặc định. Hai scene "he-noi-tiet" và "mo-lien-ket" CỐ Ý
-  // không có ảnh: cấu trúc của chúng là các tuyến và túi hoạt dịch nhỏ nằm
-  // rải khắp người, chụp ra gần như một khung trống — hình minh hoạ thiết
-  // kế sẵn nhìn rõ ràng hơn hẳn một tấm ảnh trống.
+  // hình minh hoạ mặc định.
+  //
+  // Đợt 23/08/2026: bổ sung 14 scene mới (regions6/7) và ĐÓNG NỐT hai scene
+  // trước đây cố ý để trống ảnh — "he-noi-tiet" và "mo-lien-ket". Lý do bỏ
+  // trống trước kia vẫn đúng (tuyến nội tiết và túi hoạt dịch là những mảnh
+  // nhỏ rải khắp người, khung hình mặc định chụp ra gần như một tấm trống),
+  // nên hai ảnh này render bằng THAM SỐ ZOOM của render_glb_preview.py
+  // (0,5 và 0,45) để cắt sát vào cụm cấu trúc thay vì lấy trọn hộp bao:
+  //   blender -b --python scripts/blender/render_glb_preview.py --   //     public/models/endocrine_system.glb public/thumbnails/he-noi-tiet.png 1.0 head "" 0.5 ""
+  // Chạy `render-thumbnails.mjs` cho hai slug này sẽ ghi đè bằng khung mặc
+  // định (ảnh trống) — phải render lại bằng lệnh trên.
   "ban-chan": "/thumbnails/ban-chan.jpg",
   "ban-tay": "/thumbnails/ban-tay.jpg",
   "bo-rang": "/thumbnails/bo-rang.jpg",
@@ -279,6 +322,40 @@ const thumbnails: Record<string, string> = {
   "khop-hang": "/thumbnails/khop-hang.jpg",
   "cot-song-nguc": "/thumbnails/cot-song-nguc.jpg",
   "ban-chan-chi-tiet": "/thumbnails/ban-chan-chi-tiet.jpg",
+  "dam-roi-canh-tay": "/thumbnails/dam-roi-canh-tay.jpg",
+  "than-kinh-tu-chu": "/thumbnails/than-kinh-tu-chu.jpg",
+  "duong-thi-giac": "/thumbnails/duong-thi-giac.jpg",
+  "dong-mach-canh": "/thumbnails/dong-mach-canh.jpg",
+  "vung-nguc-tuyen-vu": "/thumbnails/vung-nguc-tuyen-vu.jpg",
+  "thuc-quan": "/thumbnails/thuc-quan.jpg",
+  "bang-quang-tien-liet": "/thumbnails/bang-quang-tien-liet.jpg",
+  "khop-cung-chau": "/thumbnails/khop-cung-chau.jpg",
+  "chop-xoay-vai": "/thumbnails/chop-xoay-vai.jpg",
+  "gan-got-ong-co-chan": "/thumbnails/gan-got-ong-co-chan.jpg",
+  "tinh-mach-hien": "/thumbnails/tinh-mach-hien.jpg",
+  "hach-co": "/thumbnails/hach-co.jpg",
+  "mang-phoi": "/thumbnails/mang-phoi.jpg",
+  "tuyen-giap": "/thumbnails/tuyen-giap.jpg",
+  "he-noi-tiet": "/thumbnails/he-noi-tiet.jpg",
+  "mo-lien-ket": "/thumbnails/mo-lien-ket.jpg",
+  "than-kinh-sinh-ba": "/thumbnails/than-kinh-sinh-ba.jpg",
+  "le-dao": "/thumbnails/le-dao.jpg",
+  "ho-duoi-thai-duong": "/thumbnails/ho-duoi-thai-duong.jpg",
+  "co-vung-gay": "/thumbnails/co-vung-gay.jpg",
+  "khop-uc-don": "/thumbnails/khop-uc-don.jpg",
+  "ong-song-that-lung": "/thumbnails/ong-song-that-lung.jpg",
+  "tam-giac-dui": "/thumbnails/tam-giac-dui.jpg",
+  "dong-mach-chi-tren": "/thumbnails/dong-mach-chi-tren.jpg",
+  "tinh-mach-chi-tren": "/thumbnails/tinh-mach-chi-tren.jpg",
+  "dong-mach-chi-duoi": "/thumbnails/dong-mach-chi-duoi.jpg",
+  "ho-khuyu": "/thumbnails/ho-khuyu.jpg",
+  "mach-mac-treo": "/thumbnails/mach-mac-treo.jpg",
+  "goc-cau-tieu-nao": "/thumbnails/goc-cau-tieu-nao.jpg",
+  "dai-chau-chay": "/thumbnails/dai-chau-chay.jpg",
+  "than-kinh-toa": "/thumbnails/than-kinh-toa.jpg",
+  "can-nguc-that-lung": "/thumbnails/can-nguc-that-lung.jpg",
+  "moc-xuong-chi-tren": "/thumbnails/moc-xuong-chi-tren.jpg",
+  "moc-xuong-chi-duoi": "/thumbnails/moc-xuong-chi-duoi.jpg",
 };
 
 function buildSearchText(scene: SceneModule): string {
@@ -387,6 +464,48 @@ const sceneRegion: Record<string, RegionKey> = {
   "ho-khoeo": "lower-limb", "khop-co-chan": "lower-limb",
   "cang-chan-ban-chan": "lower-limb", "ban-chan-chi-tiet": "lower-limb",
   "vung-mong": "lower-limb",
+  // Đợt vùng thứ năm — 14 vùng chuyên đề
+  "dam-roi-canh-tay": "upper-limb",
+  "than-kinh-tu-chu": "thorax",
+  "duong-thi-giac": "head-neck",
+  "dong-mach-canh": "head-neck",
+  "vung-nguc-tuyen-vu": "thorax",
+  "thuc-quan": "thorax",
+  "bang-quang-tien-liet": "pelvis",
+  "khop-cung-chau": "pelvis",
+  "chop-xoay-vai": "upper-limb",
+  "gan-got-ong-co-chan": "lower-limb",
+  "tinh-mach-hien": "lower-limb",
+  "hach-co": "head-neck",
+  "mang-phoi": "thorax",
+  "tuyen-giap": "head-neck",
+  // Đợt vùng thứ sáu
+  "than-kinh-sinh-ba": "head-neck",
+  "le-dao": "head-neck",
+  "ho-duoi-thai-duong": "head-neck",
+  "co-vung-gay": "back",
+  "khop-uc-don": "upper-limb",
+  "ong-song-that-lung": "back",
+  "tam-giac-dui": "lower-limb",
+  "dong-mach-chi-tren": "upper-limb",
+  "tinh-mach-chi-tren": "upper-limb",
+  "dong-mach-chi-duoi": "lower-limb",
+  // Ba model dưới đây gán được vùng nhưng trước nay bị bỏ sót nên KHÔNG hiện ra
+  // ở trang "Giải phẫu theo vùng" (đếm được 110/119 model). Sáu model toàn thân
+  // còn lại (hệ mạc, mô liên kết, hệ nội tiết, tuyến nội tiết, cây động mạch
+  // chủ, hệ bạch huyết) vẫn cố ý không gán vùng — chúng trải khắp cơ thể.
+  "dong-mach-vanh": "thorax",
+  "he-tiet-nieu": "abdomen",
+  "he-sinh-san-nam": "pelvis",
+  // Đợt vùng thứ bảy
+  "ho-khuyu": "upper-limb",
+  "mach-mac-treo": "abdomen",
+  "goc-cau-tieu-nao": "head-neck",
+  "dai-chau-chay": "lower-limb",
+  "than-kinh-toa": "lower-limb",
+  "can-nguc-that-lung": "back",
+  "moc-xuong-chi-tren": "upper-limb",
+  "moc-xuong-chi-duoi": "lower-limb",
 };
 
 export const scenesOfRegion = (key: RegionKey): CatalogScene[] =>

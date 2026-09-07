@@ -171,7 +171,7 @@
         "E": "Cơ bụng chân"
       },
       "answer": "C",
-      "explanation": "Cơ thẳng đùi gấp đùi và duỗi cẩng chân. Các cơ ụ ngổi cẳng chân có thể duỗi đùi và gấp căng chân. Cơ may có thể gấp đùi và cẳng chân. Cơ rốne trong có thè duỗi cẳng chân. Cơ bụng chân có thể gấp cẳng chân và gấp gan chân",
+      "explanation": "Cơ thẳng đùi gấp đùi và duỗi cẩng chân. Các cơ ụ ngổi cẳng chân có thể duỗi đùi và gấp căng chân. Cơ may có thể gấp đùi và cẳng chân. Cơ rộng trong có thè duỗi cẳng chân. Cơ bụng chân có thể gấp cẳng chân và gấp gan chân",
       "source": {
         "title": "Giải Phẫu Người, Đại học Y Hà Nội (2006)",
         "questionPage": 448,
@@ -266,7 +266,7 @@
         "E": "Chúng đều không bám tận vào xương gót"
       },
       "answer": "C",
-      "explanation": "ĐM khoeo cũng cấp máu cho cơ vùng cẳng chân sau (cơ bụng chân). Cơ bụng chân, cơ khoeo và cơ gan chân dài khỏng bám nguyên uỷ vào xương cẳng chân mà vào xương đùi. Mặt trong xương chày chỉ có da phủ. Cơ tam đầu cãns chân bám tận vào xương gót",
+      "explanation": "ĐM khoeo cũng cấp máu cho cơ vùng cẳng chân sau (cơ bụng chân). Cơ bụng chân, cơ khoeo và cơ gan chân dài khỏng bám nguyên uỷ vào xương cẳng chân mà vào xương đùi. Mặt trong xương chày chỉ có da phủ. Cơ tam đầu cẳng chân bám tận vào xương gót",
       "source": {
         "title": "Giải Phẫu Người, Đại học Y Hà Nội (2006)",
         "questionPage": 449,
@@ -1039,7 +1039,7 @@
       "stem": "Mô tả nào trong các mô tả sau về xương trụ đúng?",
       "options": {
         "A": "Nó gồm hai đầu và một thân xương hình trụ",
-        "B": "Nó có hai khuyêt ở đầu trên là khuyết ròng rọc và khuyết CỊuax",
+        "B": "Nó có hai khuyêt ở đầu trên là khuyết ròng rọc và khuyết quay",
         "C": "Nó có một mỏm trâm (mỏm trám trụ) ờ thấp hơn móm trám quay",
         "D": "Nó tiếp khớp với đầu xa xương quay tại mỏm vẹt",
         "E": "Nó có đầu gần nhỏ hơn đầu xa"
@@ -1093,7 +1093,7 @@
     {
       "id": "yhn-anatomy-upper_limb-009",
       "region": "CHI TRÊN",
-      "stem": "Mô tả nào sau đảv về cơ ngực nhỏ đúng?",
+      "stem": "Mô tả nào sau đây về cơ ngực nhỏ đúng?",
       "options": {
         "A": "Nó chia TK nách thành ba phần",
         "B": "Nó tạo nên thành sau của nách",
@@ -1745,7 +1745,7 @@
         "B": "Cử động ngửa bị mất một phần khi một thần kinh nằm trong rãnh ở mặt sau xương cánh tay bị đứt",
         "C": "Nó cần đến sự tham gia của khớp khuỷu và khớp cổ tay",
         "D": "Nó cần đến sự tham gia của các khớp quay-trụ gần và xa",
-        "E": "Trong cử động ngửa, đầu trên của xương quay xoay bên trong dáv chằng vòng quay"
+        "E": "Trong cử động ngửa, đầu trên của xương quay xoay bên trong dây chằng vòng quay"
       },
       "answer": "C",
       "explanation": "Cử động ngửa cần đến sự tham gia của các khớp quay-trụ nhưng không cần đến khớp cổ tay. Gan tay hướng ra trước trong lúc ngửa. Cử động này được thực hiển bởi cơ ngửa và cơ nhị đầu cánh tay; cơ ngửa do TK quay chi phối, cơ nhị đầu do TK cơ bì chi phối. Tổn thương TK quay làm liệt cơ ngửa và làm giảm khả nãng ngửa",
@@ -2651,7 +2651,7 @@
     {
       "id": "yhn-anatomy-pelvis_perineum-010",
       "region": "CHẬU HÔNG VÀ ĐÁY CHẬU",
-      "stem": "Một khối u lành nàm trong khe giữa dây chàng cung mu và dáv chàng ngang đáy chậu có thể đè ép vào cấu trúc nào trong các cấu trúc sau?",
+      "stem": "Một khối u lành nàm trong khe giữa dây chàng cung mu và dây chằng ngang đáy chậu có thể đè ép vào cấu trúc nào trong các cấu trúc sau?",
       "options": {
         "A": "TK mu dương vật",
         "B": "TM mu sáu dương vật",
@@ -3658,7 +3658,7 @@
     {
       "id": "yhn-anatomy-head_neck-004",
       "region": "ĐẦU CỔ",
-      "stem": "Tổn thương tới TK thanh quản Dgoài trong phẫu thuật tuyến giáp có thể làm cho bệnh nhân không thể 1 '",
+      "stem": "Tổn thương tới TK thanh quản ngoài trong phẫu thuật tuyến giáp có thể làm cho bệnh nhân không thể 1 '",
       "options": {
         "A": "Làm chùng dây thanh âm",
         "B": "Xoay các sụn phễu",
@@ -3800,7 +3800,7 @@
         "E": "Nó đi ở mặt ngoài tuyến mang tai"
       },
       "answer": "D",
-      "explanation": "Các nhánh ihái dương nông, chẩm và tai sau của ĐM cành ngoài cấp máu cho hầu hết da đầu. ------------",
+      "explanation": "Các nhánh thái dương nông, chẩm và tai sau của ĐM cành ngoài cấp máu cho hầu hết da đầu. ------------",
       "source": {
         "title": "Giải Phẫu Người, Đại học Y Hà Nội (2006)",
         "questionPage": 493,
@@ -4155,8 +4155,8 @@
       "stem": "Những mô tả sau đây về thanh hầu đều đúng TRỪ",
       "options": {
         "A": "Nó thông với thanh quản qua lỗ (đường) vào thanh quản",
-        "B": "Nó ngăn cách với ố thanh qaản bởi sụn giáp, sụn phễu và cơ nhẫn-phễu bên",
-        "C": "Nó liên tiếp ở dưới với thực quảiv",
+        "B": "Nó ngăn cách với ố thanh quản bởi sụn giáp, sụn phễu và cơ nhẫn-phễu bên",
+        "C": "Nó liên tiếp ở dưới với thực quản",
         "D": "Nó thông ở trên với khẩu hầu V",
         "E": "Nó còn được gọi là phần thanh quản của hầ^"
       },
@@ -4522,7 +4522,7 @@
         "E": "Mất cảm giác chung ở trần miệng"
       },
       "answer": "D",
-      "explanation": "TK đá lớn chứa các sợi đối giao cảm trirớc hạch là các sợi vận tiết tuyến lệ và các tuyến niêm mạc của ổ mũi và khẩu cái. Nó còn chứa các S Ợ I càm giác vị giác cho khẩu cái, các sợi cảm giác chung cho trần ổ miệng. Tổn thương TK đá bé gây giảm tiết dịch tuyến mang tai",
+      "explanation": "TK đá lớn chứa các sợi đối giao cảm trước hạch là các sợi vận tiết tuyến lệ và các tuyến niêm mạc của ổ mũi và khẩu cái. Nó còn chứa các S Ợ I càm giác vị giác cho khẩu cái, các sợi cảm giác chung cho trần ổ miệng. Tổn thương TK đá bé gây giảm tiết dịch tuyến mang tai",
       "source": {
         "title": "Giải Phẫu Người, Đại học Y Hà Nội (2006)",
         "questionPage": 501,

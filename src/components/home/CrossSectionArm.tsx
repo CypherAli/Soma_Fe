@@ -155,6 +155,12 @@ export default function CrossSectionArm({ url = "/models/arm.glb" }: { url?: str
       <Canvas
         dpr={[1, 1.6]}
         camera={{ position: [0.7, 0.2, 1.2], fov: 42, near: 0.01, far: 100 }}
+      // Kích thước TƯỜNG MINH cho canvas: thiếu dòng này, R3F đo khung ở
+      // lần dựng đầu ra 0 và KHÔNG khởi động lại — canvas nằm nguyên cỡ mặc
+      // định 300x150, model không hề được tải và trang xem trắng trơn cho tới
+      // khi người dùng đổi kích thước cửa sổ. Đã đo ngày 24/08/2026 trên trang
+      // /giai-phau/mo-hinh/*: bắn một sự kiện resize là model tải ngay.
+      style={{ width: "100%", height: "100%" }}
         gl={{ antialias: true, stencil: true, toneMapping: THREE.ACESFilmicToneMapping }}
         onCreated={({ gl }) => { gl.localClippingEnabled = true; }}
       >

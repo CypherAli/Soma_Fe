@@ -154,7 +154,7 @@ export const regionScenes5: Record<string, SceneModule> = {
 
 export const regionViewerConfig5: Record<string, { cats: RegionViewKey[]; faded?: RegionViewKey[] }> = {
   // Khối cơ xoay ngoài che kín bao khớp — mở sẵn ở trạng thái mờ để thấy ổ khớp.
-  "khop-hang": { cats: ["muscle", "artery", "vein", "nerve", "bone"], faded: ["muscle"] },
+  "khop-hang": { cats: ["skin", "muscle", "artery", "vein", "nerve", "bone"], faded: ["muscle"] },
   "cot-song-nguc": { cats: ["muscle", "artery", "vein", "nerve", "bone"], faded: ["muscle"] },
   // Cân gan chân thuộc lớp DA theo pickCat: không làm mờ thì tấm cân trắng phủ
   // kín toàn bộ bốn lớp cơ gan chân bên dưới.

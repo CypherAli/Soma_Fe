@@ -3,6 +3,14 @@ import { regionScenes2, regionViewerConfig2 } from "./regions2";
 import { regionScenes3, regionViewerConfig3 } from "./regions3";
 import { regionScenes4, regionViewerConfig4 } from "./regions4";
 import { regionScenes5, regionViewerConfig5 } from "./regions5";
+import { regionScenes6, regionViewerConfig6 } from "./regions6";
+import { regionScenes7, regionViewerConfig7 } from "./regions7";
+import { regionScenes8, regionViewerConfig8 } from "./regions8";
+import { regionScenes9, regionViewerConfig9 } from "./regions9";
+import { regionScenes10, regionViewerConfig10 } from "./regions10";
+import { regionScenes11, regionViewerConfig11 } from "./regions11";
+import { regionScenes12, regionViewerConfig12 } from "./regions12";
+import { regionScenes13, regionViewerConfig13 } from "./regions13";
 
 /**
  * Scene "vùng cơ thể nhiều lớp" — chuẩn dựng theo mô hình cánh tay: mỗi scene
@@ -18,6 +26,14 @@ export const regionScenes: Record<string, SceneModule> = {
   ...regionScenes3,
   ...regionScenes4,
   ...regionScenes5,
+  ...regionScenes6,
+  ...regionScenes7,
+  ...regionScenes8,
+  ...regionScenes9,
+  ...regionScenes10,
+  ...regionScenes11,
+  ...regionScenes12,
+  ...regionScenes13,
   "giai-phau-ban-tay": {
     slug: "giai-phau-ban-tay",
     title: { vi: "Bàn tay chi tiết", en: "The Hand in Detail", zh: "手部精细解剖" },
@@ -901,6 +917,14 @@ export const regionScenes: Record<string, SceneModule> = {
         note: { vi: "Tấm mạc treo tam giác nhỏ treo ruột thừa vào mạc treo hồi tràng, trong bờ tự do có ĐỘNG MẠCH RUỘT THỪA. Đây là động mạch TẬN không có vòng nối, nên khi viêm ruột thừa làm huyết khối mạch này thì ruột thừa hoại tử rồi thủng rất nhanh — lý do viêm ruột thừa là cấp cứu ngoại khoa chứ không chờ được. Cắt ruột thừa chính là thắt mạc treo này trước rồi mới cắt gốc.", en: "The small triangular fold suspending the appendix from the ileal mesentery; its free edge carries the APPENDICULAR ARTERY, an end artery without collaterals — thrombosis in appendicitis leads quickly to gangrene and perforation, which is why appendicitis is a surgical emergency.", zh: "将阑尾悬于回肠系膜的三角形小系膜，其游离缘含阑尾动脉，为无侧支的终动脉；阑尾炎时血栓形成迅速导致坏疽穿孔，故阑尾炎属外科急症。" } },
       { key: "mesentery-vessels", meshName: "Superior mesenteric artery.001", offset: [0, 0], label: { vi: "Động mạch mạc treo tràng trên", en: "Superior mesenteric artery", zh: "肠系膜上动脉" }, latinName: "Arteria mesenterica superior",
         note: { vi: "Đi trong mạc treo ruột non, cho các nhánh nối nhau thành nhiều CUNG MẠCH rồi mới toả ra thành mạch thẳng vào ruột. Hệ cung mạch này cho phép cắt bỏ một đoạn ruột mà phần còn lại vẫn được nuôi — nhưng nếu tắc gốc động mạch thì cả ruột giữa hoại tử vì không có nguồn thay thế.", en: "Runs in the mesentery giving branches that anastomose into ARCADES before straight vessels reach the bowel; the arcades let a segment be resected safely, yet occlusion at the origin infarcts the whole midgut because there is no alternative supply.", zh: "行于小肠系膜内，分支相互吻合形成动脉弓后再发直动脉入肠壁；动脉弓使肠段切除安全，但主干起始部闭塞则整个中肠坏死，因无替代供血。" } },
+      { key: "free-taenia", meshName: "Free taenia", offset: [0, 0], label: { vi: "Dải cơ dọc tự do", en: "Free taenia coli", zh: "独立带" }, latinName: "Taenia libera",
+        note: { vi: "Một trong BA dải cơ dọc chạy suốt đại tràng. Ba dải này ngắn hơn chiều dài ruột nên xúm ruột lại thành các bướu — đặc điểm phân biệt đại tràng với ruột non chỉ bằng mắt. Ba dải hội tụ về gốc RUỘT THỪA, nên trong mổ, lần theo dải cơ dọc là tìm được ruột thừa dù nó nằm lạc chỗ.", en: "One of the THREE longitudinal muscle bands running along the colon. Being shorter than the bowel they gather it into haustra — the feature that tells colon from small bowel at a glance. All three converge on the base of the APPENDIX, so following a taenia at operation finds the appendix however oddly it lies.", zh: "沿结肠走行的三条纵行肌带之一。因短于肠管长度而将肠壁聚成结肠袋——仅凭肉眼即可区分结肠与小肠的特征。三条带均汇聚于阑尾根部，故术中沿结肠带追踪即可找到位置异常的阑尾。" } },
+      { key: "duodenum-peritoneum", meshName: "Duodenum", offset: [0, 0], label: { vi: "Tá tràng (đoạn sau phúc mạc)", en: "Duodenum — the retroperitoneal segment", zh: "十二指肠（腹膜后位）" }, latinName: "Duodenum",
+        note: { vi: "Trừ đoạn đầu ngắn, tá tràng nằm SAU phúc mạc — nó vốn có mạc treo nhưng bị dán vào thành sau khi ruột xoay trong phôi. Chính vì thế thủ thuật Kocher (rạch lá phúc mạc bên phải tá tràng) lật được cả khối tá tràng – đầu tuỵ ra trước mà không cắt vào mạch nào.", en: "Apart from its short first part, the duodenum lies BEHIND the peritoneum — it once had a mesentery that became plastered to the posterior wall during embryonic rotation. That is why the Kocher manoeuvre, incising the peritoneum lateral to it, lifts the whole duodenum and pancreatic head forwards without dividing a single vessel.", zh: "除短小的第一部分外，十二指肠位于腹膜后——胚胎期肠旋转时其原有系膜贴附于后壁。故Kocher手法（切开其外侧腹膜）可将十二指肠与胰头整体翻向前方而不切断任何血管。" } },
+      { key: "ascending-colon-peritoneum", meshName: "Ascending colon", offset: [0, 0], label: { vi: "Đại tràng lên (đoạn dính thành sau)", en: "Ascending colon — fixed to the posterior wall", zh: "升结肠（腹膜间位）" }, latinName: "Colon ascendens",
+        note: { vi: "Chỉ được phúc mạc phủ ba mặt, mặt sau dính vào thành bụng — nên đại tràng lên gần như không di động, khác đại tràng ngang và sigma vốn có mạc treo dài. Chính chỗ dính đó (rãnh cạnh đại tràng phải) là đường mà dịch trong ổ bụng chảy xuống chậu hông khi bệnh nhân nằm.", en: "Covered by peritoneum on only three sides with its back fixed to the abdominal wall, the ascending colon barely moves — unlike the transverse and sigmoid colon with their long mesenteries. That fixation creates the right paracolic gutter, the channel along which peritoneal fluid runs down to the pelvis in a supine patient.", zh: "仅三面被腹膜覆盖，后面固定于腹壁，故升结肠几乎不能移动——与具长系膜的横结肠、乙状结肠不同。此固定形成右结肠旁沟，为仰卧位时腹腔积液流向盆腔的通道。" } },
+      { key: "portal-vein-peritoneum", meshName: "Hepatic portal vein.001", offset: [0, 0], label: { vi: "Tĩnh mạch cửa (trong cuống gan)", en: "Hepatic portal vein in the free edge", zh: "肝门静脉" }, latinName: "Vena portae hepatis",
+        note: { vi: "Nằm ở bờ TỰ DO của mạc nối nhỏ cùng động mạch gan riêng và ống mật chủ — bộ ba của cuống gan, với tĩnh mạch cửa ở phía sau. Bờ tự do ấy là thành trước lỗ mạc nối; luồn ngón tay qua lỗ rồi bóp cuống gan (thủ thuật Pringle) là cách cầm máu gan nhanh nhất khi vỡ gan.", en: "It lies in the FREE edge of the lesser omentum with the hepatic artery proper and the bile duct — the portal triad, the vein lying behind the other two. That free edge is the anterior wall of the omental foramen; passing a finger through it and compressing the pedicle (the Pringle manoeuvre) is the fastest way to control bleeding from a ruptured liver.", zh: "位于小网膜游离缘内，与肝固有动脉、胆总管共同构成肝蒂三联，门静脉居于二者后方。该游离缘即网膜孔前壁；手指经孔钳夹肝蒂（Pringle手法）是肝破裂出血最快速的控制方法。" } },
     ],
   },
 
@@ -1033,31 +1057,39 @@ export const regionViewerConfig: Record<string, { cats: RegionViewKey[]; faded?:
   ...regionViewerConfig3,
   ...regionViewerConfig4,
   ...regionViewerConfig5,
+  ...regionViewerConfig6,
+  ...regionViewerConfig7,
+  ...regionViewerConfig8,
+  ...regionViewerConfig9,
+  ...regionViewerConfig10,
+  ...regionViewerConfig11,
+  ...regionViewerConfig12,
+  ...regionViewerConfig13,
   "giai-phau-ban-tay": { cats: ["skin", "muscle", "artery", "vein", "nerve", "bone"], faded: ["skin"] },
   "khop-vai-khuyu": { cats: ["muscle", "bone"] },
-  "so-nen-so": { cats: ["artery", "vein", "nerve", "bone"] },
-  "hoc-mat": { cats: ["muscle", "artery", "vein", "nerve", "eye", "bone"], faded: ["bone"] },
-  "tai-day-du": { cats: ["artery", "vein", "nerve", "organ", "bone"], faded: ["bone"] },
-  "mui-xoang": { cats: ["artery", "vein", "nerve", "organ", "bone"] },
-  "mieng-luoi-rang": { cats: ["muscle", "artery", "vein", "nerve", "organ", "bone"], faded: ["bone"] },
-  "hau-thanh-quan": { cats: ["muscle", "artery", "vein", "nerve", "organ", "bone"] },
-  "co-hoanh-day-du": { cats: ["muscle", "artery", "vein", "nerve", "bone"] },
-  "thanh-bung": { cats: ["skin", "muscle", "artery", "vein", "nerve", "bone"], faded: ["skin"] },
-  "dai-nao": { cats: ["brain", "artery", "vein"] },
-  "than-nao-day-so-full": { cats: ["brain", "artery", "vein", "nerve"] },
-  "tieu-nao-day-du": { cats: ["brain", "artery", "vein"] },
-  "tuy-song-dam-roi": { cats: ["brain", "nerve", "bone"], faded: ["bone"] },
-  "he-dong-mach-chu": { cats: ["artery", "vein"] },
-  "he-bach-huyet": { cats: ["lymph", "organ"] },
-  "tim-day-du": { cats: ["organ", "artery", "vein", "nerve"] },
-  "phoi-cay-phe-quan": { cats: ["organ", "artery", "vein", "nerve", "lymph"] },
-  "trung-that": { cats: ["organ", "artery", "vein", "nerve", "lymph", "bone"] },
-  "gan-duong-mat": { cats: ["organ", "artery", "vein"] },
-  "da-day-ta-trang": { cats: ["organ", "artery", "vein", "nerve"] },
+  "so-nen-so": { cats: ["muscle", "brain", "artery", "vein", "nerve", "bone"] },
+  "hoc-mat": { cats: ["muscle", "brain", "organ", "artery", "vein", "nerve", "eye", "bone"], faded: ["bone"] },
+  "tai-day-du": { cats: ["muscle", "brain", "artery", "vein", "nerve", "bone"], faded: ["bone"] },
+  "mui-xoang": { cats: ["muscle", "artery", "vein", "nerve", "bone"] },
+  "mieng-luoi-rang": { cats: ["skin", "muscle", "organ", "artery", "vein", "nerve", "bone"], faded: ["bone"] },
+  "hau-thanh-quan": { cats: ["muscle", "organ", "artery", "vein", "nerve", "bone"] },
+  "co-hoanh-day-du": { cats: ["skin", "muscle", "brain", "artery", "vein", "nerve", "bone"] },
+  "thanh-bung": { cats: ["skin", "muscle", "brain", "artery", "vein", "nerve", "bone"], faded: ["skin"] },
+  "dai-nao": { cats: ["muscle", "brain", "artery", "vein", "bone"] },
+  "than-nao-day-so-full": { cats: ["muscle", "brain", "artery", "vein", "nerve", "bone"] },
+  "tieu-nao-day-du": { cats: ["muscle", "brain", "artery", "vein", "bone"] },
+  "tuy-song-dam-roi": { cats: ["muscle", "brain", "nerve", "bone"], faded: ["bone"] },
+  "he-dong-mach-chu": { cats: ["muscle", "brain", "artery", "vein", "bone"] },
+  "he-bach-huyet": { cats: ["organ", "lymph", "bone"] },
+  "tim-day-du": { cats: ["muscle", "organ", "artery", "vein", "nerve"] },
+  "phoi-cay-phe-quan": { cats: ["muscle", "organ", "artery", "vein", "nerve", "lymph"] },
+  "trung-that": { cats: ["muscle", "organ", "artery", "vein", "nerve", "lymph", "bone"] },
+  "gan-duong-mat": { cats: ["muscle", "organ", "artery", "vein"] },
+  "da-day-ta-trang": { cats: ["muscle", "organ", "artery", "vein"] },
   "ruot-non-ruot-gia": { cats: ["organ", "artery", "vein", "lymph"] },
-  "tuy-lach": { cats: ["organ", "artery", "vein"] },
+  "tuy-lach": { cats: ["muscle", "organ", "artery", "vein"] },
   "than-nieu-quan": { cats: ["organ", "artery", "vein"] },
-  "phuc-mac-mac-treo": { cats: ["organ", "artery", "vein"] },
+  "phuc-mac-mac-treo": { cats: ["muscle", "organ", "artery", "vein"] },
   // Chi dưới — cân (fascia lata, cân cẳng chân) được pickCat xếp vào lớp "Da"
   // nên mở sẵn ở trạng thái MỜ, nếu không tấm cân trắng che kín cả khối cơ.
   "khop-goi": { cats: ["muscle", "artery", "vein", "nerve", "bone"] },

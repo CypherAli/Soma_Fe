@@ -264,13 +264,13 @@ export const regionScenes2: Record<string, SceneModule> = {
 
 /** Bảng lớp cho từng scene đợt 2 — gộp vào `regionViewerConfig` ở regions.ts. */
 export const regionViewerConfig2: Record<string, { cats: RegionViewKey[]; faded?: RegionViewKey[] }> = {
-  "chau-hong-day-chau": { cats: ["muscle", "organ", "artery", "vein", "nerve", "bone"], faded: ["bone"] },
-  "vung-lung": { cats: ["skin", "muscle", "artery", "vein", "nerve", "bone"], faded: ["skin"] },
-  "thanh-nguc": { cats: ["muscle", "artery", "vein", "nerve", "bone"] },
-  "vai-ho-nach": { cats: ["muscle", "artery", "vein", "nerve", "bone"] },
+  "chau-hong-day-chau": { cats: ["skin", "muscle", "organ", "artery", "vein", "nerve", "bone"], faded: ["bone"] },
+  "vung-lung": { cats: ["skin", "muscle", "brain", "organ", "artery", "vein", "nerve", "bone"], faded: ["skin"] },
+  "thanh-nguc": { cats: ["skin", "muscle", "brain", "artery", "vein", "nerve", "bone"] },
+  "vai-ho-nach": { cats: ["skin", "muscle", "artery", "vein", "nerve", "bone"] },
   "vung-ben": { cats: ["skin", "muscle", "artery", "vein", "nerve", "bone"], faded: ["skin"] },
-  "co-mat-than-kinh-vii": { cats: ["skin", "muscle", "artery", "vein", "nerve", "bone"], faded: ["bone"] },
-  "khop-thai-duong-ham": { cats: ["muscle", "artery", "vein", "nerve", "bone"] },
-  "cot-song-co": { cats: ["muscle", "artery", "vein", "nerve", "bone"] },
-  "cot-song-that-lung": { cats: ["muscle", "artery", "vein", "nerve", "bone"] },
+  "co-mat-than-kinh-vii": { cats: ["muscle", "artery", "vein", "nerve", "bone"], faded: ["bone"] },
+  "khop-thai-duong-ham": { cats: ["skin", "muscle", "organ", "artery", "vein", "nerve", "bone"] },
+  "cot-song-co": { cats: ["muscle", "organ", "artery", "vein", "nerve", "bone"] },
+  "cot-song-that-lung": { cats: ["skin", "muscle", "brain", "artery", "vein", "nerve", "bone"] },
 };

@@ -101,12 +101,20 @@ class Region:
         c = self.cfg
         specs = [
             ("1:", c.get("bone_kw"), c.get("bone_drop", []), c.get("bone_names"), "bone"),
+            # Hệ 2 = MẢNG ĐIỂM BÁM CƠ đắp lên mặt xương: đuôi ".o*" là nguyên uỷ,
+            # ".e*" là bám tận. Bình thường không lấy (chúng phủ kín mặt xương và
+            # che mất chính khối xương), chỉ vùng nào dạy mốc bám mới bật lên.
+            ("2:", c.get("insertion_kw"), c.get("insertion_drop", []), None, "muscle"),
             ("3:", c.get("joint_kw"), c.get("joint_drop", []), None, "joint"),
             ("4:", c.get("muscle_kw"), c.get("muscle_drop", []), None, "muscle"),
             ("5:", c.get("heart_kw"), c.get("organ_drop", []), None, "organ"),  # buồng tim/van
             ("8:", c.get("organ_kw"), c.get("organ_drop", []), None, "organ"),
             ("6:", c.get("organ6_kw"), [], None, "organ"),   # lách nằm ở nhóm bạch huyết
             ("7:", c.get("sense_kw"), c.get("sense_drop", []), None, "organ"),  # mắt/tai/não
+            # Hệ 9 phần lớn là MẢNH NHÃN vùng cơ thể (đắp trên bề mặt), lấy cả
+            # nhóm là phủ kín model bằng những mảng vô nghĩa — nên chỉ dùng khi
+            # vùng CHỈ ĐÍCH DANH tên (móng tay, mầm móng…), không bao giờ True.
+            ("9:", c.get("region_kw"), c.get("region_drop", []), None, "skin"),
         ]
         keep = [k.lower() for k in c.get("keep_kw", [])]
         # Ngưỡng số đỉnh: mặc định 10 để loại mảnh rác, NHƯNG Z-Anatomy dựng
@@ -135,9 +143,13 @@ class Region:
                 # sọ. Bỏ chúng đi là thủng một mảng đúng chỗ ấy.
                 if any(k in nm for k in drop) and not any(k in nm for k in keep):
                     continue
-                # mesh phụ điểm bám tên dạng .el/.o1r -> chỉ nhận hậu tố bên hoặc không hậu tố
+                # mesh phụ điểm bám tên dạng .el/.o1r -> chỉ nhận hậu tố bên hoặc không hậu tố.
+                # NGOẠI LỆ: vùng dạy mốc bám (insertion_kw) thì chính mấy mảnh ấy
+                # là nội dung, nên bỏ qua phép lọc hậu tố cho nhóm hệ 2.
                 tail = nm.rsplit('.', 1)[-1] if '.' in nm else ''
-                if tail and tail not in ('l', 'r') and not tail.isdigit():
+                if prefix != "2:" and tail and tail not in ('l', 'r') and not tail.isdigit():
+                    continue
+                if prefix == "2:" and self.side and not tail.endswith(self.side):
                     continue
                 # Xương/cơ/khớp lấy theo GIAO NHAU với hộp (cắt lấy phần trong
                 # hộp là hợp lý); tạng lấy theo TÂM, nếu không gan/phổi/dạ dày

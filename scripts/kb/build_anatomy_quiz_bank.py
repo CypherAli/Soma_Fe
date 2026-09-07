@@ -46,6 +46,19 @@ SECTIONS = [
     {"key": "pelvis_perineum", "label": "Chậu hông và đáy chậu", "questionPages": (474, 479), "answerPages": (479, 481), "count": 42},
     {"key": "abdomen", "label": "Bụng", "questionPages": (482, 488), "answerPages": (488, 490), "count": 53},
     {"key": "head_neck", "label": "Đầu cổ", "questionPages": (491, 504), "answerPages": (504, 510), "count": 98},
+    # KHÔNG có mục "Ngực" — và đây không phải chỗ quên khai báo.
+    #
+    # Sách có "6. PHẦN NGỰC" thật, câu hỏi bắt đầu ở trang 511 ("6.1. Thành
+    # ngực") và chạy tới hết trang 515. Nhưng BẢN PDF ĐANG DÙNG CHỈ CÓ 515
+    # TRANG: phần đáp án và lời giải của vùng ngực nằm ở những trang sau đó,
+    # không có trong bản quét này. Bóc câu hỏi mà không có khoá đáp án thì
+    # không chấm được, nên vùng ngực bị để ngoài ngân hàng một cách CÓ Ý.
+    #
+    # Muốn bổ sung: cần bản quét đầy đủ (kiểm bằng `len(PdfReader(...).pages)`,
+    # phải lớn hơn 515), rồi thêm vào đây một mục
+    #   {"key": "thorax", "label": "Ngực", "questionPages": (511, 515),
+    #    "answerPages": (<trang đầu đáp án>, <trang cuối>), "count": <số câu>}
+    # và chạy lại build → curate như các vùng khác.
 ]
 
 def clean(text: str) -> str:

@@ -2,30 +2,17 @@ import { homeContent as C, pick, type Loc } from "@/lib/homeContent";
 import { Link } from "@/i18n/navigation";
 import IconSprite from "./IconSprite";
 import HomeNav from "./HomeNav";
-import HomeSearch from "./HomeSearch";
 import HomeFooter from "./HomeFooter";
+import HomeMotion from "./HomeMotion";
 
 export default function HomePage({ locale }: { locale: Loc }) {
   const cols = [C.twoCol.corpus, C.twoCol.anima] as const;
 
   return (
-    <div className="bd">
+    <div className="bd home-motion-root">
       <IconSprite />
-      <HomeNav minimal />
-
-      <header className="hero">
-        <div className="wrap">
-          <div className="hero-copy">
-            <h1 className="hero-display">
-              {pick(C.hero.titlePre, locale)}{" "}
-              <em>{pick(C.hero.titleAccent, locale)}</em>{" "}
-              {pick(C.hero.titlePost, locale)}
-            </h1>
-            <p className="hero-lede">{pick(C.hero.lede, locale)}</p>
-            <HomeSearch locale={locale} />
-          </div>
-        </div>
-      </header>
+      <HomeMotion />
+      <HomeNav minimal commerce />
 
       {/* Khối 2 cột: Corpus (người) · Anima (thú y) — như mẫu Corpus & Anima */}
       <section className="twocol">
@@ -35,6 +22,7 @@ export default function HomePage({ locale }: { locale: Loc }) {
               key={i}
               href={col.href}
               className={`tc-panel ${i === 0 ? "tc-corpus" : "tc-anima"}`}
+              data-reveal
             >
               <div className="tc-copy">
                 <div className="tc-top">

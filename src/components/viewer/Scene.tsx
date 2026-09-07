@@ -143,6 +143,12 @@ export default function Scene() {
       shadows
       dpr={[1, 1.75]}
       camera={{ position: [0, 0.5, 8], fov: 42 }}
+      // Kích thước TƯỜNG MINH cho canvas: thiếu dòng này, R3F đo khung ở
+      // lần dựng đầu ra 0 và KHÔNG khởi động lại — canvas nằm nguyên cỡ mặc
+      // định 300x150, model không hề được tải và trang xem trắng trơn cho tới
+      // khi người dùng đổi kích thước cửa sổ. Đã đo ngày 24/08/2026 trên trang
+      // /giai-phau/mo-hinh/*: bắn một sự kiện resize là model tải ngay.
+      style={{ width: "100%", height: "100%" }}
       onPointerMissed={() => clearSelection(null)}
       gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping, preserveDrawingBuffer: true }}
     >

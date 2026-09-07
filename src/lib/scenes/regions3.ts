@@ -85,7 +85,13 @@ export const regionScenes3: Record<string, SceneModule> = {
 
   "tuyen-noi-tiet": {
     slug: "tuyen-noi-tiet",
-    title: { vi: "Hệ nội tiết", en: "The Endocrine System", zh: "内分泌系统" },
+    // Đổi tên 23/08/2026: trước đây scene này và "he-noi-tiet" mang TÊN HIỂN
+    // THỊ Y HỆT NHAU ("Hệ nội tiết"), nên trên trang danh mục có hai thẻ trùng
+    // tên trỏ vào hai model khác nhau — người học không có cách nào biết nên
+    // bấm thẻ nào. Hai scene KHÔNG trùng nội dung: "he-noi-tiet" là các tuyến
+    // thả tự do trong không gian, còn scene này dựng chúng CÙNG CỘT SỐNG làm
+    // mốc định vị, nên tên mới nói đúng điểm khác biệt ấy.
+    title: { vi: "Tuyến nội tiết và mốc cột sống", en: "Endocrine Glands & Vertebral Landmarks", zh: "内分泌腺与脊柱定位标志" },
     description: {
       vi: "Các tuyến nội tiết dựng cùng cột sống làm mốc định vị, vì đặc điểm lớn nhất của hệ này là NẰM RẢI RÁC chứ không tụ thành một khối như các hệ khác. Chúng không có ống dẫn: sản phẩm đổ thẳng vào máu và đi khắp cơ thể, chỉ tác động lên tế bào nào mang đúng thụ thể. Hệ quả của cách truyền tin đó là tác dụng chậm nhưng lan rộng và kéo dài — trái ngược với thần kinh vốn nhanh, khu trú và ngắn. Phần lớn các tuyến chịu điều khiển của tuyến yên theo trục dưới đồi – tuyến yên – tuyến đích, với cơ chế phản hồi ngược âm tính, nên hỏng ở tầng nào cũng biểu hiện ra ở tầng cuối và phải xét nghiệm cả trục mới định khu được.",
       en: "The endocrine glands shown against the vertebral column as a landmark, because the defining feature of this system is that it is SCATTERED rather than gathered into one organ. The glands are ductless: their products enter the blood directly and reach the whole body, acting only on cells bearing the right receptor. Hence effects that are slow but widespread and sustained — the opposite of the fast, focal, brief action of nerves. Most glands are governed by the pituitary through hypothalamic–pituitary–target axes with negative feedback, so a fault at any level shows up at the bottom and only assay of the whole axis localises it.",
@@ -263,7 +269,7 @@ export const regionViewerConfig3: Record<string, { cats: RegionViewKey[]; faded?
   "nao-that-mang-nao": { cats: ["brain", "bone"], faded: ["bone"] },
   "he-tinh-mach-chu-cua": { cats: ["vein"] },
   "tuyen-noi-tiet": { cats: ["organ", "bone"], faded: ["bone"] },
-  "dam-roi-that-lung-cung": { cats: ["muscle", "nerve", "bone"], faded: ["muscle"] },
+  "dam-roi-that-lung-cung": { cats: ["muscle", "brain", "nerve", "bone"], faded: ["muscle"] },
   "co-tay-ong-co-tay": { cats: ["muscle", "artery", "vein", "nerve", "bone"] },
   "vung-mong": { cats: ["skin", "muscle", "artery", "vein", "nerve", "bone"] },
   "co-quan-sinh-duc-nam": { cats: ["organ", "artery", "vein", "nerve", "bone"], faded: ["bone"] },

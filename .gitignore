@@ -52,3 +52,7 @@ __pycache__/
 *.backup-*
 # Log dev server ghi tại gốc dự án
 soma-dev.log
+
+# Cache tải mẫu vật thú y từ Sketchfab (scripts/vet/import-vet-soft-tissue.mjs).
+# 483 MB và tải lại được từ nguồn — model đã dùng thật nằm ở public/models/vet/.
+/.cache/

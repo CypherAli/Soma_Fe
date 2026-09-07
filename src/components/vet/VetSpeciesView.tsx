@@ -6,11 +6,16 @@ import HomeNav from "@/components/home/HomeNav";
 import HomeFooter from "@/components/home/HomeFooter";
 import IconSprite from "@/components/home/IconSprite";
 import { pick, type Loc } from "@/lib/homeContent";
-import VetModelViewer from "./VetModelViewer";
 import VetBoneBrowser from "./VetBoneBrowser";
 import { vetCopy } from "@/lib/vet/copy";
-import { VET_REGION_LABEL, VET_SYSTEM_LABEL, relatedAcrossSpecies, speciesInfo } from "@/lib/vet/knowledge";
-import { vetModelsOfSpecies } from "@/lib/vet/models";
+import {
+  VET_LAYER_LABEL,
+  VET_REGION_LABEL,
+  VET_SYSTEM_LABEL,
+  relatedAcrossSpecies,
+  speciesInfo,
+} from "@/lib/vet/knowledge";
+import { vetLayersOfSpecies, vetModelsOfSpecies } from "@/lib/vet/models";
 import type { VetFact, VetSpeciesKey, VetSystemKey } from "@/lib/vet/types";
 
 /**
@@ -35,6 +40,9 @@ export default function VetSpeciesView({
   const [open, setOpen] = useState<string | null>(facts[0]?.id ?? null);
   const models = vetModelsOfSpecies(speciesKey);
 
+  // Trang loài chỉ LIỆT KÊ có những lớp nào; việc bóc lớp diễn ra ở khung xem
+  // riêng (`/dong-vat/<loài>/xem`).
+  const layers = useMemo(() => vetLayersOfSpecies(speciesKey), [speciesKey]);
   const systems = useMemo(() => {
     const keys = [...new Set(facts.map((f) => f.system))];
     return keys.sort((a, b) => pick(VET_SYSTEM_LABEL[a], locale).localeCompare(pick(VET_SYSTEM_LABEL[b], locale)));
@@ -79,9 +87,28 @@ export default function VetSpeciesView({
       {models.length > 0 && (
         <section className="vet-models" aria-labelledby="vet-models-h">
           <h2 id="vet-models-h">{t.modelH}</h2>
-          {models.map((m) => (
-            <VetModelViewer key={m.slug} locale={locale} model={m} />
-          ))}
+
+          {/* Trang loài KHÔNG nhúng khung 3D nữa. Trước đây mỗi lớp là một
+              khung 16:9 chiếm gần trọn màn hình, mà chó có năm lớp — người học
+              phải cuộn qua một dãy khung 3D mới tới được phần chữ. Khung xem đã
+              có trang riêng chiếm trọn chiều cao, giống `/viewer` bên người. */}
+          <Link href={`/dong-vat/${speciesKey}/xem`} className="vet-viewer-cta">
+            <div>
+              <strong>{t.viewerOpen}</strong>
+              <span>{t.viewerOpenSub}</span>
+            </div>
+            <i aria-hidden="true">→</i>
+          </Link>
+
+          <div className="vet-layers" aria-label={t.modelLayerH}>
+            {layers.map((l) => (
+              <span key={l} className="vet-layer-tag">
+                {pick(VET_LAYER_LABEL[l], locale)}
+                <b>{models.filter((m) => m.layer === l).length}</b>
+              </span>
+            ))}
+          </div>
+          <p className="vet-layers-note">{t.modelLayerNote}</p>
         </section>
       )}
 

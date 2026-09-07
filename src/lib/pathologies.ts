@@ -2,37 +2,99 @@ import { API_URL } from "./auth";
 import type { Loc } from "./homeContent";
 
 export type Severity = "info" | "warning" | "critical";
-export type Pathology = {
-  id: string; nameVi: string; nameEn: string; nameZh: string; latin?: string | null;
-  icdCode?: string | null; severity?: Severity | null; descriptionVi?: string | null; source: string;
-  structure: { code: string; meshName?: string | null; nameVi: string; nameEn: string; nameZh: string; latin?: string | null; system?: { code: string; nameVi: string; nameEn: string; nameZh: string } };
-  citations?: { id: string; pageOrSection?: string | null; verified?: boolean; source: { title: string; publisher: string; year?: number | null; url: string } }[];
+
+export type PathologyContent = {
+  locale: string;
+  /** true = bản dịch máy, chưa có người chuyên môn duyệt. */
+  machineTranslated?: boolean;
+  description?: string | null;
+  clinical?: string | null;
+  imaging?: string | null;
+  progression?: string | null;
+  treatment?: string | null;
 };
 
-const fallbackPathologies: Pathology[] = [
-  ["myocardial-infarction", "Nhồi máu cơ tim", "Myocardial infarction", "心肌梗死", "critical", "giai-phau-tim", "Tim", "Heart", "心脏", "cardiovascular", "Tim mạch", "Cardiovascular", "心血管", "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine, 12th ed. (2021)"],
-  ["cirrhosis", "Xơ gan", "Cirrhosis of the liver", "肝硬化", "warning", "giai-phau-gan", "Gan", "Liver", "肝脏", "digestive", "Tiêu hóa", "Digestive", "消化系统", "Sherlock's Diseases of the Liver and Biliary System, 13th ed. (2018)"],
-  ["cholelithiasis", "Sỏi mật", "Cholelithiasis", "胆石症", "info", "gan-duong-mat", "Túi mật", "Gallbladder", "胆囊", "digestive", "Tiêu hóa", "Digestive", "消化系统", "Sabiston Textbook of Surgery, 21st ed. (2022)"],
-  ["acute-appendicitis", "Viêm ruột thừa cấp", "Acute appendicitis", "急性阑尾炎", "warning", "ruot-non-ruot-gia", "Ruột thừa", "Appendix", "阑尾", "digestive", "Tiêu hóa", "Digestive", "消化系统", "Sabiston Textbook of Surgery, 21st ed. (2022)"],
-  ["abdominal-aortic-aneurysm", "Phình động mạch chủ bụng", "Abdominal aortic aneurysm", "腹主动脉瘤", "critical", "he-dong-mach-chu", "Động mạch chủ bụng", "Abdominal aorta", "腹主动脉", "cardiovascular", "Tim mạch", "Cardiovascular", "心血管", "Rutherford's Vascular Surgery and Endovascular Therapy, 10th ed. (2022)"],
-].map(([id, nameVi, nameEn, nameZh, severity, code, structureVi, structureEn, structureZh, systemCode, systemVi, systemEn, systemZh, source]) => ({
-  id, nameVi, nameEn, nameZh, severity: severity as Severity, source,
-  structure: { code, nameVi: structureVi, nameEn: structureEn, nameZh: structureZh, system: { code: systemCode, nameVi: systemVi, nameEn: systemEn, nameZh: systemZh } },
-}));
+export type PathologyStructure = {
+  code: string;
+  meshName?: string | null;
+  nameVi: string;
+  nameEn: string;
+  nameZh: string;
+  latin?: string | null;
+  system?: { code: string; nameVi: string; nameEn: string; nameZh: string };
+};
 
-export const pathologyName = (p: Pathology, l: Loc) => l === "en" ? p.nameEn : l === "zh" ? p.nameZh : p.nameVi;
-export const structureName = (p: Pathology, l: Loc) => l === "en" ? p.structure.nameEn : l === "zh" ? p.structure.nameZh : p.structure.nameVi;
-export const systemName = (p: Pathology, l: Loc) => l === "en" ? p.structure.system?.nameEn : l === "zh" ? p.structure.system?.nameZh : p.structure.system?.nameVi;
+export type Pathology = {
+  id: string;
+  slug: string;
+  nameVi: string;
+  nameEn: string;
+  nameZh: string;
+  latin?: string | null;
+  icdCode?: string | null;
+  severity?: Severity | null;
+  /** Hệ lâm sàng theo giáo trình (Hô hấp, Tim mạch…) — khác hệ giải phẫu. */
+  clinicalSystem?: string | null;
+  source: string;
+  sourcePage?: number | null;
+  needsReview?: boolean;
+  /** Rỗng với bệnh không thuộc một cấu trúc 3D đơn lẻ (huyết học, cấp cứu…). */
+  structure?: PathologyStructure | null;
+  /** Mesh vị trí tổn thương; có giá trị này thì cũng có ảnh /lesions/<slug>.png
+      do `npm run render:lesions` sinh ra từ chính model của dự án. */
+  lesionMesh?: string | null;
+  lesionSystem?: string | null;
+  content?: PathologyContent[];
+  citations?: {
+    id: string;
+    pageOrSection?: string | null;
+    verified?: boolean;
+    source: { title: string; publisher: string; year?: number | null; url: string };
+  }[];
+};
 
-export async function fetchPathologies(structure?: string): Promise<Pathology[]> {
+export const pathologyName = (p: Pathology, l: Loc) =>
+  l === "en" ? p.nameEn : l === "zh" ? p.nameZh : p.nameVi;
+
+export const structureName = (p: Pathology, l: Loc) =>
+  !p.structure ? null : l === "en" ? p.structure.nameEn : l === "zh" ? p.structure.nameZh : p.structure.nameVi;
+
+export const systemName = (p: Pathology, l: Loc) =>
+  !p.structure?.system
+    ? null
+    : l === "en"
+      ? p.structure.system.nameEn
+      : l === "zh"
+        ? p.structure.system.nameZh
+        : p.structure.system.nameVi;
+
+/** Nội dung bệnh học theo ngôn ngữ, lùi về tiếng Việt nếu chưa dịch. */
+export const pathologyContent = (p: Pathology, l: Loc): PathologyContent | undefined =>
+  p.content?.find((c) => c.locale === l) ?? p.content?.find((c) => c.locale === "vi");
+
+export type PathologyResult =
+  | { ok: true; items: Pathology[] }
+  | { ok: false; items: Pathology[]; error: string };
+
+/**
+ * Trả về cả trạng thái lỗi thay vì nuốt im lặng.
+ *
+ * Bản trước `catch` rồi trả về một danh sách hardcode, nên khi backend chết
+ * trang vẫn hiện 5 bệnh như thể bình thường — và 3 trong 5 bản ghi đó trỏ tới
+ * mã cấu trúc đã không còn tồn tại. Giờ gọi được thì trả dữ liệu thật, không
+ * gọi được thì nói rõ là không gọi được.
+ */
+export async function fetchPathologies(structure?: string): Promise<PathologyResult> {
   const url = `${API_URL}/pathologies${structure ? `?structure=${encodeURIComponent(structure)}` : ""}`;
   try {
     const response = await fetch(url);
-    if (!response.ok) throw new Error("API unavailable");
-    return response.json();
-  } catch {
-    return structure
-      ? fallbackPathologies.filter((item) => item.structure.code === structure || item.structure.meshName === structure)
-      : fallbackPathologies;
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return { ok: true, items: (await response.json()) as Pathology[] };
+  } catch (error) {
+    return {
+      ok: false,
+      items: [],
+      error: error instanceof Error ? error.message : "network error",
+    };
   }
 }

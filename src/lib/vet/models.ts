@@ -1,21 +1,34 @@
 import type { VetModel, VetSpeciesKey } from "./types";
+import { VET_LAYER_ORDER } from "./types";
+import { generatedVetModels } from "./modelsGenerated";
+import { PIG_BONES, PIG_BONE_GROUP_OF, PIG_PART_GROUPS } from "./pigBonesGenerated";
 
 /**
  * MÔ HÌNH 3D THÚ Y — sổ đăng ký.
  *
- * TÌNH TRẠNG (27/08/2026): ba mẫu vật thật — sọ chó, sọ mèo, sọ ngựa.
+ * TÌNH TRẠNG (01/09/2026): sáu mẫu đặt tay ở tệp này (ba bộ xương toàn thân,
+ * ba sọ) CỘNG với lớp mô mềm nạp bằng script, khai ở `softTissue.ts` và sinh ra
+ * `modelsGenerated.ts`.
  *
- * Vẫn KHÔNG tồn tại bộ dữ liệu thú y vừa gắn nhãn vừa cấp phép sạch nào tương
- * đương Z-Anatomy, nên khu thú y vẫn lấy tri thức so sánh làm gốc và mô hình
- * chỉ là mẫu vật minh hoạ, không phải bản đồ có tên từng bộ phận.
+ * ĐÃ SỬA LẠI MỘT KẾT LUẬN CŨ. Chỗ này từng viết "khu thú y chỉ là mẫu vật minh
+ * hoạ" vì tin rằng ngoài xương thì không có gì cấp phép sạch. Rà lại bằng
+ * Sketchfab Data API (lọc `downloadable=true` + giấy phép cc0/by/by-sa, 29 truy
+ * vấn × 15 tài khoản) thì ra 14 mẫu MÔ MỀM đều CC BY 4.0: cơ, nội tạng, mạch,
+ * tai — của Ontario Veterinary College, FU Berlin, Pixelbeaker, 3DVet_Printing.
+ * Bò từ chỗ KHÔNG có mô hình nào nay có ba.
+ *
+ * Vế vẫn đúng của kết luận cũ: KHÔNG bộ nào gắn nhãn từng bộ phận như
+ * Z-Anatomy, nên hotspot vẫn phải đặt theo toạ độ, và các lớp KHÔNG chồng lên
+ * nhau được (mỗi lớp một mẫu vật, khác tỉ lệ, khác gốc toạ độ) — trang loài
+ * cho CHUYỂN lớp và nói rõ điều đó với người học.
+ *
+ * Lợn nay có bộ xương GẮN NHÃN TỪNG XƯƠNG lấy từ Z-PIG (Z-Anatomy, CC BY-SA)
+ * — loài đầu tiên của khu thú y bấm vào từng xương ra đúng tên như bên người.
+ * Còn thiếu hẳn: gà, và phần mềm của lợn. Xem VET_MODEL_CANDIDATES.
  *
  * Đường lấy được: Zenodo lưu bản sao Objaverse 1.0 của các mô hình Sketchfab
- * giấy phép CC — tải thẳng bằng HTTP, KHÔNG cần OAuth như tải qua Sketchfab.
- * Đây là điều đã sửa lại kết luận cũ "Sketchfab đòi đăng nhập nên chịu".
- *
- * Bò, lợn, gà: đã rà hơn 25 truy vấn trên Zenodo, không có mẫu nào vừa đúng
- * loài vừa CC0/CC-BY — thứ ra được chỉ là phù điêu đầu bò trang trí và tượng
- * lợn ở hầm mộ Paris, không dùng cho giải phẫu được. Xem VET_MODEL_CANDIDATES.
+ * giấy phép CC — tải thẳng bằng HTTP. Còn Sketchfab thì tải bằng API token cá
+ * nhân (xem `import-lmu-models.mjs` và `import-vet-soft-tissue.mjs`).
  *
  * CÁCH THÊM MỘT MÔ HÌNH (xem `scripts/vet/import-vet-model.mjs`):
  *   1. Tải tệp về, đọc kỹ giấy phép — CC0 và CC-BY dùng được; CC-BY-NC chỉ
@@ -29,7 +42,7 @@ import type { VetModel, VetSpeciesKey } from "./types";
  *   4. Đặt hotspot theo TOẠ ĐỘ (scan thú y là khối liền, không có tên bộ phận),
  *      mỗi hotspot trỏ tới `factId` có thật trong kho tri thức.
  */
-export const vetModels: VetModel[] = [
+const handPickedVetModels: VetModel[] = [
   // ── BỘ XƯƠNG TOÀN THÂN ───────────────────────────────────────────────────
   // Ba mẫu này giấy phép CC BY (cho phép tác phẩm phái sinh) nên GIẢM LƯỚI ĐƯỢC,
   // khác hẳn bộ xương rời của LMU vốn mang ND. Nhờ vậy bộ xương chó 13,8 MB
@@ -39,6 +52,8 @@ export const vetModels: VetModel[] = [
   {
     slug: "dog-skeleton",
     species: "dog",
+    layer: "skeleton",
+    region: "whole",
     title: {
       vi: "Bộ xương chó, toàn thân",
       en: "Dog skeleton, whole body",
@@ -56,6 +71,8 @@ export const vetModels: VetModel[] = [
   {
     slug: "cat-skeleton",
     species: "cat",
+    layer: "skeleton",
+    region: "whole",
     title: {
       vi: "Bộ xương mèo, toàn thân",
       en: "Cat skeleton, whole body",
@@ -73,6 +90,8 @@ export const vetModels: VetModel[] = [
   {
     slug: "horse-skeleton",
     species: "horse",
+    layer: "skeleton",
+    region: "whole",
     title: {
       vi: "Bộ xương ngựa, toàn thân",
       en: "Horse skeleton, whole body",
@@ -90,6 +109,8 @@ export const vetModels: VetModel[] = [
   {
     slug: "dog-skull",
     species: "dog",
+    layer: "skeleton",
+    region: "head",
     title: {
       vi: "Sọ chó nhà (đực)",
       en: "Domestic dog skull (male)",
@@ -108,6 +129,8 @@ export const vetModels: VetModel[] = [
   {
     slug: "cat-cranium",
     species: "cat",
+    layer: "skeleton",
+    region: "head",
     title: {
       vi: "Sọ mèo nhà",
       en: "Domestic cat cranium",
@@ -122,9 +145,67 @@ export const vetModels: VetModel[] = [
       { factId: "cat-dental-formula", position: [-6.939, -26.368, 28.492] },
     ],
   },
+  // ── LỢN: bộ xương ĐÃ GẮN NHÃN TỪNG XƯƠNG ─────────────────────────────────
+  // Bước ngoặt của khu thú y. Mọi mẫu trước đó là khối quét liền, tách bộ phận
+  // phải dựa vào tên vật liệu do người quét tình cờ đặt, hoặc phải đánh dấu
+  // bằng toạ độ. Z-PIG (Z-Anatomy) là bộ giải phẫu thú y dựng tay, 120 xương
+  // mỗi cái một object có tên thật — nên lợn là loài ĐẦU TIÊN bấm vào từng
+  // xương ra đúng tên như bên người.
+  //
+  // GIẤY PHÉP KHÁC HẲN phần còn lại: CC BY-SA 4.0 (ShareAlike). Tệp .glb dựng
+  // ra từ nó là tác phẩm phái sinh nên phải phát hành lại CÙNG giấy phép —
+  // ghi công thôi chưa đủ. Và đừng gộp mẫu này chung một tệp với mẫu CC BY của
+  // nguồn khác: gộp là kéo cả tệp ấy vào ràng buộc ShareAlike.
+  //
+  // Tên bộ phận sinh từ `scripts/vet/build-pig-bones.mjs` (nhãn gốc tiếng Pháp
+  // → slug + NAV + vi/en/zh). Cùng tệp đó đặt tên vật liệu trong .glb, nên
+  // danh sách bộ phận và hình học không thể lệch nhau.
+  {
+    slug: "pig-skeleton",
+    species: "pig",
+    layer: "skeleton",
+    region: "whole",
+    title: {
+      vi: "Bộ xương lợn, toàn thân",
+      en: "Pig skeleton, whole body",
+      zh: "猪全身骨骼",
+    },
+    file: "pig-skeleton.glb",
+    license: "CC BY-SA 4.0",
+    attribution: "Z-Anatomy — “Z-PIG” (đã giảm lưới cho web; phát hành lại theo CC BY-SA 4.0)",
+    sourceUrl: "https://github.com/LluisV/Z-Anatomy",
+    // Không cần điểm chú giải: mẫu này bấm thẳng vào từng xương ra tên, chứ
+    // không phải khối liền cần đánh dấu bằng toạ độ như các mẫu quét khác.
+    hotspots: [],
+    parts: PIG_BONES,
+    partGroups: PIG_PART_GROUPS,
+    partsFrom: "atlas",
+  },
+  {
+    slug: "pig-skull",
+    species: "pig",
+    layer: "skeleton",
+    region: "head",
+    title: {
+      vi: "Sọ lợn, hàm dưới và xương móng",
+      en: "Pig skull, mandible and hyoid",
+      zh: "猪颅骨、下颌骨与舌骨",
+    },
+    file: "pig-skull.glb",
+    license: "CC BY-SA 4.0",
+    attribution: "Z-Anatomy — “Z-PIG” (phát hành lại theo CC BY-SA 4.0)",
+    sourceUrl: "https://github.com/LluisV/Z-Anatomy",
+    hotspots: [],
+    partsFrom: "atlas",
+    // Sọ tách riêng và KHÔNG giảm lưới: răng nanh sữa (“răng kim”) của lợn con
+    // là nội dung dạy thật — giảm lưới xuống là mất luôn ranh giới từng răng.
+    parts: PIG_BONES.filter((p) => PIG_BONE_GROUP_OF[p.material] === "head"),
+  },
   {
     slug: "horse-skull",
     species: "horse",
+    layer: "skeleton",
+    region: "head",
     title: {
       vi: "Sọ ngựa",
       en: "Horse skull",
@@ -141,8 +222,22 @@ export const vetModels: VetModel[] = [
   },
 ];
 
+/**
+ * Sổ đăng ký cuối cùng = mẫu đặt tay + mẫu do `import-vet-soft-tissue.mjs` nạp.
+ *
+ * Tách hai nguồn vì tệp sinh ra bị GHI ĐÈ mỗi lần chạy script; trộn chung thì
+ * một lần nạp lại là mất sạch phần biên tập tay.
+ */
+export const vetModels: VetModel[] = [...handPickedVetModels, ...generatedVetModels];
+
 export const vetModelsOfSpecies = (species: VetSpeciesKey) =>
   vetModels.filter((m) => m.species === species);
+
+/** Các lớp có mẫu vật thật cho một loài, xếp theo thứ tự bóc lớp. */
+export const vetLayersOfSpecies = (species: VetSpeciesKey) => {
+  const have = new Set(vetModelsOfSpecies(species).map((m) => m.layer));
+  return VET_LAYER_ORDER.filter((l) => have.has(l));
+};
 
 export const vetModel = (slug: string) => vetModels.find((m) => m.slug === slug);
 
@@ -165,17 +260,17 @@ export type VetModelCandidate = {
 export const VET_MODEL_CANDIDATES: VetModelCandidate[] = [
   {
     species: "cattle",
-    what: "Sọ bò (Bos taurus)",
+    what: "Sọ bò (Bos taurus) — bò đã có khung chậu, chi trước và dạ cỏ, còn thiếu đúng cái sọ",
     where: "MorphoSource / Sketchfab — Zenodo KHÔNG có (rà 25+ truy vấn ngày 27/08/2026, thứ ra được chỉ là phù điêu đầu bò trang trí ở lâu đài Beynac)",
     license: "Thay đổi theo từng mẫu — phải kiểm trước khi dùng",
     howToGet: "Đăng nhập MorphoSource rồi tải thủ công; hoặc chờ Objaverse đợt sau đổ thêm lên Zenodo.",
   },
   {
     species: "pig",
-    what: "Sọ lợn (Sus scrofa)",
-    where: "MorphoSource (oVert) — Zenodo không có mẫu giải phẫu nào đúng loài",
+    what: "MÔ MỀM lợn (nội tạng, cơ) — XƯƠNG THÌ XONG RỒI, xem pig-skeleton và pig-skull",
+    where: "Z-PIG chỉ dựng hệ xương. Phần mềm phải rà tiếp bằng Sketchfab Data API như đợt mô mềm chó/mèo/bò",
     license: "Phần lớn CC BY-NC — kiểm từng bản ghi",
-    howToGet: "Cần tài khoản MorphoSource; nếu chỉ có ảnh CT thì phải dựng mesh bằng 3D Slicer.",
+    howToGet: "Chạy lại vòng rà với từ khoá lợn / sus scrofa / porcine; loại ND vì ta có giảm lưới.",
   },
   {
     species: "chicken",

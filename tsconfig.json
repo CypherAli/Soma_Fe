@@ -6,6 +6,8 @@
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
+    // scripts/test-gestures.ts chạy thẳng bằng node nên phải ghi rõ đuôi .ts
+    "allowImportingTsExtensions": true,
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "bundler",

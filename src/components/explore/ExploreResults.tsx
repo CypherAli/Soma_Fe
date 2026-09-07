@@ -45,7 +45,7 @@ const SORT_LABELS: Record<SortMode, { vi: string; en: string; zh: string }> = {
 };
 
 export default function ExploreResults({ data, locale }: { data: CategoryData; locale: Loc }) {
-  const isAllModels = data.filters.length === 0;
+  const isAllModels = data.slug === "tat-ca";
   const [active, setActive] = useState("all");
   const [contentType, setContentType] = useState<"all" | "anatomy" | "condition" | "procedure">("all");
   const [query, setQuery] = useState("");
@@ -97,11 +97,11 @@ export default function ExploreResults({ data, locale }: { data: CategoryData; l
         <div className="content-tabs">
           {contentTypeTabs.map((t) => <button key={t.key} className={`content-tab${contentType === t.key ? " active" : ""}`} onClick={() => setContentType(t.key)}>{pick(t.label, locale)}</button>)}
         </div>
-      ) : (
+      ) : data.filters.length > 0 ? (
         <div className="filter-tabs">
           {data.filters.map((f) => <button key={f.key} className={`filter-tab${active === f.key ? " active" : ""}`} onClick={() => setActive(f.key)}>{pick(f.label, locale)}</button>)}
         </div>
-      )}
+      ) : null}
 
       {cards.length === 0 ? (
         <p className="content-empty">{locale === "vi" ? "Chưa có nội dung ở mục này." : locale === "zh" ? "此分类暂无内容。" : "No content in this category yet."}</p>
@@ -110,10 +110,6 @@ export default function ExploreResults({ data, locale }: { data: CategoryData; l
           {cards.map((c, i) => (
             <button type="button" key={`${pick(c.title, "en")}-${i}`} className="result-card" onClick={() => c.href && router.push(c.href)} disabled={!c.href}>
               <div className={`thumb ${c.img}${c.thumb ? " has-photo" : ""}`}>
-                {/* Dùng <img> có chủ đích: thumbnail đã được nén sẵn ở bước dựng
-                    bằng scripts/optimize-thumbnails.mjs (JPEG 600px, ~10–70KB) nên
-                    cho next/image tối ưu lại lúc chạy chỉ tốn thêm vòng xử lý. */}
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 {c.thumb ? <img src={c.thumb} alt={pick(c.title, locale)} loading="lazy" /> : (
                   <div className="anatomy-plate" aria-hidden="true">
                     <span className="plate-kicker">SPECIMEN · {String(i + 1).padStart(3, "0")}</span>

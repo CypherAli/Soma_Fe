@@ -59,6 +59,18 @@ FIXES = {
     "Mỏ tá": "Mô tả", "mỏ tá": "mô tả", "Mó tà": "Mô tả", "mó tà": "mô tả",
     "Mô tà": "Mô tả", "mô tà": "mô tả", "Mô tá": "Mô tả", "mô tá": "mô tả",
     "TRƯ:": "TRỪ:", "nguvén": "nguyên", "dao đám": "dao đâm",
+    # Đợt hiệu đính 2026-08-19 — mỗi chỗ đều xác định được DUY NHẤT một từ nhờ
+    # thuật ngữ giải phẫu đi kèm trong chính câu đó, không phải đoán dấu:
+    "TK thanh quản Dgoài": "TK thanh quản ngoài",   # thanh quản ngoài/trong
+    "thanh qaản": "thanh quản", "thực quảiv": "thực quản",
+    "nhánh ihái dương": "nhánh thái dương",
+    "giao cảm trirớc hạch": "giao cảm trước hạch",
+    "khuyết CỊuax": "khuyết quay",                  # khuyết ròng rọc + khuyết quay
+    "Cơ rốne trong": "Cơ rộng trong",               # vastus medialis
+    "tam đáu cãns chán": "tam đầu cẳng chân",       # triceps surae
+    "tam đầu cãns chân": "tam đầu cẳng chân",
+    "sau đảv": "sau đây", "dưới đảv": "dưới đây",
+    "dáv chằng": "dây chằng", "dáv chàng": "dây chằng", "dáv chăns": "dây chằng",
 }
 
 # Hai nhóm lỗi OCR CÓ QUY LUẬT của bản scan này, sửa theo cả từ nên không đụng

@@ -4,8 +4,9 @@ import { useLocale } from "next-intl";
 import { useRouter, usePathname } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { useEffect, useRef, useState, useTransition } from "react";
+import { markLocaleTransition } from "@/lib/localeTransition";
 
-const CODES: Record<Locale, string> = { vi: "VI", en: "EN", zh: "中" };
+const CODES: Record<Locale, string> = { vi: "VI", en: "EN", zh: "中文" };
 const LABELS: Record<Locale, string> = { vi: "Tiếng Việt", en: "English", zh: "中文" };
 
 export default function LanguageSwitcher() {
@@ -18,49 +19,32 @@ export default function LanguageSwitcher() {
 
   useEffect(() => {
     if (!open) return;
-    const closeOnOutsideClick = (event: MouseEvent) => {
+    const close = (event: MouseEvent) => {
       if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
     };
-    document.addEventListener("mousedown", closeOnOutsideClick);
-    return () => document.removeEventListener("mousedown", closeOnOutsideClick);
+    document.addEventListener("mousedown", close);
+    return () => document.removeEventListener("mousedown", close);
   }, [open]);
 
-  const otherLocales = routing.locales.filter((item) => item !== locale);
-
   return (
-    <div ref={rootRef} className="relative">
-      <button
-        type="button"
-        disabled={isPending}
-        aria-label="Chọn ngôn ngữ"
-        aria-expanded={open}
-        onClick={() => setOpen((value) => !value)}
-        className="flex h-9 min-w-15 items-center justify-center gap-1.5 rounded-lg border border-[var(--line)] bg-[var(--surf)] px-3 text-xs font-medium text-[var(--body-fg)] transition-colors hover:bg-[var(--surf-2)] disabled:opacity-60"
-      >
-        {CODES[locale]}
-        <svg className={`size-3 transition-transform ${open ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="m8 10 4 4 4-4" />
-        </svg>
+    <div ref={rootRef} className="language-select">
+      <button type="button" disabled={isPending} aria-label="Chọn ngôn ngữ" aria-expanded={open} onClick={() => setOpen((value) => !value)} className="language-select-trigger">
+        <svg className="language-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3.5 12h17M12 3c2.4 2.5 3.6 5.5 3.6 9S14.4 18.5 12 21c-2.4-2.5-3.6-5.5-3.6-9S9.6 5.5 12 3Z"/></svg>
+        <span>{LABELS[locale]}</span><em>{CODES[locale]}</em>
+        <svg className={`language-chevron ${open ? "is-open" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="m8 10 4 4 4-4" /></svg>
       </button>
-
-      {open && (
-        <div className="absolute right-0 top-[calc(100%+8px)] z-50 min-w-20 overflow-hidden rounded-xl border border-[var(--line)] bg-[var(--surf)] py-1.5 shadow-[0_14px_35px_rgba(0,0,0,0.16)]">
-          {otherLocales.map((item) => (
-            <button
-              key={item}
-              type="button"
-              title={LABELS[item]}
-              onClick={() => {
-                setOpen(false);
-                startTransition(() => router.replace(pathname, { locale: item }));
-              }}
-              className="block w-full px-4 py-2.5 text-left text-xs font-medium text-[var(--body-fg)] transition-colors hover:bg-[var(--surf-2)] hover:text-[var(--blue)]"
-            >
-              {CODES[item]}
-            </button>
-          ))}
-        </div>
-      )}
+      {open && <div className="language-select-menu" role="menu">
+        <p>Ngôn ngữ / Language</p>
+        {routing.locales.map((item) => <button key={item} type="button" aria-current={item === locale ? "true" : undefined} onClick={() => {
+          setOpen(false);
+          if (item !== locale) {
+            markLocaleTransition(pathname);
+            startTransition(() => router.replace(pathname, { locale: item, scroll: false }));
+          }
+        }} className="language-select-option">
+          <span>{LABELS[item]}</span><em>{CODES[item]}</em>{item === locale && <b aria-hidden="true">✓</b>}
+        </button>)}
+      </div>}
     </div>
   );
 }

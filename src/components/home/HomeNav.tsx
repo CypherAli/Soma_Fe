@@ -2,37 +2,45 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useLocale } from "next-intl";
-import { useRouter, usePathname, Link } from "@/i18n/navigation";
-import { routing } from "@/i18n/routing";
+import { usePathname, Link } from "@/i18n/navigation";
 import { homeContent as C, pick, type Loc } from "@/lib/homeContent";
 import { systemGroups, scenesOfSystem, catalogStats } from "@/lib/catalog";
 import { Icon } from "./IconSprite";
 import { AUTH_CHANGED_EVENT, authRequest, clearAuth, getToken, type AuthUser } from "@/lib/auth";
 import ThemeToggle from "./ThemeToggle";
+import LanguageSwitcher from "../LanguageSwitcher";
+import BrandSignature from "./BrandSignature";
+import HomeSearch from "./HomeSearch";
 
-const LANG_CODE: Record<Loc, string> = { vi: "VI", en: "EN", zh: "中" };
-
-export default function HomeNav({ minimal = false }: { minimal?: boolean }) {
+export default function HomeNav({
+  minimal = false,
+  commerce = false,
+  section = "human",
+}: {
+  minimal?: boolean;
+  commerce?: boolean;
+  /** Khu vực đang xem — quyết định thanh menu nào hiện ra. */
+  section?: "human" | "vet";
+}) {
   const locale = useLocale() as Loc;
-  const router = useRouter();
   const pathname = usePathname();
+  const menu = section === "vet" ? C.vetMenu : C.mainMenu;
+  /**
+   * Chỉ tô đậm MỘT mục: mục có href khớp dài nhất.
+   *
+   * So kiểu `startsWith` từng mục thì ở /dong-vat/trac-nghiem cả "Động vật"
+   * (/dong-vat) lẫn "Quiz" (/dong-vat/trac-nghiem) đều sáng, vì mục đầu là
+   * tiền tố của mục sau.
+   */
+  const activeHref = menu
+    .map((m) => m.href.split("#")[0])
+    .filter((href) => href !== "/" && (pathname === href || pathname.startsWith(`${href}/`)))
+    .sort((a, b) => b.length - a.length)[0];
+
   const [megaOpen, setMegaOpen] = useState(false);
-  const [langOpen, setLangOpen] = useState(false);
   const [user, setUser] = useState<AuthUser | null>(null);
   const [accountOpen, setAccountOpen] = useState(false);
-  const langRef = useRef<HTMLDivElement>(null);
   const accountRef = useRef<HTMLDivElement>(null);
-
-  const otherLocales = routing.locales.filter((l) => l !== locale);
-
-  useEffect(() => {
-    if (!langOpen) return;
-    const onClickOutside = (e: MouseEvent) => {
-      if (langRef.current && !langRef.current.contains(e.target as Node)) setLangOpen(false);
-    };
-    document.addEventListener("mousedown", onClickOutside);
-    return () => document.removeEventListener("mousedown", onClickOutside);
-  }, [langOpen]);
 
   useEffect(() => {
     async function loadUser() {
@@ -69,16 +77,17 @@ export default function HomeNav({ minimal = false }: { minimal?: boolean }) {
 
   return (
     <>
-      <nav className="nav">
+      <nav className={`nav${commerce ? " home-commerce-nav" : ""}`}>
         <div className="nav-inner">
-          <Link href="/" className="nav-word" aria-label="Soma 3D">Soma&nbsp;3D</Link>
+          {commerce && <div className="home-nav-search"><HomeSearch locale={locale} compact /></div>}
+          <BrandSignature />
 
           {!minimal && <div className="menu">
-            {C.mainMenu.map((m) => (
+            {menu.map((m) => (
               <Link
                 key={m.href}
                 href={m.href}
-                className={pathname.startsWith(m.href.split("#")[0]) && m.href !== "/" ? "active" : ""}
+                className={m.href === activeHref ? "active" : ""}
               >
                 {pick(m.label, locale)}
               </Link>
@@ -87,32 +96,7 @@ export default function HomeNav({ minimal = false }: { minimal?: boolean }) {
 
           <div className="nav-r">
             <ThemeToggle />
-            <div className="lang" ref={langRef}>
-              <button
-                type="button"
-                className="lang-trigger"
-                aria-expanded={langOpen}
-                onClick={() => setLangOpen((o) => !o)}
-              >
-                {LANG_CODE[locale]}
-                <Icon id="i-chev" className="isvg cx" />
-              </button>
-              {langOpen && (
-                <div className="lang-menu">
-                  {otherLocales.map((l) => (
-                    <button
-                      key={l}
-                      onClick={() => {
-                        router.replace(pathname, { locale: l });
-                        setLangOpen(false);
-                      }}
-                    >
-                      {LANG_CODE[l as Loc]}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
+            <LanguageSwitcher />
             {user ? (
               <div className="account" ref={accountRef}>
                 <button type="button" className="btn-signin account-trigger" onClick={() => setAccountOpen((open) => !open)} aria-expanded={accountOpen}>

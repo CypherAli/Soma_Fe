@@ -31,6 +31,21 @@ export const homeContent = {
     { label: { vi: "Vision AI", en: "Vision AI", zh: "视觉 AI" }, href: "/cu-chi" },
     { label: { vi: "Bệnh lý", en: "Pathology", zh: "病理" }, href: "/benh-ly" },
   ],
+  /**
+   * Menu của khu thú y.
+   *
+   * Ba mục, không hơn. Khu thú y điều hướng theo chiều SÂU — nhóm → loài →
+   * cấu trúc — nên nhồi thêm mục ngang hàng chỉ làm loãng; việc đi vào từng
+   * loài là của trang chủ khu.
+   *
+   * KHÔNG dùng chung `mainMenu`: dùng chung thì đang xem sọ ngựa mà bấm
+   * "Hệ cơ quan" lại nhảy sang hệ cơ quan của người.
+   */
+  vetMenu: [
+    { label: { vi: "Động vật", en: "Animals", zh: "动物" }, href: "/dong-vat" },
+    { label: { vi: "Bệnh", en: "Disease", zh: "疾病" }, href: "/dong-vat/benh" },
+    { label: { vi: "Vision AI", en: "Vision AI", zh: "视觉 AI" }, href: "/cu-chi" },
+  ],
   // Khối 2 cột: Corpus (người) · Anima (thú y)
   twoCol: {
     corpus: {
@@ -45,21 +60,24 @@ export const homeContent = {
       },
       cta: { vi: "Vào atlas người", en: "Enter human atlas", zh: "进入人体图谱" },
       href: "/nguoi",
-      img: "/plates/skull-human.png",
+      img: "/plates/skull-human-transparent.png",
     },
     anima: {
       kicker: { vi: "Anima", en: "Anima", zh: "Anima" },
-      meta: { vi: "Đang phát triển", en: "In development", zh: "开发中" },
+      /* Trước đây thẻ này ghi "Sắp ra mắt" và trỏ vào một trang tờ rơi. Nay
+         khu vực thú y đã có nội dung thật (6 loài, giải phẫu so sánh), nên
+         phải mời người dùng vào chứ không hứa hẹn nữa. */
+      meta: { vi: "6 loài", en: "6 species", zh: "6 个物种" },
       title: { vi: "Giải phẫu động vật", en: "Animal anatomy", zh: "动物解剖" },
       latin: { vi: "Anatomia Veterinaria", en: "Anatomia Veterinaria", zh: "Anatomia Veterinaria" },
       body: {
-        vi: "Nghiên cứu so sánh trên chó, mèo, ngựa, gia cầm và động vật ngoại lai — phục vụ chẩn đoán và can thiệp lâm sàng.",
-        en: "Comparative study across dogs, cats, horses, poultry and exotics — for clinical diagnosis and intervention.",
-        zh: "涵盖犬、猫、马、家禽及外来动物的比较研究——服务于临床诊断与干预。",
+        vi: "Giải phẫu so sánh chó, mèo, ngựa, bò, lợn và gà — khác nhau ở đâu và mỗi khác biệt dẫn tới điều gì trên lâm sàng.",
+        en: "Comparative anatomy of dog, cat, horse, cattle, pig and chicken — what differs and what each difference means in the clinic.",
+        zh: "犬、猫、马、牛、猪与鸡的比较解剖——差异何在，以及每处差异在临床上的意义。",
       },
-      cta: { vi: "Sắp ra mắt", en: "Coming soon", zh: "即将推出" },
+      cta: { vi: "Vào atlas thú y", en: "Enter veterinary atlas", zh: "进入兽医图谱" },
       href: "/dong-vat",
-      img: "/plates/skull-cat.jpg",
+      img: "/plates/skull-cat-transparent.png",
     },
   },
   // Hero trang Giải phẫu người
@@ -187,25 +205,50 @@ export const homeContent = {
       en: "Interactive 3D anatomy platform — graduation project. Data based on Z-Anatomy (CC BY-SA) and BodyParts3D (CC BY-SA 2.1 JP), terminology per Terminologia Anatomica.",
       zh: "交互式 3D 解剖平台——毕业设计。数据基于 Z-Anatomy (CC BY-SA) 与 BodyParts3D (CC BY-SA 2.1 JP)，术语依据 Terminologia Anatomica。",
     },
-    productH: { vi: "Khám phá", en: "Explore", zh: "探索" },
-    resourcesH: { vi: "Tài nguyên", en: "Resources", zh: "资源" },
-    languageH: { vi: "Ngôn ngữ", en: "Language", zh: "语言" },
-    product: [
-      { label: { vi: "Tất cả mô hình", en: "All models", zh: "所有模型" }, href: "/giai-phau/tat-ca" },
-      { label: { vi: "Theo hệ cơ quan", en: "By organ system", zh: "按器官系统" }, href: "/giai-phau/theo-he" },
-      { label: { vi: "Theo vùng cơ thể", en: "By body region", zh: "按身体区域" }, href: "/giai-phau/theo-vung" },
-      { label: { vi: "Giải phẫu toàn thân", en: "Complete anatomy", zh: "完整解剖" }, href: "/viewer" },
+    groups: [
+      { key: "about", heading: { vi: "Giới thiệu", en: "About", zh: "简介" }, links: [
+        { label: { vi: "Về Soma Atlas", en: "About Soma Atlas", zh: "关于 Soma Atlas" }, href: "/" },
+        { label: { vi: "Sứ mệnh & nguồn gốc", en: "Mission & origins", zh: "使命与来源" }, href: "/tai-lieu-y-khoa" },
+        { label: { vi: "Dữ liệu & phương pháp", en: "Data & methodology", zh: "数据与方法" }, href: "/tai-lieu-y-khoa" },
+      ] },
+      { key: "services", heading: { vi: "Dịch vụ", en: "Services", zh: "服务" }, links: [
+        { label: { vi: "Atlas giải phẫu 3D", en: "3D anatomy atlas", zh: "3D 解剖图谱" }, href: "/giai-phau/tat-ca" },
+        { label: { vi: "Học tập & trắc nghiệm", en: "Learning & quizzes", zh: "学习与测验" }, href: "/quiz" },
+        { label: { vi: "Trợ lý Soma", en: "Soma assistant", zh: "Soma 助手" }, href: "/tro-ly" },
+      ] },
+      { key: "resources", heading: { vi: "Tài nguyên", en: "Resources", zh: "资源" }, links: [
+        { label: { vi: "Kho tài liệu y khoa", en: "Medical document library", zh: "医学资料库" }, href: "/tai-lieu-y-khoa" },
+        { label: { vi: "Thư viện mô hình", en: "Model library", zh: "模型库" }, href: "/thu-vien" },
+        { label: { vi: "Học liệu Đại học Y Hà Nội", en: "Hanoi Medical University resources", zh: "河内医科大学学习资料" }, href: "https://hmu.edu.vn/", external: true },
+        { label: { vi: "Y học Bộ Y tế", en: "Ministry of Health medicine", zh: "卫生部医学资料" }, href: "https://moh.gov.vn/", external: true },
+        { label: { vi: "Z-Anatomy", en: "Z-Anatomy", zh: "Z-Anatomy" }, href: "https://www.z-anatomy.com/", external: true },
+        { label: { vi: "BodyParts3D (DBCLS)", en: "BodyParts3D (DBCLS)", zh: "BodyParts3D (DBCLS)" }, href: "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/desc.html", external: true },
+      ] },
+      { key: "support", heading: { vi: "Chăm sóc khách hàng", en: "Customer care", zh: "客户服务" }, links: [
+        { label: { vi: "Trung tâm hỗ trợ", en: "Help center", zh: "帮助中心" }, href: "/tro-ly" },
+        { label: { vi: "Câu hỏi thường gặp", en: "Frequently asked questions", zh: "常见问题" }, href: "/tro-ly" },
+        { label: { vi: "Hướng dẫn sử dụng", en: "User guide", zh: "使用指南" }, href: "/tai-lieu-y-khoa" },
+        { label: { vi: "Hotline: 0848 565 650", en: "Hotline: 0848 565 650", zh: "热线：0848 565 650" }, href: "tel:0848565650" },
+        { label: { vi: "Báo lỗi nội dung", en: "Report content issue", zh: "报告内容问题" }, href: "mailto:support@somaatlas.vn" },
+      ] },
+      { key: "policy", heading: { vi: "Chính sách", en: "Policies", zh: "政策" }, links: [
+        { label: { vi: "Bản quyền & giấy phép", en: "Copyright & licences", zh: "版权与许可" }, href: "https://creativecommons.org/licenses/by-sa/4.0/", external: true },
+        { label: { vi: "Nguồn dữ liệu", en: "Data sources", zh: "数据来源" }, href: "/tai-lieu-y-khoa" },
+        { label: { vi: "Cam kết sử dụng", en: "Usage commitment", zh: "使用承诺" }, href: "/tai-lieu-y-khoa" },
+        { label: { vi: "Bảo vệ tài nguyên", en: "Resource protection", zh: "资源保护" }, href: "/tai-lieu-y-khoa" },
+        { label: { vi: "Quy tắc sử dụng", en: "Terms of use", zh: "使用条款" }, href: "/tai-lieu-y-khoa" },
+      ] },
+      { key: "connect", heading: { vi: "Liên hệ & kết nối", en: "Contact & connect", zh: "联系与合作" }, links: [
+        { label: { vi: "trinhviethoangawm@gmail.com", en: "trinhviethoangawm@gmail.com", zh: "trinhviethoangawm@gmail.com" }, href: "mailto:trinhviethoangawm@gmail.com" },
+        { label: { vi: "0848 565 650", en: "0848 565 650", zh: "0848 565 650" }, href: "tel:0848565650" },
+      ] },
     ],
-    resources: [
-      { label: { vi: "Thư viện của tôi", en: "My library", zh: "我的库" }, href: "/thu-vien" },
-      { label: { vi: "Z-Anatomy", en: "Z-Anatomy", zh: "Z-Anatomy" }, href: "https://www.z-anatomy.com/", external: true },
-      { label: { vi: "BodyParts3D (DBCLS)", en: "BodyParts3D (DBCLS)", zh: "BodyParts3D (DBCLS)" }, href: "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/desc.html", external: true },
-      { label: { vi: "Giấy phép CC BY-SA", en: "CC BY-SA licence", zh: "CC BY-SA 许可" }, href: "https://creativecommons.org/licenses/by-sa/4.0/", external: true },
-    ],
-    languages: [
-      { label: "Tiếng Việt", loc: "vi" as Loc },
-      { label: "English", loc: "en" as Loc },
-      { label: "中文", loc: "zh" as Loc },
+    socialH: { vi: "Kết nối với chúng tôi", en: "Connect with us", zh: "关注我们" },
+    social: [
+      { label: "Facebook", href: "https://www.facebook.com/" },
+      { label: "Instagram", href: "https://www.instagram.com/" },
+      { label: "TikTok", href: "https://www.tiktok.com/" },
+      { label: "X", href: "https://x.com/" },
     ],
   },
 };

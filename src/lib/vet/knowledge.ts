@@ -1,11 +1,14 @@
 import { fold } from "@/lib/anatomy/knowledge";
 import { pick, type Loc, type T3 } from "@/lib/homeContent";
 import { largeAnimalFacts } from "./facts/largeAnimals";
+import { muscleFacts } from "./facts/muscles";
 import { poultryFacts } from "./facts/poultry";
 import { smallAnimalFacts } from "./facts/smallAnimals";
+import { visceraFacts } from "./facts/viscera";
 import {
   VET_SPECIES,
   type VetFact,
+  type VetLayerKey,
   type VetRegionKey,
   type VetSpeciesKey,
   type VetSystemKey,
@@ -177,6 +180,21 @@ export const VET_SYSTEM_LABEL: Record<VetSystemKey, T3> = {
   lymphoid: { vi: "Hệ bạch huyết", en: "Lymphoid system", zh: "淋巴系统" },
 };
 
+/**
+ * Nhãn LỚP GIẢI PHẪU — khác `VET_SYSTEM_LABEL` ở chỗ đây là lớp bóc trên mẫu
+ * vật (cắt tới đâu thấy gì), còn hệ là cách sách chia nội dung. Một lớp có thể
+ * cắt ngang nhiều hệ: lớp "tạng" của chó gồm cả tiêu hoá lẫn tuần hoàn.
+ */
+export const VET_LAYER_LABEL: Record<VetLayerKey, T3> = {
+  skin: { vi: "Da", en: "Skin", zh: "皮肤" },
+  muscle: { vi: "Lớp cơ", en: "Muscle", zh: "肌肉层" },
+  viscera: { vi: "Nội tạng", en: "Viscera", zh: "内脏" },
+  vessel: { vi: "Mạch máu", en: "Vessels", zh: "血管" },
+  nerve: { vi: "Thần kinh", en: "Nerves", zh: "神经" },
+  senses: { vi: "Giác quan", en: "Sense organs", zh: "感觉器官" },
+  skeleton: { vi: "Bộ xương", en: "Skeleton", zh: "骨骼" },
+};
+
 export const VET_REGION_LABEL: Record<VetRegionKey, T3> = {
   head: { vi: "Đầu", en: "Head", zh: "头部" },
   neck: { vi: "Cổ", en: "Neck", zh: "颈部" },
@@ -191,7 +209,7 @@ let cache: VetFact[] | null = null;
 
 export function allVetFacts(): VetFact[] {
   if (cache) return cache;
-  const out = [...smallAnimalFacts, ...largeAnimalFacts, ...poultryFacts];
+  const out = [...smallAnimalFacts, ...muscleFacts, ...visceraFacts, ...largeAnimalFacts, ...poultryFacts];
   // Trùng id là lỗi dữ liệu chứ không phải chuyện nhỏ: hai mục cùng id thì mục
   // sau che mục trước ở mọi phép tra, mà không có gì báo. Chặn ngay ở đây.
   const seen = new Set<string>();

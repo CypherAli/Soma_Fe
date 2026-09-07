@@ -231,8 +231,23 @@ export const muscularScenes: Record<string, SceneModule> = {
           zh: "前间室中最小最短的肌肉，起自肩胛骨喙突——通常被肌皮神经穿过，是腋区手术入路的重要标志。",
         },
       },
+      { key: "biceps-short-head", meshName: "Short head of biceps brachii.l", offset: [0, 0], label: { vi: "Cơ nhị đầu (đầu ngắn)", en: "Biceps brachii — short head", zh: "Cơ nhị đầu (đầu ngắn)" }, latinName: "Caput breve musculi bicipitis brachii",
+        note: { vi: "Bám vào mỏm quạ xương bả vai cùng cơ quạ cánh tay. Khác đầu dài, đầu ngắn KHÔNG đi qua trong ổ khớp vai nên không dính dáng tới bệnh lý sụn viền; đứt gân đầu dài thì đầu ngắn vẫn giữ được phần lớn lực gấp khuỷu, đó là lý do đứt đầu dài thường không cần mổ ở người lớn tuổi.", en: "It arises from the coracoid process with coracobrachialis. Unlike the long head it does NOT pass inside the shoulder joint, so it plays no part in labral disease; when the long head ruptures the short head preserves most elbow flexion, which is why such ruptures are usually managed without surgery in older patients.", zh: "与喙肱肌共同起自肩胛骨喙突。与长头不同，短头不穿经肩关节腔，故与盂唇病变无关；长头断裂后短头仍保留大部分屈肘力量，故老年患者此类断裂多无需手术。" } },
+      { key: "triceps-lateral-head", meshName: "Lateral head of triceps brachii.l", offset: [0, 0], label: { vi: "Cơ tam đầu (đầu ngoài)", en: "Triceps brachii — lateral head", zh: "Cơ tam đầu (đầu ngoài)" }, latinName: "Caput laterale musculi tricipitis brachii",
+        note: { vi: "Bám ở mặt sau xương cánh tay TRÊN rãnh thần kinh quay, còn đầu trong bám DƯỚI rãnh — hai đầu kẹp lấy dây thần kinh quay và động mạch cánh tay sâu. Đường mổ vào mặt sau xương cánh tay phải tách đúng giữa hai đầu này để không phạm dây.", en: "It arises on the back of the humerus ABOVE the radial groove while the medial head arises BELOW it — the two heads sandwich the radial nerve and the deep brachial artery. The posterior approach to the humerus splits precisely between them to spare the nerve.", zh: "起自肱骨后面桡神经沟以上，而内侧头起自沟以下——两头夹持桡神经与肱深动脉。肱骨后侧入路正是从两头之间分离，以避开神经。" } },
+      { key: "triceps-medial-head", meshName: "Medial head of triceps brachii.l", offset: [0, 0], label: { vi: "Cơ tam đầu (đầu trong)", en: "Triceps brachii — medial head", zh: "Cơ tam đầu (đầu trong)" }, latinName: "Caput mediale musculi tricipitis brachii",
+        note: { vi: "Đầu SÂU nhất, nằm dưới hai đầu kia và hoạt động ở mọi mức duỗi khuỷu, trong khi đầu dài và đầu ngoài chỉ vào cuộc khi cần lực lớn. Vì thế mỏi cơ tam đầu khi chống đẩy chậm là mỏi đầu trong trước tiên.", en: "The DEEPEST head, lying beneath the other two and active throughout elbow extension, whereas the long and lateral heads join in only when force is required. Slow push-ups therefore fatigue the medial head first.", zh: "最深的一头，位于其余两头深面，在整个伸肘过程中持续活动，而长头与外侧头仅在需要较大力量时参与。故缓慢俯卧撑时最先疲劳的是内侧头。" } },
+      { key: "brachioradialis-arm", meshName: "Brachioradialis muscle.l", offset: [0, 0], label: { vi: "Cơ cánh tay quay", en: "Brachioradialis", zh: "Cơ cánh tay quay" }, latinName: "Musculus brachioradialis",
+        note: { vi: "Cơ gấp khuỷu DUY NHẤT do thần kinh quay chi phối — ngoại lệ khiến nó được gọi là “cơ phản bội”. Nó khoẻ nhất khi cẳng tay ở tư thế trung gian, tức tư thế xách vật nặng; phản xạ gân cơ này tương ứng tầng tuỷ C5–C6.", en: "The only elbow flexor supplied by the RADIAL nerve — the exception that earns it the nickname the treacherous muscle. It is strongest with the forearm in mid-position, the posture of carrying a load; its tendon reflex tests the C5–C6 cord segments.", zh: "唯一由桡神经支配的屈肘肌——这一例外使其得名“叛徒肌”。前臂中立位时力量最大，即提重物的姿势；其腱反射检查C5–C6节段。" } },
+      { key: "humerus-arm", meshName: "Humerus.l", offset: [0, 0], label: { vi: "Xương cánh tay", en: "Humerus", zh: "Xương cánh tay" }, latinName: "Humerus",
+        note: { vi: "Vách gian cơ trong và ngoài bám dọc thân xương chia cánh tay thành hai KHOANG: khoang trước (gấp, thần kinh cơ bì) và khoang sau (duỗi, thần kinh quay). Chia khoang như vậy là cơ sở để đọc một vết thương hay một khối máu tụ sẽ ảnh hưởng tới nhóm cơ và dây thần kinh nào.", en: "The medial and lateral intermuscular septa run along the shaft and divide the arm into two COMPARTMENTS: anterior (flexors, musculocutaneous nerve) and posterior (extensors, radial nerve). That division is how one reads which muscle group and which nerve a wound or haematoma will affect.", zh: "内、外侧肌间隔沿骨干走行，将上臂分为两个筋膜室：前室（屈肌群、肌皮神经）与后室（伸肌群、桡神经）。此分隔是判断创伤或血肿将累及何肌群与何神经的依据。" } },
     ],
   },
+  // Chỉ 5 nhãn — và đó là TẤT CẢ những gì model có: abdominal_wall_muscles.glb
+  // chứa đúng 5 cơ mỗi bên (thẳng bụng, chéo ngoài, chéo trong, ngang bụng,
+  // tháp), cả 5 đều đã gắn nhãn. Muốn thêm phải xuất lại model kèm bao cơ
+  // thẳng và đường trắng — hiện Z-Anatomy không tách hai cấu trúc đó thành
+  // mesh riêng.
   "co-bung": {
     slug: "co-bung",
     title: { vi: "Cơ Thành bụng trước-bên", en: "Abdominal Wall Muscles", zh: "腹前外侧壁肌肉" },
@@ -292,6 +307,8 @@ export const muscularScenes: Record<string, SceneModule> = {
           zh: "最深层，肌纤维呈水平走行（不同于上方两层的斜向排列）——其功能如同天然的'腹部束带'，收缩时向内压迫腹腔脏器，并在提举重物前稳定脊柱。",
         },
       },
+      { key: "pyramidalis", meshName: "Pyramidalis muscle.l", offset: [0, 0], label: { vi: "Cơ tháp", en: "Pyramidalis", zh: "Cơ tháp" }, latinName: "Musculus pyramidalis",
+        note: { vi: "Cơ nhỏ hình tam giác nằm trước phần dưới cơ thẳng bụng, căng ĐƯỜNG TRẮNG khi co. Khoảng 20% người không có cơ này ở một hoặc cả hai bên — một biến thể vô hại, nhưng phẫu thuật viên dùng nó làm mốc tìm đường trắng ở vùng dưới rốn nên vắng nó thì phải tìm mốc khác.", en: "A small triangular muscle in front of the lower rectus abdominis that tenses the LINEA ALBA when it contracts. About 20% of people lack it on one or both sides — a harmless variant, but since surgeons use it as a landmark for the linea alba below the umbilicus, its absence means finding another landmark.", zh: "位于腹直肌下部前方的小三角形肌，收缩时紧张白线。约20%的人单侧或双侧缺如——为无害变异，但外科医师以其作为脐下寻找白线的标志，缺如时须另寻标志。" } },
     ],
   },
 };

@@ -14,7 +14,9 @@ import { API_URL, getToken } from "@/lib/auth";
  * thì đăng nhập giữa chừng là cùng một lượt bị đếm hai lần.
  */
 
-export type QuizSourceKey = "model" | "book" | "atlas" | "personal";
+/* "vet" = trắc nghiệm khu thú y. Nằm chung một hệ tiến độ với các nguồn kia để
+   lịch sử học của một người là MỘT dòng liền, không tách người/thú y. */
+export type QuizSourceKey = "model" | "book" | "atlas" | "personal" | "vet";
 
 export type GradedItem = {
   itemKey: string;

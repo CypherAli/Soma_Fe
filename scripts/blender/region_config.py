@@ -881,6 +881,708 @@ REGIONS = {
                           "saphenous", "sural", "malleolar", "tarsal"],
     ),
 
+    # ---------- Nhóm J: đợt vùng thứ năm (14 vùng chuyên đề) ----------
+    # Mười bốn vùng bổ sung, chọn theo NGUYÊN TẮC KHÔNG CHỒNG LẤN: mỗi vùng ở
+    # đây là một chủ đề mà các scene đã có không dạy được — đám rối cánh tay
+    # (đã có đám rối thắt lưng cùng, chi trên thì chưa), chuỗi hạch giao cảm,
+    # đường thị giác, tam giác cảnh, tuyến vú, thực quản, bàng quang – tiền
+    # liệt, khớp cùng chậu, chóp xoay, gân gót – ống cổ chân, tĩnh mạch hiển,
+    # hạch cổ, màng phổi, tuyến giáp.
+    # Toạ độ hộp đều lấy từ bbox THẬT của chính các cấu trúc đó, dump bằng
+    # `dump_objects.py` (X ÂM là bên PHẢI cơ thể, Y+ là phía SAU).
+
+    # Đám rối: rễ C5–T1 x -0,122..0 · y 0,005..0,035 · z 1,378..1,505.
+    # Hộp kéo xuống z 1,265 để lấy trọn hố nách và ba dây tận (giữa, trụ, quay),
+    # ra trước tới y -0,078 cho cơ ức đòn chũm và xương đòn làm mốc.
+    "brachial_plexus": dict(
+        # curve_only_named: hộp này trùm cả nền cổ nên phép xét TÂM kéo vào cả
+        # mạch mặt (mặt, hàm trên, môi, cằm) lẫn mạch phổi phân thuỳ — đã đo:
+        # 60 "động mạch" trong lần xuất thử, quá nửa không liên quan đám rối.
+        curve_only_named=True,
+        out="brachial_plexus.glb", side="r", min_verts=4,
+        box=(-0.190, -0.002, -0.078, 0.085, 1.265, 1.552),
+        bone_kw=["clavicle", "first rib", "second rib", "third rib", "scapula",
+                 "vertebra", "humerus", "sternum", "manubrium"],
+        muscle_kw=["scalenus", "sternocleidomastoid", "subclavius", "pectoralis minor",
+                   "omohyoid", "levator scapulae", "serratus anterior", "trapezius"],
+        vessels=True, nerves=True, skin=False,
+        curve_drop_default=False,
+        curve_keep_names=["brachial plexus", "median nerve", "ulnar nerve", "radial nerve",
+                          "musculocutaneous", "axillary nerve", "long thoracic",
+                          "thoracodorsal", "suprascapular", "subscapular nerve",
+                          "pectoral nerve", "dorsal scapular", "phrenic nerve",
+                          "subclavian", "axillary artery", "axillary vein",
+                          "thoracoacromial", "transverse cervical", "cephalic vein"],
+        curve_drop=["cerebral", "coronary", "pulmonary", "mesenteric", "iliac", "femoral",
+                    "renal", "hepatic", "gastric"],
+    ),
+
+    # Chuỗi hạch giao cảm z 1,133..1,505 (mesh hạch, hệ 7) và dây X z 1,105..1,576.
+    # Lấy CẢ HAI BÊN: bài học chính là sự đối xứng của hai chuỗi hạch cạnh sống.
+    "autonomic_nerves": dict(
+        out="autonomic_nerves.glb", side=None, min_verts=4,
+        curve_only_named=True,
+        box=(-0.095, 0.095, -0.080, 0.115, 1.020, 1.560),
+        bone_kw=["vertebra", "rib", "sternum", "manubrium"],
+        sense_kw=["ganglia of sympathetic"],
+        organ_kw=["oesophagus", "trachea", "heart"],
+        organ_tubes=True,
+        vessels=True, nerves=True, skin=False,
+        curve_drop_default=False,
+        curve_keep_names=["sympathetic", "vagus", "phrenic nerve", "recurrent laryngeal",
+                          "cardiac nerve", "cardiac plexus", "splanchnic",
+                          "intercostal nerve", "thoracic aorta", "oesophagus", "trachea"],
+        curve_drop=["cerebral", "coronary", "pulmonary artery", "mesenteric", "iliac",
+                    "femoral", "renal", "brachial plexus"],
+    ),
+
+    # Đường thị giác: TK II và giao thoa z 1,593..1,616 · dải thị · thể gối ngoài
+    # z 1,608..1,616 · rãnh cựa z 1,602..1,635 · cực chẩm. Hộp ôm trọn từ nhãn
+    # cầu (y -0,090) ra tới cực chẩm (y +0,108).
+    "visual_pathway": dict(
+        out="visual_pathway.glb", side=None, min_verts=4,
+        curve_only_named=True,
+        box=(-0.062, 0.062, -0.090, 0.108, 1.555, 1.700),
+        sense_kw=["optic", "geniculate body", "calcarine", "cuneus", "occipital pole",
+                  "eyeball", "sclera", "cornea", "lens", "vitreous", "retina",
+                  "choroid", "iris", "thalamus", "superior colliculus"],
+        # "choroid" định lấy màng mạch của nhãn cầu, nhưng nó nuốt luôn ĐÁM RỐI
+        # MẠCH MẠC của não thất — hai khối đỏ nằm chắn ngay giữa đường thị giác.
+        sense_drop=["precuneus", "medial geniculate", "choroid plexus"],
+        bone_kw=["sphenoid"],
+        vessels=False, nerves=True, skin=False,
+        curve_drop_default=False,
+        curve_keep_names=["optic nerve", "oculomotor"],
+        curve_drop=["artery", "vein", "sinus"],
+    ),
+
+    # Tam giác cảnh: chạc đôi động mạch cảnh chung nằm ngang bờ trên sụn giáp
+    # (z ~1,46); hộp z 1,355..1,622 lấy từ gốc cổ tới nền sọ.
+    "carotid_neck": dict(
+        out="carotid_neck.glb", side="r", min_verts=4,
+        curve_only_named=True,
+        box=(-0.080, -0.002, -0.075, 0.050, 1.355, 1.622),
+        bone_kw=["hyoid", "mandible", "vertebra", "clavicle", "temporal bone", "cartilage"],
+        muscle_kw=["sternocleidomastoid", "omohyoid", "sternohyoid", "sternothyroid",
+                   "digastric", "stylohyoid", "thyrohyoid", "mylohyoid", "platysma",
+                   "constrictor"],
+        organ_kw=["thyroid gland", "larynx", "pharynx", "trachea", "submandibular gland"],
+        vessels=True, nerves=True, skin=False,
+        curve_drop_default=False,
+        curve_keep_names=["carotid", "jugular", "facial artery", "facial vein",
+                          "lingual artery", "superior thyroid", "inferior thyroid",
+                          "occipital artery", "ascending pharyngeal", "maxillary artery",
+                          "superficial temporal", "vagus", "hypoglossal", "accessory nerve",
+                          "ansa cervicalis", "sympathetic", "glossopharyngeal"],
+        curve_drop=["cerebral", "coronary", "pulmonary", "mesenteric", "iliac", "femoral"],
+    ),
+
+    # Vùng ngực trước và tuyến vú: mảng nhãn vùng vú (hệ 9) x 0..0,148 ·
+    # y -0,131..-0,070 · z 1,179..1,325. Hộp phủ từ xương đòn xuống nếp dưới vú.
+    "pectoral_breast": dict(
+        out="pectoral_breast.glb", side="r", min_verts=4,
+        box=(-0.200, -0.002, -0.140, 0.035, 1.140, 1.435),
+        bone_kw=["rib", "sternum", "costal cartilage", "clavicle", "scapula", "humerus"],
+        muscle_kw=["pectoralis", "subclavius", "serratus anterior", "latissimus",
+                   "external abdominal oblique", "rectus abdominis", "intercostal"],
+        region_kw=["mammary region", "inframammary region"],
+        # Hạch: gọi theo TỪ KHOÁ chứ không bật `lymph=True`. Hộp ngực đủ rộng
+        # để phép xét tâm kéo vào 29 nhóm hạch, quá nửa là hạch trung thất và
+        # hạch cổ — bài học ở đây chỉ là đường dẫn lưu của tuyến vú.
+        organ6_kw=["axillary nodes", "pectoral nodes", "interpectoral", "parasternal",
+                   "subscapular nodes", "apical nodes", "supraclavicular"],
+        # curve_only_named: không có nó thì phép xét tâm kéo vào 55 động mạch và
+        # 33 tĩnh mạch, phần lớn là mạch cổ – mặt – phổi đi ngang qua hộp.
+        curve_only_named=True,
+        vessels=True, nerves=True, skin=False,
+        curve_drop_default=False,
+        curve_keep_names=["thoracoacromial", "internal thoracic", "lateral thoracic",
+                          "intercostal", "thoracodorsal", "long thoracic", "pectoral nerve",
+                          "cephalic vein", "axillary artery", "axillary vein",
+                          "musculophrenic", "superior epigastric"],
+        curve_drop=["cerebral", "coronary", "pulmonary", "mesenteric", "iliac", "femoral",
+                    "renal", "hepatic"],
+    ),
+
+    # Thực quản: đường cong hệ 8, đi từ bờ dưới sụn nhẫn (z ~1,46) qua lỗ thực
+    # quản của cơ hoành (z ~1,15) tới tâm vị. Hộp gồm cả cơ hoành và cột sống
+    # ngực để thấy ba chỗ hẹp và đoạn bụng ngắn của thực quản.
+    "oesophagus": dict(
+        out="oesophagus.glb", side=None, min_verts=4,
+        curve_only_named=True,
+        box=(-0.095, 0.095, -0.075, 0.100, 1.030, 1.500),
+        bone_kw=["vertebra", "sternum", "manubrium", "cartilage"],
+        muscle_kw=["diaphragm", "crus", "constrictor", "cricopharyngeus"],
+        organ_kw=["oesophagus", "stomach", "trachea", "pharynx", "larynx"],
+        organ_tubes=True,
+        # Chỉ những nhóm hạch NẰM DỌC thực quản, gọi đích danh. Bật `lymph=True`
+        # cho hộp dài từ cổ xuống tâm vị này thì được 54 nhóm hạch của cả cổ,
+        # trung thất và ổ bụng phủ kín thực quản.
+        organ6_kw=["juxta-oesophageal", "tracheobronchial", "paratracheal",
+                   "prevertebral nodes", "coeliac nodes", "left gastric nodes"],
+        vessels=True, nerves=True, skin=False,
+        curve_drop_default=False,
+        curve_keep_names=["oesophag", "azygos", "thoracic aorta", "left gastric",
+                          "vagus", "recurrent laryngeal", "thoracic duct", "bronchial",
+                          "inferior thyroid", "trachea"],
+        curve_drop=["cerebral", "coronary", "pulmonary artery", "iliac", "femoral",
+                    "mesenteric", "renal", "splenic"],
+    ),
+
+    # Bàng quang z 0,829..0,882 · tiền liệt z 0,809..0,832 · túi tinh z 0,828..0,859
+    # · niệu đạo z 0,745..0,831. Hộp z 0,715..0,935 lấy trọn đường tiểu dưới.
+    "bladder_prostate": dict(
+        out="bladder_prostate.glb", side=None, min_verts=4,
+        box=(-0.090, 0.090, -0.100, 0.090, 0.715, 0.935),
+        bone_kw=["hip bone", "pubis", "ischium", "ilium", "sacrum", "coccyx"],
+        joint_kw=True,
+        # Khớp háng nằm sát hộp và có tới 18 dây chằng — chúng thuộc bài "khớp
+        # háng" đã có scene riêng, ở đây chỉ tổ ôm kín bàng quang.
+        joint_drop=["shoulder", "elbow", "wrist", "carpal", "ankle", "tarsal", "knee",
+                    "costo", "sterno", "acromio", "intervertebral", "acetabul",
+                    "hip joint", "head of femur", "ischiofemoral", "pubofemoral",
+                    "triradiate", "obturator membrane"],
+        muscle_kw=["levator ani", "coccygeus", "sphincter", "obturator internus",
+                   "bulbospongiosus", "ischiocavernosus", "perineal"],
+        organ_kw=["bladder", "urethra", "prostate", "seminal", "ductus deferens",
+                  "ureter", "rectum", "anal canal"],
+        organ_tubes=True,
+        vessels=True, nerves=True, skin=False,
+        curve_drop_default=False,
+        curve_keep_names=["vesical", "prostatic", "pudendal", "obturator", "internal iliac",
+                          "rectal", "ureter", "deferential"],
+        curve_drop=["cerebral", "coronary", "pulmonary", "mesenteric artery", "femoral",
+                    "renal artery", "hepatic", "gluteal", "testicular", "penis", "penile",
+                    "sciatic", "saphenous", "piriformis", "quadratus femoris",
+                    "external iliac", "sacral", "perforating"],
+    ),
+
+    # Khớp cùng chậu và hệ dây chằng chậu: dây chằng cùng-ụ ngồi z 0,809..0,900,
+    # cùng-gai z 0,850..0,911, xương cùng z 0,866..0,981. Lấy CẢ HAI BÊN vì bài
+    # học là vòng chậu khép kín truyền lực từ cột sống xuống hai chi dưới.
+    "pelvic_ligaments": dict(
+        out="pelvic_ligaments.glb", side=None, min_verts=4,
+        box=(-0.150, 0.150, -0.020, 0.125, 0.770, 1.040),
+        bone_kw=["sacrum", "coccyx", "hip bone", "ilium", "ischium", "pubis",
+                 "vertebra l", "lumbar vertebra", "femur"],
+        joint_kw=True,
+        joint_drop=["shoulder", "elbow", "wrist", "carpal", "ankle", "tarsal", "knee",
+                    "costo", "sterno", "acromio", "temporomandibular"],
+        vessels=False, nerves=False, skin=False,
+    ),
+
+    # Chóp xoay: trên gai z 1,378..1,411 · dưới gai z 1,286..1,399 · tròn bé
+    # z 1,295..1,385 · dưới vai z 1,264..1,396. Hộp ôm trọn bốn cơ và khớp ổ chảo.
+    "rotator_cuff": dict(
+        # Hộp vai nằm ngay cạnh hố nách: phép xét tâm kéo vào 61 mạch và 31 dây
+        # thần kinh của cả đám rối cánh tay, che kín bốn cơ chóp xoay.
+        curve_only_named=True,
+        out="rotator_cuff.glb", side="r", min_verts=4,
+        box=(-0.208, -0.010, -0.020, 0.130, 1.230, 1.432),
+        bone_kw=["scapula", "humerus", "clavicle"],
+        joint_kw=True,
+        joint_drop=["elbow", "wrist", "carpal", "hip", "knee", "ankle", "tarsal",
+                    "costo", "sterno", "intervertebral", "sacro", "pubic"],
+        muscle_kw=["supraspinatus", "infraspinatus", "teres minor", "teres major",
+                   "subscapularis", "deltoid", "biceps brachii", "coracobrachialis",
+                   "triceps brachii", "bursa"],
+        vessels=True, nerves=True, skin=False,
+        curve_drop_default=False,
+        curve_keep_names=["suprascapular", "circumflex humeral", "subscapular",
+                          "axillary nerve", "thoracoacromial"],
+        curve_drop=["cerebral", "coronary", "pulmonary", "mesenteric", "iliac", "femoral",
+                    "renal", "hepatic", "gastric"],
+    ),
+
+    # Gân gót z 0,025..0,245 · cơ dép z 0,134..0,409 · mạc giữ gân gấp cổ chân
+    # · xương gót z 0,011..0,063. Hộp z -0,005..0,300 lấy trọn phần sau cổ chân.
+    "ankle_achilles": dict(
+        out="ankle_achilles.glb", side="r", min_verts=4,
+        box=(-0.140, -0.002, -0.045, 0.120, -0.005, 0.300),
+        bone_kw=["calcaneus", "talus", "tibia", "fibula", "navicular", "cuboid",
+                 "cuneiform", "metatarsal"],
+        joint_kw=True,
+        joint_drop=["shoulder", "elbow", "wrist", "carpal", "hip", "knee", "costo",
+                    "sterno", "intervertebral", "sacro", "pubic"],
+        muscle_kw=["calcaneal tendon", "soleus", "gastrocnemius", "plantaris",
+                   "flexor hallucis longus", "flexor digitorum longus", "tibialis posterior",
+                   "retinaculum", "abductor hallucis", "plantar aponeurosis", "peroneus",
+                   "fibularis", "bursa"],
+        vessels=True, nerves=True, skin=False,
+        curve_drop_default=False,
+        curve_keep_names=["posterior tibial", "anterior tibial", "fibular", "peroneal",
+                          "plantar", "sural", "saphenous", "tibial nerve", "malleolar",
+                          "calcaneal"],
+        curve_drop=["cerebral", "coronary", "pulmonary", "mesenteric", "renal", "hepatic",
+                    "gastric", "uterine", "iliac"],
+    ),
+
+    # Tĩnh mạch hiển lớn z 0,058..0,855 (từ mắt cá trong tới lỗ tĩnh mạch hiển ở
+    # nếp bẹn), hiển bé z 0,034..0,490. Chỉ giữ đường VỀ: kèm động mạch vào là
+    # cây động mạch che kín hệ nông, mà đó không phải bài học của scene này.
+    "saphenous_veins": dict(
+        out="saphenous_veins.glb", side="r", min_verts=4,
+        box=(-0.165, -0.002, -0.095, 0.125, -0.005, 0.905),
+        bone_kw=["femur", "tibia", "fibula", "patella", "hip bone", "talus", "calcaneus",
+                 "metatarsal", "tarsal"],
+        vessels=True, nerves=False, skin=False,
+        curve_drop_default=False,
+        curve_keep_names=["saphenous", "femoral vein", "popliteal vein", "perforating vein",
+                          "dorsal venous", "external iliac vein", "tibial vein",
+                          "fibular vein", "plantar venous"],
+        curve_drop=["artery", "arteries", "aorta", "nerve", "duct", "lymphatic", "trunk"],
+    ),
+
+    # Hạch cổ: chuỗi cảnh trong bám dọc tĩnh mạch cảnh trong, hạch dưới hàm,
+    # dưới cằm, mang tai, thượng đòn. Mốc cơ ức đòn chũm và cơ vai móng chính là
+    # ranh giới các NHÓM HẠCH theo phân vùng ngoại khoa (level I–VI).
+    "cervical_nodes": dict(
+        out="cervical_nodes.glb", side="r", min_verts=4,
+        curve_only_named=True,
+        box=(-0.085, -0.002, -0.085, 0.065, 1.350, 1.625),
+        bone_kw=["mandible", "hyoid", "clavicle", "vertebra", "temporal bone"],
+        muscle_kw=["sternocleidomastoid", "omohyoid", "digastric", "trapezius", "scalenus",
+                   "mylohyoid", "platysma", "stylohyoid"],
+        organ_kw=["submandibular gland", "parotid", "thyroid gland", "larynx", "pharynx"],
+        lymph=True,
+        vessels=True, nerves=False, skin=False,
+        curve_drop_default=False,
+        curve_keep_names=["jugular", "carotid", "facial vein", "thoracic duct",
+                          "transverse cervical", "subclavian vein"],
+        curve_drop=["cerebral", "coronary", "pulmonary", "mesenteric", "iliac", "femoral"],
+    ),
+
+    # Màng phổi (một mesh liên tục, x -0,132..0,131 · y -0,104..0,085 ·
+    # z 1,168..1,432) cùng lồng ngực và cơ hoành: bài học là hai lá màng phổi và
+    # ngách sườn – hoành, chỗ thấp nhất của khoang, nơi dịch đọng và là điểm chọc dò.
+    "pleura": dict(
+        out="pleura.glb", side=None, min_verts=4,
+        box=(-0.150, 0.150, -0.120, 0.105, 1.010, 1.460),
+        bone_kw=["rib", "sternum", "costal cartilage", "vertebra", "clavicle", "manubrium"],
+        muscle_kw=["diaphragm", "intercostal", "crus"],
+        organ_kw=["pleura", "lung", "lobe of lung", "trachea", "bronch", "pericard"],
+        vessels=False, nerves=False, skin=False,
+    ),
+
+    # Tuyến giáp z 1,381..1,510 (hai thuỳ ôm hai bên khí quản, eo tuyến bắc ngang
+    # vòng sụn 2–4) và 4 tuyến cận giáp — mỗi tuyến cận giáp chỉ có 9 ĐỈNH nên
+    # min_verts phải hạ xuống, để mặc định 10 là mất sạch cả bốn.
+    "thyroid_parathyroid": dict(
+        out="thyroid_parathyroid.glb", side=None, min_verts=4,
+        curve_only_named=True,
+        box=(-0.075, 0.075, -0.065, 0.040, 1.340, 1.535),
+        bone_kw=["hyoid", "cartilage", "clavicle", "sternum", "manubrium", "vertebra"],
+        muscle_kw=["sternothyroid", "sternohyoid", "omohyoid", "cricothyroid",
+                   "constrictor", "sternocleidomastoid", "thyrohyoid"],
+        organ_kw=["thyroid gland", "parathyroid", "trachea", "larynx", "oesophagus",
+                  "pharynx"],
+        organ_tubes=True,
+        lymph=True,
+        vessels=True, nerves=True, skin=False,
+        curve_drop_default=False,
+        curve_keep_names=["thyroid", "carotid", "jugular", "recurrent laryngeal", "vagus",
+                          "laryngeal", "thyrocervical", "subclavian"],
+        curve_drop=["cerebral", "coronary", "pulmonary", "mesenteric", "iliac", "femoral"],
+    ),
+
+    # ---------- Nhóm K: đợt vùng thứ sáu (10 vùng chuyên đề) ----------
+    # Vẫn theo nguyên tắc KHÔNG CHỒNG LẤN: mỗi vùng ở đây là một bài mà 103
+    # scene trước không dạy được. Ba loại còn hổng rõ nhất sau đợt J:
+    #   – đường đi của MỘT dây thần kinh sọ lớn (V) và bộ lệ,
+    #   – các khoang phẫu tích kinh điển chưa có (hố dưới thái dương, tam giác
+    #     đùi, vùng gáy, khớp ức đòn, ống sống),
+    #   – CÂY MẠCH của từng chi, xem riêng động mạch và tĩnh mạch (atlas mới chỉ
+    #     có cây động mạch chủ toàn thân và hệ tĩnh mạch nông chi dưới).
+
+    # Rễ cảm giác/vận động dây V x ±0,023 · z 1,543..1,610; các ngành V1 V2 V3
+    # toả ra tới x ±0,076 · y -0,088. Hộp ôm trọn từ hạch tới nhánh tận ở mặt.
+    "trigeminal_nerve": dict(
+        out="trigeminal_nerve.glb", side="r", min_verts=4,
+        curve_only_named=True,
+        box=(-0.082, -0.002, -0.092, 0.062, 1.515, 1.685),
+        bone_kw=["sphenoid", "temporal bone", "maxilla", "mandible", "zygomatic",
+                 "frontal bone", "palatine", "nasal bone"],
+        bone_drop=["cells of"],
+        sense_kw=["trigeminal", "geniculate ganglion"],
+        vessels=False, nerves=True, skin=False,
+        curve_drop_default=False,
+        curve_keep_names=["trigeminal", "ophthalmic nerve", "maxillary nerve",
+                          "mandibular nerve", "frontal nerve", "supra-orbital",
+                          "supraorbital", "supratrochlear", "nasociliary", "infratrochlear",
+                          "lacrimal nerve", "infra-orbital", "infraorbital", "zygomatic nerve",
+                          "alveolar", "palatine nerve", "nasopalatine", "buccal nerve",
+                          "lingual nerve", "auriculotemporal", "mental nerve",
+                          "masseteric", "deep temporal", "mylohyoid"],
+        curve_drop=["facial nerve", "vagus", "glossopharyngeal", "hypoglossal", "accessory",
+                    "optic", "oculomotor", "trochlear", "abducens", "vestibulocochlear"],
+    ),
+
+    # Bộ lệ: tuyến lệ ở góc trên ngoài ổ mắt, tiểu quản – túi lệ – ống lệ mũi
+    # chạy xuống ngách mũi dưới. Toàn bộ khối x ±0,051 · y -0,076..-0,034 ·
+    # z 1,555..1,612 — hộp chỉ nhỉnh hơn chút để lấy thêm xương ổ mắt làm mốc.
+    "lacrimal_apparatus": dict(
+        out="lacrimal_apparatus.glb", side="r", min_verts=4,
+        curve_only_named=True,
+        box=(-0.058, -0.002, -0.090, -0.012, 1.540, 1.628),
+        bone_kw=["lacrimal bone", "maxilla", "frontal bone", "nasal bone", "ethmoid",
+                 "concha", "zygomatic", "sphenoid", "palatine"],
+        bone_drop=["cells of"],
+        muscle_kw=["orbicularis oculi", "levator palpebrae", "rectus", "oblique"],
+        sense_kw=["lacrimal", "nasolacrimal", "eyeball", "sclera", "cornea", "conjunctiva",
+                  "eyelid", "tarsus"],
+        organ_kw=["nasal cavity", "nasal meatus"],
+        vessels=True, nerves=True, skin=False,
+        curve_drop_default=False,
+        curve_keep_names=["lacrimal", "ophthalmic artery", "angular", "infra-orbital",
+                          "infraorbital", "supraorbital", "supra-orbital"],
+        curve_drop=["cerebral", "carotid", "maxillary artery", "facial artery"],
+    ),
+
+    # Hố dưới thái dương: khoang giữa ngành hàm dưới và thành bên hầu, chứa hai
+    # cơ chân bướm, động mạch hàm trên và thần kinh hàm dưới. Cơ chân bướm
+    # x ±0,043 · y -0,042..-0,008 · z 1,526..1,584; hộp mở rộng ra ngoài tới
+    # ngành hàm dưới (x -0,085) và lên tới hố thái dương.
+    "infratemporal_fossa": dict(
+        out="infratemporal_fossa.glb", side="r", min_verts=4,
+        curve_only_named=True,
+        box=(-0.088, -0.002, -0.062, 0.024, 1.495, 1.615),
+        bone_kw=["mandible", "maxilla", "sphenoid", "temporal bone", "zygomatic", "palatine"],
+        bone_drop=["cells of"],
+        muscle_kw=["pterygoid", "temporalis", "masseter", "buccinator", "tensor",
+                   "levator veli", "styloglossus", "stylopharyngeus"],
+        joint_kw=True,
+        joint_drop=["shoulder", "elbow", "wrist", "carpal", "hip", "knee", "ankle",
+                    "tarsal", "costo", "sterno", "intervertebral", "sacro", "pubic"],
+        vessels=True, nerves=True, skin=False,
+        curve_drop_default=False,
+        curve_keep_names=["maxillary artery", "middle meningeal", "inferior alveolar",
+                          "posterior superior alveolar", "sphenopalatine", "deep temporal",
+                          "masseteric", "buccal", "descending palatine", "pterygoid",
+                          "mandibular nerve", "lingual nerve", "auriculotemporal",
+                          "chorda tympani", "mylohyoid", "retromandibular", "pterygoid plexus"],
+        curve_drop=["cerebral", "vertebral", "coronary", "pulmonary", "femoral", "iliac"],
+    ),
+
+    # Ống sống: bao màng cứng tuỷ (một mesh 18k đỉnh, z 1,055..1,545), đuôi ngựa
+    # z 0,873..1,142, cùng đốt sống – đĩa đệm – dây chằng vàng. Hộp lấy từ đoạn
+    # ngực thấp xuống hết xương cùng để thấy đúng tầng chọc dò tuỷ sống.
+    "spinal_canal": dict(
+        # Hộp cũ (z 0,84..1,56) chạy từ chậu hông lên tận nền sọ nên kéo vào cả
+        # dây chằng thái dương hàm, dây chằng trâm móng, khớp háng và bảy dây
+        # thần kinh sọ — 171 mesh cho một bài về ống sống. Nay thu về ĐÚNG đoạn
+        # ngực thấp – thắt lưng – cùng: chóp tuỷ nằm ngang T12–L1 (z ~1,14),
+        # đuôi ngựa z 0,873..1,142, tức là đúng tầm chọc dò tuỷ sống.
+        curve_only_named=True,
+        out="spinal_canal.glb", side=None, min_verts=4,
+        box=(-0.058, 0.058, -0.012, 0.108, 0.855, 1.235),
+        bone_kw=["vertebra", "sacrum", "coccyx"],
+        joint_kw=["ligamenta flava", "longitudinal ligament", "interspinous", "supraspinous",
+                  "intervertebral disc", "nucleus pulposus", "intertransverse"],
+        sense_kw=["spinal dura", "spinal cord", "denticulate", "conus"],
+        # Bao màng cứng tuỷ và tuỷ sống là MỘT mesh dài chạy suốt từ cổ xuống
+        # thắt lưng, tâm bbox của nó nằm tận đoạn ngực nên phép xét tâm (áp dụng
+        # cho nhóm "organ") loại thẳng nó ra — mất đúng nội dung chính của scene.
+        # keep_kw buộc dùng phép GIAO NHAU với hộp, phần thừa đã bị bước cắt lo.
+        keep_kw=["spinal dura", "spinal cord", "denticulate", "conus"],
+        vessels=False, nerves=True, skin=False,
+        curve_drop_default=False,
+        curve_keep_names=["cauda equina", "root of spinal", "radicular"],
+        curve_drop=["brachial plexus", "sympathetic", "facial", "vagus", "accessory",
+                    "hypoglossal", "glossopharyngeal", "chorda", "pectoral", "thoracic",
+                    "scapular", "piriformis", "quadratus femoris", "intercostal",
+                    "cerebral", "coronary", "pulmonary", "iliac", "femoral", "sciatic",
+                    "obturator", "pudendal", "gluteal"],
+    ),
+
+    # Tam giác đùi: đáy là dây chằng bẹn (z 0,840..0,953), hai cạnh là cơ may và
+    # cơ khép dài; trong tam giác có bó mạch – thần kinh đùi. Hộp kéo xuống
+    # z 0,560 để lấy trọn ống cơ khép nơi động mạch đùi chui ra hố khoeo.
+    "femoral_triangle": dict(
+        out="femoral_triangle.glb", side="r", min_verts=4,
+        box=(-0.138, -0.002, -0.078, 0.062, 0.555, 0.985),
+        bone_kw=["hip bone", "femur", "pubis", "ilium", "ischium", "sacrum"],
+        joint_kw=True,
+        joint_drop=["shoulder", "elbow", "wrist", "carpal", "knee", "ankle", "tarsal",
+                    "costo", "sterno", "acromio", "intervertebral", "temporomandibular"],
+        muscle_kw=["sartorius", "adductor", "pectineus", "iliopsoas", "psoas", "iliacus",
+                   "gracilis", "rectus femoris", "vastus", "tensor fasciae", "obturator externus",
+                   "quadratus femoris", "inguinal", "fascia lata", "cribriform"],
+        vessels=True, nerves=True, skin=False,
+        curve_drop_default=False,
+        curve_keep_names=["femoral", "circumflex femoral", "external iliac", "obturator",
+                          "saphenous", "genitofemoral", "epigastric", "external pudendal",
+                          "perforating", "descending genicular"],
+        curve_drop=["cerebral", "coronary", "pulmonary", "mesenteric", "renal", "hepatic",
+                    "gastric", "internal iliac", "gluteal", "sciatic", "pudendal",
+                    "penis", "penile", "anorectal", "appendicular", "testicular",
+                    "iliolumbar", "sacral", "piriformis", "quadratus femoris"],
+    ),
+
+    # Vùng gáy: cơ bán gai đầu – cổ (z 1,150..1,503), cơ gối đầu – cổ
+    # (z 1,285..1,573), cơ thang, cùng động mạch đốt sống z 1,420..1,579 chui
+    # trong lỗ mỏm ngang. Hộp lấy nửa phải từ mỏm chũm xuống bờ trên bả vai.
+    "posterior_neck": dict(
+        out="posterior_neck.glb", side="r", min_verts=4,
+        curve_only_named=True,
+        box=(-0.095, -0.002, -0.005, 0.118, 1.320, 1.595),
+        bone_kw=["vertebra", "atlas", "axis", "occipital bone", "temporal bone", "scapula",
+                 "first rib", "second rib", "clavicle"],
+        muscle_kw=["semispinalis", "splenius", "trapezius", "levator scapulae", "longissimus",
+                   "rhomboid", "multifidus", "interspinales", "intertransversarii",
+                   "rectus capitis", "obliquus capitis", "sternocleidomastoid", "scalenus",
+                   "iliocostalis", "spinalis", "serratus posterior"],
+        joint_kw=True,
+        joint_drop=["shoulder", "elbow", "wrist", "carpal", "hip", "knee", "ankle", "tarsal",
+                    "sacro", "pubic", "temporomandibular"],
+        vessels=True, nerves=True, skin=False,
+        curve_drop_default=False,
+        curve_keep_names=["vertebral", "occipital artery", "deep cervical", "transverse cervical",
+                          "cervical nerve", "accessory nerve", "occipital nerve",
+                          "dorsal scapular", "suboccipital"],
+        curve_drop=["cerebral", "coronary", "pulmonary", "facial", "maxillary", "lingual",
+                    "thyroid", "brachial plexus", "median", "ulnar nerve", "radial nerve"],
+    ),
+
+    # Khớp ức đòn: diện khớp x -0,034..0,030 · y -0,056..-0,019 · z 1,381..1,416.
+    # Dây chằng ức đòn, sườn đòn và gian đòn chỉ có 4–8 ĐỈNH nên min_verts phải
+    # hạ xuống, để mặc định 10 là mất sạch chính nội dung của scene.
+    "sternoclavicular": dict(
+        out="sternoclavicular.glb", side=None, min_verts=4,
+        curve_only_named=True,
+        box=(-0.080, 0.080, -0.072, 0.022, 1.345, 1.445),
+        bone_kw=["clavicle", "sternum", "manubrium", "first rib", "second rib", "vertebra"],
+        joint_kw=True,
+        joint_drop=["shoulder", "elbow", "wrist", "carpal", "hip", "knee", "ankle", "tarsal",
+                    "sacro", "pubic", "temporomandibular", "acromio"],
+        muscle_kw=["sternocleidomastoid", "subclavius", "sternohyoid", "sternothyroid",
+                   "pectoralis major", "scalenus"],
+        vessels=True, nerves=False, skin=False,
+        curve_drop_default=False,
+        curve_keep_names=["subclavian", "brachiocephalic", "internal thoracic", "jugular",
+                          "common carotid", "vena cava"],
+        curve_drop=["cerebral", "coronary", "pulmonary", "facial", "maxillary"],
+    ),
+
+    # Cây động mạch chi trên: dưới đòn (z ~1,45) → nách → cánh tay (z 1,090..1,366)
+    # → quay/trụ → hai cung gan tay (z ~0,74). Hộp trùm cả chi phải, xương giữ
+    # lại làm mốc — bảng lớp của viewer cho phép làm mờ xương khi cần nhìn mạch.
+    "upper_limb_arteries": dict(
+        curve_only_named=True,
+        out="upper_limb_arteries.glb", side="r", min_verts=4,
+        box=(-0.365, -0.002, -0.125, 0.105, 0.655, 1.475),
+        bone_kw=["clavicle", "scapula", "humerus", "radius", "ulna", "carpal", "scaphoid",
+                 "lunate", "triquetrum", "pisiform", "trapezium", "trapezoid", "capitate",
+                 "hamate", "metacarpal", "phalanx"],
+        vessels=True, nerves=False, skin=False,
+        curve_drop_default=False,
+        curve_keep_names=["subclavian artery", "axillary artery", "brachial artery",
+                          "radial artery", "ulnar artery", "interosseous artery",
+                          "palmar arch", "digital arteries", "circumflex humeral",
+                          "subscapular artery", "thoraco-acromial", "princeps pollicis",
+                          "radialis indicis", "recurrent artery", "metacarpal arteries",
+                          "collateral artery", "thyrocervical", "costocervical"],
+        curve_drop=["vein", "veins", "nerve", "nerves", "lymph", "duct", "plexus",
+                    "vertebral", "carotid", "thoracic artery", "intercostal"],
+    ),
+
+    # Cây tĩnh mạch chi trên: hệ NÔNG (đầu, nền, giữa khuỷu) và hệ SÂU đi kèm
+    # động mạch. Cùng hộp với cây động mạch để hai scene khớp khung hình nhau,
+    # nhưng chỉ giữ đường VỀ — có cả động mạch thì cây tĩnh mạch bị che kín.
+    "upper_limb_veins": dict(
+        curve_only_named=True,
+        out="upper_limb_veins.glb", side="r", min_verts=4,
+        box=(-0.365, -0.002, -0.125, 0.105, 0.655, 1.475),
+        bone_kw=["clavicle", "scapula", "humerus", "radius", "ulna", "carpal", "scaphoid",
+                 "lunate", "triquetrum", "pisiform", "trapezium", "trapezoid", "capitate",
+                 "hamate", "metacarpal", "phalanx"],
+        vessels=True, nerves=False, skin=False,
+        curve_drop_default=False,
+        curve_keep_names=["cephalic", "basilic", "median cubital", "median vein",
+                          "median antebrachial", "brachial vein", "axillary vein",
+                          "subclavian vein", "radial vein", "ulnar vein", "interosseous vein",
+                          "dorsal venous network", "metacarpal veins", "digital veins",
+                          "palmar venous", "brachiocephalic vein"],
+        curve_drop=["artery", "arteries", "nerve", "nerves", "lymph", "duct", "trunk"],
+    ),
+
+    # Cây động mạch chi dưới: chậu ngoài (z 0,891..0,987) → đùi → khoeo
+    # (z 0,374..0,566) → chày trước/sau và mác → cung gan chân. Đối xứng với
+    # scene tĩnh mạch hiển đã có, nhưng chỉ giữ đường ĐI.
+    "lower_limb_arteries": dict(
+        curve_only_named=True,
+        out="lower_limb_arteries.glb", side="r", min_verts=4,
+        box=(-0.172, -0.002, -0.102, 0.132, -0.005, 1.005),
+        bone_kw=["femur", "tibia", "fibula", "patella", "hip bone", "talus", "calcaneus",
+                 "navicular", "cuboid", "cuneiform", "metatarsal", "phalanx", "sacrum"],
+        vessels=True, nerves=False, skin=False,
+        curve_drop_default=False,
+        curve_keep_names=["iliac artery", "femoral artery", "deep artery of thigh",
+                          "circumflex femoral", "popliteal artery", "genicular",
+                          "tibial artery", "fibular artery", "peroneal artery",
+                          "dorsalis pedis", "plantar artery", "plantar arch", "arcuate artery",
+                          "metatarsal arteries", "digital arteries", "obturator artery",
+                          "gluteal artery", "perforating arteries", "descending genicular",
+                          "tarsal artery", "malleolar"],
+        curve_drop=["vein", "veins", "nerve", "nerves", "lymph", "duct", "pudendal",
+                    "rectal", "vesical", "uterine", "sacral"],
+    ),
+
+    # ---------- Nhóm L: đợt vùng thứ bảy (6 vùng chuyên đề) ----------
+    # KHÔNG dựng cơ quan sinh dục (yêu cầu của chủ đồ án). Sáu vùng còn lại
+    # chọn theo chỗ hổng: hố khuỷu, mạch mạc treo, góc cầu tiểu não, dải chậu
+    # chày, đường đi thần kinh toạ và cân ngực – thắt lưng.
+
+    # Hố khuỷu: gân nhị đầu ở giữa, động mạch cánh tay và thần kinh giữa vào
+    # trong, thần kinh quay ra ngoài. Gân nhị đầu z 1,050..1,408, cơ sấp tròn
+    # z 0,974..1,125 — hộp z 0,955..1,185 lấy trọn nếp khuỷu và chỗ chia đôi mạch.
+    "cubital_fossa": dict(
+        out="cubital_fossa.glb", side="r", min_verts=4,
+        curve_only_named=True,
+        box=(-0.302, -0.055, -0.065, 0.095, 0.955, 1.185),
+        bone_kw=["humerus", "radius", "ulna"],
+        joint_kw=True,
+        joint_drop=["shoulder", "hip", "knee", "ankle", "tarsal", "carpal", "costo",
+                    "sterno", "intervertebral", "sacro", "pubic", "acromio"],
+        muscle_kw=["biceps brachii", "brachialis", "brachioradialis", "pronator",
+                   "triceps brachii", "supinator", "flexor carpi", "extensor carpi",
+                   "palmaris", "anconeus", "flexor digitorum", "extensor digitorum"],
+        vessels=True, nerves=True, skin=False,
+        curve_drop_default=False,
+        curve_keep_names=["brachial artery", "radial artery", "ulnar artery", "recurrent",
+                          "interosseous", "median nerve", "radial nerve", "ulnar nerve",
+                          "musculocutaneous", "cephalic", "basilic", "median cubital",
+                          "median vein", "brachial vein", "collateral"],
+        curve_drop=["cerebral", "coronary", "pulmonary", "femoral", "iliac", "renal"],
+    ),
+
+    # Mạch mạc treo: động mạch mạc treo tràng trên tách khỏi động mạch chủ ngang
+    # L1 (z ~1,14) rồi toả hình quạt vào ruột non và đại tràng phải; tĩnh mạch
+    # cùng tên đi kèm bên phải rồi hợp với tĩnh mạch lách thành tĩnh mạch cửa.
+    "mesenteric_vessels": dict(
+        out="mesenteric_vessels.glb", side=None, min_verts=4,
+        curve_only_named=True,
+        box=(-0.135, 0.135, -0.105, 0.085, 0.845, 1.190),
+        bone_kw=["vertebra"],
+        organ_kw=["jejunum", "ileum", "colon", "caecum", "appendix", "duodenum",
+                  "pancreas", "peritoneum", "omentum"],
+        organ_tubes=True,
+        vessels=True, nerves=False, skin=False,
+        curve_drop_default=False,
+        curve_keep_names=["mesenteric", "ileocolic", "colic", "jejunal", "ileal",
+                          "marginal artery", "sigmoid", "appendicular", "portal",
+                          "splenic vein", "abdominal aorta", "gastro-omental",
+                          "pancreaticoduodenal"],
+        curve_drop=["cerebral", "coronary", "pulmonary", "femoral", "renal artery",
+                    "testicular", "ovarian", "uterine", "vesical", "pudendal", "penis"],
+    ),
+
+    # Góc cầu tiểu não: khe giữa cầu não, tiểu não và xương đá, nơi dây VII và
+    # dây VIII cùng đi vào ống tai trong. Ốc tai z 1,575..1,584, dây VIII
+    # z 1,577..1,582, cuống tiểu não z 1,581..1,603.
+    "cerebellopontine_angle": dict(
+        out="cerebellopontine_angle.glb", side="r", min_verts=4,
+        curve_only_named=True,
+        box=(-0.058, -0.002, -0.012, 0.058, 1.548, 1.618),
+        bone_kw=["temporal bone", "occipital bone", "sphenoid"],
+        bone_drop=["cells of"],
+        sense_kw=["cochlea", "vestibul", "semicircular", "cerebellar peduncle", "pons",
+                  "medulla", "cerebellum", "flocculus", "trigeminal", "olive"],
+        sense_drop=["choroid plexus"],
+        vessels=True, nerves=True, skin=False,
+        curve_drop_default=False,
+        curve_keep_names=["facial nerve", "vestibulocochlear", "trigeminal",
+                          "glossopharyngeal", "vagus", "abducens", "labyrinthine",
+                          "cerebellar artery", "basilar", "vertebral artery"],
+        curve_drop=["carotid", "maxillary", "facial artery", "occipital artery",
+                    "meningeal", "coronary", "pulmonary"],
+    ),
+
+    # Dải chậu chày: tấm gân dẹt chạy suốt mặt ngoài đùi từ mào chậu tới lồi cầu
+    # ngoài xương chày (x tới -0,161 · z -0,001..0,998). Lấy kèm cơ căng mạc đùi,
+    # cơ mông lớn – nhỡ và túi hoạt dịch mấu chuyển z 0,816..0,858.
+    "iliotibial_tract": dict(
+        out="iliotibial_tract.glb", side="r", min_verts=4,
+        curve_only_named=True,
+        box=(-0.175, -0.002, -0.065, 0.125, 0.320, 1.015),
+        bone_kw=["femur", "hip bone", "tibia", "fibula", "patella", "ilium", "ischium"],
+        joint_kw=True,
+        joint_drop=["shoulder", "elbow", "wrist", "carpal", "ankle", "tarsal", "costo",
+                    "sterno", "intervertebral", "temporomandibular"],
+        muscle_kw=["iliotibial", "tensor fasciae", "gluteus", "vastus lateralis",
+                   "biceps femoris", "fascia lata", "bursa", "sartorius", "rectus femoris",
+                   "piriformis", "quadratus femoris"],
+        vessels=True, nerves=True, skin=False,
+        curve_drop_default=False,
+        curve_keep_names=["superior gluteal", "inferior gluteal", "circumflex femoral",
+                          "lateral femoral cutaneous", "perforating", "descending genicular",
+                          "superior lateral genicular"],
+        curve_drop=["cerebral", "coronary", "pulmonary", "internal iliac", "pudendal",
+                    "rectal", "vesical", "obturator", "testicular", "penis", "sciatic"],
+    ),
+
+    # Đường đi thần kinh toạ: từ khuyết ngồi lớn dưới cơ hình lê (z ~0,90) chạy
+    # giữa ụ ngồi và mấu chuyển lớn, xuống mặt sau đùi rồi chia đôi ở đỉnh hố
+    # khoeo (z ~0,54). Bbox thật của dây: x ±0,080 · y 0,016..0,072 · z 0,540..0,978.
+    "sciatic_course": dict(
+        out="sciatic_course.glb", side="r", min_verts=4,
+        curve_only_named=True,
+        box=(-0.135, -0.002, -0.005, 0.120, 0.325, 1.010),
+        bone_kw=["hip bone", "femur", "ischium", "ilium", "sacrum", "tibia", "fibula"],
+        muscle_kw=["gluteus", "piriformis", "obturator internus", "gemellus",
+                   "quadratus femoris", "biceps femoris", "semitendinosus",
+                   "semimembranosus", "adductor magnus", "gastrocnemius"],
+        vessels=True, nerves=True, skin=False,
+        curve_drop_default=False,
+        curve_keep_names=["sciatic", "tibial nerve", "common fibular", "peroneal nerve",
+                          "posterior femoral cutaneous", "superior gluteal nerve",
+                          "inferior gluteal", "nerve to", "popliteal", "perforating"],
+        curve_drop=["cerebral", "coronary", "pulmonary", "pudendal", "rectal", "vesical",
+                    "obturator artery", "testicular", "penis", "uterine"],
+    ),
+
+    # Cân ngực – thắt lưng: ba lá cân bọc khối cơ dựng sống và cơ vuông thắt
+    # lưng, nối cơ lưng rộng ở trên với cơ mông lớn ở dưới thành một dải truyền
+    # lực chéo qua lưng. Lá cân z 0,927..1,163; lấy cả hai bên vì bài học là
+    # đường truyền lực CHÉO từ vai bên này sang mông bên kia.
+    "thoracolumbar_fascia": dict(
+        out="thoracolumbar_fascia.glb", side=None, min_verts=4,
+        box=(-0.150, 0.150, 0.015, 0.120, 0.860, 1.265),
+        bone_kw=["vertebra", "rib", "sacrum", "hip bone", "ilium"],
+        muscle_kw=["thoracolumbar", "erector", "iliocostalis", "longissimus", "spinalis",
+                   "multifidus", "latissimus", "serratus posterior", "quadratus lumborum",
+                   "gluteus maximus", "abdominal oblique", "transversus abdominis",
+                   "interspinales", "intertransversarii", "trapezius", "rhomboid"],
+        joint_kw=["ligamenta flava", "supraspinous", "interspinous", "iliolumbar",
+                  "sacro-iliac", "intervertebral disc"],
+        vessels=False, nerves=False, skin=False,
+    ),
+
+    # ---------- Nhóm M: mốc xương, nguyên uỷ và bám tận ----------
+    # Hai model cho trang "Mốc xương, nguyên uỷ & bám tận". Nội dung chính là
+    # MẢNG ĐIỂM BÁM của hệ 2 trong Z-Anatomy: mỗi cơ để lại trên xương một mảng
+    # nguyên uỷ (đuôi ".o") và một mảng bám tận (đuôi ".e"), đắp đúng lên mặt
+    # xương. Không lấy khối cơ (hệ 4) vì cơ che kín xương, mất hẳn thứ cần xem.
+
+    "landmarks_upper": dict(
+        out="landmarks_upper.glb", side="r", min_verts=3,
+        box=(-0.370, -0.002, -0.130, 0.140, 0.640, 1.480),
+        bone_kw=["clavicle", "scapula", "humerus", "radius", "ulna", "scaphoid",
+                 "lunate", "triquetrum", "pisiform", "trapezium", "trapezoid",
+                 "capitate", "hamate", "metacarpal", "phalanx"],
+        insertion_kw=True,
+        vessels=False, nerves=False, skin=False,
+    ),
+
+    "landmarks_lower": dict(
+        out="landmarks_lower.glb", side="r", min_verts=3,
+        box=(-0.175, -0.002, -0.105, 0.135, -0.005, 1.020),
+        bone_kw=["hip bone", "ilium", "ischium", "pubis", "femur", "patella",
+                 "tibia", "fibula", "talus", "calcaneus", "navicular", "cuboid",
+                 "cuneiform", "metatarsal", "phalanx", "sacrum"],
+        insertion_kw=True,
+        vessels=False, nerves=False, skin=False,
+    ),
+
     # ---------- Nhóm Z: 7 hệ TOÀN THÂN cho trang /viewer ----------
     # Bản export tháng 7/2026 dùng export_system.py chỉ lấy object MESH, mà mạch
     # máu và thần kinh ngoại biên trong Z-Anatomy là CURVE nên mất sạch:

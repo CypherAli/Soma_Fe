@@ -29,6 +29,8 @@ export default function SectionModelViewer({
   hotspots: SceneHotspot[];
 }) {
   const t = useTranslations("viewer");
+
+
   return (
     <div className="viewer-stage relative h-full w-full">
       <SectionModelScene modelUrl={modelUrl} hotspots={hotspots} />
