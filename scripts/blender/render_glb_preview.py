@@ -44,14 +44,21 @@ BONE = ["humerus","radius","ulna","scaphoid","lunate","triquetrum","pisiform","t
 def cat(n):
     n=n.lower()
     if ("skin" in n or "envelope" in n or "fascia" in n or "aponeurosis" in n
-            or "nail" in n or "perionyx" in n or "onych" in n): return "skin"
+            or "nail" in n or "perionyx" in n or "onych" in n
+            or n.endswith(" region") or n[:-2].endswith(" region")): return "skin"
     if "cornea" in n: return "cornea"
     if "iris" in n: return "iris"
     if "vitreous" in n or "posterior segment" in n: return "vitreous"
     if any(k in n for k in ["sclera","eyeball","lens"]): return "eye"
     # giống pickCat của viewer: xét tĩnh mạch TRƯỚC ("Deep venous palmar arch" là
     # cung tĩnh mạch), và bắt "arter" để khớp cả số nhiều "arteries".
-    is_vein = "vein" in n or "venous" in n or "vena cava" in n
+    # Xoang tĩnh mạch màng cứng không có chữ "vein" nào trong tên — giống
+    # pickCat, phải gọi đích danh, nếu không chúng bị tô màu CƠ.
+    is_dural_sinus = any(k in n for k in [
+        "sagittal sinus", "transverse sinus", "sigmoid sinus", "straight sinus",
+        "occipital sinus", "petrosal sinus", "cavernous sinus", "intercavernous sinus",
+        "sphenoparietal sinus", "confluence of sinus"])
+    is_vein = "vein" in n or "venous" in n or "vena cava" in n or is_dural_sinus
     if not is_vein and ("arter" in n or "aorta" in n or "pulmonary trunk" in n
                         or "palmar arch" in n or "carpal arch" in n or "anastomosis" in n):
         return "artery"
@@ -69,7 +76,20 @@ def cat(n):
     if "pancrea" in n: return "pancreas"
     if any(k in n for k in ["stomach","gastric","colon","intestine","duoden","jejun","ileum",
         "caecum","appendix","taenia","omentum","meso","gallbladder","bile"]): return "gut"
-    if "brain" in n or "commissure" in n: return "brain"
+    # Bộ lệ: "lacrimal" nằm trong danh sách BONE (xương lệ) nên tuyến lệ, túi lệ
+    # và ống lệ mũi bị tô màu xương — gọi đích danh phần mềm trước.
+    if any(k in n for k in ["lacrimal gland", "lacrimal sac", "lacrimal canaliculus",
+                            "nasolacrimal", "salivary", "parotid",
+                            "submandibular gland", "sublingual gland"]): return "gut"
+    # Các cấu trúc trung ương không khớp từ khoá nào ở trên (giao thoa thị giác,
+    # thể gối, củ não sinh tư, rãnh cựa, nêm chẩm, cực chẩm, nhân thân não).
+    if any(k in n for k in ["brain", "commissure", "cerebr", "cerebell", "thalam",
+                            "optic chiasm", "optic tract", "geniculate", "colliculus",
+                            "calcarine", "cuneus", "occipital pole", "insula", "caudate",
+                            "putamen", "pallidus", "fornix", "hippocamp", "amygdal",
+                            "peduncle", "olive", "flocculus", "medulla oblongata", "pons",
+                            "spinal cord", "cauda equina", "stria medullaris",
+                            "cochlear nucle", "vestibular nucle"]): return "brain"
     if "nerve" in n or "plexus" in n: return "nerve"
     # Giống pickCat: SỤN xét trước, rồi tới mô liên kết. Dây chằng và bao khớp
     # của bàn tay có sẵn tên xương trong đó ("Deep transverse METACARPAL

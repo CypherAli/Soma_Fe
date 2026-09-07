@@ -1,0 +1,196 @@
+import type { Loc } from "@/lib/homeContent";
+import type { HandMode } from "./gestures";
+import type { HandTrackingErrorCode } from "./useHandTracking";
+
+/**
+ * Chữ nghĩa của trang Vision AI, ba thứ tiếng.
+ *
+ * Trang này trước đây viết chết tiếng Việt trong khi cả phần còn lại của atlas
+ * đã chạy vi/en/zh — mở bằng giao diện tiếng Anh là gặp một trang tiếng Việt.
+ * Gom vào một chỗ để dịch được và để câu chữ hướng dẫn cử chỉ luôn khớp với
+ * hành vi thật của mã (sửa cử chỉ thì sửa ngay cạnh đây).
+ */
+export type GestureText = ReturnType<typeof gestureText>;
+
+const MODE_VI: Record<HandMode, string> = {
+  point: "Trỏ",
+  zoom: "Phóng to / thu nhỏ",
+  rotate: "Xoay",
+  pan: "Di chuyển",
+};
+const MODE_EN: Record<HandMode, string> = {
+  point: "Point",
+  zoom: "Zoom",
+  rotate: "Rotate",
+  pan: "Pan",
+};
+const MODE_ZH: Record<HandMode, string> = {
+  point: "指向",
+  zoom: "缩放",
+  rotate: "旋转",
+  pan: "平移",
+};
+
+const ERR_VI: Record<HandTrackingErrorCode, string> = {
+  "insecure-context": "Trình duyệt chỉ cho dùng camera trên HTTPS hoặc localhost.",
+  unsupported: "Trình duyệt này không hỗ trợ truy cập camera.",
+  "permission-denied": "Chưa được cấp quyền camera. Bấm biểu tượng camera trên thanh địa chỉ và chọn Cho phép.",
+  "no-camera": "Không tìm thấy webcam nào trên máy.",
+  "camera-busy": "Camera đang bị ứng dụng khác chiếm. Đóng ứng dụng đó rồi thử lại.",
+  "model-load": "Không nạp được mô hình nhận diện tay (thiếu tệp trong /mediapipe).",
+  "camera-lost": "Mất kết nối với camera.",
+  unknown: "Không chạy được nhận diện tay.",
+};
+const ERR_EN: Record<HandTrackingErrorCode, string> = {
+  "insecure-context": "Browsers allow the camera only over HTTPS or on localhost.",
+  unsupported: "This browser cannot access the camera.",
+  "permission-denied": "Camera permission was denied. Click the camera icon in the address bar and allow it.",
+  "no-camera": "No webcam was found on this machine.",
+  "camera-busy": "The camera is in use by another application. Close it and try again.",
+  "model-load": "The hand-tracking model failed to load (files missing in /mediapipe).",
+  "camera-lost": "Lost connection to the camera.",
+  unknown: "Hand tracking could not start.",
+};
+const ERR_ZH: Record<HandTrackingErrorCode, string> = {
+  "insecure-context": "浏览器仅允许在 HTTPS 或 localhost 下使用摄像头。",
+  unsupported: "此浏览器无法访问摄像头。",
+  "permission-denied": "摄像头权限被拒绝。请点击地址栏的摄像头图标并允许。",
+  "no-camera": "未在本机找到摄像头。",
+  "camera-busy": "摄像头正被其他程序占用，请关闭后重试。",
+  "model-load": "手部识别模型加载失败（/mediapipe 中缺少文件）。",
+  "camera-lost": "与摄像头的连接已断开。",
+  unknown: "无法启动手部识别。",
+};
+
+export function gestureText(locale: Loc) {
+  if (locale === "en") {
+    return {
+      title: "Vision AI — gesture control",
+      subtitle: "Forearm anatomy, driven by your hand through the webcam",
+      start: "Start camera",
+      stop: "Stop camera",
+      noHand: "No hand detected",
+      loading: "Loading the hand-tracking model…",
+      backend: (b: string) => `accelerator: ${b.toUpperCase()}`,
+      detectFps: "detect",
+      renderFps: "draw",
+      hands: "hands",
+      selected: "Selected",
+      nothing: "— nothing selected —",
+      clear: "Clear selection",
+      layers: "Anatomy layers",
+      show: "Shown",
+      hide: "Hidden",
+      faded: "Faded",
+      solid: "Solid",
+      actions: "Actions",
+      explode: "Explode / collapse layers",
+      reset: "Reset view",
+      guide: "Gestures",
+      guideItems: [
+        "**Index finger only** → cursor. Pinch thumb to index to click, or hold still for 1.2 s.",
+        "**Open hand, then turn it** → the model turns with you; raise or lower the hand to tilt.",
+        "**Make a fist and drag** → move the model.",
+        "**Both hands pinched** → pull apart to enlarge, bring together to shrink.",
+        "**Hold the cursor over 🗑** → hides the selected structure after a 2.5 s countdown.",
+      ],
+      bothHands: "Both hands work at once: A = right hand, B = left hand.",
+      privacy: "In this mode the webcam image never leaves your device — hand tracking runs in the browser. (Scan mode sends one cropped photo, and only if you agree to it.)",
+      mode: MODE_EN,
+      err: ERR_EN,
+      enableHint: "Start the camera to control by gesture",
+      right: "Right",
+      left: "Left",
+      undo: "Undo",
+      trash: "Drop",
+      trashHint: "hold 2.5 s",
+      hiddenCount: (n: number) => `${n} structure(s) hidden — Undo brings them back`,
+    };
+  }
+  if (locale === "zh") {
+    return {
+      title: "Vision AI — 手势控制",
+      subtitle: "通过摄像头以手势操作前臂解剖模型",
+      start: "开启摄像头",
+      stop: "关闭摄像头",
+      noHand: "未检测到手",
+      loading: "正在加载手部识别模型…",
+      backend: (b: string) => `加速方式：${b.toUpperCase()}`,
+      detectFps: "识别",
+      renderFps: "绘制",
+      hands: "手",
+      selected: "已选中",
+      nothing: "— 尚未选择 —",
+      clear: "取消选择",
+      layers: "解剖层次",
+      show: "显示",
+      hide: "隐藏",
+      faded: "淡化",
+      solid: "清晰",
+      actions: "操作",
+      explode: "分层 / 合并",
+      reset: "复位视角",
+      guide: "手势说明",
+      guideItems: [
+        "**仅伸食指** → 光标；拇指与食指捏合即点击，或停留1.2秒选择。",
+        "**张开手掌并旋转** → 模型随之旋转；抬手或下压则前后俯仰。",
+        "**握拳拖动** → 平移模型。",
+        "**双手同时捏合** → 双手拉开放大，靠拢缩小。",
+        "**光标停在 🗑 上** → 倒数2.5秒后隐藏所选结构。",
+      ],
+      bothHands: "双手可同时使用：A = 右手，B = 左手。",
+      privacy: "在此模式下摄像头画面不会离开本机——手部追踪全部在浏览器本地完成。（扫描模式会发送一张裁剪图，且需你同意。）",
+      mode: MODE_ZH,
+      err: ERR_ZH,
+      enableHint: "开启摄像头以手势操作",
+      right: "右",
+      left: "左",
+      undo: "撤销",
+      trash: "丢弃",
+      trashHint: "停留2.5秒",
+      hiddenCount: (n: number) => `已隐藏 ${n} 个结构 — 可用撤销恢复`,
+    };
+  }
+  return {
+    title: "Vision AI — điều khiển bằng cử chỉ",
+    subtitle: "Giải phẫu cẳng tay, điều khiển bằng bàn tay qua webcam",
+    start: "Bật camera",
+    stop: "Tắt camera",
+    noHand: "Chưa thấy tay",
+    loading: "Đang nạp mô hình nhận diện tay…",
+    backend: (b: string) => `tăng tốc: ${b.toUpperCase()}`,
+    detectFps: "nhận diện",
+    renderFps: "vẽ",
+    hands: "tay",
+    selected: "Đang chọn",
+    nothing: "— chưa chọn —",
+    clear: "Hủy chọn",
+    layers: "Lớp giải phẫu",
+    show: "Hiện",
+    hide: "Ẩn",
+    faded: "Mờ",
+    solid: "Rõ",
+    actions: "Thao tác",
+    explode: "Tách lớp / gộp lại",
+    reset: "Về vị trí ban đầu",
+    guide: "Cử chỉ",
+    guideItems: [
+      "**Chỉ giơ ngón trỏ** → con trỏ; chụm ngón cái vào ngón trỏ để bấm, hoặc giữ yên 1,2 giây.",
+      "**Xoè cả bàn tay rồi xoay** → mô hình xoay theo; nâng hạ tay = ngửa cúi.",
+      "**Nắm tay rồi kéo** → di chuyển mô hình.",
+      "**Chụm ngón CẢ HAI TAY** → kéo hai tay ra xa để phóng to, đưa lại gần để thu nhỏ.",
+      "**Giữ con trỏ trong ô 🗑** → đếm ngược 2,5 giây rồi ẩn cấu trúc đang chọn.",
+    ],
+    bothHands: "Hai tay dùng được cùng lúc: A = tay phải, B = tay trái.",
+    privacy: "Ở chế độ này hình webcam KHÔNG rời khỏi máy — nhận diện tay chạy ngay trong trình duyệt. (Chế độ Quét có gửi một mẩu ảnh đã cắt, và chỉ khi bạn đồng ý.)",
+    mode: MODE_VI,
+    err: ERR_VI,
+    enableHint: "Bật camera để điều khiển",
+    right: "Phải",
+    left: "Trái",
+    undo: "Hoàn tác",
+    trash: "Vứt",
+    trashHint: "giữ 2,5 giây",
+    hiddenCount: (n: number) => `Đã ẩn ${n} cấu trúc — bấm Hoàn tác để lấy lại`,
+  };
+}

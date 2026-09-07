@@ -33,14 +33,6 @@ export default function HumanPage({ locale }: { locale: Loc }) {
               <em>{pick(C.humanHero.titleAccent, locale)}</em>
             </h1>
             <p className="hero-lede human-hero-lede">{pick(C.humanHero.lede, locale)}</p>
-            <div className="hero-cta human-hero-cta">
-              <Link href="/giai-phau/theo-he" className="pill pill-solid">
-                {pick(C.humanHero.ctaSystem, locale)}
-              </Link>
-              <Link href="/giai-phau/theo-vung" className="pill pill-ghost">
-                {pick(C.humanHero.ctaRegion, locale)}
-              </Link>
-            </div>
             <div className="human-hero-search">
               <HomeSearch locale={locale} />
             </div>
@@ -118,8 +110,10 @@ export default function HumanPage({ locale }: { locale: Loc }) {
               <h2>{pick(C.sources.heading, locale)}</h2>
               <p>{pick(C.sources.body, locale)}</p>
             </div>
-            {/* id để thẻ "chưa có dữ liệu" ở trang Giải phẫu trỏ thẳng tới đây
-                (Mô mỡ, Hệ sinh sản nữ) thay vì bấm vào không phản ứng gì. */}
+            {/* Mục giới hạn dữ liệu: nơi DUY NHẤT còn nói về hai nhóm chưa dựng
+                được (mô mỡ, hệ sinh sản nữ) sau khi hai thẻ "SẮP CÓ" của chúng
+                đã được bỏ khỏi danh mục mô hình. Giữ id để các liên kết cũ
+                trỏ vào đây vẫn tới đúng chỗ. */}
             <div className="src-gaps" id="gioi-han-du-lieu">
               <h3>{pick(C.sources.gapsHeading, locale)}</h3>
               <p>{pick(C.sources.gapsBody, locale)}</p>

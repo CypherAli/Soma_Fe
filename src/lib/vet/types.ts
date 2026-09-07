@@ -65,10 +65,94 @@ export type VetFact = {
   keys?: string[];
 };
 
+/**
+ * LỚP GIẢI PHẪU của một mô hình.
+ *
+ * Bên người bóc lớp được vì mọi lớp cùng đến từ MỘT bộ dữ liệu (Z-Anatomy) nên
+ * chung một hệ toạ độ. Bên thú y thì mỗi lớp là một mẫu vật khác, do một cơ sở
+ * khác quét, khác tỉ lệ và khác gốc toạ độ — chồng lên nhau sẽ lệch. Vì vậy ở
+ * đây "lớp" là để CHUYỂN QUA LẠI, không phải để chồng trong suốt. Nói rõ chỗ
+ * này để sau không ai cố ghép rồi tưởng mình làm sai.
+ */
+export type VetLayerKey =
+  | "skin"
+  | "muscle"
+  | "vessel"
+  | "nerve"
+  | "viscera"
+  | "senses"
+  | "skeleton";
+
+/**
+ * Thứ tự bóc lớp — NGOÀI VÀO TRONG, đúng trình tự trên bàn giải phẫu:
+ * da → cơ → mạch máu → thần kinh → nội tạng → giác quan → bộ xương.
+ *
+ * Thứ tự cũ đặt nội tạng ngay sau cơ là SAI trình tự: mạch máu và thần kinh
+ * nằm giữa các lớp cơ và trên thành xoang, phải gỡ chúng TRƯỚC khi mở xoang
+ * ngực – bụng. Mở tạng ra rồi mới quay lại tìm mạch là làm ngược, và người học
+ * đi theo thứ tự ấy sẽ nhớ sai quan hệ vị trí.
+ *
+ * Lớp `skin` có trong danh sách dù CHƯA CÓ MẪU VẬT NÀO: đó là lớp đầu tiên
+ * người ta gỡ, để trống mà không nói gì thì trang trông như bắt đầu từ giữa
+ * chừng. Khung xem hiện đủ bảy lớp và ghi rõ lớp nào chưa có mẫu.
+ */
+export const VET_LAYER_ORDER: VetLayerKey[] = [
+  "skin",
+  "muscle",
+  "vessel",
+  "nerve",
+  "viscera",
+  "senses",
+  "skeleton",
+];
+
+/**
+ * MỘT BỘ PHẬN TÁCH ĐƯỢC trong mẫu vật, nhận diện qua TÊN VẬT LIỆU.
+ *
+ * Bên người nhận diện cấu trúc qua tên mesh do Z-Anatomy gắn. Mẫu quét thú y
+ * không có thứ đó — mesh toàn tên "Object_0". Nhưng vài mẫu (của Pixelbeaker
+ * và OVC) lại gắn nhãn giải phẫu ở TÊN VẬT LIỆU: "default_05b_Liver_1",
+ * "default_06b_Intestines_dec"… Đó là chỗ bấu víu duy nhất, và nó đủ để tách
+ * từng cơ quan như bên người.
+ *
+ * Vì thế bước nén trong `import-vet-soft-tissue.mjs` bị cấm gộp mesh/trộn vật
+ * liệu: gộp là mất nhãn. Mẫu nào chỉ có một vật liệu thì thật sự là khối liền,
+ * `parts` để trống và trang nói thẳng là không tách được.
+ */
+export type VetModelPart = {
+  /** Tên vật liệu trong tệp .glb — khoá để gom mesh lúc chạy. */
+  material: string;
+  /**
+   * Mục tri thức mà bộ phận này ứng với.
+   *
+   * Vùng do `segment_by_seeds.py` cắt ra lấy luôn `factId` làm TÊN VẬT LIỆU,
+   * nên hình học và nội dung nối nhau bằng đúng một khoá — không phải chép tên
+   * vào hai chỗ rồi để chúng lệch nhau. Có `factId` thì tên và thuật ngữ NAV
+   * đọc thẳng từ kho tri thức.
+   */
+  factId?: string;
+  /** Tên tự đặt, cho bộ phận KHÔNG ứng với mục tri thức nào (lớp da, khối máu). */
+  name?: T3;
+  /** Thuật ngữ NAV nếu bộ phận ứng với một cấu trúc có tên. */
+  nav?: string;
+  /**
+   * Khoá nhóm, khớp với `VetModel.partGroups`.
+   *
+   * Chỉ cần khi mẫu vật có QUÁ NHIỀU bộ phận để đọc thành một danh sách phẳng.
+   * Bộ xương lợn có 120 xương: không chia mục thì thanh bên thành một dải cuộn
+   * dài, muốn tìm xương sườn số 9 phải lăn qua cả cột sống.
+   */
+  group?: string;
+};
+
 /** Một mô hình 3D thú y đã nạp được — xem `src/lib/vet/models.ts`. */
 export type VetModel = {
   slug: string;
   species: VetSpeciesKey;
+  /** Lớp giải phẫu mà mẫu vật này thuộc về — dùng cho bộ chuyển lớp. */
+  layer: VetLayerKey;
+  /** Vùng cơ thể mẫu vật bao phủ; `whole` là toàn thân. */
+  region: VetRegionKey;
   title: T3;
   /** Tệp trong /public/models/vet/. */
   file: string;
@@ -84,4 +168,28 @@ export type VetModel = {
    * ánh xạ tới một mục tri thức qua `factId`.
    */
   hotspots: { factId: string; position: [number, number, number] }[];
+  /**
+   * Vùng được CẮT RA bằng `segment_by_seeds.py`, không phải nhãn của tác giả.
+   *
+   * Ranh giới giữa hai vùng nằm ở chỗ cách đều hai điểm mồi trên bề mặt, không
+   * phải ở chỗ hai cơ thật sự giáp nhau. Trang xem phải nói thẳng điều này —
+   * người học không được tưởng đây là mesh gắn nhãn như Z-Anatomy.
+   */
+  segmented?: boolean;
+  /** Bộ phận tách được. Vắng mặt = mẫu là khối liền, không tách được. */
+  parts?: VetModelPart[];
+  /**
+   * Mục để xếp `parts` — theo ĐÚNG thứ tự khai ở đây. Không khai thì danh sách
+   * bộ phận hiện phẳng như cũ.
+   */
+  partGroups?: { key: string; title: T3 }[];
+  /**
+   * Tên bộ phận ở đâu ra — quyết định câu giải thích hiện dưới bảng thông tin.
+   *
+   * "scan-materials" (mặc định) là mẫu quét mà tác giả tình cờ đặt tên vật liệu
+   * theo cơ quan. "atlas" là bộ giải phẫu dựng tay, mỗi cấu trúc một vật thể
+   * riêng có tên NAV thật (Z-PIG). Hai nguồn ấy tin được ở mức KHÁC HẲN nhau,
+   * nên không được nói với người học bằng cùng một câu.
+   */
+  partsFrom?: "scan-materials" | "atlas";
 };

@@ -43,7 +43,11 @@ type AnatomyState = {
   clipKeepPositive: boolean;
   /** key hotspot đang active (camera đã zoom vào) — dùng chung giữa pin 3D và danh sách Labels bên panel. */
   activeHotspotKey: string | null;
+  /** Bệnh đang được xem, đến từ ?pathology= khi mở từ trang Bệnh lý. Trước đây
+      tham số này bị bỏ rơi nên sang viewer là mất hẳn ngữ cảnh bệnh. */
+  focusedPathologyId: string | null;
   setSelected: (part: SelectedPart) => void;
+  setFocusedPathology: (id: string | null) => void;
   setHovered: (id: string | null) => void;
   toggleSystem: (key: SystemKey) => void;
   toggleSystemFaded: (key: SystemKey) => void;
@@ -80,6 +84,7 @@ export const useAnatomyStore = create<AnatomyState>((set) => ({
   hiddenIds: {},
   fadedIds: {},
   isolatedId: null,
+  focusedPathologyId: null,
   fadedSystems: Object.fromEntries(allSystems.map((s) => [s, false])) as Record<SystemKey, boolean>,
   clipEnabled: false,
   clipAxis: "y",
@@ -87,6 +92,7 @@ export const useAnatomyStore = create<AnatomyState>((set) => ({
   clipKeepPositive: false,
   activeHotspotKey: null,
   setSelected: (part) => set({ selected: part }),
+  setFocusedPathology: (id) => set({ focusedPathologyId: id }),
   setHovered: (id) => set({ hovered: id }),
   toggleSystem: (key) =>
     set((state) => ({

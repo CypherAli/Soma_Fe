@@ -21,7 +21,8 @@
     "meshes": "node scripts/list_meshes.mjs --json",
     "render:lesions": "node scripts/render_all_lesions.mjs",
     "export:vet": "node --import ./scripts/ts-resolve.mjs scripts/vet/export-vet-data.ts",
-    "verify:vet-export": "node --import ./scripts/ts-resolve.mjs scripts/vet/export-vet-data.ts --check"
+    "verify:vet-export": "node --import ./scripts/ts-resolve.mjs scripts/vet/export-vet-data.ts --check",
+    "test:vision": "node --import ./scripts/ts-resolve.mjs scripts/test-vision.ts"
   },
   "dependencies": {
     "@mediapipe/tasks-vision": "^1.0.1",
@@ -35,6 +36,7 @@
     "zustand": "^5.0.14"
   },
   "devDependencies": {
+    "@gltf-transform/cli": "^4.5.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

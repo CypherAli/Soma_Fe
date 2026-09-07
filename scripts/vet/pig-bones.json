@@ -1,0 +1,1338 @@
+[
+  {
+    "fr": [
+      "Crâne"
+    ],
+    "slug": "cranium",
+    "nav": "Cranium",
+    "vi": "Sọ",
+    "en": "Skull",
+    "zh": "颅骨",
+    "group": "head"
+  },
+  {
+    "fr": [
+      "Mandibule"
+    ],
+    "slug": "mandibula",
+    "nav": "Mandibula",
+    "vi": "Xương hàm dưới",
+    "en": "Mandible",
+    "zh": "下颌骨",
+    "group": "head"
+  },
+  {
+    "fr": [
+      "Os hyoïde"
+    ],
+    "slug": "os-hyoideum",
+    "nav": "Os hyoideum",
+    "vi": "Xương móng",
+    "en": "Hyoid bone",
+    "zh": "舌骨",
+    "group": "head"
+  },
+  {
+    "fr": [
+      "Vertèbre C1 (Atlas)"
+    ],
+    "slug": "atlas",
+    "nav": "Atlas [Vertebra cervicalis I]",
+    "vi": "Đốt đội (C1)",
+    "en": "Atlas (C1)",
+    "zh": "寰椎",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre C2 (Axis)"
+    ],
+    "slug": "axis",
+    "nav": "Axis [Vertebra cervicalis II]",
+    "vi": "Đốt trục (C2)",
+    "en": "Axis (C2)",
+    "zh": "枢椎",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre C3"
+    ],
+    "slug": "vertebra-c3",
+    "nav": "Vertebra cervicalis III",
+    "vi": "Đốt sống cổ C3",
+    "en": "Cervical vertebra C3",
+    "zh": "颈椎 C3",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre C4"
+    ],
+    "slug": "vertebra-c4",
+    "nav": "Vertebra cervicalis IV",
+    "vi": "Đốt sống cổ C4",
+    "en": "Cervical vertebra C4",
+    "zh": "颈椎 C4",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre C5"
+    ],
+    "slug": "vertebra-c5",
+    "nav": "Vertebra cervicalis V",
+    "vi": "Đốt sống cổ C5",
+    "en": "Cervical vertebra C5",
+    "zh": "颈椎 C5",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre C6"
+    ],
+    "slug": "vertebra-c6",
+    "nav": "Vertebra cervicalis VI",
+    "vi": "Đốt sống cổ C6",
+    "en": "Cervical vertebra C6",
+    "zh": "颈椎 C6",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre C7"
+    ],
+    "slug": "vertebra-c7",
+    "nav": "Vertebra cervicalis VII",
+    "vi": "Đốt sống cổ C7",
+    "en": "Cervical vertebra C7",
+    "zh": "颈椎 C7",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre T1"
+    ],
+    "slug": "vertebra-t1",
+    "nav": "Vertebra thoracica I",
+    "vi": "Đốt sống ngực T1",
+    "en": "Thoracic vertebra T1",
+    "zh": "胸椎 T1",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre T2"
+    ],
+    "slug": "vertebra-t2",
+    "nav": "Vertebra thoracica II",
+    "vi": "Đốt sống ngực T2",
+    "en": "Thoracic vertebra T2",
+    "zh": "胸椎 T2",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre T3"
+    ],
+    "slug": "vertebra-t3",
+    "nav": "Vertebra thoracica III",
+    "vi": "Đốt sống ngực T3",
+    "en": "Thoracic vertebra T3",
+    "zh": "胸椎 T3",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre T4"
+    ],
+    "slug": "vertebra-t4",
+    "nav": "Vertebra thoracica IV",
+    "vi": "Đốt sống ngực T4",
+    "en": "Thoracic vertebra T4",
+    "zh": "胸椎 T4",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre T5"
+    ],
+    "slug": "vertebra-t5",
+    "nav": "Vertebra thoracica V",
+    "vi": "Đốt sống ngực T5",
+    "en": "Thoracic vertebra T5",
+    "zh": "胸椎 T5",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre T6"
+    ],
+    "slug": "vertebra-t6",
+    "nav": "Vertebra thoracica VI",
+    "vi": "Đốt sống ngực T6",
+    "en": "Thoracic vertebra T6",
+    "zh": "胸椎 T6",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre T7"
+    ],
+    "slug": "vertebra-t7",
+    "nav": "Vertebra thoracica VII",
+    "vi": "Đốt sống ngực T7",
+    "en": "Thoracic vertebra T7",
+    "zh": "胸椎 T7",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre T8"
+    ],
+    "slug": "vertebra-t8",
+    "nav": "Vertebra thoracica VIII",
+    "vi": "Đốt sống ngực T8",
+    "en": "Thoracic vertebra T8",
+    "zh": "胸椎 T8",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre T9"
+    ],
+    "slug": "vertebra-t9",
+    "nav": "Vertebra thoracica IX",
+    "vi": "Đốt sống ngực T9",
+    "en": "Thoracic vertebra T9",
+    "zh": "胸椎 T9",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre T10"
+    ],
+    "slug": "vertebra-t10",
+    "nav": "Vertebra thoracica X",
+    "vi": "Đốt sống ngực T10",
+    "en": "Thoracic vertebra T10",
+    "zh": "胸椎 T10",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre T11"
+    ],
+    "slug": "vertebra-t11",
+    "nav": "Vertebra thoracica XI",
+    "vi": "Đốt sống ngực T11",
+    "en": "Thoracic vertebra T11",
+    "zh": "胸椎 T11",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre T12"
+    ],
+    "slug": "vertebra-t12",
+    "nav": "Vertebra thoracica XII",
+    "vi": "Đốt sống ngực T12",
+    "en": "Thoracic vertebra T12",
+    "zh": "胸椎 T12",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre T13"
+    ],
+    "slug": "vertebra-t13",
+    "nav": "Vertebra thoracica XIII",
+    "vi": "Đốt sống ngực T13",
+    "en": "Thoracic vertebra T13",
+    "zh": "胸椎 T13",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre L1"
+    ],
+    "slug": "vertebra-l1",
+    "nav": "Vertebra lumbalis I",
+    "vi": "Đốt sống thắt lưng L1",
+    "en": "Lumbar vertebra L1",
+    "zh": "腰椎 L1",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre L2"
+    ],
+    "slug": "vertebra-l2",
+    "nav": "Vertebra lumbalis II",
+    "vi": "Đốt sống thắt lưng L2",
+    "en": "Lumbar vertebra L2",
+    "zh": "腰椎 L2",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre L3"
+    ],
+    "slug": "vertebra-l3",
+    "nav": "Vertebra lumbalis III",
+    "vi": "Đốt sống thắt lưng L3",
+    "en": "Lumbar vertebra L3",
+    "zh": "腰椎 L3",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre L4"
+    ],
+    "slug": "vertebra-l4",
+    "nav": "Vertebra lumbalis IV",
+    "vi": "Đốt sống thắt lưng L4",
+    "en": "Lumbar vertebra L4",
+    "zh": "腰椎 L4",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre L5"
+    ],
+    "slug": "vertebra-l5",
+    "nav": "Vertebra lumbalis V",
+    "vi": "Đốt sống thắt lưng L5",
+    "en": "Lumbar vertebra L5",
+    "zh": "腰椎 L5",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre L6"
+    ],
+    "slug": "vertebra-l6",
+    "nav": "Vertebra lumbalis VI",
+    "vi": "Đốt sống thắt lưng L6",
+    "en": "Lumbar vertebra L6",
+    "zh": "腰椎 L6",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre L7"
+    ],
+    "slug": "vertebra-l7",
+    "nav": "Vertebra lumbalis VII",
+    "vi": "Đốt sống thắt lưng L7",
+    "en": "Lumbar vertebra L7",
+    "zh": "腰椎 L7",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre L8"
+    ],
+    "slug": "vertebra-l8",
+    "nav": "Vertebra lumbalis VIII",
+    "vi": "Đốt sống thắt lưng L8",
+    "en": "Lumbar vertebra L8",
+    "zh": "腰椎 L8",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Sacrum"
+    ],
+    "slug": "os-sacrum",
+    "nav": "Os sacrum",
+    "vi": "Xương cùng",
+    "en": "Sacrum",
+    "zh": "荐骨",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre Cc1"
+    ],
+    "slug": "vertebra-cd1",
+    "nav": "Vertebra caudalis I",
+    "vi": "Đốt sống đuôi Cd1",
+    "en": "Caudal vertebra Cd1",
+    "zh": "尾椎 Cd1",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre Cc2"
+    ],
+    "slug": "vertebra-cd2",
+    "nav": "Vertebra caudalis II",
+    "vi": "Đốt sống đuôi Cd2",
+    "en": "Caudal vertebra Cd2",
+    "zh": "尾椎 Cd2",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre Cc3"
+    ],
+    "slug": "vertebra-cd3",
+    "nav": "Vertebra caudalis III",
+    "vi": "Đốt sống đuôi Cd3",
+    "en": "Caudal vertebra Cd3",
+    "zh": "尾椎 Cd3",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre Cc4"
+    ],
+    "slug": "vertebra-cd4",
+    "nav": "Vertebra caudalis IV",
+    "vi": "Đốt sống đuôi Cd4",
+    "en": "Caudal vertebra Cd4",
+    "zh": "尾椎 Cd4",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre Cc5"
+    ],
+    "slug": "vertebra-cd5",
+    "nav": "Vertebra caudalis V",
+    "vi": "Đốt sống đuôi Cd5",
+    "en": "Caudal vertebra Cd5",
+    "zh": "尾椎 Cd5",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre Cc6"
+    ],
+    "slug": "vertebra-cd6",
+    "nav": "Vertebra caudalis VI",
+    "vi": "Đốt sống đuôi Cd6",
+    "en": "Caudal vertebra Cd6",
+    "zh": "尾椎 Cd6",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre Cc7"
+    ],
+    "slug": "vertebra-cd7",
+    "nav": "Vertebra caudalis VII",
+    "vi": "Đốt sống đuôi Cd7",
+    "en": "Caudal vertebra Cd7",
+    "zh": "尾椎 Cd7",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre Cc8"
+    ],
+    "slug": "vertebra-cd8",
+    "nav": "Vertebra caudalis VIII",
+    "vi": "Đốt sống đuôi Cd8",
+    "en": "Caudal vertebra Cd8",
+    "zh": "尾椎 Cd8",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre Cc9"
+    ],
+    "slug": "vertebra-cd9",
+    "nav": "Vertebra caudalis IX",
+    "vi": "Đốt sống đuôi Cd9",
+    "en": "Caudal vertebra Cd9",
+    "zh": "尾椎 Cd9",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre Cc10"
+    ],
+    "slug": "vertebra-cd10",
+    "nav": "Vertebra caudalis X",
+    "vi": "Đốt sống đuôi Cd10",
+    "en": "Caudal vertebra Cd10",
+    "zh": "尾椎 Cd10",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre Cc11"
+    ],
+    "slug": "vertebra-cd11",
+    "nav": "Vertebra caudalis XI",
+    "vi": "Đốt sống đuôi Cd11",
+    "en": "Caudal vertebra Cd11",
+    "zh": "尾椎 Cd11",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Vertèbre Cc12"
+    ],
+    "slug": "vertebra-cd12",
+    "nav": "Vertebra caudalis XII",
+    "vi": "Đốt sống đuôi Cd12",
+    "en": "Caudal vertebra Cd12",
+    "zh": "尾椎 Cd12",
+    "group": "spine"
+  },
+  {
+    "fr": [
+      "Première côte"
+    ],
+    "slug": "costa-1",
+    "nav": "Costa I",
+    "vi": "Xương sườn 1",
+    "en": "Rib 1",
+    "zh": "第1肋骨",
+    "group": "thorax"
+  },
+  {
+    "fr": [
+      "Deuxième côte"
+    ],
+    "slug": "costa-2",
+    "nav": "Costa II",
+    "vi": "Xương sườn 2",
+    "en": "Rib 2",
+    "zh": "第2肋骨",
+    "group": "thorax"
+  },
+  {
+    "fr": [
+      "Troisième côte"
+    ],
+    "slug": "costa-3",
+    "nav": "Costa III",
+    "vi": "Xương sườn 3",
+    "en": "Rib 3",
+    "zh": "第3肋骨",
+    "group": "thorax"
+  },
+  {
+    "fr": [
+      "Quatrième côte"
+    ],
+    "slug": "costa-4",
+    "nav": "Costa IV",
+    "vi": "Xương sườn 4",
+    "en": "Rib 4",
+    "zh": "第4肋骨",
+    "group": "thorax"
+  },
+  {
+    "fr": [
+      "Cinquième côte"
+    ],
+    "slug": "costa-5",
+    "nav": "Costa V",
+    "vi": "Xương sườn 5",
+    "en": "Rib 5",
+    "zh": "第5肋骨",
+    "group": "thorax"
+  },
+  {
+    "fr": [
+      "Sixième côte"
+    ],
+    "slug": "costa-6",
+    "nav": "Costa VI",
+    "vi": "Xương sườn 6",
+    "en": "Rib 6",
+    "zh": "第6肋骨",
+    "group": "thorax"
+  },
+  {
+    "fr": [
+      "Septième côte"
+    ],
+    "slug": "costa-7",
+    "nav": "Costa VII",
+    "vi": "Xương sườn 7",
+    "en": "Rib 7",
+    "zh": "第7肋骨",
+    "group": "thorax"
+  },
+  {
+    "fr": [
+      "Huitième côte"
+    ],
+    "slug": "costa-8",
+    "nav": "Costa VIII",
+    "vi": "Xương sườn 8",
+    "en": "Rib 8",
+    "zh": "第8肋骨",
+    "group": "thorax"
+  },
+  {
+    "fr": [
+      "Neuvième côte"
+    ],
+    "slug": "costa-9",
+    "nav": "Costa IX",
+    "vi": "Xương sườn 9",
+    "en": "Rib 9",
+    "zh": "第9肋骨",
+    "group": "thorax"
+  },
+  {
+    "fr": [
+      "Dixième côte"
+    ],
+    "slug": "costa-10",
+    "nav": "Costa X",
+    "vi": "Xương sườn 10",
+    "en": "Rib 10",
+    "zh": "第10肋骨",
+    "group": "thorax"
+  },
+  {
+    "fr": [
+      "Onzième côte"
+    ],
+    "slug": "costa-11",
+    "nav": "Costa XI",
+    "vi": "Xương sườn 11",
+    "en": "Rib 11",
+    "zh": "第11肋骨",
+    "group": "thorax"
+  },
+  {
+    "fr": [
+      "Douzième côte"
+    ],
+    "slug": "costa-12",
+    "nav": "Costa XII",
+    "vi": "Xương sườn 12",
+    "en": "Rib 12",
+    "zh": "第12肋骨",
+    "group": "thorax"
+  },
+  {
+    "fr": [
+      "Treizième côte"
+    ],
+    "slug": "costa-13",
+    "nav": "Costa XIII",
+    "vi": "Xương sườn 13",
+    "en": "Rib 13",
+    "zh": "第13肋骨",
+    "group": "thorax"
+  },
+  {
+    "fr": [
+      "Quatorzième côte"
+    ],
+    "slug": "costa-14",
+    "nav": "Costa XIV",
+    "vi": "Xương sườn 14",
+    "en": "Rib 14",
+    "zh": "第14肋骨",
+    "group": "thorax"
+  },
+  {
+    "fr": [
+      "Quinzième côte"
+    ],
+    "slug": "costa-15",
+    "nav": "Costa XV",
+    "vi": "Xương sườn 15",
+    "en": "Rib 15",
+    "zh": "第15肋骨",
+    "group": "thorax"
+  },
+  {
+    "fr": [
+      "Cartilages costaux"
+    ],
+    "slug": "cartilagines-costales",
+    "nav": "Cartilagines costales",
+    "vi": "Sụn sườn",
+    "en": "Costal cartilages",
+    "zh": "肋软骨",
+    "group": "thorax"
+  },
+  {
+    "fr": [
+      "Manubrium sternal"
+    ],
+    "slug": "manubrium-sterni",
+    "nav": "Manubrium sterni",
+    "vi": "Cán ức",
+    "en": "Manubrium of sternum",
+    "zh": "胸骨柄",
+    "group": "thorax"
+  },
+  {
+    "fr": [
+      "Deuxième sternèbre"
+    ],
+    "slug": "sternebra-2",
+    "nav": "Sternebra II",
+    "vi": "Đốt ức 2",
+    "en": "Sternebra 2",
+    "zh": "第2胸骨节",
+    "group": "thorax"
+  },
+  {
+    "fr": [
+      "Troisième sternèbre"
+    ],
+    "slug": "sternebra-3",
+    "nav": "Sternebra III",
+    "vi": "Đốt ức 3",
+    "en": "Sternebra 3",
+    "zh": "第3胸骨节",
+    "group": "thorax"
+  },
+  {
+    "fr": [
+      "Quatrième sternèbre"
+    ],
+    "slug": "sternebra-4",
+    "nav": "Sternebra IV",
+    "vi": "Đốt ức 4",
+    "en": "Sternebra 4",
+    "zh": "第4胸骨节",
+    "group": "thorax"
+  },
+  {
+    "fr": [
+      "Cinquième sternèbre"
+    ],
+    "slug": "sternebra-5",
+    "nav": "Sternebra V",
+    "vi": "Đốt ức 5",
+    "en": "Sternebra 5",
+    "zh": "第5胸骨节",
+    "group": "thorax"
+  },
+  {
+    "fr": [
+      "Sixième sternèbre"
+    ],
+    "slug": "sternebra-6",
+    "nav": "Sternebra VI",
+    "vi": "Đốt ức 6",
+    "en": "Sternebra 6",
+    "zh": "第6胸骨节",
+    "group": "thorax"
+  },
+  {
+    "fr": [
+      "Scapula"
+    ],
+    "slug": "scapula",
+    "nav": "Scapula",
+    "vi": "Xương bả vai",
+    "en": "Scapula",
+    "zh": "肩胛骨",
+    "group": "forelimb"
+  },
+  {
+    "fr": [
+      "Humérus"
+    ],
+    "slug": "humerus",
+    "nav": "Humerus",
+    "vi": "Xương cánh tay",
+    "en": "Humerus",
+    "zh": "肱骨",
+    "group": "forelimb"
+  },
+  {
+    "fr": [
+      "Radius"
+    ],
+    "slug": "radius",
+    "nav": "Radius",
+    "vi": "Xương quay",
+    "en": "Radius",
+    "zh": "桡骨",
+    "group": "forelimb"
+  },
+  {
+    "fr": [
+      "Ulna"
+    ],
+    "slug": "ulna",
+    "nav": "Ulna",
+    "vi": "Xương trụ",
+    "en": "Ulna",
+    "zh": "尺骨",
+    "group": "forelimb"
+  },
+  {
+    "fr": [
+      "Os radial du carpe [Os scaphoïde]"
+    ],
+    "slug": "os-carpi-radiale",
+    "nav": "Os carpi radiale",
+    "vi": "Xương cổ tay quay",
+    "en": "Radial carpal bone",
+    "zh": "桡腕骨",
+    "group": "forelimb"
+  },
+  {
+    "fr": [
+      "Os intermédiaire du carpe [Os lunatum]"
+    ],
+    "slug": "os-carpi-intermedium",
+    "nav": "Os carpi intermedium",
+    "vi": "Xương cổ tay giữa",
+    "en": "Intermediate carpal bone",
+    "zh": "中间腕骨",
+    "group": "forelimb"
+  },
+  {
+    "fr": [
+      "Os ulnaire du carpe [Os triquetrum]"
+    ],
+    "slug": "os-carpi-ulnare",
+    "nav": "Os carpi ulnare",
+    "vi": "Xương cổ tay trụ",
+    "en": "Ulnar carpal bone",
+    "zh": "尺腕骨",
+    "group": "forelimb"
+  },
+  {
+    "fr": [
+      "Os accessoire du carpe [Os pisiforme]"
+    ],
+    "slug": "os-carpi-accessorium",
+    "nav": "Os carpi accessorium",
+    "vi": "Xương cổ tay phụ",
+    "en": "Accessory carpal bone",
+    "zh": "副腕骨",
+    "group": "forelimb"
+  },
+  {
+    "fr": [
+      "Os carpien III [Os capitatum]"
+    ],
+    "slug": "os-carpale-3",
+    "nav": "Os carpale III",
+    "vi": "Xương cổ tay III",
+    "en": "Third carpal bone",
+    "zh": "第三腕骨",
+    "group": "forelimb"
+  },
+  {
+    "fr": [
+      "Os carpien IV [Os hamatum]"
+    ],
+    "slug": "os-carpale-4",
+    "nav": "Os carpale IV",
+    "vi": "Xương cổ tay IV",
+    "en": "Fourth carpal bone",
+    "zh": "第四腕骨",
+    "group": "forelimb"
+  },
+  {
+    "fr": [
+      "Deuxième métacarpien"
+    ],
+    "slug": "os-metacarpale-2",
+    "nav": "Os metacarpale II",
+    "vi": "Xương bàn trước II",
+    "en": "Metacarpal II",
+    "zh": "第2掌骨",
+    "group": "forelimb"
+  },
+  {
+    "fr": [
+      "Troisième métacarpien"
+    ],
+    "slug": "os-metacarpale-3",
+    "nav": "Os metacarpale III",
+    "vi": "Xương bàn trước III",
+    "en": "Metacarpal III",
+    "zh": "第3掌骨",
+    "group": "forelimb"
+  },
+  {
+    "fr": [
+      "Quatrième métacarpien"
+    ],
+    "slug": "os-metacarpale-4",
+    "nav": "Os metacarpale IV",
+    "vi": "Xương bàn trước IV",
+    "en": "Metacarpal IV",
+    "zh": "第4掌骨",
+    "group": "forelimb"
+  },
+  {
+    "fr": [
+      "Cinquième métacarpien"
+    ],
+    "slug": "os-metacarpale-5",
+    "nav": "Os metacarpale V",
+    "vi": "Xương bàn trước V",
+    "en": "Metacarpal V",
+    "zh": "第5掌骨",
+    "group": "forelimb"
+  },
+  {
+    "fr": [
+      "Os sésamoïdes proximaux du majeur de la main"
+    ],
+    "slug": "ossa-sesamoidea-manus",
+    "nav": "Ossa sesamoidea proximalia (manus)",
+    "vi": "Xương vừng gần, chi trước",
+    "en": "Proximal sesamoid bones, forelimb",
+    "zh": "前肢近籽骨",
+    "group": "forelimb"
+  },
+  {
+    "fr": [
+      "Os coxal"
+    ],
+    "slug": "os-coxae",
+    "nav": "Os coxae",
+    "vi": "Xương chậu",
+    "en": "Hip bone",
+    "zh": "髋骨",
+    "group": "hindlimb"
+  },
+  {
+    "fr": [
+      "Fémur"
+    ],
+    "slug": "os-femoris",
+    "nav": "Os femoris",
+    "vi": "Xương đùi",
+    "en": "Femur",
+    "zh": "股骨",
+    "group": "hindlimb"
+  },
+  {
+    "fr": [
+      "Tibia"
+    ],
+    "slug": "tibia",
+    "nav": "Tibia",
+    "vi": "Xương chày",
+    "en": "Tibia",
+    "zh": "胫骨",
+    "group": "hindlimb"
+  },
+  {
+    "fr": [
+      "Fibula"
+    ],
+    "slug": "fibula",
+    "nav": "Fibula",
+    "vi": "Xương mác",
+    "en": "Fibula",
+    "zh": "腓骨",
+    "group": "hindlimb"
+  },
+  {
+    "fr": [
+      "Calcaneus"
+    ],
+    "slug": "calcaneus",
+    "nav": "Calcaneus",
+    "vi": "Xương gót",
+    "en": "Calcaneus",
+    "zh": "跟骨",
+    "group": "hindlimb"
+  },
+  {
+    "fr": [
+      "Talus"
+    ],
+    "slug": "talus",
+    "nav": "Talus",
+    "vi": "Xương sên",
+    "en": "Talus",
+    "zh": "距骨",
+    "group": "hindlimb"
+  },
+  {
+    "fr": [
+      "Os central du tarse [Os naviculaire]"
+    ],
+    "slug": "os-tarsi-centrale",
+    "nav": "Os tarsi centrale",
+    "vi": "Xương cổ chân giữa",
+    "en": "Central tarsal bone",
+    "zh": "中央跗骨",
+    "group": "hindlimb"
+  },
+  {
+    "fr": [
+      "Os tarsien I [Os cunéiforme médial]"
+    ],
+    "slug": "os-tarsale-1",
+    "nav": "Os tarsale I",
+    "vi": "Xương cổ chân I",
+    "en": "Tarsal bone I",
+    "zh": "第1跗骨",
+    "group": "hindlimb"
+  },
+  {
+    "fr": [
+      "Os tarsien II [Os cunéiforme intermédiaire]"
+    ],
+    "slug": "os-tarsale-2",
+    "nav": "Os tarsale II",
+    "vi": "Xương cổ chân II",
+    "en": "Tarsal bone II",
+    "zh": "第2跗骨",
+    "group": "hindlimb"
+  },
+  {
+    "fr": [
+      "Os tarsien III [Os cunéiforme latéral]"
+    ],
+    "slug": "os-tarsale-3",
+    "nav": "Os tarsale III",
+    "vi": "Xương cổ chân III",
+    "en": "Tarsal bone III",
+    "zh": "第3跗骨",
+    "group": "hindlimb"
+  },
+  {
+    "fr": [
+      "Os tarsien IV"
+    ],
+    "slug": "os-tarsale-4",
+    "nav": "Os tarsale IV",
+    "vi": "Xương cổ chân IV",
+    "en": "Tarsal bone IV",
+    "zh": "第4跗骨",
+    "group": "hindlimb"
+  },
+  {
+    "fr": [
+      "Deuxième métatarsien",
+      "Deuxième os métatarsien"
+    ],
+    "slug": "os-metatarsale-2",
+    "nav": "Os metatarsale II",
+    "vi": "Xương bàn sau II",
+    "en": "Metatarsal II",
+    "zh": "第2跖骨",
+    "group": "hindlimb"
+  },
+  {
+    "fr": [
+      "Troisième métatarsien",
+      "Troisième os métatarsien"
+    ],
+    "slug": "os-metatarsale-3",
+    "nav": "Os metatarsale III",
+    "vi": "Xương bàn sau III",
+    "en": "Metatarsal III",
+    "zh": "第3跖骨",
+    "group": "hindlimb"
+  },
+  {
+    "fr": [
+      "Quatrième métatarsien",
+      "Quatrième os métatarsien"
+    ],
+    "slug": "os-metatarsale-4",
+    "nav": "Os metatarsale IV",
+    "vi": "Xương bàn sau IV",
+    "en": "Metatarsal IV",
+    "zh": "第4跖骨",
+    "group": "hindlimb"
+  },
+  {
+    "fr": [
+      "Cinquième métatarsien",
+      "Cinquième os métatarsien"
+    ],
+    "slug": "os-metatarsale-5",
+    "nav": "Os metatarsale V",
+    "vi": "Xương bàn sau V",
+    "en": "Metatarsal V",
+    "zh": "第5跖骨",
+    "group": "hindlimb"
+  },
+  {
+    "fr": [
+      "Phalange proximale du deuxième doigt de la main"
+    ],
+    "slug": "phalanx-proximalis-manus-2",
+    "nav": "Phalanx proximalis digiti II manus",
+    "vi": "Đốt ngón gần, ngón II chi trước",
+    "en": "Proximal phalanx, digit II forelimb",
+    "zh": "前肢第2指近节",
+    "group": "forelimb"
+  },
+  {
+    "fr": [
+      "Phalange proximale du deuxième doigt de pied"
+    ],
+    "slug": "phalanx-proximalis-pedis-2",
+    "nav": "Phalanx proximalis digiti II pedis",
+    "vi": "Đốt ngón gần, ngón II chi sau",
+    "en": "Proximal phalanx, digit II hindlimb",
+    "zh": "后肢第2趾近节",
+    "group": "hindlimb"
+  },
+  {
+    "fr": [
+      "Phalange proximale du troisième doigt de la main",
+      "Phalange proximale du troisème doigt de la main"
+    ],
+    "slug": "phalanx-proximalis-manus-3",
+    "nav": "Phalanx proximalis digiti III manus",
+    "vi": "Đốt ngón gần, ngón III chi trước",
+    "en": "Proximal phalanx, digit III forelimb",
+    "zh": "前肢第3指近节",
+    "group": "forelimb"
+  },
+  {
+    "fr": [
+      "Phalange proximale du troisième doigt de pied",
+      "Phalange proximale du troisème doigt de pied"
+    ],
+    "slug": "phalanx-proximalis-pedis-3",
+    "nav": "Phalanx proximalis digiti III pedis",
+    "vi": "Đốt ngón gần, ngón III chi sau",
+    "en": "Proximal phalanx, digit III hindlimb",
+    "zh": "后肢第3趾近节",
+    "group": "hindlimb"
+  },
+  {
+    "fr": [
+      "Phalange proximale du quatrième doigt de la main"
+    ],
+    "slug": "phalanx-proximalis-manus-4",
+    "nav": "Phalanx proximalis digiti IV manus",
+    "vi": "Đốt ngón gần, ngón IV chi trước",
+    "en": "Proximal phalanx, digit IV forelimb",
+    "zh": "前肢第4指近节",
+    "group": "forelimb"
+  },
+  {
+    "fr": [
+      "Phalange proximale du quatrième doigt de pied"
+    ],
+    "slug": "phalanx-proximalis-pedis-4",
+    "nav": "Phalanx proximalis digiti IV pedis",
+    "vi": "Đốt ngón gần, ngón IV chi sau",
+    "en": "Proximal phalanx, digit IV hindlimb",
+    "zh": "后肢第4趾近节",
+    "group": "hindlimb"
+  },
+  {
+    "fr": [
+      "Phalange proximale du cinquième doigt de la main",
+      "Phalange proximale du cinquème doigt de la main"
+    ],
+    "slug": "phalanx-proximalis-manus-5",
+    "nav": "Phalanx proximalis digiti V manus",
+    "vi": "Đốt ngón gần, ngón V chi trước",
+    "en": "Proximal phalanx, digit V forelimb",
+    "zh": "前肢第5指近节",
+    "group": "forelimb"
+  },
+  {
+    "fr": [
+      "Phalange proximale du cinquième doigt de pied",
+      "Phalange proximale du cinquème doigt de pied"
+    ],
+    "slug": "phalanx-proximalis-pedis-5",
+    "nav": "Phalanx proximalis digiti V pedis",
+    "vi": "Đốt ngón gần, ngón V chi sau",
+    "en": "Proximal phalanx, digit V hindlimb",
+    "zh": "后肢第5趾近节",
+    "group": "hindlimb"
+  },
+  {
+    "fr": [
+      "Phalange moyenne du deuxième doigt de la main"
+    ],
+    "slug": "phalanx-media-manus-2",
+    "nav": "Phalanx media digiti II manus",
+    "vi": "Đốt ngón giữa, ngón II chi trước",
+    "en": "Middle phalanx, digit II forelimb",
+    "zh": "前肢第2指中节",
+    "group": "forelimb"
+  },
+  {
+    "fr": [
+      "Phalange moyenne du deuxième doigt de pied"
+    ],
+    "slug": "phalanx-media-pedis-2",
+    "nav": "Phalanx media digiti II pedis",
+    "vi": "Đốt ngón giữa, ngón II chi sau",
+    "en": "Middle phalanx, digit II hindlimb",
+    "zh": "后肢第2趾中节",
+    "group": "hindlimb"
+  },
+  {
+    "fr": [
+      "Phalange moyenne du troisième doigt de la main",
+      "Phalange moyenne du troisème doigt de la main"
+    ],
+    "slug": "phalanx-media-manus-3",
+    "nav": "Phalanx media digiti III manus",
+    "vi": "Đốt ngón giữa, ngón III chi trước",
+    "en": "Middle phalanx, digit III forelimb",
+    "zh": "前肢第3指中节",
+    "group": "forelimb"
+  },
+  {
+    "fr": [
+      "Phalange moyenne du troisième doigt de pied",
+      "Phalange moyenne du troisème doigt de pied"
+    ],
+    "slug": "phalanx-media-pedis-3",
+    "nav": "Phalanx media digiti III pedis",
+    "vi": "Đốt ngón giữa, ngón III chi sau",
+    "en": "Middle phalanx, digit III hindlimb",
+    "zh": "后肢第3趾中节",
+    "group": "hindlimb"
+  },
+  {
+    "fr": [
+      "Phalange moyenne du quatrième doigt de la main"
+    ],
+    "slug": "phalanx-media-manus-4",
+    "nav": "Phalanx media digiti IV manus",
+    "vi": "Đốt ngón giữa, ngón IV chi trước",
+    "en": "Middle phalanx, digit IV forelimb",
+    "zh": "前肢第4指中节",
+    "group": "forelimb"
+  },
+  {
+    "fr": [
+      "Phalange moyenne du quatrième doigt de pied"
+    ],
+    "slug": "phalanx-media-pedis-4",
+    "nav": "Phalanx media digiti IV pedis",
+    "vi": "Đốt ngón giữa, ngón IV chi sau",
+    "en": "Middle phalanx, digit IV hindlimb",
+    "zh": "后肢第4趾中节",
+    "group": "hindlimb"
+  },
+  {
+    "fr": [
+      "Phalange moyenne du cinquième doigt de la main",
+      "Phalange moyenne du cinquème doigt de la main"
+    ],
+    "slug": "phalanx-media-manus-5",
+    "nav": "Phalanx media digiti V manus",
+    "vi": "Đốt ngón giữa, ngón V chi trước",
+    "en": "Middle phalanx, digit V forelimb",
+    "zh": "前肢第5指中节",
+    "group": "forelimb"
+  },
+  {
+    "fr": [
+      "Phalange moyenne du cinquième doigt de pied",
+      "Phalange moyenne du cinquème doigt de pied"
+    ],
+    "slug": "phalanx-media-pedis-5",
+    "nav": "Phalanx media digiti V pedis",
+    "vi": "Đốt ngón giữa, ngón V chi sau",
+    "en": "Middle phalanx, digit V hindlimb",
+    "zh": "后肢第5趾中节",
+    "group": "hindlimb"
+  },
+  {
+    "fr": [
+      "Phalange distale du deuxième doigt de la main"
+    ],
+    "slug": "phalanx-distalis-manus-2",
+    "nav": "Phalanx distalis digiti II manus",
+    "vi": "Đốt ngón xa, ngón II chi trước",
+    "en": "Distal phalanx, digit II forelimb",
+    "zh": "前肢第2指远节",
+    "group": "forelimb"
+  },
+  {
+    "fr": [
+      "Phalange distale du deuxième doigt de pied"
+    ],
+    "slug": "phalanx-distalis-pedis-2",
+    "nav": "Phalanx distalis digiti II pedis",
+    "vi": "Đốt ngón xa, ngón II chi sau",
+    "en": "Distal phalanx, digit II hindlimb",
+    "zh": "后肢第2趾远节",
+    "group": "hindlimb"
+  },
+  {
+    "fr": [
+      "Phalange distale du troisième doigt de la main",
+      "Phalange distale du troisème doigt de la main"
+    ],
+    "slug": "phalanx-distalis-manus-3",
+    "nav": "Phalanx distalis digiti III manus",
+    "vi": "Đốt ngón xa, ngón III chi trước",
+    "en": "Distal phalanx, digit III forelimb",
+    "zh": "前肢第3指远节",
+    "group": "forelimb"
+  },
+  {
+    "fr": [
+      "Phalange distale du troisième doigt de pied",
+      "Phalange distale du troisème doigt de pied"
+    ],
+    "slug": "phalanx-distalis-pedis-3",
+    "nav": "Phalanx distalis digiti III pedis",
+    "vi": "Đốt ngón xa, ngón III chi sau",
+    "en": "Distal phalanx, digit III hindlimb",
+    "zh": "后肢第3趾远节",
+    "group": "hindlimb"
+  },
+  {
+    "fr": [
+      "Phalange distale du quatrième doigt de la main"
+    ],
+    "slug": "phalanx-distalis-manus-4",
+    "nav": "Phalanx distalis digiti IV manus",
+    "vi": "Đốt ngón xa, ngón IV chi trước",
+    "en": "Distal phalanx, digit IV forelimb",
+    "zh": "前肢第4指远节",
+    "group": "forelimb"
+  },
+  {
+    "fr": [
+      "Phalange distale du quatrième doigt de pied"
+    ],
+    "slug": "phalanx-distalis-pedis-4",
+    "nav": "Phalanx distalis digiti IV pedis",
+    "vi": "Đốt ngón xa, ngón IV chi sau",
+    "en": "Distal phalanx, digit IV hindlimb",
+    "zh": "后肢第4趾远节",
+    "group": "hindlimb"
+  },
+  {
+    "fr": [
+      "Phalange distale du cinquième doigt de la main",
+      "Phalange distale du cinquème doigt de la main"
+    ],
+    "slug": "phalanx-distalis-manus-5",
+    "nav": "Phalanx distalis digiti V manus",
+    "vi": "Đốt ngón xa, ngón V chi trước",
+    "en": "Distal phalanx, digit V forelimb",
+    "zh": "前肢第5指远节",
+    "group": "forelimb"
+  },
+  {
+    "fr": [
+      "Phalange distale du cinquième doigt de pied",
+      "Phalange distale du cinquème doigt de pied"
+    ],
+    "slug": "phalanx-distalis-pedis-5",
+    "nav": "Phalanx distalis digiti V pedis",
+    "vi": "Đốt ngón xa, ngón V chi sau",
+    "en": "Distal phalanx, digit V hindlimb",
+    "zh": "后肢第5趾远节",
+    "group": "hindlimb"
+  }
+]

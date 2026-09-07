@@ -24,7 +24,7 @@ export const digestiveScenes: Record<string, SceneModule> = {
         label: { vi: "Đốt sống ngực XII (T12)", en: "12th Thoracic Vertebra (T12)", zh: "第12胸椎 (T12)" },
         latinName: "Vertebra thoracica XII",
         note: {
-          vi: "Đốt sống ngực cuối cùng, nơi xương sườn 12 (sườn cụt) gắn vào — mốc chuẩn xác định mức cắt qua tầng bụng trên. Tuỷ sống ở mức này đã kết thúc thành chóp tuỷ (conus medullaris) ở người trưởng thành, phía sau là các cơ dựng sống (erector spinae).",
+          vi: "Đốt sống ngực cuối cùng, nơi xương sườn 12 (sườn cụt) gắn vào — mốc chuẩn xác định mức cắt qua tầng bụng trên. Tuỷ sống ở mức này đã kết thúc thành nón tuỷ (conus medullaris) ở người trưởng thành, phía sau là các cơ dựng sống (erector spinae).",
           en: "The last thoracic vertebra, where the 12th (floating) rib attaches — the standard landmark for this upper-abdominal cross-section. In adults the spinal cord has already tapered into the conus medullaris near this level; the erector spinae muscles lie just posterior to the vertebral body.",
           zh: "最后一节胸椎，第12肋（浮肋）附着处——此腹上区横切面的标准解剖标志。成人此水平脊髓已终止为脊髓圆锥，椎体后方紧邻竖脊肌。",
         },

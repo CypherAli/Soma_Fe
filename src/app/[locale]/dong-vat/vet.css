@@ -191,9 +191,23 @@
   font: 500 11px/1 var(--sans, inherit); letter-spacing: .16em; text-transform: uppercase;
   color: var(--sub-e);
 }
+/* Thanh chọn lớp giải phẫu — dùng lại đúng hình thức nút của .vet-filter để
+   trang không sinh ra hai kiểu nút lọc trông khác nhau. */
+.bd .vet-layers { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 0; }
+.bd .vet-layer-tag {
+  display: inline-flex; align-items: baseline; gap: 7px;
+  padding: 6px 13px; border: 1px solid var(--line-e); border-radius: 999px;
+  color: var(--body-e); font-size: 12.5px;
+}
+.bd .vet-layer-tag b { color: var(--acc); font-size: 11px; font-variant-numeric: tabular-nums; }
+.bd .vet-layers-note {
+  margin: 10px 0 0; max-width: 74ch;
+  font: italic 12px/1.7 var(--serif); color: var(--sub-e);
+}
+
 .bd .vet-model { margin: 16px 0 30px; }
 .bd .vet-model-stage {
-  position: relative; aspect-ratio: 16 / 9; min-height: 260px;
+  position: relative; aspect-ratio: 4 / 3; max-height: 62vh; min-height: 300px;
   border: 1px solid var(--line-e); border-radius: 12px; overflow: hidden;
   background: #0d0f12;
 }
@@ -375,3 +389,136 @@ html[data-theme="dark"] .bd {
   .bd .vet-bones-body { grid-template-columns: 1fr; }
   .bd .vet-bone-list { max-height: 280px; }
 }
+
+/* ═══ KHUNG XEM MẪU VẬT (/dong-vat/<loài>/xem) ═══════════════════════════
+   Dùng lại .viewer-rail / .vr-* / .viewer-stage của trang toàn thân bên người
+   để hai khu vực không trông như hai sản phẩm khác nhau. Chỉ những gì bên
+   người KHÔNG có mới định nghĩa thêm ở đây. */
+.bd.vet-viewer { display: flex; flex-direction: column; height: 100dvh; overflow: hidden; }
+.bd.vet-viewer .vet-viewer-body { display: flex; flex: 1; min-height: 0; }
+.bd.vet-viewer .vet-viewer-stage { position: relative; flex: 1; min-width: 0; }
+
+/* Hàng trong thanh trái vốn là <div>; ở đây cấp lớp và cấp mẫu vật là <button>
+   nên phải gỡ kiểu nút mặc định rồi trả lại đúng dáng .vr-row. */
+.bd .vr-row.vet-vr-pick {
+  width: 100%; border: 0; background: transparent; cursor: pointer;
+  text-align: left; font: inherit; font-size: 13px;
+}
+.bd .vr-row.vet-vr-pick.is-on { background: color-mix(in srgb, var(--acc) 12%, transparent); }
+.bd .vr-row.vet-vr-pick.is-on .vr-name { color: var(--acc); }
+/* Lớp chưa có mẫu vẫn hiện, nhưng mờ và bấm không được — để người học thấy
+   trình tự bóc lớp đầy đủ và biết chỗ nào của atlas còn trống. */
+.bd .vr-row.vet-vr-pick.is-empty { opacity: .38; cursor: default; }
+.bd .vr-row.vet-vr-pick.is-empty:hover { background: transparent; }
+.bd .vr-row.vet-vr-pick.is-empty .vet-vr-count { font-style: italic; font-size: 10px; }
+.bd .vet-vr-count { flex: none; font-size: 11px; color: var(--sub-e); font-variant-numeric: tabular-nums; }
+.bd .vet-vr-label {
+  flex: 1; min-width: 0; display: grid; gap: 1px; padding: 0;
+  border: 0; background: none; cursor: pointer; text-align: left; color: inherit; font: inherit;
+}
+.bd .vet-vr-label .vr-name { font-size: 13px; line-height: 1.3; }
+.bd .vet-vr-label em { font: italic 10.5px var(--serif); color: var(--sub-e); }
+
+/* Đầu mục trong danh sách bộ phận — chỉ dùng khi mẫu vật có quá nhiều bộ phận
+   để đọc phẳng (bộ xương lợn: 120 xương). Kẻ một vạch trên và in hoa nhỏ để
+   mắt bắt được ranh giới mục khi lăn nhanh. */
+.bd .vr-row.vet-vr-group {
+  margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--line-e, rgba(0,0,0,.08));
+}
+.bd .vr-row.vet-vr-group:hover { background: transparent; }
+.bd .vr-row.vet-vr-group .vr-name {
+  font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--sub-e);
+}
+
+.bd .vet-viewer-loading { position: absolute; inset: 0; }
+.bd .vet-viewer-empty,
+.bd .vet-viewer-hint {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  padding: 6px 15px; border-radius: 999px; background: rgba(12,14,17,.72);
+  color: #cfd3d8; font-size: 11.5px; backdrop-filter: blur(6px); pointer-events: none;
+}
+.bd .vet-viewer-hint { bottom: 18px; }
+.bd .vet-viewer-empty { top: 50%; }
+/* Thanh gợi ý đổi vai: bình thường là câu hướng dẫn, khi rê chuột lên mẫu thì
+   thành TÊN cấu trúc sắp bấm trúng. Đây là thứ thay cho việc luôn bày điểm
+   đánh dấu trên mình con vật. */
+.bd .vet-viewer-hint.is-name {
+  color: var(--paper); background: rgba(208,106,80,.9);
+  font-size: 12.5px; letter-spacing: .01em;
+}
+.bd .vet-viewer-markers {
+  position: absolute; top: 16px; left: 16px; padding: 6px 14px;
+  border: 1px solid rgba(255,255,255,.18); border-radius: 999px;
+  background: rgba(12,14,17,.72); color: #cfd3d8; font-size: 11.5px; cursor: pointer;
+  backdrop-filter: blur(6px); transition: all .16s ease;
+}
+.bd .vet-viewer-markers:hover { border-color: var(--acc); color: var(--acc); }
+.bd .vet-viewer-markers.is-on { border-color: var(--acc); color: var(--acc); }
+.bd .vet-viewer-reset {
+  position: absolute; top: 16px; right: 16px; padding: 6px 14px;
+  border: 1px solid rgba(255,255,255,.18); border-radius: 999px;
+  background: rgba(12,14,17,.72); color: #e6e8ea; font-size: 11.5px; cursor: pointer;
+  backdrop-filter: blur(6px); transition: all .16s ease;
+}
+.bd .vet-viewer-reset:hover { border-color: var(--acc); color: var(--acc); }
+
+/* Bảng thông tin bên phải — hẹp hơn thanh trái vì chỉ chứa chữ. */
+.bd .vet-viewer-info {
+  width: 300px; flex-shrink: 0; display: flex; flex-direction: column;
+  background: var(--paper); border-left: 1px solid var(--line-e); overflow-y: auto;
+}
+.bd .vvi-head { padding: 18px 20px 14px; border-bottom: 1px solid var(--line-e); }
+.bd .vvi-head h2 {
+  font: 700 9px/1 var(--sans, inherit); letter-spacing: .22em;
+  text-transform: uppercase; color: var(--sub-e);
+}
+.bd .vvi-body { padding: 18px 20px; }
+.bd .vvi-body h3 { font: 500 19px/1.3 var(--serif); color: var(--ink-e); }
+.bd .vvi-body > em { display: block; margin-top: 3px; font: italic 12.5px var(--serif); color: var(--acc); }
+.bd .vvi-body h4 {
+  margin: 16px 0 5px; font-size: 9px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--sub-e); font-weight: 700;
+}
+.bd .vvi-body p { margin-top: 10px; font-size: 13px; line-height: 1.8; color: var(--body-e); }
+.bd .vvi-body h4 + p { margin-top: 0; }
+.bd .vvi-body small { display: block; margin-top: 16px; font: italic 11px var(--serif); color: var(--sub-e); }
+.bd .vvi-note { font-style: italic; color: var(--sub-e) !important; font-size: 11.5px !important; }
+.bd .vvi-acts { display: flex; gap: 6px; margin-top: 14px; }
+.bd .vvi-acts button {
+  flex: 1; padding: 7px 8px; border: 1px solid var(--line-e); border-radius: 7px;
+  background: transparent; color: var(--body-e); font-size: 11.5px; cursor: pointer;
+  transition: all .16s ease;
+}
+.bd .vvi-acts button:hover { border-color: var(--acc); color: var(--acc); }
+.bd .vvi-acts button.is-on { border-color: var(--acc); color: var(--acc); background: color-mix(in srgb, var(--acc) 10%, transparent); }
+.bd .vvi-empty { flex: 1; display: grid; place-items: center; padding: 26px 22px; }
+.bd .vvi-empty p { font: italic 12.5px/1.75 var(--serif); color: var(--sub-e); text-align: center; }
+/* Ghi công dính đáy: CC BY buộc hiện ghi công ở nơi người xem thấy được, mà
+   khung xem không cuộn nên phải luôn nằm trong tầm mắt. */
+.bd .vvi-cred { margin-top: auto; padding: 16px 20px 20px; border-top: 1px solid var(--line-e); }
+.bd .vvi-cred p { font-size: 11px; line-height: 1.7; color: var(--sub-e); }
+.bd .vvi-cred-title { color: var(--ink-e) !important; font-weight: 600; margin-bottom: 5px; }
+.bd .vvi-cred a { display: inline-block; margin-top: 7px; font-size: 11px; color: var(--acc); text-decoration: none; }
+.bd .vvi-cred a:hover { text-decoration: underline; }
+
+/* Dưới 1100px thì hai thanh bên xếp xuống dưới sân khấu — ba khoang cạnh nhau
+   trên màn hẹp thì khoang nào cũng không đủ rộng để dùng. */
+@media (max-width: 1100px) {
+  .bd.vet-viewer { height: auto; overflow: visible; }
+  .bd.vet-viewer .vet-viewer-body { flex-direction: column; }
+  .bd.vet-viewer .vet-viewer-stage { min-height: 58dvh; }
+  .bd.vet-viewer .viewer-rail,
+  .bd .vet-viewer-info { width: 100%; border: 0; border-top: 1px solid var(--line-e); }
+}
+
+/* Thẻ dẫn sang khung xem, đặt trên trang loài. */
+.bd .vet-viewer-cta {
+  display: flex; align-items: center; gap: 16px; margin: 16px 0 4px;
+  padding: 16px 18px; border: 1px solid var(--line-e); border-radius: 12px;
+  text-decoration: none; transition: border-color .18s ease, background .18s ease;
+}
+.bd .vet-viewer-cta:hover { border-color: var(--acc); background: color-mix(in srgb, var(--acc) 5%, transparent); }
+.bd .vet-viewer-cta div { flex: 1; min-width: 0; }
+.bd .vet-viewer-cta strong { display: block; font: 500 15px/1.35 var(--serif); color: var(--ink-e); }
+.bd .vet-viewer-cta span { display: block; margin-top: 3px; font-size: 12px; color: var(--sub-e); }
+.bd .vet-viewer-cta i { flex: none; font-style: normal; font-size: 18px; color: var(--acc); }

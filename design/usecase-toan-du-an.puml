@@ -1,0 +1,155 @@
+@startuml soma-3d-usecase
+' Sơ đồ ca sử dụng toàn dự án Soma 3D (đồ án tốt nghiệp)
+' Frontend Next.js (Soma_Fe) + Backend NestJS/Prisma (soma_be)
+
+left to right direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam packageStyle rectangle
+skinparam actorStyle awesome
+skinparam usecase {
+  BackgroundColor #FDFDFD
+  BorderColor #6B7A73
+  ArrowColor #475550
+}
+
+actor "Khách\n(chưa đăng nhập)" as Guest
+actor "Thành viên\n(đã đăng nhập)" as Member
+actor "Người biên tập\nnội dung" as Editor
+
+actor "Dịch vụ LLM\n(Claude / DeepSeek)" as LLM
+actor "Nhà cung cấp OAuth\n(Google, GitHub, Facebook)" as OAuth
+actor "Webcam +\nMediaPipe" as Cam
+
+Member --|> Guest
+
+rectangle "Atlas giải phẫu 3D" as R1 {
+  usecase "Xem mô hình 3D\nnhiều lớp" as UC1
+  usecase "Bóc / ẩn hiện\ntừng lớp giải phẫu" as UC2
+  usecase "Cắt mặt phẳng\n(mặt cắt stencil)" as UC3
+  usecase "Chọn và xem\nchi tiết cấu trúc" as UC4
+  usecase "Duyệt theo\nhệ cơ quan" as UC5
+  usecase "Tìm kiếm cấu trúc\n(vi / en / la)" as UC6
+  usecase "Xem giải phẫu\nthú y (so sánh)" as UC7
+}
+
+rectangle "Điều khiển bằng cử chỉ (Vision AI)" as R2 {
+  usecase "Điều khiển mô hình\nbằng cử chỉ tay" as UC8
+  usecase "Nhận diện bàn tay\nqua webcam" as UC9
+  usecase "Chỉ / chọn cấu trúc\nbằng tia raycast" as UC10
+}
+
+rectangle "Học tập & Trắc nghiệm" as R3 {
+  usecase "Làm bài trắc nghiệm\ngiải phẫu" as UC11
+  usecase "Sinh câu hỏi từ\nkho hotspot + ảnh atlas" as UC12
+  usecase "Chấm điểm và\nxem lại đáp án" as UC13
+}
+
+rectangle "Thư viện bệnh lý" as R4 {
+  usecase "Duyệt danh mục\n106 bệnh" as UC14
+  usecase "Đọc hồ sơ bệnh\n(5 mục chuyên môn)" as UC15
+  usecase "Xem hình trích\ntừ giáo trình" as UC16
+  usecase "Mở mô hình 3D\nvị trí tổn thương" as UC17
+  usecase "Tra theo\ntriệu chứng" as UC18
+  usecase "Hỏi đáp trong\nphạm vi một bệnh" as UC19
+}
+
+rectangle "Trợ lý Soma Bot" as R5 {
+  usecase "Hỏi đáp giải phẫu\nvà bệnh học" as UC20
+  usecase "Tra cứu tư liệu\n(RAG 3 kho)" as UC21
+  usecase "Trả lời kèm\ntrích dẫn nguồn" as UC22
+  usecase "Nhập câu hỏi\nbằng giọng nói" as UC23
+  usecase "Đọc câu trả lời\nthành tiếng" as UC24
+  usecase "Giới hạn 2 câu\n& mời đăng nhập" as UC25
+  usecase "Lưu lịch sử hội thoại\ntheo tài khoản" as UC26
+}
+
+rectangle "Tài khoản & Cá nhân hoá" as R6 {
+  usecase "Đăng ký" as UC27
+  usecase "Đăng nhập" as UC28
+  usecase "Đăng nhập bằng\nmạng xã hội" as UC29
+  usecase "Quản lý bộ sưu tập\ncấu trúc đã lưu" as UC30
+  usecase "Đổi ngôn ngữ\nvi / en / zh" as UC31
+  usecase "Đổi giao diện\nsáng / tối" as UC32
+}
+
+rectangle "Quản trị nội dung (qua script & API)" as R7 {
+  usecase "Nhập dữ liệu giải phẫu\nvà bệnh lý (seed)" as UC33
+  usecase "Nhập bản dịch\nEN / ZH" as UC34
+  usecase "Xuất model từ Blender\n(Z-Anatomy)" as UC35
+  usecase "Dựng chỉ mục\ngiáo trình (OCR)" as UC36
+}
+
+' ----- Khách dùng được gì -----
+Guest --> UC1
+Guest --> UC5
+Guest --> UC6
+Guest --> UC7
+Guest --> UC8
+Guest --> UC11
+Guest --> UC14
+Guest --> UC18
+Guest --> UC20
+Guest --> UC27
+Guest --> UC28
+Guest --> UC31
+Guest --> UC32
+
+' ----- Riêng thành viên -----
+Member --> UC26
+Member --> UC30
+
+' ----- Người biên tập -----
+Editor --> UC33
+Editor --> UC34
+Editor --> UC35
+Editor --> UC36
+
+' ----- Quan hệ include -----
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC4 : <<include>>
+UC4 ..> UC17 : <<extend>>
+UC5 ..> UC1 : <<include>>
+UC6 ..> UC4 : <<include>>
+UC8 ..> UC9 : <<include>>
+UC8 ..> UC10 : <<include>>
+UC11 ..> UC12 : <<include>>
+UC11 ..> UC13 : <<include>>
+UC14 ..> UC15 : <<include>>
+UC15 ..> UC16 : <<include>>
+UC15 ..> UC17 : <<extend>>
+UC15 ..> UC19 : <<extend>>
+UC18 ..> UC21 : <<include>>
+UC19 ..> UC21 : <<include>>
+UC20 ..> UC21 : <<include>>
+UC21 ..> UC22 : <<include>>
+UC29 ..> UC28 : <<include>>
+
+' ----- Quan hệ extend (tuỳ chọn) -----
+UC1 ..> UC3 : <<extend>>
+UC20 ..> UC23 : <<extend>>
+UC20 ..> UC24 : <<extend>>
+UC20 ..> UC25 : <<extend>>
+UC20 ..> UC26 : <<extend>>
+
+' ----- Hệ thống ngoài -----
+UC21 --> LLM
+UC12 --> LLM
+UC9 --> Cam
+UC29 --> OAuth
+
+note bottom of UC21
+  Ba kho tư liệu:
+  629 hotspot giải phẫu · 2883 đoạn
+  giáo trình bệnh học · 20 mục
+  giải phẫu đại cương có trích nguồn.
+  Cấm mô hình dùng kiến thức ngoài.
+end note
+
+note bottom of UC25
+  Khách: hội thoại chỉ nằm trong bộ nhớ
+  trang, F5 là mất; hết 2 câu thì mời
+  đăng nhập.
+end note
+
+@enduml

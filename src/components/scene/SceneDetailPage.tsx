@@ -13,6 +13,7 @@ import InfoPanel from "../InfoPanel";
 import LanguageSwitcher from "../LanguageSwitcher";
 import ThemeToggle from "../home/ThemeToggle";
 import "../../app/home.css";
+import { consumeLocaleTransition } from "@/lib/localeTransition";
 
 export default function SceneDetailPage({
   module: sceneModule,
@@ -31,10 +32,23 @@ export default function SceneDetailPage({
   // Mỗi lần vào 1 scene: xoá sạch Ẩn/Mờ/Cô lập/Mặt cắt của scene trước đó và
   // chỉ bật đúng các hệ scene này cần — tránh trạng thái cũ lẫn sang.
   useEffect(() => {
+    if (consumeLocaleTransition()) {
+      const current = useAnatomyStore.getState().selected;
+      const hotspot = current && sceneModule.hotspots.find((item) => item.key === useAnatomyStore.getState().activeHotspotKey);
+      if (current && hotspot) {
+        useAnatomyStore.getState().setSelected({
+          ...current,
+          name: displayName(hotspot, locale),
+          latin: hotspot.latinName ?? current.latin,
+          description: hotspot.note ? pick(hotspot.note, locale) : current.description,
+        });
+      }
+      return;
+    }
     const patch = Object.fromEntries(sceneModule.visibleSystems.map((k) => [k, true]));
     resetViewer(patch);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sceneModule.slug]);
+  }, [sceneModule, locale]);
 
   return (
     <div className="bd flex h-screen flex-col bg-[var(--surf-3)]">

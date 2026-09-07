@@ -15,7 +15,7 @@ const MAX_SUGGESTIONS = 6;
  * Anh, Latin) nên gõ "hepar" hay "ốc tai" đều ra đúng mô hình. Bỏ dấu tiếng
  * Việt nên "coi song" vẫn tìm được "Cột sống".
  */
-export default function HomeSearch({ locale }: { locale: Loc }) {
+export default function HomeSearch({ locale, compact = false }: { locale: Loc; compact?: boolean }) {
   const router = useRouter();
   const [query, setQuery] = useState("");
   const [focused, setFocused] = useState(false);
@@ -30,7 +30,7 @@ export default function HomeSearch({ locale }: { locale: Loc }) {
   };
 
   return (
-    <div className="search-wrap">
+    <div className={`search-wrap${compact ? " search-compact" : ""}`}>
       <form
         className="search"
         onSubmit={(e) => {
@@ -38,6 +38,7 @@ export default function HomeSearch({ locale }: { locale: Loc }) {
           goToFirstResult();
         }}
       >
+        <svg className="search-leading-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -52,8 +53,13 @@ export default function HomeSearch({ locale }: { locale: Loc }) {
           placeholder={pick(C.hero.search, locale)}
           aria-label={pick(C.hero.search, locale)}
         />
-        <button type="submit" className="go">
-          {pick(C.hero.searchBtn, locale)}
+        <button type="submit" className="go" disabled={!query.trim() || results.length === 0}>
+          {!compact && <span>{pick(C.hero.searchBtn, locale)}</span>}
+          {compact ? (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+          ) : (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5"/></svg>
+          )}
         </button>
       </form>
 

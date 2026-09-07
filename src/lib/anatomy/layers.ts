@@ -87,7 +87,17 @@ const BRAIN_KEYS = ["brain", "cerebr", "cerebell", "brainstem", "telencephal", "
   // Khoang dịch não tuỷ và màng não: không có mấy từ này thì đám rối màng mạch,
   // vách trong suốt và màng cứng rơi xuống nhánh cuối và bị tô thành CƠ.
   "septum pellucidum", "aqueduct", "falx", "tentorium",
-  "dura", "arachnoid", "pia mater", "subarachnoid"];
+  "dura", "arachnoid", "pia mater", "subarachnoid",
+  // Bổ sung 24/08/2026 sau khi `verify:layers` phát hiện: giao thoa và dải thị,
+  // thể gối, củ não sinh tư, rãnh cựa, nêm chẩm, cực chẩm, các nhân thân não…
+  // không khớp từ khoá nào nên rơi xuống nhánh cuối và bị tô màu CƠ giữa một
+  // scene não; riêng "occipital pole" còn bị BONE_KEYS bắt mất thành XƯƠNG.
+  "optic chiasm", "optic tract", "geniculate", "colliculus", "calcarine",
+  "cuneus", "occipital pole", "frontal pole", "temporal pole", "insula",
+  "caudate", "putamen", "pallidus", "fornix", "hippocamp", "amygdal",
+  "peduncle", "olive", "flocculus", "tonsil of cerebell", "lingula of cerebell",
+  "stria medullaris", "cochlear nucle", "vestibular nucle", "nucleus of",
+  "spinal cord", "conus medullaris", "cauda equina", "denticulate"];
 
 // Não thất tim và não thất não TRÙNG TỪ "ventricle". Vì lớp tạng được xét
 // trước lớp não (mạch vành, cơ nhú phải ra tạng chứ không ra não), phải nhận
@@ -109,7 +119,12 @@ const ORGAN_KEYS = ["lung", "lobe of", "pleura", "bronch", "trachea", "liver", "
   "thyroid", "parathyroid", "hypophysis", "pituitary", "pineal", "thymus", "islet",
   "bladder", "urethra", "testis", "epididymis", "prostate", "seminal", "deferens",
   "ejaculatory", "penis", "penile", "cavernosum", "spongiosum", "glans", "scrotum",
-  "uterus", "ovary", "vagina"];
+  "uterus", "ovary", "vagina",
+  // Bộ lệ: "lacrimal" có sẵn trong BONE_KEYS (xương lệ) nên tuyến lệ, túi lệ,
+  // tiểu quản và ống lệ mũi đều bị tô màu XƯƠNG — gọi đích danh phần mềm ở đây
+  // để chúng ra lớp tạng, còn "Lacrimal bone" vẫn rơi đúng vào xương.
+  "lacrimal gland", "lacrimal sac", "lacrimal canaliculus", "nasolacrimal",
+  "salivary", "parotid", "submandibular gland", "sublingual gland"];
 
 export function pickCat(name: string): CatKey {
   const n = name.toLowerCase();
@@ -120,7 +135,10 @@ export function pickCat(name: string): CatKey {
   // ra năm cái móng đỏ chót ở đầu ngón.
   if (n.includes("skin") || n.includes("envelope") || n.includes("fascia") ||
       n.includes("aponeurosis") || n.includes("nail") || n.includes("perionyx") ||
-      n.includes("onych")) return "skin";
+      n.includes("onych") ||
+      // Mảng nhãn VÙNG của hệ 9 ("Mammary region", "Inframammary region",
+      // "Sternocleidomastoid region") là mảnh đắp trên bề mặt da, không phải cơ.
+      / region$/.test(n) || / region\.[lr]$/.test(n)) return "skin";
   if (n.includes("lymph") || n.includes("node")) return "lymph";
   if (EYE_KEYS.some((k) => n.includes(k))) return "eye";
   // mạch lớn trước để không nhầm sang tạng.
@@ -128,8 +146,12 @@ export function pickCat(name: string): CatKey {
   // mạch vừa chứa "venous" ("Deep venous palmar arch" — cung TĨNH mạch).
   // "Coronary sinus" là tĩnh mạch lớn nhất của tim nhưng trong tên không có chữ
   // "vein" nào — không kể riêng thì nó rơi xuống nhánh cuối và bị tô thành cơ.
+  // Xoang tĩnh mạch màng cứng KHÔNG có chữ "vein" trong tên nên trước đây rơi
+  // xuống nhánh cuối và bị tô màu cơ. Gọi đích danh từng xoang thay vì bắt cả
+  // chữ "sinus" — "Sinus of frontal bone" là xoang trán, phải ở lại lớp xương.
+  const isDuralSinus = /(sagittal|transverse|sigmoid|straight|occipital|petrosal|cavernous|intercavernous|sphenoparietal) sinus|confluence of sinus/.test(n);
   const isVein = n.includes("vein") || n.includes("venous") || n.includes("vena cava") ||
-    n.includes("venae") || n.includes("coronary sinus");
+    n.includes("venae") || n.includes("coronary sinus") || isDuralSinus;
   // "arter" (không phải "artery") để bắt cả số nhiều "arteries" và "arteriole".
   if (!isVein && (n.includes("arter") || n.includes("aorta") || n.includes("pulmonary trunk") ||
       n.includes("palmar arch") || n.includes("carpal arch") || n.includes("anastomosis"))) return "artery";

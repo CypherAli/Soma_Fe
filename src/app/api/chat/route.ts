@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { searchFacts, SYSTEM_LABEL, type AnatomyFact } from "@/lib/anatomy/knowledge";
 import { pick, type Loc } from "@/lib/homeContent";
+import { complete, isConfigured } from "@/lib/llm";
 
 /**
  * TRỢ LÝ GIẢI PHẪU — HAI TẦNG.
@@ -9,8 +10,8 @@ import { pick, type Loc } from "@/lib/homeContent";
  * trúc đã biên soạn của chính dự án. Trả về đoạn giải thích NGUYÊN VĂN kèm
  * đường dẫn mở đúng cấu trúc trên mô hình 3D. Không sinh chữ nên KHÔNG BỊA.
  *
- * Tầng 2 (chỉ bật khi có ANTHROPIC_API_KEY): đưa đúng những đoạn tìm được ở
- * tầng 1 cho Claude viết lại thành câu trả lời mạch lạc. Vẫn bắt buộc bám vào
+ * Tầng 2 (chỉ bật khi có AI_API_KEY): đưa đúng những đoạn tìm được ở
+ * tầng 1 cho mô hình viết lại thành câu trả lời mạch lạc. Vẫn bắt buộc bám vào
  * ngữ cảnh đó — prompt cấm trả lời ngoài phần được cung cấp.
  *
  * Vì sao KHÔNG nạp giáo trình PDF vào đây: sách có bản quyền, phục vụ nguyên
@@ -79,8 +80,7 @@ export async function POST(req: Request) {
     ...sources.map((s) => `• ${s.name}${s.latin ? ` (${s.latin})` : ""} — ${s.note}`),
   ].join("\n\n");
 
-  const key = process.env.ANTHROPIC_API_KEY;
-  if (!key) {
+  if (!isConfigured()) {
     return NextResponse.json({ answer: lookupAnswer, sources, engine: "lookup" });
   }
 
@@ -93,38 +93,24 @@ export async function POST(req: Request) {
       )
       .join("\n\n");
 
-    const res = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        "x-api-key": key,
-        "anthropic-version": "2023-06-01",
-      },
-      body: JSON.stringify({
-        model: "claude-sonnet-5",
-        max_tokens: 700,
-        system:
-          "Bạn là trợ lý giải phẫu của atlas 3D Soma, dành cho sinh viên y. " +
-          "CHỈ được trả lời dựa trên phần TƯ LIỆU được cung cấp. Không thêm kiến thức ngoài, " +
-          "không suy đoán, không chẩn đoán bệnh. Nếu tư liệu không đủ để trả lời, nói thẳng là " +
-          "thư viện chưa có và gợi ý cấu trúc gần nhất có trong tư liệu. Dẫn nguồn bằng số [1], [2] " +
-          "đúng theo tư liệu. Trả lời gọn, đúng thuật ngữ giải phẫu, cùng ngôn ngữ với câu hỏi.",
-        messages: [
-          { role: "user", content: `TƯ LIỆU:\n\n${context}\n\n---\n\nCÂU HỎI: ${question}` },
-        ],
-      }),
+    const text = await complete({
+      system:
+        "Bạn là trợ lý giải phẫu của atlas 3D Soma, dành cho sinh viên y. " +
+        "CHỈ được trả lời dựa trên phần TƯ LIỆU được cung cấp. Không thêm kiến thức ngoài, " +
+        "không suy đoán, không chẩn đoán bệnh. Nếu tư liệu không đủ để trả lời, nói thẳng là " +
+        "thư viện chưa có và gợi ý cấu trúc gần nhất có trong tư liệu. Dẫn nguồn bằng số [1], [2] " +
+        "đúng theo tư liệu. Trả lời gọn, đúng thuật ngữ giải phẫu, cùng ngôn ngữ với câu hỏi.",
+      user: `TƯ LIỆU:
+
+${context}
+
+---
+
+CÂU HỎI: ${question}`,
+      maxTokens: 700,
     });
 
-    if (!res.ok) throw new Error(`anthropic ${res.status}`);
-    const data = await res.json();
-    const text = (data?.content ?? [])
-      .filter((c: { type?: string }) => c?.type === "text")
-      .map((c: { text?: string }) => c.text ?? "")
-      .join("")
-      .trim();
-
-    if (!text) throw new Error("empty completion");
-    return NextResponse.json({ answer: text, sources, engine: "claude" });
+    return NextResponse.json({ answer: text, sources, engine: "ai" });
   } catch {
     // Hỏng khoá/hết hạn mức/mất mạng thì RƠI VỀ tầng tra cứu chứ không báo lỗi
     // trắng màn hình — người dùng vẫn nhận được nội dung đúng, chỉ kém mượt.

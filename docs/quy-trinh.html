@@ -1,0 +1,569 @@
+<title>Sổ tay quy trình Soma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap">
+
+<style>
+  :root {
+    --paper: #f7f3ec;
+    --surface: #fffdfa;
+    --ink: #1c1813;
+    --sub: #544b3d;
+    --line: #ddd2c0;
+    --line-soft: #ebe3d5;
+    --acc: #9a3324;
+    --acc-wash: #f2e6e1;
+    --ok: #2f6f52;
+    --ok-wash: #e6efe9;
+
+    --display: "Playfair Display", "Iowan Old Style", Palatino, Georgia, serif;
+    --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+    --mono: "JetBrains Mono", "Cascadia Mono", Consolas, monospace;
+
+    --pad: clamp(20px, 5vw, 56px);
+    --col: 68ch;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #16140f;
+      --surface: #1e1b16;
+      --ink: #f0e9dc;
+      --sub: #b9b0a2;
+      --line: #3c3831;
+      --line-soft: #2a2721;
+      --acc: #d06a50;
+      --acc-wash: #2c211c;
+      --ok: #7bbf9a;
+      --ok-wash: #1c2721;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #16140f;
+    --surface: #1e1b16;
+    --ink: #f0e9dc;
+    --sub: #b9b0a2;
+    --line: #3c3831;
+    --line-soft: #2a2721;
+    --acc: #d06a50;
+    --acc-wash: #2c211c;
+    --ok: #7bbf9a;
+    --ok-wash: #1c2721;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font: 400 16px/1.7 var(--body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 var(--pad) 96px; }
+  .col { max-width: var(--col); }
+
+  /* ---------- đầu trang ---------- */
+  header.top {
+    padding: clamp(48px, 8vw, 96px) 0 clamp(28px, 4vw, 44px);
+    border-bottom: 1px solid var(--line);
+  }
+  .eyebrow {
+    font: 600 11px/1 var(--mono);
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--acc);
+  }
+  h1 {
+    margin: 16px 0 0;
+    font: 500 clamp(32px, 5.4vw, 56px)/1.08 var(--display);
+    text-wrap: balance;
+  }
+  header.top p {
+    margin: 18px 0 0;
+    max-width: 62ch;
+    font-size: 17px;
+    color: var(--sub);
+  }
+
+  h2 {
+    margin: 0;
+    font: 500 clamp(23px, 3vw, 30px)/1.2 var(--display);
+    text-wrap: balance;
+  }
+  h3 {
+    margin: 0;
+    font: 600 16px/1.4 var(--body);
+  }
+
+  section { padding-top: clamp(44px, 6vw, 72px); }
+  .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 22px; }
+  .sec-num {
+    flex: none;
+    font: 600 12px/1 var(--mono);
+    color: var(--acc);
+    padding-top: 6px;
+  }
+  section > .col > p { color: var(--sub); }
+
+  /* ---------- bản đồ một trang ---------- */
+  .map {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    margin-top: 26px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    overflow-x: auto;
+  }
+  .map > div { background: var(--surface); padding: 22px 20px 26px; min-width: 210px; }
+  .map h3 {
+    font: 600 11px/1 var(--mono);
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--sub);
+    margin-bottom: 16px;
+  }
+  .map ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
+  .map li {
+    font-size: 14px;
+    line-height: 1.5;
+    padding-left: 15px;
+    position: relative;
+  }
+  .map li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: .62em;
+    width: 6px; height: 1px;
+    background: var(--acc);
+  }
+  .map li b { font-weight: 600; }
+  .map li span { display: block; color: var(--sub); font-size: 12.5px; }
+  .map-flow {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-top: 14px;
+    font: 600 10.5px/1 var(--mono);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--sub);
+  }
+
+  /* ---------- bảng ---------- */
+  .table-scroll { overflow-x: auto; margin-top: 22px; }
+  table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 14.5px; }
+  th, td { text-align: left; padding: 11px 14px 11px 0; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+  th {
+    font: 600 10.5px/1.4 var(--mono);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--sub);
+    border-bottom-color: var(--line);
+    white-space: nowrap;
+  }
+  td code { font-size: 13px; }
+  .lic { color: var(--sub); font-size: 13px; }
+
+  /* ---------- thẻ đường ống ---------- */
+  .pipes { display: grid; gap: 1px; margin-top: 24px; background: var(--line); border: 1px solid var(--line); }
+  .pipe { background: var(--surface); padding: 24px var(--pad) 28px; }
+  .pipe-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .tag {
+    font: 600 10.5px/1 var(--mono);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: 5px 9px;
+    border: 1px solid var(--line);
+    color: var(--sub);
+  }
+  .pipe > p { margin: 12px 0 0; max-width: 66ch; color: var(--sub); font-size: 14.5px; }
+  .steps { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 14px; counter-reset: s; }
+  .steps > li { display: grid; grid-template-columns: 26px 1fr; gap: 12px; align-items: start; counter-increment: s; }
+  .steps > li::before {
+    content: counter(s);
+    font: 600 12px/1.5 var(--mono);
+    color: var(--acc);
+    border-top: 1px solid var(--acc);
+    padding-top: 5px;
+  }
+  .steps strong { font-weight: 600; }
+  .steps p { margin: 3px 0 0; font-size: 14px; color: var(--sub); }
+
+  pre {
+    margin: 10px 0 0;
+    padding: 14px 16px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    overflow-x: auto;
+    font: 400 13px/1.7 var(--mono);
+    color: var(--ink);
+  }
+  pre .c { color: var(--sub); }
+  code { font-family: var(--mono); font-size: .92em; }
+  p code, li code, td code { background: var(--paper); border: 1px solid var(--line-soft); padding: 1px 5px; }
+
+  .check {
+    margin-top: 20px;
+    border-left: 2px solid var(--ok);
+    background: var(--ok-wash);
+    padding: 14px 18px;
+    font-size: 14px;
+  }
+  .check b { font: 600 10.5px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ok); display: block; margin-bottom: 7px; }
+
+  .rules { list-style: none; margin: 24px 0 0; padding: 0; display: grid; gap: 18px; }
+  .rules li { border-left: 2px solid var(--acc); padding: 2px 0 2px 18px; }
+  .rules b { display: block; font: 500 18px/1.35 var(--display); }
+  .rules span { color: var(--sub); font-size: 14.5px; }
+
+  .note {
+    margin-top: 24px;
+    padding: 18px 20px;
+    background: var(--acc-wash);
+    font-size: 14.5px;
+  }
+  .note b { color: var(--acc); }
+
+  footer {
+    margin-top: clamp(56px, 8vw, 88px);
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+    font: 400 13px/1.7 var(--mono);
+    color: var(--sub);
+  }
+
+  @media (max-width: 720px) {
+    .map { grid-template-columns: 1fr; }
+    .pipe { padding-left: 20px; padding-right: 20px; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="top">
+    <div class="eyebrow">Soma 3D · tài liệu vận hành</div>
+    <h1>Tài nguyên đi từ đâu tới màn hình</h1>
+    <p>
+      Toàn bộ dự án chạy trên bốn đường ống. Trang này nói rõ mỗi thứ trên web đến từ nguồn nào,
+      qua bước xử lý gì, và bạn phải gõ lệnh nào để làm lại — theo đúng thứ tự.
+    </p>
+  </header>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">01</span>
+      <h2>Bản đồ một trang</h2>
+    </div>
+    <div class="col">
+      <p>Đọc từ trái sang phải: dữ liệu thô nằm ngoài dự án, qua bước xử lý thành tệp trong <code>public/</code>, rồi trang web đọc các tệp đó.</p>
+    </div>
+
+    <div class="map">
+      <div>
+        <h3>Nguồn (ngoài repo)</h3>
+        <ul>
+          <li><b>Z-Anatomy</b><span>tệp Blender 294 MB, CC BY-SA</span></li>
+          <li><b>BodyParts3D</b><span>bù ba đoạn ruột Z-Anatomy thiếu</span></li>
+          <li><b>Giáo trình bệnh học</b><span>PDF trong medical_kb/</span></li>
+          <li><b>Giáo trình thú y</b><span>đọc và viết tay, không lưu tệp</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Xử lý (chạy một lần)</h3>
+        <ul>
+          <li><b>Blender + Python</b><span>cắt vùng, nén Draco, giảm lưới</span></li>
+          <li><b>Chụp ảnh đại diện</b><span>render từ chính mô hình</span></li>
+          <li><b>OCR + cắt hình</b><span>PDF thành chữ và ảnh</span></li>
+          <li><b>Viết tri thức</b><span>thẳng vào tệp TypeScript</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Trên web</h3>
+        <ul>
+          <li><b>public/models/</b><span>130 tệp .glb người + 3 sọ thú y</span></li>
+          <li><b>public/thumbnails/</b><span>122 ảnh đại diện</span></li>
+          <li><b>public/figures · lesions</b><span>84 hình từ giáo trình</span></li>
+          <li><b>src/lib/**</b><span>1310 nhãn người · 38 mục thú y</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="map-flow"><span>Nguồn</span>→<span>Xử lý</span>→<span>Tệp trong repo</span>→<span>Trang web đọc</span></div>
+
+    <div class="note">
+      <b>Điều cần nhớ:</b> tệp nguồn (<code>Startup.blend</code>, PDF) <b>không</b> nằm trong repo vì quá nặng và vướng bản quyền.
+      Repo chỉ chứa <b>kết quả đã xử lý</b> cộng với <b>script để làm lại</b>. Ai clone về cũng dựng lại được, miễn có tệp nguồn.
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">02</span>
+      <h2>Nguồn nào cho ra cái gì</h2>
+    </div>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>Nguồn</th><th>Giấy phép</th><th>Cho ra</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Z-Anatomy</b><br><code>../zanatomy-src/Z-Anatomy/</code></td>
+            <td class="lic">CC BY-SA</td>
+            <td>Gần như toàn bộ 130 mô hình 3D người, kèm tên mesh chính là tên giải phẫu</td>
+          </tr>
+          <tr>
+            <td><b>BodyParts3D</b><br><code>../zanatomy-src/bodyparts3d/</code></td>
+            <td class="lic">CC BY-SA 2.1 JP</td>
+            <td>Hồi tràng, manh tràng, trực tràng — ba đoạn Z-Anatomy không có</td>
+          </tr>
+          <tr>
+            <td><b>Terminologia Anatomica</b><br><code>TA2.csv</code></td>
+            <td class="lic">tra cứu</td>
+            <td>Đối chiếu tên Latin cho từng nhãn</td>
+          </tr>
+          <tr>
+            <td><b>Giáo trình bệnh học</b><br><code>../medical_kb/sources/</code></td>
+            <td class="lic">xem <code>catalog.json</code></td>
+            <td>2829 đoạn văn có dẫn trang + 84 hình minh hoạ</td>
+          </tr>
+          <tr>
+            <td><b>MediaPipe HandLandmarker</b><br><code>public/mediapipe/</code></td>
+            <td class="lic">Apache 2.0</td>
+            <td>Nhận diện bàn tay, chạy hẳn trong trình duyệt — hình webcam không rời khỏi máy</td>
+          </tr>
+          <tr>
+            <td><b>Giáo trình thú y</b><br>König &amp; Liebich · Dyce · Miller</td>
+            <td class="lic">đọc, không lưu tệp</td>
+            <td>38 mục giải phẫu so sánh viết tay, mỗi mục ghi rõ sách và lần xuất bản</td>
+          </tr>
+          <tr>
+            <td><b>Zenodo</b><br>bản sao Objaverse của mô hình Sketchfab CC</td>
+            <td class="lic">CC BY 4.0</td>
+            <td>Ba mẫu vật thật trong <code>public/models/vet/</code>: sọ chó, sọ mèo, sọ ngựa</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">
+      <b>Thú y có mẫu vật, chưa có bản đồ có nhãn.</b> Ba sọ chó, mèo, ngựa tải được vì Zenodo lưu bản sao
+      Objaverse của các mô hình Sketchfab giấy phép CC và cho tải thẳng bằng HTTP — không cần đăng nhập như Sketchfab.
+      Nhưng chúng là khối liền không có tên từng bộ phận, nên khu thú y vẫn lấy tri thức so sánh làm gốc.
+      Bò, lợn, gà chưa tìm được mẫu dùng được; danh sách đã rà nằm trong <code>src/lib/vet/models.ts</code>.
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">03</span>
+      <h2>Bốn đường ống</h2>
+    </div>
+    <div class="col">
+      <p>Mỗi đường ống độc lập. Muốn thêm thứ gì lên web, tìm đúng đường ống của nó rồi làm theo các bước.</p>
+    </div>
+
+    <div class="pipes">
+
+      <article class="pipe">
+        <div class="pipe-head">
+          <h2 style="font-size:22px">A · Mô hình 3D</h2>
+          <span class="tag">Blender</span>
+          <span class="tag">nặng nhất</span>
+        </div>
+        <p>Dùng khi muốn thêm một mô hình mới, ví dụ "vùng hố nách" hay "khớp cổ chân".</p>
+        <ol class="steps">
+          <li>
+            <div>
+              <strong>Xem trong tệp nguồn có gì</strong>
+              <p>In ra tên và toạ độ mọi vật thể để biết mình sẽ cắt cái gì.</p>
+<pre><span class="c"># đặt đường dẫn Blender một lần cho cả phiên</span>
+BLENDER="C:/Program Files/Blender Foundation/Blender 5.1/blender.exe"
+
+"$BLENDER" --background "Startup.blend" \
+  --python scripts/blender/dump_objects.py</pre>
+            </div>
+          </li>
+          <li>
+            <div>
+              <strong>Khai báo hộp cắt</strong>
+              <p>Thêm một mục vào <code>scripts/blender/region_config.py</code>: toạ độ hộp, từ khoá giữ lại, từ khoá loại bỏ.</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <strong>Xuất ra .glb</strong>
+<pre>"$BLENDER" --background "Startup.blend" \
+  --python scripts/blender/export_region.py -- ten_vung public/models/ten_vung.glb</pre>
+            </div>
+          </li>
+          <li>
+            <div>
+              <strong>Giảm nhẹ nếu quá 12 MB</strong>
+<pre>"$BLENDER" --background \
+  --python scripts/blender/decimate_glb.py -- vao.glb ra.glb</pre>
+            </div>
+          </li>
+          <li>
+            <div>
+              <strong>Chụp ảnh đại diện</strong>
+              <p>Ảnh chụp từ chính mô hình, không lấy ảnh ngoài.</p>
+<pre>node scripts/render-thumbnails.mjs
+node scripts/optimize-thumbnails.mjs</pre>
+            </div>
+          </li>
+          <li>
+            <div>
+              <strong>Khai báo scene và đặt nhãn</strong>
+              <p>Thêm vào <code>src/lib/scenes/*.ts</code>: tên ba thứ tiếng, tên Latin, ghi chú, và <code>meshName</code> đúng như trong tệp .glb.</p>
+            </div>
+          </li>
+        </ol>
+        <div class="check">
+          <b>Kiểm trước khi tin</b>
+<pre>npm run verify:scenes        <span class="c"># nhãn phải trỏ tới mesh có thật</span>
+node scripts/verify-layers.mjs
+npm run verify:models        <span class="c"># cảnh báo mô hình quá nặng</span></pre>
+        </div>
+        <p style="margin-top:20px"><b>Mô hình thú y tải từ ngoài</b> đi đường riêng, một lệnh là xong — script tự giảm lưới,
+        nén Draco, từ chối giấy phép ND, rồi in ra đoạn mã cần dán:</p>
+<pre>node scripts/vet/import-vet-model.mjs duong-dan.glb   --species dog --slug dog-skull   --license "CC BY 4.0" --by "Tên tác giả" --url https://zenodo.org/records/...</pre>
+      </article>
+
+      <article class="pipe">
+        <div class="pipe-head">
+          <h2 style="font-size:22px">B · Nội dung và hình bệnh lý</h2>
+          <span class="tag">Python</span>
+          <span class="tag">PDF</span>
+        </div>
+        <p>Dùng khi thêm một bệnh mới hoặc thêm hình minh hoạ trích từ giáo trình.</p>
+        <ol class="steps">
+          <li><div><strong>Rút chữ từ PDF</strong><pre>python scripts/kb/ocr_pdf.py</pre></div></li>
+          <li><div><strong>Cắt hình trong sách</strong><pre>python scripts/kb/build_atlas_shots.py
+python scripts/kb/mask_atlas_labels.py   <span class="c"># che nhãn để ra đề</span></pre></div></li>
+          <li><div><strong>Chụp vị trí tổn thương trên mô hình 3D</strong><pre>node scripts/render_all_lesions.mjs</pre></div></li>
+          <li><div><strong>Nạp vào cơ sở dữ liệu</strong><p>Trong thư mục <code>../soma_be</code>:</p><pre>npm run db:seed</pre></div></li>
+        </ol>
+        <div class="check">
+          <b>Kiểm trước khi tin</b>
+<pre>npm run verify:lesions   <span class="c"># mốc tổn thương phải trỏ đúng mesh</span></pre>
+        </div>
+      </article>
+
+      <article class="pipe">
+        <div class="pipe-head">
+          <h2 style="font-size:22px">C · Tri thức chữ</h2>
+          <span class="tag">chỉ sửa tệp</span>
+          <span class="tag">không cần công cụ</span>
+        </div>
+        <p>Đây là đường ống dễ nhất: mở tệp, viết thêm, chạy kiểm thử. Trắc nghiệm và trợ lý <b>tự động</b> có nội dung mới, không phải khai báo ở đâu nữa.</p>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Muốn thêm</th><th>Sửa tệp</th><th>Kiểm bằng</th></tr></thead>
+            <tbody>
+              <tr><td>Nhãn giải phẫu người</td><td><code>src/lib/scenes/*.ts</code></td><td><code>npm run verify:scenes</code></td></tr>
+              <tr><td>Mục giải phẫu thú y</td><td><code>src/lib/vet/facts/*.ts</code></td><td><code>npm run test:vet-kb</code></td></tr>
+              <tr><td>Hiểu biết về chính trang web</td><td><code>src/lib/site/siteKnowledge.ts</code></td><td><code>npm run test:site-kb</code></td></tr>
+              <tr><td>Kiến thức tổng quan</td><td><code>src/lib/anatomy/generalFacts.ts</code></td><td><code>npm run build</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="pipe">
+        <div class="pipe-head">
+          <h2 style="font-size:22px">D · Điều khiển bằng cử chỉ</h2>
+          <span class="tag">chạy trong trình duyệt</span>
+        </div>
+        <p>Không có bước xử lý ngoại tuyến nào. Mô hình nhận diện tay và WASM đã nằm sẵn trong <code>public/mediapipe/</code> (42 MB), nên tính năng chạy được cả khi mất mạng và hình webcam không rời khỏi máy.</p>
+        <div class="check">
+          <b>Kiểm mà không cần webcam</b>
+<pre>npm run test:gestures   <span class="c"># kiểm phép toán cử chỉ bằng bàn tay dựng số</span></pre>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">04</span>
+      <h2>Chạy dự án ở máy</h2>
+    </div>
+    <div class="col">
+      <p>Hai phần chạy song song: web ở cổng 3000, API ở cổng 3001.</p>
+    </div>
+<pre><span class="c"># --- web (thư mục Soma_Fe) ---</span>
+npm install
+npm run dev
+
+<span class="c"># --- API + cơ sở dữ liệu (thư mục soma_be) ---</span>
+npm install
+npm run prisma:generate
+npm run prisma:deploy    <span class="c"># tạo bảng</span>
+npm run db:seed          <span class="c"># nạp bệnh lý và cấu trúc</span>
+npm run start:dev</pre>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Tệp</th><th>Khoá</th><th>Dùng để</th></tr></thead>
+        <tbody>
+          <tr><td><code>Soma_Fe/.env.local</code></td><td><code>AI_API_KEY</code> <code>AI_BASE_URL</code> <code>AI_MODEL</code></td><td>Trợ lý hỏi đáp, soạn đề từ PDF</td></tr>
+          <tr><td><code>soma_be/.env</code></td><td><code>DATABASE_URL</code></td><td>Kết nối PostgreSQL</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">05</span>
+      <h2>Trước khi nộp hoặc đưa lên mạng</h2>
+    </div>
+    <div class="col">
+      <p>Chạy hết một lượt. Mỗi lệnh kiểm một loại sai khác nhau, và tất cả đều phải xanh.</p>
+    </div>
+<pre>npx tsc --noEmit && npx eslint src scripts
+
+npm run verify:scenes         <span class="c"># 1310 nhãn ↔ mesh thật</span>
+node scripts/verify-layers.mjs
+npm run verify:models
+npm run verify:lesions
+
+npm run test:vet-kb           <span class="c"># kho thú y</span>
+npm run test:site-kb          <span class="c"># kho hiểu biết về web</span>
+npm run test:gestures         <span class="c"># cử chỉ tay</span>
+
+npm run build</pre>
+    <div class="col">
+      <p style="margin-top:22px">Đưa lên mạng bằng <b>Render</b>: web chạy <code>npm run build</code> rồi <code>npm start</code>; API chạy <code>npm run build</code> rồi <code>npm run start:prod</code>. Sau lần deploy đầu, chạy <code>prisma:deploy</code> và <code>db:seed</code> một lần trên máy chủ.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">06</span>
+      <h2>Ba quy tắc chi phối mọi thứ</h2>
+    </div>
+    <ul class="rules col">
+      <li>
+        <b>Không bịa</b>
+        <span>Thư viện không có thì nói chưa có. Áp dụng cho cả trợ lý lẫn nội dung trang — đây là nội dung y khoa.</span>
+      </li>
+      <li>
+        <b>Nhãn nào cũng phải kiểm được</b>
+        <span>Một hotspot trỏ tới mesh không tồn tại là lỗi chặn, không phải chuyện nhỏ. Vì thế mới có <code>verify:scenes</code>.</span>
+      </li>
+      <li>
+        <b>Tài nguyên ngoài phải nói được nguồn gốc</b>
+        <span>Mỗi tệp lấy từ nơi khác đều ghi rõ giấy phép và người làm, hiện ngay trên trang dùng nó.</span>
+      </li>
+    </ul>
+  </section>
+
+  <footer>
+    Bản tra cứu lệnh ngắn gọn: <code>docs/QUY-TRINH.md</code> trong repo.<br>
+    Cập nhật 27/08/2026 — 130 mô hình người + 3 sọ thú y · 1310 nhãn · 38 mục thú y · 2829 đoạn giáo trình.
+  </footer>
+
+</div>
