@@ -1,0 +1,1048 @@
+/* Giao diện atlas toàn thân — chuyển từ human-atlas/app/globals.css.
+   MỌI selector đã được bọc trong .atlas-studio: file gốc đặt luật lên
+   `*`, `html`, `body`, `button`, `input`, `h1`... nên bê nguyên vào một app
+   Next đang có hệ thiết kế riêng là phá sạch các trang khác. Phần @import
+   tailwind và @theme inline đã bỏ (Soma_Fe có cấu hình Tailwind riêng);
+   biến màu trong :root chuyển thành biến cục bộ của .atlas-studio. */
+
+.atlas-studio{font-family:'Helvetica Neue',Arial,sans-serif;color:#20242b;background:#f3f4f4;--background:#f3f4f4;--foreground:#20242b;--card:#ffffff;--card-foreground:#20242b;--popover:#ffffff;--popover-foreground:#20242b;--primary:#263b48;--primary-foreground:#f3f4f4;--secondary:#e9ecef;--secondary-foreground:#20242b;--muted:#e9ecef;--muted-foreground:#68727d;--accent:#edf0f2;--accent-foreground:#20242b;--destructive:#a8574a;--border:#18253618;--input:#18253622;--ring:#263b48;--radius:.5rem;color-scheme:light}
+/* ---------------------------------------------------------------------------
+   Bù phần tạo hình của shadcn.
+   File CSS gốc CHỈ tinh chỉnh công tắc và thanh trượt ([data-slot=switch],
+   [data-slot=slider-thumb]...), còn hình dáng cơ bản đến từ class Tailwind
+   trong component shadcn — thứ không theo sang đây. Dựng lại đúng kích thước
+   và màu của bản gốc để hai bên nhìn không lệch.
+   --------------------------------------------------------------------------- */
+.atlas-studio [data-slot=switch]{
+  appearance:none;border:0;padding:0;display:inline-flex;align-items:center;flex:none;
+  width:36px;height:20px;border-radius:999px;background:var(--input);
+  transition:background .18s;cursor:pointer;
+}
+.atlas-studio [data-slot=switch][data-state=checked]{background:var(--primary)}
+.atlas-studio [data-slot=switch]:hover{background:var(--input)}
+.atlas-studio [data-slot=switch][data-state=checked]:hover{background:var(--primary)}
+.atlas-studio [data-slot=switch-thumb]{
+  display:block;width:16px;height:16px;border-radius:999px;background:#fff;
+  box-shadow:0 1px 2px #18253626;transform:translateX(2px);transition:transform .18s;
+}
+.atlas-studio [data-slot=switch][data-state=checked] [data-slot=switch-thumb]{transform:translateX(18px)}
+
+.atlas-studio [data-slot=slider]{
+  appearance:none;-webkit-appearance:none;width:100%;background:transparent;cursor:pointer;
+}
+.atlas-studio [data-slot=slider]::-webkit-slider-runnable-track{height:6px;border-radius:999px;background:var(--muted)}
+.atlas-studio [data-slot=slider]::-moz-range-track{height:6px;border-radius:999px;background:var(--muted)}
+.atlas-studio [data-slot=slider]::-moz-range-progress{height:6px;border-radius:999px;background:var(--primary)}
+.atlas-studio [data-slot=slider]::-webkit-slider-thumb{
+  -webkit-appearance:none;margin-top:-5px;
+  width:16px;height:16px;border-radius:999px;border:3px solid #fff;background:#263b48;
+  box-shadow:0 0 0 1px #263b4830,0 2px 5px #18253618;
+}
+.atlas-studio [data-slot=slider]::-moz-range-thumb{
+  width:16px;height:16px;border-radius:999px;border:3px solid #fff;background:#263b48;
+  box-shadow:0 0 0 1px #263b4830,0 2px 5px #18253618;
+}
+
+/* Bảng tìm kiếm và tấm chi tiết vốn là <Combobox>/<Sheet> của shadcn. */
+.atlas-studio .anatomy-search-results{max-height:min(46vh,420px);overflow:auto;margin-top:6px}
+.atlas-studio .anatomy-search-results button{
+  width:100%;display:flex;gap:10px;align-items:center;justify-content:space-between;
+  padding:0 10px;min-height:44px;font-size:14px;border-radius:8px;text-align:left;
+}
+.atlas-studio .search-panel input{
+  margin-top:9px;background:#18253605;width:100%;height:44px;
+  border:1px solid var(--border);border-radius:9px;padding:0 12px;color:inherit;
+}
+.atlas-studio .detail-sheet,.atlas-studio .about-sheet{z-index:6}
+.atlas-studio .sheet-close{
+  position:absolute;top:10px;right:10px;min-width:36px;min-height:36px;
+  display:inline-flex;align-items:center;justify-content:center;border-radius:8px;
+}
+
+/* Nền của <Button> shadcn.
+   File gốc reset `button:not([data-slot])` — luật này có ĐỘ ƯU TIÊN CAO HƠN
+   `.primary-action` (thêm một :not([...]) là thêm một bậc), nên nếu nút không
+   mang data-slot thì nền và màu chữ của nút chính bị xoá và nó thành vô hình
+   trên nền trắng. Bản gốc thoát được vì mọi nút đều là <Button> của shadcn,
+   vốn tự gắn data-slot="button". Ở đây gắn tay cho đủ, kèm phần tạo hình nền
+   mà component đó vẫn cung cấp. */
+.atlas-studio [data-slot=button]{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  border:0;background:none;color:inherit;border-radius:var(--radius);
+  transition:background .18s,color .18s;cursor:pointer;
+}
+.atlas-studio [data-slot=button]:hover{background:#18253608;color:#182536}
+.atlas-studio [data-slot=button]:disabled{opacity:.4;cursor:default}
+
+
+.atlas-studio *{box-sizing:border-box}
+.atlas-studio,.atlas-studio,.atlas-studio{margin:0;width:100%;height:100%;overflow:hidden}
+.atlas-studio button,.atlas-studio input{font:inherit}
+.atlas-studio button,.atlas-studio a,.atlas-studio input{touch-action:manipulation}
+.atlas-studio button{cursor:pointer}
+.atlas-studio button:not([data-slot]){border:0;background:none;color:inherit}
+.atlas-studio button:focus-visible,.atlas-studio a:focus-visible{outline:2px solid #538d9a;outline-offset:4px}
+.atlas-studio button:disabled{opacity:.4;cursor:default}
+.atlas-studio a{color:inherit}
+.atlas-studio button:not([data-slot]):hover{color:#182536}
+.atlas-studio button svg,.atlas-studio a svg{flex-shrink:0}
+.atlas-studio button{transition:background .18s,color .18s}
+.atlas-studio button:not([data-slot]):hover{background:#18253608}
+.atlas-studio{height:100dvh;min-height:340px;width:100%;position:relative;isolation:isolate}
+.atlas-studio .scene{position:absolute;inset:0}
+.atlas-studio .scene canvas{display:block;width:100%;height:100%;touch-action:none}
+.atlas-studio .vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 51% 43%,transparent 35%,#83919e0f 100%)}
+.atlas-studio .glass{background:#ffffffeb;border:1px solid #25384a17;box-shadow:0 16px 48px #2433440a;backdrop-filter:blur(20px)}
+.atlas-studio .identity{position:absolute;left:32px;top:29px;pointer-events:none}
+.atlas-studio .eyebrow{font-size:12px;letter-spacing:.19em;color:#737d89;display:flex;align-items:center;gap:8px}
+.atlas-studio .status-dot{height:5px;width:5px;background:#458a85;border-radius:50%;box-shadow:0 0 12px #458a8526}
+.atlas-studio h1{font-family:inherit;font-weight:400;line-height:1.1;font-size:38px;letter-spacing:-1.4px;margin:10px 0 9px}
+.atlas-studio h1 em{font-weight:400;color:#586572}
+.atlas-studio h1 .edition{vertical-align:top;font:10px Arial;letter-spacing:.08em;margin-left:10px;opacity:.4}
+.atlas-studio .identity-meta{font-size:12px;color:#78828c;letter-spacing:.02em}
+.atlas-studio .identity-meta span{padding:0 6px;color:#9aa3ab}
+.atlas-studio .top-actions{position:absolute;top:32px;right:30px;display:flex;align-items:center;gap:10px}
+.atlas-studio .top-actions button{display:flex;gap:12px;align-items:center;font-size:14px;color:#515d69;padding:12px;border-radius:5px}
+.atlas-studio .top-actions kbd{font-size:12px;opacity:.5;margin-left:24px;padding:0 5px;border:1px solid #18253620;border-radius:3px}
+.atlas-studio .icon-button{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px}
+.atlas-studio .layers-panel{position:absolute;left:30px;top:180px;bottom:175px;width:254px;max-height:654px;border-radius:6px;display:flex;flex-direction:column;padding:17px 16px 0}
+.atlas-studio .panel-heading{display:flex;align-items:center;justify-content:space-between;font-size:14px;color:#26313c;min-height:22px}
+.atlas-studio .small-number{font-size:12px;font-variant-numeric:tabular-nums;color:#7c8793}
+.atlas-studio .layer-presets{display:flex;gap:5px;padding:16px 0 10px;border-bottom:1px solid #18253612}
+.atlas-studio .layer-presets button{font-size:12px;padding:7px 11px;border:1px solid #18253618;border-radius:3px;color:#65717e}
+.atlas-studio .system-list{overflow-y:auto;overscroll-behavior:contain;padding:7px 0;scrollbar-width:thin;scrollbar-color:#b9c1c8 transparent}
+.atlas-studio .system-row{display:flex;align-items:center;justify-content:space-between;gap:9px;min-height:35px;opacity:.54}
+.atlas-studio .system-row.enabled{opacity:1}
+.atlas-studio .system-name{display:flex;align-items:center;gap:8px;text-align:left;font-size:13px;flex:1;min-height:35px;padding:0;white-space:nowrap}
+.atlas-studio .system-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.atlas-studio .system-count{font-size:11px;color:#87929d;margin-left:auto}
+.atlas-studio .system-row [data-slot=switch]{transform:scale(.8);transform-origin:right center}
+.atlas-studio .panel-foot{display:flex;justify-content:space-between;align-items:center;font-size:11px;min-height:42px;border-top:1px solid #18253612;color:#75818d;margin-top:auto}
+.atlas-studio .panel-foot button{font-size:11px;color:#75818d;padding:10px 0}
+.atlas-studio .view-controls{position:absolute;right:30px;top:50%;transform:translateY(-50%);border-radius:5px;padding:5px;display:flex;flex-direction:column}
+.atlas-studio .view-controls button{width:40px;height:44px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#74818e;border-radius:3px}
+.atlas-studio .view-controls .active{color:#263b48;background:#263b4812}
+.atlas-studio .view-controls i{height:1px;background:#18253615;margin:5px}
+.atlas-studio .scene-caption{position:absolute;bottom:162px;left:50%;transform:translateX(-50%);display:flex;gap:15px;align-items:center;color:#7c8793;letter-spacing:.15em;font-size:11px;white-space:nowrap;pointer-events:none}
+.atlas-studio .caption-line{width:24px;height:1px;background:#18253622}
+.atlas-studio .bottom-dock{position:absolute;bottom:54px;left:50%;transform:translateX(-50%);width:460px;padding:16px 19px;border-radius:6px;display:flex;gap:24px;align-items:center}
+.atlas-studio .explode-control{flex:1;min-width:0}
+.atlas-studio .explode-label{display:flex;align-items:center;justify-content:space-between;font-size:13px;margin-bottom:11px;color:#3c4956}
+.atlas-studio .explode-label output{font-size:15px;font-variant-numeric:tabular-nums;color:#263b48}
+.atlas-studio .explode-label output span{font-size:11px;margin-left:3px;color:#7f8c98}
+.atlas-studio .explode-control [data-slot=slider]{padding:9px 0}
+.atlas-studio .slider-endpoints{display:flex;justify-content:space-between;font-size:10px;color:#7c8793;margin-top:3px}
+.atlas-studio .dock-reset{border-left:1px solid #18253618;padding:10px 0 10px 20px;display:flex;flex-direction:column;gap:7px;align-items:center;color:#687683;font-size:11px}
+.atlas-studio .studio-footer{position:absolute;bottom:20px;left:30px;right:30px;display:flex;justify-content:space-between;font-size:11px;color:#73808c}
+.atlas-studio .studio-footer b{font-weight:400;margin:0 8px;color:#a0a9b2}
+.atlas-studio .studio-footer button{display:flex;gap:6px;align-items:center;color:#73808c;font-size:11px}
+.atlas-studio .mobile-only{display:none}
+.atlas-studio .loading{position:absolute;left:50%;top:43%;transform:translate(-50%,-50%);border-radius:6px;padding:22px 25px;display:flex;align-items:center;gap:18px;min-width:290px}
+.atlas-studio .loading strong{display:block;font-weight:400;font-size:15px}
+.atlas-studio .loading span{display:block;font-size:12px;color:#75818d;margin-top:8px}
+.atlas-studio .loading-track{height:2px;background:#18253615;margin-top:14px;min-width:200px}
+.atlas-studio .loading-track i{display:block;height:100%;background:#458a85;transition:width .4s}
+.atlas-studio .error{flex-direction:column;max-width:90vw}
+.atlas-studio .error button{padding:10px 16px;border:1px solid #18253628;border-radius:4px}
+.atlas-studio .search-panel{position:absolute;right:30px;top:94px;width:350px;border-radius:6px;padding:12px 18px 16px;z-index:20}
+.atlas-studio .search-panel [data-slot=input-group]{margin-top:9px;background:#18253605;width:100%;height:44px}
+.atlas-studio .search-panel input{font-size:14px}
+.atlas-studio .search-note{font-size:12px;line-height:1.6;color:#78838f;margin:14px 0 0}
+.atlas-studio .anatomy-search-results{max-width:min(350px,calc(100vw - 32px));background:#ffffff!important;border:1px solid #18253618!important;color:#26313c!important}
+.atlas-studio .anatomy-search-results [data-slot=combobox-item]{font-size:14px;min-height:44px;display:flex;gap:10px;align-items:center}
+.atlas-studio .search-result-name{flex:1;text-transform:capitalize}
+.atlas-studio .detail-sheet{top:105px!important;bottom:178px!important;right:95px!important;height:auto!important;width:310px!important;max-width:310px!important;padding:28px 23px;overflow-y:auto;gap:18px!important;border-radius:6px;box-shadow:0 15px 70px #2433440a}
+.atlas-studio .detail-accent{width:24px;height:2px}
+.atlas-studio .structure-title{font-family:inherit!important;font-size:28px!important;font-weight:400!important;line-height:1.15!important;text-transform:capitalize;letter-spacing:-.6px;margin:0}
+.atlas-studio .structure-description{font-size:15px!important;line-height:1.7;color:#66727f!important}
+.atlas-studio .context-note{font-size:11px;line-height:1.5;color:#87929d;margin-top:-8px}
+.atlas-studio .structure-meta{display:flex;gap:28px;padding:18px 0;border-block:1px solid #18253612;font-size:11px;color:#87929d}
+.atlas-studio .structure-meta strong{display:block;font-size:14px;color:#475665;font-weight:400;margin-top:6px}
+.atlas-studio .primary-action{display:flex;align-items:center;gap:9px;font-size:13px;padding:13px 12px;border:1px solid #263b4840;border-radius:4px;color:#263b48;min-height:46px}
+.atlas-studio .primary-action svg:last-child{margin-left:auto}
+.atlas-studio .primary-action.active{background:#263b4812}
+.atlas-studio .secondary-action{font-size:12px;color:#788694;padding:10px}
+.atlas-studio .member-list h3{font-size:12px;font-weight:400;color:#687786}
+.atlas-studio .member-list button{display:flex;justify-content:space-between;gap:8px;text-align:left;min-height:44px;font-size:12px;line-height:1.5;border-bottom:1px solid #18253612;width:100%}
+.atlas-studio .source-link{display:flex;align-items:center;gap:5px;font-size:11px;color:#74818e;margin-top:auto}
+.atlas-studio .about-sheet{padding:64px 30px 30px!important;width:min(450px,100vw)!important;max-width:450px!important;overflow-y:auto}
+.atlas-studio .about-sheet [data-slot=sheet-description]{font-size:16px;line-height:1.7}
+.atlas-studio .about-copy{font-size:15px;line-height:1.75;color:#667481}
+.atlas-studio .about-copy p{margin:15px 0}
+.atlas-studio .about-copy strong{font-weight:500;color:#364653}
+.atlas-studio .about-copy h3{font-size:13px;color:#364653;margin-top:25px}
+.atlas-studio .about-copy a{display:flex;align-items:center;gap:8px;font-size:13px;margin:12px 0;color:#516d7b}
+.atlas-studio:has(.detail-sheet) [data-slot=sheet-overlay]{display:none}
+@media(min-width:1400px){
+.atlas-studio .layers-panel{top:190px;bottom:180px}
+.atlas-studio .system-row,.atlas-studio .system-name{min-height:39px}
+.atlas-studio .system-name{font-size:14px}
+}
+@media(max-width:1000px){
+.atlas-studio .layers-panel{width:222px;left:20px;padding-inline:12px}
+.atlas-studio .system-name{font-size:12px}
+.atlas-studio .system-count{display:none}
+.atlas-studio .identity{left:22px}
+.atlas-studio .top-actions{right:20px}
+.atlas-studio .detail-sheet{right:80px!important;width:280px!important}
+.atlas-studio .view-controls{right:20px}
+}
+@media(max-width:767px){
+.atlas-studio .mobile-only{display:flex}
+.atlas-studio .desktop-only{display:none}
+.atlas-studio .identity{top:max(20px,env(safe-area-inset-top));left:20px}
+.atlas-studio .eyebrow{font-size:10px;letter-spacing:.15em}
+.atlas-studio h1{font-size:31px;margin:8px 0}
+.atlas-studio h1 .edition{font-size:9px}
+.atlas-studio .identity-meta{font-size:10px}
+.atlas-studio .top-actions{top:max(21px,env(safe-area-inset-top));right:13px;gap:0}
+.atlas-studio .top-actions button{padding:12px}
+.atlas-studio .top-actions span,.atlas-studio .top-actions kbd{display:none}
+.atlas-studio .layers-panel{display:none}
+.atlas-studio .layers-panel.mobile-open{display:flex;z-index:30;top:auto;left:12px;right:12px;bottom:calc(140px + env(safe-area-inset-bottom));width:auto;max-height:calc(100dvh - 270px);padding:8px 17px 0;background:#fffffff5}
+.atlas-studio .panel-heading{font-size:15px}
+.atlas-studio .layer-presets{padding-top:8px}
+.atlas-studio .layer-presets button{font-size:13px;min-height:40px}
+.atlas-studio .system-row,.atlas-studio .system-name{min-height:44px}
+.atlas-studio .system-name{font-size:14px}
+.atlas-studio .system-count{display:block;font-size:12px}
+.atlas-studio .system-row [data-slot=switch]{transform:none;margin-right:4px}
+.atlas-studio .system-list{padding-top:3px}
+.atlas-studio .view-controls{right:12px;top:43%;padding:3px}
+.atlas-studio .view-controls button{height:44px;width:37px}
+.atlas-studio .view-controls button span{font-size:13px}
+.atlas-studio .bottom-dock{bottom:calc(30px + env(safe-area-inset-bottom));width:calc(100% - 24px);padding:13px;gap:15px;background:#ffffffed}
+.atlas-studio .dock-layers{flex-direction:column;align-items:center;gap:8px;font-size:10px;padding:9px 12px 9px 0;border-right:1px solid #18253618}
+.atlas-studio .dock-reset{padding:10px 0 10px 12px;font-size:10px}
+.atlas-studio .explode-label{font-size:12px}
+.atlas-studio .scene-caption{bottom:calc(148px + env(safe-area-inset-bottom));font-size:9px;gap:10px}
+.atlas-studio .caption-line{width:15px}
+.atlas-studio .studio-footer{bottom:calc(9px + env(safe-area-inset-bottom));left:15px;right:15px;font-size:9px;justify-content:center}
+.atlas-studio .studio-footer>span{display:none}
+.atlas-studio .studio-footer button{font-size:10px}
+.atlas-studio .search-panel{top:112px;left:12px;right:12px;width:auto;z-index:40}
+.atlas-studio .anatomy-search-results{max-height:calc(100dvh - 310px)!important}
+.atlas-studio .detail-sheet{left:12px!important;right:12px!important;top:auto!important;bottom:calc(139px + env(safe-area-inset-bottom))!important;max-height:48dvh;width:auto!important;max-width:none!important;padding:22px!important;background:#fffffff5;gap:14px!important}
+.atlas-studio .structure-title{font-size:26px!important;padding-right:18px}
+.atlas-studio .structure-description{font-size:14px!important;line-height:1.65}
+.atlas-studio .structure-meta{padding:12px 0}
+.atlas-studio .source-link{font-size:12px}
+.atlas-studio .about-sheet{padding-top:60px!important}
+.atlas-studio .loading{padding:18px;min-width:265px;top:44%}
+}
+@media(max-height:600px) and (orientation:landscape){
+.atlas-studio .identity{top:16px;left:20px}
+.atlas-studio h1{font-size:27px}
+.atlas-studio .identity-meta{display:none}
+.atlas-studio .layers-panel{display:none}
+.atlas-studio .mobile-only{display:flex}
+.atlas-studio .bottom-dock{bottom:22px;width:390px;padding:10px 15px}
+.atlas-studio .dock-layers{flex-direction:column;gap:5px;font-size:10px}
+.atlas-studio .scene-caption{display:none}
+.atlas-studio .view-controls{top:50%;flex-direction:row;right:16px}
+.atlas-studio .view-controls i{height:auto;width:1px}
+.atlas-studio .view-controls button{width:35px}
+.atlas-studio .layers-panel.mobile-open{display:flex;top:90px;bottom:115px;left:12px;width:250px;max-height:none;z-index:30}
+.atlas-studio .system-name,.atlas-studio .system-row{min-height:44px}
+.atlas-studio .detail-sheet{top:80px!important;right:15px!important;left:auto!important;bottom:112px!important;width:290px!important;max-height:none}
+.atlas-studio .studio-footer{bottom:6px}
+.atlas-studio .search-panel{top:70px}
+.atlas-studio .top-actions{top:16px}
+.atlas-studio .anatomy-search-results{max-height:160px!important}
+}
+@media(prefers-reduced-motion:reduce){
+.atlas-studio *,.atlas-studio *::before,.atlas-studio *::after{transition:none!important;animation:none!important}
+}
+.atlas-studio .anatomy-choice{margin-top:15px;pointer-events:auto}
+.atlas-studio .anatomy-choice [data-slot=select-trigger]{min-height:36px;font-size:12px;letter-spacing:.02em;border:1px solid #18253620;border-radius:4px;color:#485866;padding:6px 10px;background:#ffffffd9}
+.atlas-studio .anatomy-choice-menu [data-slot=select-item]{min-height:44px;font-size:14px}
+.atlas-studio .identity{z-index:2}
+.atlas-studio .layers-panel{top:217px}
+@media(max-width:767px){
+.atlas-studio .anatomy-choice{margin-top:10px}
+.atlas-studio .anatomy-choice [data-slot=select-trigger]{min-height:40px;font-size:12px}
+.atlas-studio .layers-panel.mobile-open{top:auto}
+.atlas-studio .search-panel{top:162px}
+.atlas-studio .anatomy-search-results{max-height:calc(100dvh - 370px)!important}
+}
+@media(max-height:600px) and (orientation:landscape){
+.atlas-studio .anatomy-choice{margin-top:7px}
+.atlas-studio .anatomy-choice [data-slot=select-trigger]{min-height:36px}
+.atlas-studio .layers-panel.mobile-open{top:132px}
+.atlas-studio .search-panel{top:70px}
+.atlas-studio .anatomy-search-results{max-height:160px!important}
+}
+.atlas-studio .part-hover{position:absolute;pointer-events:none;z-index:45;max-width:250px;background:#202e3bf5;color:#ffffff;padding:9px 12px;border-radius:5px;box-shadow:0 5px 18px #18253620;font-size:13px;line-height:1.45;text-transform:capitalize}
+.atlas-studio .part-hover[hidden]{display:none}
+.atlas-studio .structure-meta strong{overflow-wrap:anywhere;max-width:150px}
+.atlas-studio .view-controls button:disabled{opacity:.22;background:none}
+.atlas-studio .scene canvas{cursor:grab}
+.atlas-studio .scene canvas:active{cursor:grabbing}
+@media(min-width:768px) and (max-width:1100px){
+.atlas-studio:has(.detail-sheet) .layers-panel{display:none}
+}
+@media(max-width:767px){
+.atlas-studio .detail-sheet.is-isolated{max-height:34dvh}
+}
+.atlas-studio .detail-sheet [data-slot=sheet-close],.atlas-studio .about-sheet [data-slot=sheet-close]{top:10px;right:10px;min-width:36px;min-height:36px;transform:none}
+.atlas-studio .detail-sheet .eyebrow{padding-right:28px}
+@media(max-width:767px){
+.atlas-studio .detail-sheet [data-slot=sheet-close],.atlas-studio .about-sheet [data-slot=sheet-close]{min-width:44px;min-height:44px;top:3px;right:3px}
+}
+.atlas-studio .detail-sheet{overflow:hidden!important}
+.atlas-studio .detail-header{flex-shrink:0;display:flex;flex-direction:column;gap:14px;padding-right:20px}
+.atlas-studio .detail-scroll{display:flex;flex-direction:column;gap:16px;overflow-y:auto;overscroll-behavior:contain;min-height:0;flex:1;scrollbar-width:thin;scrollbar-color:#b9c3cc transparent}
+.atlas-studio .detail-actions{flex-shrink:0;display:flex;flex-direction:column;gap:5px;padding-top:12px;border-top:1px solid #18253618}
+.atlas-studio .detail-actions .secondary-action{padding:7px}
+.atlas-studio .detail-scroll .structure-description{margin:0}
+.atlas-studio .detail-scroll .source-link{margin-top:4px}
+.atlas-studio .detail-scroll .structure-meta{flex-shrink:0}
+@media(max-width:767px){
+.atlas-studio .detail-sheet.is-isolated{max-height:42dvh}
+.atlas-studio .detail-header{gap:8px}
+.atlas-studio .detail-header .structure-title{font-size:23px!important}
+.atlas-studio .detail-sheet{padding:18px!important}
+.atlas-studio .detail-actions{padding-top:8px}
+.atlas-studio .detail-scroll{gap:12px}
+}
+.atlas-studio .system-list{padding-right:16px;scrollbar-gutter:stable}
+.atlas-studio .system-name{min-width:0;overflow:hidden;text-overflow:ellipsis}
+.atlas-studio .system-row [data-slot=switch]{margin-right:2px}
+@media(max-width:767px){
+.atlas-studio .system-list{padding-right:12px}
+}
+.atlas-studio /* Modern studio surfaces and shadcn control treatments. */ :root{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--primary-foreground:#ffffff;--radius:.75rem;-webkit-font-smoothing:antialiased}
+.atlas-studio .glass{border-radius:16px;box-shadow:0 2px 5px #24334403,0 16px 48px #24334407;backdrop-filter:blur(24px)}
+.atlas-studio h1{display:flex;align-items:center;gap:12px;font-size:32px;font-weight:600;letter-spacing:-1.3px;margin:10px 0 8px}
+.atlas-studio h1 .edition{font-family:inherit;font-weight:500;font-size:10px;letter-spacing:.03em;margin:0;opacity:1;color:#697782;border-color:var(--border);padding:2px 6px;border-radius:6px}
+.atlas-studio .eyebrow{font-size:10px;font-weight:600;letter-spacing:.14em}
+.atlas-studio .identity-meta{font-size:11px;letter-spacing:0}
+.atlas-studio .anatomy-choice{margin-top:14px}
+.atlas-studio .anatomy-choice [data-slot=select-trigger]{border-radius:9px;min-height:38px;color:var(--foreground);background:#ffffffd9;box-shadow:0 1px 2px #18253604}
+.atlas-studio .top-actions{gap:8px}
+.atlas-studio .top-actions button{height:42px;border:1px solid var(--border);background:#ffffffd9;border-radius:10px;font-size:12px;padding:0 13px;gap:9px}
+.atlas-studio .top-actions button:hover{background:white}
+.atlas-studio .top-actions .icon-button{width:42px;min-width:42px}
+.atlas-studio .top-actions kbd{margin-left:18px}
+.atlas-studio .layers-panel{top:200px;padding:18px 14px 0}
+.atlas-studio .panel-heading{font-size:13px;font-weight:600;padding:0 3px}
+.atlas-studio .panel-heading .small-number{font-size:10px;background:#eef1f3;color:#687582;height:21px;padding:0 7px}
+.atlas-studio .layer-presets{gap:2px;background:#edf0f2;border:0;border-radius:9px;padding:3px;margin:15px 0 9px}
+.atlas-studio .layer-presets button{height:30px;min-height:30px;flex:1;font-size:11px;border:0;padding:0 6px;border-radius:6px;color:#697582;font-weight:500}
+.atlas-studio .layer-presets button[aria-pressed=true]{background:white;color:#233644;box-shadow:0 1px 3px #18253612}
+.atlas-studio .system-row{opacity:1;gap:8px}
+.atlas-studio .system-name{font-weight:400;color:#8a949e;font-size:12px;border-radius:7px;padding:0 5px;justify-content:flex-start}
+.atlas-studio .enabled .system-name{color:#394957}
+.atlas-studio .system-dot{width:6px;height:6px;box-shadow:0 0 0 2px #18253605}
+.atlas-studio .system-count{font-variant-numeric:tabular-nums;font-size:10px}
+.atlas-studio .system-list{padding-right:16px}
+.atlas-studio .system-row [data-slot=switch]{transform:none;--primary:#536875}
+.atlas-studio .system-row [data-slot=switch-thumb]{background:white}
+.atlas-studio .panel-foot{font-size:10px;padding-inline:4px;min-height:44px}
+.atlas-studio .panel-foot button{font-size:10px;font-weight:400;padding:0 5px}
+.atlas-studio .view-controls{border-radius:13px;padding:5px;gap:2px}
+.atlas-studio .view-controls button{border-radius:8px;font-weight:500}
+.atlas-studio .view-controls .active{background:#263b48;color:#fff;box-shadow:0 2px 4px #18253610}
+.atlas-studio .bottom-dock{border-radius:16px;gap:21px;padding:17px 20px}
+.atlas-studio .explode-label{font-size:12px;font-weight:500;color:#3c4956;margin-bottom:10px}
+.atlas-studio .explode-label output{background:#edf1f3;border:1px solid #18253608;border-radius:6px;padding:3px 7px;font-size:12px;min-width:49px;text-align:center}
+.atlas-studio .explode-label output span{font-size:10px;color:#73818e}
+.atlas-studio .explode-control [data-slot=slider-thumb]{width:16px;height:16px;border:3px solid white;background:#263b48;box-shadow:0 0 0 1px #263b4830,0 2px 5px #18253618}
+.atlas-studio .dock-reset,.atlas-studio .dock-layers{height:auto;border-radius:0;font-weight:400}
+.atlas-studio .dock-reset{font-size:10px;color:#6c7a88}
+.atlas-studio .scene-caption{font-size:9px;letter-spacing:.11em;color:#7c8894}
+.atlas-studio .studio-footer button{height:auto;padding:0;font-weight:400}
+.atlas-studio .structure-title{font-size:25px!important;font-weight:600!important;letter-spacing:-.75px;line-height:1.2!important}
+.atlas-studio .detail-sheet{border-radius:16px;gap:18px!important}
+.atlas-studio .detail-accent{width:28px;height:4px;border-radius:3px}
+.atlas-studio .detail-header{gap:11px}
+.atlas-studio .structure-description{font-size:14px!important;line-height:1.7}
+.atlas-studio .structure-meta strong{font-size:13px;font-weight:500}
+.atlas-studio .primary-action{background:#263b48;color:white!important;border:1px solid #263b48;border-radius:9px;font-weight:500;font-size:12px;min-height:44px}
+.atlas-studio .primary-action:hover,.atlas-studio .primary-action.active{background:#3b5261}
+.atlas-studio .secondary-action{border-radius:8px;font-weight:400;min-height:32px}
+.atlas-studio .member-list button{height:auto;white-space:normal;font-weight:400;padding:9px 3px;justify-content:space-between}
+.atlas-studio .member-list button span{flex:1}
+.atlas-studio .source-link{text-decoration:none;color:#537a89}
+.atlas-studio .source-link:hover{text-decoration:underline}
+.atlas-studio .search-panel{border-radius:14px}
+.atlas-studio .search-panel [data-slot=input-group]{border-radius:9px;background:#f7f9fa}
+.atlas-studio .anatomy-search-results{border-radius:12px!important}
+.atlas-studio .about-sheet{border-radius:16px 0 0 16px}
+.atlas-studio .about-copy strong{font-weight:600}
+.atlas-studio .loading{border-radius:14px}
+.atlas-studio .loading strong{font-weight:500}
+.atlas-studio .part-hover{border-radius:8px;font-size:12px}
+@media(min-width:1400px){
+.atlas-studio .system-row,.atlas-studio .system-name{min-height:38px}
+.atlas-studio .system-name{font-size:13px}
+}
+@media(max-width:1000px){
+.atlas-studio .layers-panel{padding-inline:10px}
+.atlas-studio .system-name{font-size:11px}
+}
+@media(max-width:767px){
+.atlas-studio h1{font-size:28px;gap:9px}
+.atlas-studio .eyebrow{font-size:9px}
+.atlas-studio .top-actions{gap:5px;right:14px}
+.atlas-studio .top-actions button{width:38px;height:40px;padding:0;border-radius:9px}
+.atlas-studio .top-actions .icon-button{min-width:38px;width:38px}
+.atlas-studio .identity-meta{font-size:10px}
+.atlas-studio .anatomy-choice [data-slot=select-trigger]{min-height:40px}
+.atlas-studio .layers-panel.mobile-open{border-radius:16px;padding:10px 14px 0}
+.atlas-studio .layer-presets button{height:38px;font-size:12px}
+.atlas-studio .system-row,.atlas-studio .system-name{min-height:44px}
+.atlas-studio .system-name{font-size:13px}
+.atlas-studio .system-list{padding-right:12px}
+.atlas-studio .panel-heading{font-size:13px}
+.atlas-studio .panel-heading .mobile-only{height:40px;padding:0}
+.atlas-studio .bottom-dock{padding:13px;gap:14px;border-radius:14px}
+.atlas-studio .dock-layers{padding-right:12px;font-size:10px}
+.atlas-studio .dock-reset{padding-left:12px}
+.atlas-studio .explode-label{font-size:11px}
+.atlas-studio .scene-caption{font-size:8px}
+.atlas-studio .detail-sheet{border-radius:16px}
+.atlas-studio .detail-header .structure-title{font-size:22px!important}
+.atlas-studio .detail-actions{gap:3px}
+.atlas-studio .search-panel{top:161px}
+.atlas-studio .about-sheet{border-radius:0}
+}
+@media(max-height:600px) and (orientation:landscape){
+.atlas-studio .layers-panel.mobile-open{top:132px}
+.atlas-studio .bottom-dock{padding:10px 15px}
+.atlas-studio .search-panel{top:70px}
+}
+.atlas-studio /* Touch layouts keep camera controls outside the selectable anatomy. */ .scene-caption{max-width:calc(100% - 32px);white-space:normal;text-align:center;overflow-wrap:anywhere}
+.atlas-studio .scene-caption>span:not(.caption-line){min-width:0}
+.atlas-studio .caption-line{flex-shrink:0}
+.atlas-studio .structure-title{overflow-wrap:anywhere}
+.atlas-studio .detail-header .structure-title:focus{outline:none}
+@media(max-width:767px){
+.atlas-studio .identity{left:max(16px,env(safe-area-inset-left));top:max(18px,env(safe-area-inset-top))}
+.atlas-studio .top-actions{right:max(12px,env(safe-area-inset-right));gap:4px}
+.atlas-studio .top-actions button,.atlas-studio .top-actions .icon-button{width:44px;min-width:44px;height:44px;min-height:44px}
+.atlas-studio .view-controls{top:max(112px,calc(env(safe-area-inset-top) + 94px));right:12px;left:12px;transform:none;flex-direction:row;justify-content:center;gap:2px;width:fit-content;max-width:calc(100% - 24px);margin-inline:auto;padding:4px;border-radius:12px}
+.atlas-studio .view-controls button{width:44px;height:44px;flex-shrink:0}
+.atlas-studio .view-controls i{width:1px;height:28px;margin:8px 4px}
+.atlas-studio .bottom-dock{left:12px;right:12px;width:auto;transform:none;max-width:520px;margin-inline:auto}
+.atlas-studio .dock-layers,.atlas-studio .dock-reset{min-width:44px;min-height:48px}
+.atlas-studio .dock-reset{padding-left:8px}
+.atlas-studio .dock-layers{padding-right:8px}
+.atlas-studio .explode-control [data-slot=slider]{padding-block:13px}
+.atlas-studio .explode-control [data-slot=slider-thumb]::after{inset:-14px}
+.atlas-studio .layer-presets button{min-height:44px;height:44px}
+.atlas-studio .panel-foot button{min-height:44px;min-width:48px}
+.atlas-studio .system-row [data-slot=switch]::after{inset:-13px -6px}
+.atlas-studio .search-panel{top:max(108px,calc(env(safe-area-inset-top) + 90px))}
+.atlas-studio .search-panel input{font-size:16px}
+.atlas-studio .search-note{display:none}
+.atlas-studio .anatomy-search-results{max-height:min(360px,calc(100dvh - 220px))!important}
+.atlas-studio .anatomy-search-results [data-slot=combobox-item]{white-space:normal;overflow-wrap:anywhere}
+.atlas-studio .detail-sheet{gap:12px!important}
+.atlas-studio .detail-header{gap:7px}
+.atlas-studio .detail-header .structure-title{font-size:20px!important;line-height:1.2!important}
+.atlas-studio .detail-actions .secondary-action{min-height:44px}
+.atlas-studio .detail-scroll{min-height:48px}
+.atlas-studio .detail-actions{padding-top:6px}
+.atlas-studio .about-copy a{min-height:44px}
+.atlas-studio .studio-footer button{min-height:24px}
+}
+@media(max-width:350px){
+.atlas-studio h1{font-size:24px;gap:6px}
+.atlas-studio .identity-meta{font-size:9px}
+.atlas-studio .eyebrow{font-size:8px}
+.atlas-studio .top-actions{gap:2px}
+.atlas-studio .top-actions button,.atlas-studio .top-actions .icon-button{width:44px;min-width:44px}
+.atlas-studio .bottom-dock{gap:8px;padding:11px}
+.atlas-studio .explode-label{font-size:10px;gap:3px}
+.atlas-studio .explode-label output{min-width:39px;padding:3px 5px}
+.atlas-studio .detail-sheet{padding:14px!important}
+.atlas-studio .detail-header .structure-title{font-size:18px!important}
+.atlas-studio .detail-header{padding-right:18px}
+.atlas-studio .detail-actions{gap:0}
+.atlas-studio .detail-sheet .primary-action{min-height:44px}
+.atlas-studio .detail-sheet .secondary-action{min-height:36px}
+}
+@media(max-height:600px) and (orientation:landscape){
+.atlas-studio .view-controls{top:76px;left:auto;right:max(12px,env(safe-area-inset-right));transform:none;flex-direction:row;width:auto;margin:0}
+.atlas-studio .view-controls button{width:44px;height:44px}
+.atlas-studio .view-controls i{width:1px;height:28px;margin:8px 4px}
+.atlas-studio .layers-panel.mobile-open{top:12px;bottom:12px;left:max(12px,env(safe-area-inset-left));width:280px;max-height:none}
+.atlas-studio .detail-sheet,.atlas-studio .detail-sheet.is-isolated{top:12px!important;bottom:12px!important;right:max(12px,env(safe-area-inset-right))!important;left:auto!important;width:300px!important;max-height:none!important;padding:16px!important;gap:12px!important}
+.atlas-studio:has(.detail-sheet) .view-controls,.atlas-studio:has(.detail-sheet) .top-actions{visibility:hidden}
+.atlas-studio .search-panel{top:72px;width:350px;left:auto;right:12px}
+.atlas-studio .search-panel input{font-size:16px}
+.atlas-studio .search-note{display:none}
+.atlas-studio .anatomy-search-results{max-height:calc(100dvh - 190px)!important}
+}
+@media(max-width:767px){
+.atlas-studio:has(.detail-sheet) .view-controls{visibility:hidden}
+}
+@media(max-height:600px) and (orientation:landscape){
+.atlas-studio:has(.detail-sheet) .bottom-dock{left:12px;right:324px;width:auto;transform:none;max-width:none;margin:0}
+}
+/* Định vị nền của hai tấm trượt.
+   Bản gốc lấy vị trí từ component <Sheet> của shadcn (position:fixed, inset-y-0,
+   right-0, flex-col); CSS chỉ tinh chỉnh top/bottom/right lên trên nền đó. Không
+   có component thì các offset kia vô nghĩa và tấm chi tiết rơi về góc trên trái.
+   Dùng `absolute` chứ không `fixed`: ở Soma 3D khung studio nằm DƯỚI TopBar, mốc
+   phải là khung studio chứ không phải cả cửa sổ. */
+.atlas-studio .detail-sheet{
+  position:absolute;display:flex;flex-direction:column;gap:18px;
+}
+.atlas-studio .about-sheet{
+  position:absolute;top:0;right:0;bottom:0;
+  display:flex;flex-direction:column;gap:14px;overflow-y:auto;
+}
+/* Trang toàn thân tràn viền, không còn TopBar phía trên nên giữ nguyên
+   `height:100dvh` của bản gốc — luật đó nằm ở khối `.atlas-studio` phía trên
+   (nguyên là `.studio`, đã sửa từ bộ chọn hậu duệ thành chính phần tử gốc). */
+
+/* ---------------------------------------------------------------------------
+   Nhận diện và điều khiển chung, nhập vào lớp nổi thay cho thanh header riêng
+   --------------------------------------------------------------------------- */
+
+/* `.identity` được đặt `pointer-events:none` để không chặn thao tác xoay model,
+   nên riêng logo phải bật lại thì mới bấm về trang chủ được. */
+.atlas-studio .brand-signature{
+  pointer-events:auto;margin-bottom:16px;
+  color:var(--foreground);
+  --sub-e:var(--muted-foreground);
+  --acc:var(--primary);
+}
+.atlas-studio .brand-signature-emblem img{display:block;width:38px;height:38px}
+.atlas-studio .brand-signature-copy strong{font-size:22px}
+
+/* Nút sáng/tối dùng chung, chỉnh cho vừa hàng nút nổi. */
+.atlas-studio .top-actions .theme-toggle{
+  pointer-events:auto;width:38px;height:38px;flex:none;
+  display:grid;place-items:center;border-radius:9px;
+  border:1px solid var(--border);background:var(--card);color:var(--foreground);
+}
+
+/* Bộ đổi ngôn ngữ dùng chung của app.
+   Nó lấy màu từ bộ biến theme của Soma (--paper, --ink-e, --line-e...), mà
+   mặt atlas luôn sáng bất kể app đang ở theme nào — để nguyên thì lúc app ở
+   theme tối sẽ có một menu đen đổ xuống giữa nền sáng. Nạp lại đúng bộ biến
+   đó bằng bảng màu của atlas: cả nút bấm lẫn menu tự khớp, không phải viết
+   lại từng phần tử. */
+.atlas-studio .language-select{
+  pointer-events:auto;
+  --paper:#ffffff;
+  --paper-2:#eef1f3;
+  --ink-e:var(--foreground);
+  --sub-e:var(--muted-foreground);
+  --line-e:var(--input);
+  --acc:var(--primary);
+}
+.atlas-studio .language-select-trigger{
+  height:38px;min-width:0;border-radius:9px;font-size:12px;background:#ffffffd9;
+}
+
+@media(max-width:767px){
+  .atlas-studio .atlas-brand{margin-bottom:8px}
+  .atlas-studio .atlas-brand-text i{display:none}
+}
+
+
+/* Trợ lý Soma Bot nổi cố định ở góc phải dưới (right:22px, bottom:18px, khối
+   ~112px, z-index 90) — bản gốc human-atlas không có nó, nên chân trang atlas
+   trải hết chiều ngang và nút "Nguồn & ghi công" nằm lọt đúng dưới con mascot,
+   bấm vào là mở khung chat. Chừa chỗ cho nó. */
+.atlas-studio .studio-footer{right:150px}
+@media(max-width:767px){
+  .atlas-studio .studio-footer{right:110px}
+}
+
+/* ===========================================================================
+   CHẾ ĐỘ TỐI
+   Bảng màu human-atlas chỉ có bản sáng (`color-scheme:light`, hàng loạt màu
+   cứng). Khối này phủ lên theo đúng đặc tả: NỀN ĐEN · CHỮ TRẮNG · NÚT XANH
+   DƯƠNG (#2f6bd8, cùng token --blue của Soma).
+   Chọn `html[data-theme="dark"]` nên độ ưu tiên cao hơn mọi luật gốc, đặt ở
+   cuối file cũng không phụ thuộc thứ tự.
+   =========================================================================== */
+html[data-theme="dark"] .atlas-studio{
+  color-scheme:dark;
+  --background:#0b0c0e;
+  --foreground:#f2f4f7;
+  --card:#14161a;
+  --popover:#14161a;
+  --primary:#2f6bd8;          /* nút chính: xanh dương */
+  --primary-foreground:#ffffff;
+  --secondary:#1c1f24;
+  --muted:#232830;
+  --muted-foreground:#98a2b0;
+  --accent:#1c1f24;
+  --border:#ffffff1a;
+  --input:#ffffff26;
+  --ring:#2f6bd8;
+  background:#0b0c0e;
+  color:#f2f4f7;
+}
+
+/* --- bề mặt kính và các bảng --- */
+html[data-theme="dark"] .atlas-studio .glass{
+  background:#14161ae6;border:1px solid #ffffff14;box-shadow:0 16px 48px #00000059;
+}
+html[data-theme="dark"] .atlas-studio .vignette{
+  background:radial-gradient(ellipse at 51% 43%,transparent 35%,#00000073 100%);
+}
+
+/* --- chữ --- */
+html[data-theme="dark"] .atlas-studio h1,
+html[data-theme="dark"] .atlas-studio .structure-title,
+html[data-theme="dark"] .atlas-studio .panel-heading,
+html[data-theme="dark"] .atlas-studio .explode-label,
+html[data-theme="dark"] .atlas-studio .member-list h3,
+html[data-theme="dark"] .atlas-studio .about-copy h3,
+html[data-theme="dark"] .atlas-studio .structure-meta strong,
+html[data-theme="dark"] .atlas-studio .about-copy strong{color:#f2f4f7}
+html[data-theme="dark"] .atlas-studio .eyebrow,
+html[data-theme="dark"] .atlas-studio .identity-meta,
+html[data-theme="dark"] .atlas-studio .identity-meta span,
+html[data-theme="dark"] .atlas-studio .system-count,
+html[data-theme="dark"] .atlas-studio .panel-foot,
+html[data-theme="dark"] .atlas-studio .studio-footer,
+html[data-theme="dark"] .atlas-studio .scene-caption,
+html[data-theme="dark"] .atlas-studio .slider-endpoints,
+html[data-theme="dark"] .atlas-studio .search-note,
+html[data-theme="dark"] .atlas-studio .context-note,
+html[data-theme="dark"] .atlas-studio .structure-meta,
+html[data-theme="dark"] .atlas-studio .structure-description,
+html[data-theme="dark"] .atlas-studio .detail-scroll,
+html[data-theme="dark"] .atlas-studio .about-copy,
+html[data-theme="dark"] .atlas-studio .loading span,
+html[data-theme="dark"] .atlas-studio .secondary-action{color:#98a2b0}
+html[data-theme="dark"] .atlas-studio .system-name,
+html[data-theme="dark"] .atlas-studio .enabled .system-name,
+html[data-theme="dark"] .atlas-studio .dock-reset,
+html[data-theme="dark"] .atlas-studio .panel-foot button,
+html[data-theme="dark"] .atlas-studio .studio-footer button{color:#dbe1e9}
+html[data-theme="dark"] .atlas-studio .caption-line{background:#ffffff26}
+
+/* --- nút: xanh dương --- */
+html[data-theme="dark"] .atlas-studio .primary-action{
+  background:#2f6bd8;border-color:#2f6bd8;color:#fff !important;
+}
+html[data-theme="dark"] .atlas-studio .primary-action:hover,
+html[data-theme="dark"] .atlas-studio .primary-action.active{background:#3f7ce6}
+html[data-theme="dark"] .atlas-studio .layer-presets{background:#ffffff0d}
+html[data-theme="dark"] .atlas-studio .layer-presets button{color:#98a2b0}
+html[data-theme="dark"] .atlas-studio .layer-presets button[aria-pressed=true]{
+  background:#2f6bd8;color:#fff;
+}
+html[data-theme="dark"] .atlas-studio .view-controls .active{background:#2f6bd8;color:#fff}
+html[data-theme="dark"] .atlas-studio [data-slot=button]:hover{background:#ffffff12;color:#fff}
+html[data-theme="dark"] .atlas-studio [data-slot=switch]{background:#ffffff26}
+html[data-theme="dark"] .atlas-studio [data-slot=switch][data-state=checked]{background:#2f6bd8}
+html[data-theme="dark"] .atlas-studio [data-slot=slider]::-webkit-slider-runnable-track{background:#ffffff1f}
+html[data-theme="dark"] .atlas-studio [data-slot=slider]::-moz-range-track{background:#ffffff1f}
+html[data-theme="dark"] .atlas-studio [data-slot=slider]::-webkit-slider-thumb{background:#2f6bd8;border-color:#14161a}
+html[data-theme="dark"] .atlas-studio [data-slot=slider]::-moz-range-thumb{background:#2f6bd8;border-color:#14161a}
+html[data-theme="dark"] .atlas-studio .small-number,
+html[data-theme="dark"] .atlas-studio .panel-heading .small-number,
+html[data-theme="dark"] .atlas-studio .top-actions kbd{background:#ffffff14;color:#98a2b0}
+html[data-theme="dark"] .atlas-studio .loading-track{background:#ffffff1a}
+html[data-theme="dark"] .atlas-studio .loading-track i{background:#2f6bd8}
+html[data-theme="dark"] .atlas-studio .source-link,
+html[data-theme="dark"] .atlas-studio .about-copy a{color:#6ea1ff}
+html[data-theme="dark"] .atlas-studio .search-panel input,
+html[data-theme="dark"] .atlas-studio .anatomy-search-results button{
+  background:#ffffff0d;border-color:#ffffff1f;color:#f2f4f7;
+}
+html[data-theme="dark"] .atlas-studio .anatomy-search-results button:hover{background:#ffffff14}
+html[data-theme="dark"] .atlas-studio .part-hover{background:#14161af2;color:#f2f4f7;border-color:#ffffff1f}
+html[data-theme="dark"] .atlas-studio .explode-label output{background:#ffffff14;color:#f2f4f7}
+
+/* Bộ đổi ngôn ngữ và nút sáng/tối cũng theo bảng màu tối của atlas. */
+html[data-theme="dark"] .atlas-studio .language-select{
+  --paper:#14161a;--paper-2:#1c1f24;--ink-e:#f2f4f7;--sub-e:#98a2b0;
+  --line-e:#ffffff26;--acc:#2f6bd8;
+}
+html[data-theme="dark"] .atlas-studio .language-select-trigger{background:#ffffff0d}
+html[data-theme="dark"] .atlas-studio .top-actions .theme-toggle{background:#14161a;color:#f2f4f7}
+
+/* ---------------------------------------------------------------------------
+   Thanh header của trang chuyên đề.
+   Trang toàn thân cố ý tràn viền không header; trang chuyên đề thì ngược lại —
+   người dùng vào từ thư viện nên cần lối thoát rõ ràng và một mốc phân cách.
+   Header CHIẾM CHỖ THẬT (không phải lớp nổi) nên khung 3D lùi xuống dưới nó.
+   --------------------------------------------------------------------------- */
+.atlas-studio .scene-bar{
+  position:absolute;inset:0 0 auto 0;z-index:7;
+  display:flex;align-items:center;gap:18px;
+  height:62px;padding:0 22px;
+  border-bottom:1px solid var(--border);
+  background:var(--card);
+}
+/* Khung 3D bắt đầu NGAY DƯỚI header. Không hạ mốc này thì canvas vẫn cao bằng
+   cả trang, 62px trên cùng bị header che — vừa phí điểm ảnh vừa làm model lệch
+   tâm so với vùng nhìn thấy. */
+.atlas-studio.atlas-scene .scene{top:62px}
+/* Nút thoát bên trái, nhận diện CĂN GIỮA, điều khiển bên phải — bố cục header
+   quen thuộc, không để logo dính vào nút thoát thành một cụm lệch. */
+.atlas-studio .scene-bar .brand-signature{
+  position:absolute;left:50%;transform:translateX(-50%);
+  margin-bottom:0;pointer-events:auto;
+}
+.atlas-studio .scene-bar .brand-signature-emblem img{width:30px;height:30px}
+.atlas-studio .scene-bar .brand-signature-copy strong{font-size:17px}
+.atlas-studio .scene-bar .brand-signature-copy small{margin-top:3px}
+.atlas-studio .scene-bar-actions{margin-left:auto;display:flex;align-items:center;gap:9px}
+.atlas-studio .scene-exit{
+  display:inline-flex;align-items:center;gap:6px;flex:0 0 auto;
+  height:36px;padding:0 13px 0 9px;border-radius:9px;
+  border:1px solid var(--border);background:transparent;
+  font-size:13px;color:var(--foreground);text-decoration:none;
+  transition:background .18s;
+}
+.atlas-studio .scene-exit:hover{background:#18253608}
+.atlas-studio .scene-exit svg{transform:rotate(180deg)}
+
+/* Tấm chi tiết là lớp nổi neo theo cả trang, phải lùi xuống dưới header. */
+.atlas-studio.atlas-scene .detail-sheet{top:84px!important}
+
+
+
+html[data-theme="dark"] .atlas-studio .scene-bar{background:#101215;border-bottom-color:#ffffff14}
+html[data-theme="dark"] .atlas-studio .scene-exit{border-color:#ffffff1f;color:#dbe1e9}
+html[data-theme="dark"] .atlas-studio .scene-exit:hover{background:#ffffff12}
+
+@media(max-width:767px){
+  .atlas-studio .scene-bar{height:54px;padding:0 12px;gap:10px}
+  .atlas-studio .scene-bar .brand-signature{display:none}
+  .atlas-studio.atlas-scene .scene{top:54px}
+
+}
+
+
+
+
+
+/* ===========================================================================
+   TRANG CHUYÊN ĐỀ — CỘT TRÁI
+
+   Nguyên tắc: MỘT khối layout lo toàn bộ cột, dùng flex + gap. Bản trước đặt
+   tiêu đề, bảng bài học và mặt cắt thành ba tấm nổi neo bằng top/bottom riêng,
+   nên đổi một cái là phải căn lại hai cái kia — và luôn còn khe hở thừa.
+   =========================================================================== */
+/* Tiêu đề đứng riêng, KHÔNG nằm trong cột thu gọn — thu gọn bảng điều khiển
+   không có nghĩa là giấu luôn tên bài đang xem. Cũng không phải card: không
+   viền, không nền. */
+.atlas-studio .scene-title{position:absolute;z-index:5;left:28px;top:84px;width:300px;padding:0}
+
+.atlas-studio .scene-rail{
+  position:absolute;z-index:5;
+  /* Đáy dừng TRÊN thanh tách rời (cao ~66px + lề 26px). Thanh đó căn giữa
+     trang theo yêu cầu, nên ở màn hẹp nó chồm sang vùng cột trái — chừa sẵn
+     chỗ là hết va, không phải xử lý theo từng bề rộng. */
+  /* Bề rộng cột là MỘT biến: nút thu gọn và phép trượt đều tính từ nó, nên đổi
+     bề rộng ở breakpoint không phải sửa thêm chỗ nào. */
+  --rail-w:288px;--rail-x:26px;
+  /* Chiều cao theo NỘI DUNG, chặn trên bằng max-height — nhờ vậy khi bật mặt
+     cắt, thẻ đó nở xuống vùng trống bên dưới thay vì ép thẻ bài học co lại.
+     Chỉ khi đã dùng hết chỗ thì thẻ bài học mới nhường. */
+  left:var(--rail-x);top:172px;bottom:auto;width:var(--rail-w);
+  /* Chừa 104px dưới đáy để không đè thanh tách rời (thanh đó căn giữa trang
+     nên ở màn hẹp mới chồm sang vùng cột). */
+  max-height:calc(100% - 172px - 104px);
+  display:flex;flex-direction:column;
+  transition:transform .28s cubic-bezier(.22,1,.36,1);
+}
+.atlas-studio .rail-body{
+  flex:1;min-height:0;
+  display:flex;flex-direction:column;gap:14px;
+}
+.atlas-studio .scene-title h1{
+  margin:0;font-size:30px;font-weight:600;line-height:1.1;letter-spacing:-.9px;
+  color:var(--foreground);text-wrap:balance;
+}
+.atlas-studio .scene-meta{
+  margin:7px 0 0;font-size:11.5px;color:var(--muted-foreground);
+  display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+}
+.atlas-studio .scene-meta i{font-style:italic}
+
+/* --- thẻ bài học: co giãn lấp chỗ trống còn lại --- */
+.atlas-studio .lesson-card{
+  /* Cao mong muốn 430px, được phép co khi cột chạm trần. */
+  flex:0 1 430px;min-height:120px;
+  display:flex;flex-direction:column;overflow:hidden;
+  border-radius:12px;border:1px solid var(--border);background:var(--card);
+  box-shadow:0 14px 40px #2433440d;
+}
+.atlas-studio .lesson-scroll{
+  flex:1;min-height:0;overflow-y:auto;
+  display:flex;flex-direction:column;gap:12px;padding:16px;
+  scrollbar-width:thin;scrollbar-color:#b9c3cc transparent;
+}
+.atlas-studio .lesson-intro{
+  margin:0;font-size:12.5px;line-height:1.7;color:var(--muted-foreground);
+}
+.atlas-studio .lesson-list{
+  display:flex;flex-direction:column;gap:1px;
+  border-top:1px solid var(--border);padding-top:10px;
+}
+.atlas-studio .lesson-item{
+  justify-content:space-between;gap:10px;min-height:38px;padding:0 10px;
+  border-radius:8px;font-size:13px;text-align:left;color:var(--foreground);
+}
+.atlas-studio .lesson-item.active{background:var(--primary);color:#fff}
+.atlas-studio .lesson-name{flex:1;text-align:left}
+.atlas-studio .lesson-count{font-size:11px;opacity:.55;font-variant-numeric:tabular-nums}
+
+/* --- thẻ mặt cắt: cao theo nội dung, luôn nằm đáy cột --- */
+.atlas-studio .clip-card{
+  flex:0 0 auto;
+  border-radius:12px;border:1px solid var(--border);background:var(--card);
+  padding:13px 15px;display:flex;flex-direction:column;gap:11px;
+}
+.atlas-studio .clip-head{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  font-size:12.5px;font-weight:600;color:var(--foreground);
+}
+.atlas-studio .clip-body{display:flex;flex-direction:column;gap:10px}
+.atlas-studio .clip-axes{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:4px;
+  background:#18253808;padding:3px;border-radius:9px;
+}
+.atlas-studio .clip-axes button{
+  min-height:30px;border-radius:7px;font-size:12px;font-weight:600;
+  color:var(--muted-foreground);
+}
+.atlas-studio .clip-axes button[aria-pressed=true]{background:var(--primary);color:#fff}
+.atlas-studio .clip-foot{
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:11px;color:var(--muted-foreground);font-variant-numeric:tabular-nums;
+}
+.atlas-studio .clip-foot button{min-height:28px;padding:0 9px;border-radius:7px;font-size:11px}
+
+/* --- trang toàn thân: thẻ mặt cắt ở CỘT TRÁI, ngay dưới bảng hệ cơ quan ---
+   Cùng vị trí với trang chuyên đề (user yêu cầu). Bảng hệ cơ quan neo bottom:175px,
+   nên nhường đáy cho thẻ; khi thẻ mở ra (cao hơn) bảng co thêm bằng :has(). */
+.atlas-studio .layers-panel{bottom:252px}
+.atlas-studio .clip-panel{
+  position:absolute;z-index:6;left:30px;bottom:175px;width:var(--layers-w,286px);
+}
+.atlas-studio:has(.clip-panel [aria-checked=true]) .layers-panel{bottom:338px}
+@media(max-width:767px){.atlas-studio .clip-panel{display:none}}
+
+/* Nhãn chỉ dẫn kiểu atlas giáo khoa (AtlasScene vẽ, trang chuyên đề bật).
+   Lớp phủ không nhận chuột, chỉ từng nhãn nhận — kéo xoay vẫn đi xuyên qua. */
+.atlas-scene .scene-labels{position:absolute;inset:0;pointer-events:none;z-index:2}
+.atlas-scene .scene-label-lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.atlas-scene .scene-label-lines line{stroke-width:1.2;opacity:.9}
+.atlas-scene .scene-label{
+  position:absolute;transform:translateY(-50%);pointer-events:auto;
+  display:flex;align-items:center;gap:7px;max-width:190px;padding:4px 10px;
+  border-radius:8px;border:1px solid rgba(127,127,127,.35);
+  background:rgba(12,13,16,.78);backdrop-filter:blur(6px);color:#eef0f2;
+  font-size:12px;font-weight:500;line-height:1.25;text-align:left;cursor:pointer;
+}
+:root[data-theme=light] .atlas-scene .scene-label{background:rgba(255,255,255,.88);color:#1d2227}
+.atlas-scene .scene-label[data-side=l]{flex-direction:row-reverse;text-align:right}
+.atlas-scene .scene-label i{width:9px;height:9px;border-radius:50%;flex:none}
+.atlas-scene .scene-label:hover{border-color:currentColor}
+/* Chế độ chụp ảnh bìa (?thumb): chỉ còn canvas. */
+.atlas-scene.is-thumb > :not(.scene):not(.vignette){display:none!important}
+body:has(.atlas-scene.is-thumb) .soma-bot-launcher{display:none!important}
+
+/* Dòng meta (Latin · số mảnh · nguồn) một dòng: tên Latin dài xuống dòng thì
+   chữ "BodyParts3D" tràn xuống đè lên thẻ bài học (bài mặt cắt ngang bụng). */
+/* Tiêu đề tối đa 2 dòng: dòng thứ 3 rơi xuống sau thẻ bài học (bài mũi–xoang). */
+.atlas-scene .scene-title h1{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.atlas-scene .scene-title .scene-meta{flex-wrap:nowrap!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:var(--rail-w,300px)}
+.atlas-scene .scene-title .scene-meta > *{flex:none}
+
+/* Chuyển lớp của bài bộ phận (Xương / Cơ / Mạch…). */
+/* Một thanh phân đoạn MỘT DÒNG (cuộn ngang nếu nhiều lớp) — bản cũ là viên thuốc to,
+   xuống 2 hàng, dính sát dòng meta nhìn như lỗi bố cục (user báo, bài hốc mắt). */
+.atlas-scene .layer-chips{
+  /* wrap chứ không cuộn ngang: cuộn thì lớp thứ 4 (bài hốc mắt: "Bộ lệ") bị giấu mất. */
+  display:flex;flex-wrap:wrap;gap:2px;flex:none;
+  padding:3px;border-radius:10px;border:1px solid rgba(127,127,127,.28);
+  background:rgba(127,127,127,.08);
+}
+.atlas-scene .layer-chips::-webkit-scrollbar{display:none}
+.atlas-scene .layer-chips button{
+  flex:none;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
+  padding:6px 11px;border-radius:7px;border:0;background:transparent;color:inherit;
+  font-size:12px;font-weight:500;opacity:.62;cursor:pointer;transition:background .15s,opacity .15s;
+}
+.atlas-scene .layer-chips button::before{content:"";width:7px;height:7px;border-radius:50%;border:1.5px solid currentColor}
+.atlas-scene .layer-chips button:hover{opacity:.9}
+.atlas-scene .layer-chips button.active{opacity:1;background:rgba(127,127,127,.22)}
+.atlas-scene .layer-chips button.active::before{background:#4d8ff0;border-color:#4d8ff0}
+
+/* --- thu gọn cả cột: trượt sang trái, chừa đúng nút mở lại --- */
+/* Nút thu gọn bám GIỮA CẠNH NGOÀI của cột — vị trí quen thuộc của một tay
+   kéo panel, không phải một nút lơ lửng cạnh tiêu đề. Khi cột trượt đi, nút đi
+   cùng và dừng lại sát mép trái màn hình. */
+/* Tay kéo nằm ở CẠNH TRÁI của cột, chỉ là một mũi tên trần — không vòng tròn,
+   không nền. Vùng bấm vẫn đủ rộng 32px nhờ padding. */
+.atlas-studio .rail-toggle{
+  position:absolute;top:50%;left:-14px;z-index:3;
+  width:32px;height:44px;border:0;background:none;padding:0;
+  display:grid;place-items:center;color:var(--muted-foreground);
+  transform:translateY(-50%);
+  transition:transform .28s cubic-bezier(.22,1,.36,1),color .18s;
+}
+/* Mũi tên TRẦN: chặn cả nền lúc rê chuột. Luật nền chung của nút ở chế độ tối
+   (`html[data-theme=dark] .atlas-studio [data-slot=button]:hover`) có độ ưu tiên
+   cao hơn selector một lớp, nên phải khai báo cùng mức mới thắng — đó là lý do
+   trước đây rê chuột lại hiện ra một khối chữ nhật. */
+.atlas-studio .rail-toggle,
+.atlas-studio .rail-toggle:hover,
+html[data-theme="dark"] .atlas-studio .rail-toggle,
+html[data-theme="dark"] .atlas-studio .rail-toggle:hover{
+  background:none;border:0;border-radius:0;box-shadow:none;
+}
+.atlas-studio .rail-toggle:hover{color:var(--foreground)}
+html[data-theme="dark"] .atlas-studio .rail-toggle:hover{color:#f2f4f7}
+.atlas-studio .rail-toggle svg{transform:rotate(180deg);transition:transform .24s}
+.atlas-studio .scene-rail.is-collapsed{
+  transform:translateX(calc(-1 * (var(--rail-w) + var(--rail-x))));
+}
+/* Kéo tay cầm trở lại đúng bằng quãng cột vừa trượt, cộng lề để nó nằm sát mép. */
+.atlas-studio .scene-rail.is-collapsed .rail-toggle{
+  transform:translateY(-50%) translateX(calc(var(--rail-w) + var(--rail-x)));
+}
+.atlas-studio .scene-rail.is-collapsed .rail-toggle svg{transform:rotate(0deg)}
+.atlas-studio .scene-rail.is-collapsed .rail-body{opacity:0;pointer-events:none;transition:opacity .18s}
+
+/* --- thanh tách rời: thu gọn thành viên thuốc, không để lại hộp rỗng --- */
+/* Hai nút icon CÙNG CỠ hai bên, thanh trượt ở giữa — nhờ vậy trọng tâm thị
+   giác trùng với tâm hộp. Bản trước dùng nút chữ "Đặt lại" một bên nên thanh
+   trượt lệch 30px sang trái dù hộp vẫn căn giữa đúng. */
+.atlas-studio.atlas-scene .bottom-dock{
+  display:flex;align-items:center;gap:14px;padding:14px 16px;
+}
+.atlas-studio .dock-icon{
+  flex:0 0 auto;width:38px;height:38px;border-radius:10px;
+  display:grid;place-items:center;
+  border:1px solid var(--border);background:transparent;color:var(--muted-foreground);
+}
+.atlas-studio .dock-icon:hover{color:var(--foreground)}
+.atlas-studio .dock-icon:last-child svg{transform:rotate(90deg)}
+.atlas-studio.atlas-scene .explode-control{flex:1;min-width:0}
+.atlas-studio .dock-pill{
+  position:absolute;left:50%;transform:translateX(-50%);bottom:26px;z-index:5;
+  display:inline-flex;align-items:center;gap:9px;
+  height:40px;padding:0 8px 0 16px;border-radius:999px;
+  font-size:12.5px;color:var(--foreground);
+}
+.atlas-studio .dock-pill b{font-weight:600;font-variant-numeric:tabular-nums}
+.atlas-studio .dock-pill svg{transform:rotate(-90deg);opacity:.6}
+
+/* Từ 1100px trở lên, thanh tách rời (rộng 460px, căn giữa) không còn chạm vùng
+   cột trái nữa — trả lại chỗ đó cho cột, để bật mặt cắt không phải ép thẻ bài
+   học co lại. */
+@media(min-width:1100px){
+  .atlas-studio .scene-rail{max-height:calc(100% - 172px - 56px)}
+}
+@media(max-width:1000px){
+  .atlas-studio .scene-rail{--rail-w:250px;--rail-x:18px}
+}
+@media(max-width:767px){
+  .atlas-studio .scene-rail{display:none}
+}
+
+/* --- chế độ tối --- */
+html[data-theme="dark"] .atlas-studio .lesson-card,
+html[data-theme="dark"] .atlas-studio .clip-card{
+  background:#14161ae6;border-color:#ffffff14;box-shadow:0 14px 40px #00000059;
+}
+html[data-theme="dark"] .atlas-studio .scene-title h1,
+html[data-theme="dark"] .atlas-studio .clip-head{color:#f2f4f7}
+html[data-theme="dark"] .atlas-studio .scene-meta,
+html[data-theme="dark"] .atlas-studio .lesson-intro,
+html[data-theme="dark"] .atlas-studio .lesson-count,
+html[data-theme="dark"] .atlas-studio .clip-foot,
+html[data-theme="dark"] .atlas-studio .clip-axes button{color:#98a2b0}
+html[data-theme="dark"] .atlas-studio .lesson-item{color:#dbe1e9}
+html[data-theme="dark"] .atlas-studio .lesson-item.active,
+html[data-theme="dark"] .atlas-studio .clip-axes button[aria-pressed=true]{background:#2f6bd8;color:#fff}
+html[data-theme="dark"] .atlas-studio .clip-axes{background:#ffffff0d}
+
+html[data-theme="dark"] .atlas-studio .dock-pill{color:#dbe1e9}
+
+/* ===========================================================================
+   CHẾ ĐỘ SÁNG — tăng độ rõ
+
+   Bảng màu gốc human-atlas rất nhạt: viền `#18253618` (alpha 9%) và chữ phụ
+   `#68727d`. Trên nền xám sáng thì thẻ gần như không có mép và chữ đọc mệt.
+   Đậm viền lên và hạ độ sáng chữ để đạt tương phản đọc được.
+   =========================================================================== */
+.atlas-studio{
+  --border:#1825382e;   /* 18% thay vì 9% — thẻ có mép rõ ràng */
+  --input:#1825383d;
+  --muted-foreground:#59636f;
+}
+.atlas-studio .lesson-card,
+.atlas-studio .clip-card{
+  border:1px solid #18253833;
+  box-shadow:0 10px 30px #2433441a, 0 1px 2px #24334414;
+}
+.atlas-studio .glass{
+  background:#fffffff2;
+  border:1px solid #18253833;
+  box-shadow:0 14px 42px #24334418, 0 1px 2px #24334414;
+}
+.atlas-studio .lesson-intro{color:#4d5865}
+.atlas-studio .scene-meta,
+.atlas-studio .clip-foot,
+.atlas-studio .slider-endpoints,
+.atlas-studio .studio-footer,
+.atlas-studio .explode-label{color:#59636f}
+.atlas-studio .lesson-item{color:#28313c}
+.atlas-studio .clip-axes{background:#18253810}
+.atlas-studio .clip-axes button{color:#59636f}
+.atlas-studio .dock-icon{border-color:#18253833;color:#59636f}
+.atlas-studio .rail-toggle{color:#59636f}
+.atlas-studio .scene-exit{border-color:#18253833}
+
+/* Chế độ tối giữ nguyên bảng riêng của nó — khai báo lại sau để không bị khối
+   trên ghi đè. */
+html[data-theme="dark"] .atlas-studio .lesson-card,
+html[data-theme="dark"] .atlas-studio .clip-card{
+  border-color:#ffffff14;box-shadow:0 14px 40px #00000059;
+}
+html[data-theme="dark"] .atlas-studio .glass{
+  background:#14161ae6;border-color:#ffffff14;box-shadow:0 16px 48px #00000059;
+}
+html[data-theme="dark"] .atlas-studio .lesson-intro,
+html[data-theme="dark"] .atlas-studio .scene-meta,
+html[data-theme="dark"] .atlas-studio .clip-foot,
+html[data-theme="dark"] .atlas-studio .slider-endpoints,
+html[data-theme="dark"] .atlas-studio .studio-footer,
+html[data-theme="dark"] .atlas-studio .explode-label,
+html[data-theme="dark"] .atlas-studio .clip-axes button,
+html[data-theme="dark"] .atlas-studio .rail-toggle,
+html[data-theme="dark"] .atlas-studio .dock-icon{color:#98a2b0}
+html[data-theme="dark"] .atlas-studio .lesson-item{color:#dbe1e9}
+html[data-theme="dark"] .atlas-studio .clip-axes{background:#ffffff0d}
+html[data-theme="dark"] .atlas-studio .dock-icon{border-color:#ffffff1f}
+
+/* Hai nút nhanh Ẩn / Làm mờ trong tấm chi tiết.
+   Khối này từng bị xoá nhầm khi dọn CSS cũ; không có style thì hai <button>
+   inline nằm sát nhau và đọc thành "ẨnLàm mờ". */
+.atlas-studio .detail-quick{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.atlas-studio .detail-quick button{
+  min-height:38px;border-radius:9px;font-size:12.5px;
+  border:1px solid var(--border);color:var(--foreground);background:transparent;
+}
+.atlas-studio .detail-quick button:hover{background:#18253810}
+.atlas-studio .detail-quick button[aria-pressed=true]{
+  background:var(--primary);color:#fff;border-color:var(--primary);
+}
+html[data-theme="dark"] .atlas-studio .detail-quick button{border-color:#ffffff1f;color:#dbe1e9}
+html[data-theme="dark"] .atlas-studio .detail-quick button:hover{background:#ffffff12}
+html[data-theme="dark"] .atlas-studio .detail-quick button[aria-pressed=true]{
+  background:#2f6bd8;color:#fff;border-color:#2f6bd8;
+}
+
+/* Tiêu đề cấu trúc ở trang chuyên đề là tiếng Việt đã viết hoa đúng chuẩn.
+   Bản gốc đặt `text-transform:capitalize` vì tên BodyParts3D toàn chữ thường
+   ("mitral valve"); áp vào tiếng Việt thì ra "Thành Cơ Thất" — sai chính tả. */
+.atlas-studio.atlas-scene .structure-title{text-transform:none}

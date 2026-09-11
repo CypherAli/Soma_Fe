@@ -1,16 +1,16 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { useLocale } from "next-intl";
 import { usePathname, Link } from "@/i18n/navigation";
 import { homeContent as C, pick, type Loc } from "@/lib/homeContent";
 import { systemGroups, scenesOfSystem, catalogStats } from "@/lib/catalog";
 import { Icon } from "./IconSprite";
-import { AUTH_CHANGED_EVENT, authRequest, clearAuth, getToken, type AuthUser } from "@/lib/auth";
 import ThemeToggle from "./ThemeToggle";
 import LanguageSwitcher from "../LanguageSwitcher";
 import BrandSignature from "./BrandSignature";
 import HomeSearch from "./HomeSearch";
+import AccountMenu from "./AccountMenu";
 
 export default function HomeNav({
   minimal = false,
@@ -38,43 +38,6 @@ export default function HomeNav({
     .sort((a, b) => b.length - a.length)[0];
 
   const [megaOpen, setMegaOpen] = useState(false);
-  const [user, setUser] = useState<AuthUser | null>(null);
-  const [accountOpen, setAccountOpen] = useState(false);
-  const accountRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    async function loadUser() {
-      await Promise.resolve();
-      if (!getToken()) return setUser(null);
-      try {
-        const result = await authRequest<{ user: AuthUser }>("/auth/me");
-        setUser(result.user);
-      } catch {
-        clearAuth();
-        setUser(null);
-      }
-    }
-    void loadUser();
-    window.addEventListener(AUTH_CHANGED_EVENT, loadUser);
-    return () => window.removeEventListener(AUTH_CHANGED_EVENT, loadUser);
-  }, []);
-
-  useEffect(() => {
-    if (!accountOpen) return;
-    const close = (event: MouseEvent) => {
-      if (accountRef.current && !accountRef.current.contains(event.target as Node)) setAccountOpen(false);
-    };
-    document.addEventListener("mousedown", close);
-    return () => document.removeEventListener("mousedown", close);
-  }, [accountOpen]);
-
-  async function logout() {
-    try { await authRequest("/auth/logout", { method: "POST" }); } catch { /* Xóa phiên cục bộ kể cả khi API ngoại tuyến. */ }
-    clearAuth();
-    setUser(null);
-    setAccountOpen(false);
-  }
-
   return (
     <>
       <nav className={`nav${commerce ? " home-commerce-nav" : ""}`}>
@@ -97,16 +60,7 @@ export default function HomeNav({
           <div className="nav-r">
             <ThemeToggle />
             <LanguageSwitcher />
-            {user ? (
-              <div className="account" ref={accountRef}>
-                <button type="button" className="btn-signin account-trigger" onClick={() => setAccountOpen((open) => !open)} aria-expanded={accountOpen}>
-                  {user.name.split(" ").slice(-1)[0]}
-                </button>
-                {accountOpen && <div className="account-menu"><strong>{user.name}</strong><span>{user.email}</span><button type="button" onClick={logout}>Đăng xuất</button></div>}
-              </div>
-            ) : (
-              <Link href="/dang-nhap" className="btn-signin">{pick(C.nav.signIn, locale)}</Link>
-            )}
+            <AccountMenu locale={locale} />
           </div>
         </div>
 

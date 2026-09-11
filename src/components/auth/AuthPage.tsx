@@ -14,7 +14,8 @@ const words = {
   zh: { loginTitle:"欢迎回来", registerTitle:"开启探索之旅", loginSub:"继续通过三维空间探索人体。", registerSub:"免费创建账户并保存学习进度。", login:"登录", register:"创建账户", name:"姓名", email:"电子邮箱", password:"密码", confirm:"确认密码", forgot:"忘记密码？", loading:"处理中…", home:"首页", or:"或使用以下方式", new:"还没有账户？", old:"已有账户？", terms:"我同意使用条款和隐私政策。", visual:"以全新方式探索人体解剖。", visualSub:"精准、直观，为学习而设计的三维模型。" },
 };
 
-function SocialIcon({ provider }: { provider: "google"|"facebook"|"github" }) {
+/** Dùng lại ở khu tài khoản (`components/settings/ConnectionsTab`). */
+export function SocialIcon({ provider }: { provider: "google"|"facebook"|"github" }) {
   if (provider === "google") return <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.6 12.2c0-.7-.1-1.5-.2-2.2H12v4.3h6a5.1 5.1 0 0 1-2.2 3.3v2.8h3.6c2.1-2 3.2-4.8 3.2-8.2Z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.4-2.6l-3.6-2.8c-1 .7-2.3 1.1-3.8 1.1-2.9 0-5.4-2-6.3-4.6H2v2.9A11.2 11.2 0 0 0 12 23Z"/><path fill="#FBBC05" d="M5.7 14.1A6.7 6.7 0 0 1 5.4 12c0-.7.1-1.5.3-2.1V7H2A11.2 11.2 0 0 0 2 17l3.7-2.9Z"/><path fill="#EA4335" d="M12 5.3c1.7 0 3.1.6 4.3 1.7l3.2-3.2A10.8 10.8 0 0 0 12 1 11.2 11.2 0 0 0 2 7l3.7 2.9c.9-2.7 3.4-4.6 6.3-4.6Z"/></svg>;
   if (provider === "facebook") return <svg viewBox="0 0 24 24"><path fill="#1877F2" d="M24 12a12 12 0 1 0-13.9 11.8v-8.4h-3V12h3V9.4c0-3 1.8-4.7 4.6-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9V12h3.3l-.5 3.4H14v8.4A12 12 0 0 0 24 12Z"/></svg>;
   return <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 .7a11.6 11.6 0 0 0-3.7 22.6c.6.1.8-.2.8-.5v-2.2c-3.4.7-4.1-1.4-4.1-1.4-.5-1.4-1.3-1.8-1.3-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.6.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8-.8c2.2-1.5 3.2-1.2 3.2-1.2.6 1.5.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.8 5.5-5.5 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.5A11.6 11.6 0 0 0 12 .7Z"/></svg>;

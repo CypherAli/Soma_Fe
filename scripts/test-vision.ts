@@ -62,6 +62,7 @@ import {
   rollFromAxis,
 } from "../src/lib/vision/orientation.ts";
 import { sceneModules } from "../src/lib/sceneModules.ts";
+import { atlasScenes } from "../src/lib/humanAtlas/scenes/index.ts";
 import { LM, type Landmark } from "../src/lib/gesture/handModel.ts";
 import type { FingerState } from "../src/lib/gesture/gestures.ts";
 
@@ -419,7 +420,7 @@ console.log("\nNhịp quét (ngắm → giữ chụm → đếm ngược → ch�
 {
   const m = new ScanMachine();
   const pair = () => [hand(0.3, 0.3), hand(0.72, 0.78)];
-  let t = 0;
+  const t = 0;
   const first = m.update(pair(), ASPECT, t, true);
   // nhận diện hụt: tay biến mất chốc lát
   const grace = m.update([], ASPECT, t + FRAME_GRACE_MS - 50, true);
@@ -888,7 +889,8 @@ for (const p of VISION_PARTS) {
   check(`[${p.key}] có câu nhắc đưa vào khung`, !!p.hint.vi && !!p.hint.en && !!p.hint.zh);
   check(`[${p.key}] có ít nhất một scene gợi ý`, p.scenes.length > 0);
   check(`[${p.key}] không gợi ý trùng scene`, new Set(p.scenes).size === p.scenes.length);
-  const missing = p.scenes.filter((slug) => !(slug in sceneModules));
+  // Bài bộ phận (bo-phan-*) chỉ có trên atlas — vẫn là trang có thật (/giai-phau/mo-hinh/<slug>).
+  const missing = p.scenes.filter((slug) => !(slug in sceneModules) && !(slug in atlasScenes));
   check(`[${p.key}] mọi scene gợi ý đều CÓ THẬT`, missing.length === 0, missing.join(", "));
 }
 

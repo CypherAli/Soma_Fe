@@ -43,8 +43,13 @@ export type VisionPart = {
   children?: VisionPartKey[];
   /**
    * Scene gợi ý, xếp theo mức "sát với thứ vừa quét nhất" giảm dần.
-   * MỌI slug ở đây đều phải tồn tại thật trong `sceneModules` —
-   * `npm run test:vision` kiểm điều đó, đừng thêm slug tự nghĩ ra.
+   * MỌI slug ở đây đều phải tồn tại thật trong `sceneModules` HOẶC `atlasScenes`
+   * (bài bộ phận `bo-phan-*` chỉ có trên atlas) — `npm run test:vision` kiểm điều
+   * đó, đừng thêm slug tự nghĩ ra.
+   *
+   * Cập nhật 12/09/2026: nhiều slug cũ đã ĐỔI CHỦ ĐỀ khi thư viện chuyển sang atlas
+   * (vd "co-mat" nay là khoang cẳng chân, "tai-day-du" là ĐM não trước) — quét mặt
+   * mà gợi ý cẳng chân. Nay xếp bài bộ phận học theo lớp lên đầu, bỏ slug lạc chủ đề.
    */
   scenes: string[];
 };
@@ -59,7 +64,7 @@ export const VISION_PARTS: VisionPart[] = [
       zh: "取景整个头部，从头顶到下巴。",
     },
     children: ["face", "eye", "ear", "mouth"],
-    scenes: ["giai-phau-dau", "giai-phau-so", "so-nen-so", "nao-that-mang-nao"],
+    scenes: ["bo-phan-so", "bo-phan-nao", "giai-phau-dau", "so-nen-so", "nao-that-mang-nao"],
   },
   {
     key: "face",
@@ -70,7 +75,8 @@ export const VISION_PARTS: VisionPart[] = [
       zh: "让整张脸进入取景框，正视摄像头。",
     },
     children: ["eye", "ear", "mouth"],
-    scenes: ["co-mat", "giai-phau-dau", "co-mat-than-kinh-vii", "than-kinh-sinh-ba", "tuyen-nuoc-bot"],
+    // Atlas không có cơ bám da mặt: mặt học qua khung xương mặt, mũi–xoang, dây V1, bộ lệ.
+    scenes: ["giai-phau-dau", "bo-phan-so", "mui-xoang", "than-kinh-sinh-ba", "le-dao"],
   },
   {
     key: "eye",
@@ -80,7 +86,7 @@ export const VISION_PARTS: VisionPart[] = [
       en: "Frame the area around one eye and open it wide.",
       zh: "取景一只眼睛周围区域，睁大眼睛。",
     },
-    scenes: ["giai-phau-mat", "hoc-mat", "duong-thi-giac"],
+    scenes: ["bo-phan-mat", "bo-phan-hoc-mat", "giai-phau-mat", "hoc-mat", "duong-thi-giac", "le-dao"],
   },
   {
     key: "ear",
@@ -90,7 +96,10 @@ export const VISION_PARTS: VisionPart[] = [
       en: "Turn your head so the outer ear is fully visible, then frame it.",
       zh: "侧头露出耳廓后取景。",
     },
-    scenes: ["tai-day-du", "he-thinh-giac", "goc-cau-tieu-nao"],
+    // Atlas KHÔNG có tai (chỉ một lưới tai ngoài). Gợi ý gần nhất: nền sọ — phần đá xương
+    // thái dương chứa tai giữa–tai trong; hệ đốt sống–thân nền — ĐM tiểu não trước dưới cho
+    // nhánh mê đạo nuôi tai trong.
+    scenes: ["so-nen-so", "goc-cau-tieu-nao"],
   },
   {
     key: "mouth",
@@ -100,7 +109,7 @@ export const VISION_PARTS: VisionPart[] = [
       en: "Frame the mouth and open it so the teeth show.",
       zh: "取景口部并张口露出牙齿。",
     },
-    scenes: ["mieng-luoi-rang", "bo-rang", "khop-thai-duong-ham", "tuyen-nuoc-bot"],
+    scenes: ["mieng-luoi-rang", "bo-rang", "tuyen-nuoc-bot", "hau-thanh-quan"],
   },
   {
     key: "neck",
@@ -110,7 +119,7 @@ export const VISION_PARTS: VisionPart[] = [
       en: "Lift your chin slightly so the front of the neck shows.",
       zh: "微抬下巴，露出整个颈前区。",
     },
-    scenes: ["giai-phau-co", "tam-giac-co", "tuyen-giap", "dong-mach-canh", "hach-co", "cot-song-co"],
+    scenes: ["giai-phau-co", "tam-giac-co", "bo-phan-cot-song-co", "dong-mach-canh", "hach-co", "bo-phan-thanh-quan"],
   },
   {
     key: "shoulder",
@@ -120,7 +129,7 @@ export const VISION_PARTS: VisionPart[] = [
       en: "Turn so one whole shoulder, joint included, is in frame.",
       zh: "转身使整个肩部连同肩关节入镜。",
     },
-    scenes: ["giai-phau-dai-vai", "chop-xoay-vai", "dam-roi-canh-tay", "vai-ho-nach", "khop-vai-khuyu"],
+    scenes: ["bo-phan-vai", "giai-phau-dai-vai", "chop-xoay-vai", "vai-ho-nach", "khop-vai-khuyu"],
   },
   {
     key: "upper-arm",
@@ -130,7 +139,7 @@ export const VISION_PARTS: VisionPart[] = [
       en: "Frame shoulder to elbow, arm slightly flexed.",
       zh: "取景肩到肘的一段，手臂略屈。",
     },
-    scenes: ["giai-phau-canh-tay", "co-canh-tay", "dong-mach-chi-tren", "moc-xuong-chi-tren"],
+    scenes: ["bo-phan-canh-tay", "giai-phau-canh-tay", "co-canh-tay", "dong-mach-chi-tren", "moc-xuong-chi-tren"],
   },
   {
     key: "elbow",
@@ -140,7 +149,7 @@ export const VISION_PARTS: VisionPart[] = [
       en: "Frame the elbow joint alone, bent about 90 degrees.",
       zh: "单独取景肘关节，屈约 90 度。",
     },
-    scenes: ["khop-khuyu", "ho-khuyu", "khop-vai-khuyu"],
+    scenes: ["bo-phan-khuyu", "khop-khuyu", "ho-khuyu"],
   },
   {
     key: "forearm",
@@ -150,7 +159,7 @@ export const VISION_PARTS: VisionPart[] = [
       en: "Frame elbow to wrist with the palm facing up.",
       zh: "取景肘到腕的一段，掌心朝上。",
     },
-    scenes: ["giai-phau-cang-tay", "dong-mach-chi-tren", "tinh-mach-chi-tren", "moc-xuong-chi-tren"],
+    scenes: ["bo-phan-cang-tay", "giai-phau-cang-tay", "dong-mach-chi-tren", "tinh-mach-chi-tren", "moc-xuong-chi-tren"],
   },
   {
     key: "wrist",
@@ -160,7 +169,7 @@ export const VISION_PARTS: VisionPart[] = [
       en: "Frame the wrist alone, palm side toward the camera.",
       zh: "单独取景腕部，掌面朝向摄像头。",
     },
-    scenes: ["co-tay-ong-co-tay", "giai-phau-ban-tay", "ban-tay"],
+    scenes: ["co-tay-ong-co-tay", "bo-phan-ban-tay", "giai-phau-ban-tay", "ban-tay"],
   },
   {
     key: "hand",
@@ -170,7 +179,7 @@ export const VISION_PARTS: VisionPart[] = [
       en: "Spread the hand; frame from wrist to fingertips.",
       zh: "张开手掌，从腕到指尖完整入镜。",
     },
-    scenes: ["giai-phau-ban-tay", "ban-tay", "co-tay-ong-co-tay"],
+    scenes: ["bo-phan-ban-tay", "giai-phau-ban-tay", "ban-tay", "dam-roi-canh-tay", "co-tay-ong-co-tay"],
   },
   {
     key: "chest",
@@ -180,7 +189,7 @@ export const VISION_PARTS: VisionPart[] = [
       en: "Move back so the whole front of the chest fits.",
       zh: "后退使整个胸前区入镜。",
     },
-    scenes: ["thanh-nguc", "long-nguc", "vung-nguc-tuyen-vu", "giai-phau-than", "tim-day-du"],
+    scenes: ["bo-phan-long-nguc", "thanh-nguc", "vung-nguc-tuyen-vu", "bo-phan-tim", "bo-phan-phoi"],
   },
   {
     key: "abdomen",
@@ -190,7 +199,7 @@ export const VISION_PARTS: VisionPart[] = [
       en: "Move back so the whole front of the abdomen fits.",
       zh: "后退使整个腹前区入镜。",
     },
-    scenes: ["thanh-bung", "co-bung", "mat-cat-ngang-bung", "tong-quan-he-tieu-hoa"],
+    scenes: ["thanh-bung", "mat-cat-ngang-bung", "tong-quan-he-tieu-hoa", "bo-phan-gan", "bo-phan-da-day"],
   },
   {
     key: "knee",
@@ -200,7 +209,7 @@ export const VISION_PARTS: VisionPart[] = [
       en: "Frame the knee joint alone with the leg straight.",
       zh: "单独取景膝关节，腿伸直。",
     },
-    scenes: ["khop-goi", "ho-khoeo", "moc-xuong-chi-duoi"],
+    scenes: ["bo-phan-goi", "khop-goi", "ho-khoeo", "vung-ben", "moc-xuong-chi-duoi"],
   },
   {
     key: "foot",
@@ -210,7 +219,7 @@ export const VISION_PARTS: VisionPart[] = [
       en: "Frame the whole foot from ankle to toes.",
       zh: "从踝到趾完整取景足部。",
     },
-    scenes: ["ban-chan-chi-tiet", "ban-chan", "khop-co-chan", "gan-got-ong-co-chan"],
+    scenes: ["bo-phan-co-chan-ban-chan", "ban-chan-chi-tiet", "ban-chan", "khop-co-chan", "gan-got-ong-co-chan"],
   },
 ];
 
