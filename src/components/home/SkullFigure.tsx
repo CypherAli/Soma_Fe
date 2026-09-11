@@ -11,7 +11,8 @@ const SkullTurntable = dynamic(() => import("./SkullTurntable"), {
 export default function SkullFigure() {
   return (
     <div className="human-fig human-fig-3d" aria-hidden>
-      <SkullTurntable />
+      {/* Tô màu từng xương như bài "Giải phẫu sọ" — user chọn kiểu này thay khối ngà trơn. */}
+      <SkullTurntable colored />
     </div>
   );
 }

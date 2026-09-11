@@ -3,8 +3,9 @@
 import { useMemo, useState } from "react";
 import { useRouter } from "@/i18n/navigation";
 import { pick, type Loc } from "@/lib/homeContent";
-import { contentTypeTabs, type CategoryData, type ResultCard } from "@/lib/exploreContent";
+import { type CategoryData, type ResultCard } from "@/lib/exploreContent";
 import AtlasIcon from "./AtlasIcon";
+import FilterSelect from "./FilterSelect";
 
 const IMG_ICON_FALLBACK: Record<string, string> = {
   "an-heart": "i-heart", "an-skel": "i-bone", "an-muscle": "i-muscle",
@@ -45,9 +46,7 @@ const SORT_LABELS: Record<SortMode, { vi: string; en: string; zh: string }> = {
 };
 
 export default function ExploreResults({ data, locale }: { data: CategoryData; locale: Loc }) {
-  const isAllModels = data.slug === "tat-ca";
   const [active, setActive] = useState("all");
-  const [contentType, setContentType] = useState<"all" | "anatomy" | "condition" | "procedure">("all");
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState<SortMode>("relevance");
   const router = useRouter();
@@ -55,16 +54,15 @@ export default function ExploreResults({ data, locale }: { data: CategoryData; l
   const cards = useMemo(() => {
     const filtered = data.cards.filter((c) => {
       const matchesFilter = active === "all" || c.filters.includes(active);
-      const matchesType = contentType === "all" || c.type === contentType;
       const matchesQuery = query.trim() === "" || pick(c.title, locale).toLowerCase().includes(query.trim().toLowerCase());
-      return matchesFilter && matchesType && matchesQuery;
+      return matchesFilter && matchesQuery;
     });
     if (sort === "relevance") return filtered; // giữ nguyên thứ tự biên tập
     const dir = sort === "az" ? 1 : -1;
     return [...filtered].sort(
       (a, b) => dir * pick(a.title, locale).localeCompare(pick(b.title, locale), locale === "zh" ? "zh" : "vi"),
     );
-  }, [data.cards, active, contentType, query, sort, locale]);
+  }, [data.cards, active, query, sort, locale]);
 
   return (
     <>
@@ -79,7 +77,15 @@ export default function ExploreResults({ data, locale }: { data: CategoryData; l
           />
         </div>
         <div className="tb-right">
-          <span className="visible-count">{cards.length} {locale === "vi" ? "kết quả" : locale === "zh" ? "个结果" : "results"}</span>
+          {data.filterAs === "select" && data.filters.length > 0 && (
+            <FilterSelect
+              label={data.filterLabel ? pick(data.filterLabel, locale) : ""}
+              options={data.filters}
+              value={active}
+              onChange={setActive}
+              locale={locale}
+            />
+          )}
           <button
             className="tb-btn"
             type="button"
@@ -93,11 +99,7 @@ export default function ExploreResults({ data, locale }: { data: CategoryData; l
         </div>
       </div>
 
-      {isAllModels ? (
-        <div className="content-tabs">
-          {contentTypeTabs.map((t) => <button key={t.key} className={`content-tab${contentType === t.key ? " active" : ""}`} onClick={() => setContentType(t.key)}>{pick(t.label, locale)}</button>)}
-        </div>
-      ) : data.filters.length > 0 ? (
+      {data.filters.length > 0 && data.filterAs !== "select" ? (
         <div className="filter-tabs">
           {data.filters.map((f) => <button key={f.key} className={`filter-tab${active === f.key ? " active" : ""}`} onClick={() => setActive(f.key)}>{pick(f.label, locale)}</button>)}
         </div>

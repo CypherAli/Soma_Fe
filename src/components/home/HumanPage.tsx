@@ -6,13 +6,13 @@ import {
   scenesOfSystem,
   systemGroups,
 } from "@/lib/catalog";
-import { Link } from "@/i18n/navigation";
-import IconSprite, { Icon } from "./IconSprite";
+import IconSprite from "./IconSprite";
 import HomeNav from "./HomeNav";
 import HomeFooter from "./HomeFooter";
 import SceneCarousel from "./SceneCarousel";
 import SkullFigure from "./SkullFigure";
 import HomeSearch from "./HomeSearch";
+import SystemGrid from "./SystemGrid";
 
 export default function HumanPage({ locale }: { locale: Loc }) {
   const recent = recentScenes(8);
@@ -73,52 +73,21 @@ export default function HumanPage({ locale }: { locale: Loc }) {
 
       <section className="sec" id="he-co-quan">
         <div className="wrap">
-          <div className="sec-head">
-            <div className="sec-head-text">
-              <h2>{pick(C.sections.bySystem, locale)}</h2>
-              <p className="sec-sub">{pick(C.sections.bySystemSub, locale)}</p>
-            </div>
-          </div>
-          <div className="sys-grid">
-            {systemGroups.map((group) => {
-              const count = scenesOfSystem(group.key).length;
-              return (
-                <Link
-                  key={group.key}
-                  href={`/giai-phau/${group.slug}`}
-                  className={`sys-card ${group.accent}`}
-                >
-                  <span className="sys-icon">
-                    <Icon id={group.icon} />
-                  </span>
-                  <h3>{pick(group.label, locale)}</h3>
-                  <p>
-                    {count} {pick(C.sections.modelCount, locale)}
-                  </p>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Minh bạch nguồn dữ liệu — Phương pháp biên soạn */}
-      <section className="sec" id="phuong-phap">
-        <div className="wrap">
-          <div className="src-block">
-            <div className="src-main">
-              <h2>{pick(C.sources.heading, locale)}</h2>
-              <p>{pick(C.sources.body, locale)}</p>
-            </div>
-            {/* Mục giới hạn dữ liệu: nơi DUY NHẤT còn nói về hai nhóm chưa dựng
-                được (mô mỡ, hệ sinh sản nữ) sau khi hai thẻ "SẮP CÓ" của chúng
-                đã được bỏ khỏi danh mục mô hình. Giữ id để các liên kết cũ
-                trỏ vào đây vẫn tới đúng chỗ. */}
-            <div className="src-gaps" id="gioi-han-du-lieu">
-              <h3>{pick(C.sources.gapsHeading, locale)}</h3>
-              <p>{pick(C.sources.gapsBody, locale)}</p>
-            </div>
-          </div>
+          <SystemGrid
+            title={pick(C.sections.bySystem, locale)}
+            subtitle={pick(C.sections.bySystemSub, locale)}
+            cards={systemGroups.map((group) => ({
+              key: group.key,
+              slug: group.slug,
+              accent: group.accent,
+              icon: group.icon,
+              label: pick(group.label, locale),
+              count: scenesOfSystem(group.key).length,
+              countLabel: pick(C.sections.modelCount, locale),
+            }))}
+            moreLabel={pick(C.sections.showMore, locale)}
+            lessLabel={pick(C.sections.showLess, locale)}
+          />
         </div>
       </section>
 

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { pick, homeContent, type Loc } from "@/lib/homeContent";
 import { sidebarAllModels, sidebarAnatomy, type CategorySlug } from "@/lib/exploreContent";
-import { systemGroups, scenesOfSystem } from "@/lib/catalog";
+import { regionGroups, scenesOfRegion, systemGroups, scenesOfSystem } from "@/lib/catalog";
 import { Link } from "@/i18n/navigation";
 import AtlasIcon from "./AtlasIcon";
 
@@ -74,6 +74,21 @@ export default function CategorySidebar({
               {pick(item.label, locale)}
             </Link>
           ))}
+
+          <p className="cat-label">{pick(homeContent.mega.regionsH, locale)}</p>
+          {regionGroups
+            .filter((group) => scenesOfRegion(group.key).length > 0)
+            .map((group) => (
+              <Link
+                key={group.key}
+                href={`/giai-phau/${group.slug}`}
+                className={`cat-item${group.slug === active ? " active" : ""}`}
+              >
+                <AtlasIcon id={group.icon} />
+                {pick(group.label, locale)}
+                <span className="cat-count">{scenesOfRegion(group.key).length}</span>
+              </Link>
+            ))}
 
           <p className="cat-label">{pick(homeContent.mega.systemsH, locale)}</p>
           {systemGroups.map((group) => (

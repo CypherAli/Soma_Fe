@@ -13,6 +13,7 @@ import { Link } from "@/i18n/navigation";
 import IconSprite, { Icon } from "@/components/home/IconSprite";
 import { pathologyFigures } from "@/lib/pathologyFigures.generated";
 import { getScene } from "@/lib/catalog";
+import { pathologySceneHref } from "@/lib/pathologyScene";
 import PathologyAssistant from "./PathologyAssistant";
 
 const copy = {
@@ -188,7 +189,11 @@ function systemIcon(label: string) {
  * bệnh có `lesionMesh` (neo vào mesh của model TOÀN THÂN) hoặc mã không ứng
  * với scene nào mới lùi về `/viewer` như cũ.
  */
-function view3dHref(p: { id: string; lesionMesh?: string | null; structure?: { code: string } | null }): string {
+function view3dHref(p: { id: string; slug: string; lesionMesh?: string | null; structure?: { code: string } | null }): string {
+  // Bảng bệnh → bài + nhóm bị bệnh (pathologyScene.ts) đi TRƯỚC: mở đúng bộ phận
+  // và làm nổi nó, thay vì rơi về mô hình toàn thân (user báo 12/09/2026).
+  const mapped = pathologySceneHref(p.slug);
+  if (mapped) return mapped;
   const code = p.structure?.code;
   const scene = code ? getScene(code) : undefined;
   if (scene && !p.lesionMesh) return scene.href;

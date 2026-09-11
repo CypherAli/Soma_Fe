@@ -10,15 +10,50 @@ import * as THREE from "three";
  * Model: /models/skull.glb (export từ Z-Anatomy, 22 xương sọ, Draco).
  * Vật liệu ngà thống nhất + nền trong suốt để hoà vào ô kem.
  */
-function Skull({ url }: { url: string }) {
+/**
+ * Màu TỪNG XƯƠNG cho sọ người — cùng bảng màu với bài "Giải phẫu sọ"
+ * (src/lib/humanAtlas/scenes/skull.ts), để hero trang Người trông như một
+ * atlas học được chứ không phải khối ngà trơn (user yêu cầu). Tên khớp theo
+ * tên node Z-Anatomy trong skull.glb (bỏ hậu tố .l/.r).
+ */
+// Bảng màu ĐẬM hơn bảng của scene atlas: canvas này không có env map như
+// AtlasScene, nên cùng mã màu ra nhạt hẳn (user chê "nhạt, không nét"). Chỉnh
+// theo ảnh bìa bài Giải phẫu sọ cho giống màu người học đã quen.
+const BONE_COLORS: [RegExp, string][] = [
+  [/^frontal/i, "#e08a2e"],
+  [/^parietal/i, "#e9b83c"],
+  [/^occipital/i, "#c4652f"],
+  [/^temporal/i, "#b84b33"],
+  [/^sphenoid/i, "#8b46b3"],
+  [/^ethmoid/i, "#4f9a3c"],
+  [/^maxilla/i, "#3c6fcf"],
+  [/^zygomatic/i, "#1f9c96"],
+  [/^(nasal|lacrimal|inferior nasal concha)/i, "#5f8ae0"],
+  [/^(palatine|vomer)/i, "#5358c9"],
+  [/^mandible/i, "#f1e8d4"],
+];
+
+function Skull({ url, colored }: { url: string; colored: boolean }) {
   const { scene } = useGLTF(url, "/draco/");
 
   const prepared = useMemo(() => {
-    const bone = new THREE.MeshStandardMaterial({
+    const ivory = new THREE.MeshStandardMaterial({
       color: "#e9dcc2",
       roughness: 0.82,
       metalness: 0.0,
     });
+    const byColor = new Map<string, THREE.MeshStandardMaterial>();
+    // Thử tên mesh rồi tên node cha: GLTFLoader có thể đặt tên primitive khác tên node.
+    const materialFor = (...names: (string | undefined)[]) => {
+      if (!colored) return ivory;
+      const hex = names
+        .map((n) => (n ?? "").replace(/[._]/g, " ").trim())
+        .map((n) => BONE_COLORS.find(([re]) => re.test(n))?.[1])
+        .find(Boolean);
+      if (!hex) return ivory;
+      if (!byColor.has(hex)) byColor.set(hex, new THREE.MeshStandardMaterial({ color: hex, roughness: 0.45, metalness: 0.05 }));
+      return byColor.get(hex)!;
+    };
     // Clone TRƯỚC khi đè vật liệu: `useGLTF` trả về một cây scene dùng chung
     // theo url. Sọ mèo ở hero khu thú y và khung xem trên trang Mèo là cùng
     // một tệp — đè thẳng lên bản gốc thì vào hero một lần là mẫu vật bên trang
@@ -27,7 +62,7 @@ function Skull({ url }: { url: string }) {
     root.traverse((o) => {
       const m = o as THREE.Mesh;
       if (m.isMesh) {
-        m.material = bone;
+        m.material = materialFor(m.name, m.parent?.name);
         m.castShadow = false;
         m.receiveShadow = false;
       }
@@ -48,7 +83,7 @@ function Skull({ url }: { url: string }) {
     if (span > 0) root.scale.setScalar(1 / span);
 
     return root;
-  }, [scene]);
+  }, [scene, colored]);
 
   return <primitive object={prepared} />;
 }
@@ -56,8 +91,11 @@ function Skull({ url }: { url: string }) {
 export default function SkullTurntable({
   url = "/models/skull.glb",
   margin = 1.13,
+  colored = false,
 }: {
   url?: string;
+  /** Tô màu từng xương (sọ người ở hero). Sọ mèo khu thú y giữ màu ngà — mặc định false. */
+  colored?: boolean;
   /** Hệ số khung của <Bounds>. Đo theo từng model — xem ghi chú ở <Bounds>. */
   margin?: number;
 }) {
@@ -79,14 +117,16 @@ export default function SkullTurntable({
     <Canvas
       dpr={[1, 1.6]}
       camera={{ position: [0, 0.1, 2.8], fov: 38, near: 0.01, far: 100 }}
-      gl={{ antialias: true, alpha: true, toneMapping: THREE.ACESFilmicToneMapping }}
+      // Sọ tô màu: ACES làm bạc màu (cam thành vàng nhạt) — dùng AgX giữ độ bão hoà,
+      // và hạ đèn nền để khối xương có bóng đổ rõ, nhìn "nét" như bài Giải phẫu sọ.
+      gl={{ antialias: true, alpha: true, toneMapping: colored ? THREE.AgXToneMapping : THREE.ACESFilmicToneMapping }}
       style={{ width: "100%", height: "100%" }}
     >
       {/* nền trong suốt: không <color attach="background"> */}
-      <hemisphereLight args={["#fff6ea", "#cbb9a0", 0.7]} />
-      <ambientLight intensity={0.45} />
-      <directionalLight position={[3, 5, 4]} intensity={1.15} color="#fff3e2" />
-      <directionalLight position={[-4, 1, -3]} intensity={0.4} color="#e7d9c4" />
+      <hemisphereLight args={["#fff6ea", "#cbb9a0", colored ? 0.45 : 0.7]} />
+      <ambientLight intensity={colored ? 0.2 : 0.45} />
+      <directionalLight position={[3, 5, 4]} intensity={colored ? 1.9 : 1.15} color="#fff3e2" />
+      <directionalLight position={[-4, 1, -3]} intensity={colored ? 0.7 : 0.4} color="#e7d9c4" />
       {/* bbox world-space của skull.glb: 0.1487 rộng × 0.2092 cao × 0.2036 sâu.
           maxSize = 0.2092 rơi vào trục CAO ⇒ Bounds fit luôn căn theo chiều cao,
           và sọ hiện ra cao đúng bằng (chiều cao ô) / margin.
@@ -112,7 +152,7 @@ export default function SkullTurntable({
           Bỏ `clip`: nó ép near/far theo bounding box, quay nghiêng là cắt mặt. */}
       <Bounds fit observe margin={margin}>
         <Center>
-          <Skull url={url} />
+          <Skull url={url} colored={colored} />
         </Center>
       </Bounds>
       <OrbitControls

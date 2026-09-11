@@ -23,6 +23,17 @@ export const homeContent = {
     signOut: { vi: "Đăng xuất", en: "Sign out", zh: "退出" },
     cta: { vi: "Truy cập thư viện", en: "Enter library", zh: "进入图书馆" },
   },
+  // Bảng tài khoản mở ra khi bấm avatar trên thanh điều hướng.
+  account: {
+    open: { vi: "Mở bảng tài khoản", en: "Open account panel", zh: "打开账户面板" },
+    account: { vi: "Tài khoản", en: "Account", zh: "账户" },
+    docs: { vi: "Tài liệu", en: "Documents", zh: "文档" },
+    settings: { vi: "Cài đặt", en: "Settings", zh: "设置" },
+    theme: { vi: "Giao diện", en: "Appearance", zh: "外观" },
+    light: { vi: "Sáng", en: "Light", zh: "浅色" },
+    dark: { vi: "Tối", en: "Dark", zh: "深色" },
+    language: { vi: "Ngôn ngữ", en: "Language", zh: "语言" },
+  },
   // Menu chính editorial — 4 mục như mẫu Corpus & Anima
   mainMenu: [
     { label: { vi: "Giải phẫu người", en: "Human anatomy", zh: "人体解剖" }, href: "/nguoi" },
@@ -144,6 +155,7 @@ export const homeContent = {
       { icon: "i-full", label: { vi: "Giải phẫu toàn thân", en: "Complete anatomy", zh: "完整解剖" }, href: "/viewer" },
     ] as MenuItem[],
     systemsH: { vi: "Hệ cơ quan", en: "Organ systems", zh: "器官系统" },
+    regionsH: { vi: "Vùng cơ thể", en: "Body regions", zh: "身体区域" },
     /** Mục "Hệ cơ quan" trong mega-menu được sinh từ catalog, không khai ở đây. */
     upcomingH: { vi: "Đang xây dựng", en: "In progress", zh: "建设中" },
     /**
@@ -176,6 +188,8 @@ export const homeContent = {
       zh: "每个系统汇总基于真实解剖数据构建的模型",
     },
     viewAll: { vi: "Xem tất cả", en: "View all", zh: "查看全部" },
+    showMore: { vi: "Xem thêm", en: "Show more", zh: "查看更多" },
+    showLess: { vi: "Thu gọn", en: "Show less", zh: "收起" },
     modelCount: { vi: "mô hình", en: "models", zh: "个模型" },
     structureCount: { vi: "cấu trúc", en: "structures", zh: "个结构" },
   },

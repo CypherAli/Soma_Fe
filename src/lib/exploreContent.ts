@@ -27,12 +27,10 @@ export const sidebarAllModels: SidebarItem = {
 };
 
 /**
- * Mọi mục ở đây đều có trang thật. Hai mục "Mốc xương, nguyên uỷ & bám tận" và
- * "Trắc nghiệm giải phẫu" từng bị gỡ khỏi danh sách vì đường dẫn chưa tồn tại
- * (bấm vào ra 404); ngày 25/08/2026 đã dựng xong cả hai trang nên trả lại đúng
- * chỗ cũ — `/giai-phau/moc-xuong` bày hai model mốc bám cơ dựng từ dữ liệu
- * điểm bám của Z-Anatomy, `/giai-phau/trac-nghiem` mở bộ đề sinh từ chính thư
- * viện 3D.
+ * Mọi mục ở đây đều có trang thật. "Trắc nghiệm giải phẫu" đã được gỡ khỏi
+ * danh sách (quyết định của chủ đồ án) — trang `/giai-phau/trac-nghiem` vẫn
+ * chạy và vẫn tới được từ mục Quiz trên thanh điều hướng, chỉ không còn chiếm
+ * một dòng trong menu Giải phẫu.
  */
 export const sidebarAnatomy: SidebarItem[] = [
   { slug: "theo-vung", icon: "i-region", label: { vi: "Giải phẫu theo vùng", en: "Anatomy by region", zh: "按区域" }, href: "/giai-phau/theo-vung" },
@@ -40,7 +38,6 @@ export const sidebarAnatomy: SidebarItem[] = [
   { slug: "toan-than", icon: "i-full", label: { vi: "Giải phẫu toàn thân", en: "Complete anatomy", zh: "完整解剖" }, href: "/viewer" },
   { slug: "lat-cat", icon: "i-cross", label: { vi: "Lát cắt & vi giải phẫu", en: "Cross sections & microanatomy", zh: "断面与微观解剖" }, href: "/giai-phau/lat-cat" },
   { slug: "moc-xuong", icon: "i-bone", label: { vi: "Mốc xương, nguyên uỷ & bám tận", en: "Bony landmarks, origins & insertions", zh: "骨性标志与肌肉起止" }, href: "/giai-phau/moc-xuong" },
-  { slug: "trac-nghiem", icon: "i-quiz", label: { vi: "Trắc nghiệm giải phẫu", en: "Anatomy quiz", zh: "解剖学测验" }, href: "/giai-phau/trac-nghiem" },
 ];
 
 export type FilterTab = { key: string; label: T3 };
@@ -64,47 +61,33 @@ export type CategoryData = {
   title: T3;
   filters: FilterTab[];
   cards: ResultCard[];
+  /** Đơn vị đếm ở đầu trang; mặc định là "mô hình". */
+  unit?: T3;
+  /**
+   * Bộ lọc bày kiểu nào: hàng tab gạch chân (mặc định) hay một ô chọn nằm
+   * trong thanh công cụ. Trang "Tất cả mô hình" có tới 13 hệ nên hàng tab dài
+   * quá một dòng — dùng ô chọn gọn hơn.
+   */
+  filterAs?: "tabs" | "select";
+  /** Nhãn của ô chọn khi `filterAs` là "select". */
+  filterLabel?: T3;
 };
 
-/** 4 tab nội dung của trang "Tất cả mô hình" — kiểu gạch chân, khác filter-tab dạng pill. */
-export const contentTypeTabs: { key: "all" | ContentType; label: T3 }[] = [
-  { key: "all", label: { vi: "Tất cả", en: "All", zh: "全部" } },
-  { key: "anatomy", label: { vi: "Giải phẫu & Sinh lý", en: "Anatomy and Physiology", zh: "解剖与生理" } },
-  { key: "condition", label: { vi: "Bệnh lý", en: "Conditions", zh: "病症" } },
-  { key: "procedure", label: { vi: "Thủ thuật & Điều trị", en: "Procedures and Treatments", zh: "操作与治疗" } },
-];
 
-const regionFilters: FilterTab[] = [
-  { key: "all", label: { vi: "Tất cả", en: "All", zh: "全部" } },
-  ...regionGroups.map((g) => ({ key: g.key as string, label: g.label })),
-];
 
-/**
- * Thẻ của trang "Giải phẫu theo vùng" — DẪN XUẤT từ catalog theo vùng cơ thể.
- * Trước đây là 12 thẻ viết tay ("Ngực nữ", "Bụng nam"…) không có href nên bấm
- * vào không đi đâu, lại còn chia nam/nữ trong khi dữ liệu nguồn chỉ có cơ thể
- * nam. Nay mỗi thẻ là một scene có model thật, bấm vào mở được ngay.
- */
-const regionCards: ResultCard[] = regionGroups.flatMap((group) =>
-  scenesOfRegion(group.key).map(
-    (scene): ResultCard => ({
-      img: "an-organ",
-      icon: systemByKey.get(scene.system)?.icon ?? group.icon,
-      thumb: scene.thumb,
-      title: scene.title,
-      filters: [group.key],
-      href: scene.href,
-      real: true,
-      type: "anatomy",
-    }),
-  ),
-);
 
 // Các mô hình theo hệ được trình bày như một atlas giải phẫu chung.
 /**
  * Tab lọc của trang "Giải phẫu theo hệ" — mỗi hệ một tab, sinh từ `catalog` nên
  * không bao giờ lệch với số scene thật.
  */
+const regionFilters: FilterTab[] = [
+  { key: "all", label: { vi: "Tất cả", en: "All", zh: "全部" } },
+  ...regionGroups
+    .filter((g) => scenesOfRegion(g.key).length > 0)
+    .map((g) => ({ key: g.key as string, label: g.label })),
+];
+
 const systemFilters: FilterTab[] = [
   { key: "all", label: { vi: "Tất cả", en: "All", zh: "全部" } },
   ...systemGroups
@@ -113,41 +96,24 @@ const systemFilters: FilterTab[] = [
 ];
 
 /**
- * Thẻ "bộ sưu tập" đứng đầu trang Tất cả mô hình — MỖI HỆ MỘT THẺ, dẫn tới
- * TRANG DUYỆT của hệ đó (`/giai-phau/<slug hệ>`) chứ không tới một model lẻ.
+ * Thẻ mô hình toàn thân — thứ duy nhất trong trang "Tất cả mô hình" không phải
+ * một scene của catalog, nên phải khai riêng.
  *
- * Trước đây mười tám thẻ này trỏ thẳng vào một scene tiêu biểu (thẻ "Hệ tuần
- * hoàn" mở đúng model "Giải phẫu Tim"), nên trang vừa có thẻ hệ vừa có thẻ
- * model cùng dẫn tới một chỗ — người học bấm hai thẻ khác tên lại ra cùng một
- * mô hình, và số model đếm được phồng lên. Nay thẻ hệ mở danh sách đầy đủ
- * model của hệ, đúng nghĩa một bộ sưu tập.
- *
- * Ảnh đại diện lấy từ scene ĐẦU TIÊN của hệ đã có ảnh render thật — không gõ
- * tay, nên dựng thêm model là thẻ tự có ảnh.
+ * Trang này trước đây còn có 13 thẻ "bộ sưu tập" theo hệ đứng ở đầu. Đã bỏ
+ * (yêu cầu của chủ đồ án): trang bày THẲNG mọi model, ai muốn thu hẹp thì
+ * dùng ô chọn "Hệ" trên thanh công cụ; còn lối vào từng hệ nằm ở trang "Giải
+ * phẫu theo hệ" và ở sidebar.
  */
-const systemCards: ResultCard[] = [
-  ...systemGroups
-    .filter((group) => scenesOfSystem(group.key).length > 0)
-    .map((group): ResultCard => ({
-      img: "an-organ",
-      icon: group.icon,
-      thumb: scenesOfSystem(group.key).find((s) => s.thumb)?.thumb,
-      title: group.label,
-      filters: ["male", "female"],
-      href: `/giai-phau/${group.slug}`,
-      real: true,
-      type: "anatomy",
-    })),
-  // Trang /viewer mở MÔ HÌNH TOÀN THÂN bật sẵn cả bảy hệ (xương, khớp, cơ,
-  // mạch, thần kinh, tạng, bạch huyết) chứ không riêng hệ cơ xương — tên thẻ cũ
-  // "Hệ cơ xương (toàn thân)" nói sai thứ người học sẽ thấy khi bấm vào.
-  { img: "an-skel", icon: "i-full", thumb: "/thumbnails/toan-than-7-he.jpg", title: { vi: "Giải phẫu toàn thân (7 hệ)", en: "Whole-body anatomy (7 systems)", zh: "全身解剖（七大系统）" }, filters: ["male", "female"], href: "/viewer", real: true, type: "anatomy" },
-  // Bỏ 24/08/2026 (quyết định của chủ đồ án): hai thẻ "Hệ sinh sản (nữ)" và
-  // "Mô mỡ" trước đây đứng ở đây mang nhãn "SẮP CÓ" và trỏ tới mục giới hạn dữ
-  // liệu. Danh mục nay chỉ bày thứ MỞ ĐƯỢC. Việc thiếu hai nhóm dữ liệu này vẫn
-  // được nói rõ ở mục "Giới hạn dữ liệu" trên trang /nguoi (#gioi-han-du-lieu),
-  // nên tính minh bạch không mất đi cùng hai tấm thẻ.
-];
+const wholeBodyCard: ResultCard = {
+  img: "an-skel",
+  icon: "i-full",
+  thumb: "/thumbnails/toan-than-7-he.jpg",
+  title: { vi: "Giải phẫu toàn thân (7 hệ)", en: "Whole-body anatomy (7 systems)", zh: "全身解剖（七大系统）" },
+  filters: [],
+  href: "/viewer",
+  real: true,
+  type: "anatomy",
+};
 
 /**
  * Thẻ cho mọi scene có model 3D thật — DẪN XUẤT từ `catalog` thay vì liệt kê
@@ -160,7 +126,8 @@ const crossSectionCards: ResultCard[] = catalogScenes.map((scene) => ({
   icon: systemByKey.get(scene.system)?.icon ?? "i-grid",
   thumb: scene.thumb,
   title: scene.title,
-  filters: [],
+  // Nhãn hệ để ô chọn "Hệ" ở trang Tất cả mô hình lọc được.
+  filters: [scene.system],
   href: scene.href,
   real: true,
   type: "anatomy",
@@ -196,20 +163,9 @@ const landmarkCards: ResultCard[] = catalogScenes
  * toàn thân, và các scene dựng từ một MẶT CẮT thật (slug bắt đầu bằng
  * "mat-cat-"). Lọc theo slug nên dựng thêm mặt cắt mới là tự có mặt ở đây.
  */
+// Thẻ "Cắt lát tương tác (toàn thân)" (/cat-lat) đã gỡ khỏi mục này theo yêu cầu
+// của chủ đồ án (12/09/2026) — trang /cat-lat vẫn còn, chỉ không bày ở đây nữa.
 const sectionCards: ResultCard[] = [
-  {
-    img: "an-cell",
-    icon: "i-cross",
-    title: {
-      vi: "Cắt lát tương tác (toàn thân)",
-      en: "Interactive slicing (whole body)",
-      zh: "全身交互式断层",
-    },
-    filters: [],
-    href: "/cat-lat",
-    real: true,
-    type: "anatomy",
-  },
   ...catalogScenes
     .filter((scene) => scene.slug.startsWith("mat-cat-"))
     .map((scene): ResultCard => ({
@@ -227,8 +183,8 @@ const sectionCards: ResultCard[] = [
 /**
  * Thẻ của trang "Tất cả mô hình" — MỖI ĐÍCH ĐẾN ĐÚNG MỘT THẺ.
  *
- * Trước đây trang này ghép thẳng ba mảng `systemCards + regionCards +
- * crossSectionCards`, mà cả ba đều dẫn xuất từ cùng một danh sách scene: mỗi
+ * Trước đây trang này ghép thẳng ba mảng `systemCards` + thẻ theo vùng +
+ * `crossSectionCards`, mà cả ba đều dẫn xuất từ cùng một danh sách scene: mỗi
  * model có gắn vùng cơ thể hiện ra HAI lần, thêm lần thứ ba nếu nó còn là thẻ
  * tiêu biểu của một hệ. Kết quả là trang đếm 186 thẻ trong khi atlas chỉ có 89
  * model thật — người học cuộn qua thấy đúng "Khớp gối", "Vùng mông"… lặp lại.
@@ -241,7 +197,7 @@ const sectionCards: ResultCard[] = [
 const allModelCards: ResultCard[] = (() => {
   const seen = new Set<string>();
   const out: ResultCard[] = [];
-  for (const card of [...systemCards, ...crossSectionCards]) {
+  for (const card of [wholeBodyCard, ...crossSectionCards]) {
     // Hai thẻ "chưa có dữ liệu" (sinh sản nữ, mô mỡ) dùng chung một href tới
     // mục giới hạn dữ liệu — phải kèm tên vào khoá, nếu không mất một thẻ.
     const key = card.href && !card.href.includes("#") ? card.href : `?${card.title.vi}`;
@@ -256,25 +212,39 @@ const allModelCards: ResultCard[] = (() => {
  * Trang duyệt cho từng hệ cơ quan — sinh tự động từ `catalog` nên luôn khớp
  * với số scene thật, không phải chép tay lại danh sách card.
  */
+
 /**
- * MỌI model, gắn nhãn hệ để tab lọc dùng được.
- *
- * Thẻ tiêu biểu (`systemCards`) đi trước và cũng được gắn nhãn hệ theo scene mà
- * nó trỏ tới — nếu để `filters: []` thì bấm tab "Hệ xương" là chúng biến mất
- * hết, trang trông như vừa mất nội dung.
+ * Model lẻ gắn nhãn VÙNG — trang "Giải phẫu theo vùng" bày y như trang "Tất cả
+ * mô hình": mọi model nằm thẳng trên lưới, thu hẹp bằng ô lọc trên thanh công
+ * cụ. Scene không thuộc vùng nào (hệ bạch huyết, hệ mạc… trải khắp người) cố ý
+ * không có mặt ở đây.
  */
-const systemModelCards: ResultCard[] = [
-  ...catalogScenes.map((scene): ResultCard => ({
-    img: "an-organ",
-    icon: systemByKey.get(scene.system)?.icon ?? "i-grid",
-    thumb: scene.thumb,
-    title: scene.title,
-    filters: [scene.system],
-    href: scene.href,
-    real: true,
-    type: "anatomy",
-  })),
-];
+const regionModelCards: ResultCard[] = regionGroups.flatMap((group) =>
+  scenesOfRegion(group.key).map(
+    (scene): ResultCard => ({
+      img: "an-organ",
+      icon: systemByKey.get(scene.system)?.icon ?? group.icon,
+      thumb: scene.thumb,
+      title: scene.title,
+      filters: [group.key],
+      href: scene.href,
+      real: true,
+      type: "anatomy",
+    }),
+  ),
+);
+
+/** Model lẻ gắn nhãn HỆ — cùng lối bày với trang theo vùng. */
+const systemModelCards: ResultCard[] = catalogScenes.map((scene): ResultCard => ({
+  img: "an-organ",
+  icon: systemByKey.get(scene.system)?.icon ?? "i-grid",
+  thumb: scene.thumb,
+  title: scene.title,
+  filters: [scene.system],
+  href: scene.href,
+  real: true,
+  type: "anatomy",
+}));
 
 const systemCategories: Record<string, CategoryData> = Object.fromEntries(
   systemGroups.map((group) => [
@@ -300,13 +270,46 @@ const systemCategories: Record<string, CategoryData> = Object.fromEntries(
   ]),
 );
 
+/**
+ * Trang duyệt cho từng vùng cơ thể — dựng y như trang của từng hệ cơ quan:
+ * `/giai-phau/<slug vùng>` bày đúng model của vùng đó, sidebar liệt kê cả bảy
+ * vùng kèm số model. Trước đây bảy vùng chỉ là một hàng tab lọc nằm trong
+ * trang "Giải phẫu theo vùng", không có địa chỉ riêng để lưu hay chia sẻ.
+ */
+const regionCategories: Record<string, CategoryData> = Object.fromEntries(
+  regionGroups.map((group) => [
+    group.slug,
+    {
+      slug: "theo-vung" as CategorySlug,
+      icon: group.icon,
+      title: group.label,
+      filters: [],
+      cards: scenesOfRegion(group.key).map(
+        (scene): ResultCard => ({
+          img: "an-organ",
+          icon: systemByKey.get(scene.system)?.icon ?? group.icon,
+          thumb: scene.thumb,
+          title: scene.title,
+          filters: [],
+          href: scene.href,
+          real: true,
+          type: "anatomy",
+        }),
+      ),
+    },
+  ]),
+);
+
 export const categoryData: Record<string, CategoryData> = {
   ...systemCategories,
+  ...regionCategories,
   "tat-ca": {
     slug: "tat-ca",
     icon: "i-grid",
     title: { vi: "Tất cả mô hình", en: "All Models", zh: "所有模型" },
-    filters: [],
+    filters: systemFilters,
+    filterAs: "select",
+    filterLabel: { vi: "Hệ", en: "System", zh: "系统" },
     cards: allModelCards,
   },
   "theo-vung": {
@@ -314,7 +317,9 @@ export const categoryData: Record<string, CategoryData> = {
     icon: "i-region",
     title: { vi: "Giải phẫu theo vùng", en: "Anatomy by region", zh: "按区域解剖" },
     filters: regionFilters,
-    cards: regionCards,
+    filterAs: "select",
+    filterLabel: { vi: "Vùng", en: "Region", zh: "区域" },
+    cards: regionModelCards,
   },
   /**
    * Trang này trước đây chỉ bày 17 thẻ chọn tay — mỗi hệ đúng một model tiêu
@@ -327,6 +332,8 @@ export const categoryData: Record<string, CategoryData> = {
     icon: "i-system",
     title: { vi: "Giải phẫu theo hệ", en: "Anatomy by system", zh: "按系统解剖" },
     filters: systemFilters,
+    filterAs: "select",
+    filterLabel: { vi: "Hệ", en: "System", zh: "系统" },
     cards: systemModelCards,
   },
   "moc-xuong": {

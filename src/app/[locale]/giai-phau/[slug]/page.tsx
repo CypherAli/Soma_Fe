@@ -22,5 +22,5 @@ export default async function GiaiPhauPage({
   const data = categoryData[slug as keyof typeof categoryData];
   if (!data) notFound();
 
-  return <ExplorePage data={data} locale={loc} />;
+  return <ExplorePage data={data} locale={loc} activeSlug={slug} />;
 }

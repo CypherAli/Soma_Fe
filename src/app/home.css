@@ -342,7 +342,29 @@
 .bd .lang-trigger:hover{border-color:var(--acc); color:var(--ink-e)}
 .bd .btn-signin{background:var(--ink-e); color:#f4efe6; border-radius:9999px; height:44px; padding:0 24px; font-size:14px; font-weight:500; font-family:var(--serif)}
 .bd .btn-signin:hover{background:#000}
-.bd .account{position:relative}.bd .account-trigger{border:0;cursor:pointer;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.bd .account-menu{position:absolute;right:0;top:calc(100% + 10px);z-index:40;width:230px;padding:16px;border:1px solid #d8d0c4;border-radius:12px;background:#fffdf9;box-shadow:0 14px 38px #17151024;display:grid;gap:5px;color:var(--ink-e)}.bd .account-menu strong{font-size:14px}.bd .account-menu span{font-size:12px;color:#756e64;overflow:hidden;text-overflow:ellipsis}.bd .account-menu button{margin-top:8px;padding:9px 0;border:0;border-top:1px solid #e7e0d6;background:none;text-align:left;color:#98432f;font-weight:650;cursor:pointer}
+/* Tài khoản: avatar chữ cái + bảng cài đặt thả xuống. */
+.bd .account{position:relative}
+.bd .account-avatar{padding:0;border:0;background:none;cursor:pointer;border-radius:32%;transition:transform .35s cubic-bezier(.32,.72,0,1),box-shadow .3s}
+.bd .account-avatar:hover{transform:translateY(-1px)}
+.bd .account-avatar[aria-expanded="true"]{box-shadow:0 0 0 3px var(--paper-3)}
+.bd .account-avatar:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+.bd .account-menu{position:absolute;right:0;top:calc(100% + 12px);z-index:40;width:278px;padding:16px;border:1px solid var(--line-e);border-radius:16px;background:#fffdf9;box-shadow:0 18px 44px #1715101f;display:grid;gap:10px;color:var(--ink-e)}
+.bd .account-head{display:flex;align-items:center;gap:10px;min-width:0}
+.bd .account-head>div{display:grid;min-width:0;flex:1}
+.bd .account-menu strong{font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bd .account-menu span{font-size:12px;color:var(--sub-e);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bd .account-links{display:grid;gap:2px;padding-top:10px;border-top:1px solid var(--line-e)}
+.bd .account-links a{padding:8px;margin:0 -8px;border-radius:9px;font-size:13px;color:var(--ink-e);transition:background .4s cubic-bezier(.32,.72,0,1)}
+.bd .account-links a:hover{background:var(--paper-3)}
+.bd .account-out{margin-top:4px;padding:9px 0;border:0;border-top:1px solid var(--line-e);background:none;text-align:left;color:#98432f;font:inherit;font-size:13px;font-weight:650;cursor:pointer}
+.bd .account-out:hover{color:#7d3524}
+
+/* Ảnh đại diện: squircle chứ không phải hình tròn mặc định. */
+.bd .ava{display:grid;place-items:center;overflow:hidden;flex:none;border-radius:32%;background:var(--ink-e);color:var(--paper);font-weight:600;letter-spacing:.04em;line-height:1;user-select:none}
+.bd .ava img{width:100%;height:100%;object-fit:cover;display:block}
+.bd .plan-badge{flex:none;padding:3px 8px;border-radius:6px;border:1px solid var(--line-e);background:var(--paper);color:var(--sub-e);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.bd .plan-badge.pro{border-color:var(--acc);background:color-mix(in srgb,var(--acc) 14%,transparent);color:var(--acc)}
+
 .bd .mega{background:var(--paper); border-top:1px solid var(--line-e)}
 .bd .mcol-h{font-family:var(--serif); color:var(--ink-e)}
 .bd .mi{color:var(--ink-e)} .bd .mi:hover{background:var(--paper-3)}
@@ -667,6 +689,7 @@ html[data-theme="dark"] .bd .theme-sun{opacity:0;transform:rotate(35deg) scale(.
 html[data-theme="dark"] .bd .theme-moon{opacity:1;transform:rotate(0) scale(1)}
 html[data-theme="dark"] .bd .nav,html[data-theme="dark"] .bd .hero,html[data-theme="dark"] .bd .twocol,html[data-theme="dark"] .bd .foot{background:var(--paper)}
 html[data-theme="dark"] .bd .search,html[data-theme="dark"] .bd .account-menu{background:#211f1b;color:var(--ink-e)}
+html[data-theme="dark"] .bd .account-out{color:#e08a72}
 html[data-theme="dark"] .bd .search input{color:var(--ink-e)}
 html[data-theme="dark"] .bd .search input::placeholder{color:#817a6f}
 html[data-theme="dark"] .bd .search-hit:hover{background:var(--paper-3)}
@@ -696,7 +719,9 @@ html[data-theme="dark"] .bd .tc-fig{filter:invert(.9) sepia(.15);opacity:.48;mix
 /* EXPLORE 2026 — editorial medical atlas */
 .bd .atlas-icon{width:1em;height:1em;display:block;flex:0 0 auto;color:currentColor}
 .bd .explore-shell{grid-template-columns:258px minmax(0,1fr);min-height:calc(100svh - 82px);background:var(--paper)}
-.bd .cat-sidebar{top:82px;max-height:calc(100svh - 82px);padding:30px 18px 52px;background:var(--paper-2);border-color:var(--line-e);scrollbar-width:thin;scrollbar-color:var(--line-e) transparent}
+/* min-height = cả chiều cao màn hình: thu gọn danh mục thì tấm nền không còn co lại
+   thành một ô cụt lơ lửng dưới tiêu đề (user báo, trang theo vùng). */
+.bd .cat-sidebar{top:82px;min-height:calc(100svh - 82px);max-height:calc(100svh - 82px);padding:30px 18px 52px;background:var(--paper-2);border-color:var(--line-e);scrollbar-width:thin;scrollbar-color:var(--line-e) transparent}
 .bd .cat-sidebar-title{padding:0 12px 22px;font:500 21px var(--serif);color:var(--ink-e);border-bottom:1px solid var(--line-e);margin-bottom:12px}
 .bd .cat-sidebar-title .isvg,.bd .cat-sidebar-title .atlas-icon{width:15px;color:var(--sub-e)}
 .bd .cat-label{padding:24px 12px 8px;color:var(--sub-e);font-size:9px;letter-spacing:.2em}
@@ -732,7 +757,30 @@ html[data-theme="dark"] .bd .tc-fig{filter:invert(.9) sepia(.15);opacity:.48;mix
 .bd .filter-tab.active{background:transparent;color:var(--ink-e);border-color:var(--acc)}
 .bd .filter-tab:not(.active):hover{color:var(--ink-e);border-color:var(--line-e)}
 
-.bd .results-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 18px}
+.bd .results-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 18px;margin-top:30px}
+/* Ô lọc trên thanh công cụ (trang Tất cả mô hình lọc theo hệ).
+   Nút cao 42px bằng đúng nút sắp xếp bên cạnh; bảng chọn rộng bằng nút, cao
+   đúng 4 dòng 36px rồi cuộn — chiều cao đặt trong FilterSelect.tsx. */
+.bd .tb-filter{position:relative}
+.bd .tb-filter-btn{display:inline-flex;align-items:center;justify-content:center;position:relative;
+  min-width:152px;height:42px;padding:0 30px;background:transparent;
+  border:1px solid var(--line-e);border-radius:2px;color:var(--sub-e);
+  font-family:inherit;font-size:12px;cursor:pointer;transition:.18s}
+.bd .tb-filter-btn:hover,.bd .tb-filter-btn.open{border-color:var(--acc);color:var(--acc)}
+.bd .tb-filter-btn.set{color:var(--ink-e);border-color:var(--acc)}
+.bd .tb-filter-btn .atlas-icon{position:absolute;right:12px;width:12px;height:12px;transition:transform .18s}
+.bd .tb-filter-btn.open .atlas-icon{transform:rotate(180deg)}
+.bd .tb-filter-list{position:absolute;z-index:30;top:calc(100% - 1px);left:0;right:0;
+  overflow-y:auto;overscroll-behavior:contain;background:var(--paper);
+  border:1px solid var(--acc);border-radius:0 0 2px 2px;box-shadow:0 12px 28px rgba(0,0,0,.16)}
+.bd .tb-filter-opt{display:flex;align-items:center;justify-content:center;width:100%;padding:0 14px;background:transparent;
+  border:0;color:var(--sub-e);font-family:inherit;font-size:12px;text-align:left;cursor:pointer;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bd .tb-filter-opt:hover{background:var(--paper-2);color:var(--ink-e)}
+.bd .tb-filter-opt.active{color:var(--acc)}
+.bd .tb-filter-list::-webkit-scrollbar{width:6px}
+.bd .tb-filter-list::-webkit-scrollbar-thumb{background:var(--line-e);border-radius:3px}
+.bd .tb-filter-list::-webkit-scrollbar-track{background:transparent}
 .bd .result-card{appearance:none;text-align:left;padding:0;border-radius:2px;border-color:var(--line-e);background:transparent;color:inherit;font-family:inherit;box-shadow:none;transition:transform .25s,border-color .25s,box-shadow .25s}
 .bd .result-card:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--acc) 60%,var(--line-e));box-shadow:0 22px 48px rgba(50,38,22,.1)}
 .bd .result-card:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
@@ -1272,6 +1320,19 @@ html[data-theme="dark"] .bd .pth-shell{
 }
 .viewer-stage>canvas{position:relative;z-index:1}
 .viewer-stage>p,.viewer-stage>div:not(:first-child){z-index:2}
+
+/* Sân khấu SÁNG của trang toàn thân (/viewer).
+   Nền ca-rô tối ở trên là quy ước phần mềm 3D, hợp với các trang chuyên đề;
+   trang toàn thân thì đi theo lối atlas in: nền xám rất nhạt, không lưới, để
+   tông mô ấm (da, xương ngà, cơ đỏ) bật lên và viền silhouette bớt răng cưa.
+   Canvas ở chế độ này KHÔNG trong suốt (alpha:false, clear color #f2f3f3) nên
+   phần nền dưới chỉ còn là lưới an toàn lúc canvas chưa dựng xong. */
+.viewer-stage.stage-studio{
+  background-color:#f2f3f3;
+  background-image:none;
+}
+.viewer-stage.stage-studio::before,
+.viewer-stage.stage-studio::after{content:none}
 
 /* ---------- Trang Quiz ---------- */
 .bd .quiz-shell{max-width:880px;margin:0 auto;padding:clamp(44px,6vw,84px) clamp(20px,5vw,40px) 96px}
@@ -1872,3 +1933,11 @@ html[data-theme="dark"] .bd.home-motion-root .tc-panel:hover .tc-fig{filter:brig
 .bd .quiz-pdf-docs li{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:10px 0;border-top:1px solid var(--line-e);font-size:12.5px;color:var(--sub-e)}
 .bd .quiz-pdf-docs li>span{flex:1;min-width:120px}
 .bd .quiz-pdf-docs button.quiz-danger{padding:5px 11px;border:1px solid var(--line-e);border-radius:7px;background:transparent;color:var(--sub-e);font:inherit;font-size:11px;cursor:pointer}
+
+/* Nút "Xem thêm" của lưới hệ cơ quan — chỉ 8 thẻ hiện sẵn, phần còn lại mở thêm.
+   Dùng lại đúng dáng link "Xem tất cả" ở đầu các khối carousel. */
+.bd .sys-more-btn{background:none; border:0; padding:0; cursor:pointer;
+  font-family:inherit; font-size:13px; text-decoration:underline; text-underline-offset:3px}
+/* Căn nút xuống đáy khối tiêu đề để cùng hàng với dòng mô tả bên trái */
+.bd .sys-head{align-items:flex-end}
+.bd .sys-head .sec-head-tools{padding-bottom:1px}

@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Link } from "@/i18n/navigation";
 import HomeNav from "./HomeNav";
 import HomeFooter from "./HomeFooter";
 import IconSprite from "./IconSprite";
@@ -17,7 +16,7 @@ export default function AnimalPage({ locale }: { locale: Loc }) {
   const species=[{n:t.dog,l:t.dogLatin,no:"01"},{n:t.cat,l:t.catLatin,no:"02"},{n:t.horse,l:t.horseLatin,no:"03"},{n:t.poultry,l:t.poultryLatin,no:"04"}];
   return <div className="bd animal-home"><IconSprite/><HomeNav minimal/>
     <header className="animal-hero">
-      <div className="animal-hero-copy"><span>{t.eyebrow}</span><h1>{t.title}</h1><p>{t.lead}</p><div className="animal-actions"><a href="#species" className="pill pill-solid">{t.explore}</a><Link href="/nguoi#phuong-phap" className="pill pill-ghost">{t.method}</Link></div></div>
+      <div className="animal-hero-copy"><span>{t.eyebrow}</span><h1>{t.title}</h1><p>{t.lead}</p><div className="animal-actions"><a href="#species" className="pill pill-solid">{t.explore}</a></div></div>
       <div className="animal-hero-art"><Image src="/plates/skull-cat.jpg" alt="Minh họa giải phẫu sọ động vật" fill priority sizes="(max-width: 800px) 100vw, 48vw"/><div><span>FELIS CATUS</span><i/><span>CRANIUM · LATERALIS</span></div></div>
     </header>
     {locale==="vi"&&<section className="animal-scope"><div className="animal-section-head"><div><span>{detail.scopeKicker}</span><h2>{detail.scopeTitle}</h2></div><p>{detail.scopeBody}</p></div><div className="animal-scope-grid">{detail.scopes.map(([no,title,body])=><article key={no}><span>{no}</span><h3>{title}</h3><p>{body}</p></article>)}</div></section>}

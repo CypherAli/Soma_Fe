@@ -13,6 +13,7 @@
 import { pick, type Loc, type T3 } from "./homeContent";
 import { sceneModules, type SceneModule } from "./sceneModules";
 import { regionViewerConfig } from "./scenes/regions";
+import { atlasScenes } from "./humanAtlas/scenes";
 
 /** Nhóm hệ cơ quan dùng để gom scene trên trang chủ. */
 export type SystemGroupKey =
@@ -372,6 +373,25 @@ function buildSearchText(scene: SceneModule): string {
  * Toàn bộ scene có model thật, theo THỨ TỰ XÂY DỰNG (khoá của object giữ
  * thứ tự chèn) — nhờ vậy đảo ngược mảng là ra "mới cập nhật".
  */
+/**
+ * Slug đã có scene atlas: thẻ lấy tiêu đề/mô tả/hệ từ scene atlas (một số bài
+ * đã ĐỔI CHỦ ĐỀ vì atlas thiếu cấu trúc cốt lõi của bài cũ) và luôn mở trang
+ * atlas, không rẽ sang viewer Z-Anatomy /xem-*.
+ */
+function atlasCard(scene: SceneModule): Partial<CatalogScene> | null {
+  const a = atlasScenes[scene.slug];
+  if (!a) return null;
+  const names = a.groups.map((g) => [g.name.vi, g.name.en, g.latin ?? ""].join(" "));
+  return {
+    title: a.title,
+    description: a.intro,
+    ...(a.system ? { system: a.system as SystemGroupKey } : {}),
+    href: `/giai-phau/mo-hinh/${scene.slug}`,
+    structureCount: a.groups.length,
+    searchText: [a.title.vi, a.title.en, a.title.zh, a.latin ?? "", ...names].join(" ").toLowerCase(),
+  };
+}
+
 export const catalogScenes: CatalogScene[] = Object.values(sceneModules).map((scene) => ({
   slug: scene.slug,
   title: scene.title,
@@ -390,7 +410,28 @@ export const catalogScenes: CatalogScene[] = Object.values(sceneModules).map((sc
   thumb: thumbnails[scene.slug],
   structureCount: scene.hotspots.length,
   searchText: buildSearchText(scene),
+  ...atlasCard(scene),
 }));
+
+/**
+ * Bài CHỈ có trên atlas (bài bộ phận học theo lớp, không có SceneModule
+ * Z-Anatomy tương ứng) — trộn chung vào thư viện theo hệ khai trong scene.
+ */
+for (const a of Object.values(atlasScenes)) {
+  if (sceneModules[a.slug as keyof typeof sceneModules]) continue;
+  catalogScenes.push({
+    slug: a.slug,
+    title: a.title,
+    description: a.intro,
+    system: (a.system as SystemGroupKey) ?? "skeletal",
+    href: `/giai-phau/mo-hinh/${a.slug}`,
+    thumb: thumbnails[a.slug] ?? `/thumbnails/${a.slug}.jpg`,
+    structureCount: a.groups.length,
+    searchText: [a.title.vi, a.title.en, a.title.zh, a.latin ?? "", ...a.groups.map((g) => `${g.name.vi} ${g.name.en} ${g.latin ?? ""}`)]
+      .join(" ")
+      .toLowerCase(),
+  });
+}
 
 const byslug = new Map(catalogScenes.map((s) => [s.slug, s]));
 
@@ -400,15 +441,22 @@ export const getScene = (slug: string): CatalogScene | undefined => byslug.get(s
 export type RegionKey =
   | "head-neck" | "thorax" | "abdomen" | "back" | "upper-limb" | "pelvis" | "lower-limb";
 
-export const regionGroups: { key: RegionKey; label: T3; icon: string }[] = [
-  { key: "head-neck", label: { vi: "Đầu và cổ", en: "Head and neck", zh: "头颈部" }, icon: "i-brain" },
-  { key: "thorax", label: { vi: "Ngực", en: "Thorax", zh: "胸部" }, icon: "i-heart" },
-  { key: "abdomen", label: { vi: "Bụng", en: "Abdomen", zh: "腹部" }, icon: "i-stomach" },
-  { key: "back", label: { vi: "Lưng và cột sống", en: "Back and spine", zh: "背部与脊柱" }, icon: "i-bone" },
-  { key: "upper-limb", label: { vi: "Chi trên", en: "Upper limb", zh: "上肢" }, icon: "i-muscle" },
-  { key: "pelvis", label: { vi: "Chậu hông", en: "Pelvis", zh: "骨盆" }, icon: "i-bone" },
-  { key: "lower-limb", label: { vi: "Chi dưới", en: "Lower limb", zh: "下肢" }, icon: "i-muscle" },
+/**
+ * Mỗi vùng có `slug` riêng vì vùng nay được duyệt như hệ cơ quan: mỗi vùng một
+ * trang `/giai-phau/<slug>` và một mục trong sidebar, thay cho hàng tab lọc cũ
+ * nằm trong trang "Giải phẫu theo vùng".
+ */
+export const regionGroups: { key: RegionKey; slug: string; label: T3; icon: string }[] = [
+  { key: "head-neck", slug: "vung-dau-co", label: { vi: "Đầu và cổ", en: "Head and neck", zh: "头颈部" }, icon: "i-brain" },
+  { key: "thorax", slug: "vung-nguc", label: { vi: "Ngực", en: "Thorax", zh: "胸部" }, icon: "i-heart" },
+  { key: "abdomen", slug: "vung-bung", label: { vi: "Bụng", en: "Abdomen", zh: "腹部" }, icon: "i-stomach" },
+  { key: "back", slug: "vung-lung-cot-song", label: { vi: "Lưng và cột sống", en: "Back and spine", zh: "背部与脊柱" }, icon: "i-bone" },
+  { key: "upper-limb", slug: "vung-chi-tren", label: { vi: "Chi trên", en: "Upper limb", zh: "上肢" }, icon: "i-muscle" },
+  { key: "pelvis", slug: "vung-chau-hong", label: { vi: "Chậu hông", en: "Pelvis", zh: "骨盆" }, icon: "i-bone" },
+  { key: "lower-limb", slug: "vung-chi-duoi", label: { vi: "Chi dưới", en: "Lower limb", zh: "下肢" }, icon: "i-muscle" },
 ];
+
+export const regionBySlug = new Map(regionGroups.map((g) => [g.slug, g]));
 
 /**
  * Scene nằm ở vùng cơ thể nào. Khai báo tường minh vì một scene có thể thuộc
@@ -530,8 +578,9 @@ export const featuredSlugs = [
   "giai-phau-tim",
   "giai-phau-gan",
   "giai-phau-dau",
-  "giai-phau-canh-tay",
-  "da-giac-willis",
+  // Đổi theo yêu cầu chủ đồ án (12/09/2026): cánh tay → đại não, Willis → sọ.
+  "dai-nao",
+  "giai-phau-so",
 ] as const;
 
 export const featuredScenes = (): CatalogScene[] =>
