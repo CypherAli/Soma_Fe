@@ -1,0 +1,4 @@
+interface:
+  display_name: "ELI5 — Giải thích dễ hiểu"
+  short_description: "Giải thích kỹ thuật và nghiên cứu bằng lời dễ hiểu"
+  default_prompt: "Dùng $eli5 để giải thích nội dung này bằng lời dễ hiểu và một ví dụ cụ thể."

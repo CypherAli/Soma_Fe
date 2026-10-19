@@ -1,0 +1,360 @@
+{
+  "startedAt": "2026-10-14T12:42:56.497Z",
+  "checks": [
+    {
+      "name": "frontend-unit",
+      "args": [
+        "--import",
+        "./scripts/ts-resolve.mjs",
+        "--test",
+        "src/**/*.test.ts"
+      ],
+      "code": 0,
+      "output": "▶ source quiz answer illustration visibility\n  ✔ withholds the real PDF hint until a practice answer is checked (2.753ms)\n  ✔ keeps exam hints hidden even for a checked answer until submission (0.5519ms)\n  ✔ preserves an image needed to read the question while withholding its explanation (0.3606ms)\n  ✔ does not carry images into a loading or empty question (0.2125ms)\n✔ source quiz answer illustration visibility (5.8966ms)\n(node:19740) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/src/lib/anatomy/drLamFeedback.test.ts is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\n▶ source quiz recovery and scoring\n  ✔ rejects corrupted storage while preserving other valid attempts (4.5829ms)\n  ✔ rejects mismatched sets, duplicate questions, invalid selections and timestamps (3.2962ms)\n  ✔ updates mistakes only on submission, removes corrected ones, keeps skipped ones (0.4692ms)\n  ✔ uses real elapsed time after reload and freezes it after submission (0.2209ms)\n  ✔ validates malformed network banks without crashing the page (1.9134ms)\n  ✔ requires the exact answer set for questions with multiple source keys (0.2375ms)\n✔ source quiz recovery and scoring (12.6816ms)\n(node:16580) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/src/lib/anatomy/drLamSession.test.ts is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\n(node:24092) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/src/lib/assistant.test.ts is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\n✔ a liver question preserves spelling and excludes veterinary sources (536.4354ms)\n✔ a tendon question remains distinguishable from liver (135.5619ms)\n✔ animal questions use veterinary sources, comparisons retain human sources (684.9097ms)\n✔ system retrieval uses current public guides and precise source set counts (14.4707ms)\n✔ animal model requests do not cite a human model or a human source exam (226.2787ms)\n▶ auth sessions and requests\n  ✔ uses a tab session when storage writes fail, even if reads still work (3.4579ms)\n  ✔ clears an expired token once without recursively notifying listeners (0.9173ms)\n  ✔ preserves Headers and tuple headers supplied by the caller (105.1868ms)\n  ✔ lets fetch generate the multipart boundary for uploads (4.475ms)\n  ✔ does not clear a newer session when an old request returns 401 (2.3404ms)\n  ✔ clears a rejected session exactly once (1.2464ms)\n  ✔ applies session invalidation to personal documents through the shared client (1.2109ms)\n  ✔ handles null error bodies and leaves valid sessions on network failure (1.5746ms)\n  ✔ preserves cancellation so callers can distinguish it from network failure (1.0524ms)\n  ✔ path deletion rejects HTTP and network failures instead of reporting success (1.6805ms)\n  ✔ path deletion succeeds only after a server confirmation (1.1093ms)\n  ✔ path deletion expires a rejected session and refuses without login (0.8955ms)\n✔ auth sessions and requests (128.2637ms)\n(node:1600) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/src/lib/auth.test.ts is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\n✔ AI completion preserves grounding instructions and includes a timeout signal (199.7755ms)\n✔ caller cancellation remains active alongside the provider timeout (5.2653ms)\n✔ empty provider responses fail instead of being presented as valid answers (3.9638ms)\n(node:18128) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/src/lib/llm.test.ts is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\n(node:26292) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/src/lib/newsletter.test.ts is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\n✔ newsletter persists registrations and deduplicates simultaneous retries (61.7858ms)\n✔ newsletter storage failure cannot report success or block a later retry (20.1791ms)\n✔ pathology fetch keeps real records and supplies a bounded network signal (114.9933ms)\n✔ invalid backend JSON produces a controlled error instead of a render crash (2.908ms)\n✔ backend or network failure returns no fabricated pathology entries (1.0467ms)\n(node:6600) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/src/lib/pathologies.test.ts is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\n(node:25048) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/src/lib/pathologyRetrieval.test.ts is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\n✔ contextual summaries retrieve only the current article without relying on question keywords (416.137ms)\n✔ an absent article never borrows passages from another disease (1.9588ms)\n▶ request limits\n  ✔ blocks the next hit and resumes exactly when the oldest hit expires (5.8723ms)\n  ✔ rejects invalid configuration rather than emitting a NaN retry time (0.8698ms)\n  ✔ falls back from empty forwarding headers and checks the proxy host (133.9742ms)\n✔ request limits (142.2223ms)\n(node:17908) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/src/lib/rateLimit.test.ts is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\n▶ API input boundary\n  ✔ rejects null, arrays, primitives and malformed JSON (52.6135ms)\n  ✔ accepts objects and never coerces non-text fields into a question (1.3144ms)\n  ✔ reads case-insensitive bearer schemes and rejects malformed tokens (1.9512ms)\n✔ API input boundary (57.509ms)\n(node:5260) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/src/lib/requestBody.test.ts is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\n✔ public search finds tools and real quiz sets with usable destinations (742.5355ms)\n✔ model lookup accepts Vietnamese without accents and Latin terms (31.045ms)\n✔ navigation search and assistant share current source-based feature knowledge (0.5009ms)\n✔ specific quiz retrieval outranks generic sets and stays outside medical queries (13.9093ms)\n✔ long system questions exclude unrelated source sets and distinguish 1 from 10 (38.5713ms)\n✔ answers require real numbered citations and site words do not allow code tasks (2.3772ms)\n(node:19064) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/src/lib/site/siteSearch.test.ts is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\n▶ rankGuesses\n  ✔ loại nhãn lạ, điểm rác và trùng lặp, sắp xếp giảm dần, cắt top-3 (4.6112ms)\n  ✔ kẹp điểm về [0, 1] và trả [] khi đầu vào không phải mảng (0.4269ms)\n✔ rankGuesses (6.8245ms)\n▶ gpuTier\n  ✔ kNN được nói khớp rõ, zero-shot tối đa là có thể (1.3104ms)\n✔ gpuTier (1.6067ms)\n▶ withTiers\n  ✔ gợi ý đầu giữ mức top, các gợi ý sau thấp hơn một bậc (0.463ms)\n✔ withTiers (0.684ms)\n(node:22256) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/src/lib/vision/parts.test.ts is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\n✔ microphone uses the selected locale and actual onstart status (7.0545ms)\n✔ only a final result is eligible for automatic submission, and it is delivered once (1.077ms)\n✔ manual cancellation and natural silence do not submit an unfinished transcript (0.634ms)\n✔ incremental results retain previous words instead of replacing the whole question (0.3347ms)\n✔ network, permission and device errors stop continuous listening without retry loops (5.2453ms)\n✔ stop cancels a scheduled continuous restart (0.3138ms)\n✔ continuous recognition restarts safely with a fresh engine and ignores stale callbacks (0.4134ms)\n✔ speech pauses prevent speaker feedback and require all pause reasons to be released (0.5841ms)\n✔ continuous final results are not replayed when the browser repeats its result array (0.3361ms)\n✔ constructor/start errors and an unsupported browser are controlled failures (1.6786ms)\n✔ a service that never starts cannot leave the UI listening indefinitely (0.6095ms)\n✔ voice errors explain the actual failure in all three interface languages (1.0642ms)\n✔ speaker waits for voices and never selects English to read Vietnamese (1.5804ms)\n(node:18040) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/src/lib/voice/microphone.test.ts is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\nℹ tests 66\nℹ suites 8\nℹ pass 66\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 3360.1443\n",
+      "durationMs": 3473
+    },
+    {
+      "name": "test-atlas-framing.ts",
+      "args": [
+        "--import",
+        "./scripts/ts-resolve.mjs",
+        "scripts/test-atlas-framing.ts"
+      ],
+      "code": 0,
+      "output": "Passed 80 framing cases, including tiny isolated structures and stale camera poses.\nPassed bounds projection for 1137 real groups across 148 pages in four camera directions.\n(node:8988) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/scripts/test-atlas-framing.ts is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\n",
+      "durationMs": 4527
+    },
+    {
+      "name": "test-atlas-learning.ts",
+      "args": [
+        "--import",
+        "./scripts/ts-resolve.mjs",
+        "scripts/test-atlas-learning.ts"
+      ],
+      "code": 0,
+      "output": "Passed provenance and ownership for 2234 meshes / 5709 related notes, Vietnamese atlas retrieval and empty results.\n(node:27512) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/scripts/test-atlas-learning.ts is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\n",
+      "durationMs": 998
+    },
+    {
+      "name": "test-bodyparts-source.mjs",
+      "args": [
+        "scripts/test-bodyparts-source.mjs"
+      ],
+      "code": 0,
+      "output": "PASS source detail arm 56 structures\nPASS source detail forearm 58 structures\nPASS source detail upper-limb 151 structures\nPASS source detail hand 106 structures\nPASS source detail wrist 106 structures\nPASS source detail fingers 101 structures\nPASS source detail thumb 14 structures\nPASS source detail index-finger 10 structures\nPASS source detail middle-finger 7 structures\nPASS source detail ring-finger 7 structures\nPASS source detail little-finger 10 structures\nPASS source detail head 551 structures\nPASS source detail neck 216 structures\nPASS archive hash, source face counts and original normal indices 809 OBJ meshes\n",
+      "durationMs": 15333
+    },
+    {
+      "name": "test-gestures.ts",
+      "args": [
+        "--import",
+        "./scripts/ts-resolve.mjs",
+        "scripts/test-gestures.ts"
+      ],
+      "code": 0,
+      "output": "\n1. Đọc ngón duỗi / gập\n  ok   xoè cả bàn tay → 4 ngón duỗi\n  ok   nắm tay → 0 ngón duỗi\n  ok   chỉ ngón trỏ → đúng 1 ngón duỗi và là ngón trỏ\n\n2. Cỡ bàn tay không ảnh hưởng ngưỡng (tay xa / gần camera)\n  ok   pinchSpan gần như không đổi khi tay ở xa\n  ok   chế độ cũng không đổi theo khoảng cách\n\n3. Nhận chế độ\n  ok   nắm tay → di chuyển\n  ok   xoè tay → xoay\n  ok   trỏ + ngón cái tách xa → VẪN là trỏ (một tay không còn zoom nữa)\n  ok   trỏ + ngón cái chụm sát → vẫn là trỏ (đó là cú bấm)\n  ok   xoè tay nghiêng 40° vẫn là xoay (không đọc thành nắm tay)\n  ok   nắm tay nghiêng 40° vẫn là di chuyển\n\n4. Góc bàn tay theo động tác xoay\n  ok   xoay tay 0,5 rad → góc đọc được lệch đúng ~0,5 rad\n\n5. Bấm bằng chụm ngón (trễ hai ngưỡng + chống bấm kép)\n  ok   mở ngón thì không bấm\n  ok   chụm lại → bấm 1 lần\n  ok   giữ nguyên không bấm thêm\n  ok   hé nhẹ trong vùng trễ vẫn coi là đang chụm\n  ok   đang chụm thì isClosed = true\n  ok   nhả hẳn ra\n  ok   chụm lại ngay sau 40 ms → bị chặn (chống bấm kép)\n  ok   chụm lại sau 600 ms → bấm được\n\n6. Chế độ chỉ đổi khi tư thế lặp lại đủ lâu\n  ok   khởi đầu là trỏ\n  ok   1 khung nhiễu chưa đổi\n  ok   2 khung chưa đổi\n  ok   3 khung chưa đổi\n  ok   4 khung liên tiếp mới đổi\n  ok   nhiễu xen giữa làm đếm lại từ đầu\n\n7. Zoom bằng HAI TAY, neo cố định + vùng chết\n  ok   chụm ngón thì isPinching = true\n  ok   tách ngón thì isPinching = false\n  ok   hai tay xa nhau hơn → khoảng cách đo được lớn hơn\n  ok   ngồi xa camera không làm đổi khoảng cách đã chuẩn hoá\n  ok   vừa neo xong, cỡ mô hình KHÔNG nhảy\n  ok   nhích nhẹ trong vùng chết vẫn giữ nguyên\n  ok   kéo hai tay xa ra → to lên\n  ok   đưa hai tay lại gần → nhỏ đi\n  ok   kéo tay kiểu gì cỡ mô hình cũng nằm trong [0,5 – 2,6]\n\n8. Vùng chết và chênh lệch góc\n  ok   lệch nhỏ hơn vùng chết → bỏ qua hẳn\n  ok   vượt vùng chết thì tính TỪ 0, không giật nảy\n  ok   chiều âm cũng vậy\n  ok   góc qua mốc ±π không nhảy 2π\n\n✓ Toàn bộ kiểm thử cử chỉ đạt\n\n",
+      "durationMs": 227
+    },
+    {
+      "name": "test-hand-navigation.mjs",
+      "args": [
+        "scripts/test-hand-navigation.mjs"
+      ],
+      "code": 0,
+      "output": "(node:5148) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/public/wonder/src/logic/hand-navigation.js is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\nPASS physical handedness, worker metadata, 6/9/11/30 FPS one-shot, crossed hands, release/dropout, two-hand guard, right-hand state isolation, scan suppression and source system cycle\n",
+      "durationMs": 173
+    },
+    {
+      "name": "test-hand-rotation.mjs",
+      "args": [
+        "scripts/test-hand-rotation.mjs"
+      ],
+      "code": 0,
+      "output": "(node:17164) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/public/wonder/src/logic/controller.js is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\nPASS continuous hand roll and reacquisition\nPASS scan gesture suspension and resume\nPASS original WonderSnap wrist/yaw parity at 6/11/30 Hz input and 30/60/120 FPS rendering\nPASS no filter-tail rotation when resuming a stationary wrist at 6/10/30 Hz\nPASS agreed upright/front mapping, neutral jitter rejection, left/right direction and reacquisition at 30/60/120 FPS\n",
+      "durationMs": 183
+    },
+    {
+      "name": "test-inspection-controls.mjs",
+      "args": [
+        "scripts/test-inspection-controls.mjs"
+      ],
+      "code": 0,
+      "output": "(node:27276) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/public/wonder/vendor/three.module.js is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\nPASS WonderSnap yaw-only rotation, angle seam, frame-rate independence, transient grab retention and reassembly tag visibility\nPASS local open/close cycle, continuous amount, no initial jump, manual ownership and switching selection\nPASS actual source skull membership, precise part selection, semantic group tags and particle selection mask\nPASS real forearm single-block routing, three source structures, mixed-view and single-structure guards\nPASS real mesh transforms: selected skull moves, neck stays fixed, anchors agree at front/back/side yaw\nPASS selected pull stays within vertical viewport limits\nPASS source envelope avoids phantom bounding corners without changing anatomy\nPASS 48 real skull structures: distinct cells with gaps, uniform geometry scale, exact reassembly, unchanged non-selection and matching GPU attributes\n",
+      "durationMs": 1631
+    },
+    {
+      "name": "test-inspection-frame.mjs",
+      "args": [
+        "scripts/test-inspection-frame.mjs"
+      ],
+      "code": 0,
+      "output": "(node:8264) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/public/wonder/src/logic/inspection-frame.js is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\nPASS actual endocrine, respiratory and neural source geometry fits centrally; cached bounds, exploded offsets and immutable source\n",
+      "durationMs": 745
+    },
+    {
+      "name": "test-inspection-quality.mjs",
+      "args": [
+        "scripts/test-inspection-quality.mjs"
+      ],
+      "code": 0,
+      "output": "(node:24684) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/public/wonder/src/models/inspection.js is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\nPASS hand 106 structures, intact small bones, closed crop contours\nPASS wrist 106 structures, intact small bones, closed crop contours\nPASS cap orientation/holes, source integrity and inspection filters\n",
+      "durationMs": 216
+    },
+    {
+      "name": "test-label-layout.mjs",
+      "args": [
+        "scripts/test-label-layout.mjs"
+      ],
+      "code": 0,
+      "output": "(node:21908) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/public/wonder/src/lib/label-layout.js is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\nPASS dense explosion labels, obstacles/bounds, insufficient space and exact selected labels\n",
+      "durationMs": 177
+    },
+    {
+      "name": "test-muscle-separation.mjs",
+      "args": [
+        "scripts/test-muscle-separation.mjs"
+      ],
+      "code": 0,
+      "output": "(node:11568) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/public/wonder/src/models/catalog.js is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\nPASS individual muscle separation, label transforms and reversible system layout\n",
+      "durationMs": 335
+    },
+    {
+      "name": "test-region-surface.ts",
+      "args": [
+        "--import",
+        "./scripts/ts-resolve.mjs",
+        "scripts/test-region-surface.ts"
+      ],
+      "code": 0,
+      "output": "PASS: exact surface, area-weighted sampling, deterministic seed, exact budgets\n(node:11976) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/scripts/test-region-surface.ts is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\n",
+      "durationMs": 256
+    },
+    {
+      "name": "test-render-quality.mjs",
+      "args": [
+        "scripts/test-render-quality.mjs"
+      ],
+      "code": 0,
+      "output": "(node:25684) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/public/wonder/src/lib/render-quality.js is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\nPASS quality hysteresis, camera budget, visibility/loading exclusions and explicit choices\n",
+      "durationMs": 183
+    },
+    {
+      "name": "test-scan-control.mjs",
+      "args": [
+        "scripts/test-scan-control.mjs"
+      ],
+      "code": 0,
+      "output": "(node:19032) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/src/lib/vision/scanControlModel.ts is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\nPASS scan selection mapping and camera handoff invariants\nPASS camera ownership survives scan video unmount\n",
+      "durationMs": 213
+    },
+    {
+      "name": "test-scene-labels.ts",
+      "args": [
+        "--import",
+        "./scripts/ts-resolve.mjs",
+        "scripts/test-scene-labels.ts"
+      ],
+      "code": 0,
+      "output": "Passed tag coverage for 148 pages and isolation for 1137 groups; sagittal anchors match real mesh vertices.\n(node:4260) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/scripts/test-scene-labels.ts is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\n",
+      "durationMs": 3788
+    },
+    {
+      "name": "test-site-kb.ts",
+      "args": [
+        "--import",
+        "./scripts/ts-resolve.mjs",
+        "scripts/test-site-kb.ts"
+      ],
+      "code": 0,
+      "output": "\n1. Kho dựng đủ và bám dữ liệu thật\n  ok   mỗi mô hình trong danh mục có đúng một mục\n  ok   có mục hướng dẫn\n  ok   số mô hình trong lời văn lấy từ danh mục, không gõ tay\n  ok   mọi mục đều có đường dẫn mở được\n  ok   đủ ba thứ tiếng, không mục nào bỏ trống\n\n2. Câu hỏi về trang web tìm đúng mục\n  ok   hỏi số lượng mô hình\n  ok   hỏi trắc nghiệm (vi)\n  ok   hỏi trắc nghiệm (zh)\n  ok   hỏi mặt cắt\n  ok   hỏi bật tắt lớp (en)\n  ok   hỏi trang là gì (en)\n  ok   hỏi điều khiển cử chỉ\n\n3. Gọi tên mô hình theo lối nói thường\n  ok   mở mô hình tim ở đâu\n  ok   mô hình gan (gõ thiếu dấu)\n  ok   liver model (tiếng Anh)\n  ok   hỏi 'có mô hình não không' ra các mô hình về não\n  ok   chữ \"ở đâu\" KHÔNG được kéo theo mô hình \"Giải phẫu Đầu\"\n  ok   nhưng hỏi thẳng \"mô hình đầu\" thì vẫn phải ra\n\n4. Không lấn sân câu hỏi y khoa\n  ok   \"tim có mấy buồng\" không kéo theo mục mô hình nào\n  ok   \"triệu chứng viêm ruột thừa cấp\" không kéo theo mục mô hình nào\n  ok   \"bệnh gout điều trị thế nào\" không kéo theo mục mô hình nào\n\n✓ Toàn bộ kiểm thử kho hệ thống đạt\n\n",
+      "durationMs": 724
+    },
+    {
+      "name": "test-vet-kb.ts",
+      "args": [
+        "--import",
+        "./scripts/ts-resolve.mjs",
+        "scripts/test-vet-kb.ts"
+      ],
+      "code": 0,
+      "output": "\n1. Kỷ luật biên soạn\n  ok   kho không rỗng\n  ok   mọi mục đủ tiếng Trung\n  ok   mọi mục đủ tiếng Anh\n  ok   mọi mục đủ tiếng Việt\n  ok   mọi mục ghi nguồn giáo trình\n  ok   mọi mục có thuật ngữ NAV/NAA\n  ok   mọi mục gắn ít nhất một loài\n  ok   mọi mục có phần đối chiếu\n  ok   mọi mục có ý nghĩa lâm sàng\n\n2. Phủ đủ sáu loài\n  ok   dog: có ít nhất 5 mục\n  ok   cat: có ít nhất 5 mục\n  ok   horse: có ít nhất 5 mục\n  ok   cattle: có ít nhất 5 mục\n  ok   pig: có ít nhất 5 mục\n  ok   chicken: có ít nhất 5 mục\n  ok   danh sách loài và bảng thông tin loài khớp nhau\n  ok   mọi loài có đủ trị số tham chiếu\n\n3. Nhãn hiển thị không thiếu\n  ok   mọi hệ đang dùng đều có nhãn 3 thứ tiếng\n  ok   mọi vùng đang dùng đều có nhãn 3 thứ tiếng\n  ok   số liệu thống kê đếm từ dữ liệu\n\n4. Tra cứu ra đúng thứ\n  ok   dạ dày bò (vi)\n  ok   răng chó (vi)\n  ok   ngựa không nôn (vi)\n  ok   cat teeth (en)\n  ok   air sacs (en)\n  ok   牛的胃 (zh)\n  ok   蹄叶炎 (zh)\n  ok   câu rỗng trả về rỗng\n  ok   câu không liên quan không ra rác\n\n5. Ghép chủ đề giữa các loài\n  ok   dạ dày bò ghép được với loài khác\n  ok   mục ghép không được cùng loài\n\n6. Mô hình 3D phải nói được nguồn gốc\n  ok   mọi mô hình ghi đủ giấy phép và nguồn\n  ok   tệp .glb của mọi mô hình có thật\n  ok   mô hình nào cũng có tên đủ ba ngôn ngữ\n  ok   không mô hình nào mang giấy phép ND\n  ok   mọi hotspot trỏ tới mục tri thức có thật\n  ok   loài nào cũng có mẫu vật hoặc ứng viên đã rà\n  ok   mỗi ứng viên ghi rõ giấy phép và cách lấy\n\n7. Nhóm loài\n  ok   không nhóm nào rỗng\n  ok   loài nào cũng thuộc một nhóm\n  ok   nhóm nào cũng có tên và mô tả đủ ba ngôn ngữ\n  ok   các nhóm cộng lại đúng bằng số loài\n\n8. Bản khắc giải phẫu\n  ok   loài nào cũng có bản khắc\n  ok   tệp bản khắc nào cũng có thật\n  ok   bản khắc nào cũng ghi đủ nguồn và giấy phép\n  ok   tên bản khắc đủ ba ngôn ngữ\n  ok   ghi chú mẫu vật (nếu có) đủ ba ngôn ngữ\n\n10. Bộ xương LMU\n  ok   tệp .glb của mọi xương có thật\n  ok   xương nào cũng ghi đủ giấy phép, tác giả, nguồn\n  ok   không xương nào vượt ngân sách tam giác\n  ok   loài của xương nằm trong sáu loài\n  ok   xương nào cũng rơi vào một nhóm\n  ok   phần lớn tên xương đã dịch (chưa dịch: 0/108)\n  ok   loài nào cũng có ít nhất một xương\n\n9. Bệnh neo vào giải phẫu\n  ok   mọi bệnh neo vào mục giải phẫu có thật\n  ok   loài của bệnh khớp loài của mục giải phẫu\n  ok   bệnh nào cũng đủ ba ngôn ngữ\n  ok   bệnh nào cũng có nguồn giáo trình và thuật ngữ\n  ok   mã bệnh không trùng nhau\n  ok   loài nào cũng có ít nhất một bệnh\n\n9. Sinh đề trắc nghiệm\n  ok   vi: ra đủ số câu\n  ok   vi: mỗi câu đúng một đáp án\n  ok   vi: phương án không trùng nhau\n  ok   vi: mỗi câu bốn phương án\n  ok   vi: câu nào cũng có giải thích và nguồn\n  ok   vi: đề bài không lộ đáp án\n  ok   en: ra đủ số câu\n  ok   en: mỗi câu đúng một đáp án\n  ok   en: phương án không trùng nhau\n  ok   en: mỗi câu bốn phương án\n  ok   en: câu nào cũng có giải thích và nguồn\n  ok   en: đề bài không lộ đáp án\n  ok   zh: ra đủ số câu\n  ok   zh: mỗi câu đúng một đáp án\n  ok   zh: phương án không trùng nhau\n  ok   zh: mỗi câu bốn phương án\n  ok   zh: câu nào cũng có giải thích và nguồn\n  ok   zh: đề bài không lộ đáp án\n  ok   cùng hạt giống thì ra cùng đề\n  ok   lọc theo loài thì chỉ ra câu của loài đó\n\n✓ Toàn bộ kiểm thử kho thú y đạt\n\n",
+      "durationMs": 392
+    },
+    {
+      "name": "test-vision.ts",
+      "args": [
+        "--import",
+        "./scripts/ts-resolve.mjs",
+        "scripts/test-vision.ts"
+      ],
+      "code": 0,
+      "output": "\nÔ ngắm giữa hai đầu ngón trỏ\n  ok   có ô ngắm khi hai tay đủ xa nhau\n  ok   ô bao trọn hai đầu ngón trỏ và nới thêm viền đệm\n  ok   viền đệm dày ĐỀU bốn phía tính theo pixel\n  ok   đổi thứ tự hai tay vẫn ra đúng ô đó\n  ok   KHÔNG cần tư thế tay đặc biệt: nắm tay, xoè tay đều ngắm được\n  ok   hai tay sát nhau thì không tính là đang ngắm\n  ok   ô luôn nằm trọn trong khung hình\n  ok   clampBox kẹp đúng\n\nĐưa về ảnh vuông mà không bóp méo\n  ok   ảnh ngang: vừa theo chiều rộng, giữ nguyên tỉ lệ 2:1\n  ok   ảnh ngang: viền xám chia đều trên–dưới\n  ok   ảnh dọc: vừa theo chiều cao, viền chia đều trái–phải\n  ok   ảnh vuông thì phủ kín, không viền\n\nCắt ảnh (đúng ô đã ngắm + lật gương)\n  ok   cắt ĐÚNG tỉ lệ của ô, không ép vuông\n  ok   vùng cắt nằm trọn trong ảnh\n  ok   ô ở MÉP TRÁI màn hình phải cắt ở MÉP PHẢI ảnh camera (lật gương)\n  ok   ô giữa màn hình thì cắt ở giữa ảnh\n  ok   ô phủ kín thì cắt cả khung hình\n\nCổng chất lượng ảnh\n  ok   ảnh nét, đủ sáng, đủ lớn → qua\n  ok   ảnh phẳng lì (mất nét) → chặn\n  ok   ảnh tối → chặn\n  ok   ảnh cháy sáng → chặn\n  ok   vùng cắt quá nhỏ trên ảnh gốc → chặn dù ảnh gửi vào đã phóng to\n  ok   dải ngang hai mắt (700×72) phải QUA được\n  ok   ô vành tai (179×158) phải QUA được\n  ok   dải miệng (205×58) phải QUA được\n  ok   nhưng ô như sợi chỉ (38×22) vẫn bị chặn\n  ok   ô dài nhưng mỏng dính (400×20) cũng bị chặn\n\nÔ tự bám bàn tay (cách quét chính tay mình)\n  ok   giơ một bàn tay là có ô ngay\n  ok   ô bao trọn cả bàn tay\n  ok   ô kéo dài XUỐNG phía cẳng tay\n  ok   một tay xoè thì ô TỰ BÁM tay, không phải ô ngắm hai tay\n  ok   giữ yên thì vòng tiến trình chạy\n  ok   giữ đủ lâu là CHỤP LUÔN, không đếm ngược\n  ok   tay còn di chuyển (nhịp 1) thì chưa chụp\n  ok   tay còn di chuyển (nhịp 2) thì chưa chụp\n  ok   tay còn di chuyển (nhịp 3) thì chưa chụp\n  ok   tay còn di chuyển (nhịp 4) thì chưa chụp\n  ok   tay còn di chuyển (nhịp 5) thì chưa chụp\n  ok   tay còn di chuyển (nhịp 6) thì chưa chụp\n  ok   tay đang TRỎ thì không bao giờ tự chụp\n\nỔn định quét khi nhận diện hụt hoặc đổi số tay\n  ok   hụt tay ngắn không trả tiến trình về 0\n  ok   thời gian mất dấu không được tính vào giữ yên\n  ok   mất dấu dài phải bỏ vùng cũ\n  ok   tay quay lại sau mất dấu dài phải giữ lại từ đầu\n  ok   tay thứ hai thoáng xuất hiện không làm khung quét nhảy\n  ok   một tay vẫn tiếp tục đúng chế độ sau nhịp nhiễu\n  ok   hai tay xuất hiện ổn định mới đổi chế độ\n  ok   vẽ lại dữ liệu cũ không được tự chụp\n  ok   chụp cần lần xác nhận mới từ nhận diện\n  ok   đổi sang chốt hai tay không được dùng đồng hồ giữ một tay\n  ok   chốt hai tay phải giữ đủ thời gian riêng\n\nNhịp quét (ngắm → nắm giữ → CHỤP NGAY)\n  ok   chưa đủ hai tay thì chưa có ô\n  ok   hai tay vào khung là có ô ngay, KHÔNG cần tư thế gì\n  ok   chụm cả hai tay là bắt đầu giữ\n  ok   giữ nửa chừng thì vòng tiến trình chạy được nửa\n  ok   giữ đủ lâu thì NẮM LÀ CHỤP NGAY, không đếm ngược\n  ok   cờ chụp KHÔNG bắn lại ở khung sau\n  ok   reset xong thì về chờ và bỏ ô\n  ok   giữ đủ lâu là chụp\n  ok   GIỮ NGUYÊN thế chụm sau khi chụp thì máy bận, không bắn thêm\n  ok   buông chụm trước khi đủ giữ thì chưa chụp\n  ok   ngắm bằng hai tay: có ô\n  ok   nắm cả hai tay là bắt đầu chốt\n  ok   giữ đủ lâu thì chụp ngay\n  ok   ô chụp ĐÚNG chỗ vừa ngắm, không co lại theo nắm đấm\n  ok   nắm giữ là chụp\n  ok   nắm tiếp cũng không chụp nữa khi chưa quét lại\n  ok   mất dấu tay trong khoảng ân hạn thì ô cũ VẪN còn (không nhấp nháy)\n  ok   quá khoảng ân hạn thì mới bỏ ô\n  ok   buông chụm giữa chừng thì bỏ tiến trình\n  ok   và KHÔNG tự đóng băng sau đó\n  ok   một tay chụm thôi thì không làm gì cả\n  ok   đã bắn cờ chụp\n  ok   và máy đang ở trạng thái bận\n  ok   bận thì KHÔNG tự thoát dù đợi bao lâu — bên ngoài BẮT BUỘC phải reset\n  ok   reset xong là ngắm lại được ngay\n  ok   ô KHÔNG nhảy thẳng tới vị trí mới\n  ok   nhưng có nhúc nhích về phía đó\n  ok   khung hình vẽ lại vẫn đi tiếp (mượt 60 Hz dù đo 20 Hz)\n  ok   và cuối cùng bám đúng vị trí\n\nSuy vùng từ mốc giải phẫu\n  ok   ô ôm cả đầu → đầu\n  ok   ô sát khuôn mặt → mặt\n  ok   ô nhỏ quanh một bên mắt → mắt\n  ok   ô nhỏ quanh vành tai → tai\n  ok   ô quanh khuỷu → khuỷu tay\n  ok   ô quanh đầu gối → đầu gối\n  ok   ô quanh vai → vai\n  ok   ô trải từ khuỷu tới cổ tay → cẳng tay\n  ok   có kèm mức tin cậy đọc được\n  ok   ô trải từ vai tới khuỷu → cánh tay\n  ok   LẬT GƯƠNG: quên lật là trỏ sang phía bên kia người\n  ok   mốc mờ (visibility thấp) bị bỏ qua\n  ok   không đủ 33 mốc thì không đoán bừa\n  ok   ô ở góc xa mọi mốc thì không trả về gì\n  ok   điểm cộng lại bằng 1 (dễ đọc thành phần trăm)\n\nIoU và đường lui\n  ok   hai ô trùng khít → IoU = 1\n  ok   hai ô rời nhau → IoU = 0\n  ok   ô lớn trùm ô nhỏ vẫn cho IoU thấp\n  ok   đường lui khi chỉ có bàn tay: ba ứng viên vùng chuyển tiếp\n\nQuét chính bàn tay mình (tình huống đo thật 03/09)\n  ok   ô ôm bàn tay giơ ngang mặt: KHÔNG bao giờ ra 'mặt'\n  ok   ba ứng viên đều thuộc chi trên\n  ok   ô chỉ ôm bàn tay → bàn tay đứng đầu\n  ok   và đo đúng là lấn rất ít xuống cẳng tay\n  ok   ô lấn nửa cẳng tay → cẳng tay đứng đầu, vẫn không có 'mặt'\n  ok   ô lấn tới khuỷu → cẳng tay đứng đầu\n  ok   đo được phần cẳng tay lọt vào ô\n  ok   không thấy khuỷu thì chỉ dám nói có bàn tay\n  ok   đoạn nằm trọn trong ô → phủ 100%\n  ok   đoạn nằm ngoài ô → phủ 0%\n  ok   lọc theo danh sách vùng cho phép\n\nXoay mô hình theo góc bộ phận thật\n  ok   quy góc về (-180,180]\n  ok   góc trục: sang phải = 0°\n  ok   góc trục: hướng LÊN trên ảnh = -90°\n  ok   tay giơ THẲNG ĐỨNG → không xoay gì cả (trùng tư thế gốc của mô hình)\n  ok   tay nằm ngang → nghiêng đúng 90°\n  ok   và đúng chiều theo hệ trục Three.js\n  ok   tay phải dựng đứng: không nghiêng, không lật\n  ok   quét tay TRÁI thì phải LẬT GƯƠNG (mô hình dựng bên phải)\n  ok   nghiêng tay 30° thì mô hình nghiêng 30°\n  ok   nguồn góc ghi đúng là từ bàn tay\n  ok   cẳng tay từ mốc pose: có góc\n  ok   bên TRÁI thì lật, bên PHẢI thì không\n  ok   hai bên đối xứng nên góc ngược dấu nhau\n  ok   mặt / cổ / ngực KHÔNG có trục → không bịa góc\n  ok   không có mốc nào thì trả null chứ không xoay bừa\n  ok   ưu tiên mốc BÀN TAY khi quét bàn tay\n\nBên trái/phải của mô hình\n  ok   tâm x dương là bên TRÁI của người (đo trên dữ liệu)\n  ok   tâm x âm là bên PHẢI\n  ok   sát đường giữa (tim, sọ) thì không có bên\n  ok   mô hình .glb (bên phải): quét tay trái → lật, tay phải → không\n  ok   mô hình atlas bên TRÁI: quét tay trái → KHÔNG lật, tay phải → lật\n  ok   mô hình ở đường giữa thì không bao giờ lật\n  ok   chưa quét gì thì không lật\n  ok   atlas ở tư thế giải phẫu: tay dựng đứng thì mô hình quay nửa vòng\n  ok   và góc luôn quy về (−π, π]\n\nBộ điều phối hai tầng\n  ok   mốc trùng khít → dùng mốc và KHÔNG hỏi GPU\n  ok   kết quả là khuỷu tay đúng như hình học\n  ok   có kèm thời gian đo được\n  ok   mốc không khớp → lấy kết quả GPU\n  ok   kết quả GPU là thứ cuối cùng hiện ra\n  ok   không mốc, không GPU → báo không đủ chắc chắn chứ không bịa\n  ok   thiếu hẳn model tư thế → báo lỗi kỹ thuật, không phải 'không chắc'\n  ok   mốc quá hạn mà ô do bàn tay sinh ra → hiện ngay đường lui\n  ok   và KHÔNG báo lỗi, vì vẫn có cái để chọn\n  ok   mốc về MUỘN vẫn được nhận nếu người dùng chưa chọn\n  ok   NGƯỜI DÙNG ĐÃ CHỌN thì kết quả về muộn bị bỏ, không giật dưới tay họ\n  ok   GPU quá hạn rồi mới về → vẫn được nhận khi chưa ai chọn\n  ok   GPU về muộn khi đã chọn rồi thì bị bỏ\n  ok   CHƯA CẤU HÌNH dịch vụ thì nói đúng thế, không gộp thành 'không đủ chắc chắn'\n  ok   ngân sách thời gian đúng như đã chốt\n\nMức tin cậy (thay cho phần trăm) và bên trái/phải\n  ok   mốc trùng khít → 'khớp rõ'\n  ok   và biết vùng đó ở bên nào của người\n  ok   gợi ý phụ không bao giờ ngang hàng gợi ý đầu\n  ok   đường lui (không thấy người) → mọi gợi ý đều 'chưa chắc'\n  ok   gợi ý đầu mang mức được giao, gợi ý sau thấp hơn một bậc\n  ok   GPU zero-shot (chưa hiệu chỉnh) KHÔNG BAO GIỜ được nói 'khớp rõ', dù điểm 99%\n\nChặn gọi dồn route nhận diện (máy GPU trả tiền theo giờ)\n  ok   cho qua đúng số lượt trong cửa sổ, lượt thứ tư bị chặn\n  ok   bị chặn thì báo số giây phải chờ (> 0)\n  ok   IP khác không bị vạ lây\n  ok   hết cửa sổ thì được gọi lại\n  ok   cùng nguồn thì cho qua\n  ok   trang lạ gọi sang thì chặn\n  ok   không có Origin (curl, kiểm thử) thì để giới hạn tần suất lo\n  ok   GPU kNN: cao → rõ, vừa → có thể, thấp → chưa chắc\n\nKhông gian nhãn\n  ok   khoá nhãn không trùng nhau\n  ok   mọi vùng con đều là nhãn có thật\n  ok   đầu có lối rẽ xuống mắt/tai/miệng\n  ok   tra ngược theo khoá chạy đúng\n  ok   isVisionPartKey chặn khoá lạ\n  ok   [head] có đủ nhãn vi/en/zh\n  ok   [head] có câu nhắc đưa vào khung\n  ok   [head] có ít nhất một scene gợi ý\n  ok   [head] không gợi ý trùng scene\n  ok   [head] mọi scene gợi ý đều CÓ THẬT\n  ok   [head] mọi gợi ý đều mở được ngay trong trang (chế độ điều khiển)\n  ok   [head] nạp đúng bài atlas mà thư viện đang hiện\n  ok   [head] gợi ý đầu tiên có lớp để bóc và mở ra có thứ để nhìn\n  ok   [face] có đủ nhãn vi/en/zh\n  ok   [face] có câu nhắc đưa vào khung\n  ok   [face] có ít nhất một scene gợi ý\n  ok   [face] không gợi ý trùng scene\n  ok   [face] mọi scene gợi ý đều CÓ THẬT\n  ok   [face] mọi gợi ý đều mở được ngay trong trang (chế độ điều khiển)\n  ok   [face] nạp đúng bài atlas mà thư viện đang hiện\n  ok   [face] gợi ý đầu tiên có lớp để bóc và mở ra có thứ để nhìn\n  ok   [face] bản glb mở thẳng (giai-phau-dau) có thật và đủ lớp để bóc\n  ok   [eye] có đủ nhãn vi/en/zh\n  ok   [eye] có câu nhắc đưa vào khung\n  ok   [eye] có ít nhất một scene gợi ý\n  ok   [eye] không gợi ý trùng scene\n  ok   [eye] mọi scene gợi ý đều CÓ THẬT\n  ok   [eye] mọi gợi ý đều mở được ngay trong trang (chế độ điều khiển)\n  ok   [eye] nạp đúng bài atlas mà thư viện đang hiện\n  ok   [eye] gợi ý đầu tiên có lớp để bóc và mở ra có thứ để nhìn\n  ok   [ear] có đủ nhãn vi/en/zh\n  ok   [ear] có câu nhắc đưa vào khung\n  ok   [ear] có ít nhất một scene gợi ý\n  ok   [ear] không gợi ý trùng scene\n  ok   [ear] mọi scene gợi ý đều CÓ THẬT\n  ok   [ear] mọi gợi ý đều mở được ngay trong trang (chế độ điều khiển)\n  ok   [ear] nạp đúng bài atlas mà thư viện đang hiện\n  ok   [ear] gợi ý đầu tiên có lớp để bóc và mở ra có thứ để nhìn\n  ok   [mouth] có đủ nhãn vi/en/zh\n  ok   [mouth] có câu nhắc đưa vào khung\n  ok   [mouth] có ít nhất một scene gợi ý\n  ok   [mouth] không gợi ý trùng scene\n  ok   [mouth] mọi scene gợi ý đều CÓ THẬT\n  ok   [mouth] mọi gợi ý đều mở được ngay trong trang (chế độ điều khiển)\n  ok   [mouth] nạp đúng bài atlas mà thư viện đang hiện\n  ok   [mouth] gợi ý đầu tiên có lớp để bóc và mở ra có thứ để nhìn\n  ok   [neck] có đủ nhãn vi/en/zh\n  ok   [neck] có câu nhắc đưa vào khung\n  ok   [neck] có ít nhất một scene gợi ý\n  ok   [neck] không gợi ý trùng scene\n  ok   [neck] mọi scene gợi ý đều CÓ THẬT\n  ok   [neck] mọi gợi ý đều mở được ngay trong trang (chế độ điều khiển)\n  ok   [neck] nạp đúng bài atlas mà thư viện đang hiện\n  ok   [neck] gợi ý đầu tiên có lớp để bóc và mở ra có thứ để nhìn\n  ok   [shoulder] có đủ nhãn vi/en/zh\n  ok   [shoulder] có câu nhắc đưa vào khung\n  ok   [shoulder] có ít nhất một scene gợi ý\n  ok   [shoulder] không gợi ý trùng scene\n  ok   [shoulder] mọi scene gợi ý đều CÓ THẬT\n  ok   [shoulder] mọi gợi ý đều mở được ngay trong trang (chế độ điều khiển)\n  ok   [shoulder] nạp đúng bài atlas mà thư viện đang hiện\n  ok   [shoulder] gợi ý đầu tiên có lớp để bóc và mở ra có thứ để nhìn\n  ok   [upper-arm] có đủ nhãn vi/en/zh\n  ok   [upper-arm] có câu nhắc đưa vào khung\n  ok   [upper-arm] có ít nhất một scene gợi ý\n  ok   [upper-arm] không gợi ý trùng scene\n  ok   [upper-arm] mọi scene gợi ý đều CÓ THẬT\n  ok   [upper-arm] mọi gợi ý đều mở được ngay trong trang (chế độ điều khiển)\n  ok   [upper-arm] nạp đúng bài atlas mà thư viện đang hiện\n  ok   [upper-arm] gợi ý đầu tiên có lớp để bóc và mở ra có thứ để nhìn\n  ok   [elbow] có đủ nhãn vi/en/zh\n  ok   [elbow] có câu nhắc đưa vào khung\n  ok   [elbow] có ít nhất một scene gợi ý\n  ok   [elbow] không gợi ý trùng scene\n  ok   [elbow] mọi scene gợi ý đều CÓ THẬT\n  ok   [elbow] mọi gợi ý đều mở được ngay trong trang (chế độ điều khiển)\n  ok   [elbow] nạp đúng bài atlas mà thư viện đang hiện\n  ok   [elbow] gợi ý đầu tiên có lớp để bóc và mở ra có thứ để nhìn\n  ok   [forearm] có đủ nhãn vi/en/zh\n  ok   [forearm] có câu nhắc đưa vào khung\n  ok   [forearm] có ít nhất một scene gợi ý\n  ok   [forearm] không gợi ý trùng scene\n  ok   [forearm] mọi scene gợi ý đều CÓ THẬT\n  ok   [forearm] mọi gợi ý đều mở được ngay trong trang (chế độ điều khiển)\n  ok   [forearm] nạp đúng bài atlas mà thư viện đang hiện\n  ok   [forearm] gợi ý đầu tiên có lớp để bóc và mở ra có thứ để nhìn\n  ok   [wrist] có đủ nhãn vi/en/zh\n  ok   [wrist] có câu nhắc đưa vào khung\n  ok   [wrist] có ít nhất một scene gợi ý\n  ok   [wrist] không gợi ý trùng scene\n  ok   [wrist] mọi scene gợi ý đều CÓ THẬT\n  ok   [wrist] mọi gợi ý đều mở được ngay trong trang (chế độ điều khiển)\n  ok   [wrist] nạp đúng bài atlas mà thư viện đang hiện\n  ok   [wrist] gợi ý đầu tiên có lớp để bóc và mở ra có thứ để nhìn\n  ok   [hand] có đủ nhãn vi/en/zh\n  ok   [hand] có câu nhắc đưa vào khung\n  ok   [hand] có ít nhất một scene gợi ý\n  ok   [hand] không gợi ý trùng scene\n  ok   [hand] mọi scene gợi ý đều CÓ THẬT\n  ok   [hand] mọi gợi ý đều mở được ngay trong trang (chế độ điều khiển)\n  ok   [hand] nạp đúng bài atlas mà thư viện đang hiện\n  ok   [hand] gợi ý đầu tiên có lớp để bóc và mở ra có thứ để nhìn\n  ok   [chest] có đủ nhãn vi/en/zh\n  ok   [chest] có câu nhắc đưa vào khung\n  ok   [chest] có ít nhất một scene gợi ý\n  ok   [chest] không gợi ý trùng scene\n  ok   [chest] mọi scene gợi ý đều CÓ THẬT\n  ok   [chest] mọi gợi ý đều mở được ngay trong trang (chế độ điều khiển)\n  ok   [chest] nạp đúng bài atlas mà thư viện đang hiện\n  ok   [chest] gợi ý đầu tiên có lớp để bóc và mở ra có thứ để nhìn\n  ok   [abdomen] có đủ nhãn vi/en/zh\n  ok   [abdomen] có câu nhắc đưa vào khung\n  ok   [abdomen] có ít nhất một scene gợi ý\n  ok   [abdomen] không gợi ý trùng scene\n  ok   [abdomen] mọi scene gợi ý đều CÓ THẬT\n  ok   [abdomen] mọi gợi ý đều mở được ngay trong trang (chế độ điều khiển)\n  ok   [abdomen] nạp đúng bài atlas mà thư viện đang hiện\n  ok   [abdomen] gợi ý đầu tiên có lớp để bóc và mở ra có thứ để nhìn\n  ok   [hip] có đủ nhãn vi/en/zh\n  ok   [hip] có câu nhắc đưa vào khung\n  ok   [hip] có ít nhất một scene gợi ý\n  ok   [hip] không gợi ý trùng scene\n  ok   [hip] mọi scene gợi ý đều CÓ THẬT\n  ok   [hip] mọi gợi ý đều mở được ngay trong trang (chế độ điều khiển)\n  ok   [hip] nạp đúng bài atlas mà thư viện đang hiện\n  ok   [hip] gợi ý đầu tiên có lớp để bóc và mở ra có thứ để nhìn\n  ok   [thigh] có đủ nhãn vi/en/zh\n  ok   [thigh] có câu nhắc đưa vào khung\n  ok   [thigh] có ít nhất một scene gợi ý\n  ok   [thigh] không gợi ý trùng scene\n  ok   [thigh] mọi scene gợi ý đều CÓ THẬT\n  ok   [thigh] mọi gợi ý đều mở được ngay trong trang (chế độ điều khiển)\n  ok   [thigh] nạp đúng bài atlas mà thư viện đang hiện\n  ok   [thigh] gợi ý đầu tiên có lớp để bóc và mở ra có thứ để nhìn\n  ok   [knee] có đủ nhãn vi/en/zh\n  ok   [knee] có câu nhắc đưa vào khung\n  ok   [knee] có ít nhất một scene gợi ý\n  ok   [knee] không gợi ý trùng scene\n  ok   [knee] mọi scene gợi ý đều CÓ THẬT\n  ok   [knee] mọi gợi ý đều mở được ngay trong trang (chế độ điều khiển)\n  ok   [knee] nạp đúng bài atlas mà thư viện đang hiện\n  ok   [knee] gợi ý đầu tiên có lớp để bóc và mở ra có thứ để nhìn\n  ok   [leg] có đủ nhãn vi/en/zh\n  ok   [leg] có câu nhắc đưa vào khung\n  ok   [leg] có ít nhất một scene gợi ý\n  ok   [leg] không gợi ý trùng scene\n  ok   [leg] mọi scene gợi ý đều CÓ THẬT\n  ok   [leg] mọi gợi ý đều mở được ngay trong trang (chế độ điều khiển)\n  ok   [leg] nạp đúng bài atlas mà thư viện đang hiện\n  ok   [leg] gợi ý đầu tiên có lớp để bóc và mở ra có thứ để nhìn\n  ok   [ankle] có đủ nhãn vi/en/zh\n  ok   [ankle] có câu nhắc đưa vào khung\n  ok   [ankle] có ít nhất một scene gợi ý\n  ok   [ankle] không gợi ý trùng scene\n  ok   [ankle] mọi scene gợi ý đều CÓ THẬT\n  ok   [ankle] mọi gợi ý đều mở được ngay trong trang (chế độ điều khiển)\n  ok   [ankle] nạp đúng bài atlas mà thư viện đang hiện\n  ok   [ankle] gợi ý đầu tiên có lớp để bóc và mở ra có thứ để nhìn\n  ok   [foot] có đủ nhãn vi/en/zh\n  ok   [foot] có câu nhắc đưa vào khung\n  ok   [foot] có ít nhất một scene gợi ý\n  ok   [foot] không gợi ý trùng scene\n  ok   [foot] mọi scene gợi ý đều CÓ THẬT\n  ok   [foot] mọi gợi ý đều mở được ngay trong trang (chế độ điều khiển)\n  ok   [foot] nạp đúng bài atlas mà thư viện đang hiện\n  ok   [foot] gợi ý đầu tiên có lớp để bóc và mở ra có thứ để nhìn\n\nXếp hạng dự đoán\n  ok   bỏ nhãn lạ, sắp theo điểm giảm dần\n  ok   cắt còn top-3\n  ok   bỏ bản ghi trùng nhãn\n  ok   điểm bị kẹp về [0,1]\n  ok   dữ liệu rác trả về mảng rỗng\n\nTẤT CẢ ĐỀU ĐÚNG\n",
+      "durationMs": 1035
+    },
+    {
+      "name": "test-voice.ts",
+      "args": [
+        "--import",
+        "./scripts/ts-resolve.mjs",
+        "scripts/test-voice.ts"
+      ],
+      "code": 0,
+      "output": "Chuẩn hoá chữ\n  ok   bỏ dấu, kể cả chữ đ\n  ok   bỏ dấu câu và gộp khoảng trắng\n  ok   giữ nguyên chữ Hán\n\nKhớp mẫu câu\n  ok   Vision không xoay khi nghe câu phủ định\n  ok   Vision không chạy từ nằm giữa câu hỏi\n  ok   Vision giữ dấu tham số với lệnh lịch sự\n  ok   có dấu: lấy đúng tham số, GIỮ NGUYÊN DẤU\n  ok   không dấu (máy nhận dạng hay trả vậy) vẫn khớp\n  ok   có từ đệm trước/sau vẫn nhận lệnh\n  ok   tiếng Anh\n  ok   tiếng Trung (không có khoảng trắng)\n  ok   mẫu DÀI hơn thắng: 'mở mô hình {x}' thắng 'mở {x}'\n  ok   hoà điểm thì lệnh của TRANG (đăng ký trước) thắng lệnh chung\n  ok   không khớp gì thì trả null (để chuyển cho trợ lý)\n  ok   không khớp giữa chừng một từ khác\n\nChọn tên gần nhất\n  ok   khớp đúng tên\n  ok   bỏ từ đệm 'lớp'\n  ok   khớp một phần tên\n  ok   tên tiếng Anh\n  ok   MƠ HỒ ('cơ' khớp hai lớp) thì không tự chọn bừa\n  ok   không liên quan thì trả null\n\nTIẾNG VIỆT — những kiểu nhận dạng giọng nói hay trả về\n  ok   nghe lệch 'bật' thành 'bậc' vẫn là bật lớp\n  ok   nghe lệch 'tắt' thành 'tắc' vẫn là tắt lớp\n  ok   từ đệm lịch sự cuối câu không làm hỏng tên lớp\n  ok   có dấu câu, viết hoa như máy trả về\n  ok   nhiều phương án nghe: phương án đầu lệch, phương án sau đúng → vẫn chạy\n  ok   không phương án nào là lệnh → null (chuyển cho trợ lý)\n  ok   'chọn mắt' ra Mắt, không lẫn với Mặt\n  ok   'chọn mặt' ra Mặt, không lẫn với Mắt\n  ok   'chọn cổ tay' ra Cổ tay, không phải Cổ\n  ok   tiếng địa phương: 'cùi chỏ' là khuỷu tay\n  ok   'bắp chân' là cẳng chân\n  ok   'mắt cá' là cổ chân, không phải mắt\n  ok   'đầu gối' và 'gối' đều ra gối\n  ok   'bật lớp cơ' khi có hai lớp cơ → bật CẢ HAI\n  ok   'động mạch' vẫn tìm ra lớp Mạch máu\n  ok   tên rõ ràng thì chỉ một lớp\n  ok   không liên quan thì không bật gì\n  ok   gọi tên trợ lý: 'Soma ơi, tim có mấy buồng'\n  ok   nhận dạng ra 'Sô ma' / 'xô ma' vẫn là gọi trợ lý\n  ok   không gọi tên thì KHÔNG gửi câu hỏi (nghe liên tục)\n\nMở mô hình bằng câu nói thật (dữ liệu thư viện thật)\n  ok   \"mở mô hình giải phẫu cánh tay\" → giai-phau-canh-tay\n  ok   \"Mở mô hình giải phẩu cánh tay\" → giai-phau-canh-tay\n  ok   \"mo mo hinh giai phau canh tay\" → giai-phau-canh-tay\n  ok   \"Soma ơi mở mô hình giải phẫu cánh tay giúp mình\" → giai-phau-canh-tay\n  ok   \"mở mô hình cánh tay\" → bo-phan-canh-tay\n  ok   \"mở mô hình cơ cánh tay\" → co-canh-tay\n  ok   \"mở mô hình tim\" → bo-phan-tim\n  ok   \"mở mô hình khuỷu\" → bo-phan-khuyu\n  ok   \"mở mô hình hố khuỷu\" → ho-khuyu\n  ok   \"mở mô hình não\" → bo-phan-nao\n  ok   \"mở mô hình tim giúp mình với\" → bo-phan-tim\n  ok   \"mở mô hình gan nha\" → bo-phan-gan\n\nTra trang\n  ok   'trang đầu' → trang chủ\n  ok   'làm bài' → trắc nghiệm\n  ok   'bệnh lý' → /benh-ly\n  ok   'trắc nghiệm' → /quiz\n  ok   'tất cả mô hình' → /giai-phau/tat-ca\n  ok   'vision ai' → /cu-chi\n  ok   tiếng Anh 'pathology'\n  ok   tiếng Trung '病理'\n  ok   khoá đường dẫn không trùng nhau\n  ok   tên trang không lạ thì không đoán\n\nTẤT CẢ ĐỀU ĐÚNG\n",
+      "durationMs": 2392
+    },
+    {
+      "name": "test-wonder-camera.mjs",
+      "args": [
+        "scripts/test-wonder-camera.mjs"
+      ],
+      "code": 0,
+      "output": "(node:23928) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/public/wonder/src/lib/preview-projection.js is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\nPASS single selfie mirror, aspect/crop alignment, asynchronous polling, one pending frame\nPASS shared camera handoff and stream ownership\nPASS full-resolution preview source with safe loading fallback\n",
+      "durationMs": 156
+    },
+    {
+      "name": "test-wonder-label-provenance.mjs",
+      "args": [
+        "scripts/test-wonder-label-provenance.mjs"
+      ],
+      "code": 0,
+      "output": "PASS 118 individual notes and 2410 group notes match their actual source IDs\n",
+      "durationMs": 531
+    },
+    {
+      "name": "test-wonder-localization.mjs",
+      "args": [
+        "scripts/test-wonder-localization.mjs"
+      ],
+      "code": 0,
+      "output": "(node:4644) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/public/wonder/src/models/catalog.js is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\nPASS Vietnamese labels for 1450 source structure occurrences, sided head names, all model titles and preserved English reading\n",
+      "durationMs": 347
+    },
+    {
+      "name": "test-wonder-regions.mjs",
+      "args": [
+        "scripts/test-wonder-regions.mjs"
+      ],
+      "code": 0,
+      "output": "(node:26416) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/public/wonder/src/models/gesture-regions.js is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\nPASS anatomy-only navigation and gesture wraparound\nPASS Human Brain 2 layers 91 ms\nPASS Human Heart 1 layers 86 ms\nPASS Kidney 1 layers 59 ms\nPASS Lungs 6 layers 54 ms\nPASS Human Eye 1 layers 121 ms\nPASS Human Ear 1 layers 39 ms\nPASS Tooth (Molar) 1 layers 59 ms\nPASS Skull 1 layers 110 ms\nPASS Skeleton 1 layers 131 ms\nPASS Human Body 15 layers 361 ms\nPASS Cánh tay 56 layers 405 ms\nPASS Gan & Túi mật 9 layers 147 ms\nPASS Dạ dày 1 layers 229 ms\nPASS Ruột non & Đại tràng 1 layers 77 ms\nPASS Tụy & Lá lách 4 layers 203 ms\nPASS Hệ cơ 1 layers 641 ms\nPASS Toàn bộ chi trên 151 layers 461 ms\nPASS Cẳng tay 58 layers 244 ms\nPASS Cổ tay 106 layers 191 ms\nPASS Bàn tay chi tiết 106 layers 327 ms\nPASS Các ngón tay 101 layers 293 ms\nPASS Ngón cái 14 layers 252 ms\nPASS Ngón trỏ 10 layers 131 ms\nPASS Ngón giữa 7 layers 177 ms\nPASS Ngón áp út 7 layers 147 ms\nPASS Ngón út 10 layers 155 ms\nPASS Đầu đầy đủ 551 layers 861 ms\nPASS Cổ 216 layers 411 ms\nPASS Thân trên 12 layers 904 ms\nPASS Đầu · cổ · thân trên 14 layers 1144 ms\nPASS surface area sampling, exact particle budget, local assets, finite transforms\n",
+      "durationMs": 27548
+    },
+    {
+      "name": "test-wonder-soma-model.mjs",
+      "args": [
+        "scripts/test-wonder-soma-model.mjs"
+      ],
+      "code": 0,
+      "output": "(node:2612) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/public/wonder/src/models/catalog.js is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\nindex: 10 | labels: 56 | fitScale: 0.518 | ms: 53\npick invalid: 0 | groups: Cấu trúc thuộc Cơ ngực lớn, ngực bé · FJ1446M / Cấu trúc thuộc Cơ ngực lớn, ngực bé · FJ1447M / Cấu trúc thuộc Cơ ngực lớn, ngực bé · FJ1464M / Cơ delta · trái / Cấu trúc thuộc Cơ delta · FJ1468M / Cơ\n",
+      "durationMs": 296
+    },
+    {
+      "name": "test-wonder-surface-picking.mjs",
+      "args": [
+        "scripts/test-wonder-surface-picking.mjs"
+      ],
+      "code": 0,
+      "output": "(node:24980) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/public/wonder/vendor/three.module.js is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\nPASS visible surface picking, occlusion, hidden meshes, cross-sections and background\n",
+      "durationMs": 142
+    },
+    {
+      "name": "test-wonder-transition.mjs",
+      "args": [
+        "scripts/test-wonder-transition.mjs"
+      ],
+      "code": 0,
+      "output": "(node:12256) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/public/wonder/src/logic/model-transition.js is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\nPASS outgoing dissolve, cold-load timing, stale results, latest selection, one-shot assembly and manual mode\n",
+      "durationMs": 183
+    },
+    {
+      "name": "test-wonder-voice.mjs",
+      "args": [
+        "scripts/test-wonder-voice.mjs"
+      ],
+      "code": 0,
+      "output": "(node:18752) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/public/wonder/src/models/catalog.js is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\nPASS 155 bilingual intents, all catalog aliases, exact anatomy targets, negation, layers and source-language reading\nPASS 194 total assertions, including speech lifecycle, missing voices, asynchronous loading, locale, pause/resume and cancellation\n",
+      "durationMs": 3733
+    },
+    {
+      "name": "test-wondersnap.ts",
+      "args": [
+        "--import",
+        "./scripts/ts-resolve.mjs",
+        "scripts/test-wondersnap.ts"
+      ],
+      "code": 0,
+      "output": "  ok   open\n  ok   fist\n  ok   peace\n  ok   point\n  ok   none khi mất tay\n  ok   xoè 4 ngón là open kể cả khi cái khép (tay mở tự nhiên)\n  ok   open ≈ 1\n  ok   fist ≈ 0\n  ok   smooth dưới ngưỡng = 0\n  ok   smooth trên ngưỡng = 1\n  ok   smooth giữa khoảng 0..1\n  ok   chỉ tay là bận\n  ok   chụm là bận\n  ok   mở rộng là rảnh\n  ok   nắm là rảnh (về 0)\n  ok   other duỗi là rảnh\n  ok   kéo giãn hằng số\n  ok   chưa chọn thì null (làm cú bấm)\n  ok   chụm khi đã chọn thì kéo\n  ok   chụm lại cùng part thì đặt về\n  ok   chụm khi chọn part khác thì chuyển sang kéo part đó\n  ok   gộp thì fit = 1\n  ok   bung hết lùi còn ~0.53\n  ok   đơn điệu giảm\n  ok   bung vượt 1 (1.6) lùi tiếp ~0.41\n  ok   kẹp dưới 0\n  ok   3 khung chưa chốt\n  ok   4 khung chốt fist\n  ok   peace 5 khung chưa chốt\n  ok   peace 6 khung mới chốt\n  ok   nhấn không bắn\n  ok   bung nhanh bắn 1 lần\n  ok   bung xong không bắn nữa\n  ok   cooldown chặn búng dồn\n  ok   mở chậm không bắn\n  ok   nắm tay không nhấn búng\n  ok   giữa còn duỗi thì loại\n  ok   dropout vẫn bắn\n  ok   mặc định hiện\n  ok   snap khi hiện → tan\n  ok   snap khi ẩn → gọi\n  ok   peace khi hiện → next\n  ok   fist khi hiện → assemble\n  ok   fist khi ẩn → gọi + gộp\n  ok   open không đổi trạng thái\n  ok   peace khi ẩn → gọi + next\n\nTất cả kiểm thử WonderSnap đều qua.\n(node:17532) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/scripts/test-wondersnap.ts is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\n",
+      "durationMs": 332
+    },
+    {
+      "name": "verify-scenes.mjs",
+      "args": [
+        "scripts/verify-scenes.mjs"
+      ],
+      "code": 0,
+      "output": "\n✓ 1310 hotspot đều khớp node thật trong model.\n",
+      "durationMs": 540
+    },
+    {
+      "name": "verify-models.mjs",
+      "args": [
+        "scripts/verify-models.mjs"
+      ],
+      "code": 0,
+      "output": "130 model · 121 scene trỏ tới 121 model\n9 model chưa scene nào dùng: cardiovascular.glb, joints.glb, lymphoid.glb, muscular.glb, nervous.glb, skeletal.glb, skull.glb, visceral.glb, visceral_gut_bp3d.glb\n\nĐẠT CHUẨN\n",
+      "durationMs": 173
+    },
+    {
+      "name": "verify-layers.mjs",
+      "args": [
+        "scripts/verify-layers.mjs"
+      ],
+      "code": 0,
+      "output": "\n86 scene đã kiểm · 0 scene có vấn đề.\n",
+      "durationMs": 320
+    },
+    {
+      "name": "verify-quiz-bank.mjs",
+      "args": [
+        "scripts/verify-quiz-bank.mjs"
+      ],
+      "code": 0,
+      "output": "Ngân hàng hợp lệ: 257 câu, 5 vùng.\n- BỤNG: 41\n- CHI DƯỚI: 49\n- CHI TRÊN: 81\n- CHẬU HÔNG VÀ ĐÁY CHẬU: 19\n- ĐẦU CỔ: 67\nChưa có đề trường nào (index rỗng) — nguồn này hiện trạng thái trống.\n",
+      "durationMs": 161
+    },
+    {
+      "name": "verify-quiz-text.mjs",
+      "args": [
+        "scripts/verify-quiz-text.mjs"
+      ],
+      "code": 0,
+      "output": "Chữ trang quiz hợp lệ: 177 khoá × 3 thứ tiếng.\n",
+      "durationMs": 189
+    },
+    {
+      "name": "verify-dr-lam-bank",
+      "args": [
+        "--import",
+        "./scripts/ts-resolve.mjs",
+        "scripts/verify-dr-lam-bank.ts"
+      ],
+      "code": 0,
+      "output": "Verified 30 source PDFs: 2810 questions, 1417 image references; single/multiple answers, pagination, scoring passed.\n(node:22308) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/scripts/verify-dr-lam-bank.ts is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\n",
+      "durationMs": 438
+    },
+    {
+      "name": "verify-vet-export",
+      "args": [
+        "--import",
+        "./scripts/ts-resolve.mjs",
+        "scripts/vet/export-vet-data.ts",
+        "--check"
+      ],
+      "code": 0,
+      "output": "✓ vet.json khớp kho tri thức (6 loài · 40 hệ · 111 cấu trúc)\n(node:18540) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/trinh/Downloads/%C4%91%E1%BB%93%20%C3%A1n/Soma_Fe/scripts/vet/export-vet-data.ts is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to C:\\Users\\trinh\\Downloads\\đồ án\\Soma_Fe\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\n",
+      "durationMs": 523
+    }
+  ],
+  "finishedAt": "2026-10-14T13:19:05.803Z",
+  "passed": 36,
+  "failed": 0
+}

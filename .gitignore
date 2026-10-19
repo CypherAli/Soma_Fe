@@ -15,6 +15,7 @@
 
 # next.js
 /.next/
+/.next-dev/
 /out/
 
 # production
@@ -56,3 +57,8 @@ soma-dev.log
 # Cache tải mẫu vật thú y từ Sketchfab (scripts/vet/import-vet-soft-tissue.mjs).
 # 483 MB và tải lại được từ nguồn — model đã dùng thật nằm ở public/models/vet/.
 /.cache/
+
+# Personal newsletter registrations stay outside source control.
+/data/newsletter.jsonl
+/docs/audits/.newsletter-qa-*.jsonl
+/docs/reference-assets/thumbnails/

@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+const response=await fetch('http://localhost:4000/api/pathologies');
+if(!response.ok)throw new Error(`Pathologies API ${response.status}`);
+const items=await response.json();
+const fields=['description','clinical','imaging','progression','treatment'];
+const diseases=items.map(p=>({slug:p.slug,name:p.nameVi,reviewPending:p.needsReview===true,citations:p.citations?.length??0,unverifiedCitations:(p.citations??[]).filter(c=>!c.verified).length,locales:Object.fromEntries((p.content??[]).map(c=>[c.locale,{machineTranslated:c.machineTranslated===true,missing:fields.filter(field=>!c[field]?.trim())}]))}));
+const report={diseases:items.length,withoutCitations:diseases.filter(p=>!p.citations).length,reviewPending:diseases.filter(p=>p.reviewPending).length,withoutVietnameseDetail:diseases.filter(p=>!p.locales.vi).length,rows:diseases};
+fs.writeFileSync('docs/audits/pathology-content.json',JSON.stringify(report,null,2));
+console.log({...report,rows:undefined});
+const search=await fetch('http://localhost:4000/api/medical-knowledge/search?q=appendicitis&limit=2').then(response=>response.json());
+console.log('Document hits',search.results.map(hit=>({page:hit.page,source:hit.source.title})));

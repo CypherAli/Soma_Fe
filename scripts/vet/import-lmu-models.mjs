@@ -242,7 +242,7 @@ const main = async () => {
       console.warn(`\n  ⚠ bỏ qua ${raw.name}: ${error.message}`);
     }
   }
-  console.log(`\n  Tổng ${(bytes / 1048576).toFixed(1)} MB.`);
+  console.log(`\n  Tổng ${(bytes / 1048576).toFixed(1)} MB · bỏ qua ${skipped} mẫu quá lớn.`);
 
   writeRegistry(entries);
 };

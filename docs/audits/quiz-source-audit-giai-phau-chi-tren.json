@@ -1,0 +1,1744 @@
+{
+  "method": "Independent physical PDF boundaries; full stem/option/explanation text coverage; marked answer keys; SHA-256 of original embedded images and source files",
+  "pdfs": 1,
+  "questions": 145,
+  "figureOccurrences": 124,
+  "differences": 0,
+  "sets": [
+    {
+      "id": "giai-phau-chi-tren",
+      "pdf": "Giải phẫu người 2025 - Test số hóa Dr. Lâm · giải phẫu chi trên.pdf",
+      "sha256Verified": true,
+      "sourceQuestions": 145,
+      "importedQuestions": 145,
+      "figureOccurrences": 124,
+      "differences": [],
+      "figuresByQuestion": {
+        "1": [
+          {
+            "url": "/kb/dr-lam/images/c735118ce83c24cb5eab.webp",
+            "page": 2,
+            "bbox": [
+              90.75,
+              33.75,
+              472.5,
+              214.5
+            ],
+            "xref": 16,
+            "section": "explanationImages"
+          }
+        ],
+        "2": [
+          {
+            "url": "/kb/dr-lam/images/d0f0f82626de17fc612b.webp",
+            "page": 3,
+            "bbox": [
+              90.75,
+              126.0,
+              512.25,
+              325.5
+            ],
+            "xref": 20,
+            "section": "explanationImages"
+          },
+          {
+            "url": "/kb/dr-lam/images/eba163c1fb597fd665c0.webp",
+            "page": 3,
+            "bbox": [
+              90.75,
+              348.75,
+              512.25,
+              510.75
+            ],
+            "xref": 21,
+            "section": "explanationImages"
+          },
+          {
+            "url": "/kb/dr-lam/images/9b9e150bcea52b9e3332.webp",
+            "page": 3,
+            "bbox": [
+              90.75,
+              534.0,
+              512.25,
+              762.75
+            ],
+            "xref": 22,
+            "section": "explanationImages"
+          }
+        ],
+        "5": [
+          {
+            "url": "/kb/dr-lam/images/6ddb30d0c6c034b42dbd.webp",
+            "page": 6,
+            "bbox": [
+              90.75,
+              33.75,
+              512.25,
+              160.5
+            ],
+            "xref": 29,
+            "section": "explanationImages"
+          },
+          {
+            "url": "/kb/dr-lam/images/6427f0aa02baf33dc066.webp",
+            "page": 6,
+            "bbox": [
+              90.75,
+              183.75,
+              469.5,
+              552.0
+            ],
+            "xref": 30,
+            "section": "explanationImages"
+          }
+        ],
+        "7": [
+          {
+            "url": "/kb/dr-lam/images/f31d2f4ebcb8280ff206.webp",
+            "page": 8,
+            "bbox": [
+              90.75,
+              33.75,
+              512.25,
+              341.25
+            ],
+            "xref": 35,
+            "section": "explanationImages"
+          }
+        ],
+        "8": [
+          {
+            "url": "/kb/dr-lam/images/fda22e6307f38b912c23.webp",
+            "page": 9,
+            "bbox": [
+              90.75,
+              126.0,
+              464.25,
+              335.25
+            ],
+            "xref": 38,
+            "section": "explanationImages"
+          },
+          {
+            "url": "/kb/dr-lam/images/f60d1c4120c8a4fe895f.webp",
+            "page": 9,
+            "bbox": [
+              90.75,
+              358.5,
+              501.0,
+              557.25
+            ],
+            "xref": 39,
+            "section": "explanationImages"
+          }
+        ],
+        "10": [
+          {
+            "url": "/kb/dr-lam/images/18f126bc4898be1e52cd.webp",
+            "page": 11,
+            "bbox": [
+              90.75,
+              103.5,
+              512.25,
+              290.25
+            ],
+            "xref": 44,
+            "section": "explanationImages"
+          },
+          {
+            "url": "/kb/dr-lam/images/0cca7f0fbbd65735352b.webp",
+            "page": 11,
+            "bbox": [
+              90.75,
+              313.5,
+              512.25,
+              630.0
+            ],
+            "xref": 45,
+            "section": "explanationImages"
+          }
+        ],
+        "12": [
+          {
+            "url": "/kb/dr-lam/images/653a3e86d25d0cdca29b.webp",
+            "page": 13,
+            "bbox": [
+              90.75,
+              33.75,
+              512.25,
+              320.25
+            ],
+            "xref": 50,
+            "section": "explanationImages"
+          },
+          {
+            "url": "/kb/dr-lam/images/3f8f01d09c84d2c7e26a.webp",
+            "page": 13,
+            "bbox": [
+              90.75,
+              343.5000305175781,
+              512.25,
+              689.25
+            ],
+            "xref": 51,
+            "section": "explanationImages"
+          },
+          {
+            "url": "/kb/dr-lam/images/f59291a7dfd4c935b49a.webp",
+            "page": 14,
+            "bbox": [
+              90.75,
+              33.74998474121094,
+              512.25,
+              270.0
+            ],
+            "xref": 54,
+            "section": "explanationImages"
+          }
+        ],
+        "14": [
+          {
+            "url": "/kb/dr-lam/images/59366f8c2353f05ab07a.webp",
+            "page": 16,
+            "bbox": [
+              90.75,
+              141.75,
+              444.0,
+              420.75
+            ],
+            "xref": 59,
+            "section": "explanationImages"
+          }
+        ],
+        "15": [
+          {
+            "url": "/kb/dr-lam/images/94ca3e1218e62b6418b6.webp",
+            "page": 17,
+            "bbox": [
+              90.75,
+              201.75003051757812,
+              512.25,
+              563.25
+            ],
+            "xref": 62,
+            "section": "explanationImages"
+          }
+        ],
+        "16": [
+          {
+            "url": "/kb/dr-lam/images/31a218e93d4655c54e7f.webp",
+            "page": 18,
+            "bbox": [
+              90.75,
+              244.5,
+              512.25,
+              496.5
+            ],
+            "xref": 65,
+            "section": "explanationImages"
+          }
+        ],
+        "17": [
+          {
+            "url": "/kb/dr-lam/images/e67a4c95f043608cefaf.webp",
+            "page": 19,
+            "bbox": [
+              90.75,
+              259.5,
+              439.5,
+              509.25
+            ],
+            "xref": 68,
+            "section": "explanationImages"
+          }
+        ],
+        "18": [
+          {
+            "url": "/kb/dr-lam/images/668093d3445cbc1766ed.webp",
+            "page": 20,
+            "bbox": [
+              90.75,
+              282.75,
+              512.25,
+              523.5
+            ],
+            "xref": 71,
+            "section": "explanationImages"
+          },
+          {
+            "url": "/kb/dr-lam/images/481effb62a4355dc30d6.webp",
+            "page": 21,
+            "bbox": [
+              90.75,
+              33.75,
+              512.25,
+              531.75
+            ],
+            "xref": 74,
+            "section": "explanationImages"
+          }
+        ],
+        "19": [
+          {
+            "url": "/kb/dr-lam/images/77f2f3edd1c88c698dbf.webp",
+            "page": 23,
+            "bbox": [
+              90.75,
+              33.75,
+              325.5,
+              406.5
+            ],
+            "xref": 79,
+            "section": "explanationImages"
+          },
+          {
+            "url": "/kb/dr-lam/images/2d1a3e639b294ef5cfcd.webp",
+            "page": 23,
+            "bbox": [
+              90.75,
+              429.75,
+              471.0,
+              684.0
+            ],
+            "xref": 80,
+            "section": "explanationImages"
+          }
+        ],
+        "20": [
+          {
+            "url": "/kb/dr-lam/images/65554ee2037ff1f275f6.webp",
+            "page": 24,
+            "bbox": [
+              90.75,
+              409.5,
+              385.5,
+              647.25
+            ],
+            "xref": 83,
+            "section": "explanationImages"
+          }
+        ],
+        "21": [
+          {
+            "url": "/kb/dr-lam/images/38683101c779801fe290.webp",
+            "page": 26,
+            "bbox": [
+              90.75,
+              33.75,
+              512.25,
+              256.5
+            ],
+            "xref": 88,
+            "section": "explanationImages"
+          },
+          {
+            "url": "/kb/dr-lam/images/77396cb658c125e0a73c.webp",
+            "page": 26,
+            "bbox": [
+              90.75,
+              279.75,
+              490.5,
+              646.5
+            ],
+            "xref": 89,
+            "section": "explanationImages"
+          }
+        ],
+        "24": [
+          {
+            "url": "/kb/dr-lam/images/9e140c311e36dd17645c.webp",
+            "page": 30,
+            "bbox": [
+              90.75,
+              33.75,
+              355.5,
+              417.0
+            ],
+            "xref": 98,
+            "section": "explanationImages"
+          },
+          {
+            "url": "/kb/dr-lam/images/eebd49b1d9f597e64d5f.webp",
+            "page": 30,
+            "bbox": [
+              90.75,
+              440.25,
+              512.25,
+              654.0
+            ],
+            "xref": 99,
+            "section": "explanationImages"
+          },
+          {
+            "url": "/kb/dr-lam/images/6aee84db899745494f97.webp",
+            "page": 31,
+            "bbox": [
+              90.75,
+              33.75,
+              512.25,
+              233.24998474121094
+            ],
+            "xref": 102,
+            "section": "explanationImages"
+          }
+        ],
+        "26": [
+          {
+            "url": "/kb/dr-lam/images/e54e36d4d4c4f9714999.webp",
+            "page": 33,
+            "bbox": [
+              90.75,
+              33.75,
+              414.0,
+              439.5
+            ],
+            "xref": 107,
+            "section": "explanationImages"
+          },
+          {
+            "url": "/kb/dr-lam/images/9e21c303562e644bdfb1.webp",
+            "page": 34,
+            "bbox": [
+              90.75,
+              33.75,
+              436.5,
+              478.5
+            ],
+            "xref": 110,
+            "section": "explanationImages"
+          }
+        ],
+        "27": [
+          {
+            "url": "/kb/dr-lam/images/02a5802cf30e69b57683.webp",
+            "page": 35,
+            "bbox": [
+              90.75,
+              293.25,
+              490.5,
+              631.5
+            ],
+            "xref": 113,
+            "section": "explanationImages"
+          }
+        ],
+        "28": [
+          {
+            "url": "/kb/dr-lam/images/77dd375c660e24ab51e8.webp",
+            "page": 37,
+            "bbox": [
+              90.75,
+              33.75,
+              512.25,
+              341.25
+            ],
+            "xref": 118,
+            "section": "explanationImages"
+          }
+        ],
+        "29": [
+          {
+            "url": "/kb/dr-lam/images/33ab436fff33f6dc317f.webp",
+            "page": 39,
+            "bbox": [
+              90.75,
+              33.75,
+              369.0,
+              468.0
+            ],
+            "xref": 123,
+            "section": "explanationImages"
+          },
+          {
+            "url": "/kb/dr-lam/images/9efc71d61eed0c031caa.webp",
+            "page": 39,
+            "bbox": [
+              90.75,
+              491.25,
+              512.25,
+              684.75
+            ],
+            "xref": 124,
+            "section": "explanationImages"
+          },
+          {
+            "url": "/kb/dr-lam/images/6eb07ce40fb9d6f58905.webp",
+            "page": 40,
+            "bbox": [
+              90.75,
+              33.75,
+              512.25,
+              324.75
+            ],
+            "xref": 127,
+            "section": "explanationImages"
+          }
+        ],
+        "30": [
+          {
+            "url": "/kb/dr-lam/images/cc46293428b8a7826df2.webp",
+            "page": 41,
+            "bbox": [
+              90.75,
+              234.0,
+              475.5,
+              543.75
+            ],
+            "xref": 130,
+            "section": "explanationImages"
+          }
+        ],
+        "31": [
+          {
+            "url": "/kb/dr-lam/images/f49b857d6dd89ad20833.webp",
+            "page": 42,
+            "bbox": [
+              90.75,
+              315.75,
+              512.25,
+              636.0
+            ],
+            "xref": 133,
+            "section": "explanationImages"
+          }
+        ],
+        "32": [
+          {
+            "url": "/kb/dr-lam/images/79df50c30f5546db9fbe.webp",
+            "page": 44,
+            "bbox": [
+              90.75,
+              33.75,
+              512.25,
+              421.4999694824219
+            ],
+            "xref": 138,
+            "section": "explanationImages"
+          },
+          {
+            "url": "/kb/dr-lam/images/1a0db6d549f2b4229f8f.webp",
+            "page": 44,
+            "bbox": [
+              90.75,
+              444.0,
+              512.25,
+              727.5
+            ],
+            "xref": 139,
+            "section": "explanationImages"
+          }
+        ],
+        "33": [
+          {
+            "url": "/kb/dr-lam/images/c207bdc5ebc34138f8db.webp",
+            "page": 46,
+            "bbox": [
+              90.75,
+              33.75,
+              277.5,
+              381.0
+            ],
+            "xref": 144,
+            "section": "explanationImages"
+          },
+          {
+            "url": "/kb/dr-lam/images/717d27448d1325b318e9.webp",
+            "page": 46,
+            "bbox": [
+              90.75,
+              404.25,
+              421.5,
+              675.0
+            ],
+            "xref": 145,
+            "section": "explanationImages"
+          },
+          {
+            "url": "/kb/dr-lam/images/d658cc3e8d7e9a0fbcf1.webp",
+            "page": 47,
+            "bbox": [
+              90.75,
+              33.75,
+              512.25,
+              367.5
+            ],
+            "xref": 148,
+            "section": "explanationImages"
+          }
+        ],
+        "34": [
+          {
+            "url": "/kb/dr-lam/images/57fae9720608306cd2a4.webp",
+            "page": 49,
+            "bbox": [
+              90.75,
+              33.75,
+              512.25,
+              336.0
+            ],
+            "xref": 153,
+            "section": "explanationImages"
+          },
+          {
+            "url": "/kb/dr-lam/images/ac09af595a9d36156e04.webp",
+            "page": 49,
+            "bbox": [
+              90.75,
+              359.25,
+              405.0,
+              688.5
+            ],
+            "xref": 154,
+            "section": "explanationImages"
+          }
+        ],
+        "35": [
+          {
+            "url": "/kb/dr-lam/images/bfecbcabb7c74d6867eb.webp",
+            "page": 50,
+            "bbox": [
+              90.75,
+              405.0,
+              429.75,
+              621.0
+            ],
+            "xref": 157,
+            "section": "explanationImages"
+          }
+        ],
+        "36": [
+          {
+            "url": "/kb/dr-lam/images/5c9c19e3598f8d82ba29.webp",
+            "page": 52,
+            "bbox": [
+              90.75,
+              33.75,
+              512.25,
+              295.5
+            ],
+            "xref": 162,
+            "section": "explanationImages"
+          },
+          {
+            "url": "/kb/dr-lam/images/38d23ded2612969ebab6.webp",
+            "page": 52,
+            "bbox": [
+              90.75,
+              318.75,
+              477.0,
+              625.5
+            ],
+            "xref": 163,
+            "section": "explanationImages"
+          }
+        ],
+        "37": [
+          {
+            "url": "/kb/dr-lam/images/07e993fc06d5cb43ec04.webp",
+            "page": 54,
+            "bbox": [
+              90.75,
+              33.75,
+              352.5,
+              397.5
+            ],
+            "xref": 168,
+            "section": "explanationImages"
+          },
+          {
+            "url": "/kb/dr-lam/images/72b0dddbc842230392fc.webp",
+            "page": 54,
+            "bbox": [
+              90.75,
+              420.75,
+              480.0,
+              675.75
+            ],
+            "xref": 169,
+            "section": "explanationImages"
+          }
+        ],
+        "38": [
+          {
+            "url": "/kb/dr-lam/images/a39a0610164ba3b7faa9.webp",
+            "page": 56,
+            "bbox": [
+              90.75,
+              33.75,
+              512.25,
+              466.5
+            ],
+            "xref": 174,
+            "section": "explanationImages"
+          },
+          {
+            "url": "/kb/dr-lam/images/204f428e9a0be665545f.webp",
+            "page": 57,
+            "bbox": [
+              90.75,
+              33.75,
+              495.0,
+              438.0
+            ],
+            "xref": 177,
+            "section": "explanationImages"
+          }
+        ],
+        "39": [
+          {
+            "url": "/kb/dr-lam/images/637498326050f989efac.webp",
+            "page": 58,
+            "bbox": [
+              90.75,
+              311.25,
+              512.25,
+              696.75
+            ],
+            "xref": 180,
+            "section": "explanationImages"
+          }
+        ],
+        "40": [
+          {
+            "url": "/kb/dr-lam/images/6247607f3716f034125d.webp",
+            "page": 60,
+            "bbox": [
+              90.75,
+              33.75,
+              512.25,
+              292.5
+            ],
+            "xref": 185,
+            "section": "explanationImages"
+          },
+          {
+            "url": "/kb/dr-lam/images/c8d32c6a7f4997b5ec83.webp",
+            "page": 60,
+            "bbox": [
+              90.75,
+              315.75,
+              357.0,
+              639.0
+            ],
+            "xref": 186,
+            "section": "explanationImages"
+          },
+          {
+            "url": "/kb/dr-lam/images/85b37113692245a95242.webp",
+            "page": 61,
+            "bbox": [
+              90.75,
+              33.75,
+              454.5,
+              290.25
+            ],
+            "xref": 189,
+            "section": "explanationImages"
+          }
+        ],
+        "42": [
+          {
+            "url": "/kb/dr-lam/images/3a876a2056aae4348451.webp",
+            "page": 63,
+            "bbox": [
+              90.75,
+              103.5,
+              445.5,
+              423.75
+            ],
+            "xref": 194,
+            "section": "explanationImages"
+          }
+        ],
+        "43": [
+          {
+            "url": "/kb/dr-lam/images/f8aa4287c4da63fa6bd3.webp",
+            "page": 65,
+            "bbox": [
+              90.75,
+              33.75,
+              512.25,
+              343.5
+            ],
+            "xref": 199,
+            "section": "explanationImages"
+          },
+          {
+            "url": "/kb/dr-lam/images/6fa0e2c699be672d097e.webp",
+            "page": 65,
+            "bbox": [
+              90.75,
+              366.75,
+              512.25,
+              751.5
+            ],
+            "xref": 200,
+            "section": "explanationImages"
+          }
+        ],
+        "45": [
+          {
+            "url": "/kb/dr-lam/images/eea6ac5fd850b7940424.webp",
+            "page": 68,
+            "bbox": [
+              90.75,
+              33.75,
+              512.25,
+              469.5
+            ],
+            "xref": 207,
+            "section": "explanationImages"
+          }
+        ],
+        "46": [
+          {
+            "url": "/kb/dr-lam/images/0d332d45d163fbd8fa04.webp",
+            "page": 69,
+            "bbox": [
+              90.75,
+              354.0,
+              512.25,
+              391.5
+            ],
+            "xref": 210,
+            "section": "explanationImages"
+          }
+        ],
+        "49": [
+          {
+            "url": "/kb/dr-lam/images/22df74751db30156775a.webp",
+            "page": 71,
+            "bbox": [
+              90.75,
+              344.25,
+              512.25,
+              563.25
+            ],
+            "xref": 215,
+            "section": "explanationImages"
+          }
+        ],
+        "51": [
+          {
+            "url": "/kb/dr-lam/images/3cb9a4f482af137c5ca3.webp",
+            "page": 73,
+            "bbox": [
+              90.75,
+              292.5,
+              512.25,
+              677.25
+            ],
+            "xref": 220,
+            "section": "explanationImages"
+          }
+        ],
+        "53": [
+          {
+            "url": "/kb/dr-lam/images/b9087edb34d11087dbe0.webp",
+            "page": 75,
+            "bbox": [
+              90.75,
+              210.0,
+              435.75,
+              479.25
+            ],
+            "xref": 225,
+            "section": "explanationImages"
+          }
+        ],
+        "54": [
+          {
+            "url": "/kb/dr-lam/images/159e399d7bef8e029349.webp",
+            "page": 76,
+            "bbox": [
+              90.75,
+              107.25,
+              512.25,
+              401.25
+            ],
+            "xref": 228,
+            "section": "explanationImages"
+          }
+        ],
+        "56": [
+          {
+            "url": "/kb/dr-lam/images/00760e70cca2195d4af5.webp",
+            "page": 78,
+            "bbox": [
+              90.75,
+              33.75,
+              313.5,
+              406.5
+            ],
+            "xref": 233,
+            "section": "explanationImages"
+          }
+        ],
+        "57": [
+          {
+            "url": "/kb/dr-lam/images/021e72ce239bfe551c3e.webp",
+            "page": 79,
+            "bbox": [
+              90.75,
+              249.75,
+              273.75,
+              399.75
+            ],
+            "xref": 236,
+            "section": "explanationImages"
+          }
+        ],
+        "58": [
+          {
+            "url": "/kb/dr-lam/images/598bf5f3dc54cbe116f7.webp",
+            "page": 81,
+            "bbox": [
+              90.75,
+              33.75,
+              468.75,
+              205.5
+            ],
+            "xref": 241,
+            "section": "explanationImages"
+          },
+          {
+            "url": "/kb/dr-lam/images/61e587b96eeab8b751f1.webp",
+            "page": 81,
+            "bbox": [
+              90.75,
+              228.75,
+              512.25,
+              297.0
+            ],
+            "xref": 242,
+            "section": "explanationImages"
+          },
+          {
+            "url": "/kb/dr-lam/images/094216d672823d5e58b5.webp",
+            "page": 81,
+            "bbox": [
+              90.75,
+              320.25,
+              512.25,
+              614.25
+            ],
+            "xref": 243,
+            "section": "explanationImages"
+          }
+        ],
+        "60": [
+          {
+            "url": "/kb/dr-lam/images/72602c64b424a8cd6951.webp",
+            "page": 83,
+            "bbox": [
+              90.75,
+              238.5,
+              404.25,
+              533.25
+            ],
+            "xref": 249,
+            "section": "explanationImages"
+          }
+        ],
+        "61": [
+          {
+            "url": "/kb/dr-lam/images/72602c64b424a8cd6951.webp",
+            "page": 84,
+            "bbox": [
+              90.75,
+              276.75,
+              404.25,
+              571.5
+            ],
+            "xref": 249,
+            "section": "explanationImages"
+          }
+        ],
+        "63": [
+          {
+            "url": "/kb/dr-lam/images/af171031506926310a38.webp",
+            "page": 86,
+            "bbox": [
+              90.75,
+              33.75,
+              443.25,
+              114.0
+            ],
+            "xref": 256,
+            "section": "explanationImages"
+          },
+          {
+            "url": "/kb/dr-lam/images/84dd2de796e2190cd725.webp",
+            "page": 86,
+            "bbox": [
+              90.75,
+              137.25,
+              330.75,
+              393.0
+            ],
+            "xref": 257,
+            "section": "explanationImages"
+          }
+        ],
+        "64": [
+          {
+            "url": "/kb/dr-lam/images/922f6f35622ccad86c05.webp",
+            "page": 87,
+            "bbox": [
+              90.75,
+              33.75,
+              512.25,
+              303.75
+            ],
+            "xref": 260,
+            "section": "explanationImages"
+          },
+          {
+            "url": "/kb/dr-lam/images/8feda5e91abe53818ca0.webp",
+            "page": 87,
+            "bbox": [
+              90.75,
+              326.25,
+              378.0,
+              724.5
+            ],
+            "xref": 261,
+            "section": "explanationImages"
+          }
+        ],
+        "65": [
+          {
+            "url": "/kb/dr-lam/images/61a8032a6d0fde2d332f.webp",
+            "page": 89,
+            "bbox": [
+              90.75,
+              33.75,
+              512.25,
+              473.25
+            ],
+            "xref": 266,
+            "section": "explanationImages"
+          }
+        ],
+        "66": [
+          {
+            "url": "/kb/dr-lam/images/81bdd0071021ae968438.webp",
+            "page": 90,
+            "bbox": [
+              90.75,
+              276.75,
+              373.5,
+              645.0
+            ],
+            "xref": 269,
+            "section": "explanationImages"
+          }
+        ],
+        "67": [
+          {
+            "url": "/kb/dr-lam/images/5f558b0250fb7a71d967.webp",
+            "page": 91,
+            "bbox": [
+              90.75,
+              414.75,
+              512.25,
+              715.5
+            ],
+            "xref": 272,
+            "section": "explanationImages"
+          }
+        ],
+        "68": [
+          {
+            "url": "/kb/dr-lam/images/43744604fd1882ca2caf.webp",
+            "page": 93,
+            "bbox": [
+              90.75,
+              33.75,
+              512.25,
+              363.0
+            ],
+            "xref": 277,
+            "section": "explanationImages"
+          }
+        ],
+        "71": [
+          {
+            "url": "/kb/dr-lam/images/cc8a9235776ffb209a1f.webp",
+            "page": 96,
+            "bbox": [
+              90.75,
+              33.75,
+              468.75,
+              414.75
+            ],
+            "xref": 284,
+            "section": "explanationImages"
+          },
+          {
+            "url": "/kb/dr-lam/images/2c4184f70aabfd12902f.webp",
+            "page": 96,
+            "bbox": [
+              90.75,
+              438.0,
+              473.25,
+              664.5
+            ],
+            "xref": 285,
+            "section": "explanationImages"
+          }
+        ],
+        "73": [
+          {
+            "url": "/kb/dr-lam/images/66523251845a3b0a9ee6.webp",
+            "page": 98,
+            "bbox": [
+              90.75,
+              272.25,
+              437.25,
+              572.25
+            ],
+            "xref": 290,
+            "section": "explanationImages"
+          }
+        ],
+        "74": [
+          {
+            "url": "/kb/dr-lam/images/66523251845a3b0a9ee6.webp",
+            "page": 99,
+            "bbox": [
+              90.75,
+              245.25,
+              437.25,
+              545.25
+            ],
+            "xref": 290,
+            "section": "explanationImages"
+          }
+        ],
+        "76": [
+          {
+            "url": "/kb/dr-lam/images/e019304dfbeb49b7056e.webp",
+            "page": 101,
+            "bbox": [
+              90.75,
+              103.5,
+              470.25,
+              339.0
+            ],
+            "xref": 297,
+            "section": "explanationImages"
+          },
+          {
+            "url": "/kb/dr-lam/images/56e075bfe0a03dfd436f.webp",
+            "page": 101,
+            "bbox": [
+              90.75,
+              408.0,
+              512.25,
+              795.75
+            ],
+            "xref": 298,
+            "section": "explanationImages"
+          }
+        ],
+        "78": [
+          {
+            "url": "/kb/dr-lam/images/cfc7e76fd28dd91b2631.webp",
+            "page": 103,
+            "bbox": [
+              90.75,
+              412.5000305175781,
+              512.25,
+              786.0
+            ],
+            "xref": 303,
+            "section": "explanationImages"
+          }
+        ],
+        "83": [
+          {
+            "url": "/kb/dr-lam/images/9658fd26f12a5084c979.webp",
+            "page": 107,
+            "bbox": [
+              90.75,
+              33.75,
+              489.0,
+              441.0
+            ],
+            "xref": 312,
+            "section": "explanationImages"
+          }
+        ],
+        "84": [
+          {
+            "url": "/kb/dr-lam/images/b2cc2e35375bc13c181c.webp",
+            "page": 108,
+            "bbox": [
+              90.75,
+              130.49998474121094,
+              512.25,
+              333.0
+            ],
+            "xref": 315,
+            "section": "explanationImages"
+          }
+        ],
+        "85": [
+          {
+            "url": "/kb/dr-lam/images/63f6f96c6283ac255433.webp",
+            "page": 109,
+            "bbox": [
+              90.75,
+              188.25,
+              412.5,
+              424.5
+            ],
+            "xref": 318,
+            "section": "explanationImages"
+          }
+        ],
+        "86": [
+          {
+            "url": "/kb/dr-lam/images/951f9aff7ac26f17b6a4.webp",
+            "page": 110,
+            "bbox": [
+              90.75,
+              80.25,
+              385.5,
+              316.5
+            ],
+            "xref": 321,
+            "section": "explanationImages"
+          }
+        ],
+        "90": [
+          {
+            "url": "/kb/dr-lam/images/eb852d960cb06856d9f9.webp",
+            "page": 113,
+            "bbox": [
+              90.75,
+              33.75,
+              512.25,
+              280.5
+            ],
+            "xref": 328,
+            "section": "explanationImages"
+          }
+        ],
+        "91": [
+          {
+            "url": "/kb/dr-lam/images/157821adf64495763dc3.webp",
+            "page": 114,
+            "bbox": [
+              90.75,
+              33.75,
+              397.5,
+              274.5
+            ],
+            "xref": 331,
+            "section": "explanationImages"
+          }
+        ],
+        "93": [
+          {
+            "url": "/kb/dr-lam/images/157821adf64495763dc3.webp",
+            "page": 116,
+            "bbox": [
+              90.75,
+              33.75,
+              397.5,
+              274.5
+            ],
+            "xref": 331,
+            "section": "explanationImages"
+          }
+        ],
+        "94": [
+          {
+            "url": "/kb/dr-lam/images/6a2d894e8027cc91867e.webp",
+            "page": 117,
+            "bbox": [
+              90.75,
+              33.75,
+              512.25,
+              280.5
+            ],
+            "xref": 338,
+            "section": "explanationImages"
+          }
+        ],
+        "97": [
+          {
+            "url": "/kb/dr-lam/images/9315bf1f89175b21d597.webp",
+            "page": 120,
+            "bbox": [
+              90.75,
+              254.25,
+              435.75,
+              459.75
+            ],
+            "xref": 345,
+            "section": "explanationImages"
+          }
+        ],
+        "101": [
+          {
+            "url": "/kb/dr-lam/images/3b9b139adbaac67da47d.webp",
+            "page": 123,
+            "bbox": [
+              90.75,
+              33.75,
+              465.0,
+              285.75
+            ],
+            "xref": 352,
+            "section": "explanationImages"
+          }
+        ],
+        "102": [
+          {
+            "url": "/kb/dr-lam/images/3b9b139adbaac67da47d.webp",
+            "page": 124,
+            "bbox": [
+              90.75,
+              33.75,
+              465.0,
+              285.75
+            ],
+            "xref": 352,
+            "section": "explanationImages"
+          }
+        ],
+        "103": [
+          {
+            "url": "/kb/dr-lam/images/e14249f2c1162cf0365b.webp",
+            "page": 125,
+            "bbox": [
+              90.75,
+              33.75,
+              453.75,
+              252.75
+            ],
+            "xref": 357,
+            "section": "explanationImages"
+          }
+        ],
+        "104": [
+          {
+            "url": "/kb/dr-lam/images/df15436222b665c23a13.webp",
+            "page": 126,
+            "bbox": [
+              90.75,
+              33.75,
+              492.75,
+              246.75
+            ],
+            "xref": 360,
+            "section": "explanationImages"
+          }
+        ],
+        "105": [
+          {
+            "url": "/kb/dr-lam/images/2b325d9d8f24817b7bda.webp",
+            "page": 127,
+            "bbox": [
+              90.75,
+              33.75,
+              315.75,
+              282.0
+            ],
+            "xref": 363,
+            "section": "explanationImages"
+          }
+        ],
+        "110": [
+          {
+            "url": "/kb/dr-lam/images/85eb38326b35219c7e72.webp",
+            "page": 131,
+            "bbox": [
+              90.75,
+              33.75,
+              443.25,
+              370.5
+            ],
+            "xref": 372,
+            "section": "explanationImages"
+          }
+        ],
+        "111": [
+          {
+            "url": "/kb/dr-lam/images/8351a13d6e0169eebaa5.webp",
+            "page": 132,
+            "bbox": [
+              90.75,
+              165.0,
+              349.5,
+              361.5
+            ],
+            "xref": 375,
+            "section": "explanationImages"
+          }
+        ],
+        "112": [
+          {
+            "url": "/kb/dr-lam/images/aad1beb7b9348dbf4f2c.webp",
+            "page": 133,
+            "bbox": [
+              90.75,
+              226.5,
+              353.25,
+              498.75
+            ],
+            "xref": 378,
+            "section": "explanationImages"
+          }
+        ],
+        "114": [
+          {
+            "url": "/kb/dr-lam/images/aad1beb7b9348dbf4f2c.webp",
+            "page": 135,
+            "bbox": [
+              90.75,
+              103.5,
+              353.25,
+              375.75
+            ],
+            "xref": 378,
+            "section": "explanationImages"
+          },
+          {
+            "url": "/kb/dr-lam/images/07462fe3948c88ed3020.webp",
+            "page": 135,
+            "bbox": [
+              90.75,
+              398.25,
+              489.75,
+              468.0
+            ],
+            "xref": 383,
+            "section": "explanationImages"
+          }
+        ],
+        "115": [
+          {
+            "url": "/kb/dr-lam/images/128e3f2d335cb770684f.webp",
+            "page": 136,
+            "bbox": [
+              90.75,
+              254.25,
+              223.5,
+              458.25
+            ],
+            "xref": 386,
+            "section": "explanationImages"
+          }
+        ],
+        "116": [
+          {
+            "url": "/kb/dr-lam/images/2e7c2d49652ccb286817.webp",
+            "page": 137,
+            "bbox": [
+              90.75,
+              315.7500305175781,
+              512.25,
+              750.75
+            ],
+            "xref": 389,
+            "section": "explanationImages"
+          }
+        ],
+        "117": [
+          {
+            "url": "/kb/dr-lam/images/daaf2775b38adbf5b9b6.webp",
+            "page": 139,
+            "bbox": [
+              90.75,
+              33.75,
+              384.0,
+              335.25
+            ],
+            "xref": 394,
+            "section": "explanationImages"
+          }
+        ],
+        "121": [
+          {
+            "url": "/kb/dr-lam/images/7c4c468eb3a7468031f0.webp",
+            "page": 142,
+            "bbox": [
+              90.75,
+              146.25,
+              490.5,
+              397.5
+            ],
+            "xref": 401,
+            "section": "explanationImages"
+          }
+        ],
+        "122": [
+          {
+            "url": "/kb/dr-lam/images/a2b5ffe18261fc91f927.webp",
+            "page": 143,
+            "bbox": [
+              90.75,
+              103.5,
+              512.25,
+              195.0
+            ],
+            "xref": 404,
+            "section": "explanationImages"
+          }
+        ],
+        "123": [
+          {
+            "url": "/kb/dr-lam/images/31247c3c84047acd3525.webp",
+            "page": 144,
+            "bbox": [
+              90.75,
+              33.75,
+              512.25,
+              624.75
+            ],
+            "xref": 407,
+            "section": "explanationImages"
+          }
+        ],
+        "126": [
+          {
+            "url": "/kb/dr-lam/images/886fe3ae7abf6598953b.webp",
+            "page": 146,
+            "bbox": [
+              90.75,
+              329.25,
+              512.25,
+              423.0
+            ],
+            "xref": 412,
+            "section": "explanationImages"
+          }
+        ],
+        "128": [
+          {
+            "url": "/kb/dr-lam/images/a2ab259dd0a38ca591c6.webp",
+            "page": 147,
+            "bbox": [
+              90.75,
+              614.25,
+              512.25,
+              662.25
+            ],
+            "xref": 415,
+            "section": "explanationImages"
+          }
+        ],
+        "129": [
+          {
+            "url": "/kb/dr-lam/images/bba7957158503eb5ab80.webp",
+            "page": 148,
+            "bbox": [
+              90.75,
+              366.75,
+              512.25,
+              572.25
+            ],
+            "xref": 418,
+            "section": "explanationImages"
+          }
+        ],
+        "134": [
+          {
+            "url": "/kb/dr-lam/images/677f52d908575661e23a.webp",
+            "page": 152,
+            "bbox": [
+              90.75,
+              33.75,
+              512.25,
+              588.7499389648438
+            ],
+            "xref": 427,
+            "section": "explanationImages"
+          }
+        ],
+        "136": [
+          {
+            "url": "/kb/dr-lam/images/f6585179aaf8bb037614.webp",
+            "page": 154,
+            "bbox": [
+              90.75,
+              292.5,
+              489.75,
+              600.0
+            ],
+            "xref": 432,
+            "section": "explanationImages"
+          }
+        ],
+        "137": [
+          {
+            "url": "/kb/dr-lam/images/157821adf64495763dc3.webp",
+            "page": 156,
+            "bbox": [
+              90.75,
+              33.75,
+              397.5,
+              274.5
+            ],
+            "xref": 331,
+            "section": "explanationImages"
+          }
+        ],
+        "139": [
+          {
+            "url": "/kb/dr-lam/images/b95c21b77dfef26b84da.webp",
+            "page": 158,
+            "bbox": [
+              90.75,
+              80.25,
+              475.5,
+              325.5
+            ],
+            "xref": 441,
+            "section": "explanationImages"
+          }
+        ],
+        "140": [
+          {
+            "url": "/kb/dr-lam/images/b95c21b77dfef26b84da.webp",
+            "page": 159,
+            "bbox": [
+              90.75,
+              373.5,
+              475.5,
+              618.75
+            ],
+            "xref": 441,
+            "section": "explanationImages"
+          }
+        ],
+        "142": [
+          {
+            "url": "/kb/dr-lam/images/76f6691d98c2bc4e8244.webp",
+            "page": 162,
+            "bbox": [
+              90.75,
+              33.75,
+              512.25,
+              507.75
+            ],
+            "xref": 450,
+            "section": "explanationImages"
+          },
+          {
+            "url": "/kb/dr-lam/images/4bf1fd1143690c8a6201.webp",
+            "page": 163,
+            "bbox": [
+              90.75,
+              33.75,
+              480.0,
+              452.25
+            ],
+            "xref": 453,
+            "section": "explanationImages"
+          }
+        ],
+        "143": [
+          {
+            "url": "/kb/dr-lam/images/f6a064c234145bada5fa.webp",
+            "page": 164,
+            "bbox": [
+              90.75,
+              279.0,
+              336.0,
+              425.25
+            ],
+            "xref": 456,
+            "section": "explanationImages"
+          }
+        ],
+        "144": [
+          {
+            "url": "/kb/dr-lam/images/1e1c22e252f5a27b6bed.webp",
+            "page": 165,
+            "bbox": [
+              90.75,
+              180.0,
+              256.5,
+              423.75
+            ],
+            "xref": 459,
+            "section": "explanationImages"
+          }
+        ],
+        "145": [
+          {
+            "url": "/kb/dr-lam/images/f3644d8a069aa4619940.webp",
+            "page": 166,
+            "bbox": [
+              90.75,
+              103.5,
+              390.75,
+              303.0
+            ],
+            "xref": 462,
+            "section": "explanationImages"
+          }
+        ],
+        "3": [],
+        "4": [],
+        "6": [],
+        "9": [],
+        "11": [],
+        "13": [],
+        "22": [],
+        "23": [],
+        "25": [],
+        "41": [],
+        "44": [],
+        "47": [],
+        "48": [],
+        "50": [],
+        "52": [],
+        "55": [],
+        "59": [],
+        "62": [],
+        "69": [],
+        "70": [],
+        "72": [],
+        "75": [],
+        "77": [],
+        "79": [],
+        "80": [],
+        "81": [],
+        "82": [],
+        "87": [],
+        "88": [],
+        "89": [],
+        "92": [],
+        "95": [],
+        "96": [],
+        "98": [],
+        "99": [],
+        "100": [],
+        "106": [],
+        "107": [],
+        "108": [],
+        "109": [],
+        "113": [],
+        "118": [],
+        "119": [],
+        "120": [],
+        "124": [],
+        "125": [],
+        "127": [],
+        "130": [],
+        "131": [],
+        "132": [],
+        "133": [],
+        "135": [],
+        "138": [],
+        "141": []
+      }
+    }
+  ]
+}

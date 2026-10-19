@@ -1,0 +1,215 @@
+{
+  "at": "2026-10-07T16:34:39.149Z",
+  "scope": "Actual Vision iframe parser/features; no microphone/audio hardware used",
+  "settings": {
+    "recognitionLanguage": "vi-VN",
+    "synthesisLanguage": null,
+    "synthesisVoice": null
+  },
+  "rows": [
+    {
+      "text": "tách lớp",
+      "actions": [],
+      "invalidModels": []
+    },
+    {
+      "text": "tach lop",
+      "actions": [
+        {
+          "type": "explode"
+        }
+      ],
+      "invalidModels": []
+    },
+    {
+      "text": "phóng to",
+      "actions": [],
+      "invalidModels": []
+    },
+    {
+      "text": "phong to",
+      "actions": [
+        {
+          "type": "zoomIn"
+        }
+      ],
+      "invalidModels": []
+    },
+    {
+      "text": "thu nhỏ",
+      "actions": [],
+      "invalidModels": []
+    },
+    {
+      "text": "thu nho",
+      "actions": [
+        {
+          "type": "zoomOut"
+        }
+      ],
+      "invalidModels": []
+    },
+    {
+      "text": "đọc chú thích",
+      "actions": [
+        {
+          "type": "model",
+          "name": "Cổ"
+        }
+      ],
+      "invalidModels": []
+    },
+    {
+      "text": "giải thích",
+      "actions": [],
+      "invalidModels": []
+    },
+    {
+      "text": "giai thich",
+      "actions": [
+        {
+          "type": "describe"
+        }
+      ],
+      "invalidModels": []
+    },
+    {
+      "text": "mở bàn tay",
+      "actions": [],
+      "invalidModels": []
+    },
+    {
+      "text": "ban tay",
+      "actions": [],
+      "invalidModels": []
+    },
+    {
+      "text": "cổ tay",
+      "actions": [
+        {
+          "type": "model",
+          "name": "Cổ tay"
+        }
+      ],
+      "invalidModels": []
+    },
+    {
+      "text": "wrist",
+      "actions": [],
+      "invalidModels": []
+    },
+    {
+      "text": "forearm",
+      "actions": [],
+      "invalidModels": []
+    },
+    {
+      "text": "head",
+      "actions": [],
+      "invalidModels": []
+    },
+    {
+      "text": "neck",
+      "actions": [],
+      "invalidModels": []
+    },
+    {
+      "text": "show me the heart",
+      "actions": [
+        {
+          "type": "model",
+          "name": "Human Heart"
+        }
+      ],
+      "invalidModels": []
+    },
+    {
+      "text": "show me the animal cell",
+      "actions": [
+        {
+          "type": "model",
+          "name": "Animal Cell"
+        }
+      ],
+      "invalidModels": [
+        "Animal Cell"
+      ]
+    },
+    {
+      "text": "show me car",
+      "actions": [
+        {
+          "type": "model",
+          "name": "Sports Car"
+        }
+      ],
+      "invalidModels": [
+        "Sports Car"
+      ]
+    },
+    {
+      "text": "không xoay",
+      "actions": [
+        {
+          "type": "rotate"
+        }
+      ],
+      "invalidModels": []
+    },
+    {
+      "text": "do not rotate",
+      "actions": [
+        {
+          "type": "rotate"
+        }
+      ],
+      "invalidModels": []
+    },
+    {
+      "text": "ẩn mô hình",
+      "actions": [],
+      "invalidModels": []
+    },
+    {
+      "text": "cơ cánh tay-quay trái",
+      "actions": [
+        {
+          "type": "model",
+          "name": "Cánh tay"
+        },
+        {
+          "type": "record"
+        }
+      ],
+      "invalidModels": []
+    },
+    {
+      "text": "show left brachioradialis",
+      "actions": [
+        {
+          "type": "part",
+          "index": 30
+        }
+      ],
+      "invalidModels": []
+    },
+    {
+      "text": "rotate",
+      "actions": [
+        {
+          "type": "rotate"
+        }
+      ],
+      "invalidModels": []
+    },
+    {
+      "text": "zoom in",
+      "actions": [
+        {
+          "type": "zoomIn"
+        }
+      ],
+      "invalidModels": []
+    }
+  ]
+}

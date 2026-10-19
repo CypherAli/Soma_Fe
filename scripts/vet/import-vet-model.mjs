@@ -19,7 +19,7 @@
 // đòi đăng nhập, và tải hộ bằng tài khoản người khác là chuyện không nên làm.
 
 import { execFileSync } from "node:child_process";
-import { copyFileSync, existsSync, mkdirSync, statSync } from "node:fs";
+import { existsSync, mkdirSync, statSync } from "node:fs";
 import path from "node:path";
 
 const ALLOWED = [

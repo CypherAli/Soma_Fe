@@ -1,0 +1,117 @@
+{
+  "startedAt": "2026-10-14T13:27:48.661Z",
+  "checks": [
+    {
+      "name": "search API returns the real PDF tool",
+      "passed": true
+    },
+    {
+      "name": "search validation limit=NaN",
+      "passed": true
+    },
+    {
+      "name": "search validation limit=2.5",
+      "passed": true
+    },
+    {
+      "name": "search validation limit=0",
+      "passed": true
+    },
+    {
+      "name": "search validation limit=101",
+      "passed": true
+    },
+    {
+      "name": "search validation locale=invalid",
+      "passed": true
+    },
+    {
+      "name": "source-based AI receives current counts and links",
+      "passed": true
+    },
+    {
+      "name": "invalid AI citations fall back to actual sources",
+      "passed": true
+    },
+    {
+      "name": "provider failure leaves source lookup usable",
+      "passed": true
+    },
+    {
+      "name": "unsupported tasks refuse before any AI call",
+      "passed": true
+    },
+    {
+      "name": "oversized questions reject before inference",
+      "passed": true
+    },
+    {
+      "name": "pathology fallback uses interface language and identifies Vietnamese source excerpts",
+      "passed": true
+    },
+    {
+      "name": "pathology out-of-range citations fall back to the current article",
+      "passed": true
+    },
+    {
+      "name": "all public feature destinations are routable",
+      "passed": true
+    },
+    {
+      "name": "anonymous API boundaries",
+      "passed": true
+    },
+    {
+      "name": "Vision validates malformed JSON before provider calls",
+      "passed": true
+    },
+    {
+      "name": "Vision rejects cross-origin requests",
+      "passed": true
+    },
+    {
+      "name": "Vision rejects oversized cropped images",
+      "passed": true
+    },
+    {
+      "name": "Vision accepts only real model labels and finite scores",
+      "passed": true
+    },
+    {
+      "name": "Vision empty inference offers controlled no-match",
+      "passed": true
+    },
+    {
+      "name": "Vision provider outage is handled without a page crash",
+      "passed": true
+    },
+    {
+      "name": "Vision scan frequency cap returns retry-after",
+      "passed": true
+    },
+    {
+      "name": "newsletter saves and deduplicates actual concurrent registrations",
+      "passed": true
+    },
+    {
+      "name": "newsletter storage failure returns 503 instead of false success",
+      "passed": true
+    },
+    {
+      "name": "newsletter cross-origin registration is rejected",
+      "passed": true
+    },
+    {
+      "name": "newsletter rate cap returns retry-after",
+      "passed": true
+    }
+  ],
+  "boundaryOutput": "Passed 17 API boundary cases against http://127.0.0.1:57178.\n",
+  "finishedAt": "2026-10-14T13:28:02.974Z",
+  "failed": 0,
+  "productionStartup": [
+    "▲ Next.js 16.2.10",
+    "- Local:         http://127.0.0.1:57178",
+    "✓ Ready in 0ms"
+  ]
+}

@@ -1,0 +1,11 @@
+node_modules
+.next
+.next-dev
+.git
+*.log
+.env.local
+data/newsletter.jsonl
+docs/audits/.newsletter-qa-*.jsonl
+docs/research
+docs/reference-assets
+.claude

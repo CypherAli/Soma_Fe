@@ -30,6 +30,7 @@ Kho skill của dự án nằm ở **`.claude/skills/`**. Mỗi thư mục có m
 | `taste-skill` | `design-taste-frontend` | Làm trang/landing mới, tránh giao diện nhìn như máy sinh |
 | `soft-skill` | `high-end-visual-design` | Cần "đẹp, cao cấp, sang" — spacing, shadow, card, chuyển động |
 | `redesign-skill` | `redesign-existing-projects` | Nâng cấp giao diện có sẵn mà không phá chức năng |
+| `eli5` | `eli5` | Người dùng yêu cầu giải thích dễ hiểu, bỏ thuật ngữ hoặc giải thích vai trò thành phần dự án |
 
 > Không có skill Web3/blockchain — dự án ArtCurve đã bỏ, đừng mang khái niệm đó vào đây.
 > Cũng KHÔNG dùng GSAP, Framer Motion, shadcn/ui: không có trong `package.json`.
