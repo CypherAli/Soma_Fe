@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Bài bộ phận "Bàng quang và tuyến tiền liệt — học theo lớp" học theo lớp — nhóm lấy từ bladder-prostate.ts (đã kiểm), chỉ thêm lớp.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const partBladderScene: AtlasSceneDef = {
+export const partBladderScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/part-bladder.ts#partBladderScene", {
   "slug": "bo-phan-bang-quang",
   "title": {
     "vi": "Bàng quang và tuyến tiền liệt — học theo lớp",
@@ -210,4 +212,4 @@ export const partBladderScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

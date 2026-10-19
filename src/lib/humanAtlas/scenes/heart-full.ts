@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Tim: buồng, van và mạch vành" — ghép nhóm đã duyệt của scene tim mẫu
  * và scene động mạch vành.
@@ -7,7 +9,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const heartFullScene: AtlasSceneDef = {
+export const heartFullScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/heart-full.ts#heartFullScene", {
   "slug": "tim-day-du",
   "title": {
     "vi": "Tim: buồng, van và mạch vành",
@@ -492,4 +494,4 @@ export const heartFullScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

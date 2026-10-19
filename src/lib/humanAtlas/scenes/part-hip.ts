@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Bài bộ phận "Hông" học theo lớp, dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const partHipScene: AtlasSceneDef = {
+export const partHipScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/part-hip.ts#partHipScene", {
   "slug": "bo-phan-hong",
   "title": {
     "vi": "Hông — học theo lớp",
@@ -262,4 +264,4 @@ export const partHipScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

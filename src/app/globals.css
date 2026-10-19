@@ -191,3 +191,8 @@ body {
 @keyframes soma-thought-pop{0%,100%{opacity:.25;transform:translateY(3px) scale(.65)}48%{opacity:1;transform:translateY(-2px) scale(1)}}
 @keyframes soma-status-pulse{0%,100%{opacity:.45;box-shadow:0 0 0 2px rgba(113,231,221,.08)}50%{opacity:1;box-shadow:0 0 0 5px rgba(113,231,221,.14)}}
 @media(prefers-reduced-motion:reduce){.soma-bot.is-thinking .soma-bot-header-mascot img,.soma-bot-header-mascot>i,.soma-bot.is-thinking .soma-bot-panel>header span i{animation:none!important}}
+
+/* Shared charcoal workspace for Scan and Vision; scoped to the gesture page. */
+html[data-theme] .bd.vision-workspace{--surf:#202327;--surf-2:#292e33;--surf-3:#191c1f;--ink:#eef1f4;--body-fg:#d9e0e7;--muted:#a9b4bf;--muted-2:#a9b4bf;--line:#394149;color:var(--body-fg);background:#191c1f}
+.vision-workspace summary:focus-visible{outline:2px solid #25c9b7;outline-offset:5px;border-radius:4px}
+@media(max-width:720px){.vision-workspace>div>aside{width:160px}}

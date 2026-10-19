@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { SceneModule } from "./types";
 import type { RegionViewKey } from "./regions";
 
@@ -15,7 +17,7 @@ import type { RegionViewKey } from "./regions";
  * `.er` = bám tận bên phải; số ở giữa (`.o1r`, `.e2r`) là khi một cơ có nhiều
  * đầu bám rời nhau.
  */
-export const regionScenes13: Record<string, SceneModule> = {
+export const regionScenes13: Record<string, SceneModule> = bindContentSource("data:src/lib/scenes/regions13.ts#regionScenes13", {
   "moc-xuong-chi-tren": {
     slug: "moc-xuong-chi-tren",
     title: {
@@ -103,7 +105,7 @@ export const regionScenes13: Record<string, SceneModule> = {
         note: { vi: "Ba xương chậu, ngồi, mu hợp thành một khối duy nhất và mang tới hơn ba mươi điểm bám cơ — nhiều nhất trong các xương. Gai chậu trước trên, mào chậu, ụ ngồi và củ mu đều SỜ ĐƯỢC qua da, và bốn mốc ấy đủ để dựng lại toàn bộ hệ trục của khung chậu khi khám dáng đi.", en: "Ilium, ischium and pubis fuse into one bone carrying over thirty muscle attachments — more than any other bone. The anterior superior iliac spine, iliac crest, ischial tuberosity and pubic tubercle are all PALPABLE, and those four landmarks are enough to reconstruct the whole pelvic frame of reference when assessing gait.", zh: "髂骨、坐骨、耻骨融合为一，承载三十余处肌肉附着——多于其他任何骨。髂前上棘、髂嵴、坐骨结节与耻骨结节均可经皮触及，此四标志足以在步态评估中重建整个骨盆参考系。" } },
     ],
   },
-};
+});
 
 export const regionViewerConfig13: Record<string, { cats: RegionViewKey[]; faded?: RegionViewKey[] }> = {
   // Mảng điểm bám được pickCat xếp vào lớp "Cơ" (tên chúng là tên cơ), xương ở

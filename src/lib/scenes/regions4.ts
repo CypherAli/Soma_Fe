@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { SceneModule } from "./types";
 import type { RegionViewKey } from "./regions";
 
@@ -13,7 +15,7 @@ import type { RegionViewKey } from "./regions";
  * Mọi `meshName` lấy từ `npm run structures <file.glb>`, kiểm lại bằng
  * `npm run verify:scenes`.
  */
-export const regionScenes4: Record<string, SceneModule> = {
+export const regionScenes4: Record<string, SceneModule> = bindContentSource("data:src/lib/scenes/regions4.ts#regionScenes4", {
   "tuyen-nuoc-bot": {
     slug: "tuyen-nuoc-bot",
     title: { vi: "Tuyến nước bọt và vùng mang tai", en: "Salivary Glands & Parotid Region", zh: "唾液腺与腮腺区" },
@@ -237,7 +239,7 @@ export const regionScenes4: Record<string, SceneModule> = {
         note: { vi: "Mắt cá ngoài xuống THẤP HƠN mắt cá trong khoảng 1 cm và nằm ra sau hơn, tạo thành thành ngoài của gọng kìm và cản trở bàn chân lật ra ngoài. Xương mác gần như không chịu trọng lực — chỉ khoảng một phần mười — nên có thể lấy một đoạn thân xương mác làm mảnh ghép xương ở nơi khác mà không ảnh hưởng đi lại, miễn là giữ nguyên đoạn mắt cá.", en: "The lateral malleolus descends about 1 cm LOWER than the medial and lies more posteriorly, forming the lateral wall of the mortise and resisting eversion. The fibula bears almost no weight — about a tenth — so a length of its shaft can be harvested as a bone graft without affecting walking, provided the malleolar segment is preserved.", zh: "外踝较内踝低约1厘米且位置偏后，构成榫眼外侧壁并阻止外翻。腓骨几乎不承重——约十分之一——故可取其骨干作骨移植而不影响行走，前提是保留踝部节段。" } },
     ],
   },
-};
+});
 
 export const regionViewerConfig4: Record<string, { cats: RegionViewKey[]; faded?: RegionViewKey[] }> = {
   "tuyen-nuoc-bot": { cats: ["skin", "muscle", "organ", "artery", "vein", "nerve", "bone"], faded: ["bone"] },

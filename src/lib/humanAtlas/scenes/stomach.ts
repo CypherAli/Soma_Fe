@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Dạ dày và tá tràng" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const stomachScene: AtlasSceneDef = {
+export const stomachScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/stomach.ts#stomachScene", {
   "slug": "da-day-ta-trang",
   "title": {
     "vi": "Dạ dày và tá tràng",
@@ -150,4 +152,4 @@ export const stomachScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

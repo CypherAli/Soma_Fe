@@ -1,5 +1,9 @@
 "use client";
 
+
+
+import { useContent } from "@/components/content/ContentProvider";
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useMemo, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import HomeNav from "@/components/home/HomeNav";
@@ -34,6 +38,11 @@ export default function VetSpeciesView({
   speciesKey: VetSpeciesKey;
   facts: VetFact[];
 }) {
+  const cmsContent = useContent();
+  const VET_SYSTEM_LABEL = cmsContent.resolve(cmsSourceVET_SYSTEM_LABEL());
+  const VET_LAYER_LABEL = cmsContent.resolve(cmsSourceVET_LAYER_LABEL());
+  const VET_REGION_LABEL = cmsContent.resolve(cmsSourceVET_REGION_LABEL());
+
   const t = vetCopy(locale);
   const info = speciesInfo(speciesKey);
   const [system, setSystem] = useState<VetSystemKey | "all">("all");
@@ -46,14 +55,15 @@ export default function VetSpeciesView({
   const systems = useMemo(() => {
     const keys = [...new Set(facts.map((f) => f.system))];
     return keys.sort((a, b) => pick(VET_SYSTEM_LABEL[a], locale).localeCompare(pick(VET_SYSTEM_LABEL[b], locale)));
-  }, [facts, locale]);
+  }, [VET_SYSTEM_LABEL, facts, locale]);
 
   const shown = system === "all" ? facts : facts.filter((f) => f.system === system);
 
-  return (
+  return <ContentSurface scope="src/components/vet/VetSpeciesView.tsx">{(
     <div className="bd animal-home">
       <IconSprite />
       <HomeNav section="vet" />
+      <main>
 
       <header className="vet-species-head">
         <div>
@@ -181,7 +191,12 @@ export default function VetSpeciesView({
         })}
       </section>
 
+      </main>
       <HomeFooter locale={locale} />
     </div>
-  );
+  )}</ContentSurface>;
 }
+
+function cmsSourceVET_SYSTEM_LABEL() { return VET_SYSTEM_LABEL; }
+function cmsSourceVET_LAYER_LABEL() { return VET_LAYER_LABEL; }
+function cmsSourceVET_REGION_LABEL() { return VET_REGION_LABEL; }

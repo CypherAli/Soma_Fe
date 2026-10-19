@@ -1,0 +1,54 @@
+.quiz-confirm-dialog {
+  width: min(440px, calc(100vw - 32px));
+  margin: auto;
+  padding: 28px;
+  border: 1px solid var(--line-e, #e0d9c7);
+  border-radius: 8px;
+  background: var(--surf-e, #fff);
+  color: var(--ink-e, #16130e);
+  font:
+    14px/1.65 var(--font-sans),
+    system-ui,
+    sans-serif;
+}
+.quiz-confirm-dialog::backdrop {
+  background: #16130e80;
+}
+.quiz-confirm-dialog h2 {
+  margin: 0 0 12px;
+  font:
+    600 21px/1.4 var(--font-sans),
+    sans-serif;
+  color: inherit;
+}
+.quiz-confirm-dialog p {
+  color: var(--sub-e, #5d584e);
+  font-size: 13px;
+}
+.quiz-confirm-dialog > div {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 24px;
+}
+.quiz-confirm-dialog button {
+  padding: 10px 16px;
+  border: 1px solid var(--line-e, #e0d9c7);
+  border-radius: 5px;
+  font:
+    600 12px/1.5 var(--font-sans),
+    sans-serif;
+  cursor: pointer;
+}
+.quiz-confirm-cancel {
+  background: var(--surf-e, #fff);
+  color: var(--ink-e, #16130e);
+}
+.quiz-confirm-accept {
+  background: var(--ink-e, #16130e);
+  color: var(--paper, #fbfaf7);
+}
+.quiz-confirm-dialog button:focus-visible {
+  outline: 2px solid var(--acc, #8e2b1d);
+  outline-offset: 3px;
+}

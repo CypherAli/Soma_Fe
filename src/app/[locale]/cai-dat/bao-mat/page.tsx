@@ -1,3 +1,5 @@
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { setRequestLocale } from "next-intl/server";
 import HomeNav from "@/components/home/HomeNav";
 import IconSprite from "@/components/home/IconSprite";
@@ -11,12 +13,12 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
   const { locale: rawLocale } = await params;
   const locale = rawLocale as Loc;
   setRequestLocale(locale);
-  return (
+  return <ContentSurface scope="src/app/[locale]/cai-dat/bao-mat/page.tsx">{(
     <div className="bd">
       <IconSprite />
       <HomeNav />
       <SettingsPage locale={locale} tab="security" />
       <HomeFooter locale={locale} />
     </div>
-  );
+  )}</ContentSurface>;
 }

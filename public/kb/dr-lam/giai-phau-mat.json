@@ -1,0 +1,754 @@
+{
+  "schemaVersion": 1,
+  "id": "giai-phau-mat",
+  "title": "Giải phẫu mắt",
+  "sourceFile": "Giải phẫu người 2025 - Test số hóa Dr. Lâm giải phẫu mắt.pdf",
+  "sourceNote": null,
+  "sourceHash": "3f07b6ebc662708bd2e06a28a2c577f54b7e2c3368dce61e29c107cc67d66e30",
+  "pages": 24,
+  "questions": [
+    {
+      "id": "giai-phau-mat-1",
+      "number": 1,
+      "stem": "Những mô tả sau đây về các tiếp nối trung ương của TK thị giác đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Võng mạc - thể gối bên - vùng vỏ thị giác ở thùy chẩm."
+        },
+        {
+          "id": "B",
+          "text": "Võng mạc - vùng trước mái - nhân đối giao cảm thần kinh III (Edinger’- Westphal) - hạch mi - cơ thắt con ngươi."
+        },
+        {
+          "id": "C",
+          "text": "Võng mạc - gò trên - tủy sống( hoặc cầu não)."
+        },
+        {
+          "id": "D",
+          "text": "Võng mạc - đồi thị - hồi sau trung tâm."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Võng mạc - thể gối bên - vùng vỏ thị giác ở thùy chẩm=>(dải gối\n-cựa).\nC.Võng mạc - gò trên - tủy sống( hoặc cầu não)=>(dải mái-cầu và\ndải mái-tuỷ).\nD.Võng mạc - đồi thị - hồi sau trung tâm=>Không có.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 1,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-mat-2",
+      "number": 2,
+      "stem": "Các mô tả sau về các cơ ngoài nhãn cầu đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Các cơ chéo đều bám tận vào phần ngoài của nửa sau củng mạc."
+        },
+        {
+          "id": "B",
+          "text": "Tất cả các cơ ngoài nhãn cầu đều có nguyên ủy từ vùng đỉnh ổ mắt."
+        },
+        {
+          "id": "C",
+          "text": "Bốn cơ thẳng vây quanh TK thị giác."
+        },
+        {
+          "id": "D",
+          "text": "Bảy cơ ngoài nhãn cầu được chi phối bởi ba TK sọ."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.Tất cả các cơ ngoài nhãn cầu đều có nguyên ủy từ vùng đỉnh ổ\nmắt=>cơ chéo dưới nguyên uỷ bám vào thành trong ổ mắt.\nD.Bảy cơ ngoài nhãn cầu được chi phối bởi ba TK sọ=>3,4,6.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/2dc4a6c43e60e581d638.webp",
+        "/kb/dr-lam/images/8b45bcf1d7d24a0e1eb3.webp"
+      ],
+      "sourcePage": 1,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-mat-3",
+      "number": 3,
+      "stem": "Các mô tả sau về mi mắt đều đúng , TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Vòm kết mạc ở mỗi mi là đường mà kết mạc mi lật lên kết mạc nhãn cầu."
+        },
+        {
+          "id": "B",
+          "text": "Sụn mi nằm sau các lớp: da, mô dưới da và cơ."
+        },
+        {
+          "id": "C",
+          "text": "Trên mỗi bờ mi, gần góc mắt trong, có một cục lệ."
+        },
+        {
+          "id": "D",
+          "text": "Trên bờ của mỗi mi có hai viền mi."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Trên mỗi bờ mi, gần góc mắt trong, có một cục lệ=>có một nhú\nlệ, cục lệ thì nằm trong hồ lệ.\nD.Trên bờ của mỗi mi có hai viền mi=>viền mí trước, tròn, có lông mí\nvà các lỗ của tuyến mi viền mí sau áp vào nhãn cầu.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/d3e87ca346b7a80d2624.webp"
+      ],
+      "sourcePage": 2,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-mat-4",
+      "number": 4,
+      "stem": "Mô tả nào sau về các thành ổ mũi đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ở vách mũi, xương lá mía nằm trước mảnh thẳng xương sàng."
+        },
+        {
+          "id": "B",
+          "text": "Sàn mũi phần lớn được tạo nên bởi mỏm huyệt răng xương hàm trên."
+        },
+        {
+          "id": "C",
+          "text": "Các xoăn mũi (xương xoăn ) trên và giữa ở thành ngoài mũi đều là những phần của mê đạo sàng nhô vào ổ mũi."
+        },
+        {
+          "id": "D",
+          "text": "Thành trên ổ mũi không có sự tham gia của xương mũi."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Ở vách mũi, xương lá mía nằm trước mảnh thẳng xương\nsàng=>dưới.\nB.Sàn mũi phần lớn được tạo nên bởi mỏm huyệt răng xương hàm\ntrên=>khẩu cái.\nD.Thành trên ổ mũi không có sự tham gia của xương mũi=>xương\nmũi, xương trán, mảnh sàng, thân xg bướm.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/e548ae4899bdd3e55129.webp"
+      ],
+      "sourcePage": 4,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-mat-5",
+      "number": 5,
+      "stem": "Các mô tả sau về ổ mũi đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Mỗi ngăn ổ mũi mở thông bằng hai lỗ vào mặt và tỵ hầu."
+        },
+        {
+          "id": "B",
+          "text": "Phần ổ mũi ở ngay sau lỗ mũi trước được phủ bằng da."
+        },
+        {
+          "id": "C",
+          "text": "Trừ tiền đình mũi ( có da phủ), toàn bộ phần còn lại của ổ mũi được phủ bằng niêm mạc khứu giác."
+        },
+        {
+          "id": "D",
+          "text": "Niêm mạc mũi liên tiếp với niêm mạc các xoang cạnh mũi."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "B.Phần ổ mũi ở ngay sau lỗ mũi trước được phủ bằng da=>lỗ mũi\ntrước và sau.\nC.Trừ tiền đình mũi ( có da phủ), toàn bộ phần còn lại của ổ mũi\nđược phủ bằng niêm mạc khứu giác=>Dưới xoăn mũi trên phủ bằng\nniêm mạc hô hấp, trên xoăn mũi trên bằng niêm mạc khứu giác;tiền\nđình mũi.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/16caa9a8cd35b64a80cd.webp"
+      ],
+      "sourcePage": 5,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-mat-6",
+      "number": 6,
+      "stem": "Các mô tả sau về ngách mũi giữa đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó chứa lỗ thông của xoang hàm trên."
+        },
+        {
+          "id": "B",
+          "text": "Nó có đường thông vào xoang trán và các xoang sàng trước."
+        },
+        {
+          "id": "C",
+          "text": "Đây là chỗ đổ vào của ống lệ mũi."
+        },
+        {
+          "id": "D",
+          "text": "Nó được ngăn cách với ngách mũi dưới bởi xoăn mũi dưới."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Đây là chỗ đổ vào của ống lệ mũi=>đổ vào ngách mũi dưới.\nxoang trán, xoang sàng giữa-trước, xoang hàm trên.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/a86434a9df9357bd0575.webp"
+      ],
+      "sourcePage": 6,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-mat-7",
+      "number": 7,
+      "stem": "Mô tả sau đây về hầu đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Hạnh nhân hầu có kích thước lớn dần theo tuổi."
+        },
+        {
+          "id": "B",
+          "text": "Ở thành bên của tỵ hầu và khẩu hầu cộng lại có 4 hạnh nhân."
+        },
+        {
+          "id": "C",
+          "text": "Hạnh nhân lưỡi nằm ở mặt dưới lưỡi."
+        },
+        {
+          "id": "D",
+          "text": "Cung khẩu cái - hầu là giới hạn của eo họng."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Hạnh nhân hầu có kích thước lớn dần theo tuổi=>to ở trẻ dưới 7\ntuổi.\nB.Ở thành bên của tỵ hầu và khẩu hầu cộng lại có 4 hạnh nhân=>2\nhạch nhân vòi + 2 hạch nhân khẩu cái.\nC.Hạnh nhân lưỡi nằm ở mặt dưới lưỡi=>ở phần sau rãnh tận mặt\nlưng lưỡi.\nD.Cung khẩu cái - hầu là giới hạn của eo họng=>giới hạn trên là lưỡi\ngà, 2 bên là 2 cung khẩu cái lưỡi, dưới là mặt lưng lưỡi",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/f9e8e31193f47682696a.webp"
+      ],
+      "sourcePage": 7,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-mat-8",
+      "number": 8,
+      "stem": "Các mô tả sau về hầu đều đúng ,TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Lỗ thông từ hầu vào thanh quản nằm ở phần trên của thành trước thanh hầu."
+        },
+        {
+          "id": "B",
+          "text": "Lỗ thông từ hầu vào miệng được giới hạn ở hai bên bởi cung khẩu cái hầu."
+        },
+        {
+          "id": "C",
+          "text": "Cung trước của đốt đội nằm ở phần sau và dưới của vòm hầu."
+        },
+        {
+          "id": "D",
+          "text": "Đốt sống cổ 3 nằm ở ranh giới giữa các thành sau của khẩu hầu và thanh hầu."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.Lỗ thông từ hầu vào miệng được giới hạn ở hai bên bởi cung khẩu\ncái hầu=>cung khẩu cái lưỡi.\nD.Đốt sống cổ 3 nằm ở ranh giới giữa các thành sau của khẩu hầu và\nthanh hầu=>khẩu hầu (C2,3), thanh hầu (C3,4,5,).",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 8,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-mat-9",
+      "number": 9,
+      "stem": "Mô tả sau đây về hầu đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó là một khoang đi từ nền sọ tới ngang bờ trên sụn nhẫn."
+        },
+        {
+          "id": "B",
+          "text": "Hạnh nhân lưỡi là một trong ba hạnh nhân của khẩu hầu."
+        },
+        {
+          "id": "C",
+          "text": "Hạnh nhân khẩu cái nằm trước eo họng ( trước khung khẩu cái lưỡi)."
+        },
+        {
+          "id": "D",
+          "text": "Hạnh nhân hầu nằm trên thành sau của khẩu hầu."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Nó là một khoang đi từ nền sọ tới ngang bờ trên sụn nhẫn=>từ\nnền sọ đến đầu trên thực quản, ngang bờ dưới sụn nhẫn, ĐS C6.\nB.Hạnh nhân lưỡi là một trong ba hạnh nhân của khẩu hầu=>lưỡi + 2\nkhẩu cái.\nC.Hạnh nhân khẩu cái nằm trước eo họng ( trước khung khẩu cái\nlưỡi)=>nằm ở thành bên eo họng, sau cung khẩu cái lưỡi, trước\ncung khẩu cái hầu.\nD.Hạnh nhân hầu nằm trên thành sau của khẩu hầu=>Ở thành trên\nvà sau tỵ hầu (vòm hầu).",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 9,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-mat-10",
+      "number": 10,
+      "stem": "Mô tả sau đây về cơ nội tại của thanh quản đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ nhẫn giáp làm căng dây thanh quản và làm hẹp khe thanh môn."
+        },
+        {
+          "id": "B",
+          "text": "Cơ nhẫn phễu sau làm cho hai nếp thanh âm lại gần nhau."
+        },
+        {
+          "id": "C",
+          "text": "Cơ giáp phễu làm căng dây thanh âm."
+        },
+        {
+          "id": "D",
+          "text": "Các cơ phễu ( ngang và chéo) có tác dụng ngược với cơ nhẫn phễu bên."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.Cơ nhẫn giáp làm căng dây thanh quản và làm hẹp khe thanh\nmôn.\nB.Cơ nhẫn phễu sau làm cho hai nếp thanh âm lại gần nhau=>ra xa.\nC.Cơ giáp phễu làm căng dây thanh âm=>chùng.\nD.Các cơ phễu ( ngang và chéo) có tác dụng ngược với cơ nhẫn\nphễu bên=>đều khép nếp thanh âm;ngược với Cơ nhẫn- phễu sau.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 9,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-mat-11",
+      "number": 11,
+      "stem": "Trong các mô tả sau về áo xơ nhãn cầu,mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó gồm củng mạc ở trước và giác mạc ở sau."
+        },
+        {
+          "id": "B",
+          "text": "Củng mạc có độ lồi lớn hơn độ lồi của giác mạc."
+        },
+        {
+          "id": "C",
+          "text": "Độ dày của giác mạc ở ngoại vi lớn hơn độ dày ở trung tâm."
+        },
+        {
+          "id": "D",
+          "text": "Giác mạc có màu đen nên được gọi là lòng đen."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Nó gồm củng mạc ở trước và giác mạc ở sau=>giác mạc ở trước,\ncùng mạc ở sau.\nB.Củng mạc có độ lồi lớn hơn độ lồi của giác mạc=>giác mạc\ntrong suốt, lồi hơn cùng mạc.\nC.Độ dày của giác mạc ở ngoại vi lớn hơn độ dày ở trung\ntâm=>1mm ngoại vi, 0,5-0,6mm trung tâm.\nD.Giác mạc có màu đen nên được gọi là lòng đen=>trong suốt.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/2a0e89af65df070b9b79.webp"
+      ],
+      "sourcePage": 10,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-mat-12",
+      "number": 12,
+      "stem": "Các mô tả sau về củng mạc đều đúng , TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Toàn bộ mặt ngoài củng mạc được phủ bằng kết mạc."
+        },
+        {
+          "id": "B",
+          "text": "Mặt trong củng mạc được gắn với mạch mạc bằng lá trên mạch mạc."
+        },
+        {
+          "id": "C",
+          "text": "Ở sau, củng mạc liên tiếp với bao sợi của TK thị giác."
+        },
+        {
+          "id": "D",
+          "text": "TK thị giác, các mạch và TK mi và các TM xoáy xuyên qua củng mạc."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.Toàn bộ mặt ngoài củng mạc được phủ bằng kết mạc=>chỉ phần\ntrước cùng mạc được phủ bằng kết mạc(hay lá tối củng mạc).",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 11,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-mat-13",
+      "number": 13,
+      "stem": "Các mô tả sau về áo xơ nhãn cầu đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Áo xơ gồm hai phần liên tiếp với nhau tại chỗ tiếp nối củng mạc’- giác mạc."
+        },
+        {
+          "id": "B",
+          "text": "Xoang TM củng mạc nằm ở chỗ tiếp nối giác mạc’-’ củng mạc’."
+        },
+        {
+          "id": "C",
+          "text": "Củng mạc khỏe nhất tại nơi có TK thị giác đi qua."
+        },
+        {
+          "id": "D",
+          "text": "Củng mạc là một lớp mô liên kết có vai trò bảo vệ và định hình cho nhãn cầu."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Áo xơ gồm hai phần liên tiếp với nhau tại chỗ tiếp nối củng mạc’-\ngiác mạc=>(viền giác mạc).\nB.Xoang TM củng mạc nằm ở chỗ tiếp nối giác mạc’-’ củng\nmạc’=>A90.\nC.Củng mạc khỏe nhất tại nơi có TK thị giác đi qua=>gọi là lá sàng\ncủng mạc, là nơi yếu nhất củng mạc.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 12,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-mat-14",
+      "number": 14,
+      "stem": "Trong các mô tả sau đây về áo mạch nhãn cầu, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Gồm ba phần từ trước ra sau là: giác mạc, thể mi, màng mạch."
+        },
+        {
+          "id": "B",
+          "text": "Màng mạch phủ hết mặt trong củng mạc."
+        },
+        {
+          "id": "C",
+          "text": "Màng mạch liên tiếp với mô màng nhện - màng mềm tại đĩa thần kinh thị."
+        },
+        {
+          "id": "D",
+          "text": "Từ ngoài vào,các lớp của mạch mạc gồm: lá mao mạch, lá mạch, lá đáy."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Gồm ba phần từ trước ra sau là: giác mạc, thể mi, màng\nmạch=>mống mắt, thể mi và màng mạch.\nB.Màng mạch phủ hết mặt trong củng mạc=>màng mạch chỉ lót\nhầu hết mặt trong cùng mạc, trừ phần trước.\nD.Từ ngoài vào,các lớp của mạch mạc gồm: lá mao mạch, lá mạch,\nlá đáy=>lá mạch, lá mao mạch, lá đáy.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/5bcf4400cbd90005bf34.webp"
+      ],
+      "sourcePage": 12,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-mat-15",
+      "number": 15,
+      "stem": "Các mô tả sau về thể mi đều đúng,TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thể mi là phần dày lên của áo mạch."
+        },
+        {
+          "id": "B",
+          "text": "Các sợi cơ trơn trong thể mi tạo nên cơ thể mi."
+        },
+        {
+          "id": "C",
+          "text": "Mặt trong thể mi có hai phần: phần trước nhẵn, phần sau gấp nếp."
+        },
+        {
+          "id": "D",
+          "text": "70’-80 gờ lồi ở mặt trong thể mi ( các mỏm mi) tạo nên vành mi."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Mặt trong thể mi có hai phần: phần trước nhẵn, phần sau gấp\nnếp=>phần phía sau nhẵn là vòng mi, phần trước gấp nếp là vành\nmi.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/ff4587396f59991416bd.webp"
+      ],
+      "sourcePage": 14,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-mat-16",
+      "number": 16,
+      "stem": "Trong các mô tả sau đây về thể mi, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ thể mi co làm căng dây chằng treo thấu kính."
+        },
+        {
+          "id": "B",
+          "text": "Các sợi cơ của thể mi đều bám ở trước vào cựa củng mạc."
+        },
+        {
+          "id": "C",
+          "text": "Thủy dịch từ các mỏm mi tiết ra đổ vào phòng (buồng) trước của nhãn cầu."
+        },
+        {
+          "id": "D",
+          "text": "Bờ trước của thể mi ở ngang mức miệng thắt."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Cơ thể mi co làm căng dây chằng treo thấu kính=>làm chùng dây\ntreo thấu kính, tăng độ lồi thấu kính.\nC.Thủy dịch từ các mỏm mi tiết ra đổ vào phòng (buồng) trước của\nnhãn cầu=>đổ vào hậu phòng.\nD.Bờ trước của thể mi ở ngang mức miệng thắt=>bờ sau thể mi, thể\nmi đi từ miệng thắt đến nơi tiếp nối giác mạc, củng mạc.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 15,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-mat-17",
+      "number": 17,
+      "stem": "Các mô tả sau về mống mắt đều đúng ,TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Góc mống mắt giác mạc nằm giữa bờ ngoại vi của mống mắt và thành trong của xoang TM củng mạc."
+        },
+        {
+          "id": "B",
+          "text": "Các sợi cơ vòng của mống mắt do TK giao cảm chi phối."
+        },
+        {
+          "id": "C",
+          "text": "Bờ tự do của mống mắt tiếp xúc với mặt trước thấu kính."
+        },
+        {
+          "id": "D",
+          "text": "Bờ tự do ( bờ trung tâm) của mống mắt bao quanh đồng tử."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.Các sợi cơ vòng của mống mắt do TK giao cảm chi phối=>do TK\nđối giao cảm (1 phần của dây 3) chi phối.\nMống mắt có 2 cơ: Cơ vòng ( thắt co đồng tử) do PGC ; Cơ nan hoa\n( Giãn đồng tử).\nNhớ HC cường Cholinergic: 3 co: co đồng tử, co thắt PQ, co tống.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/aca3939147648bb7a2fc.webp"
+      ],
+      "sourcePage": 16,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-mat-18",
+      "number": 18,
+      "stem": "Các mô tả sau về võng mạc đều đúng ,TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Phần phủ thể mi và mống mắt của võng mạc không có tế bào cảm thụ ánh sáng."
+        },
+        {
+          "id": "B",
+          "text": "Vết võng mạc nằm ở phía trong đĩa TK thị."
+        },
+        {
+          "id": "C",
+          "text": "Có thể nhìn thấy các mạch máu của võng mạc khi soi đáy mắt."
+        },
+        {
+          "id": "D",
+          "text": "Đĩa TK thị là nơi tập trung các sợi trục của lớp tế bào hạch của võng mạc."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Phần phủ thể mi và mống mắt của võng mạc không có tế bào\ncảm thụ ánh sáng=>(võng mạc tịt).\nÁo thần kinh gồm: Phần có TK ( Võng mạc thị giác ) và phần không\ncó TK( VM thể mi; VM mống mắt).\nB.Vết võng mạc nằm ở phía trong đĩa TK thị=>ở phía ngoài đĩa thần\nkinh thị, chỉ có tế bào nón.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/c85ebe830656f99117bf.webp"
+      ],
+      "sourcePage": 17,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-mat-19",
+      "number": 19,
+      "stem": "Các mô tả sau về thấu kính đều đúng ,TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Các sợi nối thấu kính với các mỏm mi tạo thành vòng mi."
+        },
+        {
+          "id": "B",
+          "text": "Các sợi tạo nên chất thấu kính thực chất là các tế bào bị ép dẹt."
+        },
+        {
+          "id": "C",
+          "text": "Thượng mô thấu kính nằm ở mặt sau khối chất thấu kính."
+        },
+        {
+          "id": "D",
+          "text": "Mặt sau thấu kính tựa lên hồ kính của thể kính."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Thượng mô thấu kính nằm ở mặt sau khối chất thấu kính=>nằm ở\nMặt trước thấu kính,sợi thấu kính là những TB thuôn dẹt, áp sát\nnhau, có nguồn gốc từ lớp thượng mô thấu kính ở mặt trước khối\nchất thấu kính,nằm ở Mặt trước thấu kính.\nD.Mặt sau thấu kính tựa lên hồ kính cuả thể kính, mặt trước tiếp xúc\nvới bờ tự do của thấu kính.\nChất thấu kính gồm:\n- Vỏ thấu kính\n- Nhân thấu kinh\nCác sợi thấu kinh: TB thuôn dẹt: Nằm sát nhau --> Các lớp của củ\nhành\ncó nguồn gốc từ Thượng mô thấu kính --> Nằm ở Mặt trước Khối\nchất thấu kinh\nDây chằng treo Thấu kính = Vùng mi : Tập hợp các sợi vùng: Gắn\nMỏm mi với Thấu kính.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/6a991da213e91ced126f.webp"
+      ],
+      "sourcePage": 18,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-mat-20",
+      "number": 20,
+      "stem": "Trong các mô tả sau về thấu kính, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Vỏ thấu kính là bao thấu kính."
+        },
+        {
+          "id": "B",
+          "text": "Độ lồi của thấu kính ở mặt trước nhỏ hơn ở mặt sau."
+        },
+        {
+          "id": "C",
+          "text": "Thấu kính người trưởng thành được cấp máu bởi động mạch kính."
+        },
+        {
+          "id": "D",
+          "text": "Thấu kính nằm giữa phòng sau và phòng sau cùng của nhãn cầu."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Vỏ thấu kính là bao thấu kính=>chất thấu kính bao quanh bằng\nbao thấu kính, chất thấu kính gồm vỏ và nhân;Bao thấu kính bên\nngoài; Vỏ thấu kính. Nhân thấu kính.\nB.Độ lồi của thấu kính ở mặt trước nhỏ hơn ở mặt sau=>độ lồi mặt\ntrước lớn hơn mặt sau.\nC.Thấu kính người trưởng thành được cấp máu bởi động mạch\nkính=>Thấu kính người trưởng thành vô mạch,Thấu kính người\ntrưởng thành Vô mạch, không màu, trong suốt nhưng Vẫn mềm.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/3d3340fdd0f4994bc47a.webp"
+      ],
+      "sourcePage": 19,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-mat-21",
+      "number": 21,
+      "stem": "Trong các mô tả về TK thị giác, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đoạn đi qua ống thị giác, TK II đi cùng các TM mắt."
+        },
+        {
+          "id": "B",
+          "text": "Các sợi của TK thị giác xuyên qua củng mạc ở cực sau của nhãn cầu."
+        },
+        {
+          "id": "C",
+          "text": "Đoạn ổ mắt của TK thị giác đi theo một đường thẳng (theo đườngngắn nhất)."
+        },
+        {
+          "id": "D",
+          "text": "Đoạn ổ mắt của TK thị giác có chiều dài lớn nhất."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Đoạn đi qua ống thị giác, TK II đi cùng các TM mắt=>TK 2 đi cùng\nĐM mắt.\nB.Các sợi của TK thị giác xuyên qua củng mạc ở cực sau của nhãn\ncầu=>ở GẦN cực sau nhãn cầu, trong cực sau 3mm.\nC.Đoạn ổ mắt của TK thị giác đi theo một đường thẳng (theo\nđườngngắn nhất)=>đoạn ổ mắt có đường đi hơi ngoằn ngoèo dài\n25mm.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 21,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-mat-22",
+      "number": 22,
+      "stem": "Các mô tả sau về TK thị giác đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "ĐM não trước đi trên đoạn trong sọ của TK thị giác."
+        },
+        {
+          "id": "B",
+          "text": "Bao của TK thị giác gồm ba lớp liên tiếp với ba lớp của màng não."
+        },
+        {
+          "id": "C",
+          "text": "Trong ống thị giác, TK thị giác đi cùng TK mũi mi."
+        },
+        {
+          "id": "D",
+          "text": "Trong ổ mắt, TK thị giác bị vây quanh bởi bốn cơ thẳng."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.ĐM não trước đi trên đoạn trong sọ của TK thị giác=>dải khứu, hồi\nthẳng và ĐM não trước ở trên TK, ĐM cảnh trong ở ngoài TK.\nC.Trong ống thị giác, TK thị giác đi cùng TK mũi mi=>Ở trước ống thị\ngiác, TK mũi mi ra trước,vào trong, bắt chéo trên TK thị.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 22,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-mat-23",
+      "number": 23,
+      "stem": "Trong các mô tả sau về giao thoa thị giác, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Toàn bộ các sợi của TK thị giác bắt chéo nhau tại giao thoa thị giác."
+        },
+        {
+          "id": "B",
+          "text": "Toàn bộ các sợi trục từ tế bào hạch võng mạc có mặt ở các dải thị giác."
+        },
+        {
+          "id": "C",
+          "text": "Giao thoa thị giác dễ bị tổn thương do một khối u tuyến yên."
+        },
+        {
+          "id": "D",
+          "text": "Sau giao thoa thị giác, tất cả các sợi của dải thị giác tận cùng ở thể gối ngoài (bên)."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Toàn bộ các sợi của TK thị giác bắt chéo nhau tại giao thoa thị\ngiác=>sợi võng mạc mũi bắt chéo, võng mạc thái dương không bắt\nchéo.\nB.Toàn bộ các sợi trục từ tế bào hạch võng mạc có mặt ở các dải\nthị giác=>Hầu hết.\nD.Sau giao thoa thị giác, tất cả các sợi của dải thị giác tận cùng ở\nthể gối ngoài (bên)=>ngoài ra còn tận cùng ở gò trên, vùng trước\nmái và một loạt các nhân nằm dọc theo dải thị giác.\nNửa Mũi của 2 võng mạc: bắt chéo nhau\nSợi từ Thái dương: không bắt chéo\nDải thị giác --> Nhân thể gối bên của Đồi thị, Gò trên, Vùng trước\nmái\ncác nhân nằm dọc theo Dải thị giác.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/dc27aeb2c9bee6ba3c98.webp",
+        "/kb/dr-lam/images/a2f8498901257706dd44.webp"
+      ],
+      "sourcePage": 22,
+      "gradable": true
+    }
+  ]
+}

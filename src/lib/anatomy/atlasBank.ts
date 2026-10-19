@@ -1,3 +1,7 @@
+
+import { bindContentSource } from "@/lib/content/source";
+
+import { contentFetch } from '@/lib/content/fetch';
 import type { QuizItem } from "./quiz";
 import { rng, shuffle } from "./random";
 
@@ -32,7 +36,7 @@ let cache: AtlasBank | null = null;
 
 export async function loadAtlasBank(): Promise<AtlasBank> {
   if (cache) return cache;
-  const res = await fetch("/atlas/index.json");
+  const res = await contentFetch("/atlas/index.json");
   if (!res.ok) throw new Error(`atlas bank ${res.status}`);
   const data = (await res.json()) as AtlasBank;
   // Chỉ giữ mục CÓ ảnh đã che và CÓ dấu hỏi — thiếu một trong hai thì câu hỏi
@@ -46,11 +50,11 @@ export function atlasQuestionCount(bank: AtlasBank): number {
   return bank.shots.length;
 }
 
-const PROMPT = {
+const PROMPT = bindContentSource("data:src/lib/anatomy/atlasBank.ts#PROMPT", {
   vi: "Cấu trúc được đánh dấu ❓ trên hình là gì?",
   en: "Which structure is marked ❓ on this figure?",
   zh: "图中标记 ❓ 的结构是什么？",
-} as const;
+} as const);
 
 export function atlasToQuizItems(
   bank: AtlasBank,

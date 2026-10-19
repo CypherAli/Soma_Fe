@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Vòng mạch tuỵ–tá tràng" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const pancreaticoduodenalScene: AtlasSceneDef = {
+export const pancreaticoduodenalScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/pancreaticoduodenal.ts#pancreaticoduodenalScene", {
   "slug": "he-mac",
   "title": {
     "vi": "Tuỵ, tá tràng và vòng mạch tuỵ–tá tràng",
@@ -159,4 +161,4 @@ export const pancreaticoduodenalScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

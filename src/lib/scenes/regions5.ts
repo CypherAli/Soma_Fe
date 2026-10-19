@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { SceneModule } from "./types";
 import type { RegionViewKey } from "./regions";
 
@@ -18,7 +20,7 @@ import type { RegionViewKey } from "./regions";
  * Mọi `meshName` lấy từ `node scripts/glb-nodes.mjs <file.glb>`, kiểm lại bằng
  * `npm run verify:scenes`; khung hình kiểm bằng `npm run verify:models`.
  */
-export const regionScenes5: Record<string, SceneModule> = {
+export const regionScenes5: Record<string, SceneModule> = bindContentSource("data:src/lib/scenes/regions5.ts#regionScenes5", {
   "khop-hang": {
     slug: "khop-hang",
     title: { vi: "Khớp háng", en: "The Hip Joint", zh: "髋关节" },
@@ -150,7 +152,7 @@ export const regionScenes5: Record<string, SceneModule> = {
         note: { vi: "Gân KHOẺ NHẤT cơ thể, chịu lực tới hơn mười lần trọng lượng cơ thể lúc chạy. Vùng cách chỗ bám 2–6 cm là VÙNG NGHÈO MẠCH — đúng chỗ gân hay viêm và hay đứt. Đứt gân gót cho dấu hiệu bóp bắp chân không thấy bàn chân gấp xuống, và người bệnh vẫn gấp bàn chân yếu được nhờ các cơ gấp khác nên dễ bị bỏ sót nếu chỉ hỏi “có nhấc mũi chân được không”.", en: "The STRONGEST tendon in the body, loaded to more than ten times body weight in running. The zone 2–6 cm above its insertion is HYPOVASCULAR — exactly where tendinopathy and rupture occur. Rupture gives a negative calf-squeeze test, and because other flexors still work the patient retains weak plantarflexion, so the injury is missed if the examiner only asks whether the foot can be pointed.", zh: "人体最强的肌腱，跑步时承受逾十倍体重的负荷。止点上方2–6厘米为乏血管区——正是肌腱病与断裂的好发部位。断裂时小腿挤压试验阴性，且因其他屈肌仍在，患者保留微弱跖屈，故若仅询问“能否绷脚尖”便会漏诊。" } },
     ],
   },
-};
+});
 
 export const regionViewerConfig5: Record<string, { cats: RegionViewKey[]; faded?: RegionViewKey[] }> = {
   // Khối cơ xoay ngoài che kín bao khớp — mở sẵn ở trạng thái mờ để thấy ổ khớp.

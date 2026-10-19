@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Mô liên kết đặc" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const denseConnectiveScene: AtlasSceneDef = {
+export const denseConnectiveScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/dense-connective.ts#denseConnectiveScene", {
   "slug": "mo-lien-ket",
   "title": {
     "vi": "Mô liên kết đặc: gân, dây chằng, màng, mạc giữ gân",
@@ -177,4 +179,4 @@ export const denseConnectiveScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

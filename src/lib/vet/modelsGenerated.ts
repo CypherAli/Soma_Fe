@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { VetModel } from "./types";
 
 /**
@@ -16,7 +18,7 @@ import type { VetModel } from "./types";
  * `scripts/vet/hotspot_probe.py` trên đúng tệp đã giảm lưới rồi mới chép vào
  * `handPickedVetModels`, vì giảm lưới có thể đổi hộp bao của mẫu vật.
  */
-export const generatedVetModels: VetModel[] = [
+export const generatedVetModels: VetModel[] = bindContentSource("data:src/lib/vet/modelsGenerated.ts#generatedVetModels", [
   {
     slug: "cat-ecorche",
     species: "cat",
@@ -377,4 +379,4 @@ export const generatedVetModels: VetModel[] = [
       { material: "cattle-paralumbar-fossa", factId: "cattle-paralumbar-fossa" },
     ],
   },
-];
+]);

@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Thực quản" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const oesophagusScene: AtlasSceneDef = {
+export const oesophagusScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/oesophagus.ts#oesophagusScene", {
   "slug": "thuc-quan",
   "title": {
     "vi": "Thực quản",
@@ -158,4 +160,4 @@ export const oesophagusScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

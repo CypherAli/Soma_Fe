@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { SceneModule } from "./types";
 import type { RegionViewKey } from "./regions";
 
@@ -10,7 +12,7 @@ import type { RegionViewKey } from "./regions";
  * Model xuất bằng `scripts/blender/export_region.py`, tên mesh đã đối chiếu
  * bằng `npm run structures <file.glb>` rồi kiểm lại bằng `npm run verify:scenes`.
  */
-export const regionScenes2: Record<string, SceneModule> = {
+export const regionScenes2: Record<string, SceneModule> = bindContentSource("data:src/lib/scenes/regions2.ts#regionScenes2", {
   "chau-hong-day-chau": {
     slug: "chau-hong-day-chau",
     title: { vi: "Chậu hông và đáy chậu", en: "Pelvis & Perineum", zh: "骨盆与会阴" },
@@ -260,7 +262,7 @@ export const regionScenes2: Record<string, SceneModule> = {
         note: { vi: "Nối mỏm ngang L5 (và L4) với mào chậu, neo đốt L5 vào khung chậu và chống lại xu hướng L5 TRƯỢT ra trước trên xương cùng. Dây chằng này yếu hoặc mỏm khớp bị khuyết là điều kiện để xảy ra trượt đốt sống — nguyên nhân đau lưng cơ học hay gặp ở người trẻ chơi thể thao ưỡn lưng nhiều.", en: "Anchors the L5 (and L4) transverse process to the iliac crest, resisting forward slip of L5 on the sacrum. Weakness here, with a pars defect, permits spondylolisthesis — a common cause of mechanical back pain in young athletes.", zh: "将L5（及L4）横突固定于髂嵴，抵抗L5在骶骨上前滑。此处薄弱并伴峡部裂时发生腰椎滑脱——是年轻运动员机械性腰痛的常见原因。" } },
     ],
   },
-};
+});
 
 /** Bảng lớp cho từng scene đợt 2 — gộp vào `regionViewerConfig` ở regions.ts. */
 export const regionViewerConfig2: Record<string, { cats: RegionViewKey[]; faded?: RegionViewKey[] }> = {

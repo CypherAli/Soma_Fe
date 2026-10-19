@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Hầu và thanh quản" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const pharynxLarynxScene: AtlasSceneDef = {
+export const pharynxLarynxScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/pharynx-larynx.ts#pharynxLarynxScene", {
   "slug": "hau-thanh-quan",
   "title": {
     "vi": "Cơ hầu và thanh quản",
@@ -214,4 +216,4 @@ export const pharynxLarynxScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

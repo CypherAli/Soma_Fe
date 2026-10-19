@@ -1,3 +1,5 @@
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { pick, type Loc } from "@/lib/homeContent";
 import type { CategoryData, CategorySlug } from "@/lib/exploreContent";
 import IconSprite from "../home/IconSprite";
@@ -45,7 +47,7 @@ export default function ExplorePage({
     models: locale === "vi" ? "mô hình" : locale === "zh" ? "个模型" : "models",
   };
 
-  return (
+  return <ContentSurface scope="src/components/explore/ExplorePage.tsx">{(
     <div className="bd">
       <IconSprite />
       <HomeNav />
@@ -73,5 +75,5 @@ export default function ExplorePage({
         </main>
       </div>
     </div>
-  );
+  )}</ContentSurface>;
 }

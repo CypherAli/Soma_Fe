@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Bài bộ phận "Vai" học theo lớp, dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const partShoulderScene: AtlasSceneDef = {
+export const partShoulderScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/part-shoulder.ts#partShoulderScene", {
   "slug": "bo-phan-vai",
   "title": {
     "vi": "Vai — học theo lớp",
@@ -360,4 +362,4 @@ export const partShoulderScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

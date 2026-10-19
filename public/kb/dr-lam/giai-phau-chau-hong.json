@@ -1,0 +1,1081 @@
+{
+  "schemaVersion": 1,
+  "id": "giai-phau-chau-hong",
+  "title": "Giải phẫu chậu hông",
+  "sourceFile": "Giải phẫu người 2025 - Test số hóa Dr. Lâm giải phẫu chậu hông.pdf",
+  "sourceNote": null,
+  "sourceHash": "3eda7a6c92d9a70f9f9cd187116b617d7f42e7486947fd7f0f4913e59e6007c3",
+  "pages": 15,
+  "questions": [
+    {
+      "id": "giai-phau-chau-hong-1",
+      "number": 1,
+      "stem": "Thành phần gắn vào khớp mu bằng dây chằng treo",
+      "options": [
+        {
+          "id": "A",
+          "text": "Buồng trứng"
+        },
+        {
+          "id": "B",
+          "text": "Tử cung"
+        },
+        {
+          "id": "C",
+          "text": "Vòi trứng"
+        },
+        {
+          "id": "D",
+          "text": "Âm vật"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 1,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chau-hong-2",
+      "number": 2,
+      "stem": "Thành phần nằm giữa các mạch chậu ngoài và trong",
+      "options": [
+        {
+          "id": "A",
+          "text": "Buồng trứng"
+        },
+        {
+          "id": "B",
+          "text": "Tử cung"
+        },
+        {
+          "id": "C",
+          "text": "Vòi trứng"
+        },
+        {
+          "id": "D",
+          "text": "Âm vật"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 1,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chau-hong-3",
+      "number": 3,
+      "stem": "Thành phần có các ống tiết đổ vào hành dương vật",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tuyến tiền liệt"
+        },
+        {
+          "id": "B",
+          "text": "Túi tinh"
+        },
+        {
+          "id": "C",
+          "text": "Tuyến tiền đình lớn"
+        },
+        {
+          "id": "D",
+          "text": "Tuyến hành niệu đạo"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 1,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chau-hong-4",
+      "number": 4,
+      "stem": "Thành phần có nhiều ống tiết đổ vào niệu đạo",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tuyến tiền liệt"
+        },
+        {
+          "id": "B",
+          "text": "Túi tinh"
+        },
+        {
+          "id": "C",
+          "text": "Tuyến tiền đình lớn"
+        },
+        {
+          "id": "D",
+          "text": "Tuyến hành niệu đạo"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 2,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chau-hong-5",
+      "number": 5,
+      "stem": "Thành phần nằm trong khoang đáy chậu nông",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tuyến tiền liệt"
+        },
+        {
+          "id": "B",
+          "text": "Túi tinh"
+        },
+        {
+          "id": "C",
+          "text": "Tuyến tiền đình lớn"
+        },
+        {
+          "id": "D",
+          "text": "Tuyến hành niệu đạo"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 2,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chau-hong-6",
+      "number": 6,
+      "stem": "Thành phần nằm ở phía bên niệu đạo màng",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tuyến tiền liệt"
+        },
+        {
+          "id": "B",
+          "text": "Túi tinh"
+        },
+        {
+          "id": "C",
+          "text": "Tuyến tiền đình lớn"
+        },
+        {
+          "id": "D",
+          "text": "Tuyến hành niệu đạo"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 3,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chau-hong-7",
+      "number": 7,
+      "stem": "Thành phần nằm ở mặt sau bàng quang",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tuyến tiền liệt"
+        },
+        {
+          "id": "B",
+          "text": "Túi tinh"
+        },
+        {
+          "id": "C",
+          "text": "Tuyến tiền đình lớn"
+        },
+        {
+          "id": "D",
+          "text": "Tuyến hành niệu đạo"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 3,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chau-hong-8",
+      "number": 8,
+      "stem": "Nằm vùi trong cơ này là 1 tuyến sinh dục phụ",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ hành xốp"
+        },
+        {
+          "id": "B",
+          "text": "Cơ ngồi hang"
+        },
+        {
+          "id": "C",
+          "text": "Cơ thắt niệu đạo"
+        },
+        {
+          "id": "D",
+          "text": "Cơ nâng hậu môn"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 3,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chau-hong-9",
+      "number": 9,
+      "stem": "Cơ tạo nên thành bên hố ngồi trực tràng",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ hành xốp"
+        },
+        {
+          "id": "B",
+          "text": "Cơ ngồi hang"
+        },
+        {
+          "id": "C",
+          "text": "Cơ thắt niệu đạo"
+        },
+        {
+          "id": "D",
+          "text": "Cơ nâng hậu môn"
+        },
+        {
+          "id": "E",
+          "text": "Cơ bịt trong"
+        }
+      ],
+      "answers": [
+        "E"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 4,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chau-hong-10",
+      "number": 10,
+      "stem": "Cơ nằm trên bề mặt trụ dương vật / âm vật",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ hành xốp"
+        },
+        {
+          "id": "B",
+          "text": "Cơ ngồi hang"
+        },
+        {
+          "id": "C",
+          "text": "Cơ thắt niệu đạo"
+        },
+        {
+          "id": "D",
+          "text": "Cơ nâng hậu môn"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 4,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chau-hong-11",
+      "number": 11,
+      "stem": "Cơ bao bọc các tuyến tiền đình lớn",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ hành xốp"
+        },
+        {
+          "id": "B",
+          "text": "Cơ ngồi hang"
+        },
+        {
+          "id": "C",
+          "text": "Cơ thắt niệu đạo"
+        },
+        {
+          "id": "D",
+          "text": "Cơ nâng hậu môn"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 5,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chau-hong-12",
+      "number": 12,
+      "stem": "Yếu tố chính chống đỡ cho tử cung",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ hành xốp"
+        },
+        {
+          "id": "B",
+          "text": "Cơ ngồi hang"
+        },
+        {
+          "id": "C",
+          "text": "Cơ thắt niệu đạo"
+        },
+        {
+          "id": "D",
+          "text": "Cơ nâng hậu môn"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 5,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chau-hong-13",
+      "number": 13,
+      "stem": "Mô tả sai về tuyến hành niệu đạo",
+      "options": [
+        {
+          "id": "A",
+          "text": "Chúng nằm trong khoang đáy chậu sâu"
+        },
+        {
+          "id": "B",
+          "text": "Chúng được vùi trong cơ thắt niệu đạo"
+        },
+        {
+          "id": "C",
+          "text": "Chúng sinh ra tinh dịch và tinh trùng"
+        },
+        {
+          "id": "D",
+          "text": "Các ống tiết đổ vào đoạn hành của niệu đạo dương vật"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 5,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chau-hong-14",
+      "number": 14,
+      "stem": "Hiện tượng không xảy ra trong lúc phóng tinh",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ thắt niệu đạo ở cổ bàng quang đóng lại"
+        },
+        {
+          "id": "B",
+          "text": "TLT, các tuyến tinh và tuyến hành niệu đạo co lại"
+        },
+        {
+          "id": "C",
+          "text": "Cơ trơn ở ống dẫn tinh co"
+        },
+        {
+          "id": "D",
+          "text": "Nước tiểu rời bàng quang"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 6,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chau-hong-15",
+      "number": 15,
+      "stem": "Tất cả các cấu trúc sau bắt chéo eo trên, TRỪ",
+      "options": [
+        {
+          "id": "A",
+          "text": "ĐM buồng trứng"
+        },
+        {
+          "id": "B",
+          "text": "Niệu quản"
+        },
+        {
+          "id": "C",
+          "text": "Dây chằng tròn tử cung"
+        },
+        {
+          "id": "D",
+          "text": "ĐM tử cung"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 6,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chau-hong-16",
+      "number": 16,
+      "stem": "Cấu trúc không giới hạn nên eo trên",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ụ nhô"
+        },
+        {
+          "id": "B",
+          "text": "Bờ trước cánh xương cùng"
+        },
+        {
+          "id": "C",
+          "text": "Đường lược"
+        },
+        {
+          "id": "D",
+          "text": "Mào chậu"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 7,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chau-hong-17",
+      "number": 17,
+      "stem": "Cấu trúc không sờ thấy khi thăm âm đạo",
+      "options": [
+        {
+          "id": "A",
+          "text": "Buồng trứng"
+        },
+        {
+          "id": "B",
+          "text": "Niệu quản có sỏi"
+        },
+        {
+          "id": "C",
+          "text": "Các gai ngồi"
+        },
+        {
+          "id": "D",
+          "text": "Đỉnh bàng quang"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 7,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chau-hong-18",
+      "number": 18,
+      "stem": "Mô tả sai về TLT",
+      "options": [
+        {
+          "id": "A",
+          "text": "Túi bầu dục mở vào đỉnh gò tinh"
+        },
+        {
+          "id": "B",
+          "text": "Thùy giữa nằm sau niệu đạo"
+        },
+        {
+          "id": "C",
+          "text": "Lưỡi gà của BQ nam nổi rõ hơn khi PĐTLT"
+        },
+        {
+          "id": "D",
+          "text": "Các thùy bên tạo nên phần lớn thể tích tuyến"
+        },
+        {
+          "id": "E",
+          "text": "Túi bầu dục là đầu tận cùng của ống TLT"
+        }
+      ],
+      "answers": [
+        "E"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 7,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chau-hong-19",
+      "number": 19,
+      "stem": "Một Bn nam bị giập vỡ niệu đạo dương vật và mạc đáy chậu, nước tiểu có thể tràn vào chỗ vỡ niệu đạo và tất cả các cấu trúc sau, TRỪ",
+      "options": [
+        {
+          "id": "A",
+          "text": "Bìu"
+        },
+        {
+          "id": "B",
+          "text": "Dương vật"
+        },
+        {
+          "id": "C",
+          "text": "Túi dưới da đáy chậu"
+        },
+        {
+          "id": "D",
+          "text": "Thành bụng dưới"
+        },
+        {
+          "id": "E",
+          "text": "Đùi"
+        }
+      ],
+      "answers": [
+        "E"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 8,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chau-hong-20",
+      "number": 20,
+      "stem": "Tất cả các cấu trúc đều đi qua lỗ ngồi lớn và bé, TRỪ",
+      "options": [
+        {
+          "id": "A",
+          "text": "ĐM thẹn trong"
+        },
+        {
+          "id": "B",
+          "text": "TK thẹn"
+        },
+        {
+          "id": "C",
+          "text": "Tk tới cơ bịt trong"
+        },
+        {
+          "id": "D",
+          "text": "Gân cơ bịt trong"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 8,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chau-hong-21",
+      "number": 21,
+      "stem": "Cấu trúc không đi dưới dây chằng bẹn",
+      "options": [
+        {
+          "id": "A",
+          "text": "TM đùi"
+        },
+        {
+          "id": "B",
+          "text": "Cơ TL chậu"
+        },
+        {
+          "id": "C",
+          "text": "Đm thẹn ngoài"
+        },
+        {
+          "id": "D",
+          "text": "Ống đùi"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 9,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chau-hong-22",
+      "number": 22,
+      "stem": "Tất cả các cấu trúc đi qua lỗ ngồi lớn, TRỪ",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ hình lê"
+        },
+        {
+          "id": "B",
+          "text": "TK mông trên"
+        },
+        {
+          "id": "C",
+          "text": "TK ngồi"
+        },
+        {
+          "id": "D",
+          "text": "Gân cơ bịt trong"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 9,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chau-hong-23",
+      "number": 23,
+      "stem": "Cấu trúc không tạo nên giới hạn đáy chậu",
+      "options": [
+        {
+          "id": "A",
+          "text": "Dây chằng cung mu"
+        },
+        {
+          "id": "B",
+          "text": "Đỉnh xương cụt"
+        },
+        {
+          "id": "C",
+          "text": "Các củ ngồi"
+        },
+        {
+          "id": "D",
+          "text": "Dây chằng cùng gai ngồi"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 10,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chau-hong-24",
+      "number": 24,
+      "stem": "Eo dưới được tạo bởi tất cả các cấu trúc sau, TRỪ",
+      "options": [
+        {
+          "id": "A",
+          "text": "Dây chằng cùng củ"
+        },
+        {
+          "id": "B",
+          "text": "Ngành dưới xương mu"
+        },
+        {
+          "id": "C",
+          "text": "Củ mu"
+        },
+        {
+          "id": "D",
+          "text": "Củ ngồi"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 10,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chau-hong-25",
+      "number": 25,
+      "stem": "Để gây tê toàn bộ da tam giác niệu dục, cần nhằm vào tất cả TK sau, TRỪ",
+      "options": [
+        {
+          "id": "A",
+          "text": "TK chậu bẹn ( nhánh bìu trước/ môi trước)"
+        },
+        {
+          "id": "B",
+          "text": "TK chậu hạ vị"
+        },
+        {
+          "id": "C",
+          "text": "TK bì đùi sau ( nhánh đáy chậu)"
+        },
+        {
+          "id": "D",
+          "text": "TK thẹn"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 10,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chau-hong-26",
+      "number": 26,
+      "stem": "Một Bn nam 60 tuổi mất khả năng cương dương vật sau khi trải qua 1 phẫu thuật trực tràng kèm theo cắt bỏ TLT. Bn có khả năng tổn thương TK nào",
+      "options": [
+        {
+          "id": "A",
+          "text": "TK mu dương vật"
+        },
+        {
+          "id": "B",
+          "text": "Tk đáy chậu"
+        },
+        {
+          "id": "C",
+          "text": "Tk hạ vị"
+        },
+        {
+          "id": "D",
+          "text": "Tk tạng cùng"
+        },
+        {
+          "id": "E",
+          "text": "Tk tạng chậu hông"
+        }
+      ],
+      "answers": [
+        "E"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 11,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chau-hong-27",
+      "number": 27,
+      "stem": "Thành phần nào nằm giữa ở khoang giữa màng đáy chậu và hoành chậu hông",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ ngang đáy chậu sâu, tuyến hành niệu đạo, niệu đạo màng"
+        },
+        {
+          "id": "B",
+          "text": "Cơ ngang đáy chậu sâu, cơ hành xốp, 1 phần niệu đạo xốp"
+        },
+        {
+          "id": "C",
+          "text": "Các Đm đi tới hành xốp, cơ ngồi hang, tuyến hành niệu đạo"
+        },
+        {
+          "id": "D",
+          "text": "Cơ thắt niệu đạo, tuyến hành niệu đạo và tuyến tiền đình lớn"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 11,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chau-hong-28",
+      "number": 28,
+      "stem": "Mô tả đúng về hố ngồi trực tràng",
+      "options": [
+        {
+          "id": "A",
+          "text": "Giới hạn trước bởi dây chằng ngang đáy chậu"
+        },
+        {
+          "id": "B",
+          "text": "Giới hạn 1 phần ở sau bởi cơ mông lớn"
+        },
+        {
+          "id": "C",
+          "text": "Ống thẹn chạy dọc phần trong của nó"
+        },
+        {
+          "id": "D",
+          "text": "Cơ nâng hậu môn ngăn cách hố với tam giác niệu dục"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 12,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chau-hong-29",
+      "number": 29,
+      "stem": "Một bác sĩ sản khoa làm tổn thương thể đáy chậu khi rạch TSM theo đường giữa, chức năng cơ nào bị tổn hại",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ ngồi hang và cơ thắt niệu đạo"
+        },
+        {
+          "id": "B",
+          "text": "Cơ ngang đáy chậu sâu và bịt trong"
+        },
+        {
+          "id": "C",
+          "text": "Cơ hành xốp và cơ ngang đáy chậu nông"
+        },
+        {
+          "id": "D",
+          "text": "Phần nông cơ thắt HM ngoài và cơ thắt niệu đạo"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 12,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chau-hong-30",
+      "number": 30,
+      "stem": "Một khối u lành nằm trong khe giữa dây chằng cung mu và dây chằng ngang đáy chậu có thể đè ép vào",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tk mu dương vật"
+        },
+        {
+          "id": "B",
+          "text": "Tm mu sâu dương vật"
+        },
+        {
+          "id": "C",
+          "text": "Tm mu nông"
+        },
+        {
+          "id": "D",
+          "text": "Đm mu dương vật"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 13,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chau-hong-31",
+      "number": 31,
+      "stem": "Hủy hoại cấu trúc nằm trong khoang giữa màng đáy chậu và hoành chậu hông sẽ làm tổn thương cơ nào",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ thắt niệu đạo"
+        },
+        {
+          "id": "B",
+          "text": "Cơ cụt"
+        },
+        {
+          "id": "C",
+          "text": "Cơ ngang đáy chậu nông"
+        },
+        {
+          "id": "D",
+          "text": "Cơ nâng hậu môn"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 13,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chau-hong-32",
+      "number": 32,
+      "stem": "Mô tả đúng về cơ thắt hậu môn ngoài",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó chủ yếu được chi phối bởi TK tự chủ"
+        },
+        {
+          "id": "B",
+          "text": "Nó gồm phần sâu, nông và dưới da"
+        },
+        {
+          "id": "C",
+          "text": "Những sợi ngoại vi của nó đan xen với những sợi cơ bịt trong"
+        },
+        {
+          "id": "D",
+          "text": "Nó kéo dài lên trên tới tận đầu dưới ĐT sigma"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 13,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chau-hong-33",
+      "number": 33,
+      "stem": "Cấu trúc tạo nên giới hạn trên của ngăn đáy chậu nông",
+      "options": [
+        {
+          "id": "A",
+          "text": "Hoành chậu hông"
+        },
+        {
+          "id": "B",
+          "text": "Lớp màng của tấm dưới da đáy chậu"
+        },
+        {
+          "id": "C",
+          "text": "Lớp mỡ của tấm dưới da đáy chậu"
+        },
+        {
+          "id": "D",
+          "text": "Màng đáy chậu"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 14,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chau-hong-34",
+      "number": 34,
+      "stem": "Ống đổ vào gò tinh",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ống tiết của túi tinh"
+        },
+        {
+          "id": "B",
+          "text": "Ống của TLT"
+        },
+        {
+          "id": "C",
+          "text": "Ống phóng tinh"
+        },
+        {
+          "id": "D",
+          "text": "Ống của mào tinh"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 14,
+      "gradable": true
+    }
+  ]
+}

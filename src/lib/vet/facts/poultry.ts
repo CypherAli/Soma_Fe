@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { VetFact } from "../types";
 
 /**
@@ -14,7 +16,7 @@ import type { VetFact } from "../types";
 const KING = "King & McLelland, Birds: Their Structure and Function, 2nd ed.";
 const NAA = "Nomina Anatomica Avium, 2nd ed. (1993)";
 
-export const poultryFacts: VetFact[] = [
+export const poultryFacts: VetFact[] = bindContentSource("data:src/lib/vet/facts/poultry.ts#poultryFacts", [
   {
     id: "chicken-air-sacs",
     species: ["chicken"],
@@ -273,4 +275,4 @@ export const poultryFacts: VetFact[] = [
     source: KING,
     keys: ["manh trang", "caeca", "cau trung", "coccidiosis", "salmonella"],
   },
-];
+]);

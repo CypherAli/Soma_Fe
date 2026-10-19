@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 // TỆP SINH TỰ ĐỘNG — đừng sửa tay.
 // Nguồn: scripts/vet/pig-bones.json, sinh bằng `node scripts/vet/build-pig-bones.mjs`.
 // Tên vật liệu trong pig-skeleton.glb / pig-skull.glb do CHÍNH tệp đó đặt, nên
@@ -7,7 +9,7 @@ import type { VetModelPart } from "./types";
 export type PigBoneGroup = "head" | "spine" | "thorax" | "forelimb" | "hindlimb";
 
 /** Năm mục để trang xem khỏi đổ 120 xương thành một danh sách cuộn dài dằng dặc. */
-export const PIG_PART_GROUPS: { key: PigBoneGroup; title: { vi: string; en: string; zh: string } }[] = [
+export const PIG_PART_GROUPS: { key: PigBoneGroup; title: { vi: string; en: string; zh: string } }[] = bindContentSource("data:src/lib/vet/pigBonesGenerated.ts#PIG_PART_GROUPS", [
   {
     "key": "head",
     "title": {
@@ -48,7 +50,7 @@ export const PIG_PART_GROUPS: { key: PigBoneGroup; title: { vi: string; en: stri
       "zh": "后肢"
     }
   }
-];
+]);
 
 /** Nhóm giải phẫu của từng xương — để trang xem xếp 120 xương thành năm mục. */
 export const PIG_BONE_GROUP_OF: Record<string, PigBoneGroup> = {
@@ -174,7 +176,7 @@ export const PIG_BONE_GROUP_OF: Record<string, PigBoneGroup> = {
   "phalanx-distalis-pedis-5": "hindlimb"
 };
 
-export const PIG_BONES: VetModelPart[] = [
+export const PIG_BONES: VetModelPart[] = bindContentSource("data:src/lib/vet/pigBonesGenerated.ts#PIG_BONES", [
   {
     "material": "cranium",
     "name": {
@@ -1375,4 +1377,4 @@ export const PIG_BONES: VetModelPart[] = [
     "nav": "Phalanx distalis digiti V pedis",
     "group": "hindlimb"
   }
-];
+]);

@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Cẳng chân và bàn chân" (bên trái) dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const legScene: AtlasSceneDef = {
+export const legScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/leg.ts#legScene", {
   "slug": "cang-chan-ban-chan",
   "title": {
     "vi": "Cẳng chân và bàn chân",
@@ -254,4 +256,4 @@ export const legScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

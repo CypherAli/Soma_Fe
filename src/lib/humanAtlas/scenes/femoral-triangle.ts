@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Tam giác đùi" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const femoralTriangleScene: AtlasSceneDef = {
+export const femoralTriangleScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/femoral-triangle.ts#femoralTriangleScene", {
   "slug": "tam-giac-dui",
   "title": {
     "vi": "Tam giác đùi",
@@ -132,4 +134,4 @@ export const femoralTriangleScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

@@ -1,0 +1,726 @@
+{
+  "schemaVersion": 1,
+  "id": "than-kinh-trung-uong",
+  "title": "Thần kinh trung ương",
+  "sourceFile": "Giải phẫu người 2025 - Test số hóa Dr. Lâm thần kinh trung ương.pdf",
+  "sourceNote": null,
+  "sourceHash": "43503ff3d77de14a236fd33b0ae6d9d75ed6e9c7aa7473b66b05c606adc79cc5",
+  "pages": 22,
+  "questions": [
+    {
+      "id": "than-kinh-trung-uong-1",
+      "number": 1,
+      "stem": "Tổn thương thần kinh mặt tại đoạn nhĩ, bệnh nhân có các dấu hiệu sau, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tăng thính."
+        },
+        {
+          "id": "B",
+          "text": "Giảm tiết nước bọt trong miệng."
+        },
+        {
+          "id": "C",
+          "text": "Khô niêm mạc mũi."
+        },
+        {
+          "id": "D",
+          "text": "Mất vị giác phần trước rãnh tận."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Đáp án: C\nA. Tăng thính => Đoạn nhĩ nằm trước khi dây VII phát ra dây thần kinh\ncơ bàn đạp. Khi tổn thương đoạn này, cơ bàn đạp bị liệt, không thể\nlàm giảm độ rung của xương bàn đạp, dẫn đến tiếng động nghe rất\nchói tai\nB. Giảm tiết nước bọt trong miệng => Dây VII đoạn này chứa các sợi\nđối giao cảm đi vào dây thần kinh thừng nhĩ để đến hạch dưới hàm,\nchi phối tiết dịch cho tuyến dưới hàm và dưới lưỡi\nC. Khô niêm mạc mũi => Các sợi đối giao cảm chi phối tiết dịch\nniêm mạc mũi và tuyến lệ tách ra từ thần kinh đá lớn tại hạch gối\n(đoạn mê đạo). Đoạn nhĩ nằm sau hạch gối nên tổn thương tại đây\nkhông ảnh hưởng đến việc tiết dịch ở mũi và lệ\nD. Mất vị giác phần trước rãnh tận => Dây thần kinh thừng nhĩ (tách\nra từ dây VII ở đoạn nhĩ hoặc đoạn chũm) dẫn truyền cảm giác vị\ngiác 2/3 trước lưỡi, nên tổn thương tại vị trí này sẽ gây mất vị giác\ntương ứng",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 1,
+      "gradable": true
+    },
+    {
+      "id": "than-kinh-trung-uong-2",
+      "number": 2,
+      "stem": "Các thần kinh vận động cho các cơ ngoài nhãn cầu có đặc điểm sau:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đều có nhân nằm ở trung não."
+        },
+        {
+          "id": "B",
+          "text": "Đều thoát ra ở mặt trước của thân não."
+        },
+        {
+          "id": "C",
+          "text": "Đều lách qua khe thông hố sọ giữa với ổ mắt."
+        },
+        {
+          "id": "D",
+          "text": "Đều có nhánh nối với hạch mi."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Đáp án: C\nA. Đều có nhân nằm ở trung não => Nhân dây III và IV nằm ở trung\nnão, nhưng nhân dây VI nằm ở cầu não\nB. Đều thoát ra ở mặt trước của thân não => Dây III thoát ở hố gian\ncuống, dây VI thoát ở rãnh hành cầu, riêng dây IV là dây duy nhất\nthoát ra ở mặt sau của thân não (dưới củ hạ đồi)\nC. Đều lách qua khe thông hố sọ giữa với ổ mắt => Cả ba dây thần\nkinh vận nhãn đều đi qua khe ổ mắt trên để vào ổ mắt chi phối cho\ncác cơ ngoài nhãn cầu\nD. Đều có nhánh nối với hạch mi => Chỉ có dây III (nhánh vận động\ncho cơ vòng mống mắt và cơ thể mi) mới có nhánh nối với hạch mi,\ndây IV và VI không liên quan đến cấu trúc này",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 2,
+      "gradable": true
+    },
+    {
+      "id": "than-kinh-trung-uong-3",
+      "number": 3,
+      "stem": "Mô tả nào sau đây về thần kinh vận nhãn đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó có hai nhân, một ở trung não vả một ở cầu não."
+        },
+        {
+          "id": "B",
+          "text": "Chạy cùng các thần kinh vận động nhãn cầu khác ở thành ngoài của xoang hang."
+        },
+        {
+          "id": "C",
+          "text": "Nó chi phối vận động cho cả cơ mí trên và dưới."
+        },
+        {
+          "id": "D",
+          "text": "Nhánh nối với hạch mi chỉ chứa các sợi tự chủ."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "Đáp án: B\nA. Nó có hai nhân, một ở trung não và một ở cầu não => Cả nhân vận\nđộng chính và nhân đối giao cảm (Edinger-Westphal) của dây III\nđều nằm ở trung não, ngang mức gò trên\nB. Chạy cùng các thần kinh vận động nhãn cầu khác ở thành ngoài\ncủa xoang hang => Thần kinh III chạy cùng thần kinh IV và thần kinh\nmắt (V1) ở thành ngoài xoang hang trước khi vào khe ổ mắt trên\nC. Nó chi phối vận động cho cả cơ mí trên và dưới => Thần kinh III chỉ\nchi phối cho cơ nâng mi trên; cơ mi dưới (cơ sụn mi dưới) do hệ giao\ncảm chi phối\nD. Nhánh nối với hạch mi chỉ chứa các sợi tự chủ => Rễ sau (rễ mắt)\nđi vào hạch mi chủ yếu mang các sợi đối giao cảm trước hạch,\nnhưng nhánh nối này cũng có thể chứa các sợi cảm giác từ nhãn\ncầu đi về dây V1 qua hạch mi",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 3,
+      "gradable": true
+    },
+    {
+      "id": "than-kinh-trung-uong-4",
+      "number": 4,
+      "stem": "Các dấu hiệu sau đều có nguyên nhân tổn thương nhân ở trung não, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Lác ngoài."
+        },
+        {
+          "id": "B",
+          "text": "Khô mắt."
+        },
+        {
+          "id": "C",
+          "text": "Sụp mi trên."
+        },
+        {
+          "id": "D",
+          "text": "Mắt phản xạ thắt đồng tử."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "Đáp án: B\nA. Lác ngoài => Dây thần kinh vận nhãn (III) có nhân nằm ở trung não\nchi phối cơ thẳng trong, khi tổn thương sẽ gây mất đối trọng dẫn\nđến nhãn cầu bị kéo ra ngoài bởi cơ thẳng ngoài\nB. Khô mắt => Tuyến lệ được chi phối bởi sợi đối giao cảm từ nhân lệ\ntỵ (nhân bọt trên) nằm ở cầu não, do đó khô mắt thường liên quan\nđến tổn thương cầu não hoặc dây thần kinh mặt (VII)\nC. Sụp mi trên => Nhân thần kinh vận nhãn (III) ở trung não chi phối\ncơ nâng mi trên, nên tổn thương tại đây sẽ làm mất khả năng mở\nmắt chủ động gây sụp mi\nD. Mất phản xạ thắt đồng tử => Nhân đối giao cảm Edinger-\nWestphal thuộc phức hợp nhân dây III nằm ở trung não điều khiển\ncơ thắt võng mống mắt, khi tổn thương sẽ làm mất phản xạ này",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 4,
+      "gradable": true
+    },
+    {
+      "id": "than-kinh-trung-uong-5",
+      "number": 5,
+      "stem": "Các triệu chứng sau đều do tổn thương các nhân ở hành não, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Mất cảm giác vị giác ở phần ba sau lưỡi."
+        },
+        {
+          "id": "B",
+          "text": "Mất chi phối tiết dịch tuyến mang tai."
+        },
+        {
+          "id": "C",
+          "text": "Mất cảm giác chung của hầu."
+        },
+        {
+          "id": "D",
+          "text": "Mất chi phối tiết dịch niêm mạc mũi."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "Đáp án: D\nA. Mất cảm giác vị giác ở phần ba sau lưỡi => Sợi vị giác 1/3 sau lưỡi\ntheo dây IX về tận cùng tại nhân bó đơn độc nằm ở hành não\nB. Mất chi phối tiết dịch tuyến mang tai => Các sợi đối giao cảm này\nxuất phát từ nhân dưới bọt, một nhân thực vật nằm ở phần cao của\nhành não\nC. Mất cảm giác chung của hầu => Cảm giác chung vùng hầu do\ndây IX và X đảm nhiệm, dẫn truyền thông tin về nhân bó đơn độc và\nnhân gai thần kinh sinh ba ở hành não\nD. Mất chi phối tiết dịch niêm mạc mũi => Các sợi đối giao cảm chi\nphối tiết dịch niêm mạc mũi xuất phát từ nhân lệ tỵ (nhân bọt trên)\nnằm ở cầu não, không thuộc hành não",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 5,
+      "gradable": true
+    },
+    {
+      "id": "than-kinh-trung-uong-6",
+      "number": 6,
+      "stem": "Tủy sống có các đặc điểm sau đây về cấu tạo, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thừng sau chỉ chứa các dải cảm giác."
+        },
+        {
+          "id": "B",
+          "text": "Các mép xám trước và sau nối các cột trung gian ở hai bên."
+        },
+        {
+          "id": "C",
+          "text": "Phần ống trung tâm ở phình thắt lưng-cùng mở rộng thành thất tận cùng."
+        },
+        {
+          "id": "D",
+          "text": "Sừng bên xuất hiện trên mặt cắt qua đốt tủy thắt lưng III."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "Đáp án: D\nA. Thừng sau chỉ chứa các dải cảm giác => Thừng sau được giới hạn\ntừ rãnh giữa sau đến rãnh bên sau, chỉ bao gồm các dải dẫn truyền\ncảm giác bản thể có ý thức là bó thon và bó chêm\nB. Các mép xám trước và sau nối các cột trung gian ở hai bên =>\nCác mép xám nằm vây quanh ống trung tâm, đóng vai trò là cầu nối\nchất xám giữa hai nửa tủy sống để liên kết các cột trung gian\nC. Phần ống trung tâm ở phình thắt lưng-cùng mở rộng thành thất\ntận cùng => Ở phần thấp nhất của tủy sống (nón tủy), ống trung\ntâm giãn rộng tạo thành một khoang nhỏ gọi là thất tận cùng trước\nkhi kết thúc\nD. Sừng bên xuất hiện trên mặt cắt qua đốt tủy thắt lưng III => Sừng\nbên chứa nhân giao cảm trung gian bên chỉ xuất hiện từ đốt tủy\nngực I đến thắt lưng II (hoặc đôi khi là L3 nhưng rất hiếm), do đó\nthường không xuất hiện ở mức L3 tiêu chuẩn",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 6,
+      "gradable": true
+    },
+    {
+      "id": "than-kinh-trung-uong-7",
+      "number": 7,
+      "stem": "Các mô tả sau đây đều đúng về chất xám của tủy sống, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cột xám trước là nơi chứa các neuron vận động."
+        },
+        {
+          "id": "B",
+          "text": "Các sừng trước, bên và sau đều xuất hiện ở mặt cắt ngang qua đốt tủy ngực I."
+        },
+        {
+          "id": "C",
+          "text": "Nhân trung gian bên nằm trên toàn bộ chiều dài của chất trung gian bên."
+        },
+        {
+          "id": "D",
+          "text": "Vùng chất xám nối chất trung gian trung tâm ở hai bên gọi là các mép xám."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Đáp án: C\nA. Cột xám trước là nơi chứa các neuron vận động => Cột xám\ntrước là vị trí của các neuron vận động bản thể chi phối cho các cơ\nvân ở thân mình và các chi\nB. Các sừng trước, bên và sau đều xuất hiện ở mặt cắt ngang qua\nđốt tủy ngực I => Ở mức tủy ngực, chất xám có đầy đủ ba sừng:\nsừng trước (vận động), sừng sau (cảm giác) và sừng bên (chứa nhân\ngiao cảm trung gian bên)\nC. Nhân trung gian bên nằm trên toàn bộ chiều dài của chất trung\ngian bên => Nhân trung gian bên chỉ xuất hiện ở các đốt tủy từ T1\nđến L2 hoặc L3 (hệ giao cảm) và từ S2 đến S4 (hệ đối giao cảm),\nkhông hiện diện trên toàn bộ chiều dài tủy sống\nD. Vùng chất xám nối chất trung gian trung tâm ở hai bên gọi là các\nmép xám => Mép xám trước và mép xám sau bao quanh ống trung\ntâm, đóng vai trò là cầu nối chất xám giữa hai nửa tủy sống",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 7,
+      "gradable": true
+    },
+    {
+      "id": "than-kinh-trung-uong-8",
+      "number": 8,
+      "stem": "Tủy sống có các đặc điểm sau, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Phần lớn các thần kinh sống cổ thoát ra ở trên cuống của đốt sống tương ứng."
+        },
+        {
+          "id": "B",
+          "text": "Phình cổ của tủy sống tương ứng với nguyên ủy của đám rối cánh tay."
+        },
+        {
+          "id": "C",
+          "text": "Chỉ có một đôi thần kinh sống cụt do các rễ từ đoạn tủy cụt kém phát triển."
+        },
+        {
+          "id": "D",
+          "text": "Có số lượng các đốt tủy bằng với số lượng các đốt sống tương ứng."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "Đáp án: D\nA. Phần lớn các thần kinh sống cổ thoát ra ở trên cuống của đốt\nsống tương ứng => Các dây thần kinh sống từ C1 đến C7 thoát ra\nkhỏi ống sống ở phía trên đốt sống cùng tên, riêng dây C8 thoát ra\ndưới đốt sống C7\nB. Phình cổ của tủy sống tương ứng với nguyên ủy của đám rối cánh\ntay => Phình cổ (đoạn từ C4 đến T1) là nơi tập trung lượng lớn\nneuron vận động và cảm giác để hình thành đám rối cánh tay chi\nphối cho chi trên\nC. Chỉ có một đôi thần kinh sống cụt do các rễ từ đoạn tủy cụt kém\nphát triển => Tủy sống ở người có đoạn tủy cụt rất nhỏ và thường\nchỉ thoái triển còn lại một đôi dây thần kinh sống cụt duy nhất\nD. Có số lượng các đốt tủy bằng với số lượng các đốt sống tương\nứng => Do tủy sống ngắn hơn cột sống nên số lượng các đốt sống\n(33-34 đốt) không bằng số lượng đốt tủy (31 đốt), đặc biệt là ở\nvùng thắt lưng, cùng và cụt",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 8,
+      "gradable": true
+    },
+    {
+      "id": "than-kinh-trung-uong-9",
+      "number": 9,
+      "stem": "Ở thừng trắng bên của tủy sống có các dải dẫn truyền sau, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Vận động có ý thức."
+        },
+        {
+          "id": "B",
+          "text": "Vận động không ý thức."
+        },
+        {
+          "id": "C",
+          "text": "Cảm giác về trương lực cơ."
+        },
+        {
+          "id": "D",
+          "text": "Cảm giác xúc giác thô sơ."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "Đáp án: D\nA. Vận động có ý thức => Thừng trắng bên chứa dải vỏ tủy bên (bó\ntháp bên), là đường dẫn truyền vận động có ý thức quan trọng nhất\nchi phối cho các cơ cùng bên\nB. Vận động không ý thức => Các dải vận động phụ (ngoại tháp)\nnhư dải đỏ tủy và dải lưới tủy nằm ở thừng trắng bên để điều hòa\ncác cử động tự động và phối hợp động tác\nC. Cảm giác về trương lực cơ => Các dải tủy-tiểu não trước và sau\nnằm ở vùng ngoại vi của thừng trắng bên, dẫn truyền cảm giác bản\nthể không ý thức về tình trạng căng cơ và trương lực cơ lên tiểu não\nD. Cảm giác xúc giác thô sơ => Dải dẫn truyền cảm giác xúc giác\nthô sơ và áp lực (dải tủy đồi thị trước) nằm ở thừng trắng trước,\nkhông thuộc thừng trắng bên",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 9,
+      "gradable": true
+    },
+    {
+      "id": "than-kinh-trung-uong-10",
+      "number": 10,
+      "stem": "Thùy trán có các đặc điểm sau, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó là một trong ba thùy xuất hiện ở ca ba mặt của bán cầu đại não."
+        },
+        {
+          "id": "B",
+          "text": "Nó có bốn hồi ở mặt trên-ngoài."
+        },
+        {
+          "id": "C",
+          "text": "Nó có chứa vùng vận động ngôn ngữ."
+        },
+        {
+          "id": "D",
+          "text": "Nó có rãnh khứu ở mặt dưới ngăn cách các hồi ổ mắt với hồi thẳng."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Chỉ có 2 thuỳ xuất hiện ở cả 3 mặt của bán cầu đại não là thuỳ trán\nvà thuỳ chẩm\nbs Nga Đỗ",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 10,
+      "gradable": true
+    },
+    {
+      "id": "than-kinh-trung-uong-11",
+      "number": 11,
+      "stem": "Một bệnh nhân bị u màng tủy chèn ép gây mất cảm giác đau, nhiệt tại vùng da phủ cơ ngực lớn ở mức khoang gian sườn I bên phải, vị trí chèn ép của khối u là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thừng trắng trước đốt tủy cổ II đối bên."
+        },
+        {
+          "id": "B",
+          "text": "Thừng trắng sau đốt tủy cổ III đối bên."
+        },
+        {
+          "id": "C",
+          "text": "Thừng trắng bên đốt tủy cổ IV đối bên."
+        },
+        {
+          "id": "D",
+          "text": "Thừng trắng bên đốt tủy cổ V đối bên."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Đáp án: C\nA. Thừng trắng trước đốt tủy cổ II đối bên => Thừng trắng trước\nchứa dải tủy đồi thị trước dẫn truyền xúc giác thô sơ và áp lực,\nkhông chuyên biệt cho cảm giác đau và nhiệt\nB. Thừng trắng sau đốt tủy cổ III đối bên => Thừng trắng sau chứa\nbó thon và bó chêm dẫn truyền cảm giác bản thể có ý thức và xúc\ngiác tinh tế, không dẫn truyền đau nhiệt\nC. Thừng trắng bên đốt tủy cổ IV đối bên => Vùng da khoang gian\nsườn I (mức rễ C4) dẫn truyền đau nhiệt qua dải tủy đồi thị bên đã\nbắt chéo, nên khối u ở thừng bên đối bên tại mức C4 trở lên sẽ gây\nmất cảm giác này\nD. Thừng trắng bên đốt tủy cổ V đối bên => Mức đốt tủy C5 nằm\nthấp hơn mức chi phối cảm giác của khoang gian sườn I (C4), do đó\ntổn thương tại C5 đối bên sẽ gây mất cảm giác từ mức C5 trở\nxuống, không ảnh hưởng đến vùng C4",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 11,
+      "gradable": true
+    },
+    {
+      "id": "than-kinh-trung-uong-12",
+      "number": 12,
+      "stem": "Một thoát vị đĩa gian đốt sống giữa các đốt sống thắt lưng IV và V chèn vào phần trước-trái của tủy sống, cấu trúc bị tổn thương là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Sợi trục của một số neuron ở hồi trước trung tâm bên phải."
+        },
+        {
+          "id": "B",
+          "text": "Sợi trục của một số neuron ở hạch gai của các thần kinh sống thắt lưng IV và V bên trái."
+        },
+        {
+          "id": "C",
+          "text": "Sợi trục của các neuron ở nhân đỏ bên trái."
+        },
+        {
+          "id": "D",
+          "text": "Sợi trục của một số neuron ở cột xám sau bên phải."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "Đáp án: B\nA. Sợi trục của một số neuron ở hồi trước trung tâm bên phải =>\nCác sợi này thuộc dải vỏ tủy bên đã bắt chéo sang bên trái của tủy\nsống, nhưng tại mức đĩa đệm L4-L5 thì tủy sống đã kết thúc từ lâu\n(thường ở mức L1-L2)\nB. Sợi trục của một số neuron ở hạch gai của các thần kinh sống\nthắt lưng IV và V bên trái => Tại mức đốt sống L4-L5, ống sống chỉ\ncòn chứa các rễ thần kinh (đuôi ngựa), trong đó rễ thần kinh L4 và\nL5 trái đang đi xuống để thoát ra ngoài nên sẽ bị khối thoát vị chèn\nép\nC. Sợi trục của các neuron ở nhân đỏ bên trái => Dải đỏ tủy là một\ndải vận động của tủy sống, tuy nhiên cấu trúc này không còn tồn tại\nở mức đốt sống L4-L5 vì tủy sống đã kết thúc ở phía trên\nD. Sợi trục của một số neuron ở cột xám sau bên phải => Cột xám\nsau là cấu trúc của chất xám tủy sống, vốn không còn xuất hiện\ntrong ống sống tại vị trí đốt sống thắt lưng IV và V do hiện tượng đi\nlên của tủy sống",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 12,
+      "gradable": true
+    },
+    {
+      "id": "than-kinh-trung-uong-13",
+      "number": 13,
+      "stem": "Một khối u màng tủy chèn ép vào thừng trắng bên của nửa phải tủy sống các đoạn tủy cổ VII đến ngực II, dấu hiệu có thể xuất hiện là?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Yếu vận động cơ gấp cổ tay trụ cùng bên."
+        },
+        {
+          "id": "B",
+          "text": "Yếu vận động của các cơ mô út đối bên."
+        },
+        {
+          "id": "C",
+          "text": "Mất cảm giác đau, nhiệt độ tại mặt trong của cánh tay cùng bên."
+        },
+        {
+          "id": "D",
+          "text": "Mất cảm giác về vị trí tại mặt trong của căng tay đối bên."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Đáp án: A\nA. Yếu vận động cơ gấp cổ tay trụ cùng bên => Dải vỏ tủy bên nằm\nở thừng trắng bên chi phối vận động cho các cơ cùng bên, và cơ\ngấp cổ tay trụ nhận sợi từ các đốt tủy C7, C8, T1\nB. Yếu vận động của các cơ mô út đối bên => Dải vỏ tủy bên sau khi\nbắt chéo ở hành não sẽ chi phối vận động cho các cơ ở cùng bên\nvới phía thừng trắng bên đó bị tổn thương\nC. Mất cảm giác đau, nhiệt độ tại mặt trong của cánh tay cùng bên\n=> Dải tủy đồi thị bên dẫn truyền cảm giác đau nhiệt đã bắt chéo từ\ndưới lên, nên tổn thương thừng bên phải sẽ gây mất cảm giác ở nửa\nngười bên trái\nD. Mất cảm giác về vị trí tại mặt trong của cẳng tay đối bên => Cảm\ngiác về vị trí (bản thể có ý thức) được dẫn truyền qua bó thon và bó\nchêm ở thừng trắng sau, không nằm ở thừng trắng bên",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 13,
+      "gradable": true
+    },
+    {
+      "id": "than-kinh-trung-uong-14",
+      "number": 14,
+      "stem": "Hành não có các đặc điểm về hình thể ngoài sau đây, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Có nhiều vùng bề mặt được gọi tên theo các cấu trúc tương ứng bên trong."
+        },
+        {
+          "id": "B",
+          "text": "Là nơi thoát ra của bốn đôi dây thần kinh sọ dưới."
+        },
+        {
+          "id": "C",
+          "text": "Tham gia tạo nên sàn của não thất IV."
+        },
+        {
+          "id": "D",
+          "text": "Có hãm màn tủy dưới."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "Đáp án: D\nA. Có nhiều vùng bề mặt được gọi tên theo các cấu trúc tương ứng\nbên trong => Các cấu trúc như tháp hành, trám hành, củ thon và củ\nchêm ở bề mặt đều tương ứng với các bó sợi và nhân xám nằm\nngay bên dưới\nB. Là nơi thoát ra của bốn đôi dây thần kinh sọ dưới => Hành não là\nnơi xuất phát thực của các dây thần kinh sọ số IX, X, XI (rễ hành) và\nXII\nC. Tham gia tạo nên sàn của não thất IV => Phần trên của mặt sau\nhành não mở rộng tạo thành phần dưới của sàn não thất IV (vùng\ntam giác hành não)\nD. Có hãm màn tủy dưới => Hãm màn tủy là cấu trúc thuộc về màn\ntủy trên ở trung não, không phải của hành não hay màn tủy dưới",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 14,
+      "gradable": true
+    },
+    {
+      "id": "than-kinh-trung-uong-15",
+      "number": 15,
+      "stem": "Trên mặt cắt ngang qua đốt tủy cổ II, các nhân sau đều xuất hiện, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nhân cảm giác TK V."
+        },
+        {
+          "id": "B",
+          "text": "Nhân TK XI."
+        },
+        {
+          "id": "C",
+          "text": "Nhân riêng."
+        },
+        {
+          "id": "D",
+          "text": "Nhân trung gian bên."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "Đáp án: D\nA. Nhân cảm giác TK V => Nhân gai của thần kinh sinh ba kéo dài từ\nhành não xuống tận các đốt tủy cổ trên (C1, C2) để tiếp nhận cảm\ngiác đau và nhiệt vùng mặt\nB. Nhân TK XI => Nhân gai của thần kinh phụ nằm ở sừng trước chất\nxám của tủy sống từ đốt tủy cổ I đến đốt tủy cổ V hoặc VI\nC. Nhân riêng => Nhân này nằm ở sừng sau chất xám và hiện diện\nxuyên suốt chiều dài của tủy sống để tiếp nhận các thông tin cảm\ngiác thân thể\nD. Nhân trung gian bên => Nhân này chứa các neuron trước hạch\ncủa hệ giao cảm và chỉ xuất hiện ở các đốt tủy từ ngực I đến thắt\nlưng II hoặc III",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 15,
+      "gradable": true
+    },
+    {
+      "id": "than-kinh-trung-uong-16",
+      "number": 16,
+      "stem": "Hình thể ngoài của tủy sống có đặc điểm:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đáy khe giữa-trước là mép xám trước."
+        },
+        {
+          "id": "B",
+          "text": "Giữa rãnh bên-trước và rãnh bên-sau là bề mặt của ba dải cảm giác."
+        },
+        {
+          "id": "C",
+          "text": "Rãnh bên-trước còn là nơi nằm của các động mạch tủy sống trước."
+        },
+        {
+          "id": "D",
+          "text": "Rãnh giữa-sau ngăn cách các vùng bề mặt của các bó thon."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "Đáp án: D\nA. Đáy khe giữa-trước là mép xám trước => Thực tế đáy của khe\ngiữa-trước là mép trắng trước, nơi các dải sợi thần kinh bắt chéo\nsang bên đối diện\nB. Giữa rãnh bên-trước và rãnh bên-sau là bề mặt của ba dải cảm\ngiác => Khu vực thừng trắng bên này chứa hỗn hợp cả các dải cảm\ngiác và các dải vận động như dải vỏ-tủy bên\nC. Rãnh bên-trước còn là nơi nằm của các động mạch tủy sống\ntrước => Động mạch tủy sống trước chạy trong khe giữa-trước,\ncòn rãnh bên-trước là nơi thoát ra của rễ trước thần kinh sống\nD. Rãnh giữa-sau ngăn cách các vùng bề mặt của các bó thon =>\nRãnh giữa-sau chia đôi mặt sau tủy sống và là ranh giới phân tách\nhai bó thon nằm ở hai bên",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 16,
+      "gradable": true
+    },
+    {
+      "id": "than-kinh-trung-uong-17",
+      "number": 17,
+      "stem": "Đĩa gian đốt sống giữa đốt sống thắt lưng II và III bị thoát vị và chèn vào:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tất cả các thần kinh sống thắt lưng."
+        },
+        {
+          "id": "B",
+          "text": "Một số thần kinh sống chứa sợi cảm giác xúc giác tinh tế của vùng đùi sau."
+        },
+        {
+          "id": "C",
+          "text": "Phần lớn thần kinh sống cùng."
+        },
+        {
+          "id": "D",
+          "text": "Động mạch tủy sống trước."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 17,
+      "gradable": true
+    },
+    {
+      "id": "than-kinh-trung-uong-18",
+      "number": 18,
+      "stem": "Đoạn tủy cùng có đặc điểm:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Có đầy đủ các rãnh bề mặt."
+        },
+        {
+          "id": "B",
+          "text": "Có thất tận cùng nằm ở phần tham gia tạo nên phình thắt lưng-cùng."
+        },
+        {
+          "id": "C",
+          "text": "Chứa các neuron đối giao cảm chi phối các tạng trong chậu hông."
+        },
+        {
+          "id": "D",
+          "text": "Chứa dải tủy-tiểu não mỏ."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "G thích: Từ đoạn cùng II->IV k có sừng bên nhưng có cột trung gian,\ncột TG ở đoạn ấy có các nhân đôi GC, chi phối chậu hông và một ít\ntạng trong bụng (đt sigmoid, đt xuống : phần dây X k chi phối hết).",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 17,
+      "gradable": true
+    },
+    {
+      "id": "than-kinh-trung-uong-19",
+      "number": 19,
+      "stem": "Các mô tả sau về các đốt tủy thắt lưng đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Các đốt tủy này đều nằm trong ống sống đoạn ngực."
+        },
+        {
+          "id": "B",
+          "text": "Chúng có liên quan với một số thần kinh sống ngực."
+        },
+        {
+          "id": "C",
+          "text": "Có hai đốt tủy tham chi phối cho các cơ rộng bụng."
+        },
+        {
+          "id": "D",
+          "text": "Các thần kinh sống tương ứng đều thoát ra khỏi ống sống ở dưới mức các đốt tủy."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Đáp án: C\nA. Các đốt tủy này đều nằm trong ống sống đoạn ngực => Do tủy\nsống ngắn hơn cột sống, các đốt tủy thắt lưng (L1-L5) nằm đối diện\nvới các đốt sống ngực X và XI.\nB. Chúng có liên quan với một số thần kinh sống ngực => Các sợi\nthần kinh sống ngực dưới (T11, T12) chạy dọc bên cạnh các đốt tủy\nthắt lưng để đi xuống lỗ gian đốt sống tương ứng.\nC. Có hai đốt tủy tham chi phối cho các cơ rộng bụng => Các cơ\nrộng bụng (chéo bụng ngoài, trong và ngang bụng) nhận chi phối\nchủ yếu từ 6 dây thần kinh gian sườn dưới (T7-T12) và chỉ một phần\nnhỏ từ L1.\nD. Các thần kinh sống tương ứng đều thoát ra khỏi ống sống ở dưới\nmức các đốt tủy => Các rễ thần kinh thắt lưng phải chạy dài xuống\ndưới trong ống sống (tạo thành đuôi ngựa) để thoát ra tại lỗ gian\nđốt sống tương ứng của chúng.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 18,
+      "gradable": true
+    },
+    {
+      "id": "than-kinh-trung-uong-20",
+      "number": 20,
+      "stem": "Ở tủy sống, các dải vận động ở mỗi nửa của tủy sống có các đặc điểm sau, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Có đầy đủ các đường vận động thuộc hệ tháp và ngoại tháp."
+        },
+        {
+          "id": "B",
+          "text": "Tập trung ở thừng trắng trước và thừng trắng bên."
+        },
+        {
+          "id": "C",
+          "text": "Dải chạy xuống từ trung tâm về trương lực cơ nằm ở thừng trắng bên."
+        },
+        {
+          "id": "D",
+          "text": "Đều nằm sâu hơn và được bao phủ bởi các dải cảm giác."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "Đáp án: D\nA. Có đầy đủ các đường vận động thuộc hệ tháp và ngoại tháp =>\nTủy sống chứa các dải tháp (vỏ tủy trước, bên) và các dải ngoại\ntháp (đỏ tủy, tiền đình tủy, trám tủy, lưới tủy).\nB. Tập trung ở thừng trắng trước và thừng trắng bên => Các dải vận\nđộng phân bố ở thừng trước (vỏ tủy trước, tiền đình tủy) và thừng\nbên (vỏ tủy bên, đỏ tủy, lưới tủy).\nC. Dải chạy xuống từ trung tâm về trương lực cơ nằm ở thừng trắng\nbên => Dải đỏ tủy và dải lưới tủy (chi phối trương lực cơ) nằm ở\nthừng trắng bên của tủy sống.\nD. Đều nằm sâu hơn và được bao phủ bởi các dải cảm giác => Chỉ\nmột số dải vận động nằm sâu (như vỏ tủy bên), trong khi dải vỏ tủy\ntrước và tiền đình tủy nằm khá nông ở bề mặt thừng trước.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 19,
+      "gradable": true
+    },
+    {
+      "id": "than-kinh-trung-uong-21",
+      "number": 21,
+      "stem": "Chất trắng ở mỗi nửa của tủy sống đoạn cổ chứa:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Hai dải từ cột xám sau cùng bên chạy lên tiểu não."
+        },
+        {
+          "id": "B",
+          "text": "Hai dải vận động có ý thức tới các cơ cùng bên."
+        },
+        {
+          "id": "C",
+          "text": "Hai dải cảm giác chứa sợi trục của các neuron hạch gai đối bên."
+        },
+        {
+          "id": "D",
+          "text": "Bốn dải cảm giác chứa các sợi trục tới tạo synapse với neuron ở đồi thị."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Đáp án: A\nA. Hai dải từ cột xám sau cùng bên chạy lên tiểu não => Dải tủy tiểu\nnão trước và dải tủy tiểu não sau đều nằm ở cột trắng bên và dẫn\ntruyền cảm giác bản thể không ý thức lên tiểu não cùng bên.\nB. Hai dải vận động có ý thức tới các cơ cùng bên => Dải vỏ tủy\ntrước (chưa bắt chéo) chi phối cơ đối bên, còn dải vỏ tủy bên (đã\nbắt chéo ở hành não) mới chi phối cơ cùng bên.\nC. Hai dải cảm giác chứa sợi trục của các neuron hạch gai đối bên\n=> Các sợi từ hạch gai (neuron 1) luôn đi vào tủy sống cùng bên; dải\ntủy đồi thị mới chứa các sợi đã bắt chéo từ neuron 2 ở sừng sau đối\nbên.\nD. Bốn dải cảm giác chứa các sợi trục tới tạo synapse với neuron ở\nđồi thị => Chỉ có hai dải (tủy đồi thị trước và tủy đồi thị bên) là trực\ntiếp đi lên đồi thị; các bó thon và bó chêm phải dừng lại ở nhân thon\nvà nhân chêm tại hành não.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 20,
+      "gradable": true
+    },
+    {
+      "id": "than-kinh-trung-uong-22",
+      "number": 22,
+      "stem": "Tủy sống đoạn ngực có các đặc điểm sau, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Có chiều dài ngắn hơn ống sống của đoạn cột sống ngực."
+        },
+        {
+          "id": "B",
+          "text": "Được nuôi dưỡng một phần bởi các động mạch gian sườn sau."
+        },
+        {
+          "id": "C",
+          "text": "Có hai đốt tủy chứa các neuron cảm giác của mặt trong của cánh tay."
+        },
+        {
+          "id": "D",
+          "text": "Chứa các neuron vận động các cơ thành bụng trước-bên ở năm đốt tủy dưới."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/4069a7131d13cbf9da84.webp"
+      ],
+      "sourcePage": 21,
+      "gradable": true
+    },
+    {
+      "id": "than-kinh-trung-uong-23",
+      "number": 23,
+      "stem": "Một khối u nằm trong ống sống ở mức đốt sống thắt lưng I gây chèn ép các thần kinh sống tại vị trí này, các cơ sau của thành bụng đều có thể bị yếu vận động hoặc bị liệt, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ thẳng bụng."
+        },
+        {
+          "id": "B",
+          "text": "Cơ chéo bụng ngoài."
+        },
+        {
+          "id": "C",
+          "text": "Cơ chéo bụng trong."
+        },
+        {
+          "id": "D",
+          "text": "Cơ thắt lưng lớn."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Đáp án: A\nA. Cơ thẳng bụng => Cơ này được chi phối vận động bởi các nhánh\ncủa các dây thần kinh gian sườn từ T7 đến T12, nằm phía trên mức\nthắt lưng I.\nB. Cơ chéo bụng ngoài => Cơ này nhận chi phối từ các dây thần\nkinh gian sườn dưới và thường nhận thêm sợi từ thần kinh chậu hạ vị\n(L1).\nC. Cơ chéo bụng trong => Cơ này được cấp nguồn vận động từ các\ndây thần kinh gian sườn cuối và đặc biệt là thần kinh chậu hạ vị,\nchậu bẹn từ rễ L1.\nD. Cơ thắt lưng lớn => Cơ này nhận các nhánh vận động trực tiếp từ\nđám rối thắt lưng, với thành phần chủ yếu là các rễ L1, L2 và L3.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 21,
+      "gradable": true
+    }
+  ]
+}

@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Giải phẫu Gan (phân thuỳ Couinaud)" dựng từ bộ atlas BodyParts3D.
  *
@@ -12,7 +14,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const liverScene: AtlasSceneDef = {
+export const liverScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/liver.ts#liverScene", {
   slug: "giai-phau-gan",
   title: {
     vi: "Giải phẫu Gan (phân thuỳ Couinaud)",
@@ -326,4 +328,4 @@ export const liverScene: AtlasSceneDef = {
         ]
     }
 ],
-};
+});

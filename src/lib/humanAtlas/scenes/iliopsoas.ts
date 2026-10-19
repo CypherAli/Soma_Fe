@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Cơ thắt lưng–chậu" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const iliopsoasScene: AtlasSceneDef = {
+export const iliopsoasScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/iliopsoas.ts#iliopsoasScene", {
   "slug": "ong-song-that-lung",
   "title": {
     "vi": "Cơ thắt lưng–chậu",
@@ -142,4 +144,4 @@ export const iliopsoasScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

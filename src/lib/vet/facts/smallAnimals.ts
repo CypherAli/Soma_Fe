@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { VetFact } from "../types";
 
 /**
@@ -13,7 +15,7 @@ const KL = "König & Liebich, Veterinary Anatomy of Domestic Mammals, 7th ed. (2
 const MILLER = "Evans & de Lahunta, Miller's Anatomy of the Dog, 4th ed. (2013)";
 const DYCE = "Dyce, Sack & Wensing, Textbook of Veterinary Anatomy, 5th ed. (2018)";
 
-export const smallAnimalFacts: VetFact[] = [
+export const smallAnimalFacts: VetFact[] = bindContentSource("data:src/lib/vet/facts/smallAnimals.ts#smallAnimalFacts", [
   // ---------- BỘ XƯƠNG ----------
   {
     id: "dog-dental-formula",
@@ -431,4 +433,4 @@ export const smallAnimalFacts: VetFact[] = [
     source: KL,
     keys: ["gai luoi", "papillae", "di vat dang day", "linear foreign body", "ham luoi"],
   },
-];
+]);

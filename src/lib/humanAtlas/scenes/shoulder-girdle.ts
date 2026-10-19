@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Đai vai" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const shoulderGirdleScene: AtlasSceneDef = {
+export const shoulderGirdleScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/shoulder-girdle.ts#shoulderGirdleScene", {
   "slug": "giai-phau-dai-vai",
   "title": {
     "vi": "Đai vai và cơ vận động xương vai",
@@ -143,4 +145,4 @@ export const shoulderGirdleScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

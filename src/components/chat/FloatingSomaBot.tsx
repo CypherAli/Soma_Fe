@@ -1,9 +1,15 @@
 "use client";
 
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import Image from "next/image";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useLocale } from "next-intl";
-import { Link, usePathname } from "@/i18n/navigation";
+import { Link, usePathname, useRouter } from "@/i18n/navigation";
+import { matchCommand, wakeQuestion, type VoiceResult } from "@/lib/voice/match";
+import { pageVoiceActions } from "@/lib/voice/registry";
+import { buildGlobalActions } from "@/lib/voice/globalCommands";
+import { createMicrophone, microphoneError, type MicrophoneSession } from "@/lib/voice/microphone";
 import type { Loc } from "@/lib/homeContent";
 import {
   GUEST_LIMIT,
@@ -39,27 +45,6 @@ type Message = {
 
 type CatMood = "calm" | "curious" | "sleepy" | "stretch";
 
-type SpeechResultEvent = Event & {
-  resultIndex: number;
-  results: ArrayLike<{ isFinal: boolean; 0: { transcript: string } }>;
-};
-
-type SpeechErrorEvent = Event & { error: string };
-
-type BrowserSpeechRecognition = EventTarget & {
-  lang: string;
-  continuous: boolean;
-  interimResults: boolean;
-  start: () => void;
-  stop: () => void;
-  abort: () => void;
-  onresult: ((event: SpeechResultEvent) => void) | null;
-  onerror: ((event: SpeechErrorEvent) => void) | null;
-  onend: (() => void) | null;
-};
-
-type SpeechRecognitionConstructor = new () => BrowserSpeechRecognition;
-
 const COPY = {
   vi: {
     name: "Soma Bot", status: "Trợ lý giải phẫu", hello: "Chào bạn, mình là Soma Bot. Mình có thể tra cứu cấu trúc trong atlas, giải thích thuật ngữ và mở đúng mô hình 3D.",
@@ -67,6 +52,9 @@ const COPY = {
     suggestions: ["Tim có những buồng nào?", "Gan nằm ở đâu?", "Dây thần kinh giữa chi phối gì?"],
     voiceMissing: "Máy này chưa cài giọng đọc tiếng Việt nên mình chưa đọc được.",
     hide: "Ẩn trợ lý", show: "Hiện lại Soma Bot",
+    handsFree: "Nghe liên tục", handsFreeOn: "Đang nghe liên tục — nói lệnh, hoặc “Soma …” để hỏi", handsFreeOff: "Tắt nghe liên tục",
+    done: "Xong.", cmdFail: "Không thực hiện được lệnh này.",
+    notUnderstood: (x: string) => `Chưa hiểu lệnh “${x}”. Nói “trợ giúp” để nghe các lệnh.`,
     guestGateTitle: "Hết lượt hỏi của chế độ khách",
     guestGateBody: `Khách chỉ hỏi được ${GUEST_LIMIT} câu mỗi phiên và hội thoại không được lưu lại. Đăng nhập để hỏi không giới hạn và giữ lại mạch hội thoại trên mọi thiết bị.`,
     guestGateCta: "Đăng nhập / Tạo tài khoản",
@@ -77,6 +65,9 @@ const COPY = {
     suggestions: ["What are the chambers of the heart?", "Where is the liver?", "What does the median nerve supply?"],
     voiceMissing: "This device has no English text-to-speech voice installed.",
     hide: "Hide assistant", show: "Show Soma Bot again",
+    handsFree: "Hands-free", handsFreeOn: "Listening hands-free — say a command, or “Soma …” to ask", handsFreeOff: "Stop hands-free",
+    done: "Done.", cmdFail: "That command could not be carried out.",
+    notUnderstood: (x: string) => `I didn't catch the command “${x}”. Say “help” to hear the commands.`,
     guestGateTitle: "Guest questions used up",
     guestGateBody: `Guests get ${GUEST_LIMIT} questions per session and the conversation is never saved. Sign in to ask without limits and keep your conversation on any device.`,
     guestGateCta: "Sign in / Create account",
@@ -87,6 +78,9 @@ const COPY = {
     suggestions: ["心脏有哪些腔室？", "肝脏在哪里？", "正中神经支配什么？"],
     voiceMissing: "此设备未安装中文语音，暂时无法朗读。",
     hide: "隐藏助手", show: "重新显示 Soma Bot",
+    handsFree: "持续收听", handsFreeOn: "正在持续收听——直接说指令，或说“Soma …”提问", handsFreeOff: "停止持续收听",
+    done: "完成。", cmdFail: "无法执行该指令。",
+    notUnderstood: (x: string) => `没有听懂指令“${x}”。说“帮助”可听取指令列表。`,
     guestGateTitle: "访客提问次数已用完",
     guestGateBody: `访客每次会话只能提问 ${GUEST_LIMIT} 次，且对话不会保存。登录后可无限提问，并在任何设备上保留对话。`,
     guestGateCta: "登录／注册",
@@ -118,7 +112,110 @@ export default function FloatingSomaBot() {
   const launcherRef = useRef<HTMLButtonElement>(null);
   const reactionTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const answerTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const recognitionRef = useRef<BrowserSpeechRecognition | null>(null);
+  const recognitionRef = useRef<MicrophoneSession | null>(null);
+  const answerRequestRef = useRef<AbortController | null>(null);
+  const memoryGenerationRef = useRef(0);
+
+  // ---- LỆNH GIỌNG NÓI ----
+  // Câu nói (hoặc gõ) được thử khớp LỆNH trước: lệnh của trang đang mở (bật lớp,
+  // quét…) rồi tới lệnh chung (mở trang, mở mô hình). Không khớp mới gửi cho trợ
+  // lý như một câu hỏi. Lệnh chạy ngay trên máy, không tốn lượt hỏi của khách.
+  const router = useRouter();
+  const globalActions = useMemo(
+    () => buildGlobalActions({ locale, navigate: (href) => router.push(href), back: () => router.back() }),
+    [locale, router],
+  );
+  /** Nghe liên tục (rảnh tay): chỉ chạy LỆNH; muốn hỏi thì mở đầu bằng “Soma …”. */
+  const [handsFree, setHandsFree] = useState(false);
+  const handsFreeRef = useRef(false);
+  const handsFreeRecRef = useRef<MicrophoneSession | null>(null);
+  /** Đang đọc câu xác nhận: micro nghe lại chính giọng máy sẽ tự kích lệnh lần nữa. */
+  const speakingRef = useRef(false);
+  const speechSerialRef = useRef(0);
+  const speechReleaseRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const speechOutput = useCallback((active: boolean) => {
+    speakingRef.current = active;
+    if (active) handsFreeRecRef.current?.pause("speech");
+    else handsFreeRecRef.current?.resume("speech");
+    window.dispatchEvent(new CustomEvent("soma-speech-output", { detail: { active } }));
+  }, []);
+
+  const stopBotSpeech = useCallback(() => {
+    speechSerialRef.current += 1;
+    if (speechReleaseRef.current) clearTimeout(speechReleaseRef.current);
+    if (speakingRef.current) window.speechSynthesis?.cancel();
+    speechOutput(false);
+    setSpeakingIndex(null);
+  }, [speechOutput]);
+
+  // Switching microphones discards an unfinished transcript; it must not run a command.
+  function stopBotMicrophones() {
+    const rec = recognitionRef.current;
+    recognitionRef.current = null;
+    rec?.stop();
+    setListening(false);
+    handsFreeRef.current = false;
+    setHandsFree(false);
+    const continuous = handsFreeRecRef.current;
+    handsFreeRecRef.current = null;
+    continuous?.stop();
+  }
+
+  useEffect(() => {
+    const owner = (event: Event) => {
+      const other = (event as CustomEvent).detail?.owner;
+      if (other !== "vision" && other !== "assistant") return;
+      stopBotMicrophones();
+      stopBotSpeech();
+    };
+    window.addEventListener("soma-speech-owner", owner);
+    return () => { window.removeEventListener("soma-speech-owner", owner); stopBotMicrophones(); stopBotSpeech(); };
+  }, [stopBotSpeech]);
+  useEffect(() => {
+    let current = true;
+    void Promise.resolve().then(() => {
+      if (current) { recognitionRef.current?.stop(); stopBotSpeech(); }
+    });
+    return () => { current = false; };
+  }, [pathname, stopBotSpeech]);
+  useEffect(() => {
+    let current = true;
+    void Promise.resolve().then(() => {
+      if (current) handsFreeRecRef.current?.stop();
+    });
+    return () => { current = false; };
+  }, [locale]);
+  const [toast, setToast] = useState("");
+  const toastTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // Bộ nghe giọng nói giữ hàm từ lúc bắt đầu nghe; qua ref thì luôn gọi bản mới nhất.
+  const askRef = useRef<(text: string, opts?: { voice?: boolean; alts?: string[] }) => Promise<void>>(async () => {});
+  const handsFreeHandlerRef = useRef<(alts: string[]) => Promise<void>>(async () => {});
+
+  /** `texts`: các phương án nghe (phương án tin cậy nhất trước) hoặc một câu gõ. */
+  async function runCommand(texts: string[]): Promise<VoiceResult | null> {
+    const m = matchCommand(texts, [...pageVoiceActions(), ...globalActions]);
+    if (!m) return null;
+    try {
+      return (await m.action.run(m.arg)) ?? { ok: true, say: t.done };
+    } catch {
+      return { ok: false, say: t.cmdFail };
+    }
+  }
+
+  function flash(text: string) {
+    setToast(text);
+    if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
+    toastTimerRef.current = setTimeout(() => setToast(""), 3600);
+  }
+
+  /** Lệnh đã chạy: ghi vào hội thoại (không lưu — lệnh không phải kiến thức), báo nhanh, đọc to nếu nói bằng giọng. */
+  function reportCommand(said: string, r: VoiceResult, voice?: boolean) {
+    setQuestion("");
+    setMessages((prev) => [...prev, { role: "user", text: said } as Message, { role: "bot", text: r.say, engine: "command" } as Message].slice(-12));
+    flash(r.say);
+    if (voice) void speakPlain(r.say);
+  }
 
   /** Đọc lại trạng thái đăng nhập + hạn mức từ @/lib/chatMemory. */
   function syncQuota() {
@@ -128,22 +225,28 @@ export default function FloatingSomaBot() {
   }
 
   useEffect(() => {
+    let active = true;
+    const reload = () => {
+      const generation = ++memoryGenerationRef.current;
+      void loadMemory().then(turns => {
+        if (active && generation === memoryGenerationRef.current) setMessages(turns.slice(-12) as Message[]);
+      }).catch(() => {});
+    };
     Promise.resolve().then(() => {
-      try {
-        // Đã đăng nhập thì lấy hội thoại từ máy chủ (đổi máy vẫn còn); khách
-        // thì chỉ có những gì đã hỏi trong tab này — xem @/lib/chatMemory.
-        void loadMemory().then((turns) => setMessages(turns.slice(-12) as Message[]));
-      } catch { setMessages([]); }
+      if (!active) return;
+      reload();
       syncQuota();
     });
     // Đăng nhập ngay trong tab khác / trang khác thì hàng rào phải mở ra luôn,
     // không bắt người ta tải lại trang mới hỏi tiếp được.
     const onAuth = () => {
+      answerRequestRef.current?.abort(); answerRequestRef.current = null;
+      stopBotMicrophones(); setBusy(false); setQuestion("");
       syncQuota();
-      void loadMemory().then((turns) => setMessages(turns.slice(-12) as Message[])).catch(() => {});
+      reload();
     };
     window.addEventListener(AUTH_CHANGED_EVENT, onAuth);
-    return () => window.removeEventListener(AUTH_CHANGED_EVENT, onAuth);
+    return () => { active = false; answerRequestRef.current?.abort(); window.removeEventListener(AUTH_CHANGED_EVENT, onAuth); };
   }, []);
 
   useEffect(() => {
@@ -173,9 +276,9 @@ export default function FloatingSomaBot() {
   useEffect(() => () => {
     if (reactionTimerRef.current) clearTimeout(reactionTimerRef.current);
     if (answerTimerRef.current) clearTimeout(answerTimerRef.current);
-    recognitionRef.current?.abort();
-    window.speechSynthesis?.cancel();
-  }, []);
+    stopBotMicrophones();
+    stopBotSpeech();
+  }, [stopBotSpeech]);
 
   useEffect(() => {
     if (open || busy || answered || reacting) return;
@@ -195,18 +298,28 @@ export default function FloatingSomaBot() {
     return t.suggestions;
   }, [locale, pathname, t.suggestions]);
 
-  async function ask(text?: string) {
+  async function ask(text?: string, opts?: { voice?: boolean; alts?: string[] }) {
     const value = (text ?? question).trim();
-    if (!value || busy) return;
+    if (!value) return;
+    // Lệnh chạy TRƯỚC khi xét "đang bận": nó chạy ngay trên máy, không cần chờ
+    // trợ lý trả lời xong câu trước. Đã thấy trên trang thật: hỏi "tim có mấy
+    // buồng" rồi nói "mở mô hình tim" trong lúc chờ thì lệnh bị nuốt mất.
+    const cmd = await runCommand(opts?.alts?.length ? opts.alts : [value]);
+    if (cmd) {
+      reportCommand(value, cmd, opts?.voice);
+      return;
+    }
+    if (answerRequestRef.current) return;
     // Hỏi lại chatMemory chứ không tin state: hết lượt thì dừng ở đây, không
     // gọi API. Trả về sau khi đã đồng bộ để giao diện hiện hàng rào.
     if (isGuest() && guestQuotaLeft() <= 0) {
       syncQuota();
       return;
     }
-    recognitionRef.current?.stop();
-    window.speechSynthesis?.cancel();
-    setSpeakingIndex(null);
+    stopBotMicrophones();
+    stopBotSpeech();
+    const controller = new AbortController();
+    answerRequestRef.current = controller; memoryGenerationRef.current++;
     const next = [...messages, { role: "user", text: value } satisfies Message];
     setMessages(next);
     setQuestion("");
@@ -225,9 +338,11 @@ export default function FloatingSomaBot() {
           // Vài lượt gần nhất để hỏi tiếp kiểu "nó nằm ở đâu" là hiểu.
           history: next.slice(-5).map((m) => ({ role: m.role, text: m.text })),
         }),
+        signal: controller.signal,
       });
       if (!response.ok) throw new Error("assistant unavailable");
       const data = await response.json();
+      if (controller.signal.aborted || answerRequestRef.current !== controller) return;
       const complete = [...next, { role: "bot", text: data.answer ?? t.error, sources: data.sources, engine: data.engine, suggestions: data.suggestions } satisfies Message].slice(-12);
       setMessages(complete);
       saveMemory(complete.map((m) => ({ role: m.role, text: m.text })));
@@ -235,59 +350,37 @@ export default function FloatingSomaBot() {
       if (answerTimerRef.current) clearTimeout(answerTimerRef.current);
       answerTimerRef.current = setTimeout(() => setAnswered(false), 2400);
     } catch {
+      if (controller.signal.aborted || answerRequestRef.current !== controller) return;
       const complete = [...next, { role: "bot", text: t.error } satisfies Message].slice(-12);
       setMessages(complete);
       saveMemory(complete.map((m) => ({ role: m.role, text: m.text })));
-    } finally { setBusy(false); }
+    } finally { if (answerRequestRef.current === controller) { answerRequestRef.current = null; setBusy(false); } }
   }
 
   function clear() {
-    window.speechSynthesis?.cancel();
-    setSpeakingIndex(null);
+    memoryGenerationRef.current++; answerRequestRef.current?.abort(); answerRequestRef.current = null;
+    stopBotMicrophones(); setBusy(false);
+    stopBotSpeech();
     setMessages([]);
     clearMemory();
   }
 
   function toggleListening() {
-    if (listening) {
-      recognitionRef.current?.stop();
-      return;
-    }
-    const browserWindow = window as typeof window & {
-      SpeechRecognition?: SpeechRecognitionConstructor;
-      webkitSpeechRecognition?: SpeechRecognitionConstructor;
-    };
-    const Recognition = browserWindow.SpeechRecognition ?? browserWindow.webkitSpeechRecognition;
-    if (!Recognition) {
-      setVoiceNote(t.voiceUnsupported);
-      return;
-    }
-
-    window.speechSynthesis?.cancel();
-    setSpeakingIndex(null);
+    if (listening) { recognitionRef.current?.stop(); return; }
+    window.dispatchEvent(new CustomEvent("soma-speech-owner", { detail: { owner: "bot" } }));
+    stopBotMicrophones();
+    stopBotSpeech();
     setVoiceNote("");
-    const recognition = new Recognition();
-    recognition.lang = locale === "vi" ? "vi-VN" : locale === "zh" ? "zh-CN" : "en-US";
-    recognition.continuous = false;
-    recognition.interimResults = true;
-    recognition.onresult = (event) => {
-      let transcript = "";
-      for (let index = event.resultIndex; index < event.results.length; index += 1) {
-        transcript += event.results[index][0].transcript;
-      }
-      setQuestion(transcript.trimStart());
-    };
-    recognition.onerror = (event) => {
-      setVoiceNote(event.error === "not-allowed" || event.error === "service-not-allowed" ? t.micDenied : t.voiceUnsupported);
-      setListening(false);
-    };
-    recognition.onend = () => {
-      setListening(false);
-      recognitionRef.current = null;
-    };
-    recognitionRef.current = recognition;
-    setListening(true);
-    recognition.start();
+    const session = createMicrophone({
+      locale,
+      onState: state => setListening(state === "starting" || state === "listening"),
+      onError: error => setVoiceNote(microphoneError(locale, error)),
+      onText: (text, alts, final) => {
+        setQuestion(text);
+        if (final) void askRef.current(text, { voice: true, alts });
+      },
+    });
+    recognitionRef.current = session; session.start();
   }
 
   /**
@@ -302,10 +395,10 @@ export default function FloatingSomaBot() {
     const now = window.speechSynthesis.getVoices();
     if (now.length > 0) return Promise.resolve(now);
     return new Promise((resolve) => {
-      const done = () => resolve(window.speechSynthesis.getVoices());
+      const done = () => { clearTimeout(timer); window.speechSynthesis.removeEventListener("voiceschanged", done); resolve(window.speechSynthesis.getVoices()); };
       window.speechSynthesis.addEventListener("voiceschanged", done, { once: true });
       // Có trình duyệt không bao giờ bắn sự kiện này; đừng treo mãi ở đó.
-      setTimeout(done, 1200);
+      const timer = setTimeout(done, 1200);
     });
   }
 
@@ -315,14 +408,16 @@ export default function FloatingSomaBot() {
       return;
     }
     if (speakingIndex === index) {
-      window.speechSynthesis.cancel();
-      setSpeakingIndex(null);
+      stopBotSpeech();
       return;
     }
-    window.speechSynthesis.cancel();
+    window.dispatchEvent(new CustomEvent("soma-speech-owner", { detail: { owner: "bot" } }));
+    stopBotSpeech();
+    const serial = speechSerialRef.current;
 
     const lang = locale === "vi" ? "vi-VN" : locale === "zh" ? "zh-CN" : "en-US";
     const voices = await voicesReady();
+    if (serial !== speechSerialRef.current) return;
     // Khớp theo tiền tố ("vi") chứ không đòi đúng "vi-VN": nhiều hệ đặt tên là
     // "vi_VN" hoặc chỉ "vi".
     const prefix = lang.slice(0, 2).toLowerCase();
@@ -341,18 +436,90 @@ export default function FloatingSomaBot() {
     utterance.lang = voice.lang;
     utterance.rate = locale === "vi" ? 0.94 : 1;
     utterance.pitch = 1.05;
-    utterance.onend = () => setSpeakingIndex(null);
-    utterance.onerror = () => setSpeakingIndex(null);
+    const done = () => { if (serial !== speechSerialRef.current) return; setSpeakingIndex(null); speechReleaseRef.current = setTimeout(() => { if (serial === speechSerialRef.current) speechOutput(false); }, 350); };
+    utterance.onend = done;
+    utterance.onerror = done;
     setSpeakingIndex(index);
-    window.speechSynthesis.speak(utterance);
+    speechOutput(true);
+    try { window.speechSynthesis.speak(utterance); } catch { stopBotSpeech(); setVoiceNote(t.voiceUnsupported); }
   }
+
+  /** Đọc một câu ngắn (xác nhận lệnh). Máy thiếu giọng đúng tiếng thì im lặng — đã có dòng báo trên màn hình. */
+  async function speakPlain(text: string) {
+    if (!("speechSynthesis" in window)) return;
+    window.dispatchEvent(new CustomEvent("soma-speech-owner", { detail: { owner: "bot" } }));
+    stopBotSpeech();
+    const serial = speechSerialRef.current;
+    const lang = locale === "vi" ? "vi-VN" : locale === "zh" ? "zh-CN" : "en-US";
+    const voice = (await voicesReady()).find((v) => v.lang.toLowerCase().replace("_", "-").startsWith(lang.slice(0, 2)));
+    if (serial !== speechSerialRef.current) return;
+    if (!voice) { setVoiceNote(t.voiceMissing); return; }
+    const u = new SpeechSynthesisUtterance(text);
+    u.voice = voice;
+    u.lang = voice.lang;
+    u.rate = locale === "vi" ? 1 : 1.05;
+    speechOutput(true);
+    const done = () => { if (serial === speechSerialRef.current) speechReleaseRef.current = setTimeout(() => { if (serial === speechSerialRef.current) speechOutput(false); }, 350); };
+    u.onend = done;
+    u.onerror = done;
+    try { window.speechSynthesis.speak(u); } catch { stopBotSpeech(); setVoiceNote(t.voiceUnsupported); }
+  }
+
+  /** Một câu nghe được ở chế độ rảnh tay. */
+  async function handleHandsFree(alts: string[]) {
+    const text = alts[0];
+    if (!text || speakingRef.current) return;
+    const cmd = await runCommand(alts);
+    if (cmd) return reportCommand(text, cmd, true);
+    // Hỏi trợ lý phải GỌI TÊN: nghe liên tục mà câu nào cũng gửi đi thì mọi câu
+    // nói chuyện trong phòng đều thành câu hỏi, tốn lượt và làm rối hội thoại.
+    const q = alts.map(wakeQuestion).find(Boolean);
+    if (q) {
+      setOpen(true);
+      return void askRef.current(q, { voice: true });
+    }
+    flash(t.notUnderstood(text));
+  }
+
+  function toggleHandsFree() {
+    if (handsFreeRef.current) {
+      handsFreeRecRef.current?.stop();
+      return;
+    }
+    window.dispatchEvent(new CustomEvent("soma-speech-owner", { detail: { owner: "bot" } }));
+    stopBotMicrophones();
+    stopBotSpeech();
+    setVoiceNote("");
+    const session = createMicrophone({
+      locale, continuous: true,
+      onState: state => {
+        const active = state === "starting" || state === "listening" || state === "paused";
+        handsFreeRef.current = active; setHandsFree(active);
+      },
+      onError: error => setVoiceNote(microphoneError(locale, error)),
+      onText: (_text, alts) => { void handsFreeHandlerRef.current(alts); },
+    });
+    handsFreeRecRef.current = session; session.start();
+  }
+
+  useEffect(() => {
+    askRef.current = ask;
+    handsFreeHandlerRef.current = handleHandsFree;
+  });
+
+  useEffect(
+    () => () => {
+      handsFreeRef.current = false;
+      handsFreeRecRef.current?.stop();
+      if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
+    },
+    [],
+  );
 
   function toggleBot() {
     if (open) {
-      recognitionRef.current?.abort();
-      window.speechSynthesis?.cancel();
-      setListening(false);
-      setSpeakingIndex(null);
+      stopBotMicrophones();
+      stopBotSpeech();
     }
     setOpen((value) => !value);
     setReacting(true);
@@ -361,29 +528,25 @@ export default function FloatingSomaBot() {
   }
 
   function hideBot() {
-    recognitionRef.current?.abort();
-    window.speechSynthesis?.cancel();
-    setListening(false);
-    setSpeakingIndex(null);
+    stopBotMicrophones();
+    stopBotSpeech();
     setOpen(false);
     setHidden(true);
   }
 
   function closeBot() {
-    recognitionRef.current?.abort();
-    window.speechSynthesis?.cancel();
-    setListening(false);
-    setSpeakingIndex(null);
+    stopBotMicrophones();
+    stopBotSpeech();
     setOpen(false);
   }
 
   /* Đã ẩn thì cả con mèo lẫn bảng chat biến mất, chỉ còn một chấm sáng ở đúng
      chỗ cũ để gọi lại — người đang xoay mô hình 3D cần khoảng góc phải đó. */
   if (hidden) {
-    return <button className="soma-bot-minimized" type="button" onClick={() => setHidden(false)} title={t.show} aria-label={t.show}><i /></button>;
+    return <ContentSurface scope="src/components/chat/FloatingSomaBot.tsx"><button className="soma-bot-minimized" type="button" onClick={() => setHidden(false)} title={t.show} aria-label={t.show}><i /></button></ContentSurface>;
   }
 
-  return <div className={`soma-bot mood-${catMood}${open ? " is-open" : ""}${busy ? " is-thinking" : ""}${listening ? " is-listening" : ""}${answered ? " is-success" : ""}${reacting ? " is-reacting" : ""}`} style={{ position: "fixed", right: 22, bottom: 18, zIndex: 90 }}>
+  return <ContentSurface scope="src/components/chat/FloatingSomaBot.tsx"><div className={`soma-bot mood-${catMood}${open ? " is-open" : ""}${busy ? " is-thinking" : ""}${listening ? " is-listening" : ""}${answered ? " is-success" : ""}${reacting ? " is-reacting" : ""}`} style={{ position: "fixed", right: 22, bottom: 18, zIndex: 90 }}>
     <button className="soma-bot-hide" type="button" onClick={hideBot} title={t.hide} aria-label={t.hide}>
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14" strokeLinecap="round" /></svg>
     </button>
@@ -422,11 +585,16 @@ export default function FloatingSomaBot() {
         <button className={`soma-bot-mic${listening ? " is-listening" : ""}`} type="button" onClick={toggleListening} disabled={busy || gated} aria-label={listening ? t.stopMic : t.mic} title={listening ? t.stopMic : t.mic}><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6.5 11.5a5.5 5.5 0 0 0 11 0M12 17v4m-3 0h6"/></svg></button>
         <button type="submit" disabled={!question.trim() || busy || gated} aria-label={t.send}>↑</button>
       </form>
-      {(listening || voiceNote) && <div className={`soma-bot-voice-note${listening ? " is-listening" : ""}`} role="status"><i />{listening ? t.listening : voiceNote}</div>}
+      {(listening || voiceNote || handsFree) && <div className={`soma-bot-voice-note${listening || handsFree ? " is-listening" : ""}`} role="status"><i />{listening ? t.listening : handsFree ? t.handsFreeOn : voiceNote}</div>}
+      <button type="button" onClick={toggleHandsFree} aria-pressed={handsFree} disabled={gated && !handsFree} style={{ margin: "0 12px 8px", padding: "6px 10px", borderRadius: 999, border: "1px solid var(--line)", background: handsFree ? "rgba(15,138,124,.14)" : "transparent", color: "var(--ink)", fontSize: 12, cursor: "pointer" }}>
+        {handsFree ? `■ ${t.handsFreeOff}` : `◉ ${t.handsFree}`}
+      </button>
       <footer><span>{t.disclaimer}</span><Link href="/tro-ly" onClick={closeBot}>{t.full} ↗</Link></footer>
     </section>}
 
-    <button ref={launcherRef} className="soma-bot-launcher" type="button" onClick={toggleBot} aria-expanded={open} aria-label={open ? t.close : t.open}>
+    {/* Kết quả lệnh khi bảng chat đang đóng (rảnh tay): một dòng báo ngắn ngay trên con mèo. */}
+    {!open && toast && <div role="status" style={{ position: "absolute", right: 0, bottom: "100%", marginBottom: 10, maxWidth: 300, padding: "8px 12px", borderRadius: 12, border: "1px solid var(--line)", background: "var(--surf)", color: "var(--ink)", fontSize: 13, lineHeight: 1.45, boxShadow: "0 8px 24px rgba(0,0,0,.18)" }}>{handsFree ? "◉ " : ""}{toast}</div>}
+    <button ref={launcherRef} className={`soma-bot-launcher${handsFree ? " is-hands-free" : ""}`} type="button" onClick={toggleBot} aria-expanded={open} aria-label={open ? t.close : t.open}>
       <b className="soma-bot-aura" aria-hidden="true" />
       <b className="soma-bot-scan" aria-hidden="true" />
       <span>{t.open}</span>
@@ -442,5 +610,5 @@ export default function FloatingSomaBot() {
       <i />
       <b className="soma-bot-ecg" aria-hidden="true"><svg viewBox="0 0 52 18"><path d="M1 10h10l3-5 4 11 5-15 5 9h8l3-4 3 4h9" /></svg></b>
     </button>
-  </div>;
+  </div></ContentSurface>;
 }

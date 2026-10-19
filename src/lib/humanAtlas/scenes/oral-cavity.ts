@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Miệng, lưỡi và răng" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const oralCavityScene: AtlasSceneDef = {
+export const oralCavityScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/oral-cavity.ts#oralCavityScene", {
   "slug": "mieng-luoi-rang",
   "title": {
     "vi": "Ổ miệng: răng, lưỡi và vòm miệng",
@@ -214,4 +216,4 @@ export const oralCavityScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

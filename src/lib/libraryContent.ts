@@ -1,6 +1,8 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { T3 } from "./homeContent";
 
-export const libraryContent = {
+export const libraryContent = bindContentSource("data:src/lib/libraryContent.ts#libraryContent", {
   title: { vi: "Tất cả mô hình riêng tư", en: "All private models", zh: "所有私人模型" } as T3,
   search: { vi: "Tìm trong mô hình riêng tư", en: "Search all private models", zh: "搜索所有私人模型" } as T3,
   sort: { vi: "Mới nhất", en: "Most recent", zh: "最新" } as T3,
@@ -11,4 +13,4 @@ export const libraryContent = {
     zh: "这里是你在 Soma 3D 保存的解剖模型库。随时自定义、管理和发布你的模型。",
   } as T3,
   cta: { vi: "Bắt đầu khám phá", en: "Start exploring", zh: "开始探索" } as T3,
-};
+});

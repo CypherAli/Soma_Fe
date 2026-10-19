@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Bộ lệ" dựng từ bộ atlas BodyParts3D. Bên trái (bẫy #13).
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const lacrimalScene: AtlasSceneDef = {
+export const lacrimalScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/lacrimal.ts#lacrimalScene", {
   "slug": "le-dao",
   "title": {
     "vi": "Bộ lệ: tuyến lệ và đường dẫn lệ",
@@ -196,4 +198,4 @@ export const lacrimalScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

@@ -18,6 +18,8 @@ export interface AtlasSceneGroup {
   latin?: string;
   /** Ghi chú giải phẫu ngắn, viết cho sinh viên y. */
   note?: T3;
+  /** Surface features may share a parent mesh. Do not invent independent mesh IDs. */
+  landmarks?: { name: T3; latin: string; note: T3; source: string; sourceTitle?:string; separatedName?: T3; anchors?: { partId: string; position: [number, number, number] }[] }[];
   /**
    * Ghi đè màu cho cả nhóm (hex). Dùng khi màu theo hệ của atlas dạy sai —
    * điển hình là vòng tiểu tuần hoàn: động mạch phổi mang máu nghèo oxy nên
@@ -29,6 +31,8 @@ export interface AtlasSceneGroup {
 }
 
 export interface AtlasSceneDef {
+  /** Optional replacement authored in BO; empty keeps the original atlas. */
+  replacement?: { modelFile: string; hotspots: import('@/lib/scenes/types').SceneHotspot[] };
   slug: string;
   title: T3;
   latin?: string;

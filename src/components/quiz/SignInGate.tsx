@@ -1,5 +1,7 @@
 "use client";
 
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import Link from "next/link";
 import type { QuizText } from "./quizText";
 
@@ -10,12 +12,12 @@ import type { QuizText } from "./quizText";
  * vào đâu, còn lý do thì đọc xong cũng không đổi quyết định.
  */
 export default function SignInGate({ t }: { t: QuizText }) {
-  return (
+  return <ContentSurface scope="src/components/quiz/SignInGate.tsx">{(
     <section className="quiz-signin-gate">
       <b>{t.signInTitle}</b>
       <Link href="/dang-nhap" className="quiz-signin-cta">
         {t.signInCta} →
       </Link>
     </section>
-  );
+  )}</ContentSurface>;
 }

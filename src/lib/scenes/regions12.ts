@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { SceneModule } from "./types";
 import type { RegionViewKey } from "./regions";
 
@@ -6,7 +8,7 @@ import type { RegionViewKey } from "./regions";
  * ngực – thắt lưng. Ba bài về hệ CÂN và đường đi dây thần kinh dài, hai thứ mà
  * atlas trước nay chỉ chạm tới gián tiếp qua các scene cơ.
  */
-export const regionScenes12: Record<string, SceneModule> = {
+export const regionScenes12: Record<string, SceneModule> = bindContentSource("data:src/lib/scenes/regions12.ts#regionScenes12", {
   "dai-chau-chay": {
     slug: "dai-chau-chay",
     title: { vi: "Dải chậu chày và vùng đùi ngoài", en: "The Iliotibial Tract & Lateral Thigh", zh: "髂胫束与大腿外侧" },
@@ -120,7 +122,7 @@ export const regionScenes12: Record<string, SceneModule> = {
         note: { vi: "Mỏm ngang L3 DÀI NHẤT trong các đốt thắt lưng vì là điểm bám của nhiều lá cân và cơ nhất — cũng vì thế nó hay bị gãy do co cơ đột ngột ở vận động viên, và là mốc siêu âm để tìm mặt phẳng phong bế cơ vuông thắt lưng.", en: "The L3 transverse process is the LONGEST of the lumbar vertebrae because it anchors the most fascial layers and muscles — it is therefore the one avulsed by sudden muscular contraction in athletes, and the ultrasound landmark for finding the quadratus lumborum block plane.", zh: "L3横突为腰椎中最长者，因其附着的筋膜层与肌肉最多——故也是运动员肌肉骤然收缩致撕脱骨折的部位，并作为超声寻找腰方肌阻滞平面的标志。" } },
     ],
   },
-};
+});
 
 export const regionViewerConfig12: Record<string, { cats: RegionViewKey[]; faded?: RegionViewKey[] }> = {
   "dai-chau-chay": { cats: ["skin", "muscle", "artery", "vein", "nerve", "bone"], faded: ["skin"] },

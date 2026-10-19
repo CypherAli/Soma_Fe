@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 // TỆP SINH TỰ ĐỘNG — đừng sửa tay.
 // Sinh bởi scripts/vet/import-lmu-models.mjs từ sketchfab.com/vetanatMunich.
 //
@@ -21,7 +23,7 @@ export type LmuModel = {
 export const LMU_ATTRIBUTION =
   "Chair of Anatomy, Histology and Embryology, Department of Veterinary Sciences, LMU München";
 
-export const lmuModels: LmuModel[] = [
+export const lmuModels: LmuModel[] = bindContentSource("data:src/lib/vet/lmuData.ts#lmuModels", [
   {
     "uid": "350a8f86704642efa5fdda8b27605c26",
     "file": "350a8f86704642efa5fdda8b27605c26.glb",
@@ -1318,6 +1320,6 @@ export const lmuModels: LmuModel[] = [
     "author": "vetanatMunich",
     "sourceUrl": "https://sketchfab.com/3d-models/none-05de3a953ffa44f6b3463f05de158af9"
   }
-];
+]);
 
 export const lmuOfSpecies = (species: string) => lmuModels.filter((m) => m.species === species);

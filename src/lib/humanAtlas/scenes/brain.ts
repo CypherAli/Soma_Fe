@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Đại não: thuỳ, hồi và não thất" dựng từ bộ atlas BodyParts3D.
  *
@@ -11,7 +13,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const brainScene: AtlasSceneDef = {
+export const brainScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/brain.ts#brainScene", {
   slug: "dai-nao",
   title: {
     vi: "Đại não: thuỳ, hồi và não thất",
@@ -404,4 +406,4 @@ export const brainScene: AtlasSceneDef = {
         ]
     }
 ],
-};
+});

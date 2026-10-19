@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Bài bộ phận "Thận — học theo lớp" học theo lớp — nhóm lấy từ kidney.ts (đã kiểm), chỉ thêm lớp.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const partKidneyScene: AtlasSceneDef = {
+export const partKidneyScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/part-kidney.ts#partKidneyScene", {
   "slug": "bo-phan-than",
   "title": {
     "vi": "Thận — học theo lớp",
@@ -195,4 +197,4 @@ export const partKidneyScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

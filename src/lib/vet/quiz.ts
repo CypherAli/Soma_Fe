@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import { rng, shuffle } from "@/lib/anatomy/random";
 import { pick, type Loc, type T3 } from "@/lib/homeContent";
 import { SPECIES, VET_SYSTEM_LABEL, allVetFacts, speciesInfo } from "./knowledge";
@@ -34,7 +36,7 @@ export type VetQuizItem = {
   factId: string;
 };
 
-const PROMPT: Record<VetQuizKind, T3> = {
+const PROMPT: Record<VetQuizKind, T3> = bindContentSource("data:src/lib/vet/quiz.ts#PROMPT", {
   species: {
     vi: "Đặc điểm sau thuộc loài nào?",
     en: "Which species does this feature belong to?",
@@ -55,7 +57,7 @@ const PROMPT: Record<VetQuizKind, T3> = {
     en: "Which statement about the difference between species is CORRECT?",
     zh: "关于物种间差异，下列哪项陈述正确？",
   },
-};
+});
 
 /**
  * Cắt một đoạn mô tả và XOÁ mọi tên có thể làm lộ đáp án.

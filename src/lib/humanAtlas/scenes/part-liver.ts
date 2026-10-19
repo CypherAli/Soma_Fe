@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Bài bộ phận "Gan — học theo lớp" học theo lớp — nhóm lấy từ liver.ts (đã kiểm), chỉ thêm lớp.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const partLiverScene: AtlasSceneDef = {
+export const partLiverScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/part-liver.ts#partLiverScene", {
   "slug": "bo-phan-gan",
   "title": {
     "vi": "Gan — học theo lớp",
@@ -366,4 +368,4 @@ export const partLiverScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

@@ -1,5 +1,9 @@
 "use client";
 
+
+
+import { useContent } from "@/components/content/ContentProvider";
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useEffect, useState } from "react";
 import { pick, type Loc } from "@/lib/homeContent";
 import { settingsContent as S } from "@/lib/settingsContent";
@@ -24,8 +28,11 @@ export default function SecurityTab({
   user: AccountProfile;
   onSignedOut: () => void;
 }) {
+  const cmsContent = useContent();
+  const S = cmsContent.resolve(cmsSourceS());
+
   const C = S.security;
-  return (
+  return <ContentSurface scope="src/components/settings/SecurityTab.tsx">{(
     <>
       <PasswordCard locale={locale} user={user} />
       <DevicesCard locale={locale} />
@@ -35,10 +42,13 @@ export default function SecurityTab({
         </button>
       </Card>
     </>
-  );
+  )}</ContentSurface>;
 }
 
 function PasswordCard({ locale, user }: { locale: Loc; user: AccountProfile }) {
+  const cmsContent = useContent();
+  const S = cmsContent.resolve(cmsSourceS());
+
   const C = S.security;
   const [current, setCurrent] = useState("");
   const [next, setNext] = useState("");
@@ -48,11 +58,11 @@ function PasswordCard({ locale, user }: { locale: Loc; user: AccountProfile }) {
   const [done, setDone] = useState(false);
 
   if (!user.hasPassword) {
-    return (
+    return <ContentSurface scope="src/components/settings/SecurityTab.tsx">{(
       <Card title={pick(C.heading, locale)}>
         <p className="st-note">{pick(C.noPassword, locale)}</p>
       </Card>
-    );
+    )}</ContentSurface>;
   }
 
   async function submit(event: React.FormEvent) {
@@ -83,7 +93,7 @@ function PasswordCard({ locale, user }: { locale: Loc; user: AccountProfile }) {
     }
   }
 
-  return (
+  return <ContentSurface scope="src/components/settings/SecurityTab.tsx">{(
     <Card title={pick(C.heading, locale)}>
       <form className="st-form" onSubmit={(event) => void submit(event)}>
         <label>
@@ -106,10 +116,13 @@ function PasswordCard({ locale, user }: { locale: Loc; user: AccountProfile }) {
         </button>
       </form>
     </Card>
-  );
+  )}</ContentSurface>;
 }
 
 function DevicesCard({ locale }: { locale: Loc }) {
+  const cmsContent = useContent();
+  const S = cmsContent.resolve(cmsSourceS());
+
   const C = S.security;
   const [rows, setRows] = useState<DeviceSession[] | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -147,7 +160,7 @@ function DevicesCard({ locale }: { locale: Loc }) {
 
   const others = (rows ?? []).filter((row) => !row.current).length;
 
-  return (
+  return <ContentSurface scope="src/components/settings/SecurityTab.tsx">{(
     <Card
       title={pick(C.devicesHeading, locale)}
       note={pick(C.devicesNote, locale)}
@@ -189,5 +202,7 @@ function DevicesCard({ locale }: { locale: Loc }) {
         </ul>
       )}
     </Card>
-  );
+  )}</ContentSurface>;
 }
+
+function cmsSourceS() { return S; }

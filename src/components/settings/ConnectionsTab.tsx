@@ -1,5 +1,9 @@
 "use client";
 
+
+
+import { useContent } from "@/components/content/ContentProvider";
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { pick, type Loc } from "@/lib/homeContent";
@@ -31,6 +35,9 @@ export default function ConnectionsTab({
   user: AccountProfile;
   onChange: (user: AccountProfile) => void;
 }) {
+  const cmsContent = useContent();
+  const S = cmsContent.resolve(cmsSourceS());
+
   const C = S.connections;
   const params = useSearchParams();
   const [error, setError] = useState<string | null>(null);
@@ -59,7 +66,7 @@ export default function ConnectionsTab({
     }
   }
 
-  return (
+  return <ContentSurface scope="src/components/settings/ConnectionsTab.tsx">{(
     <Card title={pick(C.heading, locale)} note={pick(C.note, locale)}>
       {error && <Notice kind="error">{error}</Notice>}
       {justLinked && <Notice kind="ok">{pick(C.linkedJust, locale)}</Notice>}
@@ -110,5 +117,7 @@ export default function ConnectionsTab({
         </li>
       </ul>
     </Card>
-  );
+  )}</ContentSurface>;
 }
+
+function cmsSourceS() { return S; }

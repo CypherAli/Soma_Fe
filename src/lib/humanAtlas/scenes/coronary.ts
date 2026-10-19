@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Động mạch vành" dựng từ bộ atlas BodyParts3D.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const coronaryScene: AtlasSceneDef = {
+export const coronaryScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/coronary.ts#coronaryScene", {
   "slug": "dong-mach-vanh",
   "title": {
     "vi": "Động mạch vành",
@@ -265,4 +267,4 @@ export const coronaryScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

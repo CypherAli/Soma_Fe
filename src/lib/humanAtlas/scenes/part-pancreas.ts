@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Bài bộ phận "Tuỵ và lách — học theo lớp" học theo lớp — nhóm lấy từ pancreas-spleen.ts (đã kiểm), chỉ thêm lớp.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const partPancreasScene: AtlasSceneDef = {
+export const partPancreasScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/part-pancreas.ts#partPancreasScene", {
   "slug": "bo-phan-tuy-lach",
   "title": {
     "vi": "Tuỵ và lách — học theo lớp",
@@ -201,4 +203,4 @@ export const partPancreasScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

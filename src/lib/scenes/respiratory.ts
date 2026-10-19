@@ -1,7 +1,9 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { SceneModule } from "./types";
 
 /** He ho hap - 3 scene. */
-export const respiratoryScenes: Record<string, SceneModule> = {
+export const respiratoryScenes: Record<string, SceneModule> = bindContentSource("data:src/lib/scenes/respiratory.ts#respiratoryScenes", {
   "giai-phau-phoi": {
     slug: "giai-phau-phoi",
     title: { vi: "Giải phẫu Phổi", en: "Lung Anatomy", zh: "肺解剖" },
@@ -168,4 +170,4 @@ export const respiratoryScenes: Record<string, SceneModule> = {
         note: { vi: "Kéo nắp thanh môn xuống đậy lối vào thanh quản khi nuốt — cơ chế bảo vệ đường thở. Ở người có nếp phễu nắp ngắn bẩm sinh, phần này bị hút vào thì hít gây tiếng thở rít (mềm sụn thanh quản ở trẻ nhỏ), thường tự hết trước hai tuổi.", en: "It pulls the epiglottis down over the laryngeal inlet during swallowing — the airway protection mechanism. In infants with congenitally short aryepiglottic folds this tissue is sucked in on inspiration and causes stridor (laryngomalacia), usually resolving before the age of two.", zh: "吞咽时下拉会厌覆盖喉入口——为气道保护机制。先天性杓会厌襞短的婴儿吸气时该组织被吸入而产生喘鸣（喉软化），多在两岁前自行缓解。" } },
     ],
   },
-};
+});

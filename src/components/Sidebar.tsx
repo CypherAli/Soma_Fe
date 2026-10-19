@@ -1,5 +1,7 @@
 "use client";
 
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useTranslations } from "next-intl";
 import { useAnatomyStore, SYSTEM_KEYS, type SystemKey } from "@/store/useAnatomyStore";
 
@@ -25,17 +27,17 @@ const SYSTEM_SWATCH: Record<SystemKey, string> = {
 };
 
 function EyeIcon({ on }: { on: boolean }) {
-  return (
+  return <ContentSurface scope="src/components/Sidebar.tsx">{(
     <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12Z" />
       <circle cx="12" cy="12" r="2.6" />
       {!on && <path d="M4 4l16 16" />}
     </svg>
-  );
+  )}</ContentSurface>;
 }
 
 function FadeIcon({ faded }: { faded: boolean }) {
-  return (
+  return <ContentSurface scope="src/components/Sidebar.tsx">{(
     <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <circle cx="12" cy="12" r="8" />
       <path
@@ -45,7 +47,7 @@ function FadeIcon({ faded }: { faded: boolean }) {
         opacity={faded ? 0.35 : 1}
       />
     </svg>
-  );
+  )}</ContentSurface>;
 }
 
 export default function Sidebar() {
@@ -56,7 +58,7 @@ export default function Sidebar() {
   const toggleSystemFaded = useAnatomyStore((s) => s.toggleSystemFaded);
   const shown = SYSTEM_KEYS.filter((k) => visibleSystems[k]).length;
 
-  return (
+  return <ContentSurface scope="src/components/Sidebar.tsx">{(
     <aside className="viewer-rail" data-lenis-prevent>
       <div className="vr-head">
         <p className="vr-kicker">ATLAS TOÀN THÂN</p>
@@ -100,5 +102,5 @@ export default function Sidebar() {
         để xem thông tin bộ phận.
       </p>
     </aside>
-  );
+  )}</ContentSurface>;
 }

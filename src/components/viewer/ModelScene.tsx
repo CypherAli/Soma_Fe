@@ -1,5 +1,7 @@
 "use client";
 
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useRef, useEffect, useMemo, useState } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls, useGLTF, Center, Bounds } from "@react-three/drei";
@@ -448,7 +450,7 @@ function SystemModel({
     });
   }, [scene, hiddenIds, fadedIds, isolatedId, faded]);
 
-  return <primitive object={scene} visible={visible} />;
+  return <ContentSurface scope="src/components/viewer/ModelScene.tsx"><primitive object={scene} visible={visible} /></ContentSurface>;
 }
 
 /**
@@ -711,7 +713,7 @@ export default function ModelScene({
 
   const { ref: boxRef, ready: boxReady } = useBoxReady();
 
-  return (
+  return <ContentSurface scope="src/components/viewer/ModelScene.tsx">{(
     <div ref={boxRef} style={{ width: "100%", height: "100%" }}>
       {boxReady && (
         <Canvas
@@ -819,7 +821,7 @@ export default function ModelScene({
         </Canvas>
       )}
     </div>
-  );
+  )}</ContentSurface>;
 }
 
 [...Object.values(SYSTEM_FILES), ...Object.values(EXTRA_FILES).flat()].forEach(

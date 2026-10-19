@@ -19,6 +19,8 @@ import type { WorkerIn, WorkerOut } from "./handWorker";
 
 
 type Options = {
+  /** Pause inference while another view uses the same camera stream. */
+  paused?: boolean;
   /**
    * Gọi MỖI KHUNG HÌNH MÀN HÌNH với dữ liệu tay mới nhất. Chạy ngoài vòng đời
    * React — TUYỆT ĐỐI không setState ở đây trừ khi có sự kiện thật (chọn/hủy),
@@ -216,6 +218,16 @@ export function useHandTracking(
 
   // Giữ callback mới nhất mà không phải nạp lại model: cập nhật trong effect,
   // KHÔNG gán thẳng lúc render (vi phạm quy tắc ref của React).
+  const cameraStreamRef = useRef<MediaStream | null>(null);
+  const pausedRef = useRef(options.paused);
+  useEffect(() => {
+    pausedRef.current = options.paused;
+    const video = videoRef.current, stream = cameraStreamRef.current;
+    if (!options.paused && video && stream?.active && video.srcObject !== stream) {
+      video.srcObject = stream;
+      void video.play().catch(() => {});
+    }
+  }, [options.paused, videoRef]);
   const onFrameRef = useRef(options.onFrame);
   useEffect(() => {
     onFrameRef.current = options.onFrame;
@@ -233,18 +245,39 @@ export function useHandTracking(
     hands: [],
     frame: { width: 0, height: 0 },
   });
+  /**
+   * Khung tay ĐANG HIỆN — ngoại suy về HIỆN TẠI mỗi khung vẽ (xem (1.5)).
+   * Khởi đầu null để khung đầu tiên hiện ngay, không trượt từ gốc toạ độ ra.
+   */
+  const displayRef = useRef<TrackedHand[] | null>(null);
+  const lastRenderAtRef = useRef(0);
+  /**
+   * Lịch sử chuyển động theo TỪNG ĐIỂM (hệ màn hình, đã lật gương) để ngoại
+   * suy: 2 mẫu thô gần nhất + vận tốc EMA. Khoá theo bên tay như bộ lọc.
+   */
+  type Motion = {
+    prevT: number;
+    lastT: number;
+    last: { x: number; y: number; z: number }[];
+    vel: { x: number; y: number; z: number }[];
+  };
+  const motionRef = useRef<Map<string, Motion>>(new Map());
 
   const stop = useCallback(() => {
     if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
     rafRef.current = null;
     const video = videoRef.current;
-    const stream = video?.srcObject as MediaStream | null;
+    const stream = cameraStreamRef.current;
     stream?.getTracks().forEach((t) => {
       t.onended = null;
       t.stop();
     });
+    cameraStreamRef.current = null;
     if (video) video.srcObject = null;
     latestRef.current = { hands: [], frame: { width: 0, height: 0 } };
+    displayRef.current = null;
+    lastRenderAtRef.current = 0;
+    motionRef.current.clear();
     filtersRef.current.clear();
   }, [videoRef]);
 
@@ -368,6 +401,7 @@ export function useHandTracking(
           stream.getTracks().forEach((t) => t.stop());
           return;
         }
+        cameraStreamRef.current = stream;
         video.srcObject = stream;
         await video.play();
 
@@ -444,16 +478,43 @@ export function useHandTracking(
             }
             const tip = r.points[LM.INDEX_TIP];
             const cursor = filter.filter(1 - tip.x, tip.y, at); // lật x cho khớp ảnh gương
+            // Toạ độ hệ MÀN HÌNH (đã lật gương) — dùng chung cho hiển thị và
+            // cho lịch sử chuyển động bên dưới.
+            const pts = r.points.map((q) => ({ x: 1 - q.x, y: q.y, z: q.z }));
+            // Cập nhật vận tốc EMA từng điểm: mẫu mới về là tính vận tốc tức
+            // thời so với mẫu trước rồi trộn một nửa vào vận tốc cũ. Tay đổi
+            // hướng thì ~2 mẫu (~160 ms) là vận tốc theo kịp; tay đứng yên thì
+            // vận tốc về 0 nên phần ngoại suy tự tắt, không trôi.
+            const prevMo = motionRef.current.get(key);
+            if (!prevMo || prevMo.last.length !== pts.length) {
+              motionRef.current.set(key, {
+                prevT: at,
+                lastT: at,
+                last: pts,
+                vel: pts.map(() => ({ x: 0, y: 0, z: 0 })),
+              });
+            } else {
+              const dtm = Math.max(at - prevMo.lastT, 1);
+              const vel = prevMo.vel.map((vv, j) => ({
+                x: vv.x + ((pts[j].x - prevMo.last[j].x) / dtm - vv.x) * 0.5,
+                y: vv.y + ((pts[j].y - prevMo.last[j].y) / dtm - vv.y) * 0.5,
+                z: vv.z + ((pts[j].z - prevMo.last[j].z) / dtm - vv.z) * 0.5,
+              }));
+              motionRef.current.set(key, { prevT: prevMo.lastT, lastT: at, last: pts, vel });
+            }
             return {
               handedness,
               handednessScore: r.score,
-              landmarks: r.points.map((q) => ({ x: 1 - q.x, y: q.y, z: q.z })),
+              landmarks: pts,
               cursor,
             };
           });
           // dọn bộ lọc của bàn tay đã rời khung, không để map phình mãi
           for (const key of [...filtersRef.current.keys()]) {
             if (!seen.has(key)) filtersRef.current.delete(key);
+          }
+          for (const key of [...motionRef.current.keys()]) {
+            if (!seen.has(key)) motionRef.current.delete(key);
           }
           latestRef.current = {
             hands,
@@ -487,7 +548,7 @@ export function useHandTracking(
           const lm = landmarkerRef.current;
           // Chạy bằng worker thì KHÔNG có landmarker ở luồng này — đòi có nó là
           // vòng lặp thoát ngay và trang đứng im không báo lỗi gì.
-          if (!v || (!lm && !worker) || v.readyState < 2) return;
+          if (!v || (!lm && !worker) || v.readyState < 2 || pausedRef.current) return;
 
           const now = performance.now();
           let fresh = false;
@@ -561,8 +622,68 @@ export function useHandTracking(
             fresh = true;
           }
 
+          // ---- (1.5) NGOẠI SUY THEO NHỊP VẼ: mỗi kết quả nhận diện về tới tay
+          // đã là chuyện của ~80–150 ms trước (chép ảnh + suy luận + chuyển
+          // worker), mà vẽ thẳng nó ra thì khung xương MÃI MÃI đi sau tay thật
+          // một quãng — đúng cái delay trong ảnh chụp màn hình. Nội suy thuần
+          // còn cộng thêm trễ nên KHÔNG dùng ở đây.
+          //
+          // Thay vào đó, mỗi khung vẽ (60 Hz) tính vị trí HIỆN TẠI = mẫu mới
+          // nhất + vận tốc × thời gian đã trôi (nhìn trước tối đa 100 ms, mỗi
+          // điểm không đi quá 0,1 khung hình để một mẫu nhiễu không bắn tay đi
+          // xa). Tay đang vẩy thì khung xương đón đầu đúng chỗ tay đang ở; tay
+          // đứng yên thì vận tốc ≈ 0, ngoại suy tự tắt, đứng im tuyệt đối.
+          // Cuối cùng trượt nhẹ (τ ≈ 30 ms) về phía dự đoán để lần nhận diện
+          // mới về không làm hình "nhảy cục".
+          const makeKey = () => {
+            const seen = new Map<string, number>();
+            return (h: TrackedHand) => {
+              const n = seen.get(h.handedness) ?? 0;
+              seen.set(h.handedness, n + 1);
+              return n === 0 ? h.handedness : `${h.handedness}#${n}`;
+            };
+          };
+          const prevKey = makeKey();
+          const prevByKey = new Map<string, TrackedHand>();
+          for (const h of displayRef.current ?? []) prevByKey.set(prevKey(h), h);
+          const dtRender = Math.min(Math.max(now - (lastRenderAtRef.current || now), 0), 100);
+          lastRenderAtRef.current = now;
+          const kd = 1 - Math.exp(-dtRender / 30);
+          const target = latestRef.current.hands;
+          const curKey = makeKey();
+          const shown: TrackedHand[] = target.map((h) => {
+            const ck = curKey(h);
+            const p = prevByKey.get(ck);
+            const mo = motionRef.current.get(ck);
+            let aim = h.landmarks;
+            if (mo && mo.last.length === h.landmarks.length) {
+              const lead = Math.min(Math.max(now - mo.lastT, 0), 100);
+              if (lead > 0) {
+                aim = mo.last.map((q, j) => {
+                  const v = mo.vel[j];
+                  const dx = Math.min(Math.max(v.x * lead, -0.1), 0.1);
+                  const dy = Math.min(Math.max(v.y * lead, -0.1), 0.1);
+                  const dz = Math.min(Math.max(v.z * lead, -0.1), 0.1);
+                  return { x: q.x + dx, y: q.y + dy, z: q.z + dz };
+                });
+              }
+            }
+            if (!p || p.landmarks.length !== aim.length) {
+              return { ...h, landmarks: aim };
+            }
+            return {
+              ...h,
+              landmarks: aim.map((q, i) => {
+                const o = p.landmarks[i];
+                return { x: o.x + (q.x - o.x) * kd, y: o.y + (q.y - o.y) * kd, z: o.z + (q.z - o.z) * kd };
+              }),
+            };
+          });
+          displayRef.current = shown;
+
           // ---- (2) VẼ: mỗi khung hình màn hình, dùng dữ liệu mới nhất ----
-          const { hands, frame } = latestRef.current;
+          const { frame } = latestRef.current;
+          const hands = shown;
           onFrameRef.current?.(hands, frame, now, { fresh });
           render.frames += 1;
 
@@ -614,5 +735,5 @@ export function useHandTracking(
   }, [enabled, maxHands, detectIntervalMs, videoWidth, videoHeight, detectWidth, stop, videoRef]);
 
   // Tắt camera thì luôn báo "nghỉ" — suy ra tại chỗ nên không cần lưu vào state.
-  return enabled ? state : IDLE_STATE;
+  return { ...(enabled ? state : IDLE_STATE), cameraStreamRef };
 }

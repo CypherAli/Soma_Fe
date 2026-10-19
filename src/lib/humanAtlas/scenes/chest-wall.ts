@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Thành ngực" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const chestWallScene: AtlasSceneDef = {
+export const chestWallScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/chest-wall.ts#chestWallScene", {
   "slug": "thanh-nguc",
   "title": {
     "vi": "Thành ngực: xương sườn và cơ gian sườn",
@@ -192,4 +194,4 @@ export const chestWallScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

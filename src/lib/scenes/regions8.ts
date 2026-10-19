@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { SceneModule } from "./types";
 import type { RegionViewKey } from "./regions";
 
@@ -9,7 +11,7 @@ import type { RegionViewKey } from "./regions";
  * đùi. Cấu hình export ở "Nhóm K" trong `region_config.py`; mọi `meshName` đọc
  * từ chính file .glb đã xuất, kiểm lại bằng `npm run verify:scenes`.
  */
-export const regionScenes8: Record<string, SceneModule> = {
+export const regionScenes8: Record<string, SceneModule> = bindContentSource("data:src/lib/scenes/regions8.ts#regionScenes8", {
   "than-kinh-sinh-ba": {
     slug: "than-kinh-sinh-ba",
     title: { vi: "Thần kinh sinh ba (V)", en: "The Trigeminal Nerve (V)", zh: "三叉神经（V）" },
@@ -83,7 +85,7 @@ export const regionScenes8: Record<string, SceneModule> = {
         note: { vi: "Chạy ở góc trong mắt, ngay cạnh túi lệ, và nối THÔNG với tĩnh mạch mắt trên rồi vào xoang hang. Hệ tĩnh mạch mặt KHÔNG CÓ VAN, nên nhiễm khuẩn vùng “tam giác nguy hiểm” quanh mũi – môi trên có thể ngược dòng lên xoang hang gây huyết khối — lý do y học kinh điển của việc không nặn mụn vùng này.", en: "At the inner canthus beside the sac, communicating with the superior ophthalmic vein and thence the cavernous sinus. Facial veins are VALVELESS, so infection in the danger triangle around the nose and upper lip can travel backwards into the cavernous sinus and thrombose it — the classic reason not to squeeze spots there.", zh: "位于内眦、紧邻泪囊，与眼上静脉相通并汇入海绵窦。面静脉无瓣膜，故鼻与上唇周围“危险三角”的感染可逆行至海绵窦引起血栓——此即不可挤压该处疖肿的经典理由。" } },
     ],
   },
-};
+});
 
 export const regionViewerConfig8: Record<string, { cats: RegionViewKey[]; faded?: RegionViewKey[] }> = {
   // Khối xương sọ bọc kín đường đi của dây V — mở sẵn ở trạng thái mờ.

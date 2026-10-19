@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Hồi và thùy vỏ đại não" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,8 +10,8 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const cortexGyriScene: AtlasSceneDef = {
-  "slug": "tieu-nao-day-du",
+export const cortexGyriScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/cortex-gyri.ts#cortexGyriScene", {
+  "slug": "hoi-vo-dai-nao",
   "title": {
     "vi": "Hồi và thùy vỏ đại não",
     "en": "Gyri and Lobes of the Cerebral Cortex",
@@ -196,4 +198,4 @@ export const cortexGyriScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Khớp cổ chân" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const ankleJointScene: AtlasSceneDef = {
+export const ankleJointScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/ankle-joint.ts#ankleJointScene", {
   "slug": "khop-co-chan",
   "title": {
     "vi": "Khớp cổ chân: xương và cơ vận động",
@@ -133,4 +135,4 @@ export const ankleJointScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

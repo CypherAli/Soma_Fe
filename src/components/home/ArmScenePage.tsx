@@ -1,5 +1,11 @@
 "use client";
 
+
+
+
+import { useContent } from "@/components/content/ContentProvider";
+import { bindContentSource } from "@/lib/content/source";
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useEffect } from "react";
 import { useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
@@ -16,11 +22,11 @@ import { consumeLocaleTransition } from "@/lib/localeTransition";
 
 type CatKey = "skin" | "muscle" | "brain" | "artery" | "vein" | "nerve" | "lymph" | "eye" | "organ" | "bone";
 
-const SCENE_TEXT: Record<Loc, { back: string; reference: string; labels: string; guide: string; source: string; tips: string[]; sourceBody: string }> = {
+const SCENE_TEXT: Record<Loc, { back: string; reference: string; labels: string; guide: string; source: string; tips: string[]; sourceBody: string }> = bindContentSource("data:src/components/home/ArmScenePage.tsx#SCENE_TEXT", {
   vi: { back: "Quay lại", reference: "Mô hình nhiều lớp · đối chiếu Terminologia Anatomica và giáo trình ĐH Y Hà Nội", labels: "Nhãn", guide: "Hướng dẫn", source: "Nguồn dữ liệu", tips: ["Kéo chuột để xoay, lăn để phóng to.", "Chọn một cấu trúc trên mô hình hoặc trong danh sách để xem thông tin và thao tác riêng.", "Dùng bảng Lớp giải phẫu để ẩn, hiện hoặc làm mờ từng lớp.", "Thứ tự bóc lớp: Da → Cơ → Mạch → Thần kinh → Xương."], sourceBody: "Mô hình từ Z-Anatomy (CC BY-SA); thuật ngữ theo Terminologia Anatomica, đối chiếu Giáo trình Giải phẫu người — ĐH Y Hà Nội." },
   en: { back: "Back", reference: "Multi-layer model · aligned with Terminologia Anatomica and Hanoi Medical University references", labels: "Structures", guide: "How to use", source: "Data source", tips: ["Drag to rotate and scroll to zoom.", "Select a structure in the model or list to inspect and control it.", "Use Anatomical layers to show, hide, or fade each tissue layer.", "Suggested dissection order: Skin → Muscle → Vessels → Nerves → Bone."], sourceBody: "Model derived from Z-Anatomy (CC BY-SA); terminology follows Terminologia Anatomica and is cross-checked against Hanoi Medical University anatomy references." },
   zh: { back: "返回", reference: "多层模型 · 参照 Terminologia Anatomica 与河内医科大学教材", labels: "结构", guide: "使用说明", source: "数据来源", tips: ["拖动以旋转，滚动以缩放。", "在模型或列表中选择结构以查看并单独控制。", "使用解剖层面板显示、隐藏或淡化各组织层。", "建议剥离顺序：皮肤 → 肌肉 → 血管 → 神经 → 骨。"], sourceBody: "模型源自 Z-Anatomy（CC BY-SA）；术语遵循 Terminologia Anatomica，并参照河内医科大学解剖教材。" },
-};
+});
 
 export default function ArmScenePage({
   slug = "giai-phau-canh-tay",
@@ -33,6 +39,9 @@ export default function ArmScenePage({
   cats?: CatKey[];
   defaultFaded?: CatKey[];
 }) {
+  const cmsContent = useContent();
+  const SCENE_TEXT = cmsContent.resolve(cmsSourceSCENE_TEXT());
+
   const locale = useLocale() as Loc;
   const mod = getSceneModule(slug);
   const selected = useAnatomyStore((s) => s.selected);
@@ -64,7 +73,7 @@ export default function ArmScenePage({
   if (!mod) return null;
   const text = SCENE_TEXT[locale];
 
-  return (
+  return <ContentSurface scope="src/components/home/ArmScenePage.tsx">{(
     <div className="bd flex h-screen flex-col bg-[var(--surf-3)]">
       {/* Header */}
       <header className="flex h-14 shrink-0 items-center gap-4 border-b border-[var(--line)] bg-[var(--surf)] px-4">
@@ -184,5 +193,7 @@ export default function ArmScenePage({
         <InfoPanel />
       </div>
     </div>
-  );
+  )}</ContentSurface>;
 }
+
+function cmsSourceSCENE_TEXT() { return SCENE_TEXT; }

@@ -18,7 +18,6 @@ import {
 import {
   CROP_SIZE,
   FRAME_PAD,
-  MIN_BOX,
   MIN_CROP_PX,
   assessCrop,
   boxFromHand,
@@ -28,7 +27,6 @@ import {
   fitContain,
 } from "../src/lib/vision/framing.ts";
 import {
-  COUNTDOWN_MS,
   FRAME_GRACE_MS,
   FREEZE_HOLD_MS,
   HAND_HOLD_MS,
@@ -54,6 +52,9 @@ import type { PoseResult } from "../src/lib/vision/poseOnce.ts";
 import {
   IMAGE_TO_THREE_ROLL,
   MODEL_UPRIGHT_DEG,
+  atlasRoll,
+  mirrorFor,
+  sideFromCenterX,
   axisAngleDeg,
   normaliseDeg,
   orientationFor,
@@ -63,6 +64,9 @@ import {
 } from "../src/lib/vision/orientation.ts";
 import { sceneModules } from "../src/lib/sceneModules.ts";
 import { atlasScenes } from "../src/lib/humanAtlas/scenes/index.ts";
+import { atlasLayerDefs, getControlModel, getGlbModel, initAtlasLayers } from "../src/lib/anatomy/controlModels.ts";
+import { gpuTier, withTiers } from "../src/lib/vision/parts.ts";
+import { createLimiter, sameOrigin } from "../src/lib/rateLimit.ts";
 import { LM, type Landmark } from "../src/lib/gesture/handModel.ts";
 import type { FingerState } from "../src/lib/gesture/gestures.ts";
 
@@ -121,17 +125,8 @@ function openHand(x: number, y = 0.5) {
   return h;
 }
 
-/** Cỡ bàn tay của `hand()` — dùng để đổi "độ mở mong muốn" ra khoảng cách thật. */
-const HAND_SCALE = Math.hypot(0.05, 0.1);
-
 /** Bàn tay ĐANG NẮM: không ngón nào duỗi (cử chỉ chốt khung mới). */
 const fisted = () => fingers({ index: false, thumbOut: false, pinchSpan: 1.2, extendedCount: 0 });
-
-/** Hai bàn tay ĐANG CHỤM, cách nhau đúng `span` lần cỡ bàn tay. */
-function pinchPair(span: number) {
-  const d = (span * HAND_SCALE) / 2;
-  return [hand(0.5 - d, 0.5, pinched()), hand(0.5 + d, 0.5, pinched())];
-}
 
 /** Ảnh RGBA đặc một màu. */
 function flatImage(size: number, value: number) {
@@ -304,7 +299,51 @@ console.log("\nÔ tự bám bàn tay (cách quét chính tay mình)");
   check("tay đang TRỎ thì không bao giờ tự chụp", m.update(pointing, ASPECT, t, true).shoot === false);
 }
 
-console.log("\nNhịp quét (ngắm → giữ chụm → đếm ngược → chụp)");
+console.log("\nỔn định quét khi nhận diện hụt hoặc đổi số tay");
+{
+  const m = new ScanMachine();
+  const open = [openHand(0.5)];
+  m.update(open, ASPECT, 0, true);
+  const held = m.update(open, ASPECT, 600, true);
+  const missing = m.update([], ASPECT, 700, true);
+  check("hụt tay ngắn không trả tiến trình về 0", missing.progress === held.progress && missing.phase === held.phase);
+  const resumed = m.update(open, ASPECT, 800, true);
+  check("thời gian mất dấu không được tính vào giữ yên", Math.abs(resumed.progress - 700 / HAND_HOLD_MS) < .01);
+  check("mất dấu dài phải bỏ vùng cũ", m.update([], ASPECT, 1400, true).box === null);
+  check("tay quay lại sau mất dấu dài phải giữ lại từ đầu", m.update(open, ASPECT, 1450, true).progress === 0);
+}
+{
+  const m = new ScanMachine();
+  const open = [openHand(0.5)];
+  m.update(open, ASPECT, 0, true);
+  const held = m.update(open, ASPECT, 600, true);
+  const stray = m.update([open[0], hand(.72,.78)], ASPECT, 700, true);
+  check("tay thứ hai thoáng xuất hiện không làm khung quét nhảy", stray.mode === 'hand' && stray.box?.x === held.box?.x && stray.progress === held.progress);
+  const resumed = m.update(open, ASPECT, 780, true);
+  check("một tay vẫn tiếp tục đúng chế độ sau nhịp nhiễu", resumed.mode === 'hand' && resumed.progress > 0);
+  m.update([open[0], hand(.72,.78)], ASPECT, 850, true);
+  check("hai tay xuất hiện ổn định mới đổi chế độ", m.update([open[0], hand(.72,.78)], ASPECT, 1050, true).mode === 'frame');
+}
+{
+  const m = new ScanMachine();
+  const open = [openHand(0.5)];
+  m.update(open, ASPECT, 0, true);
+  m.update(open, ASPECT, 1000, true);
+  check("vẽ lại dữ liệu cũ không được tự chụp", !m.update(open, ASPECT, 1250, false).shoot);
+  check("chụp cần lần xác nhận mới từ nhận diện", m.update(open, ASPECT, 1270, true).shoot);
+}
+{
+  const m = new ScanMachine();
+  m.update([openHand(.5)], ASPECT, 0, true);
+  m.update([openHand(.5)], ASPECT, 700, true);
+  const pair = [hand(.3,.3,fisted()), hand(.72,.78,fisted())];
+  m.update(pair, ASPECT, 800, true);
+  const switched = m.update(pair, ASPECT, 1000, true);
+  check("đổi sang chốt hai tay không được dùng đồng hồ giữ một tay", !switched.shoot && switched.progress === 0);
+  check("chốt hai tay phải giữ đủ thời gian riêng", m.update(pair, ASPECT, 1000 + FREEZE_HOLD_MS + 1, true).shoot);
+}
+
+console.log("\nNhịp quét (ngắm → nắm giữ → CHỤP NGAY)");
 {
   const m = new ScanMachine();
   const pair = () => [hand(0.3, 0.3), hand(0.72, 0.78)];
@@ -321,19 +360,9 @@ console.log("\nNhịp quét (ngắm → giữ chụm → đếm ngược → ch�
   const half = m.update(pinchPair(), ASPECT, t, true);
   check("giữ nửa chừng thì vòng tiến trình chạy được nửa", half.phase === "locking" && Math.abs(half.progress - 0.5) < 0.01);
   t += FREEZE_HOLD_MS / 2 + 10;
-  const armed = m.update(pinchPair(), ASPECT, t, true);
-  check("giữ đủ lâu thì ô đóng băng và đếm ngược", armed.phase === "armed" && armed.countdown === 3);
-  const frozen = armed.box;
-
-  t += 1000;
-  const s1 = m.update([], ASPECT, t, true);
-  check("rút cả hai tay ra, ô vẫn ĐÓNG BĂNG nguyên chỗ", s1.phase === "armed" && !!s1.box && s1.box.x === frozen!.x && s1.box.w === frozen!.w);
-  check("đếm ngược còn 2 giây", s1.countdown === 2, String(s1.countdown));
-
-  t += COUNTDOWN_MS - 1000;
-  check("hết giờ thì bắn cờ chụp", m.update([], ASPECT, t, true).shoot === true);
-  check("chụp xong thì chuyển sang bận", m.update([], ASPECT, t + 16, true).phase === "busy");
-  check("cờ chụp KHÔNG bắn lại ở khung sau", m.update([], ASPECT, t + 16, true).shoot === false);
+  const shot = m.update(pinchPair(), ASPECT, t, true);
+  check("giữ đủ lâu thì NẮM LÀ CHỤP NGAY, không đếm ngược", shot.phase === "busy" && shot.shoot === true && !!shot.box);
+  check("cờ chụp KHÔNG bắn lại ở khung sau", m.update(pinchPair(), ASPECT, t + 16, true).shoot === false);
   m.reset();
   check("reset xong thì về chờ và bỏ ô", (() => {
     const a = m.update([], ASPECT, t + 32, true);
@@ -341,43 +370,38 @@ console.log("\nNhịp quét (ngắm → giữ chụm → đếm ngược → ch�
   })());
 }
 {
-  // LỖI ĐÃ TỪNG GIẾT TÍNH NĂNG (03/09, user báo "chụp mãi không ra ảnh"):
-  // bản trước lấy "chụm lại hai tay" làm cử chỉ huỷ, mà giữ nguyên thế chụm là
-  // phản xạ tự nhiên → huỷ ngay khung hình kế tiếp, đếm ngược không bao giờ
-  // chạy hết. Hai khẳng định dưới đây canh để chuyện đó không tái diễn.
+  // GIỮ NGUYÊN thế chụm/nắm thì đã CHỤP chứ không bao giờ tự huỷ — không còn
+  // pha đếm ngược để mà huỷ nhầm nữa.
   const m = new ScanMachine();
   const pinchPair = () => [hand(0.3, 0.3, pinched()), hand(0.72, 0.78, pinched())];
   let t = 0;
   m.update(pinchPair(), ASPECT, t, true);
   t += FREEZE_HOLD_MS + 20;
-  check("đã đóng băng ô", m.update(pinchPair(), ASPECT, t, true).phase === "armed");
+  const shot = m.update(pinchPair(), ASPECT, t, true);
+  check("giữ đủ lâu là chụp", shot.shoot === true && shot.phase === "busy");
   t += 500;
   check(
-    "GIỮ NGUYÊN thế chụm trong lúc đếm ngược KHÔNG huỷ",
-    m.update(pinchPair(), ASPECT, t, true).phase === "armed",
+    "GIỮ NGUYÊN thế chụm sau khi chụp thì máy bận, không bắn thêm",
+    m.update(pinchPair(), ASPECT, t, true).shoot === false,
   );
-  t += COUNTDOWN_MS;
-  check("và vẫn chụp được dù tay chưa hề buông chụm", m.update(pinchPair(), ASPECT, t, true).shoot === true);
 }
 {
-  // HUỶ: phải BUÔNG rồi mới ra lại cử chỉ chốt. Cùng một bài học đã trả giá hai
-  // lần — cử chỉ huỷ không được trùng tư thế người dùng đang giữ sẵn sau khi
-  // vừa chốt xong.
+  // BUÔNG TAY giữa chừng (chưa giữ đủ lâu) thì KHÔNG chụp — ô quay về ngắm.
   const m = new ScanMachine();
   const pinchPair = () => [hand(0.3, 0.3, pinched()), hand(0.72, 0.78, pinched())];
-  const fist = () => [hand(0.3, 0.3, fisted())];
+  const pair = () => [hand(0.3, 0.3), hand(0.72, 0.78)];
   let t = 0;
+  m.update(pair(), ASPECT, t, true);
   m.update(pinchPair(), ASPECT, t, true);
-  t += FREEZE_HOLD_MS + 20;
-  check("đã đóng băng ô (lần hai)", m.update(pinchPair(), ASPECT, t, true).phase === "armed");
-  t += 400;
-  check("rút tay ra khỏi khung thì vẫn đếm ngược", m.update([], ASPECT, t, true).phase === "armed");
-  t += 200;
-  check("đưa lại MỘT nắm đấm vào khung là huỷ", m.update(fist(), ASPECT, t, true).phase === "idle");
+  t += FREEZE_HOLD_MS / 2;
+  m.update(pinchPair(), ASPECT, t, true);
+  t += 100;
+  const released = m.update(pair(), ASPECT, t, true);
+  check("buông chụm trước khi đủ giữ thì chưa chụp", released.shoot === false && released.phase !== "busy");
 }
 {
-  // ĐÚNG THỨ NGƯỜI DÙNG YÊU CẦU 03/09: "hai tay nắm lại là chụp được rồi".
-  // Trước đây nắm hai tay vừa chốt xong đã tự huỷ ngay nên không bao giờ ra ảnh.
+  // ĐÚNG THỨ NGƯỜI DÙNG YÊU CẦU: "hai tay nắm lại là chụp phần đó".
+  // Nắm cả hai tay, giữ đủ giữ là CHỤP NGAY đúng chỗ vừa ngắm.
   const m = new ScanMachine();
   const pair = () => [hand(0.3, 0.3), hand(0.72, 0.78)];
   const fistPair = () => [hand(0.3, 0.3, fisted()), hand(0.72, 0.78, fisted())];
@@ -387,23 +411,17 @@ console.log("\nNhịp quét (ngắm → giữ chụm → đếm ngược → ch�
   const aimed = framing.box!;
   check("nắm cả hai tay là bắt đầu chốt", m.update(fistPair(), ASPECT, t, true).phase === "locking");
   t += FREEZE_HOLD_MS + 20;
-  const armed = m.update(fistPair(), ASPECT, t, true);
-  check("giữ đủ lâu thì đóng băng và đếm ngược", armed.phase === "armed" && armed.countdown === 3);
+  const shot = m.update(fistPair(), ASPECT, t, true);
+  check("giữ đủ lâu thì chụp ngay", shot.shoot === true && shot.phase === "busy");
   check(
-    "ô đóng băng ĐÚNG chỗ vừa ngắm, không co lại theo nắm đấm",
-    !!armed.box && near(armed.box.x, aimed.x) && near(armed.box.w, aimed.w),
-    JSON.stringify({ armed: armed.box, aimed }),
+    "ô chụp ĐÚNG chỗ vừa ngắm, không co lại theo nắm đấm",
+    !!shot.box && near(shot.box.x, aimed.x) && near(shot.box.w, aimed.w),
+    JSON.stringify({ shot: shot.box, aimed }),
   );
-  t += 200;
-  check(
-    "GIỮ NGUYÊN nắm đấm trong lúc đếm ngược KHÔNG huỷ",
-    m.update(fistPair(), ASPECT, t, true).phase === "armed",
-  );
-  t += COUNTDOWN_MS;
-  check("hết giờ là chụp", m.update([], ASPECT, t, true).shoot === true);
 }
 {
-  // Nắm tay lại lần NỮA (sau khi đã buông) mới là huỷ.
+  // Sau khi chụp, máy bận cho tới khi bấm "Quét lại" (reset) — nắm thêm cũng
+  // không bắn cờ chụp lần nữa.
   const m = new ScanMachine();
   const pair = () => [hand(0.3, 0.3), hand(0.72, 0.78)];
   const fistPair = () => [hand(0.3, 0.3, fisted()), hand(0.72, 0.78, fisted())];
@@ -411,11 +429,9 @@ console.log("\nNhịp quét (ngắm → giữ chụm → đếm ngược → ch�
   m.update(pair(), ASPECT, t, true);
   m.update(fistPair(), ASPECT, t, true);
   t += FREEZE_HOLD_MS + 20;
-  check("đã đóng băng ô (nắm đấm)", m.update(fistPair(), ASPECT, t, true).phase === "armed");
+  check("nắm giữ là chụp", m.update(fistPair(), ASPECT, t, true).shoot === true);
   t += 200;
-  check("buông tay ra thì vẫn đang đếm ngược", m.update(pair(), ASPECT, t, true).phase === "armed");
-  t += 200;
-  check("nắm lại lần nữa là huỷ", m.update(fistPair(), ASPECT, t, true).phase === "idle");
+  check("nắm tiếp cũng không chụp nữa khi chưa quét lại", m.update(fistPair(), ASPECT, t, true).shoot === false);
 }
 {
   const m = new ScanMachine();
@@ -796,6 +812,24 @@ check("ưu tiên mốc BÀN TAY khi quét bàn tay", (() => {
   return o?.from === "hand";
 })());
 
+console.log("\nBên trái/phải của mô hình");
+// Số đo trên atlas.json: "Left humerus" x = 0,14…0,24, "Right humerus" x = −0,24…−0,14.
+check("tâm x dương là bên TRÁI của người (đo trên dữ liệu)", sideFromCenterX(0.19) === "left");
+check("tâm x âm là bên PHẢI", sideFromCenterX(-0.19) === "right");
+check("sát đường giữa (tim, sọ) thì không có bên", sideFromCenterX(0.01) === "mid" && sideFromCenterX(-0.03) === "mid");
+check("mô hình .glb (bên phải): quét tay trái → lật, tay phải → không", mirrorFor(true, "right") && !mirrorFor(false, "right"));
+check(
+  "mô hình atlas bên TRÁI: quét tay trái → KHÔNG lật, tay phải → lật",
+  !mirrorFor(true, "left") && mirrorFor(false, "left"),
+);
+check("mô hình ở đường giữa thì không bao giờ lật", !mirrorFor(true, "mid") && !mirrorFor(false, "mid"));
+check("chưa quét gì thì không lật", !mirrorFor(null, "left") && !mirrorFor(null, "right"));
+check("atlas ở tư thế giải phẫu: tay dựng đứng thì mô hình quay nửa vòng", near(Math.abs(atlasRoll(0)), Math.PI));
+check("và góc luôn quy về (−π, π]", (() => {
+  const r = atlasRoll(Math.PI * 0.9);
+  return r > -Math.PI && r <= Math.PI && near(r, -Math.PI * 0.1, 1e-9);
+})());
+
 
 console.log("\nBộ điều phối hai tầng");
 {
@@ -876,6 +910,40 @@ console.log("\nBộ điều phối hai tầng");
 }
 check("ngân sách thời gian đúng như đã chốt", POSE_BUDGET_MS === 1200 && GPU_BUDGET_MS === 800);
 
+console.log("\nMức tin cậy (thay cho phần trăm) và bên trái/phải");
+{
+  const u = await runRecognise({ pose: posedOk(), gpu: null });
+  const g = u[0].guesses[0];
+  check("mốc trùng khít → 'khớp rõ'", g?.tier === "clear", JSON.stringify(g));
+  check("và biết vùng đó ở bên nào của người", g?.side === "left" || g?.side === "right", JSON.stringify(g));
+  check("gợi ý phụ không bao giờ ngang hàng gợi ý đầu", u[0].guesses.slice(1).every((x) => x.tier !== "clear"));
+}
+{
+  const u = await runRecognise({ pose: "hang", handWrist: { x: 0.5, y: 0.6, z: 0 }, gpu: null });
+  check("đường lui (không thấy người) → mọi gợi ý đều 'chưa chắc'", u[0].guesses.every((x) => x.tier === "unsure"));
+}
+check("gợi ý đầu mang mức được giao, gợi ý sau thấp hơn một bậc", (() => {
+  const r = withTiers([{ part: "elbow", score: 0.5 }, { part: "forearm", score: 0.3 }], "clear");
+  return r[0].tier === "clear" && r[1].tier === "maybe";
+})());
+check("GPU zero-shot (chưa hiệu chỉnh) KHÔNG BAO GIỜ được nói 'khớp rõ', dù điểm 99%", gpuTier(0.99, "zero-shot") !== "clear");
+console.log("\nChặn gọi dồn route nhận diện (máy GPU trả tiền theo giờ)");
+{
+  const lim = createLimiter(3, 60_000);
+  const t0 = 1_000_000;
+  const hits = [0, 1, 2, 3].map((i) => lim.hit("1.2.3.4", t0 + i));
+  check("cho qua đúng số lượt trong cửa sổ, lượt thứ tư bị chặn", hits.slice(0, 3).every((h) => h.ok) && !hits[3].ok);
+  check("bị chặn thì báo số giây phải chờ (> 0)", hits[3].retryAfter > 0 && hits[3].retryAfter <= 60);
+  check("IP khác không bị vạ lây", lim.hit("5.6.7.8", t0 + 5).ok);
+  check("hết cửa sổ thì được gọi lại", lim.hit("1.2.3.4", t0 + 60_001).ok);
+  const req = (origin: string | null, host: string) =>
+    new Request("http://x/api/vision/identify", { method: "POST", headers: { host, ...(origin ? { origin } : {}) } });
+  check("cùng nguồn thì cho qua", sameOrigin(req("https://soma.onrender.com", "soma.onrender.com")));
+  check("trang lạ gọi sang thì chặn", !sameOrigin(req("https://evil.example", "soma.onrender.com")));
+  check("không có Origin (curl, kiểm thử) thì để giới hạn tần suất lo", sameOrigin(req(null, "soma.onrender.com")));
+}
+check("GPU kNN: cao → rõ, vừa → có thể, thấp → chưa chắc", gpuTier(0.8, "knn") === "clear" && gpuTier(0.4, "knn") === "maybe" && gpuTier(0.1, "knn") === "unsure");
+
 
 console.log("\nKhông gian nhãn");
 check("khoá nhãn không trùng nhau", new Set(VISION_PART_KEYS).size === VISION_PART_KEYS.length);
@@ -892,6 +960,29 @@ for (const p of VISION_PARTS) {
   // Bài bộ phận (bo-phan-*) chỉ có trên atlas — vẫn là trang có thật (/giai-phau/mo-hinh/<slug>).
   const missing = p.scenes.filter((slug) => !(slug in sceneModules) && !(slug in atlasScenes));
   check(`[${p.key}] mọi scene gợi ý đều CÓ THẬT`, missing.length === 0, missing.join(", "));
+  // LUẬT ĐÃ CHỐT: mô hình gợi ý phải mở NGAY TRONG TRANG Vision AI, không chuyển trang.
+  const stuck = p.scenes.filter((slug) => !getControlModel(slug));
+  check(`[${p.key}] mọi gợi ý đều mở được ngay trong trang (chế độ điều khiển)`, stuck.length === 0, stuck.join(", "));
+  // Slug có trên atlas thì phải nạp BÀI ATLAS — thư viện hiện tên bài atlas, nạp .glb cũ là tên một đằng mô hình một nẻo.
+  const wrong = p.scenes.filter((slug) => slug in atlasScenes && getControlModel(slug)?.kind !== "atlas");
+  check(`[${p.key}] nạp đúng bài atlas mà thư viện đang hiện`, wrong.length === 0, wrong.join(", "));
+  const first = getControlModel(p.scenes[0]);
+  check(
+    `[${p.key}] gợi ý đầu tiên có lớp để bóc và mở ra có thứ để nhìn`,
+    first?.kind === "atlas" &&
+      atlasLayerDefs(first.scene).length > 0 &&
+      Object.values(initAtlasLayers(first.scene)).some((s) => s.visible),
+  );
+  // Vùng chạm-là-mở-thẳng-bản-glb: bản đó phải có thật và đủ lớp da–xương để
+  // bóc (mọi lớp mặc định đều hiện, da ở dạng mờ để nhìn xuyên).
+  if (p.openGlb) {
+    const glb = getGlbModel(p.openGlb);
+    check(
+      `[${p.key}] bản glb mở thẳng (${p.openGlb}) có thật và đủ lớp để bóc`,
+      !!glb && glb.kind === "glb" && glb.cats.includes("skin") && glb.cats.includes("bone"),
+      glb?.kind ?? "thiếu",
+    );
+  }
 }
 
 console.log("\nXếp hạng dự đoán");

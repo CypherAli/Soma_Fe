@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Khớp cùng–chậu và vành chậu" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const sacroiliacScene: AtlasSceneDef = {
+export const sacroiliacScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/sacroiliac.ts#sacroiliacScene", {
   "slug": "khop-cung-chau",
   "title": {
     "vi": "Khớp cùng–chậu và vành chậu",
@@ -125,4 +127,4 @@ export const sacroiliacScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

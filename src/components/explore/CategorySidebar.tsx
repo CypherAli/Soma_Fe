@@ -1,5 +1,9 @@
 "use client";
 
+
+
+import { useContent } from "@/components/content/ContentProvider";
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useState } from "react";
 import { pick, homeContent, type Loc } from "@/lib/homeContent";
 import { sidebarAllModels, sidebarAnatomy, type CategorySlug } from "@/lib/exploreContent";
@@ -25,9 +29,16 @@ export default function CategorySidebar({
   /** Slug đang mở — khớp CategorySlug hoặc slug hệ cơ quan. */
   active: CategorySlug | string;
 }) {
+  const cmsContent = useContent();
+  const homeContent = cmsContent.resolve(cmsSourcehomeContent());
+  const sidebarAllModels = cmsContent.resolve(cmsSourcesidebarAllModels());
+  const sidebarAnatomy = cmsContent.resolve(cmsSourcesidebarAnatomy());
+  const regionGroups = cmsContent.resolve(cmsSourceregionGroups());
+  const systemGroups = cmsContent.resolve(cmsSourcesystemGroups());
+
   const [open, setOpen] = useState(true);
 
-  return (
+  return <ContentSurface scope="src/components/explore/CategorySidebar.tsx">{(
     <aside className="cat-sidebar">
       <button
         type="button"
@@ -105,5 +116,11 @@ export default function CategorySidebar({
         </div>
       )}
     </aside>
-  );
+  )}</ContentSurface>;
 }
+
+function cmsSourcehomeContent() { return homeContent; }
+function cmsSourcesidebarAllModels() { return sidebarAllModels; }
+function cmsSourcesidebarAnatomy() { return sidebarAnatomy; }
+function cmsSourceregionGroups() { return regionGroups; }
+function cmsSourcesystemGroups() { return systemGroups; }

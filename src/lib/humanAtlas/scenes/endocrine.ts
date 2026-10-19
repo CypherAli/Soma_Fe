@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Hệ nội tiết" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const endocrineScene: AtlasSceneDef = {
+export const endocrineScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/endocrine.ts#endocrineScene", {
   "slug": "he-noi-tiet",
   "title": {
     "vi": "Các tuyến nội tiết",
@@ -138,4 +140,4 @@ export const endocrineScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

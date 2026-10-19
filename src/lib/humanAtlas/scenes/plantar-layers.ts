@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Bốn lớp cơ gan chân" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const plantarLayersScene: AtlasSceneDef = {
+export const plantarLayersScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/plantar-layers.ts#plantarLayersScene", {
   "slug": "tuy-song-dam-roi",
   "title": {
     "vi": "Bốn lớp cơ gan chân",
@@ -204,4 +206,4 @@ export const plantarLayersScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

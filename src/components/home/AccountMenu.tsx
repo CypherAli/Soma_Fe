@@ -1,11 +1,16 @@
 "use client";
 
+
+
+import { useContent } from "@/components/content/ContentProvider";
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import { homeContent as C, pick, type Loc } from "@/lib/homeContent";
 import { AUTH_CHANGED_EVENT, authRequest, clearAuth, getToken } from "@/lib/auth";
 import { getProfile, type AccountProfile } from "@/lib/account";
 import { Avatar, PlanBadge } from "../settings/parts";
+import { Icon } from "./IconSprite";
 
 /**
  * Nút tài khoản trên thanh điều hướng: avatar chữ cái, bấm vào mở bảng gồm
@@ -15,24 +20,35 @@ import { Avatar, PlanBadge } from "../settings/parts";
  * `/cai-dat` để chỉ có một chỗ duy nhất chỉnh, khỏi lệch giữa hai nơi.
  */
 export default function AccountMenu({ locale }: { locale: Loc }) {
+  const cmsContent = useContent();
+  const C = cmsContent.resolve(cmsSourceC());
+
   const [user, setUser] = useState<AccountProfile | null>(null);
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    let revision = 0;
     async function loadUser() {
+      const current = ++revision;
       await Promise.resolve();
-      if (!getToken()) return setUser(null);
+      const token = getToken();
+      if (!token) return setUser(null);
       try {
-        setUser(await getProfile());
+        const profile = await getProfile();
+        if (current === revision && getToken() === token) setUser(profile);
       } catch {
-        clearAuth();
-        setUser(null);
+        // authRequest clears rejected sessions; a temporary network error
+        // must not destroy a valid login or overwrite a newer profile.
+        if (current === revision && !getToken()) setUser(null);
       }
     }
     void loadUser();
     window.addEventListener(AUTH_CHANGED_EVENT, loadUser);
-    return () => window.removeEventListener(AUTH_CHANGED_EVENT, loadUser);
+    return () => {
+      revision += 1;
+      window.removeEventListener(AUTH_CHANGED_EVENT, loadUser);
+    };
   }, []);
 
   useEffect(() => {
@@ -58,10 +74,10 @@ export default function AccountMenu({ locale }: { locale: Loc }) {
     setOpen(false);
   }
 
-  if (!user) return <Link href="/dang-nhap" className="btn-signin">{pick(C.nav.signIn, locale)}</Link>;
+  if (!user) return <ContentSurface scope="src/components/home/AccountMenu.tsx"><Link href="/dang-nhap" className="btn-signin">{pick(C.nav.signIn, locale)}</Link></ContentSurface>;
 
   const A = C.account;
-  return (
+  return <ContentSurface scope="src/components/home/AccountMenu.tsx">{(
     <div className="account" ref={rootRef}>
       <button
         type="button"
@@ -72,30 +88,51 @@ export default function AccountMenu({ locale }: { locale: Loc }) {
         aria-label={pick(A.open, locale)}
         title={user.name}
       >
-        <Avatar name={user.name} src={user.avatar} size={42} />
+        <Avatar name={user.name} src={user.avatar} size={34} />
       </button>
 
       {open && (
         <div className="account-menu" role="menu">
-          <div className="account-head">
-            <Avatar name={user.name} src={user.avatar} size={38} />
+          <Link href="/cai-dat/tai-khoan" className="account-profile" onClick={() => setOpen(false)}>
+            <Avatar name={user.name} src={user.avatar} size={40} />
             <div>
               <strong>{user.name}</strong>
               <span>{user.email}</span>
             </div>
             <PlanBadge plan={user.plan} locale={locale} />
-          </div>
+          </Link>
 
           <div className="account-links">
-            <Link href="/cai-dat/tai-khoan" onClick={() => setOpen(false)}>{pick(A.account, locale)}</Link>
-            <Link href="/cai-dat/tai-lieu" onClick={() => setOpen(false)}>{pick(A.docs, locale)}</Link>
-            <Link href="/thu-vien" onClick={() => setOpen(false)}>{pick(C.nav.library, locale)}</Link>
-            <Link href="/cai-dat" onClick={() => setOpen(false)}>{pick(A.settings, locale)}</Link>
+            <Link href="/cai-dat/tai-khoan" onClick={() => setOpen(false)}>
+              <span className="am-ico"><Icon id="i-sliders" /></span>
+              <span className="am-label">{pick(A.account, locale)}</span>
+              <span className="am-chev"><Icon id="i-right" /></span>
+            </Link>
+            <Link href="/cai-dat/tai-lieu" onClick={() => setOpen(false)}>
+              <span className="am-ico"><Icon id="i-bookmark" /></span>
+              <span className="am-label">{pick(A.docs, locale)}</span>
+              <span className="am-chev"><Icon id="i-right" /></span>
+            </Link>
+            <Link href="/thu-vien" onClick={() => setOpen(false)}>
+              <span className="am-ico"><Icon id="i-grid" /></span>
+              <span className="am-label">{pick(C.nav.library, locale)}</span>
+              <span className="am-chev"><Icon id="i-right" /></span>
+            </Link>
+            <Link href="/cai-dat" onClick={() => setOpen(false)}>
+              <span className="am-ico"><Icon id="i-help" /></span>
+              <span className="am-label">{pick(A.settings, locale)}</span>
+              <span className="am-chev"><Icon id="i-right" /></span>
+            </Link>
           </div>
 
-          <button type="button" className="account-out" onClick={logout}>{pick(C.nav.signOut, locale)}</button>
+          <button type="button" className="account-out" onClick={logout}>
+            <span className="am-ico danger"><Icon id="i-close" /></span>
+            <span className="am-label">{pick(C.nav.signOut, locale)}</span>
+          </button>
         </div>
       )}
     </div>
-  );
+  )}</ContentSurface>;
 }
+
+function cmsSourceC() { return C; }

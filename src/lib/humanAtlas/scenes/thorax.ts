@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Lồng ngực" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const thoraxScene: AtlasSceneDef = {
+export const thoraxScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/thorax.ts#thoraxScene", {
   "slug": "long-nguc",
   "title": {
     "vi": "Lồng ngực",
@@ -184,4 +186,4 @@ export const thoraxScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

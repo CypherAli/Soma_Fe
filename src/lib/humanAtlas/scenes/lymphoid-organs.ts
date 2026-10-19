@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Tuyến ức và lách" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const lymphoidOrgansScene: AtlasSceneDef = {
+export const lymphoidOrgansScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/lymphoid-organs.ts#lymphoidOrgansScene", {
   "slug": "he-bach-huyet",
   "title": {
     "vi": "Cơ quan lympho: tuyến ức và lách",
@@ -134,4 +136,4 @@ export const lymphoidOrgansScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

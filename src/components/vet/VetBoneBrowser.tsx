@@ -1,5 +1,7 @@
 "use client";
 
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import dynamic from "next/dynamic";
 import { useMemo, useState } from "react";
 import { pick, type Loc } from "@/lib/homeContent";
@@ -42,7 +44,7 @@ export default function VetBoneBrowser({
   if (groups.length === 0) return null;
   const current = chosen && shownGroup?.models.includes(chosen) ? chosen : shownGroup?.models[0];
 
-  return (
+  return <ContentSurface scope="src/components/vet/VetBoneBrowser.tsx">{(
     <section className="vet-bones" aria-labelledby="vet-bones-h">
       <div className="vet-bones-head">
         <h2 id="vet-bones-h">{t.bonesH}</h2>
@@ -102,5 +104,5 @@ export default function VetBoneBrowser({
         )}
       </div>
     </section>
-  );
+  )}</ContentSurface>;
 }

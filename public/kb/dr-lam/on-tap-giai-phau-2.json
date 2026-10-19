@@ -1,0 +1,2311 @@
+{
+  "schemaVersion": 1,
+  "id": "on-tap-giai-phau-2",
+  "title": "Ôn tập giải phẫu 2",
+  "sourceFile": "Giải phẫu người 2025 - Test số hóa Dr. Lâm ôn tập giải phẫu 2.pdf",
+  "sourceNote": null,
+  "sourceHash": "f9af7ce0dadbd805f64cba04acefce9749c96980ea2914ec2825a460eb20a292",
+  "pages": 31,
+  "questions": [
+    {
+      "id": "on-tap-giai-phau-2-1",
+      "number": 1,
+      "stem": "Hành dưới tm cảnh trong nằm trong hõm giữa hai đầu nguyên ủy cơ ức đòn chũm",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 1,
+      "context": "Về tĩnh mạch cảnh trong",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-2",
+      "number": 2,
+      "stem": "Tm giáp dưới không đổ vào tm cảnh trong",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 1,
+      "context": "Về tĩnh mạch cảnh trong",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-3",
+      "number": 3,
+      "stem": "Hành trên tm cảnh trong nằm trong hố tm cảnh ở mặt dưới nền sọ",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 1,
+      "context": "Về tĩnh mạch cảnh trong",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-4",
+      "number": 4,
+      "stem": "Đường định hướng của tm cảnh trong là đường nối dái tai với đầu ức xương đòn",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Về tĩnh mạch cảnh trong: Tất cả đều đúng",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 1,
+      "context": "Về tĩnh mạch cảnh trong",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-5",
+      "number": 5,
+      "stem": "Máu từ phần bên da dầu và phần sau của mặt chỉ đổ về tm cảnh ngoài",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 2,
+      "context": "Về các tĩnh mạch nông của đầu cổ ds",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-6",
+      "number": 6,
+      "stem": "Tm mặt bắt đầu từ tm gốc ở góc mắt trong",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 2,
+      "context": "Về các tĩnh mạch nông của đầu cổ ds",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-7",
+      "number": 7,
+      "stem": "Máu tĩnh mạch từ các phần bên và sau da đầu đổ vào các tm chẩm và tai sau",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 2,
+      "context": "Về các tĩnh mạch nông của đầu cổ ds",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-8",
+      "number": 8,
+      "stem": "Tm mặt đổ về tm cảnh trong",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Về các tĩnh mạch nông của đầu cổ ds\nCâu 1: B\nCâu 2: A\nCâu 3: A\nCâu 4: A",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 2,
+      "context": "Về các tĩnh mạch nông của đầu cổ ds",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-9",
+      "number": 9,
+      "stem": "Đoạn cố định của nó đi trong bao cảnh cùng thần kinh sọ X",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 3,
+      "context": "Về động mạch cảnh trong",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-10",
+      "number": 10,
+      "stem": "Đoạn đá của nó đi trong ống đm cảnh",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 3,
+      "context": "Về động mạch cảnh trong",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-11",
+      "number": 11,
+      "stem": "Nó ra khỏi xoang hang ở bờ trong mỏm yên trước",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 4,
+      "context": "Về động mạch cảnh trong",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-12",
+      "number": 12,
+      "stem": "Đoạn não của nó tách ra đm mạch mạc trước và đm thông sau",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Về động mạch cảnh trong: Tất cả đều đúng",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 4,
+      "context": "Về động mạch cảnh trong",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-13",
+      "number": 13,
+      "stem": "Nhánh chẩm của ĐM cảnh ngoài tiếp nối với một nhánh của đm sườn cổ",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 4,
+      "context": "Về nhánh của động mạch cảnh ngoài",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-14",
+      "number": 14,
+      "stem": "Nhánh giáp trên của ĐM cảnh ngoài tiếp nối với một nhánh từ đm giáp cổ của đm dưới đòn",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 4,
+      "context": "Về nhánh của động mạch cảnh ngoài",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-15",
+      "number": 15,
+      "stem": "Các nhánh của ĐM cảnh ngoài ở hai bên không tiếp nối với nhau qua đường giữa",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 5,
+      "context": "Về nhánh của động mạch cảnh ngoài",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-16",
+      "number": 16,
+      "stem": "ĐM thái dương nông là nhánh duy nhất của đm cảnh ngoài có thể sờ thấy",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "Về nhánh của động mạch cảnh ngoài\nCâu 1: A\nCâu 2: A\nCâu 3: B\nCâu 4: B",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 5,
+      "context": "Về nhánh của động mạch cảnh ngoài",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-17",
+      "number": 17,
+      "stem": "Nó tận cùng ở sau cổ lồi cầu xương hàm dưới",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 6,
+      "context": "Về động mạch cảnh ngoài",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-18",
+      "number": 18,
+      "stem": "Ở phần nguyên ủy, nó nằm trước và trong hơn (gần đường giữa hơn) đm cảnh trong",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 6,
+      "context": "Về động mạch cảnh ngoài",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-19",
+      "number": 19,
+      "stem": "Nó được đi kèm bởi hai tm cảnh ngoài",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 6,
+      "context": "Về động mạch cảnh ngoài",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-20",
+      "number": 20,
+      "stem": "Đoạn cuối của nó đi trong tuyến mang tai, ở sâu hơn tm sau hàm dưới",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Về động mạch cảnh ngoài\nCâu 1: A\nCâu 2: A\nCâu 3: B\nCâu 4: A",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 6,
+      "context": "Về động mạch cảnh ngoài",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-21",
+      "number": 21,
+      "stem": "Đoạn ngực của ĐM cảnh chung trái nằm sau TM cánh tay đầu trái",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 7,
+      "context": "Về ĐM cảnh chung:",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-22",
+      "number": 22,
+      "stem": "Ở cổ, ĐM cảnh chung nằm trong bao cảnh cùng TM cảnh trong",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 7,
+      "context": "Về ĐM cảnh chung:",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-23",
+      "number": 23,
+      "stem": "Cơ giáp móng bắt chéo trước ĐM cảnh chung",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 7,
+      "context": "Về ĐM cảnh chung:",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-24",
+      "number": 24,
+      "stem": "Nó liên quan ở sau với mỏm ngang các đốt sống cổ",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Về ĐM cảnh chung:\nCâu 1: A\nCâu 2: A\nCâu 3: B\nCâu 4: A",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 8,
+      "context": "Về ĐM cảnh chung:",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-25",
+      "number": 25,
+      "stem": "Cơ ức móng nằm nông hơn cơ ức giáp và cơ giáp móng",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 8,
+      "context": "Về các cơ dưới móng:",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-26",
+      "number": 26,
+      "stem": "Cơ vai móng nằm ngoài cơ ức móng",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 9,
+      "context": "Về các cơ dưới móng:",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-27",
+      "number": 27,
+      "stem": "Quai cổ chi phối tất cả các cơ dưới móng",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 9,
+      "context": "Về các cơ dưới móng:",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-28",
+      "number": 28,
+      "stem": "Cơ vai móng có động tác giống hệt cơ ức móng",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "Về các cơ dưới móng:\nCâu 1: A\nCâu 2: A\nCâu 3: B\nCâu 4: B",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 9,
+      "context": "Về các cơ dưới móng:",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-29",
+      "number": 29,
+      "stem": "Đây là nơi đi qua của TK sọ XI",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 10,
+      "context": "Về tam giác cổ sau:",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-30",
+      "number": 30,
+      "stem": "Đây là nơi đi qua của TK trên đòn",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 10,
+      "context": "Về tam giác cổ sau:",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-31",
+      "number": 31,
+      "stem": "Đây là nơi đi qua của TM cảnh ngoài",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 10,
+      "context": "Về tam giác cổ sau:",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-32",
+      "number": 32,
+      "stem": "Các ĐM trên vai và ngang cổ của ĐM dưới đòn đi qua tam giác cổ sau",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Về tam giác cố sau: Tất cả đều đúng",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 10,
+      "context": "Về tam giác cổ sau:",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-33",
+      "number": 33,
+      "stem": "Bờ trước ngoài lỗ TM cảnh do bờ sau xương đá tạo nên",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 11,
+      "context": "Về xương thái dương:",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-34",
+      "number": 34,
+      "stem": "Lỗ ống tai trong nằm ở mặt trước phần đá",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 11,
+      "context": "Về xương thái dương:",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-35",
+      "number": 35,
+      "stem": "Phần trai xương thái dương nằm trên mặt dưới bên của hộp sọ",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 11,
+      "context": "Về xương thái dương:",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-36",
+      "number": 36,
+      "stem": "Phần đá xương thái dương nằm ở nền sọ, sau xương bướm và trước xương chẩm",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Về xương thái dương:\nCâu 1: A\nCâu 2: B\nCâu 3: A\nCâu 4: A",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 11,
+      "context": "Về xương thái dương:",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-37",
+      "number": 37,
+      "stem": "Bờ trên ổ mắt nằm giữa phần trai trán và phần ổ mắt của xương trán",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 12,
+      "context": "Về xương trán:",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-38",
+      "number": 38,
+      "stem": "Mào trán nằm trên đường dọc giữa của mặt trong trai trán",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 12,
+      "context": "Về xương trán:",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-39",
+      "number": 39,
+      "stem": "Phần ổ mắt xương trán tạo nên phần lớn trần ổ mắt",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 13,
+      "context": "Về xương trán:",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-40",
+      "number": 40,
+      "stem": "Phần ổ mắt xương trán tạo nên toàn bộ sàn hố sọ trước",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "Về xương trán:\nCâu 1: A\nCâu 2: A\nCâu 3: A\nCâu 4: B",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 13,
+      "context": "Về xương trán:",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-41",
+      "number": 41,
+      "stem": "Số xương của hộp sọ ít hơn số xương của khối xương mặt",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 13,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-42",
+      "number": 42,
+      "stem": "Hộp sọ bao gồm phần nền và phần vòm",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 14,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-43",
+      "number": 43,
+      "stem": "Hầu hết các xương sọ liên kết với nhau bằng khớp sợi",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 14,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-44",
+      "number": 44,
+      "stem": "Ổ mũi và ổ mắt là những khoang do các xương sọ mặt và xương hộp sọ tạo nên",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đúng"
+        },
+        {
+          "id": "B",
+          "text": "Sai"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Về vòm sọ: Tất cả đều",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 14,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-45",
+      "number": 45,
+      "stem": "Các mô tả sau đây về thần kinh trụ đều đúng, trừ",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó mang các sợi từ ngành trước các thần kinh sống C8 và N1"
+        },
+        {
+          "id": "B",
+          "text": "Nó xuyên qua vách gian cơ trong từ trước ra sau"
+        },
+        {
+          "id": "C",
+          "text": "Nó đi giữa mỏm trên lồi cầu trong xương cánh tay và mỏm khuỷu xương trụ"
+        },
+        {
+          "id": "D",
+          "text": "Nó đi sau hãm gân gấp ở cổ tay"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 14,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-46",
+      "number": 46,
+      "stem": "Dấu hiệu vuốt trụ sẽ rõ rệt hơn khi thần kinh trụ tổn thương ở đâu",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ở nách"
+        },
+        {
+          "id": "B",
+          "text": "Ở cánh tay"
+        },
+        {
+          "id": "C",
+          "text": "Ở khuỷu"
+        },
+        {
+          "id": "D",
+          "text": "Ở cổ tay"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 15,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-47",
+      "number": 47,
+      "stem": "Tổn thương thần kinh giữa dẫn đến liệt tất cả các cơ sau đây, trừ",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ gấp các ngón nông"
+        },
+        {
+          "id": "B",
+          "text": "Cơ đối chiếu ngón cái"
+        },
+        {
+          "id": "C",
+          "text": "Hai cơ giun bên trong"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 15,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-48",
+      "number": 48,
+      "stem": "Liệt mà làm mất gấp khớp gian đốt ngón xa của ngón trỏ cũng sẽ gây nên tất cả cả các tình trạng sau đây, trừ",
+      "options": [
+        {
+          "id": "A",
+          "text": "Liệt tương tự ngón tay giữa"
+        },
+        {
+          "id": "B",
+          "text": "Teo mô cái"
+        },
+        {
+          "id": "C",
+          "text": "Mất cảm giác trên phần xa của ngón tay trỏ"
+        },
+        {
+          "id": "D",
+          "text": "Liệt toàn bộ của ngón cái"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 16,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-49",
+      "number": 49,
+      "stem": "Một bệnh nhân có hội chứng ống cổ tay thì tất cả các cấu trúc sau bị chèn ép, trừ",
+      "options": [
+        {
+          "id": "A",
+          "text": "Gân cơ gấp ngón cái dài"
+        },
+        {
+          "id": "B",
+          "text": "Tk trụ"
+        },
+        {
+          "id": "C",
+          "text": "Tk giữa"
+        },
+        {
+          "id": "D",
+          "text": "Gân cơ gấp các ngón nông"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 16,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-50",
+      "number": 50,
+      "stem": "Vòng nối động mạch quanh vai có sự tham gia của tất cả các động mạch sau, trừ",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đm lưng vai"
+        },
+        {
+          "id": "B",
+          "text": "Đm trên vai"
+        },
+        {
+          "id": "C",
+          "text": "Đm dưới vai"
+        },
+        {
+          "id": "D",
+          "text": "Đm bên trụ trên"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "Đáp án D\nA. Đm lưng vai ==>vai sau",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 16,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-51",
+      "number": 51,
+      "stem": "Tổn thương thần kinh quay có các triệu chứng",
+      "options": [
+        {
+          "id": "A",
+          "text": "Mất duỗi cổ tay, dẫn đến bàn tay rơi"
+        },
+        {
+          "id": "B",
+          "text": "Cử động sấp cẳng tay yếu đi"
+        },
+        {
+          "id": "C",
+          "text": "Mất cảm giác ở mặt gan tay ngón cái"
+        },
+        {
+          "id": "D",
+          "text": "Không thể đối chiếu ngón cái"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 17,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-52",
+      "number": 52,
+      "stem": "Mô tả đúng về thần kinh quay là",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó đi qua tam giác cánh tay tam đầu cùng đm bên trụ trên"
+        },
+        {
+          "id": "B",
+          "text": "Nó vận động toàn bộ các cơ ở mặt sau cánh tay và cẳng tay"
+        },
+        {
+          "id": "C",
+          "text": "Nó đi qua rãnh giữa"
+        },
+        {
+          "id": "D",
+          "text": "Nó đi qua rãnh nhị đầu ngoài cùng đm quay"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 17,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-53",
+      "number": 53,
+      "stem": "Mạch máu đầu tiên có khả năng bị tắc bởi một cục máu đông từ các tĩnh mạch sâu của chi dưới là",
+      "options": [
+        {
+          "id": "A",
+          "text": "Các nhánh của các tm thận"
+        },
+        {
+          "id": "B",
+          "text": "Các nhánh của đm vành"
+        },
+        {
+          "id": "C",
+          "text": "Các mao mạch dạng xoang của gan"
+        },
+        {
+          "id": "D",
+          "text": "Các nhánh của các đm phổi"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 18,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-54",
+      "number": 54,
+      "stem": "Một bệnh nhân không thể khép cánh tay chủ yếu do liệt",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tròn nhỏ"
+        },
+        {
+          "id": "B",
+          "text": "Trên gai"
+        },
+        {
+          "id": "C",
+          "text": "Lưng rộng"
+        },
+        {
+          "id": "D",
+          "text": "Dưới gai"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 18,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-55",
+      "number": 55,
+      "stem": "Mô tả đúng về cơ ngực nhỏ là",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đầu nguyên ủy của nó bám vào mỏm quạ"
+        },
+        {
+          "id": "B",
+          "text": "Nó tạo nên thành sau của nách"
+        },
+        {
+          "id": "C",
+          "text": "Nó được bọc bởi mạc đòn ngực"
+        },
+        {
+          "id": "D",
+          "text": "Nó có tác dụng nâng vai"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 18,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-56",
+      "number": 56,
+      "stem": "Mô tả đúng về các cơ ở bàn tay là",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ khép ngón cái được chi phối bởi thần kinh giữa"
+        },
+        {
+          "id": "B",
+          "text": "Các cơ mô cái được chi phối bởi một thần kinh đến từ bó sau của đám rối cánh tay"
+        },
+        {
+          "id": "C",
+          "text": "Các cơ giun có nguyên ủy bám vào các gân của các cơ gấp các ngón nông"
+        },
+        {
+          "id": "D",
+          "text": "Các cơ gian cốt mu tay làm dạng các ngón tay ra xa ngón giữa"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 19,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-57",
+      "number": 57,
+      "stem": "Khi bàn tay ở tư thế ngửa, xương quay tiếp khớp ở khớp quay cổ tay với cặp xương nào",
+      "options": [
+        {
+          "id": "A",
+          "text": "Xương tháp và xương thang"
+        },
+        {
+          "id": "B",
+          "text": "Xương nguyệt và xương thang"
+        },
+        {
+          "id": "C",
+          "text": "Xương nguyệt và xương thuyền"
+        },
+        {
+          "id": "D",
+          "text": "Xương thuyền và xương móc"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 19,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-58",
+      "number": 58,
+      "stem": "Một nạn nhân bị va đập mạnh vào vùng hạ sườn phải, tạng nào hay bị tổn thương:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Gan trái."
+        },
+        {
+          "id": "B",
+          "text": "Gan phải."
+        },
+        {
+          "id": "C",
+          "text": "Góc phải đại tràng."
+        },
+        {
+          "id": "D",
+          "text": "Dạ dày."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "Đáp án: B. Gan phải\nVùng hạ sườn phải tương ứng với vị trí gan phải nằm ngay dưới cung sườn phải,\nđược bảo vệ một phần bởi các xương sườn 7–11. Khi chấn thương trực tiếp,\ngan phải – đặc biệt là thùy phải – dễ bị rách hoặc tụ máu dưới bao do kích\nthước lớn và vị trí nông.\nA. Gan trái: Nằm chủ yếu ở hạ sườn trái và vùng thượng vị.\nC. Góc phải đại tràng: Nằm sâu và được che bởi gan phải, ít bị tổn thương trực\ntiếp.\nD. Dạ dày: Chủ yếu ở hạ sườn trái và thượng vị, không nằm ngay vùng hạ sườn\nphải.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 19,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-59",
+      "number": 59,
+      "stem": "Một nhát dao nhỏ đâm thẳng từ trước ra sau ở vùng rốn, có thể làm tổn thương tạng nào",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đại tràng xuống"
+        },
+        {
+          "id": "B",
+          "text": "Hồi tràng"
+        },
+        {
+          "id": "C",
+          "text": "Gan"
+        },
+        {
+          "id": "D",
+          "text": "Đại tràng lên"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "Đáp án B\nB. Hồi tràng ==> Hỗng tràng",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 20,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-60",
+      "number": 60,
+      "stem": "Động mạch nào sau đây không tham gia tạo thành các vòng nối động mạch của dạ dày",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đm vị mạc nối phải"
+        },
+        {
+          "id": "B",
+          "text": "Đm vị mạc nối trái"
+        },
+        {
+          "id": "C",
+          "text": "Đm vị sau"
+        },
+        {
+          "id": "D",
+          "text": "Đm vị trái"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 21,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-61",
+      "number": 61,
+      "stem": "Mô tả nào sau đây về dung tích dạ dày đúng",
+      "options": [
+        {
+          "id": "A",
+          "text": "Rất thay đổi"
+        },
+        {
+          "id": "B",
+          "text": "Khoảng 100ml ở trẻ sơ sinh"
+        },
+        {
+          "id": "C",
+          "text": "Khoảng 1.500ml ở tuổi dậy thì"
+        },
+        {
+          "id": "D",
+          "text": "Khoảng 2500ml ở người trưởng thành"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 21,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-62",
+      "number": 62,
+      "stem": "Tất cả các mô tả sau về một thoát vị bẹn trực tiếp đều đúng, trừ",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó đi vào ống bẹn qua thành sau của ống"
+        },
+        {
+          "id": "B",
+          "text": "Nó nằm ngoài động mạch thượng vị dưới"
+        },
+        {
+          "id": "C",
+          "text": "Nó có một lớp vỏ bọc bằng phúc mạc"
+        },
+        {
+          "id": "D",
+          "text": "Nó có thể không đi xuống tới bìu"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 22,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-63",
+      "number": 63,
+      "stem": "Một thoát vị bẹn gián tiếp xảy ra:",
+      "options": [
+        {
+          "id": "A",
+          "text": "ở ngoài đm thượng vị dưới"
+        },
+        {
+          "id": "B",
+          "text": "giữa đm thượng vị dưới và thừng đm rốn"
+        },
+        {
+          "id": "C",
+          "text": "ở trong thừng đm rốn"
+        },
+        {
+          "id": "D",
+          "text": "giữa nếp rốn giữa và thừng đm rốn"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 22,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-64",
+      "number": 64,
+      "stem": "Cấu trúc được tạo nên bởi di tích của ống niệu rốn thời kì thôi thai là",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thừng động mạch rốn"
+        },
+        {
+          "id": "B",
+          "text": "Dây chằng tròn tử cung"
+        },
+        {
+          "id": "C",
+          "text": "Dc bẹn"
+        },
+        {
+          "id": "D",
+          "text": "Dc rốn giữa"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 22,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-65",
+      "number": 65,
+      "stem": "Mô tả nào sau đây về mạc nối nhỏ đúng",
+      "options": [
+        {
+          "id": "A",
+          "text": "Chứa động mạch lách"
+        },
+        {
+          "id": "B",
+          "text": "Không liên tiếp với phúc mạc của dạ dày"
+        },
+        {
+          "id": "C",
+          "text": "Bờ phải mạc nối nhỏ nằm trước lỗ mạc nối"
+        },
+        {
+          "id": "D",
+          "text": "Đường bám vào gan của mạc nối nhỏ gồm một đoạn bám vào khe dây chằng tròn"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 23,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-66",
+      "number": 66,
+      "stem": "Các khái niệm sau đây về phúc mạc đều đúng, trừ",
+      "options": [
+        {
+          "id": "A",
+          "text": "Phúc mạc thành: Phần phúc mạc che phủ mặt trong thành ổ bụng."
+        },
+        {
+          "id": "B",
+          "text": "Phúc mạc tạng: phần phúc mạc bọc các tạng."
+        },
+        {
+          "id": "C",
+          "text": "Phúc mạc trung gian: được gọi tên là mạc nối, mạc treo hay dây chằng."
+        },
+        {
+          "id": "D",
+          "text": "Mạc treo là phần phúc mạc trung gian giữa phúc mạc bọc các tạng không phải của ống tiêu hóa."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 23,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-67",
+      "number": 67,
+      "stem": "Khi thần kinh mác chung bị đứt ở hố khoeo nhưng thần kinh chày còn nguyên vẹn, bàn chân sẽ bị",
+      "options": [
+        {
+          "id": "A",
+          "text": "Gấp gan chân và nghiêng trong"
+        },
+        {
+          "id": "B",
+          "text": "Gấp mu chân và nghiêng ngoài"
+        },
+        {
+          "id": "C",
+          "text": "Gấp mu chân và nghiêng trong"
+        },
+        {
+          "id": "D",
+          "text": "Gấp gan chân và nghiêng ngoài"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 23,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-68",
+      "number": 68,
+      "stem": "Cử động nào sau đây bị ảnh hưởng trầm trọng nhất bởi liệt thần kinh mác sâu",
+      "options": [
+        {
+          "id": "A",
+          "text": "Gấp gan chân"
+        },
+        {
+          "id": "B",
+          "text": "Gấp mu chân"
+        },
+        {
+          "id": "C",
+          "text": "Dạng các ngón chân"
+        },
+        {
+          "id": "D",
+          "text": "Nghiêng ngoài bàn chân"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "Đáp án B\nA. Gấp gan chân ==>gấp bàn chân\nB. Gấp mu chân ==>duỗi bàn chân",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 24,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-69",
+      "number": 69,
+      "stem": "Các thành phần sau đây trực tiếp tạo nên thành của ống cơ khép, trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Mạc rộng – khép."
+        },
+        {
+          "id": "B",
+          "text": "Cơ rộng trong."
+        },
+        {
+          "id": "C",
+          "text": "Cơ khép dài."
+        },
+        {
+          "id": "D",
+          "text": "Cơ thon."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "Đáp án: D. Cơ thon\nCơ thon không tham gia cấu tạo thành của ống cơ khép; nó nằm ở phía trong\n– sau, chạy dọc đùi.\nMạc rộng khép (mạc phủ mặt sâu cơ may) tạo thành trong của ống cơ khép.\nCơ rộng trong tạo thành trước – ngoài.\nCơ khép dài và cơ khép lớn góp phần tạo thành sau.\nDo đó, cơ thon không phải là thành phần trực tiếp của ống cơ khép.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 24,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-70",
+      "number": 70,
+      "stem": "Cơ nào sau đây có thể gấp mu chân (tức duỗi bàn chân) và nghiêng bàn chân vào trong",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ mác dài"
+        },
+        {
+          "id": "B",
+          "text": "Cơ duỗi ngón cái dài"
+        },
+        {
+          "id": "C",
+          "text": "Cơ duỗi các ngón dài"
+        },
+        {
+          "id": "D",
+          "text": "Cơ mác ba"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 25,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-71",
+      "number": 71,
+      "stem": "Mất khả năng duỗi cẳng chân tại khớp gối là dấu hiệu của liệt:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ bán gân"
+        },
+        {
+          "id": "B",
+          "text": "Cơ may"
+        },
+        {
+          "id": "C",
+          "text": "Cơ thon"
+        },
+        {
+          "id": "D",
+          "text": "Cơ tứ đầu đùi"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 26,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-72",
+      "number": 72,
+      "stem": "Các mô tả sau đây về xương chậu đều đúng, trừ",
+      "options": [
+        {
+          "id": "A",
+          "text": "Các gai chậu (trước trên, trước dưới, sau trên, sau dưới) đều thuộc xương cánh chậu"
+        },
+        {
+          "id": "B",
+          "text": "Củ mào chậu nằm gần gai chậu sau trên hơn là gần gai chậu trước trên"
+        },
+        {
+          "id": "C",
+          "text": "Đường cung chia mặt trong xương cánh chậu ra thành hai phần"
+        },
+        {
+          "id": "D",
+          "text": "Mặt ngoài xương cánh chậu được gọi là mặt nông"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 26,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-73",
+      "number": 73,
+      "stem": "Những mô tả sau đây về xương chày là đúng, trừ",
+      "options": [
+        {
+          "id": "A",
+          "text": "Mặt trước trong của nó kéo dài xuống dưới và liên tiếp với mắt cá trong"
+        },
+        {
+          "id": "B",
+          "text": "Nó có hai mặt khớp trên tiếp khớp với hai lồi cầu xương đùi qua sụn chêm"
+        },
+        {
+          "id": "C",
+          "text": "Lồi củ chày là chỗ khó sờ thấy"
+        },
+        {
+          "id": "D",
+          "text": "Nó có một đường gờ chếch ở mặt sau thân xương cho cơ dép bám"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 26,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-74",
+      "number": 74,
+      "stem": "Những mô tả sau về xương đùi là đúng, trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Trục của xương đùi thường tạo với trục thân xương đùi góc lớn hơn 145 độ"
+        },
+        {
+          "id": "B",
+          "text": "Chỏm xươn đùi có một hõm ở gần đỉnh chỏm."
+        },
+        {
+          "id": "C",
+          "text": "Mấu chuyển lớn có một hố ở trong mặt."
+        },
+        {
+          "id": "D",
+          "text": "Hai mấu chuyển nôi với nhau bằng đường gian mấu."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 27,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-75",
+      "number": 75,
+      "stem": "Dây chằng nào quan trọng trong việc ngăn cản sự trượt ra trước của xương đùi trên xương chày khi gối đang chịu trọng lực ở tư thế gấp:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Dây chằng chêm đùi trước"
+        },
+        {
+          "id": "B",
+          "text": "Dây chằng bên mác"
+        },
+        {
+          "id": "C",
+          "text": "Dây chằng khoeo chéo"
+        },
+        {
+          "id": "D",
+          "text": "Dây chằng chéo sau"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 27,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-76",
+      "number": 76,
+      "stem": "Mô tả đúng về dây chằng chéo trước của khớp gối là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó trở nên căng trong lúc gấp cẳng chân."
+        },
+        {
+          "id": "B",
+          "text": "Nó cản lại sự di lệch ra sau của xương đùi trên xương chày."
+        },
+        {
+          "id": "C",
+          "text": "Nó bám vào lồi cầu trong xương đùi."
+        },
+        {
+          "id": "D",
+          "text": "Nó cản lại sự gập quá mức của cằng chân."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 27,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-77",
+      "number": 77,
+      "stem": "Nếu ổ cối bị gãy ở bờ sau trên của nó, xương nào sau đây bị gãy:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Xương cánh chậu và xương mu."
+        },
+        {
+          "id": "B",
+          "text": "Xương ngồi và xương mu."
+        },
+        {
+          "id": "C",
+          "text": "Xương cánh chậu và xương ngồi."
+        },
+        {
+          "id": "D",
+          "text": "Xương mu và xương cánh chậu."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Đáp án: C. Xương cánh chậu và xương ngồi\nỔ cối được tạo bởi ba xương: cánh chậu, xương mu và xương ngồi. Bờ sau trên\ncủa ổ cối do xương cánh chậu và phần trên xương ngồi tạo nên, nên khi gãy vị\ntrí này sẽ liên quan đến hai xương này.\nA. Xương cánh chậu và xương mu: Liên quan đến thành trước và trụ trên ổ cối.\nB. Xương ngồi và xương mu: Tham gia nhiều hơn vào bờ dưới và trước ổ cối.\nD. Xương mu và xương cánh chậu: Phù hợp với thành trước, không phải bờ sau\ntrên.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 28,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-78",
+      "number": 78,
+      "stem": "Mô tả nào sau đây về các đường dẫn truyền thần kinh đúng",
+      "options": [
+        {
+          "id": "A",
+          "text": "Dải tủy đồi thị trước dẫn truyền cảm giác đau nóng"
+        },
+        {
+          "id": "B",
+          "text": "Dải tủy tiểu não sau chui qua cuống tiểu não dưới vào tiểu não"
+        },
+        {
+          "id": "C",
+          "text": "Cùng với dải vỏ tủy, dải đỏ tủy trong đường dẫn truyền vận động có ý thức"
+        },
+        {
+          "id": "D",
+          "text": "Các dải thon và chêm là đường dẫn truyền cảm giác bản thể không ý thức"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 28,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-79",
+      "number": 79,
+      "stem": "Rãnh nào trong các rãnh sau không giới hạn lên hồi đai",
+      "options": [
+        {
+          "id": "A",
+          "text": "Rãnh thể trai"
+        },
+        {
+          "id": "B",
+          "text": "Rãnh đai"
+        },
+        {
+          "id": "C",
+          "text": "Rãnh dưới đỉnh"
+        },
+        {
+          "id": "D",
+          "text": "Rãnh cựa"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 29,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-80",
+      "number": 80,
+      "stem": "Hồi nào sau đây thuộc mặt trên ngoài của thùy trán",
+      "options": [
+        {
+          "id": "A",
+          "text": "Hồi trán trên"
+        },
+        {
+          "id": "B",
+          "text": "Hồi thẳng"
+        },
+        {
+          "id": "C",
+          "text": "Các hồi cạnh ổ mắt"
+        },
+        {
+          "id": "D",
+          "text": "Hồi trán trong"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 29,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-81",
+      "number": 81,
+      "stem": "Mô tả nào sau đây về các rãnh và sự phân chia bề mặt của đại não đúng",
+      "options": [
+        {
+          "id": "A",
+          "text": "Rãnh bên ngăn cách thùy Thái dương với tất cả các thùy còn lại ở mặt trên ngoài của đại não"
+        },
+        {
+          "id": "B",
+          "text": "Hồi vận động nằm giữa rãnh trung tâm và rãnh sau trung tâm"
+        },
+        {
+          "id": "C",
+          "text": "Rãnh đỉnh chẩm thấy rõ ở mặt trong của bán cầu đại não trong khi ở mặt trên ngoài rất ngắn"
+        },
+        {
+          "id": "D",
+          "text": "ở mặt trên ngoài của bán cầu đại não, tại thùy Thái Dương còn có rãnh chẩm – thái"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 30,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-82",
+      "number": 82,
+      "stem": "Tại thân não, cấu trúc nào sau đây là sự tập hợp của bó thon và bó chêm.",
+      "options": [
+        {
+          "id": "A",
+          "text": "Liềm giữa"
+        },
+        {
+          "id": "B",
+          "text": "Liềm bên"
+        },
+        {
+          "id": "C",
+          "text": "Liềm tủy"
+        },
+        {
+          "id": "D",
+          "text": "Bó dọc sau"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 30,
+      "context": "Về xương sọ",
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-2-83",
+      "number": 83,
+      "stem": "Cấu trúc sau là thành phần chất xám tại trung não, trừ",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nhân tự chủ tk III"
+        },
+        {
+          "id": "B",
+          "text": "Nhân vận động tk IV"
+        },
+        {
+          "id": "C",
+          "text": "Nhân vận động tk V"
+        },
+        {
+          "id": "D",
+          "text": "Nhân đỏ"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 30,
+      "context": "Về xương sọ",
+      "gradable": true
+    }
+  ]
+}

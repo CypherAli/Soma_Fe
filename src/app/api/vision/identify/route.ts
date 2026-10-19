@@ -1,5 +1,17 @@
 import { NextResponse } from "next/server";
 import { VISION_PART_KEYS, rankGuesses } from "@/lib/vision/parts";
+import { clientIp, createLimiter, sameOrigin } from "@/lib/rateLimit";
+import { readJsonObject } from "@/lib/requestBody";
+
+/**
+ * Route này chuyển tiếp thẳng sang máy GPU trả tiền theo giờ, nên mở toang là
+ * một vòng lặp `curl` đốt được cả quỹ credit. Hai lớp chặn: mỗi IP tối đa 20
+ * lượt/phút (người quét thật không bao giờ tới — mỗi lần quét phải giữ tay yên
+ * hơn một giây), và trần tổng mỗi ngày đặt được qua biến môi trường.
+ */
+const perIp = createLimiter(20, 60_000);
+const dailyCap = Number(process.env.SOMA_VISION_DAILY_CAP);
+const perDay = createLimiter(Number.isSafeInteger(dailyCap) && dailyCap > 0 ? dailyCap : 500, 86_400_000);
 
 /**
  * NHẬN DIỆN BỘ PHẬN TỪ MỘT MẨU ẢNH WEBCAM.
@@ -20,13 +32,32 @@ import { VISION_PART_KEYS, rankGuesses } from "@/lib/vision/parts";
  */
 export const runtime = "nodejs";
 
+/** Cho FE biết có GPU hay không để ẩn/hiện gợi ý quét mặt-cổ (không lộ URL/key). */
+export async function GET() {
+  return NextResponse.json({ configured: Boolean(process.env.SOMA_VISION_URL) });
+}
+
 /** ~1,4 MB base64 ≈ 1 MB ảnh — thừa sức cho một ảnh JPEG vuông 336 px. */
 const MAX_IMAGE_CHARS = 1_400_000;
 const TIMEOUT_MS = 12_000;
 
-type Body = { image?: unknown };
-
 export async function POST(req: Request) {
+  if (!sameOrigin(req)) {
+    return NextResponse.json({ error: "forbidden", message: "Chỉ nhận yêu cầu từ chính trang Soma." }, { status: 403 });
+  }
+  for (const [limiter, key, code] of [
+    [perIp, clientIp(req), "rate-limited"],
+    [perDay, "all", "daily-cap"],
+  ] as const) {
+    const r = limiter.hit(key);
+    if (!r.ok) {
+      return NextResponse.json(
+        { error: code, message: "Quét quá nhanh — đợi một chút rồi thử lại." },
+        { status: 429, headers: { "retry-after": String(r.retryAfter) } },
+      );
+    }
+  }
+
   const endpoint = process.env.SOMA_VISION_URL;
   if (!endpoint) {
     return NextResponse.json(
@@ -35,10 +66,8 @@ export async function POST(req: Request) {
     );
   }
 
-  let body: Body;
-  try {
-    body = (await req.json()) as Body;
-  } catch {
+  const body = await readJsonObject(req);
+  if (!body) {
     return NextResponse.json({ error: "bad-request", message: "Thân yêu cầu không phải JSON." }, { status: 400 });
   }
 
@@ -80,15 +109,18 @@ export async function POST(req: Request) {
       );
     }
 
-    const data = (await res.json()) as { results?: unknown };
+    const data = (await res.json()) as { results?: unknown; mode?: unknown };
     const results = rankGuesses(data.results, 3);
+    // "knn" (so với ảnh mẫu thật) hay "zero-shot" (so với câu chữ): giao diện cần
+    // biết để không khoác áo "khớp rõ" cho một con số chưa hiệu chỉnh.
+    const mode = data.mode === "knn" ? "knn" : "zero-shot";
     if (results.length === 0) {
       return NextResponse.json(
         { error: "no-match", message: "Không nhận ra bộ phận nào trong mẩu ảnh này." },
         { status: 200 },
       );
     }
-    return NextResponse.json({ results, source: "gpu" });
+    return NextResponse.json({ results, source: "gpu", mode });
   } catch (err) {
     const aborted = err instanceof Error && err.name === "AbortError";
     return NextResponse.json(

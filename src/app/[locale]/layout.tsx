@@ -6,6 +6,9 @@ import { Inter, Playfair_Display } from "next/font/google";
 import { routing } from "@/i18n/routing";
 import ThemeToggle from "@/components/home/ThemeToggle";
 import FloatingSomaBot from "@/components/chat/FloatingSomaBot";
+import { ContentProvider } from '@/components/content/ContentProvider';
+import { loadContent } from '@/lib/content/server';
+import WebsiteChrome from '@/components/content/WebsiteChrome';
 import "../globals.css";
 
 const inter = Inter({ subsets: ["latin", "vietnamese"], variable: "--font-sans" });
@@ -38,6 +41,7 @@ export default async function LocaleLayout({
     notFound();
   }
   setRequestLocale(locale);
+  const content = await loadContent();
 
   return (
     <html
@@ -54,7 +58,7 @@ export default async function LocaleLayout({
         />
       </head>
       <body className="h-full antialiased">
-        <NextIntlClientProvider>{children}<ThemeToggle fallback /><FloatingSomaBot /></NextIntlClientProvider>
+        <ContentProvider {...content}><NextIntlClientProvider>{children}<WebsiteChrome><ThemeToggle fallback /><FloatingSomaBot /></WebsiteChrome></NextIntlClientProvider></ContentProvider>
       </body>
     </html>
   );

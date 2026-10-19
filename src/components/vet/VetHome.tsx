@@ -1,3 +1,7 @@
+
+import { getContent } from "@/lib/content/server";
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import HomeNav from "@/components/home/HomeNav";
 import HomeFooter from "@/components/home/HomeFooter";
 import IconSprite from "@/components/home/IconSprite";
@@ -19,14 +23,18 @@ import { VET_GROUPS, speciesOfGroup, vetCounts, vetStats } from "@/lib/vet/knowl
  * Nay chỉ còn một lối. Hệ cơ quan vẫn còn, nhưng đúng chỗ của nó: bộ lọc bên
  * trong từng trang loài, nơi nó thực sự thu hẹp được thứ đang đọc.
  */
-export default function VetHome({ locale }: { locale: Loc }) {
+export default async function VetHome({ locale }: { locale: Loc }) {
+  const cmsContent = await getContent();
+  const VET_GROUPS = cmsContent.resolve(cmsSourceVET_GROUPS());
+
   const t = vetCopy(locale);
   const counts = vetCounts();
 
-  return (
+  return <ContentSurface scope="src/components/vet/VetHome.tsx">{(
     <div className="bd animal-home">
       <IconSprite />
       <HomeNav section="vet" />
+      <main>
 
       <header className="animal-hero">
         <div className="animal-hero-copy">
@@ -98,7 +106,10 @@ export default function VetHome({ locale }: { locale: Loc }) {
         <p>{t.note3d}</p>
       </section>
 
+      </main>
       <HomeFooter locale={locale} />
     </div>
-  );
+  )}</ContentSurface>;
 }
+
+function cmsSourceVET_GROUPS() { return VET_GROUPS; }

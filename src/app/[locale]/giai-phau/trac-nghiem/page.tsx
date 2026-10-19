@@ -1,3 +1,5 @@
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { setRequestLocale } from "next-intl/server";
 import { hasLocale } from "next-intl";
 import { routing } from "@/i18n/routing";
@@ -41,7 +43,7 @@ export default async function TracNghiemGiaiPhauPage({
           : "Questions generated from Soma's own 3D structure library — every item opens the model that contains it. Switch to the textbook bank, atlas or your own documents in the panel below.",
   };
 
-  return (
+  return <ContentSurface scope="src/app/[locale]/giai-phau/trac-nghiem/page.tsx">{(
     <div className="bd">
       <IconSprite />
       <HomeNav />
@@ -62,5 +64,5 @@ export default async function TracNghiemGiaiPhauPage({
         </main>
       </div>
     </div>
-  );
+  )}</ContentSurface>;
 }

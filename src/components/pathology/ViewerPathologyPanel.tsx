@@ -1,5 +1,7 @@
 "use client";
 
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useEffect, useState } from "react";
 import { useLocale } from "next-intl";
 import { useAnatomyStore } from "@/store/useAnatomyStore";
@@ -23,7 +25,7 @@ import type { Loc } from "@/lib/homeContent";
 export default function ViewerPathologyPanel() {
   const selected = useAnatomyStore((s) => s.selected);
   if (!selected) return null;
-  return <PathologyList key={selected.id} structureId={selected.id} />;
+  return <ContentSurface scope="src/components/pathology/ViewerPathologyPanel.tsx"><PathologyList key={selected.id} structureId={selected.id} /></ContentSurface>;
 }
 
 function PathologyList({ structureId }: { structureId: string }) {
@@ -63,7 +65,7 @@ function PathologyList({ structureId }: { structureId: string }) {
 
   const t = locale === "vi" ? { title:"Bệnh lý liên quan", empty:"Cấu trúc này chưa có bệnh lý được gắn.", loading:"Đang đối chiếu thư viện…", source:"Nguồn", highlight:"Làm nổi bật cấu trúc", active:"Đang làm nổi bật", pending:"Chưa có phần bệnh học chi tiết — xem nguồn bên dưới.", noTranslation:"Chưa có bản dịch — đang hiển thị nguyên văn tiếng Việt.", machine:"Bản dịch máy, chưa qua thẩm định chuyên môn.", sec:{overview:"Tổng quan",clinical:"Lâm sàng",imaging:"Hình ảnh",progression:"Tiến triển",treatment:"Điều trị"} } : locale === "zh" ? { title:"相关病理", empty:"此结构尚未关联病理。", loading:"正在查询资料库…", source:"来源", highlight:"突出显示结构", active:"正在突出显示", pending:"详细病理内容尚未撰写——请参见下方来源。", noTranslation:"尚无译文——此处显示越南语原文。", machine:"机器翻译，尚未经专业人员审核。", sec:{overview:"概述",clinical:"临床",imaging:"影像",progression:"进展",treatment:"治疗"} } : { title:"Related pathology", empty:"No pathology is linked to this structure yet.", loading:"Checking the clinical library…", source:"Source", highlight:"Highlight structure", active:"Structure highlighted", pending:"Detailed pathology not written yet — see the source below.", noTranslation:"Not translated yet — showing the Vietnamese original.", machine:"Machine translation, not reviewed by a clinician.", sec:{overview:"Overview",clinical:"Clinical",imaging:"Imaging",progression:"Progression",treatment:"Treatment"} };
 
-  return <section className="viewer-pathology">
+  return <ContentSurface scope="src/components/pathology/ViewerPathologyPanel.tsx"><section className="viewer-pathology">
     <div className="vp-title"><span>{t.title}</span><b>{items.length}</b></div>
     {loading ? <p className="vp-empty">{t.loading}</p> : items.length === 0 ? <p className="vp-empty">{t.empty}</p> : <div className="vp-list">{items.map((p) => {
       const sev = (p.severity ?? "info") as Severity;
@@ -91,5 +93,5 @@ function PathologyList({ structureId }: { structureId: string }) {
         })()}
       </article>;
     })}</div>}
-  </section>;
+  </section></ContentSurface>;
 }

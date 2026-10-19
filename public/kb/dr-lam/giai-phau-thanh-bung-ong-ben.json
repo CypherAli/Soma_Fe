@@ -1,0 +1,843 @@
+{
+  "schemaVersion": 1,
+  "id": "giai-phau-thanh-bung-ong-ben",
+  "title": "Giải phẫu thành bụng ống bẹn",
+  "sourceFile": "Giải phẫu người 2025 - Test số hóa Dr. Lâm giải phẫu thành bụng ống bẹn.pdf",
+  "sourceNote": null,
+  "sourceHash": "a38a8eddb7b4fce4bf1b16e394355163f3509bcca250779e39e5d4238e1cabdc",
+  "pages": 23,
+  "questions": [
+    {
+      "id": "giai-phau-thanh-bung-ong-ben-1",
+      "number": 1,
+      "stem": "Các mô tả sau đây về các loại thoát vị bẹn đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thoát vị gián tiếp xảy ra ngoài dây chằng liên hố."
+        },
+        {
+          "id": "B",
+          "text": "Thoát vị trực tiếp xảy ra ở trong ĐM thượng vị dưới."
+        },
+        {
+          "id": "C",
+          "text": "Thoát vị trực tiếp xảy ra từ hố trên bàng quang."
+        },
+        {
+          "id": "D",
+          "text": "Thoát vị gián tiếp xảy ra ở hố bẹn trong."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.Thoát vị gián tiếp xảy ra ở hố bẹn trong => ở hố bẹn ngoài.\ntrực tiếp: hố trên BQ; hố bẹn trong\ngián tiếp: hố bẹn ngoài.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/1c2b38eb4d1eda022732.webp"
+      ],
+      "sourcePage": 1,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-thanh-bung-ong-ben-2",
+      "number": 2,
+      "stem": "Các mô tả sau đây về liềm bẹn đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Do các sợi bám vào dây chằng bẹn của các cơ chéo bụng trong và ngang bụng tạo thành."
+        },
+        {
+          "id": "B",
+          "text": "Giữa liềm bẹn và nửa trong dây chằng bẹn có một khe hở cân cơ."
+        },
+        {
+          "id": "C",
+          "text": "Từ ngoài vào trong. nó nằm trên rồi đi ra sau ống bẹn."
+        },
+        {
+          "id": "D",
+          "text": "Nằm trên ống bẹn tại mức lỗ bẹn nông."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "B.Giữa liềm bẹn và nửa trong dây chằng bẹn có một khe hở cân\ncơ=>Là ống bẹn.\nLiềm bẹn là thành trên\nDC bẹn là thành dưới\nD.Nằm trên ống bẹn tại mức lỗ bẹn nông=>tại lỗ bẹn sâu, mức lỗ\nbẹn nông thì nằm sau ống bẹn.\nliềm bẹn: trước -> trên -> sau Ống bẹn.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 2,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-thanh-bung-ong-ben-3",
+      "number": 3,
+      "stem": "Các mô tả sau đây về thoát vị bẹn đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thường xảy ra ở nữ giới."
+        },
+        {
+          "id": "B",
+          "text": "Hay gặp do thành bụng yếu."
+        },
+        {
+          "id": "C",
+          "text": "Được gọi là thoát vị nội thớ khi khối thoát vị nằm trong bao thớ thừng tinh."
+        },
+        {
+          "id": "D",
+          "text": "Nguyên tắc điều trị thoát vị: làm hẹp khe hở giữa liềm bẹn và dây chằng bẹn."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.Thường xảy ra ở nữ giới=>thường xảy ra ở nam hơn.\nC.Được gọi là thoát vị nội thớ khi khối thoát vị nằm trong bao thớ\nthừng tinh=>nội thớ = gián tiếp.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 3,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-thanh-bung-ong-ben-4",
+      "number": 4,
+      "stem": "Các mô tả sau đây về các loại thoát vị bẹn đều đúng. TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thoát vị bẩm sinh là do còn mỏm bọc ( mỏm bọc không dính lại)."
+        },
+        {
+          "id": "B",
+          "text": "Thoát vị mắc phải là do thành bụng yếu."
+        },
+        {
+          "id": "C",
+          "text": "Thoát vị bẩm sinh là loại thoát vị nằm ngoài bao thớ thừng tinh."
+        },
+        {
+          "id": "D",
+          "text": "Thoát vị trực tiếp nằm ngoài bao thớ thừng tinh."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Thoát vị bẩm sinh là do còn mỏm bọc ( mỏm bọc không dính\nlại)=>còn ống phúc tinh mạc.\nC.Thoát vị bẩm sinh là loại thoát vị nằm ngoài bao thớ thừng\ntinh=>thoát vị bẩm sinh là gián tiếp, nằm trong bao thớ.\nThoát vị BS = Gián tiếp = Thoát vị nội thớ.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 3,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-thanh-bung-ong-ben-5",
+      "number": 5,
+      "stem": "Mô tả nào sau đây về ống bẹn đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thành sau của nó do cơ thẳng bụng tạo nên."
+        },
+        {
+          "id": "B",
+          "text": "Thành trên của nó là dây chằng liên hố."
+        },
+        {
+          "id": "C",
+          "text": "Thành trước của nó do cơ ngang bụng tạo nên."
+        },
+        {
+          "id": "D",
+          "text": "Thành dưới của nó là dây chằng bẹn."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Thành sau của nó do cơ thẳng bụng tạo nên=>mạc ngang và mô\nmỡ ngoài phúc mạc, phúc mạc.\nB.Thành trên của nó là dây chằng liên hố=>thành trên là liềm bẹn,\nd/c liên hố trong thành trước.\nC.Thành trước của nó do cơ ngang bụng tạo nên=>cơ chéo bụng\nngoài và 1 phần cơ chéo bụng trong",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/ea0a14b704db0fdaa962.webp"
+      ],
+      "sourcePage": 4,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-thanh-bung-ong-ben-6",
+      "number": 6,
+      "stem": "Các mô tả sau đây về ống bẹn đều đúng. TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó đi sau rồi đi dưới nhóm sợi dưới của cơ chéo bụng trong."
+        },
+        {
+          "id": "B",
+          "text": "Nó đi sau cân cơ chéo bụng ngoài."
+        },
+        {
+          "id": "C",
+          "text": "Nó đi sau mạc ngang."
+        },
+        {
+          "id": "D",
+          "text": "Đầu ngoài của nó nằm ngoài ĐM thượng vị dưới."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Nó đi sau rồi đi dưới nhóm sợi dưới của cơ chéo bụng\ntrong=>liềm bẹn.\nC.Nó đi sau mạc ngang=>Đi trước mạc ngang.\nD.Đầu ngoài của nó nằm ngoài ĐM thượng vị dưới=>Đầu ngoài= Lỗ\nbẹn sâu.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/f4cddde95836723cc6bc.webp"
+      ],
+      "sourcePage": 5,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-thanh-bung-ong-ben-7",
+      "number": 7,
+      "stem": "Mô tả nào sau đây về thành sau của ống bẹn đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Hố bẹn trong nằm sát đường giữa thành bụng trước."
+        },
+        {
+          "id": "B",
+          "text": "Thừng ĐM rốn đội phúc mạc lên thành nếp rốn giữa."
+        },
+        {
+          "id": "C",
+          "text": "ĐM thượng vị dưới đi lên giữa cơ ngang bụng và mạc ngang."
+        },
+        {
+          "id": "D",
+          "text": "Lỗ bẹn sâu nằm ở đầu ngoài thành sau ống bẹn."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Hố bẹn trong nằm sát đường giữa thành bụng trước=>hố trên\nbàng quang ms sát đường giữa.\nB.Thừng ĐM rốn đội phúc mạc lên thành nếp rốn giữa=>nếp rốn\ntrong.\nC.ĐM thượng vị dưới đi lên giữa cơ ngang bụng và mạc\nngang=>Đm thượng vị dưới nằm giữa mạc ngang và phúc mạc.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 6,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-thanh-bung-ong-ben-8",
+      "number": 8,
+      "stem": "Các mô tả sau về ống bẹn đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Lỗ bẹn nông nằm ngay trên đầu trong dây chằng bẹn."
+        },
+        {
+          "id": "B",
+          "text": "Lỗ bẹn sâu là nơi các thành phần đi trong thừng tinh tụm lại để đi vào thừng tinh."
+        },
+        {
+          "id": "C",
+          "text": "Chỉ có cân cơ chéo bụng ngoài tạo nên thành trước ống bẹn."
+        },
+        {
+          "id": "D",
+          "text": "Dây chằng bẹn nằm dọc dưới đoạn thừng tinh trong ống bẹn."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Chỉ có cân cơ chéo bụng ngoài tạo nên thành trước ống\nbẹn=>một phần cơ chéo bụng trong nữa.\nDC bẹn: Thành dưới Ống bẹn",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 7,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-thanh-bung-ong-ben-9",
+      "number": 9,
+      "stem": "Mạc ngang góp phần vào cấu trúc nào trong các cấu trúc sau đây?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Lỗ bẹn nông."
+        },
+        {
+          "id": "B",
+          "text": "Lỗ bẹn sâu."
+        },
+        {
+          "id": "C",
+          "text": "Dây chằng bẹn."
+        },
+        {
+          "id": "D",
+          "text": "Thành trước của ống bẹn."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Lỗ bẹn nông=>cân cơ chéo bụng ngoài.\nB.Lỗ bẹn sâu=>nằm trên mạc ngang, ngoài d/c gian hố, ĐM thượng\nvị dưới, nằm trên điểm giữa d/c bẹn 1,5cm.\nC.Dây chằng bẹn=>bờ tự do cơ chéo bụng ngoài cuộn vào các sợi\ncollagen.\nD.Thành trước của ống bẹn=>cân cơ chéo bụng ngoài bám vào hết\nd/c bẹn đến củ mu tạo trụ trong và trụ ngoài.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 8,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-thanh-bung-ong-ben-10",
+      "number": 10,
+      "stem": "Cấu trúc nào trong các cấu trúc sau được tạo nên bởi các di tích của ống niệu rốn thời kì phôi thai?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nếp rốn trong."
+        },
+        {
+          "id": "B",
+          "text": "Dây chằng tròn của từ cung."
+        },
+        {
+          "id": "C",
+          "text": "Dây chằng bẹn"
+        },
+        {
+          "id": "D",
+          "text": "Nếp rốn giữa"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Nếp rốn trong=>thừng ĐM rốn.\nD.Nếp rốn giữa=>Dây treo Bàng quang ( DC rốn giữa): di tích Ống\nniệu rốn. đội Phúc mạc thành Nếp rốn giữa.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 8,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-thanh-bung-ong-ben-11",
+      "number": 11,
+      "stem": "Mô tả nào trong các mô tả sau đây về dây chằng bẹn đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó được tạo nên bởi bờ dưới tự do của cơ chéo bụng trong."
+        },
+        {
+          "id": "B",
+          "text": "Nó đi từ gai chậu trước trên tới củ ngồi."
+        },
+        {
+          "id": "C",
+          "text": "Nó tại nên trần của ống bẹn."
+        },
+        {
+          "id": "D",
+          "text": "Nó tạo nên sàn của ống bẹn."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Nó được tạo nên bởi bờ dưới tự do của cơ chéo bụng trong=>cơ\nchéo bụng ngoài.\nB.Nó đi từ gai chậu trước trên tới củ ngồi=>gai chậu trước trên đến\ncủ mu.\nC.Nó tại nên trần của ống bẹn=>thành dưới ống bẹn.\nD.Nó tạo nên sàn của ống bẹn.\nDây chằng bẹn: củ mu\nĐiểm giữa bẹn: khớp mu.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 9,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-thanh-bung-ong-ben-12",
+      "number": 12,
+      "stem": "Cấu trúc nào sau đây là một phần của, hay được tạo nên bởi cơ chéo bụng trong?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Dây chằng khuyết."
+        },
+        {
+          "id": "B",
+          "text": "Dây chằng bẹn."
+        },
+        {
+          "id": "C",
+          "text": "Cơ bìu."
+        },
+        {
+          "id": "D",
+          "text": "Mạc tinh ngoài."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Dây chằng khuyết=>mạc ngang.\ncơ --> cơ\nmạc --> dây chằng.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/b413a501dd380d414874.webp"
+      ],
+      "sourcePage": 10,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-thanh-bung-ong-ben-13",
+      "number": 13,
+      "stem": "Mô tả nào trong các mô tả sau đây về cơ chéo bụng trong đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó tạo nên thành dưới ống bẹn."
+        },
+        {
+          "id": "B",
+          "text": "Cân của nó góp phần tạo nên thành sau ống bẹn."
+        },
+        {
+          "id": "C",
+          "text": "Cân của nó góp phần tạo nên liềm bẹn."
+        },
+        {
+          "id": "D",
+          "text": "Cân của nó góp phần tạo nên lá sau bao cơ thẳng bụng ở dưới đường cung."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Nó tạo nên thành dưới ống bẹn=>là d/c bẹn.\nB.Cân của nó góp phần tạo nên thành sau ống bẹn=>mạc ngang,\nphúc mạc.\nC.Cân của nó góp phần tạo nên liềm bẹn=>cơ ngang bụng và cơ\nchéo bụng trong.\nD.Cân của nó góp phần tạo nên lá sau bao cơ thẳng bụng ở dưới\nđường cung=>lá trước bao cơ thẳng bụng.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/93e4d90db03eb62a6e1b.webp"
+      ],
+      "sourcePage": 11,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-thanh-bung-ong-ben-14",
+      "number": 14,
+      "stem": "Cấu trúc nào trong các cấu trúc sau tạo nên thành trước ống bẹn?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Mạc ngang."
+        },
+        {
+          "id": "B",
+          "text": "Cân của cơ ngang bụng."
+        },
+        {
+          "id": "C",
+          "text": "Cân của cơ chéo bụng ngoài."
+        },
+        {
+          "id": "D",
+          "text": "Dây chằng khuyết."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Mạc ngang=>thành sau.\nB.Cân của cơ ngang bụng=>thành trên.\nD.Dây chằng khuyết=>thành sau.\nThành sau: Mạc ngang; Mô ngoài phúc mạc; Phúc mạc.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/c71882bc911b7600e374.webp"
+      ],
+      "sourcePage": 12,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-thanh-bung-ong-ben-15",
+      "number": 15,
+      "stem": "Một thoát vị bẹn gián tiếp xảy ra",
+      "options": [
+        {
+          "id": "A",
+          "text": "ở ngoài ĐM thượng vị dưới."
+        },
+        {
+          "id": "B",
+          "text": "Giữa ĐM thượng vị dưới và thừng ĐM rốn."
+        },
+        {
+          "id": "C",
+          "text": "ở trong thừng ĐM rốn."
+        },
+        {
+          "id": "D",
+          "text": "Giữa nếp rốn giữa và thừng ĐM rốn."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Gián tiếp: Hố bẹn ngoài: Bên ngoài Nếp rốn ngoài ( ĐM thượng vị\ndưới)\nTrực tiếp: Hố bẹn trong và Hố trên bàng quang.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 13,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-thanh-bung-ong-ben-16",
+      "number": 16,
+      "stem": "Mô tả nào trong các mô tả sau đây về ĐM thượng vị dưới đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó nằm trong một thoát vị bẹn trực tiếp."
+        },
+        {
+          "id": "B",
+          "text": "Nó nằm ngoài và sau một thoát vị bẹn gián tiếp."
+        },
+        {
+          "id": "C",
+          "text": "Nó là một nhánh của ĐM chậu trong."
+        },
+        {
+          "id": "D",
+          "text": "Nó là một đường tuần hoàn bên khi có hẹp ĐM chủ."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Nó nằm trong một thoát vị bẹn trực tiếp=>nằm ngoài.\nB.Nó nằm ngoài và sau một thoát vị bẹn gián tiếp=>nằm trong TV\nbẹn gián tiếp.\nC.Nó là một nhánh của ĐM chậu trong=>nhánh của ĐM chậu ngoài.\nD.Nó là một đường tuần hoàn bên khi có hẹp ĐM chủ=>tiếp nối với\nĐM thượng vị trên/ĐM ngực trong/ĐM dưới đòn.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/11448f2693037fada039.webp"
+      ],
+      "sourcePage": 14,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-thanh-bung-ong-ben-17",
+      "number": 17,
+      "stem": "Cân cơ chéo bụng ngoài góp phần vào tất cả các cấu trúc sau, trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Liềm bẹn."
+        },
+        {
+          "id": "B",
+          "text": "Lá trước của bao cơ thẳng bụng."
+        },
+        {
+          "id": "C",
+          "text": "Thành trước của ống bẹn."
+        },
+        {
+          "id": "D",
+          "text": "Dây chằng bẹn."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.Liềm bẹn => cơ ngang bụng và chéo bụng trong.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/d51ddee0b2d4b5b3e5ae.webp"
+      ],
+      "sourcePage": 15,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-thanh-bung-ong-ben-18",
+      "number": 18,
+      "stem": "Tất cả các mô tả sau đây về ống bẹn đều đúng, trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó tận cùng tại lỗ bẹn nông. trong cân cơ chéo bụng ngoài."
+        },
+        {
+          "id": "B",
+          "text": "Nó bắt đầu ở lỗ bẹn sâu. trong mạc ngang."
+        },
+        {
+          "id": "C",
+          "text": "Thành trước của nó chủ yếu do cân cơ ngang bụng và mạc ngang tạo nên."
+        },
+        {
+          "id": "D",
+          "text": "Nó là nơi đi qua của thừng tinh hoặc dây chằng tròn của tử cung."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Thành trước của nó chủ yếu do cân cơ ngang bụng và mạc\nngang tạo nên=>cơ chéo bụng ngoài và 1 phần chéo bụng\ntrong,Thành sau: Mạc ngang...",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 16,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-thanh-bung-ong-ben-19",
+      "number": 19,
+      "stem": "Tất cả các mô tả sau về một thoát vị bẹn trực tiếp đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó đi vào ống bẹn qua thành sau của ống."
+        },
+        {
+          "id": "B",
+          "text": "Nó nằm ngoài ĐM thượng vị dưới."
+        },
+        {
+          "id": "C",
+          "text": "Nó có một lớp vỏ bọc bằng phúc mạc."
+        },
+        {
+          "id": "D",
+          "text": "Nó có thể không đi xuống tới bìu."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.Nó nằm ngoài ĐM thượng vị dưới => nằm trong ĐM thượng vị\ndưới.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/266fce79dc0a239c5de1.webp"
+      ],
+      "sourcePage": 17,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-thanh-bung-ong-ben-20",
+      "number": 20,
+      "stem": "Các mô tả sau đây về ống bẹn đều đúng. TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó là một khe hở cân – cơ ở vùng bẹn bụng ( thành bụng trước bên)."
+        },
+        {
+          "id": "B",
+          "text": "Nó ngắn hơn chiều dài của dây chằng bẹn."
+        },
+        {
+          "id": "C",
+          "text": "Vùng bẹn bụng nằm trong bờ ngoài cơ thẳng bụng."
+        },
+        {
+          "id": "D",
+          "text": "Nó gồm 4 thành và 2 lỗ"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Vùng bẹn bụng nằm trong bờ ngoài cơ thẳng bụng => Ở ngoài\nbờ ngoài cơ thẳng bụng.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 18,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-thanh-bung-ong-ben-21",
+      "number": 21,
+      "stem": "Các mô tả sau đây về các thành ống bẹn đều đúng. Trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thành trên là liềm bẹn hay gân kết hợp."
+        },
+        {
+          "id": "B",
+          "text": "Liềm bẹn do cân cơ ngang bụng và cơ chéo bụng ngoài tạo thành."
+        },
+        {
+          "id": "C",
+          "text": "Thành trước là cân cơ chéo bụng ngoài."
+        },
+        {
+          "id": "D",
+          "text": "Thành dưới là dây chằng bẹn."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.Liềm bẹn do cân cơ ngang bụng và cơ chéo bụng ngoài tạo\nthành=>ngang bụng và chéo bụng trong.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 19,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-thanh-bung-ong-ben-22",
+      "number": 22,
+      "stem": "Các mô tả sau đây về các thành sau ống bẹn đều đúng. TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Gồm mạc ngang. mô mỡ ngoài phúc mạc và phúc mạc."
+        },
+        {
+          "id": "B",
+          "text": "Có dây chằng gian hố tăng cường."
+        },
+        {
+          "id": "C",
+          "text": "Có 3 hố phúc mạc."
+        },
+        {
+          "id": "D",
+          "text": "Lỗ bẹn sâu nằm ở vùng hố bẹn trong."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.Lỗ bẹn sâu nằm ở vùng hố bẹn trong => lỗ bẹn sâu ở ngoài.\nhố bẹn ngoài; hố bẹn trong; hố trên bàng quang.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/2ade95db865349f0340a.webp"
+      ],
+      "sourcePage": 19,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-thanh-bung-ong-ben-23",
+      "number": 23,
+      "stem": "Thành phần nào sau đây không nằm ở thành sau ống bẹn?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Dây chằng phản chiếu."
+        },
+        {
+          "id": "B",
+          "text": "Thừng ĐM rốn."
+        },
+        {
+          "id": "C",
+          "text": "Dây treo bàng quang."
+        },
+        {
+          "id": "D",
+          "text": "ĐM thượng vị dưới."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.Dây chằng phản chiếu=>thành trước.\nB.Thừng ĐM rốn=>nếp rốn trong.\nC.Dây treo bàng quang=>nếp rốn giữa.\nD.ĐM thượng vị dưới=>nếp rốn ngoài.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/9d5098c9b3ee374e6640.webp"
+      ],
+      "sourcePage": 20,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-thanh-bung-ong-ben-24",
+      "number": 24,
+      "stem": "Các mô tả sau đây về giới hạn các hố phúc mạc trên thành sau ống bẹn đều đúng. TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Hố trên bàng quang ở giữa nếp rốn giữa và nếp rốn trong."
+        },
+        {
+          "id": "B",
+          "text": "Hố bẹn trong ở ngoài nếp rốn trong."
+        },
+        {
+          "id": "C",
+          "text": "Hố bẹn ngoài ở giữa nếp rốn trong và nếp rốn ngoài."
+        },
+        {
+          "id": "D",
+          "text": "Hố bẹn ngoài nằm ở ngoài ĐM thượng vị dưới."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Hố bẹn ngoài ở giữa nếp rốn trong và nếp rốn ngoài => hố bẹn\nngoài nằm ngoài nếp rốn ngoài.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 21,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-thanh-bung-ong-ben-25",
+      "number": 25,
+      "stem": "Các mô tả sau đây về lỗ bẹn sâu đều đúng. TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nằm ở phía trên trung điểm dây chẳng bẹn 1,5-1,8cm."
+        },
+        {
+          "id": "B",
+          "text": "Nằm ở hố bẹn ngoài."
+        },
+        {
+          "id": "C",
+          "text": "Nằm ở trong dây chằng liên hố."
+        },
+        {
+          "id": "D",
+          "text": "Là nơi các thành phần thừng tinh qui tụ để chui vào ống bẹn."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Nằm ở trong dây chằng liên hố => nằm ngoài d/c liên hố.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/afb22dbfacfe92841843.webp"
+      ],
+      "sourcePage": 21,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-thanh-bung-ong-ben-26",
+      "number": 26,
+      "stem": "Các mô tả sau đây về lỗ bẹn nông đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nằm trên củ mu khoảng 0,5 cm."
+        },
+        {
+          "id": "B",
+          "text": "Có độ rộng cho phép đút vừa ngón tay cái."
+        },
+        {
+          "id": "C",
+          "text": "Được vây quanh bởi các trụ. dây chằng phản chiếu và các sợi gian trụ của cân cơ chéo bụng ngoài."
+        },
+        {
+          "id": "D",
+          "text": "Thực chất là một lỗ hở ở cân cơ chéo bụng ngoài"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.Có độ rộng cho phép đút vừa ngón tay cái => đút một ngón ÚT",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/9d5098c9b3ee374e6640.webp"
+      ],
+      "sourcePage": 22,
+      "gradable": true
+    }
+  ]
+}

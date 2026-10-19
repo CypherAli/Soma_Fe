@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Cơ quan sinh dục nam" — cùng nhóm với scene he-sinh-san-nam.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const maleGenitalScene: AtlasSceneDef = {
+export const maleGenitalScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/male-genital.ts#maleGenitalScene", {
   "slug": "co-quan-sinh-duc-nam",
   "title": {
     "vi": "Cơ quan sinh dục nam",
@@ -182,4 +184,4 @@ export const maleGenitalScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

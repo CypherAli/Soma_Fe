@@ -1,5 +1,7 @@
 "use client";
 
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useEffect, useState } from "react";
 import { AUTH_CHANGED_EVENT } from "@/lib/auth";
 import {
@@ -172,12 +174,15 @@ export default function PathPanel({
 
   const remove = async () => {
     if (!window.confirm(t.pathDeleteConfirm)) return;
-    await deletePath();
-    setPath(null);
-    setSession(null);
-    setPlan(null);
-    setOpened(null);
-    setEditing(true);
+    setError("");
+    try {
+      await deletePath();
+      setPath(null);
+      setSession(null);
+      setPlan(null);
+      setOpened(null);
+      setEditing(true);
+    } catch { setError(t.pathDeleteFailed); }
   };
 
   /** Mở/đóng chi tiết một khối. Chỉ mở MỘT khối để bảng không dài vô tận. */
@@ -195,10 +200,10 @@ export default function PathPanel({
     }
   };
 
-  if (loading) return <section className="quiz-path-builder"><p className="quiz-lead">{t.loading}</p></section>;
-  if (!signedIn) return <SignInGate t={t} />;
+  if (loading) return <ContentSurface scope="src/components/quiz/PathPanel.tsx"><section className="quiz-path-builder"><p className="quiz-lead">{t.loading}</p></section></ContentSurface>;
+  if (!signedIn) return <ContentSurface scope="src/components/quiz/PathPanel.tsx"><SignInGate t={t} /></ContentSurface>;
 
-  return (
+  return <ContentSurface scope="src/components/quiz/PathPanel.tsx">{(
     <section className="quiz-path-builder">
       <header>
         <div>
@@ -344,7 +349,7 @@ export default function PathPanel({
 
       {error && <div className="quiz-path-error" role="alert">{error}</div>}
     </section>
-  );
+  )}</ContentSurface>;
 }
 
 /**
@@ -365,7 +370,7 @@ function PlanOutline({
   opening: number;
   onToggle: (block: PlanBlock) => void;
 }) {
-  return (
+  return <ContentSurface scope="src/components/quiz/PathPanel.tsx">{(
     <div className="quiz-path-plan">
       <div className="quiz-path-plan-head">
         <b>{t.planTitle}</b>
@@ -404,7 +409,7 @@ function PlanOutline({
         ))}
       </ol>
     </div>
-  );
+  )}</ContentSurface>;
 }
 
 function BlockRow({
@@ -415,7 +420,7 @@ function BlockRow({
   block: PlanBlock;
   scopeLabel: (scope: string) => string;
 }) {
-  return (
+  return <ContentSurface scope="src/components/quiz/PathPanel.tsx">{(
     <div className="quiz-path-block">
       <b>{t.planBlock(block.granularity, block.index)}</b>
       <time dateTime={block.from}>{dateRange(locale, block.from, block.to)}</time>
@@ -428,7 +433,7 @@ function BlockRow({
       )}
       {block.current && <u>{t.planNow}</u>}
     </div>
-  );
+  )}</ContentSurface>;
 }
 
 function kindLabel(t: QuizText, kind: PlanBlock["kind"]): string {

@@ -84,7 +84,8 @@ export function iou(a: Box, b: Box): number {
   return union > 0 ? inter / union : 0;
 }
 
-type RegionRef = { part: VisionPartKey; ref: Box };
+/** `side` = bên của NGƯỜI (mốc *_L là bên trái của người, kể cả sau khi lật gương). */
+type RegionRef = { part: VisionPartKey; ref: Box; side?: "left" | "right" };
 
 /**
  * Dựng ô tham chiếu cho từng vùng từ các mốc pose ĐÃ LẬT GƯƠNG.
@@ -94,30 +95,34 @@ function buildRefs(lm: (PoseLm | undefined)[], scale: number, aspect: number): R
   const out: RegionRef[] = [];
   const k = (f: number) => ({ px: scale * f, py: scale * f * aspect });
 
+  // Quy ước gọi: danh sách mốc/cặp mốc luôn theo thứ tự [TRÁI, PHẢI] của người.
+  const sideOf = (n: number, count: number, sided: boolean) =>
+    !sided || count < 2 ? undefined : n === 0 ? ("left" as const) : ("right" as const);
+
   /** Vùng quanh MỘT mốc, ô vuông theo pixel. */
   const around = (part: VisionPartKey, idx: number[], f: number) => {
-    for (const i of idx) {
+    idx.forEach((i, n) => {
       const p = lm[i];
-      if (!has(p)) continue;
+      if (!has(p)) return;
       const { px, py } = k(f);
-      out.push({ part, ref: { x: p.x - px, y: p.y - py, w: px * 2, h: py * 2 } });
-    }
+      out.push({ part, ref: { x: p.x - px, y: p.y - py, w: px * 2, h: py * 2 }, side: sideOf(n, idx.length, true) });
+    });
   };
 
-  /** Vùng giữa HAI mốc (đoạn chi), nới thêm viền. */
-  const between = (part: VisionPartKey, pairs: [number, number][], f: number) => {
-    for (const [i, j] of pairs) {
+  /** Vùng giữa HAI mốc (đoạn chi), nới thêm viền. `sided=false` cho vùng giữa người (miệng). */
+  const between = (part: VisionPartKey, pairs: [number, number][], f: number, sided = true) => {
+    pairs.forEach(([i, j], n) => {
       const a = lm[i];
       const b = lm[j];
-      if (!has(a) || !has(b)) continue;
+      if (!has(a) || !has(b)) return;
       const { px, py } = k(f);
-      out.push({ part, ref: bboxOf([a, b], px, py) });
-    }
+      out.push({ part, ref: bboxOf([a, b], px, py), side: sideOf(n, pairs.length, sided) });
+    });
   };
 
   around("eye", [POSE.EYE_L, POSE.EYE_R], 0.16);
   around("ear", [POSE.EAR_L, POSE.EAR_R], 0.16);
-  between("mouth", [[POSE.MOUTH_L, POSE.MOUTH_R]], 0.12);
+  between("mouth", [[POSE.MOUTH_L, POSE.MOUTH_R]], 0.12, false);
 
   const faceIdx = [POSE.NOSE, POSE.EYE_L, POSE.EYE_R, POSE.EAR_L, POSE.EAR_R, POSE.MOUTH_L, POSE.MOUTH_R];
   const facePts = faceIdx.map((i) => lm[i]).filter(has);
@@ -151,7 +156,11 @@ function buildRefs(lm: (PoseLm | undefined)[], scale: number, aspect: number): R
   between("forearm", [[POSE.ELBOW_L, POSE.WRIST_L], [POSE.ELBOW_R, POSE.WRIST_R]], 0.12);
   around("wrist", [POSE.WRIST_L, POSE.WRIST_R], 0.18);
   between("hand", [[POSE.WRIST_L, POSE.INDEX_L], [POSE.WRIST_R, POSE.INDEX_R]], 0.16);
+  around("hip", [POSE.HIP_L, POSE.HIP_R], 0.28);
+  between("thigh", [[POSE.HIP_L, POSE.KNEE_L], [POSE.HIP_R, POSE.KNEE_R]], 0.14);
   around("knee", [POSE.KNEE_L, POSE.KNEE_R], 0.26);
+  between("leg", [[POSE.KNEE_L, POSE.ANKLE_L], [POSE.KNEE_R, POSE.ANKLE_R]], 0.12);
+  around("ankle", [POSE.ANKLE_L, POSE.ANKLE_R], 0.14);
   between("foot", [[POSE.ANKLE_L, POSE.FOOT_L], [POSE.ANKLE_R, POSE.FOOT_R]], 0.14);
 
   // Ngực và bụng: chia đôi khoảng vai → hông. Không có mốc xương nào ở giữa
@@ -220,21 +229,22 @@ export function guessFromPose(
   if (scale <= 0) return { guesses: [], bestIou: 0 };
 
   const allow = only ? new Set<VisionPartKey>(only) : null;
-  const best = new Map<VisionPartKey, number>();
-  for (const { part, ref } of buildRefs(lm, scale, aspect)) {
+  // Mỗi vùng giữ lại ô tham chiếu khớp nhất — kèm luôn BÊN của ô đó.
+  const best = new Map<VisionPartKey, { v: number; side?: "left" | "right" }>();
+  for (const { part, ref, side } of buildRefs(lm, scale, aspect)) {
     if (allow && !allow.has(part)) continue;
     const v = iou(box, ref);
-    if (v > (best.get(part) ?? 0)) best.set(part, v);
+    if (v > (best.get(part)?.v ?? 0)) best.set(part, { v, side });
   }
 
-  const rows = [...best.entries()].filter(([, v]) => v > 0.04).sort((a, b) => b[1] - a[1]);
+  const rows = [...best.entries()].filter(([, r]) => r.v > 0.04).sort((a, b) => b[1].v - a[1].v);
   if (rows.length === 0) return { guesses: [], bestIou: 0 };
 
   const top = rows.slice(0, 3);
-  const sum = top.reduce((n, [, v]) => n + v, 0);
+  const sum = top.reduce((n, [, r]) => n + r.v, 0);
   return {
-    guesses: top.map(([part, v]) => ({ part, score: v / sum })),
-    bestIou: rows[0][1],
+    guesses: top.map(([part, r]) => ({ part, score: r.v / sum, ...(r.side ? { side: r.side } : {}) })),
+    bestIou: rows[0][1].v,
   };
 }
 
@@ -274,6 +284,11 @@ export type ArmGuessResult = {
   guesses: VisionGuess[];
   /** Phần đoạn cổ tay→khuỷu nằm trong ô — chính là "chụp được bao nhiêu cẳng tay". */
   coverage: number;
+  /**
+   * Hình học có PHÂN ĐỊNH rõ không: ô ôm hẳn khuỷu, hoặc hầu như không lấn xuống
+   * cẳng tay. Vùng chuyển tiếp 0,25–0,6 và ca không thấy khuỷu thì không.
+   */
+  decisive: boolean;
 };
 
 /**
@@ -295,48 +310,36 @@ export type ArmGuessResult = {
  */
 export function guessFromArmChain(box: Box, wrist: P, pose: PoseLm[]): ArmGuessResult {
   const lm: (PoseLm | undefined)[] = pose.map((p) => ({ ...p, x: 1 - p.x }));
-  const elbows = [lm[POSE.ELBOW_L], lm[POSE.ELBOW_R]].filter(has);
+  const elbows = (
+    [
+      [lm[POSE.ELBOW_L], "left"],
+      [lm[POSE.ELBOW_R], "right"],
+    ] as const
+  ).filter((e): e is readonly [PoseLm, "left" | "right"] => has(e[0]));
   // Khuỷu gần cổ tay nhất chính là khuỷu của cánh tay đang giơ.
-  const elbow = elbows.sort(
-    (a, b) => Math.hypot(a.x - wrist.x, a.y - wrist.y) - Math.hypot(b.x - wrist.x, b.y - wrist.y),
+  const nearest = [...elbows].sort(
+    (a, b) =>
+      Math.hypot(a[0].x - wrist.x, a[0].y - wrist.y) - Math.hypot(b[0].x - wrist.x, b[0].y - wrist.y),
   )[0];
 
-  if (!elbow) {
+  if (!nearest) {
     // Không thấy khuỷu (tay che mất, hoặc đưa quá sát camera): chỉ biết chắc là
     // có bàn tay. Nói đúng chừng đó.
-    return { guesses: handPathFallback(), coverage: 0 };
+    return { guesses: handPathFallback(), coverage: 0, decisive: false };
   }
+  const [elbow, side] = nearest;
 
   const coverage = segmentCoverage(box, wrist, elbow);
   const inside =
     elbow.x >= box.x && elbow.x <= box.x + box.w && elbow.y >= box.y && elbow.y <= box.y + box.h;
+  const rows = (list: [VisionPartKey, number][]) => list.map(([part, score]) => ({ part, score, side }));
 
   if (inside || coverage > 0.6) {
-    return {
-      guesses: [
-        { part: "forearm", score: 0.54 },
-        { part: "wrist", score: 0.27 },
-        { part: "hand", score: 0.19 },
-      ],
-      coverage,
-    };
+    return { guesses: rows([["forearm", 0.54], ["wrist", 0.27], ["hand", 0.19]]), coverage, decisive: true };
   }
   if (coverage > 0.25) {
-    return {
-      guesses: [
-        { part: "forearm", score: 0.4 },
-        { part: "hand", score: 0.33 },
-        { part: "wrist", score: 0.27 },
-      ],
-      coverage,
-    };
+    // Vùng chuyển tiếp: ô lấn nửa vời xuống cẳng tay — thật sự không phân định được.
+    return { guesses: rows([["forearm", 0.4], ["hand", 0.33], ["wrist", 0.27]]), coverage, decisive: false };
   }
-  return {
-    guesses: [
-      { part: "hand", score: 0.52 },
-      { part: "wrist", score: 0.28 },
-      { part: "forearm", score: 0.2 },
-    ],
-    coverage,
-  };
+  return { guesses: rows([["hand", 0.52], ["wrist", 0.28], ["forearm", 0.2]]), coverage, decisive: true };
 }

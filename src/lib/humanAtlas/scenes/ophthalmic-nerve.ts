@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Thần kinh mắt (V1)" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const ophthalmicNerveScene: AtlasSceneDef = {
+export const ophthalmicNerveScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/ophthalmic-nerve.ts#ophthalmicNerveScene", {
   "slug": "than-kinh-sinh-ba",
   "title": {
     "vi": "Thần kinh mắt (V1) và các dây trong hốc mắt",
@@ -194,4 +196,4 @@ export const ophthalmicNerveScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Hố khoeo" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const poplitealFossaScene: AtlasSceneDef = {
+export const poplitealFossaScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/popliteal-fossa.ts#poplitealFossaScene", {
   "slug": "ho-khoeo",
   "title": {
     "vi": "Hố khoeo",
@@ -177,4 +179,4 @@ export const poplitealFossaScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

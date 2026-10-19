@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Bài bộ phận "Cánh tay — học theo lớp" học theo lớp — nhóm lấy từ arm-muscles.ts (đã kiểm), chỉ thêm lớp.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const partArmScene: AtlasSceneDef = {
+export const partArmScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/part-arm.ts#partArmScene", {
   "slug": "bo-phan-canh-tay",
   "title": {
     "vi": "Cánh tay — học theo lớp",
@@ -195,4 +197,4 @@ export const partArmScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

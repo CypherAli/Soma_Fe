@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { SceneModule } from "./types";
 import type { RegionViewKey } from "./regions";
 
@@ -5,7 +7,7 @@ import type { RegionViewKey } from "./regions";
  * Đợt vùng thứ sáu, phần 2/3 — ba khoang phẫu tích kinh điển: hố dưới thái
  * dương, ống sống đoạn thắt lưng và tam giác đùi.
  */
-export const regionScenes9: Record<string, SceneModule> = {
+export const regionScenes9: Record<string, SceneModule> = bindContentSource("data:src/lib/scenes/regions9.ts#regionScenes9", {
   "ho-duoi-thai-duong": {
     slug: "ho-duoi-thai-duong",
     title: { vi: "Hố dưới thái dương", en: "The Infratemporal Fossa", zh: "颞下窝" },
@@ -119,7 +121,7 @@ export const regionScenes9: Record<string, SceneModule> = {
         note: { vi: "Bao cân dày bọc kín khối cơ đùi và chia đùi thành các KHOANG kín. Vì bao không giãn được, chảy máu hay phù nề trong khoang làm áp lực tăng nhanh — hội chứng khoang: đau không tương xứng, đau khi kéo giãn cơ thụ động, và phải mở cân cấp cứu trước khi mất mạch.", en: "The thick sheath enclosing the thigh muscles and dividing them into closed COMPARTMENTS. Because it cannot stretch, bleeding or swelling inside raises pressure fast — compartment syndrome: pain out of proportion, pain on passive stretch, and fasciotomy required before pulses disappear.", zh: "包裹大腿肌群并将其分为封闭筋膜室的厚层筋膜。因其不能延展，室内出血或肿胀使压力迅速升高——即骨筋膜室综合征：疼痛程度与损伤不符、被动牵拉痛，须在脉搏消失之前行筋膜切开。" } },
     ],
   },
-};
+});
 
 export const regionViewerConfig9: Record<string, { cats: RegionViewKey[]; faded?: RegionViewKey[] }> = {
   "ho-duoi-thai-duong": { cats: ["skin", "muscle", "artery", "vein", "nerve", "bone"], faded: ["bone"] },

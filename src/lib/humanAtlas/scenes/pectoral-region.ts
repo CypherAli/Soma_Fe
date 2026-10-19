@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Cơ vùng ngực" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const pectoralRegionScene: AtlasSceneDef = {
+export const pectoralRegionScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/pectoral-region.ts#pectoralRegionScene", {
   "slug": "vung-nguc-tuyen-vu",
   "title": {
     "vi": "Cơ vùng ngực và mạch nuôi",
@@ -217,4 +219,4 @@ export const pectoralRegionScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

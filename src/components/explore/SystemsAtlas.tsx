@@ -1,4 +1,11 @@
+
+import { getContent } from "@/lib/content/server";
+
+import { bindContentSource } from "@/lib/content/source";
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { Link } from "@/i18n/navigation";
+import Image from "next/image";
 import { pick, type Loc, type T3 } from "@/lib/homeContent";
 import {
   regionGroups, scenesOfRegion, scenesOfSystem, systemGroups,
@@ -25,7 +32,7 @@ import "./systems-atlas.css";
 type AtlasGroup = { key: string; slug: string; label: T3; icon: string; about: T3; cover?: string; scenes: CatalogScene[] };
 
 /** Một câu giới thiệu mỗi hệ — viết cho sinh viên y. */
-const SYSTEM_ABOUT: Record<SystemGroupKey, T3> = {
+const SYSTEM_ABOUT: Record<SystemGroupKey, T3> = bindContentSource("data:src/components/explore/SystemsAtlas.tsx#SYSTEM_ABOUT", {
   skeletal: { vi: "206 xương làm khung nâng đỡ, bảo vệ tạng và làm đòn bẩy cho vận động; tuỷ xương tạo máu.", en: "206 bones form the frame that supports, protects the organs and acts as levers for movement; the marrow makes blood.", zh: "206块骨构成支架，支持并保护脏器，作为运动杠杆；骨髓造血。" },
   muscular: { vi: "Hơn 600 cơ vân kéo xương qua khớp; học theo khu, nguyên uỷ–bám tận và dây thần kinh chi phối.", en: "Over 600 skeletal muscles pull bones across joints; study them by compartment, attachments and nerve supply.", zh: "600多块骨骼肌牵拉骨跨越关节；按肌群、起止点和神经支配学习。" },
   nervous: { vi: "Não, tuỷ sống và dây thần kinh — trung tâm điều khiển, cảm giác và tư duy.", en: "Brain, spinal cord and nerves — the centre of control, sensation and thought.", zh: "脑、脊髓和神经——控制、感觉与思维的中枢。" },
@@ -39,10 +46,10 @@ const SYSTEM_ABOUT: Record<SystemGroupKey, T3> = {
   reproductive: { vi: "Cơ quan sinh dục và tuyến phụ — sinh giao tử và hormon sinh dục.", en: "The reproductive organs and accessory glands — gametes and sex hormones.", zh: "生殖器官与附属腺——产生配子与性激素。" },
   fascia: { vi: "Mạc bọc cơ và tạng, chia khoang, truyền lực.", en: "Fascia wraps muscles and organs, divides compartments and transmits force.", zh: "筋膜包裹肌与脏器，分隔间隙并传递力量。" },
   connective: { vi: "Gân, dây chằng, màng — mô liên kết đặc giữ các cấu trúc lại với nhau.", en: "Tendons, ligaments and membranes — the dense connective tissue that binds structures together.", zh: "肌腱、韧带与膜——将各结构连在一起的致密结缔组织。" },
-};
+});
 
 /** Một câu giới thiệu mỗi VÙNG — theo lối giải phẫu định khu. */
-const REGION_ABOUT: Record<string, T3> = {
+const REGION_ABOUT: Record<string, T3> = bindContentSource("data:src/components/explore/SystemsAtlas.tsx#REGION_ABOUT", {
   "head-neck": { vi: "Sọ, não, giác quan, miệng–hầu–thanh quản và các tam giác cổ — vùng dày đặc cấu trúc nhất cơ thể.", en: "Skull, brain, special senses, mouth, pharynx, larynx and the neck triangles — the most densely packed region of the body.", zh: "颅骨、脑、感官、口咽喉及颈部三角——人体结构最密集的区域。" },
   thorax: { vi: "Lồng ngực bảo vệ tim, phổi và trung thất; cơ hoành ngăn cách với ổ bụng.", en: "The rib cage guarding the heart, lungs and mediastinum; the diaphragm separates it from the abdomen.", zh: "胸廓保护心、肺和纵隔；膈将其与腹腔分隔。" },
   abdomen: { vi: "Thành bụng, ống tiêu hoá, gan–tuỵ–lách, thận và khoang sau phúc mạc.", en: "The abdominal wall, gut, liver, pancreas and spleen, kidneys and the retroperitoneum.", zh: "腹壁、消化管、肝胰脾、肾及腹膜后间隙。" },
@@ -50,7 +57,7 @@ const REGION_ABOUT: Record<string, T3> = {
   "upper-limb": { vi: "Từ đai vai qua cánh tay, khuỷu, cẳng tay tới bàn tay — học theo khu cơ, khớp và mạch.", en: "From the shoulder girdle through arm, elbow and forearm to the hand — by compartment, joint and vessel.", zh: "从肩带经上臂、肘、前臂至手——按肌群、关节和血管学习。" },
   pelvis: { vi: "Vành chậu, đáy chậu và các tạng chậu: bàng quang, trực tràng, cơ quan sinh dục.", en: "The pelvic ring, pelvic floor and pelvic organs: bladder, rectum and reproductive organs.", zh: "骨盆环、盆底及盆腔脏器：膀胱、直肠、生殖器官。" },
   "lower-limb": { vi: "Từ hông qua đùi, gối, cẳng chân tới cổ chân–bàn chân — nâng đỡ và đi lại.", en: "From hip through thigh, knee and leg to ankle and foot — weight-bearing and walking.", zh: "从髋经大腿、膝、小腿至踝与足——承重与行走。" },
-};
+});
 
 /** Bài đại diện làm ảnh bìa mục lục (ưu tiên bài bộ phận — hình gọn, dễ nhận). */
 const COVER: Record<string, string> = {
@@ -61,16 +68,19 @@ const COVER: Record<string, string> = {
   "upper-limb": "bo-phan-ban-tay", pelvis: "bo-phan-chau-hong", "lower-limb": "bo-phan-goi",
 };
 
-const TXT = {
+const TXT = bindContentSource("data:src/components/explore/SystemsAtlas.tsx#TXT", {
   systems: { vi: "Mục lục hệ cơ quan", en: "Organ systems", zh: "器官系统目录" },
   regions: { vi: "Mục lục vùng cơ thể", en: "Body regions", zh: "身体区域目录" },
   lessons: { vi: "bài", en: "lessons", zh: "课" },
   viewAll: { vi: "Xem tất cả", en: "View all", zh: "查看全部" },
   jump: { vi: "Đến khu này", en: "Go to section", zh: "前往此部分" },
-};
+});
 
-function GroupAtlas({ groups, heading, locale }: { groups: AtlasGroup[]; heading: T3; locale: Loc }) {
-  return (
+async function GroupAtlas({ groups, heading, locale }: { groups: AtlasGroup[]; heading: T3; locale: Loc }) {
+  const cmsContent = await getContent();
+  const TXT = cmsContent.resolve(cmsSourceTXT());
+
+  return <ContentSurface scope="src/components/explore/SystemsAtlas.tsx">{(
     <div className="sys-atlas">
       <section className="sys-index" aria-label={pick(heading, locale)}>
         <h2 className="sys-kicker">{pick(heading, locale)}</h2>
@@ -80,7 +90,7 @@ function GroupAtlas({ groups, heading, locale }: { groups: AtlasGroup[]; heading
             return (
               <a key={g.key} href={`#${g.slug}`} className="sys-tile" aria-label={`${pick(g.label, locale)} — ${pick(TXT.jump, locale)}`}>
                 <span className="sys-tile-media">
-                  {cover ? <img src={cover} alt="" loading="lazy" /> : <AtlasIcon id={g.icon} className="atlas-icon sys-tile-icon" />}
+                  {cover ? <Image src={cover} alt="" width={88} height={88} sizes="88px" /> : <AtlasIcon id={g.icon} className="atlas-icon sys-tile-icon" />}
                   <span className="sys-tile-no">{String(i + 1).padStart(2, "0")}</span>
                 </span>
                 <span className="sys-tile-body">
@@ -117,7 +127,7 @@ function GroupAtlas({ groups, heading, locale }: { groups: AtlasGroup[]; heading
             {g.scenes.map((s) => (
               <Link key={s.slug} href={s.href} className="sys-card">
                 <span className="sys-card-media">
-                  {s.thumb ? <img src={s.thumb} alt="" loading="lazy" /> : <AtlasIcon id={g.icon} className="atlas-icon" />}
+                  {s.thumb ? <Image src={s.thumb} alt="" width={320} height={320} sizes="(max-width: 620px) 160px, 200px" /> : <AtlasIcon id={g.icon} className="atlas-icon" />}
                 </span>
                 <span className="sys-card-title">{pick(s.title, locale)}</span>
               </Link>
@@ -126,17 +136,27 @@ function GroupAtlas({ groups, heading, locale }: { groups: AtlasGroup[]; heading
         </section>
       ))}
     </div>
-  );
+  )}</ContentSurface>;
 }
 
-export default function SystemsAtlas({ locale }: { locale: Loc }) {
+export default async function SystemsAtlas({ locale }: { locale: Loc }) {
+  const cmsContent = await getContent();
+  const systemGroups = cmsContent.resolve(cmsSourcesystemGroups());
+  const SYSTEM_ABOUT = cmsContent.resolve(cmsSourceSYSTEM_ABOUT());
+  const TXT = cmsContent.resolve(cmsSourceTXT());
+
   const groups = systemGroups
     .map((g) => ({ ...g, about: SYSTEM_ABOUT[g.key], cover: COVER[g.key], scenes: scenesOfSystem(g.key) }))
     .filter((g) => g.scenes.length > 0);
-  return <GroupAtlas groups={groups} heading={TXT.systems} locale={locale} />;
+  return <ContentSurface scope="src/components/explore/SystemsAtlas.tsx"><GroupAtlas groups={groups} heading={TXT.systems} locale={locale} /></ContentSurface>;
 }
 
-export function RegionsAtlas({ locale }: { locale: Loc }) {
+export async function RegionsAtlas({ locale }: { locale: Loc }) {
+  const cmsContent = await getContent();
+  const regionGroups = cmsContent.resolve(cmsSourceregionGroups());
+  const REGION_ABOUT = cmsContent.resolve(cmsSourceREGION_ABOUT());
+  const TXT = cmsContent.resolve(cmsSourceTXT());
+
   const groups = regionGroups
     .map((g) => ({
       ...g,
@@ -145,5 +165,11 @@ export function RegionsAtlas({ locale }: { locale: Loc }) {
       scenes: scenesOfRegion(g.key),
     }))
     .filter((g) => g.scenes.length > 0);
-  return <GroupAtlas groups={groups} heading={TXT.regions} locale={locale} />;
+  return <ContentSurface scope="src/components/explore/SystemsAtlas.tsx"><GroupAtlas groups={groups} heading={TXT.regions} locale={locale} /></ContentSurface>;
 }
+
+function cmsSourceTXT() { return TXT; }
+function cmsSourcesystemGroups() { return systemGroups; }
+function cmsSourceSYSTEM_ABOUT() { return SYSTEM_ABOUT; }
+function cmsSourceregionGroups() { return regionGroups; }
+function cmsSourceREGION_ABOUT() { return REGION_ABOUT; }

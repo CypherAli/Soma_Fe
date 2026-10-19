@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Vai và hố nách" (bên trái) dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const shoulderScene: AtlasSceneDef = {
+export const shoulderScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/shoulder.ts#shoulderScene", {
   "slug": "vai-ho-nach",
   "title": {
     "vi": "Vai và hố nách",
@@ -225,4 +227,4 @@ export const shoulderScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

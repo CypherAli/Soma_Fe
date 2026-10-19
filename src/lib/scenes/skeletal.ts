@@ -1,7 +1,9 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { SceneModule } from "./types";
 
 /** He xuong - 10 scene. */
-export const skeletalScenes: Record<string, SceneModule> = {
+export const skeletalScenes: Record<string, SceneModule> = bindContentSource("data:src/lib/scenes/skeletal.ts#skeletalScenes", {
   "giai-phau-so": {
     slug: "giai-phau-so",
     title: { vi: "Giải phẫu Sọ", en: "Skull Anatomy", zh: "颅骨解剖" },
@@ -613,4 +615,4 @@ export const skeletalScenes: Record<string, SceneModule> = {
         note: { vi: "Mang cung răng trên và chứa xoang hàm ngay trên chân các răng hàm. Chân răng hàm lớn thứ nhất và thứ hai nhiều khi chỉ cách lòng xoang một lớp xương mỏng hoặc chỉ có niêm mạc — nên nhổ răng có thể làm THỦNG XOANG HÀM, và ngược lại viêm xoang gây đau nhức đúng các răng ấy.", en: "It carries the upper dental arch and houses the maxillary sinus directly above the molar roots. The roots of the first and second molars are often separated from the sinus by only a thin plate of bone or by mucosa alone — so extraction can PERFORATE the sinus, and conversely sinusitis causes toothache in exactly those teeth.", zh: "承载上牙弓，上颌窦恰位于磨牙根尖上方。第一、二磨牙根与窦腔之间常仅隔薄层骨板甚至仅有黏膜——故拔牙可穿通上颌窦，反之鼻窦炎亦引起相应牙痛。" } },
     ],
   },
-};
+});

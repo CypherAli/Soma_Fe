@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { VetFact } from "../types";
 
 /**
@@ -13,7 +15,7 @@ const KL = "König & Liebich, Veterinary Anatomy of Domestic Mammals, 7th ed. (2
 const DYCE = "Dyce, Sack & Wensing, Textbook of Veterinary Anatomy, 5th ed. (2018)";
 const SISSON = "Sisson & Grossman, The Anatomy of the Domestic Animals, 5th ed.";
 
-export const largeAnimalFacts: VetFact[] = [
+export const largeAnimalFacts: VetFact[] = bindContentSource("data:src/lib/vet/facts/largeAnimals.ts#largeAnimalFacts", [
   // ============================ NGỰA ============================
   {
     id: "horse-stay-apparatus",
@@ -643,4 +645,4 @@ export const largeAnimalFacts: VetFact[] = [
     source: KL,
     keys: ["tu cung lon", "sung tu cung", "de kho lon", "bicornuate"],
   },
-];
+]);

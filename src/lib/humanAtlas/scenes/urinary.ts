@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Hệ tiết niệu" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const urinaryScene: AtlasSceneDef = {
+export const urinaryScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/urinary.ts#urinaryScene", {
   "slug": "he-tiet-nieu",
   "title": {
     "vi": "Hệ tiết niệu",
@@ -205,4 +207,4 @@ export const urinaryScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

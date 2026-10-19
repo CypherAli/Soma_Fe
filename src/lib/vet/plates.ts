@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { T3 } from "@/lib/homeContent";
 import type { VetSpeciesKey } from "./types";
 
@@ -38,7 +40,7 @@ export type VetPlate = {
   caveat?: T3;
 };
 
-export const vetPlates: VetPlate[] = [
+export const vetPlates: VetPlate[] = bindContentSource("data:src/lib/vet/plates.ts#vetPlates", [
   {
     species: "horse",
     file: "horse.png",
@@ -117,6 +119,6 @@ export const vetPlates: VetPlate[] = [
     license: "Public domain",
     sourceUrl: "https://commons.wikimedia.org/wiki/File:The_book_of_the_cat_(Page_355,_Fig._VIII)_BHL23996663.jpg",
   },
-];
+]);
 
 export const vetPlateOf = (species: VetSpeciesKey) => vetPlates.find((p) => p.species === species);

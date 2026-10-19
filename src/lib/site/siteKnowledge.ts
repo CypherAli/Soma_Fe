@@ -9,6 +9,7 @@ import {
 } from "@/lib/catalog";
 import { pick, type Loc, type T3 } from "@/lib/homeContent";
 import { SPECIES, vetStats } from "@/lib/vet/knowledge";
+import { mentionedQuizSets, webFeatureGuides, webQuizGuides } from "./webFeatures";
 
 /**
  * KHO TRI THỨC VỀ CHÍNH HỆ THỐNG WEB — lớp thứ tư của trợ lý.
@@ -28,7 +29,7 @@ import { SPECIES, vetStats } from "@/lib/vet/knowledge";
 export type SiteFact = {
   id: string;
   /** "model" = một mô hình 3D cụ thể; "feature" = một trang / tính năng. */
-  kind: "model" | "feature";
+  kind: "model" | "feature" | "quiz";
   /** Mọi cách người ta có thể gọi tên nó, ĐÃ BỎ DẤU, ba ngôn ngữ. */
   keys: string[];
   title: T3;
@@ -187,9 +188,9 @@ function featureFacts(): SiteFact[] {
       ],
       title: T("Khu vực thú y", "The veterinary section", "兽医专区"),
       body: T(
-        `Ngoài atlas người, Soma có khu giải phẫu thú y tại /dong-vat: ${vetStats.species} loài (${SPECIES.map((s) => s.name.vi).join(", ")}) với ${vetStats.facts} mục kiến thức trải trên ${vetStats.systems} hệ cơ quan. Mỗi mục gồm mô tả, KHÁC BIỆT so với người hoặc giữa các loài, ý nghĩa lâm sàng thú y, thuật ngữ Latin theo NAV và nguồn giáo trình. Khu này đi theo nhóm → loài → cấu trúc: trang /dong-vat xếp các loài theo nhóm (gia súc, gia cầm, thú cảnh), mỗi loài có trang riêng kèm trị số tham chiếu (thân nhiệt, mạch, nhịp thở) và bộ lọc theo hệ cơ quan; /dong-vat/trac-nghiem là trắc nghiệm thú y sinh thẳng từ kho này. Chó, mèo và ngựa có thêm mẫu vật sọ 3D xoay được, kèm giấy phép và ghi công.`,
-        `Besides the human atlas, Soma has a veterinary section at /dong-vat: ${vetStats.species} species (${SPECIES.map((s) => s.name.en).join(", ")}) with ${vetStats.facts} entries across ${vetStats.systems} organ systems. Each entry carries a description, the DIFFERENCE from humans or between species, its veterinary clinical relevance, the Latin term in NAV and a textbook source. The section is navigated group → species → structure: /dong-vat lists species by group (livestock, poultry, companion animals), each species has its own page with reference values (temperature, pulse, respiration) and an organ-system filter; /dong-vat/trac-nghiem is a veterinary quiz generated from the same library. Dog, cat and horse also carry a rotatable 3D skull specimen with its licence and attribution.`,
-        `除人体图谱外，Soma 设有兽医专区 /dong-vat：${vetStats.species} 个物种（${SPECIES.map((s) => s.name.zh).join("、")}），共 ${vetStats.facts} 条内容，覆盖 ${vetStats.systems} 个器官系统。每条包含描述、与人或物种间的差异、兽医临床意义、NAV 拉丁术语及教材出处。本专区按 群 → 物种 → 结构 组织：/dong-vat 按家畜、家禽、伴侣动物分组列出物种，每个物种另有专页并附参考值（体温、脉搏、呼吸）及器官系统筛选；/dong-vat/trac-nghiem 为由同一资料库生成的兽医测验。犬、猫、马另附可旋转的三维颅骨标本，并标明许可与署名。`,
+        `Ngoài atlas người, Soma có khu giải phẫu thú y tại /dong-vat: ${vetStats.species} loài (${SPECIES.map((s) => s.name.vi).join(", ")}) với ${vetStats.facts} mục kiến thức trải trên ${vetStats.systems} hệ cơ quan. Mỗi mục gồm mô tả, KHÁC BIỆT so với người hoặc giữa các loài, ý nghĩa lâm sàng thú y, thuật ngữ Latin theo NAV và nguồn giáo trình. Khu này đi theo nhóm → loài → cấu trúc: trang /dong-vat xếp các loài theo nhóm (gia súc, gia cầm, thú cảnh), mỗi loài có trang riêng kèm trị số tham chiếu (thân nhiệt, mạch, nhịp thở) và bộ lọc theo hệ cơ quan. Chó, mèo và ngựa có thêm mẫu vật sọ 3D xoay được, kèm giấy phép và ghi công.`,
+        `Besides the human atlas, Soma has a veterinary section at /dong-vat: ${vetStats.species} species (${SPECIES.map((s) => s.name.en).join(", ")}) with ${vetStats.facts} entries across ${vetStats.systems} organ systems. Each entry carries a description, the DIFFERENCE from humans or between species, its veterinary clinical relevance, the Latin term in NAV and a textbook source. The section is navigated group → species → structure: /dong-vat lists species by group (livestock, poultry, companion animals), each species has its own page with reference values (temperature, pulse, respiration) and an organ-system filter. Dog, cat and horse also carry a rotatable 3D skull specimen with its licence and attribution.`,
+        `除人体图谱外，Soma 设有兽医专区 /dong-vat：${vetStats.species} 个物种（${SPECIES.map((s) => s.name.zh).join("、")}），共 ${vetStats.facts} 条内容，覆盖 ${vetStats.systems} 个器官系统。每条包含描述、与人或物种间的差异、兽医临床意义、NAV 拉丁术语及教材出处。本专区按 群 → 物种 → 结构 组织：/dong-vat 按家畜、家禽、伴侣动物分组列出物种，每个物种另有专页并附参考值（体温、脉搏、呼吸）及器官系统筛选。犬、猫、马另附可旋转的三维颅骨标本，并标明许可与署名。`,
       ),
       href: "/dong-vat",
     },
@@ -232,11 +233,11 @@ function featureFacts(): SiteFact[] {
       ],
       title: T("Mặt cắt giải phẫu", "Sectional anatomy", "断层解剖"),
       body: T(
-        "Soma có công cụ cắt mô hình 3D theo mặt phẳng để xem thiết đồ: kéo mặt phẳng cắt dọc trục, phần bị cắt được bịt kín nên nhìn được đúng như tiêu bản cắt ngang. Vào từ mục Mặt cắt ở trang /giai-phau, hoặc mở thẳng các trang mat-cat-* cho từng vùng.",
-        "Soma includes a cutting-plane tool for viewing anatomical sections: drag the plane along the axis and the cut surface is capped, so it reads like a real cross-sectional specimen. Reach it from the Sections group on /giai-phau, or open the mat-cat-* pages for individual regions.",
-        "Soma 提供切面工具查看断层解剖：沿轴向拖动切面，断面会被封闭填充，效果与真实横断标本一致。可从 /giai-phau 的「断层」分组进入，或直接打开各部位的 mat-cat-* 页面。",
+        "Mở /cat-lat để xem phần lát cắt giải phẫu của Soma. Có thể tìm thêm bài theo vùng trong /thu-vien. Trang Vision AI /cu-chi cũng có nút Mặt cắt trong bộ công cụ quan sát mô hình 3D.",
+        "Open /cat-lat for Soma's anatomical sections. You can also find regional lessons in /thu-vien. Vision AI at /cu-chi includes a Cross-section button among its 3D inspection tools.",
+        "在 /cat-lat 查看 Soma 解剖断层，在 /thu-vien 查找部位课程；/cu-chi 的 Vision AI 三维观察工具也包含切面按钮。",
       ),
-      href: "/giai-phau",
+      href: "/cat-lat",
     },
     {
       id: "feature:viewer",
@@ -251,7 +252,7 @@ function featureFacts(): SiteFact[] {
         "Regional models (arm, forearm, shoulder, head, neck, trunk…) open in a layered viewer: show, hide or fade each layer — skin, muscle, artery, vein, nerve, bone, viscera — click a structure for its name and note, and explode the layers to see what lies superficial to what. Hovering shows the name; clicking pins it.",
         "各部位模型（上臂、前臂、肩、头、颈、躯干等）以分层查看器打开：可显示／隐藏／淡化皮肤、肌肉、动脉、静脉、神经、骨、内脏各层，点击结构查看名称与说明，并可分层展开以观察由浅入深的层次。悬停显示名称，点击可固定。",
       ),
-      href: "/giai-phau",
+      href: "/thu-vien",
     },
     {
       id: "feature:pathology",
@@ -335,7 +336,15 @@ let cache: SiteFact[] | null = null;
 export function allSiteFacts(): SiteFact[] {
   if (cache) return cache;
   const region = regionOfScene();
-  cache = [...featureFacts(), ...catalogScenes.map((s) => modelFact(s, region.get(s.slug)))];
+  const legacy = featureFacts();
+  const guides = new Map(webFeatureGuides.map(guide => [guide.id, guide]));
+  const existing = new Set(legacy.map(fact => fact.id));
+  cache = [
+    ...legacy.map(fact => guides.get(fact.id) ?? fact),
+    ...webFeatureGuides.filter(guide => !existing.has(guide.id)),
+    ...webQuizGuides,
+    ...catalogScenes.map((s) => modelFact(s, region.get(s.slug))),
+  ].map(fact => ({ ...fact, keys: fact.keys.map(fold) }));
   return cache;
 }
 
@@ -367,7 +376,11 @@ function scoreSiteFact(
   rawWords: Set<string>,
   terms: string[],
   locale: Loc,
+  namedSets: Set<string>,
 ): number {
+  // Quiz set names are navigation evidence, not anatomical explanations.
+  if (f.kind === "quiz" && !/(quiz|trac nghiem|de |bo de|on thi|cau hoi|bao nhieu cau|题库|试卷|测验)/.test(foldedQ)) return 0;
+  if (f.kind === "quiz" && namedSets.size) return namedSets.has(f.id) ? 6 : 0;
   for (const k of f.keys) {
     if (longEnough(k) && foldedQ.includes(k)) return 3;
   }
@@ -417,12 +430,14 @@ export function searchSiteFacts(
     question.toLowerCase().split(/[^\p{L}\p{N}]+/u).filter(Boolean),
   );
   if (terms.length === 0) return [];
+  const namedSets = mentionedQuizSets(question);
 
   return allSiteFacts()
-    .map((fact) => ({ fact, score: scoreSiteFact(fact, foldedQ, rawQ, rawWords, terms, locale) }))
+    .map((fact) => ({ fact, score: scoreSiteFact(fact, foldedQ, rawQ, rawWords, terms, locale, namedSets) }))
     .filter((x) => x.score > 0)
     // Mục tính năng đứng trước mô hình khi bằng điểm: hỏi "xem mặt cắt thế nào"
     // thì phần hướng dẫn hữu ích hơn một mô hình lẻ có chữ "mặt cắt" trong tên.
-    .sort((a, b) => b.score - a.score || (a.fact.kind === b.fact.kind ? 0 : a.fact.kind === "feature" ? -1 : 1))
+    .sort((a, b) => b.score - a.score ||
+      ({ feature: 0, quiz: 1, model: 2 }[a.fact.kind] - { feature: 0, quiz: 1, model: 2 }[b.fact.kind]))
     .slice(0, limit);
 }

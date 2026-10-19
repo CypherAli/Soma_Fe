@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Danh mục hệ cơ quan của atlas toàn thân — chuyển từ human-atlas/app/anatomy.ts.
  *
@@ -30,7 +32,7 @@ export const SYSTEMS: {
   name: string;
   color: string;
   description: string;
-}[] = [
+}[] = bindContentSource("data:src/lib/humanAtlas/anatomy.ts#SYSTEMS", [
   {
     id: "skeletal",
     name: "Hệ xương",
@@ -136,7 +138,7 @@ export const SYSTEMS: {
     description:
       "Sụn, dây chằng và các mô liên kết khác nâng đỡ, nối và ngăn cách các cấu trúc. Chúng giữ vững khớp và phân tán tải cơ học.",
   },
-];
+]);
 
 export interface Part {
   id: string;
@@ -189,6 +191,9 @@ export const DEFAULT_CLIP: ClipState = {
 
 /** Nhãn chỉ dẫn kiểu atlas giáo khoa: một nhãn cho mỗi nhóm cấu trúc. */
 export interface SceneLabel {
+  /** Original atlas coordinates; the renderer adds the owning mesh displacement. */
+  anchor?: [number, number, number];
+  title?: string;
   key: string;
   ids: string[];
   text: string;
@@ -196,6 +201,8 @@ export interface SceneLabel {
 }
 
 export interface SceneState {
+  /** Localized mesh names supplied by the viewer; source names remain lookup keys. */
+  partNames?: Record<string, string>;
   inspectorOpen?: boolean;
   /** Nhãn chỉ dẫn (đường dẫn + tên) — chỉ trang chuyên đề. */
   labels?: SceneLabel[];

@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Giải phẫu đầu" (tổng quan) dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const headOverviewScene: AtlasSceneDef = {
+export const headOverviewScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/head-overview.ts#headOverviewScene", {
   "slug": "giai-phau-dau",
   "title": {
     "vi": "Giải phẫu đầu: tổng quan theo lớp",
@@ -280,4 +282,4 @@ export const headOverviewScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

@@ -12,7 +12,7 @@
  *   xoang-tinh-mach-mang-cung → Nhánh xuyên sâu và động mạch mạch mạc
  *   goc-cau-tieu-nao      → Hệ đốt sống–thân nền và động mạch tiểu não
  *   than-nao-day-so-full  → Nhân nền và bao trong
- *   tieu-nao-day-du       → Hồi và thùy vỏ đại não
+ *   hoi-vo-dai-nao        → Hồi và thùy vỏ đại não
  *   co-mat-than-kinh-vii  → Thể chai và các mép liên bán cầu
  *   hach-co               → Xương móng và cơ trên–dưới móng
  */
@@ -610,7 +610,7 @@ emit({
   exportName: "cortexGyriScene",
   header: 'Scene "Hồi và thùy vỏ đại não" dựng từ bộ atlas BodyParts3D.\n\nThay bài "Tiểu não đầy đủ" cũ (trùng bài "Tiểu não"; atlas chỉ có một lưới tiểu não). Chỉ bán cầu trái.',
   scene: {
-    slug: "tieu-nao-day-du",
+    slug: "hoi-vo-dai-nao",
     system: "nervous",
     title: { vi: "Hồi và thùy vỏ đại não", en: "Gyri and Lobes of the Cerebral Cortex", zh: "大脑皮质的脑回与脑叶" },
     latin: "Gyri et lobi cerebri",

@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import { RenderQuality } from '../public/wonder/src/lib/render-quality.js';
+const q=new RenderQuality(2);
+const run=(fps,seconds,options={})=>{for(let i=0;i<fps*seconds;i++)q.sample(1/fps,options);};
+run(25,2.1);assert.equal(q.dpr,1.75,'sustained slow rendering reduces pixels');
+run(60,2.1);assert.equal(q.dpr,1.75,'short fast burst cannot undo reduction');
+run(60,7);assert.equal(q.dpr,2,'sustained recovery can restore detail');
+q.sample(1/60,{camera:true});assert.equal(q.dpr,1.5,'auto reserves pixel budget with camera on');
+const before=q.dpr;run(10,10,{visible:false});assert.equal(q.dpr,before,'hidden tab throttling is not a GPU performance signal');
+run(10,10,{busy:true});assert.equal(q.dpr,before,'loading/recording must not trigger adaptation');
+q.setMode('detail');run(25,10,{camera:true});assert.equal(q.dpr,2,'explicit detail choice is honored');
+q.setMode('smooth');run(60,10);assert.equal(q.dpr,1,'smooth remains stable');
+q.setMode('auto');run(25,20);assert.equal(q.dpr,1,'never undersample below CSS pixels');
+const normalScreen=new RenderQuality(1.25);
+assert.equal(normalScreen.setMode('detail'),2,'Detail supersamples anatomy even on a standard-density screen');
+assert.equal(normalScreen.setMode('auto'),1.25,'Auto restores the device budget');
+console.log('PASS quality hysteresis, camera budget, visibility/loading exclusions and explicit choices');

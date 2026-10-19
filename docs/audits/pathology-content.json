@@ -1,0 +1,2234 @@
+{
+  "diseases": 106,
+  "withoutCitations": 0,
+  "reviewPending": 0,
+  "withoutVietnameseDetail": 0,
+  "rows": [
+    {
+      "slug": "benh-gout",
+      "name": "Bệnh gout",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "benh-ly-phan-mem-canh-khop",
+      "name": "Bệnh lý phần mềm cạnh khớp",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "benh-nhuoc-co",
+      "name": "Bệnh nhược cơ",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "viem-khop-tu-phat-thieu-nien",
+      "name": "Bệnh viêm khớp tự phát thiếu niên",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "thoat-vi-dia-dem-that-lung",
+      "name": "Đau vùng thắt lưng và đau thần kinh toạ do thoát vị đĩa đệm",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "loan-duong-co",
+      "name": "Loạn dưỡng cơ",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "loang-xuong",
+      "name": "Loãng xương",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "lupus-ban-do-he-thong",
+      "name": "Lupus ban đỏ hệ thống",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "nhiem-khuan-co-xuong-khop",
+      "name": "Nhiễm khuẩn cơ xương khớp",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "thoai-hoa-khop",
+      "name": "Thoái hoá khớp",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "viem-co-nhiem-khuan",
+      "name": "Viêm cơ nhiễm khuẩn",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "viem-cot-song-dinh-khop",
+      "name": "Viêm cột sống dính khớp",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "viem-da-co-viem-da-co-tu-mien",
+      "name": "Viêm đa cơ và viêm da cơ tự miễn",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "viem-dia-dem-dot-song",
+      "name": "Viêm đĩa đệm đốt sống do vi khuẩn",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "viem-khop-dang-thap",
+      "name": "Viêm khớp dạng thấp",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "viem-khop-phan-ung",
+      "name": "Viêm khớp phản ứng",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "viem-quanh-khop-vai",
+      "name": "Viêm quanh khớp vai",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "xo-cung-bi",
+      "name": "Xơ cứng bì",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "ap-xe-phoi",
+      "name": "Áp xe phổi",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "copd",
+      "name": "Bệnh phổi tắc nghẽn mạn tính",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "gian-phe-quan",
+      "name": "Giãn phế quản",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "hen-phe-quan",
+      "name": "Hen phế quản",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "ho-ra-mau",
+      "name": "Ho ra máu",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "ngung-tho-khi-ngu",
+      "name": "Hội chứng ngừng thở khi ngủ",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "hoi-chung-trung-that",
+      "name": "Hội chứng trung thất",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "lao-phoi",
+      "name": "Lao phổi",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "tam-phe-man",
+      "name": "Tâm phế mạn",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "tran-dich-mang-phoi",
+      "name": "Tràn dịch màng phổi",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "tran-khi-mang-phoi",
+      "name": "Tràn khí màng phổi",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "ung-thu-phoi",
+      "name": "Ung thư phổi",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "viem-phe-quan-cap",
+      "name": "Viêm phế quản cấp",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "viem-phoi-benh-vien",
+      "name": "Viêm phổi bệnh viện",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "viem-phoi-cong-dong",
+      "name": "Viêm phổi cộng đồng",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "cap-cuu-ngung-tuan-hoan",
+      "name": "Cấp cứu ngừng tuần hoàn",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "dien-giat",
+      "name": "Điện giật",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "ngo-doc-cap-thuong-gap",
+      "name": "Một số ngộ độc cấp thường gặp",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "ngat-nuoc",
+      "name": "Ngạt nước",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "phu-phoi-cap",
+      "name": "Phù phổi cấp",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "ran-doc-can",
+      "name": "Rắn độc cắn",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "roi-loan-kali-mau",
+      "name": "Rối loạn kali máu",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "roi-loan-nuoc-natri",
+      "name": "Rối loạn nước và natri",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "roi-loan-toan-kiem",
+      "name": "Rối loạn thăng bằng toan kiềm",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "soc",
+      "name": "Sốc",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "da-hong-cau-tien-phat",
+      "name": "Bệnh đa hồng cầu tiên phát",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "da-u-tuy-xuong",
+      "name": "Bệnh đa u tuỷ xương",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "hemophilia",
+      "name": "Bệnh hemophilia",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "hoi-chung-roi-loan-sinh-tuy",
+      "name": "Hội chứng rối loạn sinh tuỷ",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "lo-xe-mi-cap",
+      "name": "Lơ xê mi cấp",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "lo-xe-mi-kinh-dong-bach-cau-hat",
+      "name": "Lơ xê mi kinh dòng bạch cầu hạt",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "suy-tuy-xuong",
+      "name": "Suy tuỷ xương",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "tang-tieu-cau-tien-phat",
+      "name": "Tăng tiểu cầu tiên phát",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "thieu-mau",
+      "name": "Thiếu máu",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "thieu-mau-tan-mau",
+      "name": "Thiếu máu tan máu",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "u-lympho-ac-tinh",
+      "name": "U lympho ác tính",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "xuat-huyet-giam-tieu-cau-vo-can",
+      "name": "Xuất huyết giảm tiểu cầu vô căn",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "dot-quy-nao",
+      "name": "Đột quỵ não",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "phi-dai-lanh-tinh-tuyen-tien-liet",
+      "name": "Phì đại lành tính tuyến tiền liệt",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "sa-sut-tri-tue",
+      "name": "Sa sút trí tuệ",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "suy-tinh-mach-man-tinh",
+      "name": "Suy tĩnh mạch mạn tính",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "cuong-giap",
+      "name": "Bệnh cường giáp",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "suy-giap",
+      "name": "Bệnh suy giáp",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "benh-to-cac-vien-cuc",
+      "name": "Bệnh to các viễn cực",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "buou-giap-don-thuan",
+      "name": "Bướu giáp đơn thuần",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "cuong-aldosteron",
+      "name": "Cường aldosteron",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "dai-thao-duong",
+      "name": "Đái tháo đường",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "dai-thao-nhat",
+      "name": "Đái tháo nhạt",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "ha-glucose-huyet",
+      "name": "Hạ glucose huyết",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "hoi-chung-cushing",
+      "name": "Hội chứng Cushing",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "hoi-chung-sheehan",
+      "name": "Hội chứng Sheehan",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "suy-thuong-than-man-tinh",
+      "name": "Suy thượng thận mạn tính",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "u-tuy-thuong-than",
+      "name": "U tuỷ thượng thận",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "benh-than-da-nang",
+      "name": "Bệnh thận đa nang",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "benh-than-iga",
+      "name": "Bệnh thận IgA",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "benh-than-lupus",
+      "name": "Bệnh thận lupus",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "benh-than-man",
+      "name": "Bệnh thận mạn và suy thận mạn tính",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "hoi-chung-than-hu",
+      "name": "Hội chứng thận hư",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "nhiem-khuan-tiet-nieu",
+      "name": "Nhiễm khuẩn tiết niệu",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "soi-tiet-nieu",
+      "name": "Sỏi tiết niệu",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "suy-than-cap",
+      "name": "Suy thận cấp",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "suy-than-giai-doan-cuoi",
+      "name": "Suy thận giai đoạn cuối — điều trị bảo tồn và thay thế thận",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "ton-thuong-than-cap",
+      "name": "Tổn thương thận cấp",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "viem-cau-than-cap-sau-lien-cau",
+      "name": "Viêm cầu thận cấp sau nhiễm liên cầu",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "ap-xe-gan",
+      "name": "Áp xe gan",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "benh-gan-do-ruou",
+      "name": "Bệnh gan do rượu",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "benh-tri",
+      "name": "Bệnh trĩ",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "hoi-chung-ruot-kich-thich",
+      "name": "Hội chứng ruột kích thích",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "loet-da-day-ta-trang",
+      "name": "Loét dạ dày tá tràng",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "soi-mat",
+      "name": "Sỏi mật",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "tao-bon",
+      "name": "Táo bón",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "ung-thu-bieu-mo-te-bao-gan",
+      "name": "Ung thư biểu mô tế bào gan",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "viem-gan-b-man",
+      "name": "Viêm gan virus B mạn tính",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "viem-gan-c",
+      "name": "Viêm gan virus C",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "viem-ruot-thua-cap",
+      "name": "Viêm ruột thừa cấp",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "viem-tuy-cap",
+      "name": "Viêm tụy cấp",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "xo-gan",
+      "name": "Xơ gan",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "xhth-do-loet-da-day-ta-trang",
+      "name": "Xuất huyết tiêu hoá do loét dạ dày tá tràng",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "xhth-tang-ap-luc-tinh-mach-cua",
+      "name": "Xuất huyết tiêu hoá trên do tăng áp lực tĩnh mạch cửa",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "hep-van-hai-la",
+      "name": "Hẹp van hai lá",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "huyet-khoi-tinh-mach-sau",
+      "name": "Huyết khối tĩnh mạch sâu chi dưới",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "nhoi-mau-co-tim",
+      "name": "Nhồi máu cơ tim và hội chứng vành cấp",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "phinh-dong-mach-chu-bung",
+      "name": "Phình động mạch chủ bụng",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "roi-loan-nhip-tim",
+      "name": "Rối loạn nhịp tim thường gặp",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "suy-tim",
+      "name": "Suy tim",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "tang-huyet-ap",
+      "name": "Tăng huyết áp",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "viem-mang-ngoai-tim",
+      "name": "Viêm màng ngoài tim",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    },
+    {
+      "slug": "viem-noi-tam-mac-nhiem-khuan",
+      "name": "Viêm nội tâm mạc nhiễm khuẩn",
+      "reviewPending": false,
+      "citations": 1,
+      "unverifiedCitations": 1,
+      "locales": {
+        "vi": {
+          "machineTranslated": false,
+          "missing": []
+        },
+        "en": {
+          "machineTranslated": true,
+          "missing": []
+        },
+        "zh": {
+          "machineTranslated": true,
+          "missing": []
+        }
+      }
+    }
+  ]
+}

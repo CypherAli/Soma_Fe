@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { T3 } from "@/lib/homeContent";
 import type { VetSpeciesKey, VetSystemKey } from "./types";
 
@@ -45,7 +47,7 @@ const KL = "König & Liebich, Veterinary Anatomy of Domestic Mammals, 7th ed. (2
 const DYCE = "Dyce, Sack & Wensing, Textbook of Veterinary Anatomy, 5th ed. (2018)";
 const KING = "King & McLelland, Birds: Their Structure and Function, 2nd ed.";
 
-export const vetDiseases: VetDisease[] = [
+export const vetDiseases: VetDisease[] = bindContentSource("data:src/lib/vet/diseases.ts#vetDiseases", [
   // ============================ CHÓ ============================
   {
     id: "dog-gdv",
@@ -657,7 +659,7 @@ export const vetDiseases: VetDisease[] = [
     source: KING,
     keys: ["viem tui khi", "airsacculitis", "tui khi", "thong gio", "amoniac"],
   },
-];
+]);
 
 export const vetDiseasesOfSpecies = (species: VetSpeciesKey) =>
   vetDiseases.filter((d) => d.species.includes(species));

@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Đai vai và Chi trên" (bên trái) dựng từ bộ atlas BodyParts3D.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const upperLimbScene: AtlasSceneDef = {
+export const upperLimbScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/upper-limb.ts#upperLimbScene", {
   "slug": "dai-vai-chi-tren",
   "title": {
     "vi": "Đai vai và Chi trên",
@@ -172,4 +174,4 @@ export const upperLimbScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

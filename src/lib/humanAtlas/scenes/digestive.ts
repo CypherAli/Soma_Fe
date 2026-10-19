@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Tổng quan hệ tiêu hoá" dựng từ bộ atlas BodyParts3D.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const digestiveScene: AtlasSceneDef = {
+export const digestiveScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/digestive.ts#digestiveScene", {
   "slug": "tong-quan-he-tieu-hoa",
   "title": {
     "vi": "Tổng quan hệ tiêu hoá",
@@ -276,4 +278,4 @@ export const digestiveScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

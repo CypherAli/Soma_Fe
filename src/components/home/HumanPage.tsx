@@ -1,3 +1,7 @@
+
+import { getContent } from "@/lib/content/server";
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { homeContent as C, pick, type Loc } from "@/lib/homeContent";
 import {
   catalogStats,
@@ -14,14 +18,19 @@ import SkullFigure from "./SkullFigure";
 import HomeSearch from "./HomeSearch";
 import SystemGrid from "./SystemGrid";
 
-export default function HumanPage({ locale }: { locale: Loc }) {
+export default async function HumanPage({ locale }: { locale: Loc }) {
+  const cmsContent = await getContent();
+  const C = cmsContent.resolve(cmsSourceC());
+  const systemGroups = cmsContent.resolve(cmsSourcesystemGroups());
+
   const recent = recentScenes(8);
   const featured = featuredScenes();
 
-  return (
+  return <ContentSurface scope="src/components/home/HumanPage.tsx">{(
     <div className="bd">
       <IconSprite />
       <HomeNav />
+      <main>
 
       {/* Hero trang Người — bố cục 2 phần: chữ trái · ảnh phải (ô chờ) */}
       <header className="human-hero">
@@ -91,7 +100,11 @@ export default function HumanPage({ locale }: { locale: Loc }) {
         </div>
       </section>
 
+      </main>
       <HomeFooter locale={locale} />
     </div>
-  );
+  )}</ContentSurface>;
 }
+
+function cmsSourceC() { return C; }
+function cmsSourcesystemGroups() { return systemGroups; }

@@ -1,5 +1,11 @@
 "use client";
 
+
+
+
+import { useContent } from "@/components/content/ContentProvider";
+import { bindContentSource } from "@/lib/content/source";
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useState, useSyncExternalStore } from "react";
 import { useRouter, usePathname } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
@@ -10,8 +16,8 @@ import { deletePath } from "@/lib/study";
 import { clearMemory } from "@/lib/chatMemory";
 import { Card, Notice } from "./parts";
 
-const LOCALE_LABELS: Record<Locale, string> = { vi: "Tiếng Việt", en: "English", zh: "中文" };
-const LOCALE_CODES: Record<Locale, string> = { vi: "VI", en: "EN", zh: "中文" };
+const LOCALE_LABELS: Record<Locale, string> = bindContentSource("data:src/components/settings/PrefsTab.tsx#LOCALE_LABELS", { vi: "Tiếng Việt", en: "English", zh: "中文" });
+const LOCALE_CODES: Record<Locale, string> = bindContentSource("data:src/components/settings/PrefsTab.tsx#LOCALE_CODES", { vi: "VI", en: "EN", zh: "中文" });
 
 type Theme = "light" | "dark";
 
@@ -26,6 +32,11 @@ function subscribeTheme(onChange: () => void) {
 
 /** Tuỳ chọn hiển thị và dọn dữ liệu học tập. */
 export default function PrefsTab({ locale }: { locale: Loc }) {
+  const cmsContent = useContent();
+  const S = cmsContent.resolve(cmsSourceS());
+  const LOCALE_LABELS = cmsContent.resolve(cmsSourceLOCALE_LABELS());
+  const LOCALE_CODES = cmsContent.resolve(cmsSourceLOCALE_CODES());
+
   const P = S.prefs;
   const router = useRouter();
   const pathname = usePathname();
@@ -61,7 +72,7 @@ export default function PrefsTab({ locale }: { locale: Loc }) {
     setFlash(pick(P.done, locale));
   }
 
-  return (
+  return <ContentSurface scope="src/components/settings/PrefsTab.tsx">{(
     <>
       <Card title={pick(P.themeHeading, locale)} note={pick(P.themeNote, locale)}>
         <div className="st-choices">
@@ -117,5 +128,9 @@ export default function PrefsTab({ locale }: { locale: Loc }) {
         {flash && <Notice kind="ok">{flash}</Notice>}
       </Card>
     </>
-  );
+  )}</ContentSurface>;
 }
+
+function cmsSourceS() { return S; }
+function cmsSourceLOCALE_LABELS() { return LOCALE_LABELS; }
+function cmsSourceLOCALE_CODES() { return LOCALE_CODES; }

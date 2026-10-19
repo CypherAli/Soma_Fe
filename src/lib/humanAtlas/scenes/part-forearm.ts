@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Bài bộ phận "Cẳng tay — học theo lớp" học theo lớp — nhóm lấy từ forearm.ts (đã kiểm), chỉ thêm lớp.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const partForearmScene: AtlasSceneDef = {
+export const partForearmScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/part-forearm.ts#partForearmScene", {
   "slug": "bo-phan-cang-tay",
   "title": {
     "vi": "Cẳng tay — học theo lớp",
@@ -359,4 +361,4 @@ export const partForearmScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

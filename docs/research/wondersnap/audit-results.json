@@ -1,0 +1,179 @@
+{
+  "date": "2026-10-06",
+  "scope": "CPU only; no GPU screenshot validation",
+  "comparisons": [
+    {
+      "file": "src/models/body.js",
+      "local": "8c57e246b96e88dd6e7146930d33ab47da0e4d3379c9ebef26b014750c750c38",
+      "upstream": "8c57e246b96e88dd6e7146930d33ab47da0e4d3379c9ebef26b014750c750c38"
+    },
+    {
+      "file": "src/lib/sampling.js",
+      "local": "5c6f72c20740b0412779296c7a78a4d70690f941c4f58cfc31061437aefb57c5",
+      "upstream": "5c6f72c20740b0412779296c7a78a4d70690f941c4f58cfc31061437aefb57c5"
+    },
+    {
+      "file": "src/lib/shapes.js",
+      "local": "b9105c1b47339024dadef5e4ccc21aa5cee0fe6f90dcf7cacdd20a7c150bcf32",
+      "upstream": "b9105c1b47339024dadef5e4ccc21aa5cee0fe6f90dcf7cacdd20a7c150bcf32"
+    },
+    {
+      "file": "src/gl/renderer.js",
+      "local": "7d3d4597eef0409f0f7c9b1c40d223518901f4a55b15b8c17c9cad365a44da03",
+      "upstream": "7d3d4597eef0409f0f7c9b1c40d223518901f4a55b15b8c17c9cad365a44da03"
+    },
+    {
+      "file": "src/gl/shaders.js",
+      "local": "958053077619ff8b2714ca1cc8293f9948caaae67550badb3765b32877106032",
+      "upstream": "958053077619ff8b2714ca1cc8293f9948caaae67550badb3765b32877106032"
+    }
+  ],
+  "models": [
+    {
+      "name": "Human Body",
+      "index": 9,
+      "n": 200000,
+      "extent": [
+        0.6177412271499634,
+        1.8072302341461182,
+        0.23568694293498993
+      ],
+      "fitScale": 0.7547808438641254,
+      "groups": [
+        {
+          "label": "Skin",
+          "count": 21850,
+          "stage": 0,
+          "offsetFractionAt32": 0.241664
+        },
+        {
+          "label": "Brain",
+          "count": 4898,
+          "stage": 0.2,
+          "offsetFractionAt32": 0.06075
+        },
+        {
+          "label": "Lungs",
+          "count": 9199,
+          "stage": 0.2,
+          "offsetFractionAt32": 0.06075
+        },
+        {
+          "label": "Heart",
+          "count": 2019,
+          "stage": 0.22,
+          "offsetFractionAt32": 0.04509516343835871
+        },
+        {
+          "label": "Liver",
+          "count": 4157,
+          "stage": 0.22,
+          "offsetFractionAt32": 0.04509516343835871
+        },
+        {
+          "label": "Stomach",
+          "count": 1848,
+          "stage": 0.22,
+          "offsetFractionAt32": 0.04509516343835871
+        },
+        {
+          "label": "Intestines",
+          "count": 5462,
+          "stage": 0.24,
+          "offsetFractionAt32": 0.03090829566992274
+        },
+        {
+          "label": "Kidneys",
+          "count": 1226,
+          "stage": 0.24,
+          "offsetFractionAt32": 0.03090829566992274
+        },
+        {
+          "label": "Bladder",
+          "count": 829,
+          "stage": 0.24,
+          "offsetFractionAt32": 0.03090829566992274
+        },
+        {
+          "label": "Nervous system",
+          "count": 9026,
+          "stage": 0.3,
+          "offsetFractionAt32": 0.0024023323615160394
+        },
+        {
+          "label": "Arteries",
+          "count": 8147,
+          "stage": 0.3,
+          "offsetFractionAt32": 0.0024023323615160394
+        },
+        {
+          "label": "Veins",
+          "count": 8737,
+          "stage": 0.3,
+          "offsetFractionAt32": 0.0024023323615160394
+        },
+        {
+          "label": "Skeleton",
+          "count": 103093,
+          "stage": 0.35,
+          "offsetFractionAt32": 0
+        }
+      ]
+    },
+    {
+      "name": "Cánh tay",
+      "index": 10,
+      "n": 200000,
+      "extent": [
+        0.7046775817871094,
+        1.699397087097168,
+        0.42124244570732117
+      ],
+      "fitScale": 0.6831302716309949,
+      "groups": [
+        {
+          "label": "Cơ nhị đầu cánh tay",
+          "count": 30320,
+          "stage": 0.326,
+          "offsetFractionAt32": 0
+        },
+        {
+          "label": "Cơ cánh tay",
+          "count": 12647,
+          "stage": 0.169,
+          "offsetFractionAt32": 0.08705489595388889
+        },
+        {
+          "label": "Cơ quạ-cánh tay",
+          "count": 6540,
+          "stage": 0.55,
+          "offsetFractionAt32": 0
+        },
+        {
+          "label": "Cơ tam đầu cánh tay",
+          "count": 30347,
+          "stage": 0.275,
+          "offsetFractionAt32": 0.011079421050473567
+        },
+        {
+          "label": "Cơ khuỷu",
+          "count": 14113,
+          "stage": 0.267,
+          "offsetFractionAt32": 0.014928254954017454
+        },
+        {
+          "label": "Cơ cánh tay-quay",
+          "count": 20180,
+          "stage": 0.36,
+          "offsetFractionAt32": 0
+        },
+        {
+          "label": "Xương (mốc)",
+          "count": 85853,
+          "stage": 0.487,
+          "offsetFractionAt32": 0
+        }
+      ]
+    }
+  ]
+}

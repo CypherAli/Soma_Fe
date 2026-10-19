@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Cây phế quản phân thùy" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const bronchialTreeScene: AtlasSceneDef = {
+export const bronchialTreeScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/bronchial-tree.ts#bronchialTreeScene", {
   "slug": "phoi-cay-phe-quan",
   "title": {
     "vi": "Khí quản và cây phế quản phân thùy",
@@ -216,4 +218,4 @@ export const bronchialTreeScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

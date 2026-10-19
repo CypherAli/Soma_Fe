@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Thành bụng trước bên" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const abdominalWallScene: AtlasSceneDef = {
+export const abdominalWallScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/abdominal-wall.ts#abdominalWallScene", {
   "slug": "thanh-bung",
   "title": {
     "vi": "Thành bụng trước bên: cơ chéo ngoài, đường trắng, mạch thượng vị",
@@ -152,4 +154,4 @@ export const abdominalWallScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

@@ -1,5 +1,7 @@
 "use client";
 
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { useAnatomyStore } from "@/store/useAnatomyStore";
@@ -11,7 +13,7 @@ export default function TopBar() {
   const searchQuery = useAnatomyStore((s) => s.searchQuery);
   const setSearchQuery = useAnatomyStore((s) => s.setSearchQuery);
 
-  return (
+  return <ContentSurface scope="src/components/TopBar.tsx">{(
     <header className="flex h-14 shrink-0 items-center gap-4 border-b border-[var(--line)] bg-[var(--surf)] px-4">
       <Link href="/" className="flex items-center gap-2">
         <div className="nav-logo">S</div>
@@ -50,5 +52,5 @@ export default function TopBar() {
       <ThemeToggle />
       <LanguageSwitcher />
     </header>
-  );
+  )}</ContentSurface>;
 }

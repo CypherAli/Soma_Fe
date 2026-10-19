@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Thận, niệu quản và tuyến thượng thận" (bên phải) dựng từ bộ atlas BodyParts3D.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const kidneyScene: AtlasSceneDef = {
+export const kidneyScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/kidney.ts#kidneyScene", {
   "slug": "than-nieu-quan",
   "title": {
     "vi": "Thận, niệu quản và tuyến thượng thận",
@@ -151,4 +153,4 @@ export const kidneyScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

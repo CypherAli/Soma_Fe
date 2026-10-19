@@ -1,5 +1,7 @@
 "use client";
 
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF, OrbitControls } from "@react-three/drei";
@@ -135,7 +137,7 @@ function Model({ url, cutRef }: { url: string; cutRef: React.MutableRefObject<nu
     }
   });
 
-  return <primitive object={built.root} />;
+  return <ContentSurface scope="src/components/home/CrossSectionArm.tsx"><primitive object={built.root} /></ContentSurface>;
 }
 
 export default function CrossSectionArm({ url = "/models/arm.glb" }: { url?: string }) {
@@ -150,7 +152,7 @@ export default function CrossSectionArm({ url = "/models/arm.glb" }: { url?: str
     return () => { cancelAnimationFrame(raf); clearTimeout(t); };
   }, []);
 
-  return (
+  return <ContentSurface scope="src/components/home/CrossSectionArm.tsx">{(
     <div style={{ position: "relative", width: "100%", height: "100%" }}>
       <Canvas
         dpr={[1, 1.6]}
@@ -185,7 +187,7 @@ export default function CrossSectionArm({ url = "/models/arm.glb" }: { url?: str
         </div>
       </div>
     </div>
-  );
+  )}</ContentSurface>;
 }
 
 const panel: React.CSSProperties = {

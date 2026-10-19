@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import {CATALOG,buildModelAsync} from '../public/wonder/src/models/catalog.js';
+import {setMuscleSeparation} from '../public/wonder/src/models/muscle-separation.js';
+globalThis.fetch=async url=>new Response(await fs.readFile(new URL(url)));
+const model=await buildModelAsync(CATALOG.findIndex(d=>d.name==='Cẳng tay'),60000);
+const offsets=model.surface.groups.map(g=>[...g.offset]),center=[...model.exCenter],fit=model.fitScale;
+setMuscleSeparation(model,true);
+const muscles=model.surface.groups.filter(g=>g.system==='muscular');
+assert.ok(muscles.length>10);
+assert.equal(new Set(muscles.map(g=>g.offset.join(','))).size,muscles.length);
+for(const g of muscles)assert.deepEqual(model.labels[g.pick].offset,g.offset);
+assert.ok(Number.isFinite(model.fitScale)&&model.fitScale>0);
+setMuscleSeparation(model,false);
+assert.deepEqual(model.surface.groups.map(g=>g.offset),offsets);
+assert.deepEqual(model.exCenter,center);assert.equal(model.fitScale,fit);
+console.log('PASS individual muscle separation, label transforms and reversible system layout');

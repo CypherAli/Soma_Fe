@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Cột sống" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const spineScene: AtlasSceneDef = {
+export const spineScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/spine.ts#spineScene", {
   "slug": "cot-song",
   "title": {
     "vi": "Cột sống",
@@ -190,4 +192,4 @@ export const spineScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

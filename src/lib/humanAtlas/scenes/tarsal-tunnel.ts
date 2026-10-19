@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Gân gót và ống cổ chân" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const tarsalTunnelScene: AtlasSceneDef = {
+export const tarsalTunnelScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/tarsal-tunnel.ts#tarsalTunnelScene", {
   "slug": "gan-got-ong-co-chan",
   "title": {
     "vi": "Gân gót và ống cổ chân",
@@ -164,4 +166,4 @@ export const tarsalTunnelScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

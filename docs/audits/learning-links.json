@@ -1,0 +1,746 @@
+{
+  "summary": {
+    "modelLessons": 148,
+    "pathologyLinks": 106,
+    "invalidLinks": [],
+    "pathologyChunks": 2829,
+    "pathologyArticles": 103,
+    "chunksWithoutPage": 0
+  },
+  "pathology": [
+    {
+      "disease": "benh-gout",
+      "scene": "bo-phan-co-chan-ban-chan",
+      "focus": "tien-tuc",
+      "title": "Cổ chân và bàn chân — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "benh-ly-phan-mem-canh-khop",
+      "scene": "mo-lien-ket",
+      "focus": "gan",
+      "title": "Mô liên kết đặc: gân, dây chằng, màng, mạc giữ gân",
+      "valid": true
+    },
+    {
+      "disease": "benh-nhuoc-co",
+      "scene": "he-bach-huyet",
+      "focus": "uc",
+      "title": "Cơ quan lympho: tuyến ức và lách",
+      "valid": true
+    },
+    {
+      "disease": "viem-khop-tu-phat-thieu-nien",
+      "scene": "bo-phan-goi",
+      "focus": "loi-cau",
+      "title": "Gối — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "thoat-vi-dia-dem-that-lung",
+      "scene": "bo-phan-cot-song-that-lung",
+      "focus": "dia-dem",
+      "title": "Cột sống thắt lưng — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "loan-duong-co",
+      "scene": "bo-phan-dui",
+      "focus": "tu-dau",
+      "title": "Đùi và mông — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "loang-xuong",
+      "scene": "cot-song",
+      "focus": "dot-that-lung",
+      "title": "Cột sống",
+      "valid": true
+    },
+    {
+      "disease": "lupus-ban-do-he-thong",
+      "scene": "bo-phan-than",
+      "focus": "than-phai",
+      "title": "Thận — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "nhiem-khuan-co-xuong-khop",
+      "scene": "bo-phan-goi",
+      "focus": "loi-cau",
+      "title": "Gối — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "thoai-hoa-khop",
+      "scene": "bo-phan-goi",
+      "focus": "mam-chay",
+      "title": "Gối — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "viem-co-nhiem-khuan",
+      "scene": "bo-phan-dui",
+      "focus": "tu-dau",
+      "title": "Đùi và mông — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "viem-cot-song-dinh-khop",
+      "scene": "khop-cung-chau",
+      "focus": "cung",
+      "title": "Khớp cùng–chậu và vành chậu",
+      "valid": true
+    },
+    {
+      "disease": "viem-da-co-viem-da-co-tu-mien",
+      "scene": "bo-phan-dui",
+      "focus": "tu-dau",
+      "title": "Đùi và mông — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "viem-dia-dem-dot-song",
+      "scene": "bo-phan-cot-song-that-lung",
+      "focus": "dia-dem",
+      "title": "Cột sống thắt lưng — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "viem-khop-dang-thap",
+      "scene": "bo-phan-ban-tay",
+      "focus": "dot-ngon",
+      "title": "Bàn tay — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "viem-khop-phan-ung",
+      "scene": "bo-phan-goi",
+      "focus": "loi-cau",
+      "title": "Gối — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "viem-quanh-khop-vai",
+      "scene": "bo-phan-vai",
+      "focus": "tren-gai",
+      "title": "Vai — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "xo-cung-bi",
+      "scene": "bo-phan-ban-tay",
+      "focus": "dot-ngon",
+      "title": "Bàn tay — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "ap-xe-phoi",
+      "scene": "bo-phan-phoi",
+      "focus": "phe-quan-p",
+      "title": "Phổi — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "copd",
+      "scene": "bo-phan-phoi",
+      "focus": "phe-quan-p",
+      "title": "Phổi — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "gian-phe-quan",
+      "scene": "phoi-cay-phe-quan",
+      "focus": "duoi",
+      "title": "Khí quản và cây phế quản phân thùy",
+      "valid": true
+    },
+    {
+      "disease": "hen-phe-quan",
+      "scene": "phoi-cay-phe-quan",
+      "focus": "khi-quan",
+      "title": "Khí quản và cây phế quản phân thùy",
+      "valid": true
+    },
+    {
+      "disease": "ho-ra-mau",
+      "scene": "giai-phau-phoi",
+      "focus": "phe-quan-dm",
+      "title": "Phổi: cuống phổi và hai hệ mạch",
+      "valid": true
+    },
+    {
+      "disease": "ngung-tho-khi-ngu",
+      "scene": "mieng-luoi-rang",
+      "focus": "luoi",
+      "title": "Ổ miệng: răng, lưỡi và vòm miệng",
+      "valid": true
+    },
+    {
+      "disease": "hoi-chung-trung-that",
+      "scene": "trung-that",
+      "title": "Trung thất",
+      "valid": true
+    },
+    {
+      "disease": "lao-phoi",
+      "scene": "phoi-cay-phe-quan",
+      "focus": "tren",
+      "title": "Khí quản và cây phế quản phân thùy",
+      "valid": true
+    },
+    {
+      "disease": "tam-phe-man",
+      "scene": "bo-phan-tim",
+      "focus": "that-phai",
+      "title": "Tim — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "tran-dich-mang-phoi",
+      "scene": "thanh-nguc",
+      "focus": "gian-trong",
+      "title": "Thành ngực: xương sườn và cơ gian sườn",
+      "valid": true
+    },
+    {
+      "disease": "tran-khi-mang-phoi",
+      "scene": "thanh-nguc",
+      "focus": "gian-trong",
+      "title": "Thành ngực: xương sườn và cơ gian sườn",
+      "valid": true
+    },
+    {
+      "disease": "ung-thu-phoi",
+      "scene": "bo-phan-phoi",
+      "focus": "phe-quan-p",
+      "title": "Phổi — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "viem-phe-quan-cap",
+      "scene": "phoi-cay-phe-quan",
+      "focus": "khi-quan",
+      "title": "Khí quản và cây phế quản phân thùy",
+      "valid": true
+    },
+    {
+      "disease": "viem-phoi-benh-vien",
+      "scene": "phoi-cay-phe-quan",
+      "focus": "duoi",
+      "title": "Khí quản và cây phế quản phân thùy",
+      "valid": true
+    },
+    {
+      "disease": "viem-phoi-cong-dong",
+      "scene": "phoi-cay-phe-quan",
+      "focus": "duoi",
+      "title": "Khí quản và cây phế quản phân thùy",
+      "valid": true
+    },
+    {
+      "disease": "cap-cuu-ngung-tuan-hoan",
+      "scene": "bo-phan-tim",
+      "focus": "that-trai",
+      "title": "Tim — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "dien-giat",
+      "scene": "bo-phan-tim",
+      "focus": "that-trai",
+      "title": "Tim — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "ngo-doc-cap-thuong-gap",
+      "scene": "bo-phan-gan",
+      "title": "Gan — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "ngat-nuoc",
+      "scene": "bo-phan-phoi",
+      "focus": "phe-quan-p",
+      "title": "Phổi — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "phu-phoi-cap",
+      "scene": "giai-phau-phoi",
+      "focus": "tm-phoi",
+      "title": "Phổi: cuống phổi và hai hệ mạch",
+      "valid": true
+    },
+    {
+      "disease": "roi-loan-kali-mau",
+      "scene": "bo-phan-tim",
+      "focus": "that-trai",
+      "title": "Tim — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "roi-loan-nuoc-natri",
+      "scene": "bo-phan-than",
+      "focus": "than-phai",
+      "title": "Thận — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "roi-loan-toan-kiem",
+      "scene": "bo-phan-than",
+      "focus": "than-phai",
+      "title": "Thận — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "soc",
+      "scene": "bo-phan-tim",
+      "focus": "that-trai",
+      "title": "Tim — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "ran-doc-can",
+      "scene": "bo-phan-cang-chan",
+      "title": "Cẳng chân — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "da-hong-cau-tien-phat",
+      "scene": "bo-phan-chau-hong",
+      "focus": "xuong",
+      "title": "Chậu hông và đáy chậu — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "da-u-tuy-xuong",
+      "scene": "cot-song",
+      "focus": "dot-that-lung",
+      "title": "Cột sống",
+      "valid": true
+    },
+    {
+      "disease": "hemophilia",
+      "scene": "bo-phan-goi",
+      "focus": "loi-cau",
+      "title": "Gối — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "hoi-chung-roi-loan-sinh-tuy",
+      "scene": "bo-phan-chau-hong",
+      "focus": "xuong",
+      "title": "Chậu hông và đáy chậu — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "lo-xe-mi-cap",
+      "scene": "bo-phan-chau-hong",
+      "focus": "xuong",
+      "title": "Chậu hông và đáy chậu — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "lo-xe-mi-kinh-dong-bach-cau-hat",
+      "scene": "he-bach-huyet",
+      "focus": "lach",
+      "title": "Cơ quan lympho: tuyến ức và lách",
+      "valid": true
+    },
+    {
+      "disease": "suy-tuy-xuong",
+      "scene": "bo-phan-chau-hong",
+      "focus": "xuong",
+      "title": "Chậu hông và đáy chậu — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "tang-tieu-cau-tien-phat",
+      "scene": "bo-phan-chau-hong",
+      "focus": "xuong",
+      "title": "Chậu hông và đáy chậu — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "thieu-mau",
+      "scene": "bo-phan-chau-hong",
+      "focus": "xuong",
+      "title": "Chậu hông và đáy chậu — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "thieu-mau-tan-mau",
+      "scene": "he-bach-huyet",
+      "focus": "lach",
+      "title": "Cơ quan lympho: tuyến ức và lách",
+      "valid": true
+    },
+    {
+      "disease": "u-lympho-ac-tinh",
+      "scene": "he-bach-huyet",
+      "focus": "lach",
+      "title": "Cơ quan lympho: tuyến ức và lách",
+      "valid": true
+    },
+    {
+      "disease": "xuat-huyet-giam-tieu-cau-vo-can",
+      "scene": "he-bach-huyet",
+      "focus": "lach",
+      "title": "Cơ quan lympho: tuyến ức và lách",
+      "valid": true
+    },
+    {
+      "disease": "dot-quy-nao",
+      "scene": "khop-thai-duong-ham",
+      "focus": "goc",
+      "title": "Động mạch não giữa và nhánh vỏ",
+      "valid": true
+    },
+    {
+      "disease": "phi-dai-lanh-tinh-tuyen-tien-liet",
+      "scene": "bo-phan-bang-quang",
+      "focus": "tien-liet",
+      "title": "Bàng quang và tuyến tiền liệt — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "sa-sut-tri-tue",
+      "scene": "gian-nao-he-vien",
+      "focus": "hai-ma",
+      "title": "Gian não, nhân nền và hệ viền",
+      "valid": true
+    },
+    {
+      "disease": "suy-tinh-mach-man-tinh",
+      "scene": "tinh-mach-hien",
+      "focus": "hien-lon",
+      "title": "Hệ tĩnh mạch chi dưới",
+      "valid": true
+    },
+    {
+      "disease": "cuong-giap",
+      "scene": "hach-co",
+      "focus": "duoi",
+      "title": "Xương móng và cơ trên–dưới móng",
+      "valid": true
+    },
+    {
+      "disease": "suy-giap",
+      "scene": "hach-co",
+      "focus": "duoi",
+      "title": "Xương móng và cơ trên–dưới móng",
+      "valid": true
+    },
+    {
+      "disease": "buou-giap-don-thuan",
+      "scene": "hach-co",
+      "focus": "duoi",
+      "title": "Xương móng và cơ trên–dưới móng",
+      "valid": true
+    },
+    {
+      "disease": "benh-to-cac-vien-cuc",
+      "scene": "he-noi-tiet",
+      "focus": "ha-doi-yen",
+      "title": "Các tuyến nội tiết",
+      "valid": true
+    },
+    {
+      "disease": "hoi-chung-sheehan",
+      "scene": "he-noi-tiet",
+      "focus": "ha-doi-yen",
+      "title": "Các tuyến nội tiết",
+      "valid": true
+    },
+    {
+      "disease": "dai-thao-nhat",
+      "scene": "he-noi-tiet",
+      "focus": "ha-doi-yen",
+      "title": "Các tuyến nội tiết",
+      "valid": true
+    },
+    {
+      "disease": "cuong-aldosteron",
+      "scene": "tuyen-giap",
+      "focus": "tuyen",
+      "title": "Tuyến thượng thận và mạch nuôi",
+      "valid": true
+    },
+    {
+      "disease": "hoi-chung-cushing",
+      "scene": "tuyen-giap",
+      "focus": "tuyen",
+      "title": "Tuyến thượng thận và mạch nuôi",
+      "valid": true
+    },
+    {
+      "disease": "suy-thuong-than-man-tinh",
+      "scene": "tuyen-giap",
+      "focus": "tuyen",
+      "title": "Tuyến thượng thận và mạch nuôi",
+      "valid": true
+    },
+    {
+      "disease": "u-tuy-thuong-than",
+      "scene": "tuyen-giap",
+      "focus": "tuyen",
+      "title": "Tuyến thượng thận và mạch nuôi",
+      "valid": true
+    },
+    {
+      "disease": "dai-thao-duong",
+      "scene": "bo-phan-tuy-lach",
+      "focus": "tuy",
+      "title": "Tuỵ và lách — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "ha-glucose-huyet",
+      "scene": "bo-phan-tuy-lach",
+      "focus": "tuy",
+      "title": "Tuỵ và lách — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "benh-than-da-nang",
+      "scene": "bo-phan-than",
+      "focus": "than-phai",
+      "title": "Thận — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "benh-than-iga",
+      "scene": "bo-phan-than",
+      "focus": "than-phai",
+      "title": "Thận — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "benh-than-lupus",
+      "scene": "bo-phan-than",
+      "focus": "than-phai",
+      "title": "Thận — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "benh-than-man",
+      "scene": "bo-phan-than",
+      "focus": "than-phai",
+      "title": "Thận — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "hoi-chung-than-hu",
+      "scene": "bo-phan-than",
+      "focus": "than-phai",
+      "title": "Thận — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "nhiem-khuan-tiet-nieu",
+      "scene": "bo-phan-bang-quang",
+      "focus": "bang-quang",
+      "title": "Bàng quang và tuyến tiền liệt — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "soi-tiet-nieu",
+      "scene": "he-tiet-nieu",
+      "focus": "nieu-quan",
+      "title": "Hệ tiết niệu",
+      "valid": true
+    },
+    {
+      "disease": "suy-than-cap",
+      "scene": "bo-phan-than",
+      "focus": "than-phai",
+      "title": "Thận — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "suy-than-giai-doan-cuoi",
+      "scene": "bo-phan-than",
+      "focus": "than-phai",
+      "title": "Thận — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "ton-thuong-than-cap",
+      "scene": "bo-phan-than",
+      "focus": "than-phai",
+      "title": "Thận — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "viem-cau-than-cap-sau-lien-cau",
+      "scene": "bo-phan-than",
+      "focus": "than-phai",
+      "title": "Thận — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "ap-xe-gan",
+      "scene": "bo-phan-gan",
+      "focus": "phan-thuy-7",
+      "title": "Gan — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "benh-gan-do-ruou",
+      "scene": "bo-phan-gan",
+      "title": "Gan — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "benh-tri",
+      "scene": "chau-hong-day-chau",
+      "focus": "that-hau-mon",
+      "title": "Chậu hông và đáy chậu",
+      "valid": true
+    },
+    {
+      "disease": "hoi-chung-ruot-kich-thich",
+      "scene": "ruot-non-ruot-gia",
+      "focus": "dai-trang-xuong",
+      "title": "Ruột non và ruột già",
+      "valid": true
+    },
+    {
+      "disease": "loet-da-day-ta-trang",
+      "scene": "da-day-ta-trang",
+      "focus": "da-day",
+      "title": "Dạ dày và tá tràng",
+      "valid": true
+    },
+    {
+      "disease": "soi-mat",
+      "scene": "gan-duong-mat",
+      "focus": "tui-mat",
+      "title": "Gan và đường mật",
+      "valid": true
+    },
+    {
+      "disease": "tao-bon",
+      "scene": "ruot-non-ruot-gia",
+      "focus": "dai-trang-xuong",
+      "title": "Ruột non và ruột già",
+      "valid": true
+    },
+    {
+      "disease": "ung-thu-bieu-mo-te-bao-gan",
+      "scene": "bo-phan-gan",
+      "title": "Gan — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "viem-gan-b-man",
+      "scene": "bo-phan-gan",
+      "title": "Gan — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "viem-gan-c",
+      "scene": "bo-phan-gan",
+      "title": "Gan — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "viem-ruot-thua-cap",
+      "scene": "ruot-non-ruot-gia",
+      "focus": "ruot-thua",
+      "title": "Ruột non và ruột già",
+      "valid": true
+    },
+    {
+      "disease": "viem-tuy-cap",
+      "scene": "bo-phan-tuy-lach",
+      "focus": "tuy",
+      "title": "Tuỵ và lách — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "xo-gan",
+      "scene": "bo-phan-gan",
+      "focus": "tm-cua",
+      "title": "Gan — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "xhth-do-loet-da-day-ta-trang",
+      "scene": "da-day-ta-trang",
+      "focus": "ta-trang",
+      "title": "Dạ dày và tá tràng",
+      "valid": true
+    },
+    {
+      "disease": "xhth-tang-ap-luc-tinh-mach-cua",
+      "scene": "thuc-quan",
+      "focus": "thuc-quan",
+      "title": "Thực quản",
+      "valid": true
+    },
+    {
+      "disease": "hep-van-hai-la",
+      "scene": "bo-phan-tim",
+      "focus": "van-hai-la",
+      "title": "Tim — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "huyet-khoi-tinh-mach-sau",
+      "scene": "ho-khoeo",
+      "focus": "tm",
+      "title": "Hố khoeo",
+      "valid": true
+    },
+    {
+      "disease": "nhoi-mau-co-tim",
+      "scene": "dong-mach-vanh",
+      "focus": "lad",
+      "title": "Động mạch vành",
+      "valid": true
+    },
+    {
+      "disease": "phinh-dong-mach-chu-bung",
+      "scene": "he-dong-mach-chu",
+      "focus": "dm-chu-bung",
+      "title": "Cây động mạch chủ và vòng Willis",
+      "valid": true
+    },
+    {
+      "disease": "roi-loan-nhip-tim",
+      "scene": "bo-phan-tim",
+      "focus": "nhi-phai",
+      "title": "Tim — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "suy-tim",
+      "scene": "bo-phan-tim",
+      "focus": "that-trai",
+      "title": "Tim — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "tang-huyet-ap",
+      "scene": "bo-phan-tim",
+      "focus": "that-trai",
+      "title": "Tim — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "viem-mang-ngoai-tim",
+      "scene": "bo-phan-tim",
+      "title": "Tim — học theo lớp",
+      "valid": true
+    },
+    {
+      "disease": "viem-noi-tam-mac-nhiem-khuan",
+      "scene": "bo-phan-tim",
+      "focus": "van-hai-la",
+      "title": "Tim — học theo lớp",
+      "valid": true
+    }
+  ]
+}

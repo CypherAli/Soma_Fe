@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Mặt cắt ngang bụng" (tầng L1) dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const abdomenSectionScene: AtlasSceneDef = {
+export const abdomenSectionScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/abdomen-section.ts#abdomenSectionScene", {
   "slug": "mat-cat-ngang-bung",
   "title": {
     "vi": "Mặt cắt ngang bụng (tầng L1)",
@@ -234,4 +236,4 @@ export const abdomenSectionScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

@@ -1,3 +1,5 @@
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { Fragment, type ReactNode } from "react";
 
 /**
@@ -108,5 +110,5 @@ export default function AnswerText({ text }: { text: string }) {
   flushPara();
   flushList();
 
-  return <div className="soma-answer">{blocks.map((b, i) => <Fragment key={i}>{b}</Fragment>)}</div>;
+  return <ContentSurface scope="src/components/chat/AnswerText.tsx"><div className="soma-answer">{blocks.map((b, i) => <Fragment key={i}>{b}</Fragment>)}</div></ContentSurface>;
 }

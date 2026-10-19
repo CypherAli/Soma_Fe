@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Khớp ức–đòn" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const sternoclavicularScene: AtlasSceneDef = {
+export const sternoclavicularScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/sternoclavicular.ts#sternoclavicularScene", {
   "slug": "khop-uc-don",
   "title": {
     "vi": "Khớp ức–đòn: xương, cơ và liên quan",
@@ -140,4 +142,4 @@ export const sternoclavicularScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

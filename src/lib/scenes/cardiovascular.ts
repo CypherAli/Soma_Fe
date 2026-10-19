@@ -1,7 +1,9 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { SceneModule } from "./types";
 
 /** He tuan hoan - 6 scene. */
-export const cardiovascularScenes: Record<string, SceneModule> = {
+export const cardiovascularScenes: Record<string, SceneModule> = bindContentSource("data:src/lib/scenes/cardiovascular.ts#cardiovascularScenes", {
   "giai-phau-tim": {
     slug: "giai-phau-tim",
     title: {
@@ -291,4 +293,4 @@ export const cardiovascularScenes: Record<string, SceneModule> = {
       },
     ],
   },
-};
+});

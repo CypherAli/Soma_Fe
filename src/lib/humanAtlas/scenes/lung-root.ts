@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Giải phẫu phổi — cuống phổi" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const lungRootScene: AtlasSceneDef = {
+export const lungRootScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/lung-root.ts#lungRootScene", {
   "slug": "giai-phau-phoi",
   "title": {
     "vi": "Phổi: cuống phổi và hai hệ mạch",
@@ -429,4 +431,4 @@ export const lungRootScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 export type Loc = "vi" | "en" | "zh";
 export type T3 = Record<Loc, string>;
 
@@ -14,7 +16,7 @@ type MenuItem = { icon: string; label: T3; vet?: boolean; href?: string };
  * Nguyên tắc: mọi thứ hiển thị phải có thật. Không có chuyên gia hư cấu,
  * không có sản phẩm chưa tồn tại, không có card trỏ vào nội dung trống.
  */
-export const homeContent = {
+export const homeContent = bindContentSource("data:src/lib/homeContent.ts#homeContent", {
   nav: {
     explore: { vi: "Khám phá", en: "Explore", zh: "探索" },
     library: { vi: "Thư viện của tôi", en: "My library", zh: "我的库" },
@@ -26,6 +28,8 @@ export const homeContent = {
   // Bảng tài khoản mở ra khi bấm avatar trên thanh điều hướng.
   account: {
     open: { vi: "Mở bảng tài khoản", en: "Open account panel", zh: "打开账户面板" },
+    notifications: { vi: "Thông báo", en: "Notifications", zh: "通知" },
+    emptyNotif: { vi: "Chưa có thông báo mới", en: "No new notifications", zh: "暂无新通知" },
     account: { vi: "Tài khoản", en: "Account", zh: "账户" },
     docs: { vi: "Tài liệu", en: "Documents", zh: "文档" },
     settings: { vi: "Cài đặt", en: "Settings", zh: "设置" },
@@ -250,7 +254,8 @@ export const homeContent = {
         { label: { vi: "Nguồn dữ liệu", en: "Data sources", zh: "数据来源" }, href: "/tai-lieu-y-khoa" },
         { label: { vi: "Cam kết sử dụng", en: "Usage commitment", zh: "使用承诺" }, href: "/tai-lieu-y-khoa" },
         { label: { vi: "Bảo vệ tài nguyên", en: "Resource protection", zh: "资源保护" }, href: "/tai-lieu-y-khoa" },
-        { label: { vi: "Quy tắc sử dụng", en: "Terms of use", zh: "使用条款" }, href: "/tai-lieu-y-khoa" },
+        { label: { vi: "Quy tắc sử dụng", en: "Terms of use", zh: "使用条款" }, href: "/dieu-khoan" },
+        { label: { vi: "Chính sách bảo mật", en: "Privacy policy", zh: "隐私政策" }, href: "/chinh-sach" },
       ] },
       { key: "connect", heading: { vi: "Liên hệ & kết nối", en: "Contact & connect", zh: "联系与合作" }, links: [
         { label: { vi: "trinhviethoangawm@gmail.com", en: "trinhviethoangawm@gmail.com", zh: "trinhviethoangawm@gmail.com" }, href: "mailto:trinhviethoangawm@gmail.com" },
@@ -265,4 +270,4 @@ export const homeContent = {
       { label: "X", href: "https://x.com/" },
     ],
   },
-};
+});

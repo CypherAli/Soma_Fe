@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Bài bộ phận "Phổi — học theo lớp" học theo lớp — nhóm lấy từ lung-root.ts (đã kiểm), chỉ thêm lớp.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const partLungScene: AtlasSceneDef = {
+export const partLungScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/part-lung.ts#partLungScene", {
   "slug": "bo-phan-phoi",
   "title": {
     "vi": "Phổi — học theo lớp",
@@ -470,4 +472,4 @@ export const partLungScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

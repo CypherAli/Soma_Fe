@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Tuyến thượng thận" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const adrenalScene: AtlasSceneDef = {
+export const adrenalScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/adrenal.ts#adrenalScene", {
   "slug": "tuyen-giap",
   "title": {
     "vi": "Tuyến thượng thận và mạch nuôi",
@@ -136,4 +138,4 @@ export const adrenalScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

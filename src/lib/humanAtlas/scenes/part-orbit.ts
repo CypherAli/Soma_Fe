@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Bài bộ phận "Hốc mắt — học theo lớp" học theo lớp — nhóm lấy từ orbit.ts (đã kiểm), chỉ thêm lớp.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const partOrbitScene: AtlasSceneDef = {
+export const partOrbitScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/part-orbit.ts#partOrbitScene", {
   "slug": "bo-phan-hoc-mat",
   "title": {
     "vi": "Hốc mắt — học theo lớp",
@@ -290,4 +292,4 @@ export const partOrbitScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

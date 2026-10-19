@@ -1,5 +1,7 @@
 "use client";
 
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useEffect, useMemo, useRef, type RefObject } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
@@ -131,7 +133,7 @@ export default function StudioStage({
     m.last = base;
   });
 
-  return (
+  return <ContentSurface scope="src/components/viewer/StudioStage.tsx">{(
     <>
       <primitive object={envRT.texture} attach="environment" />
       {/* Đúng bộ đèn của human-atlas: hemisphere làm nền dịu, key ấm trước-trên
@@ -146,5 +148,5 @@ export default function StudioStage({
         <primitive object={parts.innerRing} position-y={0.001} />
       </group>
     </>
-  );
+  )}</ContentSurface>;
 }

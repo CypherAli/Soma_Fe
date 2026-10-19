@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Cơ hoành và cơ hô hấp" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const diaphragmScene: AtlasSceneDef = {
+export const diaphragmScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/diaphragm.ts#diaphragmScene", {
   "slug": "co-hoanh-day-du",
   "title": {
     "vi": "Cơ hoành và cơ hô hấp",
@@ -256,4 +258,4 @@ export const diaphragmScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

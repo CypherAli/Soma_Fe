@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { T3 } from "@/lib/homeContent";
 import { lmuModels, type LmuModel } from "./lmuData";
 import type { VetSpeciesKey } from "./types";
@@ -18,7 +20,7 @@ import type { VetSpeciesKey } from "./types";
  */
 export type LmuGroupKey = "teeth" | "head" | "axial" | "forelimb" | "digit" | "hindlimb" | "organ";
 
-export const LMU_GROUPS: { key: LmuGroupKey; label: T3 }[] = [
+export const LMU_GROUPS: { key: LmuGroupKey; label: T3 }[] = bindContentSource("data:src/lib/vet/lmu.ts#LMU_GROUPS", [
   { key: "teeth", label: { vi: "Răng", en: "Teeth", zh: "牙齿" } },
   { key: "head", label: { vi: "Đầu", en: "Head", zh: "头部" } },
   { key: "axial", label: { vi: "Thân và cột sống", en: "Trunk and spine", zh: "躯干与脊柱" } },
@@ -26,7 +28,7 @@ export const LMU_GROUPS: { key: LmuGroupKey; label: T3 }[] = [
   { key: "digit", label: { vi: "Ngón", en: "Digits", zh: "指（趾）" } },
   { key: "hindlimb", label: { vi: "Chi sau", en: "Hindlimb", zh: "后肢" } },
   { key: "organ", label: { vi: "Cơ quan", en: "Organs", zh: "器官" } },
-];
+]);
 
 /**
  * Xếp nhóm theo TỪ KHOÁ trong tên tiếng Anh.
@@ -75,7 +77,7 @@ export function lmuGroupOf(model: LmuModel): LmuGroupKey {
  * Khoá là tên tiếng Anh đã bỏ số thứ tự ("4th tarsal bone" → "tarsal bone") và
  * bỏ tên loài dính đuôi, vì LMU đặt tiêu đề không đều tay.
  */
-const BONE: Record<string, T3> = {
+const BONE: Record<string, T3> = bindContentSource("data:src/lib/vet/lmu.ts#BONE", {
   "incisor": { vi: "Răng cửa", en: "Incisor", zh: "门齿" },
   "canine tooth": { vi: "Răng nanh", en: "Canine tooth", zh: "犬齿" },
   "cheek tooth": { vi: "Răng má", en: "Cheek tooth", zh: "颊齿" },
@@ -122,7 +124,7 @@ const BONE: Record<string, T3> = {
   "metatarsal bone": { vi: "Xương bàn chân", en: "Metatarsal bone", zh: "跖骨" },
   "metatarsal bones": { vi: "Các xương bàn chân", en: "Metatarsal bones", zh: "跖骨" },
   "kidney": { vi: "Thận", en: "Kidney", zh: "肾" },
-};
+});
 
 /**
  * Bỏ số thứ tự đầu tên và tên loài dính đuôi để tra bảng dịch.

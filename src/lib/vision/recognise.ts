@@ -1,7 +1,7 @@
 import { guessFromArmChain, guessFromPose, handPathFallback } from "./bodyRegions";
 import type { Box } from "./framing";
 import type { Landmark } from "@/lib/gesture/handModel";
-import type { VisionGuess } from "./parts";
+import { withTiers, type ConfidenceTier, type VisionGuess } from "./parts";
 import type { PoseResult } from "./poseOnce";
 
 // BỘ ĐIỀU PHỐI NHẬN DIỆN HAI TẦNG — tách khỏi component để KIỂM THỬ ĐƯỢC.
@@ -101,10 +101,18 @@ export async function recognise(
       // tay, và KHÔNG bao giờ để "mặt" lọt vào — giơ tay ngang mặt là chuyện
       // thường, ô chồng lên mặt không có nghĩa là đang quét mặt.
       const arm = guessFromArmChain(box, handWrist, p.landmarks);
-      return { guesses: arm.guesses, bestIou: 1 };
+      // Mức tin cậy theo HÌNH HỌC: ô ôm hẳn khuỷu / không chạm cẳng tay là rõ;
+      // lấn nửa vời là "có thể"; không thấy khuỷu thì chỉ còn đoán.
+      const tier: ConfidenceTier = arm.decisive ? "clear" : arm.coverage > 0 ? "maybe" : "unsure";
+      return { guesses: withTiers(arm.guesses, tier), bestIou: 1 };
     }
-    return guessFromPose(box, p.landmarks, aspect);
+    const g = guessFromPose(box, p.landmarks, aspect);
+    const tier: ConfidenceTier =
+      g.bestIou >= POSE_TRUST_IOU ? "clear" : g.bestIou >= POSE_CLAIM_IOU ? "maybe" : "unsure";
+    return { guesses: withTiers(g.guesses, tier), bestIou: g.bestIou };
   };
+  /** Đường lui khi Pose không giúp được: ba ứng viên, không cái nào được nói là chắc. */
+  const fallback = () => withTiers(handPathFallback(), "unsure");
 
   const emitPose = (p: PoseResult): boolean => {
     const l = localOf(p);
@@ -126,7 +134,7 @@ export async function recognise(
       if (!deps.picked()) emitPose(p);
     });
     if (fromHand) {
-      deps.emit({ guesses: handPathFallback(), source: { kind: "fallback", ms: 0 }, failure: null });
+      deps.emit({ guesses: fallback(), source: { kind: "fallback", ms: 0 }, failure: null });
     }
     const late = await deps.gpu();
     if (late.rows?.length && !deps.picked()) {
@@ -150,7 +158,7 @@ export async function recognise(
   const weak: VisionGuess[] = local?.guesses.length
     ? local.guesses
     : fromHand
-      ? handPathFallback()
+      ? fallback()
       : [];
   if (weak.length) {
     deps.emit({

@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Bài bộ phận "Chậu hông và đáy chậu — học theo lớp" học theo lớp — nhóm lấy từ pelvic-floor.ts (đã kiểm), chỉ thêm lớp.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const partPelvisScene: AtlasSceneDef = {
+export const partPelvisScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/part-pelvis.ts#partPelvisScene", {
   "slug": "bo-phan-chau-hong",
   "title": {
     "vi": "Chậu hông và đáy chậu — học theo lớp",
@@ -228,4 +230,4 @@ export const partPelvisScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { SceneModule } from "./types";
 import { regionScenes2, regionViewerConfig2 } from "./regions2";
 import { regionScenes3, regionViewerConfig3 } from "./regions3";
@@ -21,7 +23,7 @@ import { regionScenes13, regionViewerConfig13 } from "./regions13";
  * `scripts/blender/region_config.py`. Tên mesh trong hotspot đều đã đối chiếu
  * với node thật trong .glb (chạy `npm run verify:scenes`).
  */
-export const regionScenes: Record<string, SceneModule> = {
+export const regionScenes: Record<string, SceneModule> = bindContentSource("data:src/lib/scenes/regions.ts#regionScenes", {
   ...regionScenes2,
   ...regionScenes3,
   ...regionScenes4,
@@ -1042,7 +1044,7 @@ export const regionScenes: Record<string, SceneModule> = {
         note: { vi: "Xương cổ chân lớn nhất, chịu toàn bộ trọng lượng khi gót chạm đất. Gãy xương gót điển hình do NGÃ TỪ TRÊN CAO tiếp đất bằng gót — và vì lực truyền dọc trục nên phải khám luôn cột sống thắt lưng, khoảng 10% ca có kèm gãy lún đốt sống. Củ gót là nơi bám của gân gót ở sau và cân gan chân ở dưới.", en: "The largest tarsal bone, taking the whole body weight at heel strike. Fractures classically follow a fall from height onto the heels — the axial force means the lumbar spine must also be examined, as about 10% have an associated vertebral compression fracture.", zh: "最大的跗骨，足跟着地时承受全部体重。骨折典型见于高处坠落足跟着地——因轴向暴力传导，须同时检查腰椎，约10%合并椎体压缩骨折。" } },
     ],
   },
-};
+});
 
 /**
  * Lớp nào hiện trong bảng điều khiển của ArmViewer cho từng scene vùng, và lớp

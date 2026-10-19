@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Thân não" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const brainstemScene: AtlasSceneDef = {
+export const brainstemScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/brainstem.ts#brainstemScene", {
   "slug": "than-nao-day-so",
   "title": {
     "vi": "Thân não: trung não, cầu não, hành não",
@@ -179,4 +181,4 @@ export const brainstemScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Bài bộ phận "Tim — học theo lớp" học theo lớp — nhóm lấy từ heart.ts (đã kiểm), chỉ thêm lớp.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const partHeartScene: AtlasSceneDef = {
+export const partHeartScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/part-heart.ts#partHeartScene", {
   "slug": "bo-phan-tim",
   "title": {
     "vi": "Tim — học theo lớp",
@@ -408,4 +410,4 @@ export const partHeartScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

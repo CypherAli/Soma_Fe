@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Mắt và hốc mắt" (bên trái) dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const orbitScene: AtlasSceneDef = {
+export const orbitScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/orbit.ts#orbitScene", {
   "slug": "hoc-mat",
   "title": {
     "vi": "Mắt và hốc mắt",
@@ -237,4 +239,4 @@ export const orbitScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

@@ -1,5 +1,7 @@
 "use client";
 
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import type { SceneHotspot } from "@/lib/sceneModules";
@@ -11,14 +13,14 @@ const SectionModelScene = dynamic(() => import("./SectionModelScene"), {
 
 function ViewerFallback() {
   const t = useTranslations("viewer");
-  return (
+  return <ContentSurface scope="src/components/viewer/SectionModelViewer.tsx">{(
     <div className="flex h-full w-full items-center justify-center">
       <div className="flex flex-col items-center gap-3 text-[#b7b7b7]">
         <div className="h-8 w-8 animate-spin rounded-full border-2 border-[var(--line)] border-t-[var(--blue)]" />
         <p className="text-sm">{t("loading")}</p>
       </div>
     </div>
-  );
+  )}</ContentSurface>;
 }
 
 export default function SectionModelViewer({
@@ -31,12 +33,12 @@ export default function SectionModelViewer({
   const t = useTranslations("viewer");
 
 
-  return (
+  return <ContentSurface scope="src/components/viewer/SectionModelViewer.tsx">{(
     <div className="viewer-stage relative h-full w-full">
       <SectionModelScene modelUrl={modelUrl} hotspots={hotspots} />
       <p className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full border border-[var(--line)] bg-white/90 px-4 py-1.5 text-xs text-[var(--body-fg)] shadow backdrop-blur">
         {t("selectHint")}
       </p>
     </div>
-  );
+  )}</ContentSurface>;
 }

@@ -1,5 +1,9 @@
 "use client";
 
+
+
+import { useContent } from "@/components/content/ContentProvider";
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useRef, useState } from "react";
 import { pick, type Loc } from "@/lib/homeContent";
 import { settingsContent as S } from "@/lib/settingsContent";
@@ -16,6 +20,9 @@ export default function ProfileTab({
   user: AccountProfile;
   onChange: (user: AccountProfile) => void;
 }) {
+  const cmsContent = useContent();
+  const S = cmsContent.resolve(cmsSourceS());
+
   const P = S.profile;
   const [name, setName] = useState(user.name);
   const [busy, setBusy] = useState<"name" | "avatar" | null>(null);
@@ -72,7 +79,7 @@ export default function ProfileTab({
     }
   }
 
-  return (
+  return <ContentSurface scope="src/components/settings/ProfileTab.tsx">{(
     <>
       <Card title={pick(P.photo, locale)} note={pick(P.photoNote, locale)}>
         <div className="st-photo">
@@ -159,5 +166,7 @@ export default function ProfileTab({
         )}
       </Card>
     </>
-  );
+  )}</ContentSurface>;
 }
+
+function cmsSourceS() { return S; }

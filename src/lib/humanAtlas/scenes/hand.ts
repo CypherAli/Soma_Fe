@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Xương Bàn tay" (bàn tay trái) dựng từ bộ atlas BodyParts3D.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const handScene: AtlasSceneDef = {
+export const handScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/hand.ts#handScene", {
   "slug": "ban-tay",
   "title": {
     "vi": "Xương Bàn tay",
@@ -150,4 +152,4 @@ export const handScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

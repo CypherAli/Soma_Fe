@@ -1,0 +1,22 @@
+name: fe-ci
+on:
+  push:
+  pull_request:
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npx tsc --noEmit
+      - run: npm run test:unit
+      - run: npm run verify:quiz-bank
+      - run: npm run verify:scenes
+      - run: npm run verify:models
+      - run: npm run verify:lesions
+      - run: npm run build

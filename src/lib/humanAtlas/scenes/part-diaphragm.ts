@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Bài bộ phận "Cơ hoành và cơ hô hấp — học theo lớp" học theo lớp — nhóm lấy từ diaphragm.ts (đã kiểm), chỉ thêm lớp.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const partDiaphragmScene: AtlasSceneDef = {
+export const partDiaphragmScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/part-diaphragm.ts#partDiaphragmScene", {
   "slug": "bo-phan-co-hoanh",
   "title": {
     "vi": "Cơ hoành và cơ hô hấp — học theo lớp",
@@ -303,4 +305,4 @@ export const partDiaphragmScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

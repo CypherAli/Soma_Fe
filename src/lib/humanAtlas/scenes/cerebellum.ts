@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Tiểu não" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const cerebellumScene: AtlasSceneDef = {
+export const cerebellumScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/cerebellum.ts#cerebellumScene", {
   "slug": "tieu-nao",
   "title": {
     "vi": "Tiểu não và liên quan",
@@ -161,4 +163,4 @@ export const cerebellumScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

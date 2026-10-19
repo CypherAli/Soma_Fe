@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Bài bộ phận "Cột sống cổ — học theo lớp" học theo lớp — nhóm lấy từ cervical-spine.ts (đã kiểm), chỉ thêm lớp.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const partCervicalScene: AtlasSceneDef = {
+export const partCervicalScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/part-cervical.ts#partCervicalScene", {
   "slug": "bo-phan-cot-song-co",
   "title": {
     "vi": "Cột sống cổ — học theo lớp",
@@ -195,4 +197,4 @@ export const partCervicalScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

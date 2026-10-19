@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Tĩnh mạch vùng chậu hông" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const pelvicVeinsScene: AtlasSceneDef = {
+export const pelvicVeinsScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/pelvic-veins.ts#pelvicVeinsScene", {
   "slug": "dam-roi-that-lung-cung",
   "title": {
     "vi": "Hệ tĩnh mạch chậu",
@@ -195,4 +197,4 @@ export const pelvicVeinsScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

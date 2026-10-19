@@ -41,8 +41,18 @@ export type Box = { x: number; y: number; w: number; h: number };
  */
 export const FRAME_PAD = 0.035;
 
-/** Ô nhỏ hơn ngần này thì bỏ qua — đó là hai tay đang khép lại chứ không phải đang ngắm. */
-export const MIN_BOX = 0.08;
+/** Ô nhỏ hơn ngần này thì bỏ qua — đó là hai tay đang khép lại chứ không phải đang ngắm.
+ *  0,06 cho phép ngắm chính xác vùng nhỏ (mắt, tai) bằng cách chụm 2 đầu ngón
+ *  trỏ sát vào — đúng ý "chụm vào giãn ra để tạo hình chữ nhật". */
+export const MIN_BOX = 0.06;
+
+/**
+ * Hai đầu ngón trỏ phải CÁCH NHAU tối thiểu ngần này (đo trong hệ vuông, đã
+ * nhân x với aspect) mới tính là đang ngắm. Chụm dính vào nhau thì đó là điểm
+ * bắt đầu của cử chỉ "chụm rồi giãn", chưa phải khung hình — không có ngưỡng
+ * này, chỉ riêng viền đệm cũng đủ nặn ra một ô 0,07 và máy ngắm "khí".
+ */
+export const TIP_MIN_SPREAD = 0.05;
 
 /** Cạnh ảnh gửi đi nhận diện (mô hình thị giác nào cũng nhận 224–336 px vuông). */
 export const CROP_SIZE = 336;
@@ -62,6 +72,8 @@ export function boxFromIndexTips(a: Landmark[], b: Landmark[], aspect: number): 
   const ta = a[LM.INDEX_TIP];
   const tb = b[LM.INDEX_TIP];
   if (!ta || !tb) return null;
+  // Hai đầu ngón dính nhau = chưa ngắm (xem TIP_MIN_SPREAD).
+  if (Math.hypot((ta.x - tb.x) * aspect, ta.y - tb.y) < TIP_MIN_SPREAD) return null;
   const padX = FRAME_PAD;
   const padY = FRAME_PAD * aspect;
   const box = clampBox({

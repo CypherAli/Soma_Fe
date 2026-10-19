@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Bài bộ phận "Dạ dày — học theo lớp" học theo lớp — nhóm lấy từ stomach.ts (đã kiểm), chỉ thêm lớp.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const partStomachScene: AtlasSceneDef = {
+export const partStomachScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/part-stomach.ts#partStomachScene", {
   "slug": "bo-phan-da-day",
   "title": {
     "vi": "Dạ dày — học theo lớp",
@@ -171,4 +173,4 @@ export const partStomachScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

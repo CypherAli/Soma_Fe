@@ -844,6 +844,8 @@ html[data-theme="dark"] .atlas-studio .scene-exit:hover{background:#ffffff12}
 .atlas-scene .scene-label[data-side=l]{flex-direction:row-reverse;text-align:right}
 .atlas-scene .scene-label i{width:9px;height:9px;border-radius:50%;flex:none}
 .atlas-scene .scene-label:hover{border-color:currentColor}
+.atlas-scene .scene-label.is-pin{transform:translate(-50%,-50%);min-width:26px;min-height:26px;padding:3px 6px;border-radius:50%;font-size:11px;text-align:center;justify-content:center}
+.atlas-scene .scene-label.is-pin i{display:none}
 /* Chế độ chụp ảnh bìa (?thumb): chỉ còn canvas. */
 .atlas-scene.is-thumb > :not(.scene):not(.vignette){display:none!important}
 body:has(.atlas-scene.is-thumb) .soma-bot-launcher{display:none!important}
@@ -1046,3 +1048,47 @@ html[data-theme="dark"] .atlas-studio .detail-quick button[aria-pressed=true]{
    Bản gốc đặt `text-transform:capitalize` vì tên BodyParts3D toàn chữ thường
    ("mitral valve"); áp vào tiếng Việt thì ra "Thành Cơ Thất" — sai chính tả. */
 .atlas-studio.atlas-scene .structure-title{text-transform:none}
+
+/* Keep the identity fixed; only the description scrolls. Flex children must
+   not shrink their text boxes when a long lesson fills the inspector. */
+.atlas-studio .detail-scroll > *{flex-shrink:0}
+.atlas-studio .detail-sheet .context-note{margin:0;line-height:1.6}
+.atlas-studio .member-list{display:flex;flex-direction:column;gap:8px}
+.atlas-studio .member-list h3{margin:0;line-height:1.5}
+.atlas-studio .structure-latin{margin:0;line-height:1.5;overflow-wrap:anywhere}
+.atlas-studio .detail-header{min-height:min-content}
+.atlas-studio .detail-scroll{scroll-padding-block:8px}
+.atlas-studio .anatomy-landmarks{display:flex;flex-direction:column;gap:14px}
+.atlas-studio .anatomy-landmarks h3{font-size:15px;font-weight:650;margin:0}
+.atlas-studio .anatomy-landmarks article{border-top:1px solid var(--border);padding-top:12px}
+.atlas-studio .anatomy-landmarks h4{margin:0 0 4px;font-size:14px;font-weight:600}
+.atlas-studio .anatomy-landmarks i{font-size:12px;color:var(--muted-foreground);line-height:1.5}
+.atlas-studio .anatomy-landmarks p{font-size:14px;line-height:1.7;margin:8px 0}
+.atlas-studio .anatomy-landmarks a{font-size:12px;text-decoration:underline;color:var(--foreground)}
+.atlas-studio .member-list button small{display:block;font-size:10px;color:var(--muted-foreground);margin-top:3px}
+.atlas-studio .member-tag-number{display:inline-grid;place-items:center;min-width:21px;height:21px;border:1px solid var(--border);border-radius:50%;font-size:10px;margin-right:4px}
+.atlas-studio .member-list button[aria-pressed="true"]{background:var(--primary);color:var(--primary-foreground)}
+.atlas-studio .mobile-lessons-trigger{display:none}
+@media(max-width:767px) and (min-height:600px){
+  .atlas-studio.atlas-scene .view-controls{top:158px}
+  .atlas-studio .mobile-lessons-trigger{display:block;position:absolute;top:216px;left:12px;z-index:7;min-height:36px;padding:6px 12px;background:var(--background);color:var(--foreground);border:1px solid var(--border);border-radius:8px;font-size:12px}
+  .atlas-studio .scene-rail.mobile-open{display:flex;top:260px;bottom:145px;max-height:none;left:12px;right:12px;width:auto;transform:none;z-index:8}
+  .atlas-studio .scene-rail.mobile-open .rail-body{opacity:1;pointer-events:auto}
+  .atlas-studio .scene-rail.mobile-open .rail-toggle{display:none}
+  .atlas-studio.atlas-scene .detail-sheet{top:auto!important;bottom:16px!important;max-height:44dvh}
+  .atlas-studio.atlas-scene:has(.detail-sheet) .bottom-dock,.atlas-studio.atlas-scene:has(.detail-sheet) .dock-pill{display:none}
+  body:has(.atlas-studio.atlas-scene .detail-sheet) .soma-bot:not(.is-open){top:154px;bottom:auto;right:12px}
+}
+
+/* The bottom dock occupies the middle column. On desktop the left clipping
+   card can sit lower, leaving a usable list of systems above it. */
+@media(min-width:1000px) and (min-height:600px){
+  .atlas-studio:not(.atlas-scene) .clip-panel{bottom:54px}
+  .atlas-studio:not(.atlas-scene) .layers-panel{bottom:132px}
+  .atlas-studio:not(.atlas-scene):has(.clip-panel [aria-checked="true"]) .layers-panel{bottom:240px}
+  .atlas-studio .panel-heading,.atlas-studio .layer-presets,.atlas-studio .panel-foot{flex-shrink:0}
+}
+.anatomy-learning {border-top:1px solid var(--border);padding-top:18px;margin-top:18px;overflow-wrap:anywhere}
+.anatomy-learning h3 {font-size:17px;margin:0 0 8px}.anatomy-learning h4 {font-size:15px;margin:18px 0 8px}
+.anatomy-learning p {font-size:14px;line-height:1.7;margin:10px 0}.anatomy-learning i,.anatomy-learning details {font-size:13px;color:var(--muted-foreground)}
+.anatomy-learning summary {cursor:pointer;padding:8px 0}.anatomy-learning a {color:var(--primary);font-size:13px}.anatomy-learning article {border-top:1px solid var(--border);margin-top:14px}

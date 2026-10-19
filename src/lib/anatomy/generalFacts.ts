@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import { fold } from "@/lib/anatomy/knowledge";
 import type { T3 } from "@/lib/homeContent";
 
@@ -34,7 +36,7 @@ export type GeneralFact = {
   source: string;
 };
 
-export const GENERAL_FACTS: GeneralFact[] = [
+export const GENERAL_FACTS: GeneralFact[] = bindContentSource("data:src/lib/anatomy/generalFacts.ts#GENERAL_FACTS", [
   {
     id: "bone-count",
     keys: ["bao nhieu xuong", "so luong xuong", "tong so xuong", "how many bones", "number of bones", "bone count", "多少块骨", "骨头数量"],
@@ -255,7 +257,7 @@ export const GENERAL_FACTS: GeneralFact[] = [
     },
     source: "Terminologia Anatomica, 2nd ed. (FIPAT, 2019)",
   },
-];
+]);
 
 export type GeneralHit = { fact: GeneralFact; score: number };
 

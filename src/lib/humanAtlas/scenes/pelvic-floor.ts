@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Chậu hông và đáy chậu" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const pelvicFloorScene: AtlasSceneDef = {
+export const pelvicFloorScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/pelvic-floor.ts#pelvicFloorScene", {
   "slug": "chau-hong-day-chau",
   "title": {
     "vi": "Chậu hông và đáy chậu",
@@ -190,4 +192,4 @@ export const pelvicFloorScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

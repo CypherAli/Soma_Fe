@@ -1,4 +1,4 @@
-import { API_URL, getToken } from "@/lib/auth";
+import { authRequest, getToken } from "@/lib/auth";
 import type { QuizItem } from "@/lib/anatomy/quiz";
 import { rng, shuffle } from "@/lib/anatomy/random";
 
@@ -58,23 +58,23 @@ export async function askAiForQuestions(
   docId: string,
   text: string,
 ): Promise<{ parsed: number; note: string | null }> {
-  const token = getToken();
   const read = await fetch("/api/pdf-mcq", {
     method: "POST",
     headers: {
       "content-type": "application/json",
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...authHeaders(),
     },
     body: JSON.stringify({ text }),
   });
   const { questions } = await json<{ questions: unknown[] }>(read);
 
-  const saved = await fetch(`${API_URL}/personal-docs/${docId}/ai-questions`, {
+  const result = await personalRequest<{
+    parsed: number;
+    doc: { note: string | null };
+  }>(`/${docId}/ai-questions`, {
     method: "POST",
-    headers: { "content-type": "application/json", ...authHeaders() },
     body: JSON.stringify({ questions }),
   });
-  const result = await json<{ parsed: number; doc: { note: string | null } }>(saved);
   return { parsed: result.parsed, note: result.doc.note };
 }
 
@@ -87,12 +87,22 @@ function authHeaders(): Record<string, string> {
 async function json<T>(res: Response): Promise<T> {
   const data = await res.json().catch(() => ({}));
   if (!res.ok) {
-    const message = Array.isArray((data as { message?: unknown }).message)
-      ? (data as { message: string[] }).message[0]
-      : (data as { message?: string }).message;
-    throw new Error(message || `Máy chủ trả về lỗi ${res.status}`);
+    const raw: unknown = data?.message ?? data?.error;
+    const message: unknown = Array.isArray(raw)
+      ? raw.find((value) => typeof value === "string")
+      : raw;
+    throw new Error(
+      typeof message === "string" && message
+        ? message
+        : `Máy chủ trả về lỗi ${res.status}`,
+    );
   }
   return data as T;
+}
+
+function personalRequest<T>(path = "", init: RequestInit = {}): Promise<T> {
+  if (!getToken()) return Promise.reject(new Error("Cần đăng nhập"));
+  return authRequest<T>(`/personal-docs${path}`, init);
 }
 
 export async function uploadPdf(file: File): Promise<UploadResult> {
@@ -100,52 +110,46 @@ export async function uploadPdf(file: File): Promise<UploadResult> {
   body.append("file", file);
   // KHÔNG đặt content-type bằng tay: trình duyệt phải tự thêm ranh giới
   // multipart, gán tay là máy chủ không tách được tệp.
-  return json(await fetch(`${API_URL}/personal-docs`, { method: "POST", headers: authHeaders(), body }));
+  return personalRequest("", { method: "POST", body });
 }
 
 export async function listDocs(): Promise<{ docs: PersonalDoc[] }> {
-  return json(await fetch(`${API_URL}/personal-docs`, { headers: authHeaders() }));
+  return personalRequest();
 }
 
 export async function docQuestions(
   docId: string,
 ): Promise<{ doc: PersonalDoc; questions: PersonalQuestion[] }> {
-  return json(await fetch(`${API_URL}/personal-docs/${docId}/questions`, { headers: authHeaders() }));
+  return personalRequest(`/${docId}/questions`);
 }
 
-export async function approveAll(docId: string): Promise<{ approved: number; skipped: number }> {
-  return json(
-    await fetch(`${API_URL}/personal-docs/${docId}/approve-all`, {
-      method: "POST",
-      headers: authHeaders(),
-    }),
-  );
+export async function approveAll(
+  docId: string,
+): Promise<{ approved: number; skipped: number }> {
+  return personalRequest(`/${docId}/approve-all`, { method: "POST" });
 }
 
 export async function editQuestion(
   id: string,
-  patch: Partial<Pick<PersonalQuestion, "stem" | "options" | "answer" | "explanation" | "approved">>,
+  patch: Partial<
+    Pick<
+      PersonalQuestion,
+      "stem" | "options" | "answer" | "explanation" | "approved"
+    >
+  >,
 ): Promise<PersonalQuestion> {
-  return json(
-    await fetch(`${API_URL}/personal-docs/questions/${id}`, {
-      method: "PATCH",
-      headers: { ...authHeaders(), "content-type": "application/json" },
-      body: JSON.stringify(patch),
-    }),
-  );
+  return personalRequest(`/questions/${id}`, {
+    method: "PATCH",
+    body: JSON.stringify(patch),
+  });
 }
 
 export async function deleteQuestion(id: string): Promise<void> {
-  await json(
-    await fetch(`${API_URL}/personal-docs/questions/${id}`, {
-      method: "DELETE",
-      headers: authHeaders(),
-    }),
-  );
+  await personalRequest(`/questions/${id}`, { method: "DELETE" });
 }
 
 export async function deleteDoc(id: string): Promise<void> {
-  await json(await fetch(`${API_URL}/personal-docs/${id}`, { method: "DELETE", headers: authHeaders() }));
+  await personalRequest(`/${id}`, { method: "DELETE" });
 }
 
 export type PersonalBank = {
@@ -162,7 +166,7 @@ export type PersonalBank = {
 };
 
 export async function loadPersonalBank(): Promise<PersonalBank> {
-  return json(await fetch(`${API_URL}/personal-docs/bank`, { headers: authHeaders() }));
+  return personalRequest("/bank");
 }
 
 export function personalQuestionCount(bank: PersonalBank): number {

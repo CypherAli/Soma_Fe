@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Bài bộ phận "Sọ — học theo lớp" học theo lớp — nhóm lấy từ skull.ts (đã kiểm), chỉ thêm lớp.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const partSkullScene: AtlasSceneDef = {
+export const partSkullScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/part-skull.ts#partSkullScene", {
   "slug": "bo-phan-so",
   "title": {
     "vi": "Sọ — học theo lớp",
@@ -338,4 +340,4 @@ export const partSkullScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

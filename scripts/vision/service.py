@@ -27,6 +27,7 @@ import argparse
 import base64
 import io
 import os
+from contextlib import asynccontextmanager
 from pathlib import Path
 
 import numpy as np
@@ -60,9 +61,23 @@ PROMPTS: dict[str, list[str]] = {
     "abdomen": ["a photo of a human abdomen and belly", "a bare stomach of a person"],
     "knee": ["a close-up photo of a human knee", "a bare knee joint"],
     "foot": ["a photo of a human foot", "a bare foot with toes"],
+    # Thiếu "head" từng khiến GPU KHÔNG BAO GIỜ trả về nhãn Đầu dù giao diện có nhãn đó.
+    "head": ["a photo of a person's whole head including hair", "a human head from crown to chin"],
+    "hip": ["a photo of a human hip", "the side of a person's hip and pelvis"],
+    "thigh": ["a photo of a human thigh", "a bare upper leg between hip and knee"],
+    "leg": ["a photo of a human lower leg and calf", "a bare shin between knee and ankle"],
+    "ankle": ["a close-up photo of a human ankle", "an ankle joint with the ankle bone"],
 }
 
-app = FastAPI(title="Soma 3D vision")
+
+@asynccontextmanager
+async def lifespan(_: FastAPI):
+    # `@app.on_event("startup")` đã lỗi thời trong FastAPI; lifespan là cách chính thức.
+    load_model()
+    yield
+
+
+app = FastAPI(title="Soma 3D vision", lifespan=lifespan)
 
 _state: dict = {}
 
@@ -119,11 +134,6 @@ def softmax(x: np.ndarray, temperature: float) -> np.ndarray:
 class Body(BaseModel):
     image: str
     labels: list[str] | None = None
-
-
-@app.on_event("startup")
-def _startup() -> None:
-    load_model()
 
 
 @app.get("/health")

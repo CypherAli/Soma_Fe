@@ -1,5 +1,7 @@
 "use client";
 
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import ClipControls from "./ClipControls";
@@ -13,14 +15,14 @@ const ModelScene = dynamic(() => import("./ModelScene"), {
 
 function ViewerFallback() {
   const t = useTranslations("viewer");
-  return (
+  return <ContentSurface scope="src/components/viewer/ModelViewer.tsx">{(
     <div className="flex h-full w-full items-center justify-center bg-[var(--surf-3)]">
       <div className="flex flex-col items-center gap-3 text-[var(--muted)]">
         <div className="h-8 w-8 animate-spin rounded-full border-2 border-[var(--line)] border-t-[var(--blue)]" />
         <p className="text-sm">{t("loading")}</p>
       </div>
     </div>
-  );
+  )}</ContentSurface>;
 }
 
 export default function ModelViewer({
@@ -45,7 +47,7 @@ export default function ModelViewer({
   studio?: boolean;
 }) {
   const t = useTranslations("viewer");
-  return (
+  return <ContentSurface scope="src/components/viewer/ModelViewer.tsx">{(
     <div className={`viewer-stage relative h-full w-full${studio ? " stage-studio" : ""}`}>
       <ModelScene
         hotspots={hotspots}
@@ -58,5 +60,5 @@ export default function ModelViewer({
         {t("selectHint")}
       </p>
     </div>
-  );
+  )}</ContentSurface>;
 }

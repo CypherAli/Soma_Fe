@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Giải phẫu Sọ" dựng từ bộ atlas BodyParts3D.
  *
@@ -9,7 +11,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const skullScene: AtlasSceneDef = {
+export const skullScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/skull.ts#skullScene", {
   slug: "giai-phau-so",
   title: { vi: "Giải phẫu Sọ", en: "Anatomy of the Skull", zh: "颅骨解剖" },
   latin: "Cranium",
@@ -291,4 +293,4 @@ export const skullScene: AtlasSceneDef = {
         ]
     }
 ],
-};
+});

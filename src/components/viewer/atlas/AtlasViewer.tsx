@@ -1,5 +1,13 @@
 "use client";
 
+
+
+
+
+import { useContent } from "@/components/content/ContentProvider";
+import { bindContentSource } from "@/lib/content/source";
+import { contentFetch } from '@/lib/content/fetch';
+import { ContentSurface } from "@/components/content/ContentProvider";
 /**
  * Giao diện atlas toàn thân — chuyển từ human-atlas/app/page.tsx (MIT).
  *
@@ -12,6 +20,11 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import dynamic from "next/dynamic";
+import { useLocale } from "next-intl";
+import { localizedPartNames, localizedPartName } from "@/lib/humanAtlas/partNames";
+import type { Loc } from "@/lib/homeContent";
+import PartLearning from './PartLearning';
+import { partLearning } from '@/lib/humanAtlas/learning';
 import {
   Activity,
   ArrowUpRight,
@@ -63,11 +76,11 @@ const initial: SceneState = {
   clip: DEFAULT_CLIP,
 };
 
-const CLIP_AXES: { id: ClipAxis; label: string; title: string }[] = [
+const CLIP_AXES: { id: ClipAxis; label: string; title: string }[] = bindContentSource("data:src/components/viewer/atlas/AtlasViewer.tsx#CLIP_AXES", [
   { id: "x", label: "X", title: "Cắt dọc giữa (mặt phẳng đứng dọc)" },
   { id: "y", label: "Y", title: "Cắt ngang (mặt phẳng nằm ngang)" },
   { id: "z", label: "Z", title: "Cắt trước sau (mặt phẳng đứng ngang)" },
-];
+]);
 
 const ORGAN_PRESET: SystemId[] = [
   "cardiac",
@@ -78,12 +91,12 @@ const ORGAN_PRESET: SystemId[] = [
   "reproductive",
 ];
 
-const VIEWS: { id: View; label: string; title: string }[] = [
+const VIEWS: { id: View; label: string; title: string }[] = bindContentSource("data:src/components/viewer/atlas/AtlasViewer.tsx#VIEWS", [
   { id: "three-quarter", label: "¾", title: "Góc chéo" },
   { id: "front", label: "T", title: "Nhìn trước" },
   { id: "side", label: "B", title: "Nhìn bên" },
   { id: "back", label: "S", title: "Nhìn sau" },
-];
+]);
 
 const SUGGESTED = [
   "heart",
@@ -105,7 +118,7 @@ function Switch({
   onChange: () => void;
   label: string;
 }) {
-  return (
+  return <ContentSurface scope="src/components/viewer/atlas/AtlasViewer.tsx">{(
     <button
       type="button"
       role="switch"
@@ -117,12 +130,19 @@ function Switch({
     >
       <span data-slot="switch-thumb" />
     </button>
-  );
+  )}</ContentSurface>;
 }
 
 export default function AtlasViewer() {
+  const cmsContent = useContent();
+  const SYSTEMS = cmsContent.resolve(cmsSourceSYSTEMS());
+  const CLIP_AXES = cmsContent.resolve(cmsSourceCLIP_AXES());
+  const VIEWS = cmsContent.resolve(cmsSourceVIEWS());
+
+  const loc=useLocale() as Loc;
   const detailTitle = useRef<HTMLHeadingElement>(null);
   const [atlas, setAtlas] = useState<Atlas | null>(null);
+  const partNames=useMemo(()=>localizedPartNames(atlas?.parts??[],loc,cmsContent),[atlas,loc,cmsContent]);
   const [state, setState] = useState(initial);
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState("");
@@ -137,7 +157,7 @@ export default function AtlasViewer() {
     // lúc gắn nên mọi giá trị đã đúng bằng trạng thái khởi tạo — gọi lại chỉ
     // tạo thêm một vòng dựng thừa (và vi phạm react-hooks/set-state-in-effect).
     const abort = new AbortController();
-    fetch(ATLAS_MANIFEST, { signal: abort.signal })
+    contentFetch(ATLAS_MANIFEST, { signal: abort.signal })
       .then((r) => {
         if (!r.ok) throw new Error("Không tải được danh mục giải phẫu.");
         return r.json();
@@ -178,7 +198,7 @@ export default function AtlasViewer() {
           atlas?.parts.filter((p) => p.system === s.id).length ?? 0,
         ]),
       ),
-    [atlas],
+    [SYSTEMS, atlas?.parts],
   );
   const activeSystems = SYSTEMS.filter((s) => counts[s.id] > 0);
   const selectedParts = state.selected
@@ -199,7 +219,8 @@ export default function AtlasViewer() {
 
   const results = useMemo(() => {
     if (!atlas) return [];
-    const term = query.toLowerCase().trim();
+    const fold=(value:string)=>value.toLowerCase().normalize('NFD').replace(/\p{M}/gu,'').replace(/đ/g,'d');
+    const term = fold(query.trim());
     if (!term)
       return SUGGESTED.map((n) =>
         atlas.concepts.find((c) => c.name.toLowerCase() === n),
@@ -207,12 +228,13 @@ export default function AtlasViewer() {
     return atlas.concepts
       .filter(
         (c) =>
-          c.name.toLowerCase().includes(term) ||
+          fold(c.name).includes(term) ||
+          c.elements.some(id=>fold([partNames[id]??'',partLearning(id,cmsContent)?.latin??''].join(' ')).includes(term)) ||
           c.id.toLowerCase().includes(term),
       )
       .sort((a, b) => a.name.length - b.name.length)
       .slice(0, 80);
-  }, [atlas, query]);
+  }, [atlas, query, partNames, cmsContent]);
 
   const choose = useCallback((c: Concept) => {
     setChosen(c);
@@ -277,20 +299,21 @@ export default function AtlasViewer() {
     state.selected.length > 0 && state.selected.every((id) => state.faded.includes(id));
 
   const caption = state.isolate
-    ? (chosen?.name ?? "CẤU TRÚC ĐANG CHỌN")
+    ? (chosen?localizedPartName({id:chosen.elements[0],name:chosen.name},loc,cmsContent):"CẤU TRÚC ĐANG CHỌN")
     : state.explode > 0.95
       ? "KHO CẤU TRÚC GIẢI PHẪU"
       : state.explode > 0.05
         ? "CÁC CẤU TRÚC ĐÃ TÁCH RỜI"
         : "NGƯỜI TRƯỞNG THÀNH · NAM";
 
-  return (
+  return <ContentSurface scope="src/components/viewer/atlas/AtlasViewer.tsx">{(
     <main className="atlas-studio">
       {atlas && (
         <AtlasScene
           atlas={atlas}
           state={{
             ...state,
+            partNames,
             inspectorOpen: details && selectedParts.length > 0,
           }}
           onSelect={choosePart}
@@ -563,7 +586,7 @@ export default function AtlasViewer() {
                 key={c.id}
                 onClick={() => choose(c)}
               >
-                <span className="search-result-name">{c.name}</span>
+                <span className="search-result-name">{localizedPartName({id:c.elements[0],name:c.name},loc,cmsContent)}</span>
                 <span className="small-number">{c.elements.length} mảnh</span>
               </button>
             ))}
@@ -749,20 +772,16 @@ export default function AtlasViewer() {
             />
             <div className="eyebrow">{system?.name ?? "GIẢI PHẪU"}</div>
             <h2 ref={detailTitle} tabIndex={-1} className="structure-title">
-              {chosen?.name}
+              {chosen&&localizedPartName({id:chosen.elements[0],name:chosen.name},loc,cmsContent)}
             </h2>
           </div>
           <div className="detail-scroll" key={`${chosen?.id}-${state.isolate}`}>
-            <p className="structure-description">
+            {selected&&<PartLearning part={selected} locale={loc} hideIdentity/>}
+            {selected&&!partLearning(selected.id,cmsContent)?.note&&chosen&&EXPLANATIONS[chosen.name.toLowerCase()]&&loc==='vi'&&<p className="structure-description">
               {chosen && selected
                 ? explanation(chosen.name, selected.system)
                 : ""}
-            </p>
-            {chosen && !EXPLANATIONS[chosen.name.toLowerCase()] && (
-              <span className="context-note">
-                Mô tả chung của hệ · cấu trúc lấy từ dữ liệu giải phẫu gốc
-              </span>
-            )}
+            </p>}
             <div className="structure-meta">
               <span>
                 Mã tra cứu<strong>{chosen?.id}</strong>
@@ -782,7 +801,7 @@ export default function AtlasViewer() {
                     key={p.id}
                     onClick={() => choosePart(p.id)}
                   >
-                    <span>{p.name}</span>
+                    <span>{partNames[p.id]}</span>
                     <ChevronRight size={14} />
                   </button>
                 ))}
@@ -933,5 +952,9 @@ export default function AtlasViewer() {
         </aside>
       )}
     </main>
-  );
+  )}</ContentSurface>;
 }
+
+function cmsSourceSYSTEMS() { return SYSTEMS; }
+function cmsSourceCLIP_AXES() { return CLIP_AXES; }
+function cmsSourceVIEWS() { return VIEWS; }

@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Bộ răng" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const teethScene: AtlasSceneDef = {
+export const teethScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/teeth.ts#teethScene", {
   "slug": "bo-rang",
   "title": {
     "vi": "Bộ răng",
@@ -173,4 +175,4 @@ export const teethScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

@@ -1,10 +1,12 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import * as THREE from "three";
 
 // Phân lớp giải phẫu dùng chung cho mọi viewer (bóc lớp, tô màu, tra cứu theo tên mesh).
 // Z-Anatomy không xuất được material màu -> tô theo TÊN mesh.
 // ---- các lớp giải phẫu + màu ----
 export type CatKey = "skin" | "muscle" | "brain" | "artery" | "vein" | "nerve" | "lymph" | "eye" | "organ" | "bone";
-export const CATS: { key: CatKey; label: string; color: string }[] = [
+export const CATS: { key: CatKey; label: string; color: string }[] = bindContentSource("data:src/lib/anatomy/layers.ts#CATS", [
   { key: "skin", label: "Da", color: "#e2b48f" },
   { key: "muscle", label: "Cơ", color: "#9e2b23" },
   { key: "brain", label: "Não", color: "#d7a8a2" },
@@ -15,7 +17,7 @@ export const CATS: { key: CatKey; label: string; color: string }[] = [
   { key: "lymph", label: "Bạch huyết", color: "#5f9e57" },
   { key: "eye", label: "Mắt", color: "#5f7fa6" },
   { key: "bone", label: "Xương", color: "#e9dcbe" },
-];
+]);
 export const MAT: Record<CatKey, THREE.MeshStandardMaterial> = {
   skin: new THREE.MeshStandardMaterial({ color: "#e8b696", roughness: 0.66, metalness: 0 }),
   muscle: new THREE.MeshStandardMaterial({ color: "#9e2b23", roughness: 0.72, metalness: 0 }),
@@ -164,6 +166,8 @@ export function pickCat(name: string): CatKey {
   // "Ilio-hypogastric nerve" chứa chuỗi "gastric" nên trước đây bị xếp vào
   // nội tạng ngay giữa một scene đám rối thần kinh.
   if (n.includes("nerve")) return "nerve";
+  // Frontalis/temporalis and other named muscles may also contain a bone keyword.
+  if (n.includes("muscle")) return "muscle";
   if (ORGAN_KEYS.some((k) => n.includes(k))) return "organ";
   if (NERVE_KEYS.some((k) => n.includes(k))) return "nerve";
   if (BRAIN_KEYS.some((k) => n.includes(k))) return "brain";

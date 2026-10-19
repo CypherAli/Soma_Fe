@@ -1,5 +1,7 @@
 "use client";
 
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useCallback, useRef, useState } from "react";
 import {
   HAND_BONES,
@@ -9,6 +11,7 @@ import {
   type TrackedHand,
 } from "@/lib/gesture/useHandTracking";
 import "../../home.css";
+import { notFound } from "next/navigation";
 
 // P0 SPIKE — kiểm chứng hiệu năng & cơ chế điều khiển bằng cử chỉ trước khi build thật.
 // Đo: FPS, độ mượt con trỏ ngón trỏ, cơ chế "dừng để chọn" (dwell).
@@ -26,6 +29,8 @@ const TARGETS: Target[] = [
 ];
 
 export default function GestureTestPage() {
+  // Trang debug nội bộ — ẩn ở production để khỏi lộ công cụ test.
+  if (process.env.NODE_ENV === "production") notFound();
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [enabled, setEnabled] = useState(false);
@@ -167,7 +172,7 @@ export default function GestureTestPage() {
     maxHands: 2,
   });
 
-  return (
+  return <ContentSurface scope="src/app/[locale]/gesture-test/page.tsx">{(
     <div className="bd flex h-screen flex-col bg-[var(--surf-3)]">
       <header className="flex h-14 shrink-0 items-center gap-4 border-b border-[var(--line)] bg-[var(--surf)] px-4">
         <h1 className="text-sm font-semibold text-[var(--ink)]">
@@ -309,5 +314,5 @@ export default function GestureTestPage() {
         </aside>
       </div>
     </div>
-  );
+  )}</ContentSurface>;
 }

@@ -1,0 +1,1591 @@
+{
+  "at": "2026-10-14T13:08:02.946Z",
+  "files": 264,
+  "failures": [],
+  "records": [
+    {
+      "file": "public/models/abdomen_section.glb",
+      "bytes": 1457492,
+      "meshes": 144,
+      "passed": true
+    },
+    {
+      "file": "public/models/abdominal_wall.glb",
+      "bytes": 3383868,
+      "meshes": 203,
+      "passed": true
+    },
+    {
+      "file": "public/models/abdominal_wall_muscles.glb",
+      "bytes": 359852,
+      "meshes": 5,
+      "passed": true
+    },
+    {
+      "file": "public/models/ankle_achilles.glb",
+      "bytes": 603648,
+      "meshes": 126,
+      "passed": true
+    },
+    {
+      "file": "public/models/ankle_joint.glb",
+      "bytes": 696776,
+      "meshes": 141,
+      "passed": true
+    },
+    {
+      "file": "public/models/arm.glb",
+      "bytes": 3120436,
+      "meshes": 341,
+      "passed": true
+    },
+    {
+      "file": "public/models/arm_muscles.glb",
+      "bytes": 141360,
+      "meshes": 11,
+      "passed": true
+    },
+    {
+      "file": "public/models/arterial_tree.glb",
+      "bytes": 5739836,
+      "meshes": 456,
+      "passed": true
+    },
+    {
+      "file": "public/models/auditory_system.glb",
+      "bytes": 101108,
+      "meshes": 10,
+      "passed": true
+    },
+    {
+      "file": "public/models/autonomic_nerves.glb",
+      "bytes": 883164,
+      "meshes": 53,
+      "passed": true
+    },
+    {
+      "file": "public/models/back_muscles.glb",
+      "bytes": 4555084,
+      "meshes": 419,
+      "passed": true
+    },
+    {
+      "file": "public/models/bladder_prostate.glb",
+      "bytes": 354088,
+      "meshes": 58,
+      "passed": true
+    },
+    {
+      "file": "public/models/brachial_plexus.glb",
+      "bytes": 607080,
+      "meshes": 80,
+      "passed": true
+    },
+    {
+      "file": "public/models/brainstem_cranial_nerves.glb",
+      "bytes": 909864,
+      "meshes": 56,
+      "passed": true
+    },
+    {
+      "file": "public/models/brainstem_full.glb",
+      "bytes": 2156752,
+      "meshes": 251,
+      "passed": true
+    },
+    {
+      "file": "public/models/cardiovascular.glb",
+      "bytes": 4517760,
+      "meshes": 665,
+      "passed": true
+    },
+    {
+      "file": "public/models/carotid_neck.glb",
+      "bytes": 651652,
+      "meshes": 68,
+      "passed": true
+    },
+    {
+      "file": "public/models/cerebellopontine_angle.glb",
+      "bytes": 433700,
+      "meshes": 33,
+      "passed": true
+    },
+    {
+      "file": "public/models/cerebellum.glb",
+      "bytes": 258772,
+      "meshes": 24,
+      "passed": true
+    },
+    {
+      "file": "public/models/cerebellum_full.glb",
+      "bytes": 1105432,
+      "meshes": 80,
+      "passed": true
+    },
+    {
+      "file": "public/models/cerebrum_full.glb",
+      "bytes": 4459920,
+      "meshes": 234,
+      "passed": true
+    },
+    {
+      "file": "public/models/cervical_nodes.glb",
+      "bytes": 439748,
+      "meshes": 74,
+      "passed": true
+    },
+    {
+      "file": "public/models/cervical_spine.glb",
+      "bytes": 1296948,
+      "meshes": 190,
+      "passed": true
+    },
+    {
+      "file": "public/models/circle_of_willis.glb",
+      "bytes": 210724,
+      "meshes": 12,
+      "passed": true
+    },
+    {
+      "file": "public/models/connective_tissue.glb",
+      "bytes": 112136,
+      "meshes": 22,
+      "passed": true
+    },
+    {
+      "file": "public/models/coronary_arteries.glb",
+      "bytes": 314836,
+      "meshes": 13,
+      "passed": true
+    },
+    {
+      "file": "public/models/cubital_fossa.glb",
+      "bytes": 382924,
+      "meshes": 64,
+      "passed": true
+    },
+    {
+      "file": "public/models/dentition.glb",
+      "bytes": 209700,
+      "meshes": 16,
+      "passed": true
+    },
+    {
+      "file": "public/models/diaphragm_full.glb",
+      "bytes": 2323184,
+      "meshes": 138,
+      "passed": true
+    },
+    {
+      "file": "public/models/diencephalon_limbic.glb",
+      "bytes": 113808,
+      "meshes": 18,
+      "passed": true
+    },
+    {
+      "file": "public/models/digestive_system_overview.glb",
+      "bytes": 477356,
+      "meshes": 20,
+      "passed": true
+    },
+    {
+      "file": "public/models/dural_sinuses.glb",
+      "bytes": 348092,
+      "meshes": 23,
+      "passed": true
+    },
+    {
+      "file": "public/models/ear_full.glb",
+      "bytes": 1376200,
+      "meshes": 175,
+      "passed": true
+    },
+    {
+      "file": "public/models/elbow_joint.glb",
+      "bytes": 380484,
+      "meshes": 68,
+      "passed": true
+    },
+    {
+      "file": "public/models/endocrine_glands.glb",
+      "bytes": 448352,
+      "meshes": 37,
+      "passed": true
+    },
+    {
+      "file": "public/models/endocrine_system.glb",
+      "bytes": 99976,
+      "meshes": 9,
+      "passed": true
+    },
+    {
+      "file": "public/models/eye_anatomy.glb",
+      "bytes": 72120,
+      "meshes": 12,
+      "passed": true
+    },
+    {
+      "file": "public/models/face_muscles.glb",
+      "bytes": 3639804,
+      "meshes": 263,
+      "passed": true
+    },
+    {
+      "file": "public/models/facial_muscles.glb",
+      "bytes": 229660,
+      "meshes": 20,
+      "passed": true
+    },
+    {
+      "file": "public/models/fascia_system.glb",
+      "bytes": 218488,
+      "meshes": 20,
+      "passed": true
+    },
+    {
+      "file": "public/models/femoral_triangle.glb",
+      "bytes": 505920,
+      "meshes": 77,
+      "passed": true
+    },
+    {
+      "file": "public/models/foot_bones.glb",
+      "bytes": 120380,
+      "meshes": 27,
+      "passed": true
+    },
+    {
+      "file": "public/models/foot_detail.glb",
+      "bytes": 916324,
+      "meshes": 176,
+      "passed": true
+    },
+    {
+      "file": "public/models/forearm.glb",
+      "bytes": 985084,
+      "meshes": 111,
+      "passed": true
+    },
+    {
+      "file": "public/models/gesture/bust.glb",
+      "bytes": 15956960,
+      "meshes": 1551,
+      "passed": true
+    },
+    {
+      "file": "public/models/gesture/head.glb",
+      "bytes": 9117624,
+      "meshes": 900,
+      "passed": true
+    },
+    {
+      "file": "public/models/gesture/neck.glb",
+      "bytes": 1420988,
+      "meshes": 189,
+      "passed": true
+    },
+    {
+      "file": "public/models/gesture/thorax.glb",
+      "bytes": 6250036,
+      "meshes": 669,
+      "passed": true
+    },
+    {
+      "file": "public/models/gluteal_region.glb",
+      "bytes": 437724,
+      "meshes": 64,
+      "passed": true
+    },
+    {
+      "file": "public/models/hand_bones.glb",
+      "bytes": 97472,
+      "meshes": 27,
+      "passed": true
+    },
+    {
+      "file": "public/models/hand_detail.glb",
+      "bytes": 848804,
+      "meshes": 156,
+      "passed": true
+    },
+    {
+      "file": "public/models/head.glb",
+      "bytes": 5633440,
+      "meshes": 359,
+      "passed": true
+    },
+    {
+      "file": "public/models/heart_anatomy.glb",
+      "bytes": 217872,
+      "meshes": 18,
+      "passed": true
+    },
+    {
+      "file": "public/models/heart_full.glb",
+      "bytes": 1311416,
+      "meshes": 116,
+      "passed": true
+    },
+    {
+      "file": "public/models/hip_joint.glb",
+      "bytes": 349880,
+      "meshes": 62,
+      "passed": true
+    },
+    {
+      "file": "public/models/hip_thigh.glb",
+      "bytes": 953476,
+      "meshes": 109,
+      "passed": true
+    },
+    {
+      "file": "public/models/iliotibial_tract.glb",
+      "bytes": 699092,
+      "meshes": 109,
+      "passed": true
+    },
+    {
+      "file": "public/models/infratemporal_fossa.glb",
+      "bytes": 423576,
+      "meshes": 49,
+      "passed": true
+    },
+    {
+      "file": "public/models/inguinal_region.glb",
+      "bytes": 666464,
+      "meshes": 72,
+      "passed": true
+    },
+    {
+      "file": "public/models/intestines_full.glb",
+      "bytes": 1102248,
+      "meshes": 116,
+      "passed": true
+    },
+    {
+      "file": "public/models/joints.glb",
+      "bytes": 713444,
+      "meshes": 234,
+      "passed": true
+    },
+    {
+      "file": "public/models/knee_joint.glb",
+      "bytes": 387288,
+      "meshes": 62,
+      "passed": true
+    },
+    {
+      "file": "public/models/lacrimal_apparatus.glb",
+      "bytes": 298800,
+      "meshes": 39,
+      "passed": true
+    },
+    {
+      "file": "public/models/landmarks_lower.glb",
+      "bytes": 303292,
+      "meshes": 126,
+      "passed": true
+    },
+    {
+      "file": "public/models/landmarks_upper.glb",
+      "bytes": 503412,
+      "meshes": 237,
+      "passed": true
+    },
+    {
+      "file": "public/models/larynx_anatomy.glb",
+      "bytes": 87080,
+      "meshes": 10,
+      "passed": true
+    },
+    {
+      "file": "public/models/leg_foot.glb",
+      "bytes": 1127888,
+      "meshes": 200,
+      "passed": true
+    },
+    {
+      "file": "public/models/liver_anatomy.glb",
+      "bytes": 36204,
+      "meshes": 9,
+      "passed": true
+    },
+    {
+      "file": "public/models/liver_biliary.glb",
+      "bytes": 322836,
+      "meshes": 42,
+      "passed": true
+    },
+    {
+      "file": "public/models/lower_limb_arteries.glb",
+      "bytes": 502404,
+      "meshes": 64,
+      "passed": true
+    },
+    {
+      "file": "public/models/lumbar_spine.glb",
+      "bytes": 780728,
+      "meshes": 91,
+      "passed": true
+    },
+    {
+      "file": "public/models/lumbosacral_plexus.glb",
+      "bytes": 480900,
+      "meshes": 41,
+      "passed": true
+    },
+    {
+      "file": "public/models/lungs_airways.glb",
+      "bytes": 2875444,
+      "meshes": 251,
+      "passed": true
+    },
+    {
+      "file": "public/models/lung_anatomy.glb",
+      "bytes": 74128,
+      "meshes": 6,
+      "passed": true
+    },
+    {
+      "file": "public/models/lymphatic_system.glb",
+      "bytes": 475844,
+      "meshes": 101,
+      "passed": true
+    },
+    {
+      "file": "public/models/lymphoid.glb",
+      "bytes": 488936,
+      "meshes": 106,
+      "passed": true
+    },
+    {
+      "file": "public/models/male_genital.glb",
+      "bytes": 320680,
+      "meshes": 35,
+      "passed": true
+    },
+    {
+      "file": "public/models/male_reproductive.glb",
+      "bytes": 53376,
+      "meshes": 10,
+      "passed": true
+    },
+    {
+      "file": "public/models/mediastinum.glb",
+      "bytes": 2707520,
+      "meshes": 250,
+      "passed": true
+    },
+    {
+      "file": "public/models/mesenteric_vessels.glb",
+      "bytes": 463212,
+      "meshes": 44,
+      "passed": true
+    },
+    {
+      "file": "public/models/mouth_tongue.glb",
+      "bytes": 3265920,
+      "meshes": 282,
+      "passed": true
+    },
+    {
+      "file": "public/models/muscular.glb",
+      "bytes": 5788332,
+      "meshes": 483,
+      "passed": true
+    },
+    {
+      "file": "public/models/neck.glb",
+      "bytes": 803440,
+      "meshes": 95,
+      "passed": true
+    },
+    {
+      "file": "public/models/neck_triangles.glb",
+      "bytes": 527752,
+      "meshes": 66,
+      "passed": true
+    },
+    {
+      "file": "public/models/nervous.glb",
+      "bytes": 3109664,
+      "meshes": 439,
+      "passed": true
+    },
+    {
+      "file": "public/models/nose_sinus.glb",
+      "bytes": 3410100,
+      "meshes": 253,
+      "passed": true
+    },
+    {
+      "file": "public/models/oesophagus.glb",
+      "bytes": 557544,
+      "meshes": 56,
+      "passed": true
+    },
+    {
+      "file": "public/models/orbit_eye.glb",
+      "bytes": 3774780,
+      "meshes": 287,
+      "passed": true
+    },
+    {
+      "file": "public/models/pancreas_spleen.glb",
+      "bytes": 553344,
+      "meshes": 52,
+      "passed": true
+    },
+    {
+      "file": "public/models/pectoral_breast.glb",
+      "bytes": 1058632,
+      "meshes": 71,
+      "passed": true
+    },
+    {
+      "file": "public/models/pelvic_ligaments.glb",
+      "bytes": 220016,
+      "meshes": 37,
+      "passed": true
+    },
+    {
+      "file": "public/models/pelvis_perineum.glb",
+      "bytes": 703420,
+      "meshes": 102,
+      "passed": true
+    },
+    {
+      "file": "public/models/peritoneum_full.glb",
+      "bytes": 913920,
+      "meshes": 81,
+      "passed": true
+    },
+    {
+      "file": "public/models/pharynx_larynx.glb",
+      "bytes": 2393996,
+      "meshes": 234,
+      "passed": true
+    },
+    {
+      "file": "public/models/pleura.glb",
+      "bytes": 1067436,
+      "meshes": 55,
+      "passed": true
+    },
+    {
+      "file": "public/models/popliteal_fossa.glb",
+      "bytes": 357048,
+      "meshes": 68,
+      "passed": true
+    },
+    {
+      "file": "public/models/posterior_neck.glb",
+      "bytes": 642176,
+      "meshes": 86,
+      "passed": true
+    },
+    {
+      "file": "public/models/retroperitoneum.glb",
+      "bytes": 1069140,
+      "meshes": 85,
+      "passed": true
+    },
+    {
+      "file": "public/models/rotator_cuff.glb",
+      "bytes": 349480,
+      "meshes": 58,
+      "passed": true
+    },
+    {
+      "file": "public/models/salivary_glands.glb",
+      "bytes": 666984,
+      "meshes": 60,
+      "passed": true
+    },
+    {
+      "file": "public/models/saphenous_veins.glb",
+      "bytes": 398264,
+      "meshes": 42,
+      "passed": true
+    },
+    {
+      "file": "public/models/sciatic_course.glb",
+      "bytes": 444672,
+      "meshes": 48,
+      "passed": true
+    },
+    {
+      "file": "public/models/shoulder.glb",
+      "bytes": 2295736,
+      "meshes": 177,
+      "passed": true
+    },
+    {
+      "file": "public/models/shoulder_axilla.glb",
+      "bytes": 1733080,
+      "meshes": 200,
+      "passed": true
+    },
+    {
+      "file": "public/models/shoulder_upper_limb.glb",
+      "bytes": 106548,
+      "meshes": 5,
+      "passed": true
+    },
+    {
+      "file": "public/models/skeletal.glb",
+      "bytes": 1669248,
+      "meshes": 160,
+      "passed": true
+    },
+    {
+      "file": "public/models/skull.glb",
+      "bytes": 391624,
+      "meshes": 15,
+      "passed": true
+    },
+    {
+      "file": "public/models/skull_anatomy.glb",
+      "bytes": 413088,
+      "meshes": 20,
+      "passed": true
+    },
+    {
+      "file": "public/models/skull_base.glb",
+      "bytes": 5213600,
+      "meshes": 310,
+      "passed": true
+    },
+    {
+      "file": "public/models/spinal_canal.glb",
+      "bytes": 434184,
+      "meshes": 41,
+      "passed": true
+    },
+    {
+      "file": "public/models/spinal_cord.glb",
+      "bytes": 1372612,
+      "meshes": 112,
+      "passed": true
+    },
+    {
+      "file": "public/models/sternoclavicular.glb",
+      "bytes": 195656,
+      "meshes": 52,
+      "passed": true
+    },
+    {
+      "file": "public/models/stomach_duodenum.glb",
+      "bytes": 301688,
+      "meshes": 35,
+      "passed": true
+    },
+    {
+      "file": "public/models/thigh_gluteal_muscles.glb",
+      "bytes": 418196,
+      "meshes": 22,
+      "passed": true
+    },
+    {
+      "file": "public/models/thoracic_cage.glb",
+      "bytes": 484968,
+      "meshes": 37,
+      "passed": true
+    },
+    {
+      "file": "public/models/thoracic_spine.glb",
+      "bytes": 1566120,
+      "meshes": 120,
+      "passed": true
+    },
+    {
+      "file": "public/models/thoracic_wall.glb",
+      "bytes": 4622760,
+      "meshes": 372,
+      "passed": true
+    },
+    {
+      "file": "public/models/thoracolumbar_fascia.glb",
+      "bytes": 712408,
+      "meshes": 59,
+      "passed": true
+    },
+    {
+      "file": "public/models/thyroid_parathyroid.glb",
+      "bytes": 466264,
+      "meshes": 81,
+      "passed": true
+    },
+    {
+      "file": "public/models/tmj_mastication.glb",
+      "bytes": 3267636,
+      "meshes": 261,
+      "passed": true
+    },
+    {
+      "file": "public/models/trigeminal_nerve.glb",
+      "bytes": 301340,
+      "meshes": 23,
+      "passed": true
+    },
+    {
+      "file": "public/models/trunk.glb",
+      "bytes": 6250952,
+      "meshes": 535,
+      "passed": true
+    },
+    {
+      "file": "public/models/upper_limb_arteries.glb",
+      "bytes": 451996,
+      "meshes": 64,
+      "passed": true
+    },
+    {
+      "file": "public/models/upper_limb_joints.glb",
+      "bytes": 125408,
+      "meshes": 17,
+      "passed": true
+    },
+    {
+      "file": "public/models/upper_limb_veins.glb",
+      "bytes": 361380,
+      "meshes": 46,
+      "passed": true
+    },
+    {
+      "file": "public/models/urinary_full.glb",
+      "bytes": 1122844,
+      "meshes": 91,
+      "passed": true
+    },
+    {
+      "file": "public/models/urinary_system.glb",
+      "bytes": 79176,
+      "meshes": 10,
+      "passed": true
+    },
+    {
+      "file": "public/models/venous_portal.glb",
+      "bytes": 1487876,
+      "meshes": 120,
+      "passed": true
+    },
+    {
+      "file": "public/models/ventricles_meninges.glb",
+      "bytes": 368252,
+      "meshes": 17,
+      "passed": true
+    },
+    {
+      "file": "public/models/vertebral_column.glb",
+      "bytes": 338792,
+      "meshes": 26,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/cat-cranium.glb",
+      "bytes": 1941268,
+      "meshes": 4,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/cat-digestive.glb",
+      "bytes": 6033264,
+      "meshes": 47,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/cat-ecorche.glb",
+      "bytes": 1312600,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/cat-liver.glb",
+      "bytes": 941344,
+      "meshes": 4,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/cat-skeleton.glb",
+      "bytes": 1259164,
+      "meshes": 8,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/cattle-forelimb.glb",
+      "bytes": 4067524,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/cattle-pelvis.glb",
+      "bytes": 6852216,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/cattle-rumen.glb",
+      "bytes": 4971304,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/dog-abdomen.glb",
+      "bytes": 4136832,
+      "meshes": 25,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/dog-ear.glb",
+      "bytes": 255680,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/dog-forelimb-muscles.glb",
+      "bytes": 947688,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/dog-heart-blood-volume.glb",
+      "bytes": 1711068,
+      "meshes": 10,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/dog-heart.glb",
+      "bytes": 3305820,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/dog-liver.glb",
+      "bytes": 1883156,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/dog-skeleton.glb",
+      "bytes": 1118696,
+      "meshes": 6,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/dog-skull.glb",
+      "bytes": 2839984,
+      "meshes": 6,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/horse-colon.glb",
+      "bytes": 410424,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/horse-skeleton.glb",
+      "bytes": 3515808,
+      "meshes": 47,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/horse-skull.glb",
+      "bytes": 1848224,
+      "meshes": 4,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/horse-stifle.glb",
+      "bytes": 707508,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/002bd073eabf483da06dde676bde8813.glb",
+      "bytes": 2101660,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/0105f48f2eeb435c9236c7237edfaf35.glb",
+      "bytes": 1858532,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/04d1b268fc5f4e4a8c6568759029811c.glb",
+      "bytes": 2724292,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/05de3a953ffa44f6b3463f05de158af9.glb",
+      "bytes": 1912052,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/08b825656ee64e87be91df65caa5cdd5.glb",
+      "bytes": 1852956,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/0c471a4e063945ebb38428a23601fa80.glb",
+      "bytes": 2629588,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/0c5b5e662175480cabba4a7d2e6bf4b6.glb",
+      "bytes": 2247896,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/0de0163e3a7c465ea3e9bf0a13f895b9.glb",
+      "bytes": 2370424,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/0eb8337eb062448d90685cd1e90f72a2.glb",
+      "bytes": 615488,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/1135247b5ab042139e7e6e82dd49159c.glb",
+      "bytes": 1743448,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/11ec41dbbf1545f7be7b4dcad2b7792d.glb",
+      "bytes": 450652,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/151a5e4e50944859b566de6e247aaa70.glb",
+      "bytes": 1704636,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/15be7e8f9998499dada15717d9fa1ccc.glb",
+      "bytes": 1173708,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/17b382286efb41d487303a26ac85d15e.glb",
+      "bytes": 274100,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/1b7c42e1966e4ad2ba6eaf9a5ecaea94.glb",
+      "bytes": 2449352,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/1e55b375e68d4fbd96b2a5691feaddc9.glb",
+      "bytes": 1752968,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/20332f2187c74fae81a9053cb540f4c0.glb",
+      "bytes": 790136,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/2594d4d9f7064c259c608fa9a4d8369f.glb",
+      "bytes": 4114124,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/267dc87c87854716aebf7543ef552c4c.glb",
+      "bytes": 3292724,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/278c03e24b124ebcaf201d70f37aaf3b.glb",
+      "bytes": 1631848,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/2a20527c9a054db98a4fbe3ce4988cec.glb",
+      "bytes": 2034776,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/2deff5c718c34cf4878fc733411acf7e.glb",
+      "bytes": 1373052,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/2e2f29c35faa4e658c3861974175554c.glb",
+      "bytes": 1673084,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/2e7fc91681f945c4ae3366a55ffa2f09.glb",
+      "bytes": 1957096,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/2ef7fee07cd04fd49e777f6c3f8b641d.glb",
+      "bytes": 1955408,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/303c8211982c4c7d88b54030e4f38c48.glb",
+      "bytes": 1769512,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/350a8f86704642efa5fdda8b27605c26.glb",
+      "bytes": 1427412,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/386dc983ccc649afbcbf462bf81259e8.glb",
+      "bytes": 1985124,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/3883f6cee4424a87990d4ac8ad5eb9ef.glb",
+      "bytes": 1021108,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/3bff8f87a70f471588de81c0c83d4300.glb",
+      "bytes": 2150452,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/3d7f88562cb84a45af9b3c0305421601.glb",
+      "bytes": 348336,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/46bdba2e82714dd1898e0a3ce3437869.glb",
+      "bytes": 3392212,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/493da91cf4fd4e3ebce856388a351694.glb",
+      "bytes": 1764096,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/4ec84bfdbbec4663b9a730ef943e0768.glb",
+      "bytes": 2375080,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/4f95c8c4bb1d4c6386cad330787b3755.glb",
+      "bytes": 1665072,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/50c8fc21efde48fa9a42d80bd1d775a3.glb",
+      "bytes": 2050680,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/53b38a7c3aa74ab9aceea32e45e83bc2.glb",
+      "bytes": 1027996,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/561b566f79ec4ef198afd675f873ff99.glb",
+      "bytes": 3748656,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/5cac32fd4ebc444a90d5742255082497.glb",
+      "bytes": 2307344,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/63177d4ffd084db08034d251f4dc99e7.glb",
+      "bytes": 1733988,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/67a27271c2d4479089ab80393eebf560.glb",
+      "bytes": 3133776,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/6976e2929d86442292962455b41bba25.glb",
+      "bytes": 3020216,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/6c584de1060c444b8c76f1142b7d9954.glb",
+      "bytes": 895776,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/6cc39e8c71c549709bb211eaf862f50d.glb",
+      "bytes": 1990336,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/6cd2b8463ccf46d09de11cfcc9d2ca5d.glb",
+      "bytes": 1931964,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/73a150bce29d425b8aa2bfc52e7f0644.glb",
+      "bytes": 1224392,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/76059c1235804e07982d513cd6d6bb40.glb",
+      "bytes": 2412932,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/771c0ff19fd84f4384db21c450f6b6cc.glb",
+      "bytes": 1784092,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/7d9c6db401bf41c3836e2ba0778ef795.glb",
+      "bytes": 1918348,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/7e460904c82b4c63b0d4703c52efece6.glb",
+      "bytes": 1861340,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/7e7933d08131495f85c7e925e86ba815.glb",
+      "bytes": 2273644,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/7ecf3bc469ac47ce85d99d35f575cefa.glb",
+      "bytes": 2146872,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/88e24c0c908d494cbd74d367a3da7325.glb",
+      "bytes": 1916932,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/8dd15d888265432095cd38f82e9248d0.glb",
+      "bytes": 745432,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/8e9bbb00142644baa859571619eb0e0f.glb",
+      "bytes": 1576196,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/8e9ff4ef43d94862afe82c3beda254c7.glb",
+      "bytes": 1811124,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/922e9ab1f8174d61a73b82c44e512baa.glb",
+      "bytes": 1549296,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/92c5f2154819494d8dbc74ae56c385a9.glb",
+      "bytes": 717692,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/958a281670e1465c9e7349d428922796.glb",
+      "bytes": 1409132,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/961f666e6b594883910a7033439e18c8.glb",
+      "bytes": 1987920,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/9624064778e74387b540026cac2623ba.glb",
+      "bytes": 2455160,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/978e537e75834150a9a12ba1985f6876.glb",
+      "bytes": 990380,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/97bf4f995bed46e38faf275e8d7b9b28.glb",
+      "bytes": 2599476,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/9c181b44df14444d8d1f52f8d4c5e3af.glb",
+      "bytes": 1858920,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/9e30279190c7425f895f42f378be8c37.glb",
+      "bytes": 2564188,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/9ebd847cd9b54b0e8fa80fb1ef0b4cbc.glb",
+      "bytes": 673320,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/9f55908ad6ea49e095c653272710797f.glb",
+      "bytes": 3267000,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/9f8cac1622b942db91f7acac0bb486a5.glb",
+      "bytes": 860960,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/9fcfc424294e436dab7c8d7d31be6dbc.glb",
+      "bytes": 2344072,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/a0e6ce2db98f46b69d946612e3419b5f.glb",
+      "bytes": 1815072,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/a241af47499b4d01af273d7bb051a573.glb",
+      "bytes": 1236068,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/aad8a4d4490741ed9bd2d56cc15fe227.glb",
+      "bytes": 2447032,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/ab5ed393a78544fbafdf19830a4b03bd.glb",
+      "bytes": 293872,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/ac298657fe0c4cab851edc34bf2c60db.glb",
+      "bytes": 1825636,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/ac6ab29595884b4aa8f020eca62f0477.glb",
+      "bytes": 2704352,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/b0917b61ba3d466a8b451b124efd4427.glb",
+      "bytes": 1736148,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/b0a97bd34b354b2d85235a581ca12977.glb",
+      "bytes": 1585340,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/b1a64bac26e742788722a0db9653ad25.glb",
+      "bytes": 1330988,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/b1ab1c9484bb4b76ad688d9e8909d94c.glb",
+      "bytes": 1062844,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/b334d3cc5a304927aa30aaa697a5219a.glb",
+      "bytes": 1833176,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/b3da0e5c8fc14c74b88be68179795652.glb",
+      "bytes": 1854660,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/b47a21aca1fa4fb6a001edf6c91e03a0.glb",
+      "bytes": 1307768,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/b47a9e03ee254eb78f2000284ae0f6e8.glb",
+      "bytes": 1900740,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/b5add6e0d345418181ae35b07fe5f965.glb",
+      "bytes": 1536140,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/b9a0a69dc6fd449f8697956bf9e8bb17.glb",
+      "bytes": 1805268,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/bbb62b33073a4884b6c2316fc0c76323.glb",
+      "bytes": 2658528,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/bf6c7fac355f46c09087be87ad95adaa.glb",
+      "bytes": 1704676,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/c3c7bd085c624715ae35790446fd9d12.glb",
+      "bytes": 1650076,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/c55eb095d83a4a889d306708b926de2d.glb",
+      "bytes": 685220,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/ca070fb2e9b541fa9652b400f77e9dda.glb",
+      "bytes": 4165876,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/cb3792b3b0334741bf6a14642cff624c.glb",
+      "bytes": 1720908,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/d01cf465ba664dab969825c7f6a8517d.glb",
+      "bytes": 2337376,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/d500bbde88084c9c984ba0e260f8821a.glb",
+      "bytes": 1909920,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/d55e73024c25440baa455850278a8c79.glb",
+      "bytes": 1851456,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/d7666245c9fb4936ba1a50db6e6a9e0c.glb",
+      "bytes": 2535872,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/de3fc9541da84b4a958b5729d2865a29.glb",
+      "bytes": 1828656,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/e7ecdbf20c2b4bd9b36c6afc3770074a.glb",
+      "bytes": 958444,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/ea80af268a3446979b9120493969d410.glb",
+      "bytes": 4190084,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/eac53da4b3ed490f85fcdf59bc1f5cd7.glb",
+      "bytes": 1842444,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/ee1278822aa541af9b3c330d512341ab.glb",
+      "bytes": 2305664,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/ee892175d3954a71901ee1725435b955.glb",
+      "bytes": 2071516,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/ef20d3bff0fe4041b8fd06a4690338a1.glb",
+      "bytes": 972472,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/ef764251b36842e6a12e8b79977861f5.glb",
+      "bytes": 1813560,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/f1fe6c63524d40c7b663b9c242f176f5.glb",
+      "bytes": 3552676,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/f430ce79dce243c78d46686ee9c3d85b.glb",
+      "bytes": 2374012,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/f5219743dd85435788db125906c20eab.glb",
+      "bytes": 449608,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/f85fe93da0474b45903b1535be277d9b.glb",
+      "bytes": 404796,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/lmu/fc7a190b7ca744bf886adcf12c3ad79a.glb",
+      "bytes": 1991656,
+      "meshes": 1,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/pig-skeleton.glb",
+      "bytes": 4370488,
+      "meshes": 120,
+      "passed": true
+    },
+    {
+      "file": "public/models/vet/pig-skull.glb",
+      "bytes": 676504,
+      "meshes": 3,
+      "passed": true
+    },
+    {
+      "file": "public/models/visceral.glb",
+      "bytes": 804984,
+      "meshes": 100,
+      "passed": true
+    },
+    {
+      "file": "public/models/visceral_gut_bp3d.glb",
+      "bytes": 171984,
+      "meshes": 4,
+      "passed": true
+    },
+    {
+      "file": "public/models/visual_pathway.glb",
+      "bytes": 229696,
+      "meshes": 24,
+      "passed": true
+    },
+    {
+      "file": "public/models/wrist_carpal.glb",
+      "bytes": 439244,
+      "meshes": 117,
+      "passed": true
+    }
+  ]
+}

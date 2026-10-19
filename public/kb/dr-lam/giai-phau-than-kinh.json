@@ -1,0 +1,1498 @@
+{
+  "schemaVersion": 1,
+  "id": "giai-phau-than-kinh",
+  "title": "Giải phẫu thần kinh",
+  "sourceFile": "Giải phẫu người 2025 - Test số hóa Dr. Lâm giải phẫu thần kinh.pdf",
+  "sourceNote": null,
+  "sourceHash": "cb78f45e940869df57a83fc3c1ee9a476b2b814bf455ba3a2bea703eafe4a4df",
+  "pages": 52,
+  "questions": [
+    {
+      "id": "giai-phau-than-kinh-1",
+      "number": 1,
+      "stem": "Trong các mô tả sau về dây XII, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "thoát ra khỏi não ở rãnh sau trám hành."
+        },
+        {
+          "id": "B",
+          "text": "Đi ra khỏi sọ qua lỗ chẩm."
+        },
+        {
+          "id": "C",
+          "text": "Những sợi 12 có nguồn gốc từ thần kinh cổ 1 không đi qua ống thần kinh hạ thiệt."
+        },
+        {
+          "id": "D",
+          "text": "Thần kinh sọ 12 tách ra rễ dưới quai cổ."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.thoát ra khỏi não ở rãnh sau trám hành=>rãnh trước trám.\nB.Đi ra khỏi sọ qua lỗ chẩm=>qua ống TK hạ thiệt.\nD.Thần kinh sọ 12 tách ra rễ dưới quai cổ=>rễ trên quai cổ.\nRễ sọ : ống TK hạ thiệt\nRễ sống: Lỗ chẩm.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 1,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-2",
+      "number": 2,
+      "stem": "Trong các mô tả sau về mặt ngoài hành não, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Khe nằm giữa 2 tháp hành Đm đi ở chỗ bắt chéo tháp."
+        },
+        {
+          "id": "B",
+          "text": "Các rễ của thần kinh hạ thiệt thoát ra ở rãnh sau trám hành."
+        },
+        {
+          "id": "C",
+          "text": "Củ chêm ở 2 bên nằm kề hai bên rãnh giữa sau."
+        },
+        {
+          "id": "D",
+          "text": "Nhân trám trên nằm dưới bề mặt của trám hành."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "B.Các rễ của thần kinh hạ thiệt thoát ra ở rãnh sau trám hành=>rãnh\ntrước trám.\nD.Nhân trám trên nằm dưới bề mặt của trám hành=>Thon,dưới bề\nmặt trám hành có phức hợp nhân trám dưới: trám chính, trám phụ\ngiữa, trám phụ sau, nhân trám trên ở trần cầu não,Nhớ Thon- Trong;\nthon trong.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 1,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-3",
+      "number": 3,
+      "stem": "Các mô tả sau về hành não đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Hành não có trạm chuyển tiếp giữa các chặng 1 và 2 của đường cảm giác bản thể ở cổ, thân chi."
+        },
+        {
+          "id": "B",
+          "text": "Ở hành não có mặt tất cả các dải cảm giác từ tủy sống đi lên não."
+        },
+        {
+          "id": "C",
+          "text": "Hành não là nơi có trung tâm điều hòa các chức năng thiết yếu của cơ thể."
+        },
+        {
+          "id": "D",
+          "text": "Nhân hoài nghi nằm bên dưới diện tiền đình."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Hành não có trạm chuyển tiếp giữa các chặng 1 và 2 của đường\ncảm giác bản thể ở cổ, thân chi=>nhân thon, nhân chêm.\nC.Hành não là nơi có trung tâm điều hòa các chức năng thiết yếu\ncủa cơ thể=>trung tâm hô hấp và tuần hoàn.\nD.Nhân hoài nghi nằm bên dưới diện tiền đình=>Dưới diện tiền đình\ncó nhân tiền đình.\nD sai vì: dưới diện tiền đình là nhân tiền đình, không phải nhân hoài\nnghi.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/4fdb7bb02400a0453a45.webp",
+        "/kb/dr-lam/images/6c2e5512068d3d01f8a3.webp",
+        "/kb/dr-lam/images/eaa5bca3062647f82a70.webp"
+      ],
+      "sourcePage": 2,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-4",
+      "number": 4,
+      "stem": "Các mô tả sau về cầu não đúng, trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Vùng nền cầu não chứa các nhân cầu."
+        },
+        {
+          "id": "B",
+          "text": "Dải tháp đi qua nền cầu não."
+        },
+        {
+          "id": "C",
+          "text": "Cầu não là nơi chứa trạm trung gian của đường tiếp nối đại não - tiểu não."
+        },
+        {
+          "id": "D",
+          "text": "nhân thần kinh giạng nằm ở vùng nền cầu não."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Vùng nền cầu não chứa các nhân cầu=>nhân cầu cho các sợi bắt\nchéo sang tiểu não bên đối diện.\nB.Dải tháp đi qua nền cầu não=>chất trắng có dải tháp và các sợi\ncầu ngang.\nC.Cầu não là nơi chứa trạm trung gian của đường tiếp nối đại não -\ntiểu não=>nhân cầu là trạm chuyện tiếp giữa vỏ đại não và tiểu não.\nD.nhân thần kinh giạng nằm ở vùng nền cầu não=>Trần cầu chứa\ncác nhân dây sọ từ V – VIII.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 3,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-5",
+      "number": 5,
+      "stem": "Trong mô tả sau đây về cầu não, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cầu não là nơi có các nhân tận cùng cho các sợi của thần kinh ốc tai."
+        },
+        {
+          "id": "B",
+          "text": "Toàn bộ các sợi cảm giác thần kinh sọ V tận cùng ở các nhân cầu não."
+        },
+        {
+          "id": "C",
+          "text": "Nhân vận động thần kinh mặt nằm ở vùng nền cầu não."
+        },
+        {
+          "id": "D",
+          "text": "Liềm giữa nằm ở vùng nền cầu não."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.Cầu não là nơi có các nhân tận cùng cho các sợi của thần kinh ốc\ntai=>nhân ốc lưng, bụng ở cầu.\nB.Toàn bộ các sợi cảm giác thần kinh sọ V tận cùng ở các nhân cầu\nnão=>có nhân tuỷ TK V ở hành não.\nC.Nhân vận động thần kinh mặt nằm ở vùng nền cầu não=>ở trần\ncầu não.\nD.Liềm giữa nằm ở vùng nền cầu não=>ở trần cầu não.\nnền cầu não: Nhân cầu => Sợi cầu ngang => Tiểu não.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/5e24e553da9a4dac154c.webp",
+        "/kb/dr-lam/images/88e9e869df21df0aa844.webp"
+      ],
+      "sourcePage": 4,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-6",
+      "number": 6,
+      "stem": "Các mô tả sau đây về trung não đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Gò trên là trung tâm của các phản xạ liên quan đến thị giác."
+        },
+        {
+          "id": "B",
+          "text": "Gò dưới là một phần của đường dẫn truyền thính giác."
+        },
+        {
+          "id": "C",
+          "text": "Các dải đi xuống và các dải đi lên ở trung não được ngăn cách với nhau bởi nhân đỏ."
+        },
+        {
+          "id": "D",
+          "text": "Liềm giữa nằm sau chất đen ngoài nhân đỏ."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Các dải đi xuống và các dải đi lên ở trung não được ngăn cách\nvới nhau bởi nhân đỏ=>Các dải sợi vận động và cảm giác ngăn\ncách nhau bởi chất đen.\ncác trung tâm\nthị giác- thính giác\nở Trung não.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 5,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-7",
+      "number": 7,
+      "stem": "Các mô tả về thùy thái dương đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Không có rãnh phân cách thùy thái dương với thùy chẩm."
+        },
+        {
+          "id": "B",
+          "text": "Nó tiếp giáp với cả 4 thùy khác của não."
+        },
+        {
+          "id": "C",
+          "text": "Nó nằm ở cả 3 mặt của bán cầu đại não."
+        },
+        {
+          "id": "D",
+          "text": "Nó chứa một trong các sừng của não thất bên."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Không có rãnh phân cách thùy thái dương với thùy chẩm=>hồi\nthái dương chẩm trong .\nB.Nó tiếp giáp với cả 4 thùy khác của não=>thùy trán, đỉnh, chẩm,\nviền.\nC.Nó nằm ở cả 3 mặt của bán cầu đại não=>mặt ngoài, dưới,trừ\nmặt trong.\nD.Nó chứa một trong các sừng của não thất bên=>chứa sừng thái\ndương.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/4541d7a59bbba0833756.webp",
+        "/kb/dr-lam/images/04f78bda37f91abdfda2.webp"
+      ],
+      "sourcePage": 6,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-8",
+      "number": 8,
+      "stem": "Trong các mô tả sau đây về thùy trán, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó ngăn cách với hồi đai bằng rãnh bên phụ."
+        },
+        {
+          "id": "B",
+          "text": "Vùng cảm giác thân thể nằm ở thùy trán."
+        },
+        {
+          "id": "C",
+          "text": "Nó nằm ngay trước hồi sau trung tâm của thùy đỉnh."
+        },
+        {
+          "id": "D",
+          "text": "Mặt dưới của nó nằm trên hố sọ giữa."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Nó ngăn cách với hồi đai bằng rãnh bên phụ=>bằng rãnh đai;\nrãnh bên phụ ngăn thuỳ viền vs thuỳ thái dương.\nB.Vùng cảm giác thân thể nằm ở thùy trán=>Cảm giác ở thuỳ đỉnh,\nhồi sau trung tâm.\nthùy trán- hồi trước trung tâm: vận động cơ thể.\nD.Mặt dưới của nó nằm trên hố sọ giữa=>nằm ở hố sọ trước.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/dc8bf2a8aa751cf0036e.webp",
+        "/kb/dr-lam/images/5fc349edb0275ee8ea0f.webp",
+        "/kb/dr-lam/images/bed9c17ca3989cc15f7b.webp"
+      ],
+      "sourcePage": 7,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-9",
+      "number": 9,
+      "stem": "Các mô tả sau về thùy đỉnh đều đúng, trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó không nằm ở mặt dưới bán cầu."
+        },
+        {
+          "id": "B",
+          "text": "Nó nằm ở mặt trên ngoài và mặt trong của bán cầu đại não."
+        },
+        {
+          "id": "C",
+          "text": "Nó tiếp giáp với các thùy trán chẩm thái dương và viền."
+        },
+        {
+          "id": "D",
+          "text": "Ở mặt trên ngoài, nó được bao bọc bởi rãnh sau trung tâm, rãnh đỉnh chẩm và rãnh bên."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.Ở mặt trên ngoài, nó được bao bọc bởi rãnh sau trung tâm, rãnh\nđỉnh chẩm và rãnh bên=>rãnh trung tâm, rãnh đỉnh chẩm và rãnh\nbên,tiếp xúc với Hồi đai.\nRãnh sau trung tâm\nchia cắt Thùy đỉnh\nthành Hồi sau TT và Các\ntiểu thùy đỉnh.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/265fc4fac18b2001dd45.webp"
+      ],
+      "sourcePage": 11,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-10",
+      "number": 10,
+      "stem": "Mô tả về thùy viền, đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó nằm ở cả 3 mặt bán cầu."
+        },
+        {
+          "id": "B",
+          "text": "Nó gồm 3 phần: Hồi hải mã, hồi lưỡi và vùng dưới trai."
+        },
+        {
+          "id": "C",
+          "text": "Bao quanh nó là các rãnh: Đai, bên phụ và dưới đỉnh."
+        },
+        {
+          "id": "D",
+          "text": "Nó dễ bị tổn thương nếu có gãy lún xương vòm sọ."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Nó nằm ở cả 3 mặt bán cầu=>chỉ ở mặt dưới và mặt trong.\nB.Nó gồm 3 phần: Hồi hải mã, hồi lưỡi và vùng dưới trai=>hồi hải mã,\nhồi đai, vùng dưới trai còn hồi lưỡi thuộc thuỳ chẩm.\nD.Nó dễ bị tổn thương nếu có gãy lún xương vòm sọ=>nó ở bên\ntrong, đc vây quanh bởi các thuỳ khác.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/3108da882eb84539aff4.webp",
+        "/kb/dr-lam/images/473a816a1da1d7e09122.webp"
+      ],
+      "sourcePage": 11,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-11",
+      "number": 11,
+      "stem": "Một bệnh nhân bị mất hoàn toàn cảm giác và vận động ở nửa người bên phải do tắc mạch não, động mạch bị tổn thương là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "ĐM não trước trái."
+        },
+        {
+          "id": "B",
+          "text": "Nhánh vỏ não của ĐM não giữa phải."
+        },
+        {
+          "id": "C",
+          "text": "Nhánh nuôi bao trong của ĐM não giữa trái."
+        },
+        {
+          "id": "D",
+          "text": "ĐM não sau trái."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Nhánh nuôi bao trong của ĐM não giữa trái=>mất cảm giác + vận\nđộng => tổn thương Bao trong.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/f735c45184a434cafda7.webp"
+      ],
+      "sourcePage": 12,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-12",
+      "number": 12,
+      "stem": "Tìm các đáp án đúng về hành não:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nơi chuyển tiếp của đường cảm giác sâu có ý thức (bản thể)."
+        },
+        {
+          "id": "B",
+          "text": "Nó là nơi bắt chéo của phần lớn các sợi vỏ tủy."
+        },
+        {
+          "id": "C",
+          "text": "Nó chỉ chứa nhân của các thần kinh sọ 9 đến 12."
+        },
+        {
+          "id": "D",
+          "text": "Nó chứa các trung tâm nghe và nhìn."
+        }
+      ],
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "A.Nơi chuyển tiếp của đường cảm giác sâu có ý thức (bản\nthể)=>nhân thon, nhân chêm.\nB.Nó là nơi bắt chéo của phần lớn các sợi vỏ tủy=>tại bắt chéo\ntháp.\nC.Nó chỉ chứa nhân của các thần kinh sọ 9 đến 12=>có nhân tuỷ TK\nV, nhân tiền đình.\nD.Nó chứa các trung tâm nghe và nhìn=>thể gối trong và ngoài của\ntrung não.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 13,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-13",
+      "number": 13,
+      "stem": "Tìm các đáp án đúng cầu não:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó là nơi chứa nhân cảm giác chính thần kinh sọ 5."
+        },
+        {
+          "id": "B",
+          "text": "Nó là nơi chứa các nhân mà cho sợi trục đi tới tiểu não."
+        },
+        {
+          "id": "C",
+          "text": "Nhân vận động thần kinh không nằm ở cầu não."
+        },
+        {
+          "id": "D",
+          "text": "Các nhân thần kinh tiền đình nằm ở cả cầu não và hành não."
+        }
+      ],
+      "answers": [
+        "A",
+        "B",
+        "D"
+      ],
+      "explanation": "B.Nó là nơi chứa các nhân mà cho sợi trục đi tới tiểu não=>chứa\ncác nhân cầu ở nền cầu.\nC.Nhân vận động thần kinh không nằm ở cầu não=>nhân vđ và cg\nTK mặt đều nằm ở cầu não,dây 7 8 đi qua ở Rãnh hành- cầu.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/9e4754da47eab53d0b0b.webp"
+      ],
+      "sourcePage": 14,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-14",
+      "number": 14,
+      "stem": "Tìm các đáp án đúng trung não:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Trung não không chứa nhân của tk V."
+        },
+        {
+          "id": "B",
+          "text": "Chất đen ngăn cách các dải sợi vận động và các dải sợi cảm giác ở trung não."
+        },
+        {
+          "id": "C",
+          "text": "Nhân thần kinh sọ 3 nằm trên mặt cắt ngang đi qua gò trên."
+        },
+        {
+          "id": "D",
+          "text": "Nhân đỏ nằm trước chất đen."
+        }
+      ],
+      "answers": [
+        "B",
+        "C"
+      ],
+      "explanation": "A.Trung não không chứa nhân của tk V=>chứa nhân trung não của\nTK V,Dây V có nhân ở Cả hành não, Cầu não, trung não.\nD.Nhân đỏ nằm trước chất đen=>sau.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/c1d87ee67cb44791a3b2.webp",
+        "/kb/dr-lam/images/f94a6c574f3c81cc495b.webp"
+      ],
+      "sourcePage": 15,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-15",
+      "number": 15,
+      "stem": "Tìm các đáp án đúng nhất chất xám tủy sống:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Sừng sau chất xám là nơi tận cùng của tất cả các sợi trong rễ sau TK sống."
+        },
+        {
+          "id": "B",
+          "text": "Các sợi trục trong thừng trắng sau của tủy sống k xuất phát từ sừng sau tủy sống."
+        },
+        {
+          "id": "C",
+          "text": "Sừng trước của chất xám là nơi xuất phát của 1 phần nhỏ các sợi trong rễ trước thần kinh sống."
+        },
+        {
+          "id": "D",
+          "text": "Sợi trục từ nhân trung gian bên của sừng bên đi tới tất cả các hạch giao cảm và đối giao cảm ở ngoại vi."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Sừng sau chất xám là nơi tận cùng của tất cả các sợi trong rễ sau\nTK sống à đường dẫn truyền cảm giác sâu bản thể đâu có đi qua\nsừng sau đâu,sai ở Tất cả: có Sợi cảm giác bản thể tận ở Nhân thon,\nchêm.\nB.Các sợi trục trong thừng trắng sau của tủy sống k xuất phát từ\nsừng sau tủy sống=>thừng sau có bó thon và bó chêm, chứa các\nsợi dẫn truyền cảm giác xúc giác tinh tế và cg bản thể có ý thức (từ\nsừng sau).\nC.Sừng trước của chất xám là nơi xuất phát của 1 phần nhỏ các sợi\ntrong rễ trước thần kinh sống à hầu hết,phần còn lại là từ sừng bên.\nD.Sợi trục từ nhân trung gian bên của sừng bên đi tới tất cả các\nhạch giao cảm và đối giao cảm ở ngoại vi=>chỉ là trung tâm giao\ncảm, ko có đối giao cảm.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/e18c0b7cbd3c7d929c27.webp",
+        "/kb/dr-lam/images/d98ad7a9552129ccad91.webp",
+        "/kb/dr-lam/images/d46232d698013272deca.webp",
+        "/kb/dr-lam/images/c842163539771191345c.webp"
+      ],
+      "sourcePage": 16,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-16",
+      "number": 16,
+      "stem": "Tìm các đáp án đúng chất trắng tủy sống:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thừng trắng trước ở hai nửa tủy sống nối với nhau qua mép trắng trước."
+        },
+        {
+          "id": "B",
+          "text": "Các dải cảm giác có kích thước lớn dần từ dưới lên."
+        },
+        {
+          "id": "C",
+          "text": "Các dải vận động đi xuống tủy sống đều có nguồn gốc từ đại não."
+        },
+        {
+          "id": "D",
+          "text": "Tất cả các sợi cảm giác từ sừng sau tủy sống đi lên não đều bắt chéo trước khi đi lên."
+        }
+      ],
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "A.Thừng trắng trước ở hai nửa tủy sống nối với nhau qua mép trắng\ntrước.\nB.Các dải cảm giác có kích thước lớn dần từ dưới lên=>nhận thêm\ncác sợi nhiều lên.\nC.Các dải vận động đi xuống tủy sống đều có nguồn gốc từ đại\nnão=>còn có dải đỏ-tuỷ, lưới-tuỷ, tiền đình tuỷ,dải vỏ-tủy: chi phối\nvận động có ý thức; Cùng với các dải đỏ- tủy; mái-tủy; lưới-tủy;\ntiền đình tủy phối hợp động tác ( trước đó: các nhân có sự liên hệ\nvới Tiểu não ).\nD.Tất cả các sợi cảm giác từ sừng sau tủy sống đi lên não đều bắt\nchéo trước khi đi lên=>trừ các sợi tuỷ tiểu não sau.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/994e9f5d95b733475e48.webp",
+        "/kb/dr-lam/images/590622c2d5c257f1bcba.webp"
+      ],
+      "sourcePage": 18,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-17",
+      "number": 17,
+      "stem": "Tìm các đáp án đúng về tủy sống:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Chi phối tất cả các cơ vân của cơ thể."
+        },
+        {
+          "id": "B",
+          "text": "Các nhân đối giao cảm của tủy sống chi phối cho tất cả các tạng ở ngực và bụng."
+        },
+        {
+          "id": "C",
+          "text": "Ống trung tâm của tủy sống còn đi 1 đoạn trong hành não dưới trước khi thông với não thất."
+        },
+        {
+          "id": "D",
+          "text": "Sừng bên của chất xám tủy sống có mặt trên tất cả chiều dài tủy sống."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Chi phối tất cả các cơ vân của cơ thể=>còn nhiều cơ vận động\nbởi các sợi TK sọ.\nphần đầu- cổ : Các TK sọ chi phối.\nB.Các nhân đối giao cảm của tủy sống chi phối cho tất cả các tạng\nở ngực và bụng=>giao cảm mới chi phối tất cả các tạng,chỉ có đốt\ntuỷ cùng 2,3,4 mới có các sợi đối giao cảm chi phối các tạng chậu\nhông.\ncác tạng ở ngực- bụng: Đối giao cảm: Dây X ( lang thang) chi phối.\nC.Ống trung tâm của tủy sống còn đi 1 đoạn trong hành não dưới\ntrước khi thông với não thất.\nD.Sừng bên của chất xám tủy sống có mặt trên tất cả chiều dài tủy\nsống=>sừng bên chỉ có mặt từ N1-TL3.\nSừng bên từ Cổ 8 đến TL 3.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/d2c957173af0dc1bf9d8.webp"
+      ],
+      "sourcePage": 20,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-18",
+      "number": 18,
+      "stem": "BN lớn tuổi bị nghiền nát đoạn tủy cùng do gãy xương cột sống. xương. CS có thể bị gãy 3 đoạn:",
+      "options": [
+        {
+          "id": "A",
+          "text": "đoạn cột sống thắt lưng, gãy ngang ĐS TL I."
+        },
+        {
+          "id": "B",
+          "text": "gãy ngang các đốt sống TL II, III, và IV."
+        },
+        {
+          "id": "C",
+          "text": "đoạn CS cùng."
+        },
+        {
+          "id": "D",
+          "text": "chỗ nối đoạn II và đoạn."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Đoạn tuỷ cùng ở ngang đs TL I, gãy ở thấp hơn thì k tổn thương tuỷ\nsống đoạn tuỷ cùng.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/80eaad7a79e42ac017c9.webp"
+      ],
+      "sourcePage": 21,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-19",
+      "number": 19,
+      "stem": "Bn bị một khối u nội tủy ảnh hưởng đến vùng quanh ống trung tâm, Cảm giác nào sau đây ở thân và các chi không hoặc ít bị ảnh hưởng:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Xúc giác."
+        },
+        {
+          "id": "B",
+          "text": "Đau."
+        },
+        {
+          "id": "C",
+          "text": "Nhiệt."
+        },
+        {
+          "id": "D",
+          "text": "Bản thể."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.Bản thể=>hầu hết các sợi từ sừng sau đề bắt chéo trừ tuỷ tiểu\nnão-sau (các sợi bản thể);Sợi bản thể ( bó thon, bó chêm) không\nbắt chéo qua Ống trung tâm.\ntổn thương Ống trung tâm\n--> Không ảnh hưởng đến Bản thể\ndo không có sợi bắt chéo qua ống trung tâm.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/514ef1e31563564618b9.webp"
+      ],
+      "sourcePage": 22,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-20",
+      "number": 20,
+      "stem": "Mô tả đúng trong các mô tả sau về tủy sống là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đầu dưới của tủy sống ngang mức bờ trên L3."
+        },
+        {
+          "id": "B",
+          "text": "Các rễ TK sống ở các đoạn trong đốt tủy có chiều dài như nhau."
+        },
+        {
+          "id": "C",
+          "text": "Phình cổ của tủy sống nằm ở đoạn tủy sông mà nó tách ra các TK sống cố từ C1 đến C4."
+        },
+        {
+          "id": "D",
+          "text": "Chọc vào ống sống giữa mỏm gai các đốt sống là vì để tránh chọc vào các rễ TK sống."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Đầu dưới của tủy sống ngang mức bờ trên L3=>ngang ĐS TL 2.\nB.Các rễ TK sống ở các đoạn trong đốt tủy có chiều dài như\nnhau=>càng xuống thấp càng dài.\nC.Phình cổ của tủy sống nằm ở đoạn tủy sông mà nó tách ra các TK\nsống cố từ C1 đến C4=>phình cổ: C5-N1 (ĐR cánh tay).\nD.Chọc vào ống sống giữa mỏm gai các đốt sống là vì để tránh\nchọc vào các rễ TK sống=>do nón tuỷ ở ĐS TL2.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/f2a545c7b8efaeb6b530.webp"
+      ],
+      "sourcePage": 24,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-21",
+      "number": 21,
+      "stem": "Các mô tả sau đây về tủy sống là đúng, trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đầu dưới tủy sống thuôn lại đột ngột thành nón tủy."
+        },
+        {
+          "id": "B",
+          "text": "Có nhiều chất xám hơn ở các phình cổ và phình TL cùng của tủy sống."
+        },
+        {
+          "id": "C",
+          "text": "Tất cả các tk sống đều đi ra khỏi ống sống ở dưới đốt sống xương cùng số."
+        },
+        {
+          "id": "D",
+          "text": "Khe giữa trước của tủy sống …nằm trước mép trắng trước."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Tất cả các tk sống đều đi ra khỏi ống sống ở dưới đốt sống xương\ncùng số=>các TK sống cổ đi ở trên ĐS cùng số,có 8 TK ĐS cổ\nnhưng chỉ có 7 ĐS cổ.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 24,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-22",
+      "number": 22,
+      "stem": "Trong các câu sau đây về chất xám tủy sống, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Sừng bên có mặt ở đoạn tủy cổ và đoạn tủy ngực trên."
+        },
+        {
+          "id": "B",
+          "text": "Tất cả các sợi cảm giác trong rễ sau TK sống đều tận cùng ở sừng xám sau."
+        },
+        {
+          "id": "C",
+          "text": "Sừng trước chứa các thân noron vận động mà sợi trục của chúng đi tới cơ bám xương."
+        },
+        {
+          "id": "D",
+          "text": "Các nơ ron vđ đối giao cảm trước hạch nằm ở nhân trung gian bên."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Sừng bên có mặt ở đoạn tủy cổ và đoạn tủy ngực trên--> sừng\nbên có mặt ở tủy cổ 8à thắt lưng 3à giao cảm trước hạch Cùng 2 à\ncùng 4à đối giao cảm cùng.\nB.Tất cả các sợi cảm giác trong rễ sau TK sống đều tận cùng ở sừng\nxám sau à 1 số sợi lên thảng chân thon vs nhân chêm qua bó thon và\nbó chêm\nC.Sừng trước chứa các thân noron vận động mà sợi trục của chúng\nđi tới cơ bám xương.\nD.Các nơ ron vđ đối giao cảm trước hạch nằm ở nhân trung gian\nbên=>nhân trung gian bên chứa các nơron giao cảm trước\nhạch,giao cảm không phải ĐGC.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/9bd90e0ba24561b04750.webp",
+        "/kb/dr-lam/images/7078072ad418a2a696f9.webp"
+      ],
+      "sourcePage": 25,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-23",
+      "number": 23,
+      "stem": "Mô tả sau đây về chất xám tủy sống đúng, trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Các dải vđ từ não đi xuống tận cùng ở sừng trước."
+        },
+        {
+          "id": "B",
+          "text": "Sừng sau là nơi xuất phát của các dải cảm giác đi lên."
+        },
+        {
+          "id": "C",
+          "text": "Chất xám của tủy sống được bao bọc bằng lớp chất trắng có độ dày như nhau từ trên xuống."
+        },
+        {
+          "id": "D",
+          "text": "ở đoạn tủy cổ chất xám chứa nhân TK hoành."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Chất xám của tủy sống được bao bọc bằng lớp chất trắng có độ\ndày như nhau từ trên xuống=>càng lên cao chất trắng càng dày do\ncàng có nhiều sợi TK C3,4,5.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 26,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-24",
+      "number": 24,
+      "stem": "Các mô tả sau đây về TK vận nhãn đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó chửa cả sợi vđ cơ vân và sợi tự chủ( đối GC)."
+        },
+        {
+          "id": "B",
+          "text": "Nó đi qua khe ổ mắt trên vào ổ mắt."
+        },
+        {
+          "id": "C",
+          "text": "Nó chi phối cơ chéo trên."
+        },
+        {
+          "id": "D",
+          "text": "Nó chi phối cơ chéo dưới và cơ thẳng dưới."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Nó chi phối cơ chéo trên=>cơ chéo trên do TK ròng rọc chi phối.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 27,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-25",
+      "number": 25,
+      "stem": "Các mô tả sau đây về TK cho các cơ ngoài nhãn cầu đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "TK ròng rọc có nguyên ủy từ một nhân ở trung não."
+        },
+        {
+          "id": "B",
+          "text": "Nhân TK giạng nằm ở cầu não gần NT 4."
+        },
+        {
+          "id": "C",
+          "text": "TK giạng đi qua xoang TM hang."
+        },
+        {
+          "id": "D",
+          "text": "TK giạng rời khỏi sọ qua khe ổ mắt dưới."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.TK ròng rọc có nguyên ủy từ một nhân ở trung não=>nhân ròng\nrọc ở trung não.\nB.Nhân TK giạng nằm ở cầu não gần NT 4.=>Trần cầu não.\nD.TK giạng rời khỏi sọ qua khe ổ mắt dưới=>TK giạng qua khe ổ mắt\ntrên, khe ổ mắt dưới chỉ có TM mắt dưới.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 27,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-26",
+      "number": 26,
+      "stem": "Trong các mô tả sau đây về TK 3.4.6. Mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Các sợi tự chủ của TK 3 làm giãn đồng tử."
+        },
+        {
+          "id": "B",
+          "text": "TK sọ 4 đi ra khỏi não ở vùng chất thủng sau."
+        },
+        {
+          "id": "C",
+          "text": "TK 6 chi phối cơ thẳng ngoài."
+        },
+        {
+          "id": "D",
+          "text": "TK 3 khó bị chèn ép bởi một phình mạch não."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Các sợi tự chủ của TK 3 làm giãn đồng tử=>làm co đồng tử (pxas).\nB.TK sọ 4 đi ra khỏi não ở vùng chất thủng sau=>IV đi ra ở mặt sau\ntrung não,III.\nchất thủng sau: mặt trước Trung não.\nC.TK 6 chi phối cơ thẳng ngoài=>TK giạng (vận nhãn ngoài).\nD.TK 3 khó bị chèn ép bởi một phình mạch não=>Đi ở thành ngoài\nxoang hang, liên quan vs ĐM cảnh trong,TK III đi gần ĐM cảnh trong\nlắm.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/b7b3ad91d26c9a0a74a6.webp"
+      ],
+      "sourcePage": 28,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-27",
+      "number": 27,
+      "stem": "Trong các mô tả sau về TK sinh ba, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó gồm 2 rễ thoát ra ở mặt trước bên của cầu não, rễ cảm giác ở ngoài rễ cổ thành cảm giác."
+        },
+        {
+          "id": "B",
+          "text": "Các sợi cảm giác từ noron hạch sinh ba vẫn tận cùng ở nhân trung não."
+        },
+        {
+          "id": "C",
+          "text": "Tk hàm dưới là một TK hỗn hợp"
+        },
+        {
+          "id": "D",
+          "text": "Nhánh tủy TK sinh ba chỉ tiếp nhận sợi từ noron hạch sinh ba"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "D.Nhánh tủy TK sinh ba chỉ tiếp nhận sợi từ noron hạch sinh ba à\nchưa chắc chắn",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/3251aa3056aa84334ecb.webp"
+      ],
+      "sourcePage": 29,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-28",
+      "number": 28,
+      "stem": "Trong các mô tả sau đây về TK V1, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó có 2 nhánh tận và 2 nhánh bên."
+        },
+        {
+          "id": "B",
+          "text": "Nhánh nối với hạch mi của nhánh mũi mi cung cấp tất cả các sợi cảm giác cho nhãn cầu."
+        },
+        {
+          "id": "C",
+          "text": "Nhánh sàng trước TK mũi mi cảm giác cho phần sau thành ngoài mũi và vách mũi."
+        },
+        {
+          "id": "D",
+          "text": "Nhánh trán TK mắt chứa các sợi cảm giác từ da trán và mi trên."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Nó có 2 nhánh tận và 2 nhánh bên à 3 nhánh tận và 1 nhánh bên,chỉ\ncó TK mũi mi qua vòng gân.\nB.Nhánh nối với hạch mi của nhánh mũi mi cung cấp tất cả các sợi\ncảm giác cho nhãn cầu à nhánh nối với hạch mi và thần kinh mi dài à\nđi vào nhãn cầu/\nNhánh tới hạch TK sinh ba của TK hàm trên\nNhánh mũi mi của TK mắt tới Hạch mi.\nC.Nhánh sàng trước TK mũi mi cảm giác cho phần sau thành ngoài\nmũi và vách mũià dưới sàng trước,phần trướcà niêm mạc MŨI\nTRONG và SỐNG MŨI.\nD.Nhánh trán TK mắt chứa các sợi cảm giác từ da trán và mi trênà TK\nTRÊN RÒNG RỌC + TK TRÊN Ổ MẮT à DA TRÁN- ĐỈNH + MI TRÊN.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/1bc6f8ca99bdfc56e1e5.webp",
+        "/kb/dr-lam/images/609883cd249832de306c.webp"
+      ],
+      "sourcePage": 30,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-29",
+      "number": 29,
+      "stem": "Các mô tả sau về nhánh hàm trên thần kinh sinh ba đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó tách ra nhánh huyệt răng trên sau trước khi trở thành thần kinh dưới ổ mắt."
+        },
+        {
+          "id": "B",
+          "text": "Các nhânh chân bướm khẩu cái của nó là đường cho các sợi sau hạch từ bạch chân bướm khẩu cải đi đến thần kinh hàm trên."
+        },
+        {
+          "id": "C",
+          "text": "Nó đi qua lỗ tròn để đi vào hồ chân bướm khẩu cái."
+        },
+        {
+          "id": "D",
+          "text": "Thần kinh dưới ổ mắt chỉ chứa các sợi cảm giác từ da mặt."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.TK dưới ổ mắt chỉ chứa các sợi cảm giác từ da mặt: MÍ DƯỚI, MŨI\nNGOÀI, MŨI TRONG, MÔI TRÊN,còn các nhánh huyệt răng trên giữa\nvà trước.\nTK hàm trên tách ra nhánh TK huyết răng trên- sau rồi Đi trong Ống\ndưới ổ mắt => TK dưới ổ mắt ( nhánh huyệt răng trên- giữa và trên\ntrước).\nNhánh huyệt răng trên sau tách trực tiếp từ thân tk hàm trên, còn\nnhánh huyệt răng trên trước và trên giữa tách ra từ nhánh tk dưới ổ\nmắt",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/76ccb0dfa36c62a4a6ed.webp"
+      ],
+      "sourcePage": 31,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-30",
+      "number": 30,
+      "stem": "Trong các mô tả sau đây về TK hàm trên mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó đi qua khe ổ mắt dưới cùng ĐM hàm trên."
+        },
+        {
+          "id": "B",
+          "text": "Nó cảm giác cho toàn bộ ổ mũi."
+        },
+        {
+          "id": "C",
+          "text": "Nó cảm giác cho sống mũi và mí trên."
+        },
+        {
+          "id": "D",
+          "text": "Nó không liên quan với hạch chân bướm khẩu cái."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "B.Nó cảm giác cho toàn bộ ổ mũi=>chỉ cảm giác cho phần sau ổ\nmũi và xoang cạnh mũi.\nC.Nó cảm giác cho sông mũi và mí trên=>cho mi dưới, môi trên và\ncánh mũi, gò má, trước thái dương,TK V1.\nD.Nó không liên quan với hạch chân bướm khẩu cái=>có TK chân\nbướm khẩu cái đến hạch chân bướm.\nTK mắt => Hạch mi\nTK hàm trên => Hạch chân bướm khẩu cái.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/fbfa29502fda66bb28ca.webp"
+      ],
+      "sourcePage": 32,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-31",
+      "number": 31,
+      "stem": "Trong các mô tả sau đây về TK hàm dưới mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó chứa các sợi VĐ. CG và tự chủ."
+        },
+        {
+          "id": "B",
+          "text": "Nó đi qua lỗ tròn vào hố TD."
+        },
+        {
+          "id": "C",
+          "text": "Thân TK HD nằm trong đầu trên cơ chân bướm ngoài."
+        },
+        {
+          "id": "D",
+          "text": "Nó chi phối cho 4 cơ."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Nó chứa các sợi VĐ. CG và tự chủ  =>VẬN ĐỘNG + CẢM\nGIÁC,không có sợi tự chủ\nB.Nó đi qua lỗ tròn vào hố TD => ĐI QUA HỐ BẦU DỤC,qua lỗ bầu\ndục vào hố DƯỚI thái dương.\nC.Thân TK HD nằm trong đầu trên cơ chân bướm ngoàià NẰM\nNGOÀI CƠ CHÂN BƯỚM TRONG VÀ NẰM TRONG HƠN VỚI\nNGÀNH XƯƠNG HÀM DƯỚI\nD.Nó chi phối cho 4 cơ => CƠ CHÂN BƯỚM TRONG, CƠ CHÂN\nBƯỚM NGOÀI, CƠ CẮN, CƠ THÁI DƯƠNG, CẰM MÓNG, HÀM\nMÓNG.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/e0c5234b9f167ab95be3.webp"
+      ],
+      "sourcePage": 33,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-32",
+      "number": 32,
+      "stem": "Các mô tả sau về TK hàm dưới đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó thường có 2 nhánh tới cơ TD."
+        },
+        {
+          "id": "B",
+          "text": "Nhánh thừng nhĩ TK mặt hòa nhập vào nhánh lưỡi của TK hàm dưới."
+        },
+        {
+          "id": "C",
+          "text": "Nhánh TK má chi phối cho da và niêm mạc má."
+        },
+        {
+          "id": "D",
+          "text": "Nó ko cảm giác cho loa tai."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Nó thường có 2 nhánh tới cơ TD=>TK thái dương sâu trước và sau.\nD.Nó ko cảm giác cho loa tai=>nhánh tai-thái dương: cg cho tai\nngoài và thái dương.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/7f772305d827cffe1e87.webp",
+        "/kb/dr-lam/images/4e10f1f761cc5e2d020b.webp",
+        "/kb/dr-lam/images/7fa903de5c72d1f5aacb.webp",
+        "/kb/dr-lam/images/cb2b14dcfaaa3cf8e8c2.webp"
+      ],
+      "sourcePage": 34,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-33",
+      "number": 33,
+      "stem": "Các mô tả sau đây về các nhánh của TK hàm dưới đều đúng, trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "TK huyệt răng dưới chứa các sợi chi phối cho cơ hàm móng."
+        },
+        {
+          "id": "B",
+          "text": "TK cằm là nhánh tận của TK huyệt răng dưới."
+        },
+        {
+          "id": "C",
+          "text": "Tk tai TD đi cùng ĐM thái dương nông vào da vùng thái dương."
+        },
+        {
+          "id": "D",
+          "text": "TK lưỡi cảm giác cho 1/3 sau lưỡi."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.TK huyệt răng dưới chứa các sợi chi phối cho cơ hàm móng=>và\nbụng trước cơ 2 bụng.\nD.TK lưỡi cảm giác cho 1/3 sau lưỡi=>cảm giác chung cho 2/3\ntrước lưỡi (trừ nhú đài).\nTK huyệt răng dưới: tách ra\nTK cơ hàm móng : Cơ hàm móng và Bụng trước Cơ hai bụng\nTK cằm : Cằm và môi dưới\nTK lưỡi của TK hàm dưới V3:\n----> cảm giác 2/3 trước lưỡi\nSợi vị giác và sợi đối giao cảm trước hạch của thừng nhĩ",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/f8029c43aab97d0099e0.webp"
+      ],
+      "sourcePage": 35,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-34",
+      "number": 34,
+      "stem": "Trong các mô tả dưới đây về TK mặt, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Là TK duy nhất đi trong xương đá."
+        },
+        {
+          "id": "B",
+          "text": "Nó chia thành các nhánh tận sau khi rời khỏi tuyến mang tai."
+        },
+        {
+          "id": "C",
+          "text": "Nó đi dưới TK tiền đình ốc tai khi đi qua ống tai trong."
+        },
+        {
+          "id": "D",
+          "text": "Hạch gối nằm ở chỗ gấp góc giữa đoạn mê đạo và đoạn nhĩ của TK mặt."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Là TK duy nhất đi trong xương đá à THẦN KINH VIII CŨNG CÓ\nĐOẠN TRONG XƯƠNG ĐÁ,đi trong xương đá cùng TK tiền đình-ốc\ntai.\nB.Nó chia thành các nhánh tận sau khi rời khỏi tuyến mang tai à\nCHIA THÀNH CÁC NHÁNH TẬN NGAY TRONG TUYẾN\nC.Nó đi dưới TK tiền đình ốc tai khi đi qua ống tai trong à TK TRUNG\nGIAN NẰM GIỮA; TK III NẰM DƯỚI, NHÀNH VẬN ĐỘNG TK VII NẰM\nTRÊN.\nD.Hạch gối nằm ở chỗ gấp góc giữa đoạn mê đạo và đoạn nhĩ của\nTK mặt à LỒI ỐNG THẦN KINH MẶT NGAY TRÊN CỬA SỔ TIỀN ĐÌNH",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/f89ad5d8b728d897fd36.webp",
+        "/kb/dr-lam/images/95bff7d1fb9cd3f8f81e.webp",
+        "/kb/dr-lam/images/0f59a02a383b7021b267.webp"
+      ],
+      "sourcePage": 36,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-35",
+      "number": 35,
+      "stem": "Các mô tả sau về TK mặt đều đúng trừ :",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó chứa các sợi giao cảm."
+        },
+        {
+          "id": "B",
+          "text": "Các sợi cảm giác của nó có nguyên ủy từ hạch gối."
+        },
+        {
+          "id": "C",
+          "text": "Nó tách ra nhánh thừng nhĩ ngay trước khi ra khỏi xương đá ở lỗ trâm chũm."
+        },
+        {
+          "id": "D",
+          "text": "Trong tuyến mang tai nó nằm ngoài tĩnh mạch sau hàm dưới."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.Nó chứa các sợi giao cảm=>phó giao cảm.\nNhân bó đơn độc --> Hạch gối --> Thừng nhĩ.\nD.Trong tuyến mang tai nó nằm ngoài tĩnh mạch sau hàm dưới=>từ\nngoài vào trong: tk mặt - TM sau hàm dưới - ĐM cảnh ngoài,TK mặt\nnằm nông nhất\nphân nhánh tận cho các cơ bám da cổ mặt trong Tuyến.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 39,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-36",
+      "number": 36,
+      "stem": "Trong các mô tả về nhánh của TK mặt, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "TK đá lớn chứa các sợi cảm giác từ lưỡi."
+        },
+        {
+          "id": "B",
+          "text": "TK thừng nhĩ chứa các sợi tự chủ đi tới hạch dưới hàm."
+        },
+        {
+          "id": "C",
+          "text": "Nhánh từ cơ bàn đạp tách ra ở ngang hạch gối"
+        },
+        {
+          "id": "D",
+          "text": "Nhánh tai sau chi phối cơ trâm móng"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.TK đá lớn chứa các sợi cảm giác từ lưỡi à THẦN KINH ĐÁ LỚN\nCHỨA CÁC SỢI ĐỐI GIAO CẢM TRƯỚC HẠCH CỦA VII + IXà TK ỐNG\nCHÂN BƯỚM.\nTK đá lớn = Đối giao cảm => tuyến lệ và tuyến nhầy NM mũi.\nB.TK thừng nhĩ chứa các sợi tự chủ đi tới hạch dưới hàm=>để chi\nphối tuyến dưới hàm dưới lưỡi.\nC.Nhánh từ cơ bàn đạp tách ra ở ngang hạch gối  à TK ĐÁ LỚNà\nTÁCH RA Ở NGANG HẠCH GỐI;nhánh tới cơ bàn đạp tách ở đoạn 3\nống TK mặt (đoạn chũm).\nD.Nhánh tai sau chi phối cơ trâm móng à CHI PHỐI CƠ TAI VÀ\nBỤNG CHẨM CƠ CHẨM TRÁN CƠ TRÂM MÓNG + BỤNG SAU CƠ 2\nBỤNG DO NHÁNH 2 BỤNG CHI PHỐI.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/0afbac84df1efa6d3e47.webp",
+        "/kb/dr-lam/images/75c4fd393bddca3a9d5d.webp"
+      ],
+      "sourcePage": 39,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-37",
+      "number": 37,
+      "stem": "Trong các mô tả sau đây về TK mặt mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Hạch gối là nơi có các thân TK nơ ron cảm giác."
+        },
+        {
+          "id": "B",
+          "text": "Các sợi vận động đi thẳng từ nhân vđ thần kinh mặt tới rãnh hành cầu."
+        },
+        {
+          "id": "C",
+          "text": "Tk mặt bắt chéo mặt trong mỏm trâm trước khi chui vào tuyến mang tai."
+        },
+        {
+          "id": "D",
+          "text": "Các sợi tự chủ TK mặt xuất phát từ nhân bọt dưới."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "B.Các sợi vận động đi thẳng từ nhân vđ thần kinh mặt tới rãnh hành\ncầu=>đi hơi ngoằn ngoèo,đi qua gối thần kinh mặt à rãnh hành cầu.\nNhân bó đơn độc --> Hạch gối --> Thừng nhĩ.\nC.Tk mặt bắt chéo mặt trong mỏm trâm trước khi chui vào tuyến\nmang tai=>ngoài.\nD.Các sợi tự chủ TK mặt xuất phát từ nhân bọt dưới=>nhân bọt dưới\ncó các sợi của TK lưỡi hầu,trên và nhân lệ tị ở cầu não.\nNhân bọt trên, Nhân lệ\n--> Hạch dưới hàm, hạch chân bướm khẩu cái\n--> Thừng nhĩ , TK đá lớn --> Vị giac, tuyến dưới hàm, dưới lưỡi\nNhân bọt trên--> Hạch dưới hàm -->  Dây 7 ( Thừng nhĩ ) --> Tuyến\ndưới lưỡi, dưới hàm\nNhân lệ --> hạch chân bướm khẩu cái --> TK đá lớn --> Tuyến NM\nmũi, mie\nNhân bọt dưới: Dây 9- TK đá bé ( ĐGC đến Tuyến mang tai).\nC.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 41,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-38",
+      "number": 38,
+      "stem": "Trong các mô tả sau về TK tiền đình ốc tai mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó đi trong ống TK mặt cùng TK mặt."
+        },
+        {
+          "id": "B",
+          "text": "Nhánh ngoại vi(sợi gai) của nơ ron hạch tiền đình phân nhánh tới soan nang, cầu nang và bóng các ống bán khuyên."
+        },
+        {
+          "id": "C",
+          "text": "Hạch tiền đình nằm ở đầu ngoài ống tai ngoài."
+        },
+        {
+          "id": "D",
+          "text": "Các nhân của TK tiền đình không nằm ở hành não."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Nó đi trong ống TK mặt cùng TK mặt à ko,đi trong ống tai trong\ncùng TK mặt.\nB.Nhánh ngoại vi(sợi gai) của nơ ron hạch tiền đình phân nhánh tới\nsoan nang, cầu nang và bóng các ống bán khuyên.\nC.Hạch tiền đình nằm ở đầu ngoài ống tai ngoài à ống tai trong\nD.Các nhân của TK tiền đình không nằm ở hành não à nằm trên hành\nnão và cầu não,nhân tiền đình nằm ở cầu não và hành não.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/b349ae1323df8f293218.webp"
+      ],
+      "sourcePage": 43,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-39",
+      "number": 39,
+      "stem": "Các mô tả sau về TK tiền đình ốc tai đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Khối U TK tiền đình ốc tai có thể gây chèn ép TK mặt."
+        },
+        {
+          "id": "B",
+          "text": "Trong ống tai trong, TK ốc tai nằm dưới TK mặt."
+        },
+        {
+          "id": "C",
+          "text": "TK tiền đình ốc tai đi vào não tại rãnh hành cầu."
+        },
+        {
+          "id": "D",
+          "text": "Các sợi TK ốc tai tận cùng ở nhân đơn độc."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.Các sợi TK ốc tai tận cùng ở nhân đơn độc=>ốc lưng và bụng.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/650accfee64f8be58fca.webp"
+      ],
+      "sourcePage": 44,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-40",
+      "number": 40,
+      "stem": "Các mô tả sau về TK lưỡi hầu đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Các sợi cảm giác trong TK này tận cùng ở nhân đơn độc và nhân tủy TK sinh ba."
+        },
+        {
+          "id": "B",
+          "text": "Nó là TK cảm giác cho hầu, 1/3 sau lưỡi, hòm nhĩ, xoang cảnh và tiểu thể cảnh."
+        },
+        {
+          "id": "C",
+          "text": "Nhánh tk nhĩ của nó chỉ chứa các sợi cảm giác."
+        },
+        {
+          "id": "D",
+          "text": "Nó chi phối cơ trâm hầu."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "à chi phối 1 cơ duy nhất là cơ châm hầu, cảm giác cho nhiều vùng:\nsau hầu họng, hòm nhĩ, 1/3 sau lưỡi, thần kinh nhĩ: có nhánh cảm\ngiác và nhánh đối giao cảm à nguyên ủy: nhân đơn độc( hành não),\ndải tủy thần kinh V( hành, cầu), nhân bọt dưới: hành nãoà tuyến\nnước bọt mang tai\nC.Nhánh tk nhĩ của nó chỉ chứa các sợi cảm giác=>chứa cả sợi cảm\ngiác và đối giao cảm.\nvị giác ( lưỡi).",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/d6b8708b824cc76c3de3.webp",
+        "/kb/dr-lam/images/82099ae4eedae78e1426.webp"
+      ],
+      "sourcePage": 45,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-41",
+      "number": 41,
+      "stem": "Trong các mô tả sau đầy về thần kinh lưỡi hầu, mô tả nào đúng:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Các sợi cảm giác của nó không tận cùng ở nhân đơn độc."
+        },
+        {
+          "id": "B",
+          "text": "Các sợi vận động của nó chi phối cho cơ hai bụng."
+        },
+        {
+          "id": "C",
+          "text": "Các sợi tự chủ của nó có nguyên ủy từ nhân bọt dưới."
+        },
+        {
+          "id": "D",
+          "text": "Nó đi ra khỏi não ở rãnh trước trám hành."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Các sợi cảm giác của nó không tận cùng ở nhân đơn độc=>Sợi\ntrung ương tận cùng ở nhân đơn độc.\nB.Các sợi vận động của nó chi phối cho cơ hai bụng=>chi phối cho\ncơ trâm hầu.\nD.Nó đi ra khỏi não ở rãnh trước trám hành=>đi ra khỏi não ở rãnh\nsau trám hành, rãnh trước trám chỉ có dây 12.\nDây 9:\n- nhân hoài nghi: VĐ\n- nhân bó đơn độc: Cảm giác ( vị giác: nhân tủy TK 5)\n- nhân bọt dưới: Tuyến mang tai ( TK đá bé)",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 46,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-42",
+      "number": 42,
+      "stem": "Trong các mô tả sau đây về TK lang thang, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nhân lưng( nhân sau) TK X là nguyên ủy của các sợi vận động cho của khẩu cái và hầu."
+        },
+        {
+          "id": "B",
+          "text": "Hạch trên và hạch dưới là chỗ phình ra trên đường đi của TK X, chứa các thân nơ ron cảm giác."
+        },
+        {
+          "id": "C",
+          "text": "Nhánh thanh quản của TK X chi phối hấu hết cơ thanh quản."
+        },
+        {
+          "id": "D",
+          "text": "TKX đi qua phần sau của lỗ TM cảnh"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Nhân lưng( nhân sau) TK X là nguyên ủy của các sợi vận động cho\ncủa khẩu cái và hầu => nhân lưng cho các sợi đối giao cảm trước\nhạch đến các tạng\nB.Hạch trên và hạch dưới là chỗ phình ra trên đường đi của TK X,\nchứa các thân nơ ron cảm giác. => nằm ở lỗ tĩnh mạch cảnh\nC.Nhánh thanh quản của TK X chi phối hấu hết cơ thanh quản.\n=> nhánh ngoài TK thanh quản trên chỉ chi phối cơ nhẫn giáp và cơ\nkhít hầu dưới, cơ còn lại do TK thanh quản quặt ngược\nD.TKX đi qua phần sau của lỗ TM cảnh  => nó đi trước TM cảnh trong",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/16dacd11a6f0607a778f.webp"
+      ],
+      "sourcePage": 47,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-43",
+      "number": 43,
+      "stem": "Các mô tả sau về nhánh của thần kinh lang thang đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nhánh hầu thần kinh lang thang chứa các sợi vận động cho các cơ của khẩu cái và hầu."
+        },
+        {
+          "id": "B",
+          "text": "Thần kinh lang thang tách ra các nhánh chi phối cho tim."
+        },
+        {
+          "id": "C",
+          "text": "Nhánh thanh quản quặt ngược chi phối cho các cơ thanh quản."
+        },
+        {
+          "id": "D",
+          "text": "Các nhánh cuối cùng của thần kinh lang thang chi phối cho các tạng chậu hông."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "C.Nhánh thanh quản quặt ngược chi phối cho các cơ thanh\nquản=>trừ cơ nhẫn giáp.\nD.Các nhánh cuối cùng của thần kinh lang thang chi phối cho các\ntạng chậu hông=>TK lang thang chi phối cho tạng ngực và bụng trừ\ntạng chậu hông, TK đối giao cảm của tạng chậu hông do TK sống\ncùng II,III,IV.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/0177f67d1faea12c9ad4.webp"
+      ],
+      "sourcePage": 48,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-44",
+      "number": 44,
+      "stem": "Các mô tả sau về liên quan của TK X đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "TK X (T) ko bắt chéo ĐM dưới đòn (T)."
+        },
+        {
+          "id": "B",
+          "text": "Nhánh thanh quản quặt ngược P dài hơn vì đi qua trung thất trên."
+        },
+        {
+          "id": "C",
+          "text": "Các TK X đi sau cuống phổi."
+        },
+        {
+          "id": "D",
+          "text": "TK X đi qua cổ dọc theo ĐM cảnh trong và ĐM cảnh chung."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.TK X (T) ko bắt chéo ĐM dưới đòn (T)=>đi giữa ĐM dưới đòn T và\ncảnh chung T.\nB.Nhánh thanh quản quặt ngược P dài hơn à thanh quản quặt\nngược phải dưới thân cánh tay đầu, Trái dưới cung động mạch chủ\nT,quặt ngược trái dài hơn do vòng dưới cung ĐM chủ từ trc ra sau",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 49,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-kinh-45",
+      "number": 45,
+      "stem": "Các mô tả sau về TK phụ đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "TK phụ là TK dưới cùng trong 3 TK đi ra khỏi rãnh sau trám hành."
+        },
+        {
+          "id": "B",
+          "text": "Rễ sọ của tK phụ đi qua lỗ lớn xương chẩm ra khỏi sọ để hợp nhất với rễ sống."
+        },
+        {
+          "id": "C",
+          "text": "Các sợi trong rễ sọ TK phụ có nguyên ủy từ nhân hoài nghi."
+        },
+        {
+          "id": "D",
+          "text": "TK phụ đi qua tam giác cổ sau."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.TK phụ là TK dưới cùng trong 3 TK đi ra khỏi rãnh sau trám\nhành=>từ trên xuống dưới: 9-10-11.\nRãnh trước trám: TK XII\nRãnh sau trám: 9, 10, 11.\nB.Rễ sọ của tK phụ đi qua lỗ lớn xương chẩm ra khỏi sọ để hợp nhất\nvới rễ sống=>rễ sọ ra khỏi sọ qua lỗ TM cảnh, rễ sống mới đi qua lỗ\nlớn xương chẩm vào trong sọ,Lỗ chẩm;vận động cho các cơ nội tại\ncủa thanh quản.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/4fea79a2f10ac9c25ed5.webp",
+        "/kb/dr-lam/images/b7c503861e886353ab5e.webp",
+        "/kb/dr-lam/images/80406f1f3d937edb1db2.webp"
+      ],
+      "sourcePage": 50,
+      "gradable": true
+    }
+  ]
+}

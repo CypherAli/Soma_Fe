@@ -1,3 +1,5 @@
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { setRequestLocale } from "next-intl/server";
 import { hasLocale } from "next-intl";
 import { routing } from "@/i18n/routing";
@@ -22,5 +24,5 @@ export default async function MocXuongPage({
   setRequestLocale(rawLocale);
   const locale = (hasLocale(routing.locales, rawLocale) ? rawLocale : routing.defaultLocale) as Loc;
 
-  return <ExplorePage data={categoryData["moc-xuong"]} locale={locale} />;
+  return <ContentSurface scope="src/app/[locale]/giai-phau/moc-xuong/page.tsx"><ExplorePage data={categoryData["moc-xuong"]} locale={locale} /></ContentSurface>;
 }

@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { T3 } from "@/lib/homeContent";
 
 // KHÔNG GIAN NHÃN CỦA VISION AI — "quét bộ phận thật qua camera".
@@ -28,7 +30,11 @@ export type VisionPartKey =
   | "hand"
   | "chest"
   | "abdomen"
+  | "hip"
+  | "thigh"
   | "knee"
+  | "leg"
+  | "ankle"
   | "foot";
 
 export type VisionPart = {
@@ -41,6 +47,15 @@ export type VisionPart = {
    * riêng mắt, tai hay miệng — cho sẵn lối rẽ ấy thay vì bắt người dùng quét lại.
    */
   children?: VisionPartKey[];
+  /** Lưu ý trung thực về giới hạn dữ liệu của vùng này, hiện ngay dưới danh sách mô hình. */
+  note?: T3;
+  /**
+   * Chạm vào vùng là MỞ THẲNG bản .glb đủ da–cơ này, thay vì bài atlas đầu
+   * danh sách `scenes`. Chỉ dùng khi atlas KHÔNG có mặt ngoài của vùng (đầu
+   * và mặt: atlas toàn sọ–não, chạm "Mặt" mà ra sọ thì sai kỳ vọng). Slug phải
+   * có trong FLAGSHIP `layeredModels` — `npm run test:vision` kiểm điều đó.
+   */
+  openGlb?: string;
   /**
    * Scene gợi ý, xếp theo mức "sát với thứ vừa quét nhất" giảm dần.
    * MỌI slug ở đây đều phải tồn tại thật trong `sceneModules` HOẶC `atlasScenes`
@@ -54,7 +69,7 @@ export type VisionPart = {
   scenes: string[];
 };
 
-export const VISION_PARTS: VisionPart[] = [
+export const VISION_PARTS: VisionPart[] = bindContentSource("data:src/lib/vision/parts.ts#VISION_PARTS", [
   {
     key: "head",
     label: { vi: "Đầu", en: "Head", zh: "头部" },
@@ -75,6 +90,9 @@ export const VISION_PARTS: VisionPart[] = [
       zh: "让整张脸进入取景框，正视摄像头。",
     },
     children: ["eye", "ear", "mouth"],
+    // Chạm là mở thẳng đầu đủ da–cơ (head.glb), KHÔNG phải bài sọ atlas:
+    // atlas không có mặt ngoài, còn ảnh mẫu người dùng quét là khuôn mặt.
+    openGlb: "giai-phau-dau",
     // Atlas không có cơ bám da mặt: mặt học qua khung xương mặt, mũi–xoang, dây V1, bộ lệ.
     scenes: ["giai-phau-dau", "bo-phan-so", "mui-xoang", "than-kinh-sinh-ba", "le-dao"],
   },
@@ -99,6 +117,11 @@ export const VISION_PARTS: VisionPart[] = [
     // Atlas KHÔNG có tai (chỉ một lưới tai ngoài). Gợi ý gần nhất: nền sọ — phần đá xương
     // thái dương chứa tai giữa–tai trong; hệ đốt sống–thân nền — ĐM tiểu não trước dưới cho
     // nhánh mê đạo nuôi tai trong.
+    note: {
+      vi: "Bộ dữ liệu chưa có mô hình tai giữa và tai trong. Hai mô hình dưới đây là cấu trúc LÂN CẬN: nền sọ (phần đá xương thái dương chứa tai) và mạch nuôi tai trong.",
+      en: "The dataset has no middle- or inner-ear model yet. The two models below are NEIGHBOURING structures: the skull base (the petrous temporal bone that houses the ear) and the arteries supplying the inner ear.",
+      zh: "数据集中尚无中耳和内耳模型。下面两个模型是相邻结构：颅底（容纳耳的颞骨岩部）以及供应内耳的血管。",
+    },
     scenes: ["so-nen-so", "goc-cau-tieu-nao"],
   },
   {
@@ -201,6 +224,28 @@ export const VISION_PARTS: VisionPart[] = [
     },
     scenes: ["thanh-bung", "mat-cat-ngang-bung", "tong-quan-he-tieu-hoa", "bo-phan-gan", "bo-phan-da-day"],
   },
+  // Chi dưới: Pose đã có mốc hông, gối, mắt cá — đủ để tách bốn vùng này như chi trên.
+  // Ngồi trước laptop thì thường không thấy gối/chân: câu nhắc bảo đứng lùi ra.
+  {
+    key: "hip",
+    label: { vi: "Hông", en: "Hip", zh: "髋部" },
+    hint: {
+      vi: "Đứng lùi ra, nghiêng người lấy trọn một bên hông.",
+      en: "Step back and turn so one whole hip is in frame.",
+      zh: "后退并侧身，使一侧髋部完整入镜。",
+    },
+    scenes: ["bo-phan-hong", "khop-hang", "bo-phan-chau-hong", "vung-mong"],
+  },
+  {
+    key: "thigh",
+    label: { vi: "Đùi", en: "Thigh", zh: "大腿" },
+    hint: {
+      vi: "Đứng lùi ra, lấy đoạn từ hông tới gối.",
+      en: "Step back and frame hip to knee.",
+      zh: "后退，取景从髋到膝的一段。",
+    },
+    scenes: ["bo-phan-dui", "co-dui-mong", "tam-giac-dui", "khop-hang-dui", "dai-chau-chay"],
+  },
   {
     key: "knee",
     label: { vi: "Đầu gối", en: "Knee", zh: "膝部" },
@@ -212,6 +257,26 @@ export const VISION_PARTS: VisionPart[] = [
     scenes: ["bo-phan-goi", "khop-goi", "ho-khoeo", "vung-ben", "moc-xuong-chi-duoi"],
   },
   {
+    key: "leg",
+    label: { vi: "Cẳng chân", en: "Lower leg", zh: "小腿" },
+    hint: {
+      vi: "Lấy đoạn từ gối tới cổ chân, nhìn thẳng mặt trước ống chân.",
+      en: "Frame knee to ankle, front of the shin facing the camera.",
+      zh: "取景从膝到踝的一段，胫前朝向摄像头。",
+    },
+    scenes: ["bo-phan-cang-chan", "cang-chan-ban-chan", "co-mat", "dong-mach-chi-duoi"],
+  },
+  {
+    key: "ankle",
+    label: { vi: "Cổ chân", en: "Ankle", zh: "踝部" },
+    hint: {
+      vi: "Lấy riêng khớp cổ chân, lộ rõ mắt cá.",
+      en: "Frame the ankle joint alone with the ankle bone showing.",
+      zh: "单独取景踝关节，露出踝骨。",
+    },
+    scenes: ["khop-co-chan", "gan-got-ong-co-chan", "bo-phan-co-chan-ban-chan"],
+  },
+  {
     key: "foot",
     label: { vi: "Bàn chân", en: "Foot", zh: "足" },
     hint: {
@@ -221,9 +286,42 @@ export const VISION_PARTS: VisionPart[] = [
     },
     scenes: ["bo-phan-co-chan-ban-chan", "ban-chan-chi-tiet", "ban-chan", "khop-co-chan", "gan-got-ong-co-chan"],
   },
-];
+]);
 
 export const VISION_PART_KEYS: VisionPartKey[] = VISION_PARTS.map((p) => p.key);
+
+/**
+ * CÁCH GỌI KHÁC của từng vùng khi NÓI — để lệnh giọng nói "chọn cùi chỏ" hay
+ * "quét bắp chân" hiểu được. Nhãn chính (`label`) là thuật ngữ chuẩn; người Việt
+ * nói chuyện dùng từ thường ngày và từ địa phương.
+ */
+export const VOICE_ALIASES: Partial<Record<VisionPartKey, string[]>> = {
+  head: ["cái đầu", "hộp sọ", "sọ"],
+  face: ["khuôn mặt", "gương mặt"],
+  eye: ["con mắt", "nhãn cầu", "hốc mắt"],
+  ear: ["lỗ tai", "vành tai"],
+  mouth: ["miệng", "răng", "hàm răng", "lưỡi", "môi"],
+  neck: ["cổ họng", "họng", "gáy"],
+  shoulder: ["bả vai", "khớp vai", "đầu vai"],
+  "upper-arm": ["bắp tay", "bắp tay trên"],
+  elbow: ["cùi chỏ", "cùi chõ", "khuỷu", "khớp khuỷu"],
+  forearm: ["cẳng tay"],
+  wrist: ["cổ tay", "khớp cổ tay"],
+  hand: ["bàn tay", "lòng bàn tay", "ngón tay"],
+  chest: ["lồng ngực", "ngực"],
+  abdomen: ["bụng", "ổ bụng"],
+  hip: ["háng", "mông", "khớp hông"],
+  thigh: ["bắp đùi"],
+  knee: ["gối", "khớp gối", "bánh chè", "xương bánh chè"],
+  leg: ["bắp chân", "ống chân", "bắp chuối"],
+  ankle: ["mắt cá", "mắt cá chân", "khớp cổ chân"],
+  foot: ["gan bàn chân", "ngón chân", "gót chân"],
+};
+
+/** Mọi cách gọi một vùng (ba ngôn ngữ + cách nói thường ngày) — dùng cho lệnh giọng nói. */
+export function voiceNamesOf(p: VisionPart): string[] {
+  return [p.label.vi, p.label.en, p.label.zh, ...(VOICE_ALIASES[p.key] ?? [])];
+}
 
 const byKey = new Map<string, VisionPart>(VISION_PARTS.map((p) => [p.key, p]));
 
@@ -231,8 +329,42 @@ export const getVisionPart = (key: string): VisionPart | undefined => byKey.get(
 
 export const isVisionPartKey = (key: string): key is VisionPartKey => byKey.has(key);
 
-/** Một dự đoán của tầng nhận diện. `score` là 0..1, đã chuẩn hoá. */
-export type VisionGuess = { part: VisionPartKey; score: number };
+/**
+ * MỨC TIN CẬY hiện cho người dùng — THAY cho con số phần trăm.
+ *
+ * Vì sao bỏ phần trăm: không nguồn nào ra được độ tin cậy thật. Đường một tay
+ * trả hằng số viết cứng (54/27/19), đường Pose chuẩn hoá IoU cho tổng bằng 100%,
+ * GPU zero-shot qua softmax nhiệt độ 0,01 thì gần như luôn ~99%. Ghi "71%" trên
+ * những con số ấy là nguỵ tạo độ chính xác. Ba mức dưới đây suy từ đại lượng THÔ
+ * có nghĩa (IoU, độ phủ đoạn chi, chế độ của GPU) — xem `recognise.ts`.
+ */
+export type ConfidenceTier = "clear" | "maybe" | "unsure";
+
+/**
+ * Một dự đoán của tầng nhận diện. `score` là 0..1, đã chuẩn hoá — CHỈ để sắp
+ * thứ tự, không hiện ra. `side` là bên của người (đã tính lật gương), khi biết.
+ */
+export type VisionGuess = {
+  part: VisionPartKey;
+  score: number;
+  tier?: ConfidenceTier;
+  side?: "left" | "right";
+};
+
+/** Gắn mức cho cả danh sách: gợi ý đầu mang `top`, các gợi ý sau thấp hơn một bậc. */
+export function withTiers(guesses: VisionGuess[], top: ConfidenceTier): VisionGuess[] {
+  const lower: Record<ConfidenceTier, ConfidenceTier> = { clear: "maybe", maybe: "unsure", unsure: "unsure" };
+  return guesses.map((g, i) => ({ ...g, tier: i === 0 ? top : lower[top] }));
+}
+
+/**
+ * Mức cho kết quả GPU. Chỉ chế độ kNN (so với ảnh mẫu THẬT) mới được phép nói
+ * "khớp rõ"; zero-shot theo câu chữ chưa hiệu chỉnh nên tối đa là "có thể".
+ */
+export function gpuTier(topScore: number, mode: "knn" | "zero-shot"): ConfidenceTier {
+  if (mode === "knn") return topScore >= 0.6 ? "clear" : topScore >= 0.3 ? "maybe" : "unsure";
+  return topScore >= 0.5 ? "maybe" : "unsure";
+}
 
 /**
  * Ngưỡng tin cậy. Dưới ngưỡng này thì không coi kết quả nào là đáng tin nữa mà

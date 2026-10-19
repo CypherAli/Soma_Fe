@@ -1,3 +1,5 @@
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { setRequestLocale } from "next-intl/server";
 import AtlasViewer from "@/components/viewer/atlas/AtlasViewer";
 import "../../home.css";
@@ -27,9 +29,9 @@ export default async function ViewerPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  return (
+  return <ContentSurface scope="src/app/[locale]/viewer/page.tsx">{(
     <div className="bd">
       <AtlasViewer />
     </div>
-  );
+  )}</ContentSurface>;
 }

@@ -1,3 +1,5 @@
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { hasLocale } from "next-intl";
@@ -5,13 +7,14 @@ import { routing } from "@/i18n/routing";
 import { sceneModules, getSceneModule } from "@/lib/sceneModules";
 import SceneDetailPage from "@/components/scene/SceneDetailPage";
 import AtlasSceneViewer from "@/components/viewer/atlas/AtlasSceneViewer";
-import { atlasScenes } from "@/lib/humanAtlas/scenes";
+import { atlasScenes, atlasSceneAliases } from "@/lib/humanAtlas/scenes";
 // home.css mang style của <BrandSignature>, <ThemeToggle> và <LanguageSwitcher>
 // — ba thứ AtlasSceneViewer dùng. Thiếu nó thì logo tụt về display:inline và
 // quả cầu ngôn ngữ phình ra 92px. Trang /viewer nạp sẵn; route này thì không.
 import "../../../../home.css";
 import "../../../viewer/atlas.css";
 import type { Loc } from "@/lib/homeContent";
+import { getContent } from '@/lib/content/server';
 
 export function generateStaticParams() {
   // Cả bài chỉ có trên atlas (bài bộ phận) chứ không riêng SceneModule.
@@ -34,20 +37,22 @@ export default async function SceneModulePage({
    * chi tiết hơn hẳn model .glb cắt sẵn. Scene chưa chuyển vẫn chạy đường cũ
    * (Z-Anatomy) — xem docs/atlas-coverage.md để biết cái nào chuyển được.
    */
-  const atlasScene = atlasScenes[slug];
+  const content = await getContent();
+  const atlasScene = content.resolve(atlasScenes[atlasSceneAliases[slug]??slug]);
+  if (atlasScene?.replacement?.modelFile) return <ContentSurface scope="src/app/[locale]/giai-phau/mo-hinh/[slug]/page.tsx"><SceneDetailPage module={{ slug: atlasScene.slug, title: atlasScene.title, description: atlasScene.intro, visibleSystems: ['skeletal'], modelFile: atlasScene.replacement.modelFile, hotspots: atlasScene.replacement.hotspots }} locale={loc} backHref="/giai-phau/lat-cat" /></ContentSurface>;
   // Bọc `.bd`: TOÀN BỘ home.css nằm dưới bộ chọn đó (`.bd .brand-signature`,
   // `.bd .language-globe`…). Thiếu lớp bọc thì logo, nút sáng/tối và bộ đổi
   // ngôn ngữ mất sạch tạo hình — quả cầu phình ra 92px. Trang /viewer đã bọc
   // sẵn nên không lộ lỗi này.
   if (atlasScene)
-    return (
+    return <ContentSurface scope="src/app/[locale]/giai-phau/mo-hinh/[slug]/page.tsx">{(
       <div className="bd">
         <AtlasSceneViewer scene={atlasScene} />
       </div>
-    );
+    )}</ContentSurface>;
 
-  const sceneModule = getSceneModule(slug);
+  const sceneModule = content.resolve(getSceneModule(slug));
   if (!sceneModule) notFound();
 
-  return <SceneDetailPage module={sceneModule} locale={loc} backHref="/giai-phau/lat-cat" />;
+  return <ContentSurface scope="src/app/[locale]/giai-phau/mo-hinh/[slug]/page.tsx"><SceneDetailPage module={sceneModule} locale={loc} backHref="/giai-phau/lat-cat" /></ContentSurface>;
 }

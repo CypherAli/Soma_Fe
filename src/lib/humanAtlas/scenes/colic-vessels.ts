@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Đại tràng, mạc treo và mạch đại tràng" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const colicVesselsScene: AtlasSceneDef = {
+export const colicVesselsScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/colic-vessels.ts#colicVesselsScene", {
   "slug": "phuc-mac-mac-treo",
   "title": {
     "vi": "Đại tràng, mạc treo và mạch đại tràng",
@@ -162,4 +164,4 @@ export const colicVesselsScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

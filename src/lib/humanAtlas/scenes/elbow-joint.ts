@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Khớp khuỷu" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const elbowJointScene: AtlasSceneDef = {
+export const elbowJointScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/elbow-joint.ts#elbowJointScene", {
   "slug": "khop-khuyu",
   "title": {
     "vi": "Khớp khuỷu: xương, cơ vận động và vòng nối mạch",
@@ -155,4 +157,4 @@ export const elbowJointScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

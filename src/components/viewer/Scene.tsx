@@ -1,5 +1,11 @@
 "use client";
 
+
+
+
+import { useContent } from "@/components/content/ContentProvider";
+import { bindContentSource } from "@/lib/content/source";
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useRef } from "react";
 import { Canvas, ThreeEvent } from "@react-three/fiber";
 import { OrbitControls, ContactShadows } from "@react-three/drei";
@@ -21,7 +27,7 @@ type PlaceholderPart = {
   args: [number, number, number];
 };
 
-const PARTS: PlaceholderPart[] = [
+const PARTS: PlaceholderPart[] = bindContentSource("data:src/components/viewer/Scene.tsx#PARTS", [
   {
     id: "head",
     name: "Đầu",
@@ -85,7 +91,7 @@ const PARTS: PlaceholderPart[] = [
     position: [0.45, -1.9, 0],
     args: [0.42, 2.0, 0.42],
   },
-];
+]);
 
 function Part({ part }: { part: PlaceholderPart }) {
   const selected = useAnatomyStore((s) => s.selected?.id === part.id);
@@ -107,7 +113,7 @@ function Part({ part }: { part: PlaceholderPart }) {
   const emissive = selected ? "#38bdf8" : hovered ? "#0ea5e9" : "#000000";
   const emissiveIntensity = selected ? 0.6 : hovered ? 0.3 : 0;
 
-  return (
+  return <ContentSurface scope="src/components/viewer/Scene.tsx">{(
     <mesh
       position={part.position}
       onClick={onClick}
@@ -131,14 +137,17 @@ function Part({ part }: { part: PlaceholderPart }) {
         metalness={0.05}
       />
     </mesh>
-  );
+  )}</ContentSurface>;
 }
 
 export default function Scene() {
+  const cmsContent = useContent();
+  const PARTS = cmsContent.resolve(cmsSourcePARTS());
+
   const controls = useRef<React.ComponentRef<typeof OrbitControls>>(null);
   const clearSelection = useAnatomyStore((s) => s.setSelected);
 
-  return (
+  return <ContentSurface scope="src/components/viewer/Scene.tsx">{(
     <Canvas
       shadows
       dpr={[1, 1.75]}
@@ -180,5 +189,7 @@ export default function Scene() {
         target={[0, 0, 0]}
       />
     </Canvas>
-  );
+  )}</ContentSurface>;
 }
+
+function cmsSourcePARTS() { return PARTS; }

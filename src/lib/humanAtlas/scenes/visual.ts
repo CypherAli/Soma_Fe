@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Đường dẫn truyền thị giác" dựng từ bộ atlas BodyParts3D.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const visualScene: AtlasSceneDef = {
+export const visualScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/visual.ts#visualScene", {
   "slug": "duong-thi-giac",
   "title": {
     "vi": "Đường dẫn truyền thị giác",
@@ -161,4 +163,4 @@ export const visualScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});
