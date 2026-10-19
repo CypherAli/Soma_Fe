@@ -7,13 +7,18 @@
  * thoát mã 1 để chặn ở CI/pre-commit.
  *
  *   npm run verify:lesions
+ *   node scripts/verify_lesions.mjs --sync  # xuất lại hợp đồng từ backend
+ *
+ * Checkout riêng frontend dùng scripts/fixtures/lesion-map.json. Khi có backend
+ * cạnh frontend, bắt buộc bản xuất khớp nguồn trước khi đối chiếu mesh.
  */
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { meshNames } from "./list_meshes.mjs";
 
 const MODELS_DIR = "public/models";
 const LESION_MAP = "../soma_be/prisma/data/lesion-map.ts";
+const SNAPSHOT = "scripts/fixtures/lesion-map.json";
 
 /** Khớp SYSTEM_FILES + EXTRA_FILES trong src/components/viewer/ModelScene.tsx */
 const SYSTEM_MODELS = {
@@ -26,11 +31,33 @@ const SYSTEM_MODELS = {
   joints: ["joints"],
 };
 
-// Đọc bằng regex thay vì import: file .ts nằm ở project khác, không cùng tsconfig.
-const src = readFileSync(LESION_MAP, "utf8");
-const entries = [...src.matchAll(
-  /\{\s*slug:\s*'([^']+)',\s*mesh:\s*'([^']+)',\s*system:\s*'([^']+)'/g,
-)].map(([, slug, mesh, system]) => ({ slug, mesh, system }));
+// A frontend-only checkout uses the exported contract. In the full workspace,
+// also reject a stale export instead of silently checking older backend data.
+let sourceEntries;
+if (existsSync(LESION_MAP)) {
+  const src = readFileSync(LESION_MAP, "utf8");
+  sourceEntries = [...src.matchAll(
+    /\{\s*slug:\s*'([^']+)',\s*mesh:\s*'([^']+)',\s*system:\s*'([^']+)'/g,
+  )].map(([, slug, mesh, system]) => ({ slug, mesh, system }));
+}
+
+if (process.argv.includes("--sync")) {
+  if (!sourceEntries?.length) throw new Error(`Không đọc được nguồn ${LESION_MAP}`);
+  writeFileSync(SNAPSHOT, JSON.stringify({
+    source: "soma_be/prisma/data/lesion-map.ts",
+    entries: sourceEntries,
+  }, null, 2) + "\n");
+}
+
+const { entries } = JSON.parse(readFileSync(SNAPSHOT, "utf8"));
+if (!Array.isArray(entries) || entries.some(entry => !entry ||
+  typeof entry.slug !== "string" || typeof entry.mesh !== "string" ||
+  typeof entry.system !== "string")) {
+  throw new Error(`Dữ liệu không hợp lệ: ${SNAPSHOT}`);
+}
+if (sourceEntries && JSON.stringify(sourceEntries) !== JSON.stringify(entries)) {
+  throw new Error("Bản đồ bệnh lý đã đổi. Chạy node scripts/verify_lesions.mjs --sync rồi commit bản xuất.");
+}
 
 if (entries.length === 0) {
   console.error("Không đọc được mục nào từ lesion-map.ts — regex hỏng?");
