@@ -1,6 +1,8 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+
+import { ContentSurface } from "@/components/content/ContentProvider";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   approveAll,
   askAiForQuestions,
@@ -18,12 +20,12 @@ import { isSignedIn } from "@/lib/study";
 import type { QuizText } from "./quizText";
 import SignInGate from "./SignInGate";
 
-const MAX_BYTES = 25 * 1024 * 1024;
+const MAX_BYTES = 50 * 1024 * 1024;
 
 /**
- * HỌC TỪ PDF — tải tài liệu lên, máy chủ bóc đề, người tải lên DUYỆT rồi mới học.
+ * HỌC TỪ TÀI LIỆU — tải PDF/Word lên, máy chủ bóc đề, người tải lên DUYỆT rồi mới học.
  *
- * Bước duyệt không phải thủ tục cho có: bóc đề từ PDF không bao giờ đúng hết,
+ * Bước duyệt không phải thủ tục cho có: bóc đề từ tài liệu không bao giờ đúng hết,
  * mà sai một dấu trong câu giải phẫu là học sai luôn. Vì vậy câu mới bóc nằm ở
  * trạng thái chờ, và chỉ câu đã duyệt mới vào nguồn đề "Đề của tôi".
  */
@@ -43,6 +45,7 @@ export default function PdfPanel({ t, onBankChanged }: { t: QuizText; onBankChan
    */
   const [needsAi, setNeedsAi] = useState<{ id: string; text: string } | null>(null);
   const [questions, setQuestions] = useState<PersonalQuestion[] | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const refresh = useCallback(async () => {
     await Promise.resolve();
@@ -73,12 +76,16 @@ export default function PdfPanel({ t, onBankChanged }: { t: QuizText; onBankChan
   const upload = async () => {
     if (!file || busy) return;
     if (file.size > MAX_BYTES) { setStatus(t.pdfTooBig); return; }
+    // Giữ file vào biến cục bộ rồi xoá ô chọn ngay: chọn lại đúng file đó vẫn
+    // kích hoạt onChange (không thì phải đổi tên file mới tải lại được).
+    const target = file;
+    setFile(null);
+    if (inputRef.current) inputRef.current.value = "";
     setBusy(true);
     setStatus(t.pdfUploading);
     try {
-      const result = await uploadPdf(file);
+      const result = await uploadPdf(target);
       setStatus(result.doc.note ?? t.pdfResult(result.parsed, result.missingAnswer + result.malformed));
-      setFile(null);
       setNeedsAi(!result.parsed && result.text ? { id: result.doc.id, text: result.text } : null);
       await refresh();
       if (result.parsed) setOpenDoc(result.doc.id);
@@ -123,11 +130,19 @@ export default function PdfPanel({ t, onBankChanged }: { t: QuizText; onBankChan
   };
 
   const removeQuestion = async (id: string) => {
-    await deleteQuestion(id).catch(() => undefined);
-    setQuestions((prev) => prev?.filter((q) => q.id !== id) ?? prev);
-    onBankChanged();
-    void refresh();
+    try {
+      await deleteQuestion(id);
+      setQuestions((prev) => prev?.filter((q) => q.id !== id) ?? prev);
+      onBankChanged();
+      void refresh();
+    } catch (error) { setStatus((error as Error).message || t.pdfDeleteFailed); }
   };
+
+  /** Dung lượng đọc được: file nhỏ hiện KB thay vì "0.0 MB" khó hiểu. */
+  const sizeLabel = (bytes: number) =>
+    bytes < 1024 * 1024
+      ? `${Math.max(1, Math.round(bytes / 1024))} KB`
+      : `${(bytes / 1024 / 1024).toFixed(1)} MB`;
 
   /** Nhờ AI đọc lại tài liệu bộ luật không bóc được. Chỉ chạy khi người dùng bấm. */
   const retryWithAi = async () => {
@@ -147,12 +162,12 @@ export default function PdfPanel({ t, onBankChanged }: { t: QuizText; onBankChan
     }
   };
 
-  if (!signedIn) return <SignInGate t={t} />;
+  if (!signedIn) return <ContentSurface scope="src/components/quiz/PdfPanel.tsx"><SignInGate t={t} /></ContentSurface>;
 
   if (openDoc && questions) {
     const doc = docs?.find((d) => d.id === openDoc);
     const pending = questions.filter((q) => !q.approved).length;
-    return (
+    return <ContentSurface scope="src/components/quiz/PdfPanel.tsx">{(
       <section className="quiz-pdf-review">
         <header>
           <button type="button" className="quiz-link" onClick={() => { setOpenDoc(null); setQuestions(null); }}>
@@ -210,10 +225,10 @@ export default function PdfPanel({ t, onBankChanged }: { t: QuizText; onBankChan
           ))}
         </ol>
       </section>
-    );
+    )}</ContentSurface>;
   }
 
-  return (
+  return <ContentSurface scope="src/components/quiz/PdfPanel.tsx">{(
     <section className="quiz-pdf-import">
       <div>
         <span>{t.pdfKicker}</span>
@@ -224,11 +239,11 @@ export default function PdfPanel({ t, onBankChanged }: { t: QuizText; onBankChan
       </div>
 
       <div className="quiz-pdf-drop">
-        <input id="personal-pdf" type="file" accept="application/pdf"
+        <input id="personal-pdf" ref={inputRef} type="file" accept="application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf,.docx"
           onChange={(e) => { setFile(e.target.files?.[0] ?? null); setStatus(""); }} />
         <label htmlFor="personal-pdf">
           <b>{file ? file.name : t.pdfChoose}</b>
-          <span>{file ? `${(file.size / 1024 / 1024).toFixed(1)} MB` : t.pdfHint}</span>
+          <span>{file ? sizeLabel(file.size) : t.pdfHint}</span>
         </label>
         <button type="button" disabled={!file || busy} onClick={() => void upload()}>
           {busy ? t.pdfUploading : t.pdfAnalyse}
@@ -261,7 +276,11 @@ export default function PdfPanel({ t, onBankChanged }: { t: QuizText; onBankChan
                 <button type="button" className="quiz-danger"
                   onClick={async () => {
                     if (!window.confirm(t.pdfDeleteConfirm)) return;
-                    await deleteDoc(d.id).catch(() => undefined);
+                    try { await deleteDoc(d.id); }
+                    catch (error) { setStatus((error as Error).message || t.pdfDeleteFailed); return; }
+                    // Xoá đúng tài liệu đang chờ AI đọc thì dẹp luôn lời mời —
+                    // không thì bấm "Nhờ AI" chỉ nhận lỗi 404 khó hiểu.
+                    setNeedsAi((prev) => (prev?.id === d.id ? null : prev));
                     onBankChanged();
                     void refresh();
                   }}>
@@ -275,5 +294,5 @@ export default function PdfPanel({ t, onBankChanged }: { t: QuizText; onBankChan
         )}
       </div>
     </section>
-  );
+  )}</ContentSurface>;
 }

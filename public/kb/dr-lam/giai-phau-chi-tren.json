@@ -1,0 +1,4797 @@
+{
+  "schemaVersion": 1,
+  "id": "giai-phau-chi-tren",
+  "title": "Giải phẫu chi trên",
+  "sourceFile": "Giải phẫu người 2025 - Test số hóa Dr. Lâm · giải phẫu chi trên.pdf",
+  "sourceNote": "Bản PDF nguồn ghi nhận có tài nguyên ảnh chưa tải được.",
+  "sourceHash": "815295af964892cae264f7a1256c88bf2eba28a2dd9c8f51c6b7b05ffc0b14c1",
+  "pages": 166,
+  "questions": [
+    {
+      "id": "giai-phau-chi-tren-1",
+      "number": 1,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về cung động mạch gan tay sâu:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó nằm sát trước nền các xương đốt bàn tay."
+        },
+        {
+          "id": "B",
+          "text": "nó nhô ( lồi ) về phía xa hơn so với cung gan tay nông."
+        },
+        {
+          "id": "C",
+          "text": "nó tách ra 4 động mạch ngón tay chung."
+        },
+        {
+          "id": "D",
+          "text": "nó đi cùng với nhánh sâu tk trụ."
+        }
+      ],
+      "answers": [
+        "A",
+        "D"
+      ],
+      "explanation": "Đm quay sau khi tách ĐM chính ngón cái --> chạy vào trong ở bên\ndưới các gân gấp bắt chéo trước các cơ gian cốt và các xương đốt\nbànà kết hợp với nhanh gan tay sâu của ĐM trụ\nCác nhánh: 3 ĐM gan đốt bàn tayà ĐM mu đốt bànà DDM ngón tay\nchung của cung nông\nCác nhánh xuyên\nCác nhánh nhỏ à dây chằng, xươngà sàn ống cổ tay.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/c735118ce83c24cb5eab.webp"
+      ],
+      "sourcePage": 1,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-2",
+      "number": 2,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về cung động mạch gan tay nông:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nhánh tận động mạch trụ có thể nối với động mạch chính ngón cái hay ngón trỏ để khép kín cung nông."
+        },
+        {
+          "id": "B",
+          "text": "cung nông là nguồn dẫn máu duy nhất tới các động mạch gan ngón tay riêng."
+        },
+        {
+          "id": "C",
+          "text": "điểm lồi ra xa nhất của cung nông ở ngang mức đường kẻ ngang qua gan tay , dọc theo bờ dưới của ngón tay cái giạng hết mức."
+        },
+        {
+          "id": "D",
+          "text": "ở phần giữa gan tay, cung nông nằm sau ( sâu hơn ) các gân gấp của cơ gấp các ngón nông và cơ gấp các ngón sâu."
+        }
+      ],
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "A.nhánh tận động mạch trụ có thể nối với động mạch chính ngón\ncái hay ngón trỏ để khép kín cung nông=>ĐM chính ngón cái:\nnhánh tận ĐM quay.\nB.cung nông là nguồn dẫn máu duy nhất tới các động mạch gan\nngón tay riêng=>còn các ĐM gan đốt bàn tay của cung sâu.\nD.ở phần giữa gan tay, cung nông nằm sau ( sâu hơn ) các gân gấp\ncủa cơ gấp các ngón nông và cơ gấp các ngón sâu=>cung nông\nchỉ nằm sau cân gan tay, trước các gân cơ và TK.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/d0f0f82626de17fc612b.webp",
+        "/kb/dr-lam/images/eba163c1fb597fd665c0.webp",
+        "/kb/dr-lam/images/9b9e150bcea52b9e3332.webp"
+      ],
+      "sourcePage": 2,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-3",
+      "number": 3,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về mạng tiếp nối động mạch quanh khuỷu:",
+      "options": [
+        {
+          "id": "A",
+          "text": "có sự tham gia của động mạch quặt ngược trụ và động mạch quặt ngược quay."
+        },
+        {
+          "id": "B",
+          "text": "có sự tham gia của động mạch gian cốt trước."
+        },
+        {
+          "id": "C",
+          "text": "có sự tham gia của động mạch gian cốt quặt ngược."
+        },
+        {
+          "id": "D",
+          "text": "có sự tham gia của các động mạch bên trụ trên và dưới , các nhánh bên quay và bên giữa của động mạch cánh tay sâu."
+        }
+      ],
+      "answers": [
+        "A",
+        "C",
+        "D"
+      ],
+      "explanation": "B.có sự tham gia của động mạch gian cốt trước=>ĐM gian cốt\nquặt ngược là nhánh của ĐM gian cốt sau.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 4,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-4",
+      "number": 4,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: các tĩnh mạch nông của chi trên:",
+      "options": [
+        {
+          "id": "A",
+          "text": "tĩnh mạch đầu và tĩnh mạch nền đều khởi đầu từ mạng lưới tĩnh mạch mu tay."
+        },
+        {
+          "id": "B",
+          "text": "tĩnh mạch nền đổ vào đầu dưới tĩnh mạch nách cùng với các tĩnh mạch cánh tay."
+        },
+        {
+          "id": "C",
+          "text": "tĩnh mạch đầu nối với tĩnh mạch nền ở khuỷu qua tĩnh mạch giữa khuỷu."
+        },
+        {
+          "id": "D",
+          "text": "tĩnh mạch đầu dài hơn tĩnh mạch nền."
+        }
+      ],
+      "answers": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "explanation": "A.tĩnh mạch đầu và tĩnh mạch nền đều khởi đầu từ mạng lưới tĩnh\nmạch mu tay=>TM đầu từ phần ngoài, TM nền từ phần trong.\nD.tĩnh mạch đầu dài hơn tĩnh mạch nền=>TM đầu đi ngoài- xa hơn :\nDài hơn TM nền.\nCơ tròn bé: xoay ngoài\nCơ tròn lớn: xoay trong .\nCơ dưới gai: xoay ngoài\nCơ dưới vai: xoay trong .",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 4,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-5",
+      "number": 5,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về các cơ vận động cánh tay:",
+      "options": [
+        {
+          "id": "A",
+          "text": "xoay ngoài cánh tay do các cơ : cơ tròn bé , cơ dưới gai , và các sợi sau cơ delta."
+        },
+        {
+          "id": "B",
+          "text": "xoay trong cánh tay do các cơ : cơ tròn lớn , cơ dưới vai , cơ ngực lớn , cơ lưng rộng , các sợi trước cơ delta."
+        },
+        {
+          "id": "C",
+          "text": "giạng cánh tay : chỉ do cơ trên gai."
+        },
+        {
+          "id": "D",
+          "text": "khép cánh tay : cơ ngực bé , cơ răng trước."
+        }
+      ],
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "C.giạng cánh tay : chỉ do cơ trên gai=>và cơ delta,Khép cánh tay:\nCơ lưng rộng: chủ yếu  >< Cơ răng trước: giạng.\nD.khép cánh tay : cơ ngực bé , cơ răng trước=>Cơ ngực bé, cơ lưng\nrộng,cơ răng trước: Giang, xoay xương vai lên trên.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/6ddb30d0c6c034b42dbd.webp",
+        "/kb/dr-lam/images/6427f0aa02baf33dc066.webp"
+      ],
+      "sourcePage": 5,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-6",
+      "number": 6,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về các cơ vận động đai ngực:",
+      "options": [
+        {
+          "id": "A",
+          "text": "khép xương vai do các cơ : cơ trám lớn , cơ trám bé , các sợi giữa của cơ thang."
+        },
+        {
+          "id": "B",
+          "text": "hạ xương vai do các cơ : cơ ngực bé , các sợi dưới của cơ thang."
+        },
+        {
+          "id": "C",
+          "text": "giạng xương vai do các cơ : cơ lưng rộng , cơ dưới đòn."
+        },
+        {
+          "id": "D",
+          "text": "nâng xương vai hoàn toàn do cơ nâng vai ."
+        }
+      ],
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "C.giạng xương vai do các cơ : cơ lưng rộng , cơ dưới đòn=>cơ rẳng\ntrước,Cơ dưới đòn: chỉ hạ và đưa x đòn ra trước.\nD.nâng xương vai hoàn toàn do cơ nâng vai=>cơ trám lớn, bé, sợi\ntrên của cơ thang,hoàn toàn với chỉ là sai rồi.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 6,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-7",
+      "number": 7,
+      "stem": "Mạng tiếp nối động mạch quanh khuỷu không có sự tham gia của động mạch:",
+      "options": [
+        {
+          "id": "A",
+          "text": "động mạch quặt ngược trụ, động mạch quặt ngược quay."
+        },
+        {
+          "id": "B",
+          "text": "nhánh của động mạch gian cốt trước."
+        },
+        {
+          "id": "C",
+          "text": "nhánh của động mạch gian cốt sau."
+        },
+        {
+          "id": "D",
+          "text": "các động mạch bên trụ trên và dưới, các nhánh bên quay và bên giữa của động mạch cánh tay sâu."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.nhánh của động mạch gian cốt trước=>cấp máu cho cơ lớp sâu\nvà TK giữa.\nC.nhánh của động mạch gian cốt sau=>Đm gian cốt quặt ngược.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/f31d2f4ebcb8280ff206.webp"
+      ],
+      "sourcePage": 7,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-8",
+      "number": 8,
+      "stem": "Một bác sĩ cắt cụt chi trên bằng đường cắt qua chỗ nối phần ba trên với phần ba giữa cánh tay, các thành phần sẽ bị cắt qua ở vị trí như mô tả sau đây, trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "tk quay trong rãnh tk quay xương cánh tay."
+        },
+        {
+          "id": "B",
+          "text": "tk trụ nằm sau vách gian cơ cánh tay trong."
+        },
+        {
+          "id": "C",
+          "text": "tk giữa đang nằm ở trước ngoài động mạch cánh tay."
+        },
+        {
+          "id": "D",
+          "text": "tk bì cẳng tay trong còn nằm sâu dưới mạc cánh tay."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.tk trụ nằm sau vách gian cơ cánh tay trong=>đến giữa cánh tay\nTK trụ mới xuyên qua vách gian cơ trong ra sau.\nD.tk bì cẳng tay trong còn nằm sâu dưới mạc cánh tay => trong ống\ncánh tay =>đến giữa cánh tay mới cùng TM nền xuyên qua mạc\ncánh tay ra nông.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/fda22e6307f38b912c23.webp",
+        "/kb/dr-lam/images/f60d1c4120c8a4fe895f.webp"
+      ],
+      "sourcePage": 8,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-9",
+      "number": 9,
+      "stem": "Một bác sĩ cắt cụt chi trên bằng đường cắt qua chỗ nối phần ba dưới với phần ba giữa cánh tay, các thành phần sẽ bị cắt qua ở vị trí như mô tả sau đây trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "tk giữa nằm ở trong động mạch cánh tay."
+        },
+        {
+          "id": "B",
+          "text": "tk quay xuyên qua vách gian cơ cánh tay ngoài đi vào vùng cánh tay trước."
+        },
+        {
+          "id": "C",
+          "text": "tk cơ bì nằm giữa các cơ nhị đầu và cánh tay."
+        },
+        {
+          "id": "D",
+          "text": "tĩnh mạch nền tận cùng, đi vào sâu đổ vào tĩnh mạch cánh tay."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.tk giữa nằm ở trong động mạch cánh tay=>ở giữa cánh tay thì bắt\nchéo trc ĐM cánh tay vào trong.\nD.tĩnh mạch nền tận cùng, đi vào sâu đổ vào tĩnh mạch cánh\ntay=>Ở nách ms tận cùng, hợp vs TM cánh tay => TM nách.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 9,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-10",
+      "number": 10,
+      "stem": "Một bác sĩ cắt cụt chi trên bằng đường qua khuỷu các thành phần cắt qua ở vị trí như mô tả sau đây trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "tk trụ nằm trong rãnh giữa mỏm khuỷu xương trụ và mỏm trên lồi cầu ngoài xương cánh tay."
+        },
+        {
+          "id": "B",
+          "text": "tk quay nằm trong rãnh giữa cơ cánh tay và cơ cánh tay quay."
+        },
+        {
+          "id": "C",
+          "text": "động mạch cánh tay nằm trong rãnh nhị đầu trong, sau trẽ gân cơ nhị đầu."
+        },
+        {
+          "id": "D",
+          "text": "tk cơ bì đã xuyên qua mạc đi vào mô dưới da."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.tk trụ nằm trong rãnh giữa mỏm khuỷu xương trụ và mỏm trên lồi\ncầu ngoài xương cánh tay=>mỏm trên lồi cầu trong.\nD sai vì Nó xuyên qua mạc chếch xuống dưới ra ngoài, chứ chưa đi\nvào mô dưới da.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/18f126bc4898be1e52cd.webp",
+        "/kb/dr-lam/images/0cca7f0fbbd65735352b.webp"
+      ],
+      "sourcePage": 10,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-11",
+      "number": 11,
+      "stem": "Một bác sĩ cắt cụt ở cẳng tay bằng đường cắt qua chỗ nối phần ba trên với phần ba giữa cẳng tay, các thành phần sẽ bị cắt qua ở vị trí như mô tả sau đây trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "cơ sấp tròn bị cắt qua ở chỗ nó bám tận vào mặt ngoài xương quay."
+        },
+        {
+          "id": "B",
+          "text": "tk trụ đang nằm dưới mặt sâu cơ gấp cổ tay trụ."
+        },
+        {
+          "id": "C",
+          "text": "tk giữa đang nằm trước cơ gấp các ngón nông."
+        },
+        {
+          "id": "D",
+          "text": "động mạch quay nằm dưới cơ cánh tay quay."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "tk giữa đang nằm trước cơ gấp các ngón nông -> ở sau cơ gấp các\nngón nông, trước cơ gấp ngón sâu.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 11,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-12",
+      "number": 12,
+      "stem": "Một bác sĩ cắt cụt chi trên bằng 1 đường cắt qua phần tư dưới cẳng tay, các thành phần sẽ bị cắt qua ở vị trí như mô tả sau đây trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "gân cơ gan tay dài nằm sau gân cơ gấp các ngón nông."
+        },
+        {
+          "id": "B",
+          "text": "gân cơ gấp cổ tay quay nằm ở trước trong động mạch quay."
+        },
+        {
+          "id": "C",
+          "text": "cơ sấp vuông nằm sát các xương của cẳng tay."
+        },
+        {
+          "id": "D",
+          "text": "động mạch trụ nằm bên ngoài tk trụ."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.gân cơ gan tay dài nằm sau gân cơ gấp các ngón nông=>gân cơ\ngan tay dài nằm trc gân cơ gấp ngón nông.\n==>Động mạch dưới vai- ĐM cánh tay sâu.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/653a3e86d25d0cdca29b.webp",
+        "/kb/dr-lam/images/3f8f01d09c84d2c7e26a.webp",
+        "/kb/dr-lam/images/f59291a7dfd4c935b49a.webp"
+      ],
+      "sourcePage": 12,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-13",
+      "number": 13,
+      "stem": "Một bác sĩ cân nhắc thắt động mạch ở các vị trí sau, vị trí nguy hiểm nhất có thể khiến các tiếp nối động mạch chính không được phát huy làm cho đoạn chi dưới chỗ thắt có thể bị hoại tử là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "động mạch nách, trên nguyên ủy động mạch dưới vai."
+        },
+        {
+          "id": "B",
+          "text": "đoạn mạch trục nằm giữa động mạch dưới vai và động mạch cánh tay sâu."
+        },
+        {
+          "id": "C",
+          "text": "động mạch cánh tay giữa nguyên ủy của động mạch cánh tay sâu và nguyên ủy động mạch bên trụ trên."
+        },
+        {
+          "id": "D",
+          "text": "động mạch cánh tay, dưới nguyên ủy động mạch bên trụ trên."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "Đáp án: B\nB: Vị trí nằm giữa động mạch dưới vai và động mạch cánh tay sâu là\nđoạn không có tiếp nối hiệu quả. Nếu thắt tại đây, máu từ cả vùng\nvai và vùng khuỷu đều không đến được đoạn xa, nguy cơ thiếu máu\nvà hoại tử cao.\nA: Vị trí này vẫn còn vòng nối từ động mạch trên vai và động mạch\ncổ vai.\nC: Thắt dưới nhánh bên trụ trên vẫn còn tưới máu qua các vòng nối\nkhuỷu.\nD: Vẫn có tiếp nối giữa các nhánh quanh khuỷu nên ít nguy hiểm\nhơn.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 14,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-14",
+      "number": 14,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: trên một thiết đồ ngang qua bàn tay qua các xương đốt bàn tay, nhìn thấy:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Các cơ gian cốt gan tay bám vào xương đốt bàn tay 1,2,4,5."
+        },
+        {
+          "id": "B",
+          "text": "Các động mạch đốt bàn tay nằm ngay sau cân gan tay, trước các gân gấp."
+        },
+        {
+          "id": "C",
+          "text": "Mỗi cơ gian cốt mu tay bám vào cả hai xương đốt bàn tay của một khoang gian xương đốt bàn tay."
+        },
+        {
+          "id": "D",
+          "text": "Các gân cơ gấp các ngón sâu và các cơ giun bám vào những gân này."
+        }
+      ],
+      "answers": [
+        "A",
+        "C",
+        "D"
+      ],
+      "explanation": "A.Các cơ gian cốt gan tay bám vào xương đốt bàn tay 1,2,4,5=>mặt\ntrước hướng vào trục bàn tay củac các xg đốt bàn 1,2,4,5.\nB.Các động mạch đốt bàn tay nằm ngay sau cân gan tay, trước các\ngân gấp=>tách ra từ cung gan tay sâu => sau các gân gấp.\n==>Gan đốt bàn tay: cung sâu.\nC.Mỗi cơ gian cốt mu tay bám vào cả hai xương đốt bàn tay của\nmột khoang gian xương đốt bàn tay=>(nguyên uỷ).\nD.Các gân cơ gấp các ngón sâu và các cơ giun bám vào những gân\nnày=>bám tận: bờ ngoài gân cơ duỗi các ngón.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/59366f8c2353f05ab07a.webp"
+      ],
+      "sourcePage": 15,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-15",
+      "number": 15,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: trên một thiết đồ nằm ngang qua nách:",
+      "options": [
+        {
+          "id": "A",
+          "text": "tĩnh mạch nách nằm trong động mạch nách."
+        },
+        {
+          "id": "B",
+          "text": "tk giữa nằm ở trước ngoài động mạch nách."
+        },
+        {
+          "id": "C",
+          "text": "tk cơ bì nằm trong động mạch nách."
+        },
+        {
+          "id": "D",
+          "text": "cơ dưới vai nằm sau các mạch nách."
+        }
+      ],
+      "answers": [
+        "A",
+        "B",
+        "D"
+      ],
+      "explanation": "C.tk cơ bì nằm trong động mạch nách=>ngoài.\nD.cơ dưới vai nằm sau các mạch nách=>ngoài -trên , trong -dưới.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/94ca3e1218e62b6418b6.webp"
+      ],
+      "sourcePage": 16,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-16",
+      "number": 16,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: trên một thiết đồ đứng dọc qua nách:",
+      "options": [
+        {
+          "id": "A",
+          "text": "tĩnh mạch nách nằm dưới động mạch nách."
+        },
+        {
+          "id": "B",
+          "text": "tk cơ bì nằm dưới động mạch nách."
+        },
+        {
+          "id": "C",
+          "text": "cơ ngực bé nằm trước các mạch nách."
+        },
+        {
+          "id": "D",
+          "text": "tk trụ nằm trên động mạch nách."
+        }
+      ],
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "B.tk cơ bì nằm dưới động mạch nách=>bó ngoài nằm ở trên.\nD.tk trụ nằm trên động mạch nách=>Bó trong nằm dưới ĐM nách.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/31a218e93d4655c54e7f.webp"
+      ],
+      "sourcePage": 17,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-17",
+      "number": 17,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: trên một thiết đồ ngang qua chỗ nối phần ba trên phần ba giữa cánh tay:",
+      "options": [
+        {
+          "id": "A",
+          "text": "cơ quạ cánh tay bám vào mặt trước trong xương cánh tay."
+        },
+        {
+          "id": "B",
+          "text": "cơ delta không có mặt trên thiết đồ."
+        },
+        {
+          "id": "C",
+          "text": "cơ tam đầu cánh tay là cơ duy nhất trong ngăn cơ cánh tay sau."
+        },
+        {
+          "id": "D",
+          "text": "tĩnh mạch nền nằm sâu bên dưới mạc cánh tay phía trong động mạch cánh tay."
+        }
+      ],
+      "answers": [
+        "A",
+        "C",
+        "D"
+      ],
+      "explanation": "A.cơ quạ cánh tay bám vào mặt trước trong xương cánh tay=>1/3\ntrên- giữa.\nD.tĩnh mạch nền nằm sâu bên dưới mạc cánh tay phía trong động\nmạch cánh tay => trong ống cánh tay",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/e67a4c95f043608cefaf.webp"
+      ],
+      "sourcePage": 18,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-18",
+      "number": 18,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: trên một thiết đồ nằm ngang qua chỗ nối phần giữa phần ba dưới cánh tay:",
+      "options": [
+        {
+          "id": "A",
+          "text": "thấy nguyên ủy cơ cánh tay quay bám vào bờ ngoài xương cánh tay."
+        },
+        {
+          "id": "B",
+          "text": "cơ cánh tay bám vào mặt trước ( ngoài và trong ) xương cánh tay."
+        },
+        {
+          "id": "C",
+          "text": "tk giữa nằm ở trước ngoài động mạch cánh tay."
+        },
+        {
+          "id": "D",
+          "text": "tk cơ bì xuyên qua mạc đi vào mô dưới da ( không còn đi giữa cơ nhị đầu và cơ cánh tay )."
+        }
+      ],
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "A.thấy nguyên ủy cơ cánh tay quay bám vào bờ ngoài xương cánh\ntay=>Cơ cánh tay bám vào Mặt trước xương cánh tay.\nC.tk giữa nằm ở trước ngoài động mạch cánh tay=>TK giữa: trước\nngoài ĐM cánh tay ở 1/3 trên- giữa cánh tay,TK cơ bì: giữa Nếp gấp\nkhuỷu TK giữa mới ra nông.\nD.tk cơ bì xuyên qua mạc đi vào mô dưới da ( không còn đi giữa cơ\nnhị đầu và cơ cánh tay )=>đến bờ ngoài cơ nhị đầu, giữa nếp gấp\nkhuỷu TK giữa mới ra nông.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/668093d3445cbc1766ed.webp",
+        "/kb/dr-lam/images/481effb62a4355dc30d6.webp"
+      ],
+      "sourcePage": 19,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-19",
+      "number": 19,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: trên một thiết đồ nằm ngang qua khuỷu ( ngang mức các mỏm trên lồi cầu ):",
+      "options": [
+        {
+          "id": "A",
+          "text": "thiết đồ này cũng cắt qua mỏm khuỷu."
+        },
+        {
+          "id": "B",
+          "text": "thiết đồ này cắt qua năm tk : quay , giữa trụ cơ bì và bì cẳng tay trong."
+        },
+        {
+          "id": "C",
+          "text": "thiết đồ này không cắt qua cơ cánh tay."
+        },
+        {
+          "id": "D",
+          "text": "tĩnh mạch nền nằm cạnh tk cơ bì , tĩnh mạch đầu nằm cạnh bì cẳng tay trong."
+        }
+      ],
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "A.thiết đồ này cũng cắt qua mỏm khuỷu=>gấp --> tam giác\nduỗi ---> đường thẳng\nmỏm trên LCT; mỏm trên LCN; mỏm khuỷu.\n==>Tk cơ bì => TK bì cẳng tay ngoài\nB.thiết đồ này cắt qua năm tk : quay , giữa trụ cơ bì và bì cẳng tay\ntrong=>mấy TK đều đi từ cánh tay --> cẳng tay.\nC.thiết đồ này không cắt qua cơ cánh tay=>nguyên uỷ ở mào trên\nlồi cầu ngoài xg cánh tay.\n==>Cơ cánh tay quay: kiểu gì cũng đi qua.\nD.tĩnh mạch nền nằm cạnh tk cơ bì , tĩnh mạch đầu nằm cạnh bì\ncẳng tay trong=>TM đầu nằm bên ngoài; TK cơ bì --> TK bì cẳng tay\nngoài\nTM nền: bên trong.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/77f2f3edd1c88c698dbf.webp",
+        "/kb/dr-lam/images/2d1a3e639b294ef5cfcd.webp"
+      ],
+      "sourcePage": 21,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-20",
+      "number": 20,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: trên một thiết đồ nằm ngang qua phần tư dưới cẳng tay:",
+      "options": [
+        {
+          "id": "A",
+          "text": "phần lớn các cơ cắt qua là gân , trừ cơ sấp vuông."
+        },
+        {
+          "id": "B",
+          "text": "động mạch quay nằm trong gân cơ cánh tay quay , ngoài gân cơ gấp cổ tay quay."
+        },
+        {
+          "id": "C",
+          "text": "gân cơ gan tay dài nằm giữa gân cơ gấp cổ tay trụ và gân cơ gấp cổ tay quay."
+        },
+        {
+          "id": "D",
+          "text": "gân cơ gấp ngón cái dài nằm trong gân cơ gấp các ngón tay sâu."
+        }
+      ],
+      "answers": [
+        "A",
+        "B",
+        "C"
+      ],
+      "explanation": "D.gân cơ gấp ngón cái dài nằm trong gân cơ gấp các ngón tay\nsâu=>nhớ Quay là ngoài ,gấp các ngón: giữa.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/65554ee2037ff1f275f6.webp"
+      ],
+      "sourcePage": 23,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-21",
+      "number": 21,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: trên một thiết đồ nằm ngang qua chỗ nối phần ba trên – phần 3 giữa cẳng tay:",
+      "options": [
+        {
+          "id": "A",
+          "text": "tk trụ nằm giữa cơ gấp cổ tay trụ và cơ gấp ngón tay sâu."
+        },
+        {
+          "id": "B",
+          "text": "tk giữa và nằm sau cơ gấp các ngón tay nông."
+        },
+        {
+          "id": "C",
+          "text": "nhánh nông tk quay nằm trong động mạch quay."
+        },
+        {
+          "id": "D",
+          "text": "cơ gấp ngón tay cái dài nằm trước cơ gấp các ngón nông."
+        }
+      ],
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "B.tk giữa và nằm sau cơ gấp các ngón tay nông=>giữa cơ gấp\nngón nông và sâu.\nC.nhánh nông tk quay nằm trong động mạch quay=>nằm ngoài\nĐm quay.\nTK quay nằm ngoài ĐM quay\nTK trụ nằm trong ĐM trụ.\nD.cơ gấp ngón tay cái dài nằm trước cơ gấp các ngón nông=>\n(nông hơn)=>lớp sâu=>sau=>lớp trung gian.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/38683101c779801fe290.webp",
+        "/kb/dr-lam/images/77396cb658c125e0a73c.webp"
+      ],
+      "sourcePage": 24,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-22",
+      "number": 22,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về nhóm các cơ vận động đai ngực:",
+      "options": [
+        {
+          "id": "A",
+          "text": "cơ thang được chi phối bởi đám rối cánh tay."
+        },
+        {
+          "id": "B",
+          "text": "tất cả các cơ nhóm này có đầu nguyên ủy bám vào các xương trục."
+        },
+        {
+          "id": "C",
+          "text": "nhóm này là một phần các cơ ngoại lai của chi trên."
+        },
+        {
+          "id": "D",
+          "text": "chỉ có cơ nâng vai có tác dụng nâng xương vai."
+        }
+      ],
+      "answers": [
+        "B",
+        "C"
+      ],
+      "explanation": "A.cơ thang được chi phối bởi đám rối cánh tay=>bời TK XI.\nB.tất cả các cơ nhóm này có đầu nguyên ủy bám vào các xương\ntrục => xương thân => là các cơ ngoại lai.\nD.chỉ có cơ nâng vai có tác dụng nâng xương vai=>các sợi trên của\ncơ thang, cơ trám lớn, bé.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 27,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-23",
+      "number": 23,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về thần kinh quay:",
+      "options": [
+        {
+          "id": "A",
+          "text": "mang các sợi từ các tk C5-C8 và N1."
+        },
+        {
+          "id": "B",
+          "text": "có nhánh cảm giác cho da vùng giữa mặt sau cánh tay và cẳng tay."
+        },
+        {
+          "id": "C",
+          "text": "tận cùng bằng nhánh nông và nhánh sâu."
+        },
+        {
+          "id": "D",
+          "text": "tách ra từ cùng một bó với tk nách."
+        }
+      ],
+      "answers": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "explanation": "B.có nhánh cảm giác cho da vùng giữa mặt sau cánh tay và cẳng\ntay=>TK bì cánh tay sau, bì cẳng tay sau.\nC.tận cùng bằng nhánh nông và nhánh sâu=>ở mỏm trên lồi cầu\nngoài.\nD.tách ra từ cùng một bó với tk nách=>bó sau.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 27,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-24",
+      "number": 24,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về đường đi của tk quay:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó đi qua lỗ tứ giác."
+        },
+        {
+          "id": "B",
+          "text": "ở cánh tay , nó xuyên qua vách gian cơ ngoài khi đi từ ngăn cơ sau đến ngăn cơ trước cánh tay."
+        },
+        {
+          "id": "C",
+          "text": "nó đi trước mỏm trên lồi cầu ngoài xương cánh tay."
+        },
+        {
+          "id": "D",
+          "text": "nó đi đến hết phần ba trên cẳng tay thì tận cùng bằng các nhánh nông và sâu."
+        }
+      ],
+      "answers": [
+        "B",
+        "C"
+      ],
+      "explanation": "A.nó đi qua lỗ tứ giác=>đi qua tam giác cánh tay tam đầu cùng đm\ncánh tay sâu.\nTK nách + ĐM mũ cánh tay sau: Lỗ tứ giác\nTK quay + ĐM cánh tay sâu : Tam giác cánh tay tam đầu.\nD.nó đi đến hết phần ba trên cẳng tay thì tận cùng bằng các nhánh\nnông và sâu=>ở mỏm trên lồi cầu ngoài xg cánh tay.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/9e140c311e36dd17645c.webp",
+        "/kb/dr-lam/images/eebd49b1d9f597e64d5f.webp",
+        "/kb/dr-lam/images/6aee84db899745494f97.webp"
+      ],
+      "sourcePage": 28,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-25",
+      "number": 25,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về nhánh của thần kinh quay:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nhánh nông tk quay là một nhánh da."
+        },
+        {
+          "id": "B",
+          "text": "nhánh sâu tk quay chi phối toàn bộ cơ vùng cẳng tay sau."
+        },
+        {
+          "id": "C",
+          "text": "các nhánh bên tk quay gồm các nhánh cơ và các nhánh bì."
+        },
+        {
+          "id": "D",
+          "text": "tk quay có thể tổn thương khi gãy thân xương cánh tay."
+        }
+      ],
+      "answers": [
+        "A",
+        "C",
+        "D"
+      ],
+      "explanation": "A.nhánh nông tk quay là một nhánh da=>TK quay tách ra Nhánh cơ:\nchi phối 3/12: cơ khuỷu cơ cánh tay quay; cơ duỗi cổ tay quay dài.\nB.nhánh sâu tk quay chi phối toàn bộ cơ vùng cẳng tay sau=>Chỉ\nchi phối cho 9/12 cơ, trừ cơ khuỷu, cơ cánh tay quay, cơ duỗi cổ tay\nquay dài.\nC.các nhánh bên tk quay gồm các nhánh cơ và các nhánh\nbì=>nhánh bên: Các cơ cánh tay sau\nnhánh bì: TK bì cánh tay sau; TK bì cánh tay dưới ngoài.\nD.tk quay có thể tổn thương khi gãy thân xương cánh tay=>đi trong\nrãnh TK quay ở giữa mặt sau xương cánh tay.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 31,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-26",
+      "number": 26,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: tk quay hay nhánh của nó liên quan với các cấu trúc sau đây:",
+      "options": [
+        {
+          "id": "A",
+          "text": "rãnh xoắn ở mặt sau xương cánh tay."
+        },
+        {
+          "id": "B",
+          "text": "động mạch cánh tay sâu."
+        },
+        {
+          "id": "C",
+          "text": "vách gian cơ trong cánh tay."
+        },
+        {
+          "id": "D",
+          "text": "cơ nhị đầu cánh tay."
+        }
+      ],
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "B.động mạch cánh tay sâu=>ở tam giác cánh tay tam đầu.\nC.vách gian cơ trong cánh tay=>vách gian cơ ngoài.\nD.cơ nhị đầu cánh tay=>đi giữa cơ cánh tay và cánh tay quay (rãnh\nnhị đầu ngoài).",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/e54e36d4d4c4f9714999.webp",
+        "/kb/dr-lam/images/9e21c303562e644bdfb1.webp"
+      ],
+      "sourcePage": 32,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-27",
+      "number": 27,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về dấu hiệu tổn thương THẦN KINH quay ở mức giữa cánh tay:",
+      "options": [
+        {
+          "id": "A",
+          "text": "yếu động tác ngửa bàn tay."
+        },
+        {
+          "id": "B",
+          "text": "mất duỗi bàn tay và các ngón tay."
+        },
+        {
+          "id": "C",
+          "text": "không mất cảm giác mặt sau cánh tay."
+        },
+        {
+          "id": "D",
+          "text": "mất cảm giác mặt sau cẳng tay và nửa ngoài mu tay."
+        }
+      ],
+      "answers": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "explanation": "==>Tổn thương TK quay: Mức giữa cánh tay cái gì cũng đều bị tổn\nthường Trừ Cảm giác mặt sau cánh tay ( nách).\nA.yếu động tác ngửa bàn tay=>cơ cánh tay quay và cơ ngửa.\nB.mất duỗi bàn tay và các ngón tay=>các cơ vùng cẳng tay sau.\nC.không mất cảm giác mặt sau cánh tay => di nhánh bì cánh tay sau\n=>tách ra từ nách nên không bị ảnh hưởng ở mức giữa cánh tay.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/02a5802cf30e69b57683.webp"
+      ],
+      "sourcePage": 34,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-28",
+      "number": 28,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về tk trụ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó không mang các sợi từ ngành trước các thần kinh C5, C6, C7."
+        },
+        {
+          "id": "B",
+          "text": "trên đường đi xuống nó đi từ ngăn cơ trước cánh tay xuống ngăn cơ sau cánh tay."
+        },
+        {
+          "id": "C",
+          "text": "nó đi trong rãnh giữa mỏm trên lồi cầu ngoài xương cánh tay và mỏm khuỷu xương trụ."
+        },
+        {
+          "id": "D",
+          "text": "nó không đi trong ống cổ tay."
+        }
+      ],
+      "answers": [
+        "A",
+        "B",
+        "D"
+      ],
+      "explanation": "A.nó không mang các sợi từ ngành trước các thần kinh C5, C6,\nC7=>bó trong (C8,N1),Đi cùng ĐM bên trụ trên ( ĐM cánh tay).\nB.trên đường đi xuống nó đi từ ngăn cơ trước cánh tay xuống ngăn\ncơ sau cánh tay=>ở giữa cánh tay thì chọc qua vách gian cơ trong\nra sau.\nC.nó đi trong rãnh giữa mỏm trên lồi cầu ngoài xương cánh tay và\nmỏm khuỷu xương trụ=>trong.\nD.nó không đi trong ống cổ tay => trước hãm gân gấp",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/77dd375c660e24ab51e8.webp"
+      ],
+      "sourcePage": 35,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-29",
+      "number": 29,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về nhánh thần kinh trụ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nhánh nông tk trụ chi phối cho cơ gan tay ngắn."
+        },
+        {
+          "id": "B",
+          "text": "nhánh sâu tk trụ không chi phối cho các cơ ở mô cái gan tay."
+        },
+        {
+          "id": "C",
+          "text": "nhánh bì mu tay tk trụ chi phối cho da nửa ngoài mu bàn tay."
+        },
+        {
+          "id": "D",
+          "text": "các nhánh cơ của tk trụ chi phối phần cơ gấp các ngón tay sâu mà cho gân vào các ngón tay 4,5."
+        }
+      ],
+      "answers": [
+        "A",
+        "D"
+      ],
+      "explanation": "A.nhánh nông tk trụ chi phối cho cơ gan tay ngắn=>Rồi tách thành\n2 TK gan ngón tay.\nB.nhánh sâu tk trụ không chi phối cho các cơ ở mô cái gan tay=>chi\nphối cơ khép ngón cái và đầu sâu cơ gấp ngắn ngón cái,còn chi\nphối các cơ của mô út, các cơ gian cốt, các cơ giun III và IV.\nC.nhánh bì mu tay tk trụ chi phối cho da nửa ngoài mu bàn\ntay=>trong,nửa ngoài do TK quay cg.\nD.các nhánh cơ của tk trụ chi phối phần cơ gấp các ngón tay sâu\nmà cho gân vào các ngón tay 4,5=>2 bó trong cơ gấp các ngón\nsâu,phần ngoài do TK gian cốt trước của TK giữa chi phối.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/33ab436fff33f6dc317f.webp",
+        "/kb/dr-lam/images/9efc71d61eed0c031caa.webp",
+        "/kb/dr-lam/images/6eb07ce40fb9d6f58905.webp"
+      ],
+      "sourcePage": 37,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-30",
+      "number": 30,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về tk giữa:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó chứa các sợi từ cả 5 rễ của đám rối cánh tay."
+        },
+        {
+          "id": "B",
+          "text": "là thần kinh duy nhất đi qua ống cổ tay."
+        },
+        {
+          "id": "C",
+          "text": "tk gian cốt trước là nhánh cho các cơ gấp các ngón sâu ( nửa ngoài ) gấp ngón cái dài và sấp vuông của tk giữa."
+        },
+        {
+          "id": "D",
+          "text": "nó đi giữa cơ gấp các ngón sâu và cơ gấp các ngón nông."
+        }
+      ],
+      "answers": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "explanation": "==>TK quay; TK giữa đều có sợi từ cả 5 rễ .\nA.nó chứa các sợi từ cả 5 rễ của đám rối cánh tay=>từ nhánh của bó\nngoài và bó trong.\nbó ngoài = thân trên+ thân giữa\nbó trong = thân dưới\n----> TK giữa = 5 rễ (c5-T1).\nC.tk gian cốt trước là nhánh cho các cơ gấp các ngón sâu ( nửa\nngoài ) gấp ngón cái dài và sấp vuông của tk giữa=>nhánh cơ TK\ngiữa: cơ gấp cổ tay quay; Cơ sấp tròn; cơ gan tay dài; cơ gấp các\nngón nông.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/cc46293428b8a7826df2.webp"
+      ],
+      "sourcePage": 40,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-31",
+      "number": 31,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về nhánh của tk giữa:",
+      "options": [
+        {
+          "id": "A",
+          "text": "các nhánh cơ của nó tách ra ở vùng hố khuỷu."
+        },
+        {
+          "id": "B",
+          "text": "nhánh bì gan tay của nó tách ra ở phần dưới cẳng tay."
+        },
+        {
+          "id": "C",
+          "text": "nhánh gian cốt trước của nó đi cùng động mạch gian cốt trước."
+        },
+        {
+          "id": "D",
+          "text": "nhánh mô cái của nó không chi phối cơ khép ngón tay cái."
+        }
+      ],
+      "answers": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "explanation": "D.nhánh mô cái của nó không chi phối cơ khép ngón tay cái=>do\nTk trụ.\nTK trụ chi phối Cơ khép ngón cái; Đầu sâu Cơ gấp ngón cái ngắn\n=>Liệt Giữa: Mất đối chiếu ngón cái.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/f49b857d6dd89ad20833.webp"
+      ],
+      "sourcePage": 41,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-32",
+      "number": 32,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về liên quan của tk giữa:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó bắt chéo trước động mạch cánh tay."
+        },
+        {
+          "id": "B",
+          "text": "ở khuỷu, nó nằm sau trẽ gân cơ nhị đầu."
+        },
+        {
+          "id": "C",
+          "text": "nó đi giữa hai cơ sấp tròn."
+        },
+        {
+          "id": "D",
+          "text": "ở cẳng tay, càng xuống dưới nó càng gần bờ ngoài cơ gấp các ngón nông rồi vòng ra mặt trước bó gân đi vào ngón tay trỏ của cơ này."
+        }
+      ],
+      "answers": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "explanation": "A.nó bắt chéo trước động mạch cánh tay=>ở giữa cánh tay.\nỞ cánh tay, TK giữa đi cạnh ĐM cánh tay, trước tiên\nnằm ngoài ĐM, tiếp đó bắt chéo trước ĐM (ở gần chỗ\nbám tận của cơ quạ- cánh tay) rồi đi xuống ở trong ĐM\ntới tận hố khuỷu.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/79df50c30f5546db9fbe.webp",
+        "/kb/dr-lam/images/1a0db6d549f2b4229f8f.webp"
+      ],
+      "sourcePage": 42,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-33",
+      "number": 33,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về các dấu hiệu của chèn ép thần kinh giữa trong ống cổ tay:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nhánh gan tay tk giữa không bị ảnh hưởng do đi trước hãm gân gấp, mô cái không mất cảm giác."
+        },
+        {
+          "id": "B",
+          "text": "yếu cử động gấp các ngón tay 1,2,3."
+        },
+        {
+          "id": "C",
+          "text": "cử động gấp bàn tay và sấp cẳng tay bình thường."
+        },
+        {
+          "id": "D",
+          "text": "tê bì và dị cảm ở ba ngón tay rưỡi phía ngoài."
+        }
+      ],
+      "answers": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "explanation": "B.yếu cử động gấp các ngón tay 1,2,3=>cơ gấp ngón cái và cơ giun\n1,2.\nC.cử động gấp bàn tay và sấp cẳng tay bình thường=>các nhánh\ncơ ở trên cao.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/c207bdc5ebc34138f8db.webp",
+        "/kb/dr-lam/images/717d27448d1325b318e9.webp",
+        "/kb/dr-lam/images/d658cc3e8d7e9a0fbcf1.webp"
+      ],
+      "sourcePage": 45,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-34",
+      "number": 34,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về thần kinh cơ bì:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó chứa các sợi từ ngành trước các tk sống C5,6,7."
+        },
+        {
+          "id": "B",
+          "text": "nó chi phối cho 2 cơ gấp cẳng tay và một cơ gấp cánh tay."
+        },
+        {
+          "id": "C",
+          "text": "nó cảm giác cho mặt trong cẳng tay."
+        },
+        {
+          "id": "D",
+          "text": "nó bị ảnh hưởng nếu tổn thương các rễ C8 và N1 của đám rối cánh tay."
+        }
+      ],
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "A.nó chứa các sợi từ ngành trước các tk sống C5,6,7=>bó ngoài.\nB.nó chi phối cho 2 cơ gấp cẳng tay và một cơ gấp cánh tay=>cơ\nnhị đầu, cơ cánh tay + cơ quạ cánh tay.\ncơ cánh tay: gấp cẳng tay\ncơ quạ- cánh tay: gấp cánh tay\ncó nhị đầu: gấp cả cánh tay, cẳng tay ( nhưng chắc cẳng tay ưu thế\nhơn).\nC.nó cảm giác cho mặt trong cẳng tay=>cho mặt ngoài cẳng tay\n(TK bì cẳng tay ngoài).",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/57fae9720608306cd2a4.webp",
+        "/kb/dr-lam/images/ac09af595a9d36156e04.webp"
+      ],
+      "sourcePage": 47,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-35",
+      "number": 35,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về thần kinh cơ bì:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó xuyên qua cơ quạ cánh tay."
+        },
+        {
+          "id": "B",
+          "text": "gần khuỷu, nó xuyên qua mạc và đi vào da ở bờ ngoài gân cơ nhị đầu."
+        },
+        {
+          "id": "C",
+          "text": "nhánh cơ gần ( cao )nhất của nó đi vào cơ quạ cánh tay."
+        },
+        {
+          "id": "D",
+          "text": "ở cánh tay nó đi giữa cơ nhị đầu và cơ cánh tay."
+        }
+      ],
+      "answers": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "explanation": "B.gần khuỷu, nó xuyên qua mạc và đi vào da ở bờ ngoài gân cơ nhị\nđầu=>bờ ngoài gân nhị đầu --> xuống cẳng tay rồi.\nC.nhánh cơ gần ( cao )nhất của nó đi vào cơ quạ cánh tay=>xuyên\nqua cơ quạ ---> cho nhánh gần nhất thôi.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/bfecbcabb7c74d6867eb.webp"
+      ],
+      "sourcePage": 49,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-36",
+      "number": 36,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về tk nách:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó chi phối phần dưới của vùng da che phủ trên cơ delta."
+        },
+        {
+          "id": "B",
+          "text": "nhánh sau của nó chi phối cho phần trước cơ delta."
+        },
+        {
+          "id": "C",
+          "text": "nó đi qua lỗ tứ giác cùng động mạch mũ cánh tay trước."
+        },
+        {
+          "id": "D",
+          "text": "nó chứa các sợi từ ngành trước các thần kinh sống C5,6."
+        }
+      ],
+      "answers": [
+        "A",
+        "D"
+      ],
+      "explanation": "A.nó chi phối phần dưới của vùng da che phủ trên cơ delta=>nhánh\ntrước tk nách.\nB.nhánh sau của nó chi phối cho phần trước cơ delta=>nhánh\ntrước, nhánh sau cho phần sau và cơ tròn bé\nNhánh trước--> vùng da phủ trên phần dưới Cơ delta\nNhánh sau --> trở thành TK bì cánh tay trên ngoài :  vùng da phủ\nphần dưới cơ delta và phần trên đầu dài cơ tam đầu.\nC.nó đi qua lỗ tứ giác cùng động mạch mũ cánh tay trước=>cùng\nĐM mũ cánh tay sau.\nD.nó chứa các sợi từ ngành trước các thần kinh sống C5,6=>bó sau\n(C5-8, N1).",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/5c9c19e3598f8d82ba29.webp",
+        "/kb/dr-lam/images/38d23ded2612969ebab6.webp"
+      ],
+      "sourcePage": 50,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-37",
+      "number": 37,
+      "stem": "Tìm đáp án đúng nhất cho câu hỏi sau: về tk nách:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó có thể bị tổn thương trong gãy thân xương cánh tay."
+        },
+        {
+          "id": "B",
+          "text": "nó có thể bị tổn thương trong trật khớp vai ra trước và xuống dưới."
+        },
+        {
+          "id": "C",
+          "text": "ở nách , nó nằm ở trong thần kinh quay."
+        },
+        {
+          "id": "D",
+          "text": "thân chính tk nách tách ra một nhánh cho khớp vai."
+        },
+        {
+          "id": "E",
+          "text": "Cả B và D đúng."
+        }
+      ],
+      "answers": [
+        "E"
+      ],
+      "explanation": "A. nó có thể bị tổn thương trong gãy thân xương cánh tayà gãy thân\nxương cánh tay là gãy từ đầu bám cơ ngực lớn đến trên nếp khuỷu\n5cm.\nC.ở nách , nó nằm ở trong thần kinh quay=>nằm ngoài quay,sau ĐM\nnách ,trước cơ dưới vai.\nD. thân chính tk nách tách ra một nhánh cho khớp vai à nhánh sau\nthần kinh nách tách nhánh đi đến khớp vai, cơ tròn bé, da bờ dưới\ncơ delta, da phủ trên đầu dài cơ tam đầu.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/07e993fc06d5cb43ec04.webp",
+        "/kb/dr-lam/images/72b0dddbc842230392fc.webp"
+      ],
+      "sourcePage": 52,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-38",
+      "number": 38,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về đám rối cánh tay:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó không chi phối cho cơ thang."
+        },
+        {
+          "id": "B",
+          "text": "tk dưới vai dưới tách ra từ bó ngoài."
+        },
+        {
+          "id": "C",
+          "text": "các cơ ngực lớn và bé do nhánh bên từ các bó ngoài và trong chi phối."
+        },
+        {
+          "id": "D",
+          "text": "đám rối có 5 nhánh tận và nhiều nhánh bên."
+        }
+      ],
+      "answers": [
+        "A",
+        "C",
+        "D"
+      ],
+      "explanation": "A.nó không chi phối cho cơ thang=>TK XI.\nB.tk dưới vai dưới tách ra từ bó ngoài=>từ bó sau.\nTK dưới vai dưới: Cơ tròn lớn\nBó sau.\nC.các cơ ngực lớn và bé do nhánh bên từ các bó ngoài và trong chi\nphối=>Tk ngực ngoài , TK ngực trong.\nD.đám rối có 5 nhánh tận và nhiều nhánh bên=>quay, nách, cơ bì,\ntrụ, giữa.\nSGK tính cả TK cảnh tay trong, TK cẳng tay trong là nhánh tận.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/a39a0610164ba3b7faa9.webp",
+        "/kb/dr-lam/images/204f428e9a0be665545f.webp"
+      ],
+      "sourcePage": 54,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-39",
+      "number": 39,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về các tk bì trong của chi trên:",
+      "options": [
+        {
+          "id": "A",
+          "text": "tk bì cánh tay trong không chi phối cho toàn bộ mặt trong cánh tay."
+        },
+        {
+          "id": "B",
+          "text": "tk bì cẳng tay trong chỉ cảm giác cho mặt trong cẳng tay."
+        },
+        {
+          "id": "C",
+          "text": "tk bì cẳng tay trong xuyên qua mạch sâu đi vào da từ nền nách."
+        },
+        {
+          "id": "D",
+          "text": "cả hai tk này cùng chứa các sợi từ các tk sống C8 và N1."
+        }
+      ],
+      "answers": [
+        "A",
+        "D"
+      ],
+      "explanation": "A.tk bì cánh tay trong không chi phối cho toàn bộ mặt trong cánh\ntay=>có TK gian sườn II nữa.\nB.tk bì cẳng tay trong chỉ cảm giác cho mặt trong cẳng tay=>cả\nmặt trong cánh tay nữa.\nC.tk bì cẳng tay trong xuyên qua mạch sâu đi vào da từ nền\nnách=>từ giữa cánh tay.\nD.cả hai tk này cùng chứa các sợi từ các tk sống C8 và N1=>từ bó\ntrong.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/637498326050f989efac.webp"
+      ],
+      "sourcePage": 57,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-40",
+      "number": 40,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về liên quan của động mách nách:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó được cơ ngực lớn chia thành ba đoạn."
+        },
+        {
+          "id": "B",
+          "text": "nó đi dọc ở phía ngoài tĩnh mạch nách."
+        },
+        {
+          "id": "C",
+          "text": "nó được tiếp tục bởi động mạch cánh tay ở ngang bờ dưới cơ ngực to."
+        },
+        {
+          "id": "D",
+          "text": "sau cơ ngực bé , tên các bó của đám rối cánh tay không thể hiện vị trí của mỗi bó so với động mạch nách."
+        }
+      ],
+      "answers": [
+        "B",
+        "C"
+      ],
+      "explanation": "A.nó được cơ ngực lớn chia thành ba đoạn=>cơ ngực bé chia 3\nđoạn.\nB.nó đi dọc ở phía ngoài tĩnh mạch nách=>ĐM nách đi trên ngoài\nTM nách.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/6247607f3716f034125d.webp",
+        "/kb/dr-lam/images/c8d32c6a7f4997b5ec83.webp",
+        "/kb/dr-lam/images/85b37113692245a95242.webp"
+      ],
+      "sourcePage": 58,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-41",
+      "number": 41,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về nhánh bên và tiếp nối của động mạch nách:",
+      "options": [
+        {
+          "id": "A",
+          "text": "động mạch ngực ngoài tách ra ở đoạn sau cơ ngực bé."
+        },
+        {
+          "id": "B",
+          "text": "động mạch mũ cánh tay sau của động mạch nách tiếp nối với các động mạch dưới vai sau và trên vai của động mạch dưới đòn tạo nên vòng nối quanh vai."
+        },
+        {
+          "id": "C",
+          "text": "các nhánh mũ cánh tay trước và sau tách ra ở đoạn dưới cơ ngực bé."
+        },
+        {
+          "id": "D",
+          "text": "để chi trên không bị hoại tử , cần thắt động mạch nách ở dưới nguyên ủy của động mạch dưới vai."
+        }
+      ],
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "==>ĐM nách có 6 nhánh:\n- ĐM ngực trên: tách ở đoạn Trên cơ ngực bé\n- ĐM ngực- cùng vai, ĐM ngực ngoài:  Sau cơ ngực bé\n- ĐM dưới vai, ĐM mũ ctay trc-sau : Dưới cơ ngực bé.\nB. động mạch mũ cánh tay sau của động mạch nách tiếp nối với\ncác động mạch dưới vai sau và trên vai của động mạch dưới đòn\ntạo nên vòng nối quanh vai à động mạch vai trên+ mũ cánh tay sau+\nnhánh cùng vai của động mạch ngực cùng vaià bó mạch của khớp\nvai.\nC.các nhánh mũ cánh tay trước và sau tách ra ở đoạn dưới cơ ngực\nbé=>Thắt ở trên ĐM dưới vai.\nD.để chi trên không bị hoại tử , cần thắt động mạch nách ở dưới\nnguyên ủy của động mạch dưới vai=>trên.\nSách cũ thì cơ ngực béo  chia động mạch nách thành 3 đoạn trên,\nsau, và dưới. Động mạch mũ cánh tay trước, sau, dm dưới vai tách ở\nđoạn dưới cơ ngực bé.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 61,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-42",
+      "number": 42,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về động mạch cánh tay:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó chạy tiếp theo động mạch nách và có cùng đường định hướng như động mạch nách."
+        },
+        {
+          "id": "B",
+          "text": "nó chia thành các nhánh tận ở ngang mức cổ xương quay."
+        },
+        {
+          "id": "C",
+          "text": "nó chạy dọc sau bờ trong cơ nhị đầu."
+        },
+        {
+          "id": "D",
+          "text": "không sờ thấy mạch đập của nó vì nó bị vây quanh bởi các cơ."
+        }
+      ],
+      "answers": [
+        "A",
+        "B",
+        "C"
+      ],
+      "explanation": "C.nó chạy dọc sau bờ trong cơ nhị đầu=>trong ống cánh tay.\nD.không sờ thấy mạch đập của nó vì nó bị vây quanh bởi các\ncơ=>đoạn ở Ống cánh tay: bên trong chỉ có Da.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/3a876a2056aae4348451.webp"
+      ],
+      "sourcePage": 62,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-43",
+      "number": 43,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về động mạch cánh tay:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó thường tận cùng ở ngang mức cổ xương quay."
+        },
+        {
+          "id": "B",
+          "text": "nhánh lớn nhất của nó là bên trụ trên."
+        },
+        {
+          "id": "C",
+          "text": "nó đi xuống cùng thần kinh giữa, lúc đầu ở trong , sau bắt chéo sau tk này để nằm phía ngoài."
+        },
+        {
+          "id": "D",
+          "text": "nó đi dọc ở phía trong tk bì cẳng tay trong."
+        }
+      ],
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "B.nhánh lớn nhất của nó là bên trụ trên=>là ĐM cánh tay sâu.\nC.nó đi xuống cùng thần kinh giữa, lúc đầu ở trong , sau bắt chéo\nsau tk này để nằm phía ngoài=>nhìn hình phía trên.\nTK giữa: ngoài -> trong ĐM cánh tay.\nD.nó đi dọc ở phía trong tk bì cẳng tay trong=>ở bên ngoài.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/f8aa4287c4da63fa6bd3.webp",
+        "/kb/dr-lam/images/6fa0e2c699be672d097e.webp"
+      ],
+      "sourcePage": 63,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-44",
+      "number": 44,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về động mạch quay:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó trở thành cung gan tay sâu sau khi tách ra động mạch chính ngón cái."
+        },
+        {
+          "id": "B",
+          "text": "nó đi qua khoang gian xương đốt bàn tay thứ nhất trước khi vào gan tay."
+        },
+        {
+          "id": "C",
+          "text": "nó tách ra nhánh mu cổ tay lúc đi qua vùng mu cổ tay."
+        },
+        {
+          "id": "D",
+          "text": "ở cẳng tay nó đi giữa cơ cánh tay quay và các cơ vùng cẳng tay trước."
+        }
+      ],
+      "answers": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "explanation": "A.nó trở thành cung gan tay sâu sau khi tách ra động mạch chính\nngón cái => hoặc quay ngón trỏ\nC.nó tách ra nhánh mu cổ tay lúc đi qua vùng mu cổ tay=>Lúc đi ở\nmu cổ tay, ĐM quay tách ra một hoặc hai nhánh mu cổ tay và các\nnhánh đi đến\u0000 cả hai bờ của mu ngón cái và bờ ngoài mu ngón trỏ\nA456\n- Các nhánh mu cổ tay chạy ngang vào trong => để tiếp nối nhánh\nmu cổ tay cúa ĐM trụ và nhánh tận của ĐM gian cốt trước cung mu\ncổ tay.\nD.ở cẳng tay nó đi giữa cơ cánh tay quay và các cơ vùng cẳng tay\ntrước=>cơ sấp tròn ở 1/3 trên và cơ gấp cổ tay quay ở 2/3 dưới.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 66,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-45",
+      "number": 45,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về động mạch trụ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "ở phần trên cẳng tay , nó đi sau các cơ sấp tròn , gấp cổ tay quay và gan tay dài."
+        },
+        {
+          "id": "B",
+          "text": "nhánh gian cốt chung của động mạch trụ thường chia ra hai nhánh gian cốt trước và sau."
+        },
+        {
+          "id": "C",
+          "text": "nó trở thành cung gan tay nông sau khi tách ra nhánh gan tay sâu."
+        },
+        {
+          "id": "D",
+          "text": "nó bắt chéo sau tk giữa trên đường đi."
+        }
+      ],
+      "answers": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "explanation": "A. ở phần trên cẳng tay , nó đi sau các cơ sấp tròn , gấp cổ tay quay\nvà gan tay dài à xem atlas.\nD. nó bắt chéo sau tk giữa trên đường đi à đm trụ bắt chéo sau thần\nkinh giữa ở 1/3 trên cẳng tay.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/eea6ac5fd850b7940424.webp"
+      ],
+      "sourcePage": 66,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-46",
+      "number": 46,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về động mạch trụ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó đi sát bên ngoài tk trụ trên suốt đường đi."
+        },
+        {
+          "id": "B",
+          "text": "ở phần trên cẳng tay nó đi sau cơ gấp các ngón nông và trước cơ gấp các ngón sâu."
+        },
+        {
+          "id": "C",
+          "text": "nó là nguồn dẫn máu chính tới cung gan tay nông."
+        },
+        {
+          "id": "D",
+          "text": "nó cấp máu cho tk giữa qua nhánh từ động mạch gian cốt trước."
+        }
+      ],
+      "answers": [
+        "B",
+        "C",
+        "D"
+      ],
+      "explanation": "Sau sấp trònà giữa gấp ngón nông và gấp ngón sâuà2/3 dưới được\nche phủ bởi cơ gấp cổ tay trụ, trước cơ gấp các ngón sâuà giữa\ngân cơ gấp cổ tay trụ và cơ gấp các ngón nôngà tk trụ chạy sát\nphía trong đm trụ ở 2/3 dưới\nĐM quặt ngược trụ( nhánh trước, nhánh sau)\nĐM gian cốt chung( động mạch gian cốt trước, động mạch gian\ncốt sau( có nhánh động mạch gian cốt quặt ngược))\nNhánh gan cổ tay, mu cổ tay\nNhánh gan tay sâu.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/0d332d45d163fbd8fa04.webp"
+      ],
+      "sourcePage": 68,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-47",
+      "number": 47,
+      "stem": "Vòng nối động mạch quanh vai có sự tham gia của tất cả các động mạch sau trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "động mạch lưng vai."
+        },
+        {
+          "id": "B",
+          "text": "động mạch trên vai."
+        },
+        {
+          "id": "C",
+          "text": "động mạch dưới vai."
+        },
+        {
+          "id": "D",
+          "text": "động mạch bên trụ trên."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.động mạch lưng vai =>vai sau =>ĐM dưới đòn.\nB.động mạch trên vai=>nhánh thân giáp cổ/ĐM dưới đòn.\nC.động mạch dưới vai=>Đm nách,tách ra ĐM mũ vai.\nD.động mạch bên trụ trên=>huộc vòng nối quanh khuỷu.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 69,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-48",
+      "number": 48,
+      "stem": "Các cơ sau đây đều do các nhánh bên từ bó sau đám rối cánh tay chi phối trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "cơ dưới vai."
+        },
+        {
+          "id": "B",
+          "text": "cơ tròn rộng."
+        },
+        {
+          "id": "C",
+          "text": "cơ lưng rộng."
+        },
+        {
+          "id": "D",
+          "text": "cơ dưới gai."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.cơ dưới vai=>Tk dưới vai.\nB.cơ tròn rộng=>Tk dưới vai dưới.\nC.cơ lưng rộng=>Tk ngực lưng.\nD.cơ dưới gai=>Tk trên vai thuộc thân trên,TK trên vai ---> cơ trên\ngai, cơ dưới gai.\nBó sau:\n- TK dưới vai -> Cơ dưới vai\n- TK dưới vai dưới -> cơ tròn lớn\n- TK ngực lưng --> Cơ lưng rộng .",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 70,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-49",
+      "number": 49,
+      "stem": "Một bệnh nhân có hội chứng ống cổ tay thì tất cả các cấu trúc sau bị chèn ép trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "gân cơ gấp ngón tay cái dài."
+        },
+        {
+          "id": "B",
+          "text": "tk trụ."
+        },
+        {
+          "id": "C",
+          "text": "tk giữa."
+        },
+        {
+          "id": "D",
+          "text": "gân cơ gấp các ngón nông."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.tk trụ=>đi trước hãm gân gấp.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/22df74751db30156775a.webp"
+      ],
+      "sourcePage": 70,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-50",
+      "number": 50,
+      "stem": "Nếu các sợi tk trong các rễ C5 và C6 của đám rối cánh tay bị tổn thương ( liệt Erb – Duchenne ), liệt xảy ra ở tất cả các cơ sau đây trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "cơ gấp cổ tay trụ."
+        },
+        {
+          "id": "B",
+          "text": "Cơ cánh tay."
+        },
+        {
+          "id": "C",
+          "text": "Cơ cánh tay quay."
+        },
+        {
+          "id": "D",
+          "text": "Cơ nhị đầu cánh tay."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Đáp án: A. Cơ gấp cổ tay trụ\nCơ gấp cổ tay trụ do thần kinh trụ chi phối (rễ C8–T1), không nhận\nsợi từ C5–C6, nên không bị ảnh hưởng trong liệt Erb–Duchenne.\nB. Cơ cánh tay: Do thần kinh cơ bì (C5–C6) chi phối, thường bị liệt.\nC. Cơ cánh tay quay: Do thần kinh quay (C5–C6) chi phối, bị ảnh\nhưởng trong tổn thương C5–C6.\nD. Cơ nhị đầu cánh tay: Do thần kinh cơ bì (C5–C6) chi phối, dễ bị\nliệt trong hội chứng Erb.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 71,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-51",
+      "number": 51,
+      "stem": "Liệt mà làm mất khớp gian đốt ngón xa của ngón trỏ cũng sẽ gây nên tất cả các tình trạng sau đây trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "liệt tương tự của ngón tay giữa."
+        },
+        {
+          "id": "B",
+          "text": "teo mô cái."
+        },
+        {
+          "id": "C",
+          "text": "mất cảm giác trên phần xa của ngón tay trỏ."
+        },
+        {
+          "id": "D",
+          "text": "liệt toàn bộ của ngón cái."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.liệt tương tự của ngón tay giữa=>Liệt 2 bó ngoài cơ gấp các\nngón sâu => Tk giữa.\nC.mất cảm giác trên phần xa của ngón tay trỏ=>Tk giữa cảm giác\ncho mặt gan tay 3,5 ngón ngoài.\nD.liệt toàn bộ của ngón cái=>Cơ khép ngón cái và đầu sâu cơ gấp\nngắn ngón cái do TK trụ.\n==>Liệt Cơ gấp ngón sâu: TK giữa.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/3cb9a4f482af137c5ca3.webp"
+      ],
+      "sourcePage": 72,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-52",
+      "number": 52,
+      "stem": "Khi tk giữa bị chèn ép trong ống cổ tay do viêm bao hoạt dịch của các gân gấp chung, các mô tả sau về dấu hiệu tổn thương thần kinh đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "các cơ gian cốt gan tay và mu tay bình thường."
+        },
+        {
+          "id": "B",
+          "text": "cơ khép ngón cái không bị teo."
+        },
+        {
+          "id": "C",
+          "text": "mô cái bẹt."
+        },
+        {
+          "id": "D",
+          "text": "cảm giác ở một ngón tay rưỡi bên trong giảm."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.các cơ gian cốt gan tay và mu tay bình thường=>Do TK trụ.\nB.cơ khép ngón cái không bị teo=>TK trụ,TK trụ chi phối cơ khép\nngón cái và 1 phần Cơ gấp ngón cái.\nC.mô cái bẹt=>TK giữa chi phối các Cơ mô cái.\nD.cảm giác ở một ngón tay rưỡi bên trong giảm=>Cg 1,5 ngón bên\ntrong do TK trụ.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 73,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-53",
+      "number": 53,
+      "stem": "Tất cả mô tả sau đây về tk nách đều đúng, trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó tách ra từ bó sau đám rối cánh tay."
+        },
+        {
+          "id": "B",
+          "text": "nó nằm sát với cổ phẫu thuật xương cánh tay."
+        },
+        {
+          "id": "C",
+          "text": "nó chi phối cho cơ tròn lớn."
+        },
+        {
+          "id": "D",
+          "text": "nó có thể bị tổn thương khi chỏm xương cánh tay trật xuống dưới."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.nó tách ra từ bó sau đám rối cánh tay=>Bó sau tách ra TK nách và\nTK quay.\nC.nó chi phối cho cơ tròn lớn -> chi phối cho cơ tròn bé và cơ delta.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/b9087edb34d11087dbe0.webp"
+      ],
+      "sourcePage": 74,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-54",
+      "number": 54,
+      "stem": "Tổn thương thần kinh giữa dần đến liệt tất cả các cơ sau đây trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "cơ gấp các ngón nông."
+        },
+        {
+          "id": "B",
+          "text": "cơ đối chiếu ngón cái."
+        },
+        {
+          "id": "C",
+          "text": "hai cơ giun bên trong."
+        },
+        {
+          "id": "D",
+          "text": "cơ sấp tròn."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "hai cơ giun bên trong -> do tk trụ, tk giữa chỉ 2 cơ giun bên ngoài",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/159e399d7bef8e029349.webp"
+      ],
+      "sourcePage": 75,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-55",
+      "number": 55,
+      "stem": "Mô tả đúng về nhóm các cơ vận động đai ngực là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "cơ ngực bé nâng xương vai."
+        },
+        {
+          "id": "B",
+          "text": "tất cả các cơ nhóm này có đầu nguyên ủy không bám vào xương của chi trên."
+        },
+        {
+          "id": "C",
+          "text": "cơ răng trước khép xương vai."
+        },
+        {
+          "id": "D",
+          "text": "cơ thang do đám rối cánh tay chi phối."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.cơ ngực bé nâng xương vai=>Hạ xương va.\nB.tất cả các cơ nhóm này có đầu nguyên ủy không bám vào xương\ncủa chi trên=>nguyên uỷ bám vào xg thân mình.\nC.cơ răng trước khép xương vai=>giạng xg vai.\nD.cơ thang do đám rối cánh tay chi phối=>do TK sọ XI,cơ duy nhất\nkhông do ĐR cánh tay chi phối.\n==>(cơ dưới đòn, răng trước, ngực bé, cơ thang).\n[Ảnh chưa lưu được]\n[Ảnh chưa lưu được]",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 76,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-56",
+      "number": 56,
+      "stem": "Các mô tả sau đây về tk quay đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "mang các sợi từ ngành trước các tk sống từ c5 đến N1."
+        },
+        {
+          "id": "B",
+          "text": "chi phối cho các cơ ở mặt sau chi trên."
+        },
+        {
+          "id": "C",
+          "text": "tận cùng bằng hai nhánh nông và sâu khi đi đến rãnh tk quay."
+        },
+        {
+          "id": "D",
+          "text": "tách ra từ bó sau đám rối cánh tay."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.mang các sợi từ ngành trước các tk sống từ c5 đến N1=>(bó sau).\nC.tận cùng bằng hai nhánh nông và sâu khi đi đến rãnh tk\nquay=>tận cùng ở mỏm trên LCN.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/00760e70cca2195d4af5.webp"
+      ],
+      "sourcePage": 77,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-57",
+      "number": 57,
+      "stem": "Mô tả đúng về tk quay là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó đi qua lỗ tứ giác để đi vào vùng cánh tay sau."
+        },
+        {
+          "id": "B",
+          "text": "ở cánh tay nó xuyên qua vách gian cơ ngoài."
+        },
+        {
+          "id": "C",
+          "text": "nó đi sau mỏm trên lồi cầu ngoài xương cánh tay."
+        },
+        {
+          "id": "D",
+          "text": "nó đi giữa cơ cánh tay quay và cơ duỗi cổ tay quay dài ngay trước khi tận cùng."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.nó đi qua lỗ tứ giác để đi vào vùng cánh tay sau=>đi qua lỗ cách\ntay tam đầu cùng ĐM cánh tay sâu.\nC.nó đi sau mỏm trên lồi cầu ngoài xương cánh tay=>Đi trc mỏm\ntrên LCN, trong rãnh nhị đầu ngoài.\nD.nó đi giữa cơ cánh tay quay và cơ duỗi cổ tay quay dài ngay trước\nkhi tận cùng=>đi giữa cơ cánh tay quay và cơ cánh tay. (rãnh nhị\nđầu ngoài)",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/021e72ce239bfe551c3e.webp"
+      ],
+      "sourcePage": 78,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-58",
+      "number": 58,
+      "stem": "Các mô tả sau đây về nhánh của tk quay đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nhánh nông tk quay là 1 nhánh bì."
+        },
+        {
+          "id": "B",
+          "text": "nhánh sâu tk quay xuyên qua cơ ngửa."
+        },
+        {
+          "id": "C",
+          "text": "các nhánh bên tk quay chi phối cho 7 cơ."
+        },
+        {
+          "id": "D",
+          "text": "nhánh sâu tk quay có thể tổn thương khi gãy cổ xương quay."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.nhánh nông tk quay là 1 nhánh bì=>2 hoặc 3 rưỡi ngón tay bên\nngoài và phần mu tay tương ứng.\nC.các nhánh bên tk quay chi phối cho 7 cơ=>cho 4 cơ: cơ tam đầu,\ncơ khuỷu, cơ cánh tay quay, cơ duỗi cổ tay quay dài.\nD.nhánh sâu tk quay có thể tổn thương khi gãy cổ xương\nquay=>nhánh sâu vòng ra sau cổ xương quay xuống cẳng tay sau.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/598bf5f3dc54cbe116f7.webp",
+        "/kb/dr-lam/images/61e587b96eeab8b751f1.webp",
+        "/kb/dr-lam/images/094216d672823d5e58b5.webp"
+      ],
+      "sourcePage": 79,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-59",
+      "number": 59,
+      "stem": "Thành phần mà thần kinh quay hay nhánh của nó không có liên quan là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "rãnh tk quay xương cánh tay."
+        },
+        {
+          "id": "B",
+          "text": "động mạch cánh tay sâu."
+        },
+        {
+          "id": "C",
+          "text": "vách gian cơ ngoài của cánh tay."
+        },
+        {
+          "id": "D",
+          "text": "cơ nhị đầu cánh tay."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A. rãnh thần kinh quay xương cánh tay => Sai vì thần kinh quay đi\nqua rãnh thần kinh quay trên mặt sau của xương cánh tay, cùng với\nđộng mạch cánh tay sâu.\nB. động mạch cánh tay sâu => Sai vì thần kinh quay chạy cùng với\nđộng mạch cánh tay sâu trong rãnh thần kinh quay, do đó chúng có\nliên quan chặt chẽ.\nC. vách gian cơ ngoài của cánh tay => Sai vì thần kinh quay đi xuyên\nqua vách gian cơ ngoài trước khi phân nhánh xuống vùng cẳng tay.\nD.cơ nhị đầu cánh tay=>Tk quay chỉ đi giữa cơ cánh tay và cơ cánh\ntay quay. Cơ nhị đầu cánh tay thì được chi phối bởi thần kinh cơ bì,\nkhông liên quan đến tk quay hoặc nhánh của nó.\n[Ảnh chưa lưu được: Giải phẫu thần kinh quay 1]",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 81,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-60",
+      "number": 60,
+      "stem": "Tổn thương tk quay ở phần 3 dưới cánh tay sẽ ảnh hưởng đến những nhánh sau trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nhánh chi phối cơ ngửa."
+        },
+        {
+          "id": "B",
+          "text": "các nhánh chi phối cho các cơ duỗi bàn tay."
+        },
+        {
+          "id": "C",
+          "text": "nhánh bì cánh tay sau."
+        },
+        {
+          "id": "D",
+          "text": "nhánh nông."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C. nhánh bì cánh tay sau -> tách khi ở nách, cg giữa mặt sau cánh\ntay",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/72602c64b424a8cd6951.webp"
+      ],
+      "sourcePage": 82,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-61",
+      "number": 61,
+      "stem": "Dấu hiệu vuốt trụ sẽ rõ rệt hơn khi tk trụ tổn thương ở mức:",
+      "options": [
+        {
+          "id": "A",
+          "text": "ở nách."
+        },
+        {
+          "id": "B",
+          "text": "ở khuỷu."
+        },
+        {
+          "id": "C",
+          "text": "ở cánh tay."
+        },
+        {
+          "id": "D",
+          "text": "ở cổ tay."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.ở cổ tay=>do chỉ liệt các cơ giun, ko liệt cơ gấp.\n==>vuốt trụ: tổn thương 2 cơ giun trong\n( bình thường Cơ giun:gấp đốt bàn, duỗi đốt giữa,xa).",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/72602c64b424a8cd6951.webp"
+      ],
+      "sourcePage": 83,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-62",
+      "number": 62,
+      "stem": "Các mô tả sau về tk trụ đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó mang các sợi từ ngành trước các tk sống C8 và N1."
+        },
+        {
+          "id": "B",
+          "text": "nó xuyên qua vách gian cơ trong từ trước ra sau."
+        },
+        {
+          "id": "C",
+          "text": "nó đi giữa mỏm trên lồi cầu trong xương cánh tay và mỏm khuỷu xương trụ."
+        },
+        {
+          "id": "D",
+          "text": "nó đi sau hãm gân gấp cổ tay."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.nó mang các sợi từ ngành trước các tk sống C8 và N1=>bó trong.\nD.nó đi sau hãm gân gấp cổ tay -> đi trước hãm gân gấp.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 84,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-63",
+      "number": 63,
+      "stem": "Mô tả sau về các nhánh của tk trụ đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nhánh nông tk trụ không chi phối cơ nào."
+        },
+        {
+          "id": "B",
+          "text": "nhánh sâu tk trụ chi phối cho 1 phần các cơ mô cái gan tay."
+        },
+        {
+          "id": "C",
+          "text": "nhánh mu tay tk trụ chi phối cho da nửa trong mu bàn tay."
+        },
+        {
+          "id": "D",
+          "text": "các nhánh của tk trụ chi phối nửa trong cơ gấp các ngón tay sâu."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.nhánh nông tk trụ không chi phối cơ nào=>Chi phối cơ gan tay\nngắn.\nB.nhánh sâu tk trụ chi phối cho 1 phần các cơ mô cái gan tay=>cơ\nkhép ngón cái và đầu sâu cơ gấp ngón cái.\nD.các nhánh của tk trụ chi phối nửa trong cơ gấp các ngón tay\nsâu=>2 bó trong.\n==>Nhánh nông TK trụ: Chi phối Các cơ mô út.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/af171031506926310a38.webp",
+        "/kb/dr-lam/images/84dd2de796e2190cd725.webp"
+      ],
+      "sourcePage": 85,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-64",
+      "number": 64,
+      "stem": "Tổn thương tk trụ ở vùng gan cổ tay, nhánh nào sau đây không bị ảnh hưởng:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nhánh sâu."
+        },
+        {
+          "id": "B",
+          "text": "nhánh nông."
+        },
+        {
+          "id": "C",
+          "text": "nhánh bì mu tay."
+        },
+        {
+          "id": "D",
+          "text": "nhánh gan tay."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.nhánh bì mu tay=>tách ra ở 5cm trên cổ tay rồi rasau, dưới gân cơ\ngấp cổ tay trụ.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/922f6f35622ccad86c05.webp",
+        "/kb/dr-lam/images/8feda5e91abe53818ca0.webp"
+      ],
+      "sourcePage": 86,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-65",
+      "number": 65,
+      "stem": "Tk trụ có tất cả các liên quan sau trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "đi ở phía trong các động mạch nách và cánh tay."
+        },
+        {
+          "id": "B",
+          "text": "xuyên qua vách gian cơ cánh tay trong cùng động mạch bên trụ trên."
+        },
+        {
+          "id": "C",
+          "text": "đi giữa hai đầu cơ gấp cổ tay trụ."
+        },
+        {
+          "id": "D",
+          "text": "ở cẳng tay, đi về phía ngoài động mạch trụ."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.ở cẳng tay, đi về phía ngoài động mạch trụ=>Phía trong ĐM trụ.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/61a8032a6d0fde2d332f.webp"
+      ],
+      "sourcePage": 88,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-66",
+      "number": 66,
+      "stem": "Các mô tả sau về tk giữa đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó chứa các sợi từ ngành trước các tk sống C5-C8 và N1."
+        },
+        {
+          "id": "B",
+          "text": "nó đi qua ống cổ tay."
+        },
+        {
+          "id": "C",
+          "text": "nhánh tk gian cốt trước của nó chi phối cơ gấp các ngón nông."
+        },
+        {
+          "id": "D",
+          "text": "nó đi sau cơ gấp các ngón nông."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.nhánh tk gian cốt trước của nó chi phối cơ gấp các ngón\nnông=>chi phối 3 cơ lớp sâu: sấp vuông, nửacơ gấp các ngón sâu,\ngấp ngón cái dài.\nD.nó đi sau cơ gấp các ngón nông=>đi giữa 2 cơ gấp ngón nông và\nsâu.\n==>Nhánh  Cơ: lớp 1, 2: (nông)\nTK gian cốt trước: lớp 3,4 ( sâu).",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/81bdd0071021ae968438.webp"
+      ],
+      "sourcePage": 89,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-67",
+      "number": 67,
+      "stem": "Các mô tả sau về các nhánh của tk giữa đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó không phân nhánh bên lúc đi qua cánh tay và nách."
+        },
+        {
+          "id": "B",
+          "text": "nhánh bì gan tay tách ra ở phần dưới cẳng tay."
+        },
+        {
+          "id": "C",
+          "text": "nhánh gian cốt trước đi cùng động mạch gian cốt trước."
+        },
+        {
+          "id": "D",
+          "text": "nhánh mô cái chi phối các cơ giun 1,2."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "B.nhánh bì gan tay tách ra ở phần dưới cẳng tay=>Tách ra ngay trên\nhãm gân gấp.\nD.nhánh mô cái chi phối các cơ giun 1,2=>Do tk gan ngón tay riêng\nchi phối.\n==>TK giữa tận cùng ở bờ dưới hãm gân gấp bằng cách chia thành\nmột nhánh cơ\u0000 các cơ mô cái và các nhánh gan ngón tay.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/5f558b0250fb7a71d967.webp"
+      ],
+      "sourcePage": 90,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-68",
+      "number": 68,
+      "stem": "Liên quan đúng của tk giữa là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó bắt chéo sau động mạch cánh tay."
+        },
+        {
+          "id": "B",
+          "text": "ở khuỷu nó nằm sau trẽ gân cơ nhị đầu."
+        },
+        {
+          "id": "C",
+          "text": "nó đi sau cơ sấp tròn."
+        },
+        {
+          "id": "D",
+          "text": "ở cẳng tay, càng xuống dưới nó càng gần bờ trong cơ gấp các ngón nông."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.nó bắt chéo sau động mạch cánh tay=>Bắt chéo trc ĐM cánh tay\nở giữa cánh tay.\nB.ở khuỷu nó nằm sau trẽ gân cơ nhị đầu=>Nằm trong rãnh nhị đầu\ntrong, ngay sau gân cơ nhị đầu.\nC.nó đi sau cơ sấp tròn=>Đi giữa 2 đầu cơ sấp tròn,nằm trên đúng\nhơn.\nD.ở cẳng tay, càng xuống dưới nó càng gần bờ trong cơ gấp các\nngón nông=>Nó lộ ra ở bờ ngoài cơ gấp các ngón nông.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/43744604fd1882ca2caf.webp"
+      ],
+      "sourcePage": 92,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-69",
+      "number": 69,
+      "stem": "Chèn ép tk giữa trong ống cổ tay (sau hãm gân gấp) gây những dấu hiệu sau trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "mất cảm giác mô cái gan tay."
+        },
+        {
+          "id": "B",
+          "text": "yếu cử động gấp các ngón tay 1.2.3."
+        },
+        {
+          "id": "C",
+          "text": "các nhánh chi phối các cơ gấp bàn tay và sấp cẳng tay không bị ảnh hưởng."
+        },
+        {
+          "id": "D",
+          "text": "tê bì và dị cảm ở 3 ngón tay rưỡi phía ngoài."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.mất cảm giác mô cái gan tay=>Nhánh gan tay đi trước hãm gân\ngấp.\nB.yếu cử động gấp các ngón tay 1.2.3=>Chi phối cơ giun 1,2 và đầu\nnông cơ gấp ngón cái ngắn.\nC.các nhánh chi phối các cơ gấp bàn tay và sấp cẳng tay không bị\nảnh hưởng=>ở trên cẳng tay.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 93,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-70",
+      "number": 70,
+      "stem": "Các mô tả về tk cơ bì đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó chứa các sợi từ ngành trước các tk sống C6.7.8."
+        },
+        {
+          "id": "B",
+          "text": "Nó chi phối cho các cơ gấp cẳng tay."
+        },
+        {
+          "id": "C",
+          "text": "nó cảm giác cho mặt ngoài cẳng tay."
+        },
+        {
+          "id": "D",
+          "text": "tk cơ bì chứa các sợi từ các rễ trên của đám rối cánh tay."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.nó chứa các sợi từ ngành trước các tk sống C6.7.8=>Bó ngoài\n(C5,C6,C7).\nB.Nó chi phối cho các cơ gấp cẳng tay => 2 cơ chính trong số 4 cơ\n=>Cơ nhị đầu và cơ cánh tay(cơ sấp tròn (tk giữa), cơ cánh tay quay\n(tk quay)),\nC.nó cảm giác cho mặt ngoài cẳng tay=>Nhánh tận là tk bì cẳng\ntay ngoài,\nD.tk cơ bì chứa các sợi từ các rễ trên của đám rối cánh tay=>Nhánh\ntrc : thân trên + thân giữa => bó ngoài.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 94,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-71",
+      "number": 71,
+      "stem": "Mô tả đúng về tk cơ bì là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó xuyên qua cơ tròn to."
+        },
+        {
+          "id": "B",
+          "text": "gần khuỷu, nó xuyên qua mạc và đi vào da ở bờ trong gân cơ nhị đầu."
+        },
+        {
+          "id": "C",
+          "text": "nhánh cơ gần (cao) nhất của nó đi vào cơ quạ cánh tay."
+        },
+        {
+          "id": "D",
+          "text": "ở cánh tay, nó đi giữa xương cánh tay và cơ cánh tay."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.nó xuyên qua cơ tròn to=>xuyên qua cơ quạ cánh tay.\nB.gần khuỷu, nó xuyên qua mạc và đi vào da ở bờ trong gân cơ nhị\nđầu=>ở bờ ngoài cơ nhị đầu.\nD.ở cánh tay, nó đi giữa xương cánh tay và cơ cánh tay=>Đi giữa cơ\ncánh tay và cơ nhị đầu.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/cc8a9235776ffb209a1f.webp",
+        "/kb/dr-lam/images/2c4184f70aabfd12902f.webp"
+      ],
+      "sourcePage": 95,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-72",
+      "number": 72,
+      "stem": "Các mô tả sau về tk nách đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó chi phối toàn bộ vùng da phủ trên cơ delta."
+        },
+        {
+          "id": "B",
+          "text": "nhánh trước của nó đi giữa cổ phẫu thuật xương cánh tay và cơ delta."
+        },
+        {
+          "id": "C",
+          "text": "nó đi qua lỗ tứ giác cùng động mạch mũ cánh tay sau."
+        },
+        {
+          "id": "D",
+          "text": "nó chi phối cơ tròn bé."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.nó chi phối toàn bộ vùng da phủ trên cơ delta=>chỉ cg cho da\nphủ vùng dưới cơ delta (Tk bì cánh tay trên ngoài).\nB.nhánh trước của nó đi giữa cổ phẫu thuật xương cánh tay và cơ\ndelta=>vùng trên là do tk trên đòn (C3,4).\nC.nó đi qua lỗ tứ giác cùng động mạch mũ cánh tay sau=>đi qua Lỗ\ntứ giác.\nD.nó chi phối cơ tròn bé=>nhánh sau.\n==>Cơ tròn bé + Cơ delta.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 96,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-73",
+      "number": 73,
+      "stem": "Mô tả đúng về tk nách là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó có thể bị tổn thương trong gãy giữa thân xương cánh tay."
+        },
+        {
+          "id": "B",
+          "text": "nó có thể bị tổn thương trong trật khớp vai ra trước và xuống dưới."
+        },
+        {
+          "id": "C",
+          "text": "nó nằm ở trong tk quay."
+        },
+        {
+          "id": "D",
+          "text": "nhánh bì cánh tay trên ngoài tách ra từ thân chính tk nách."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.nó có thể bị tổn thương trong gãy giữa thân xương cánh tay=>Nó\nđi vòng quanh cổ phẫu thuật xương cánh tay,gãy cổ phẫu thuật.\nC.nó nằm ở trong tk quay=>nằm ngoài TK quay,trên tk quay.\nD.nhánh bì cánh tay trên ngoài tách ra từ thân chính tk nách=>tách\nra từ nhánh sau TK.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/66523251845a3b0a9ee6.webp"
+      ],
+      "sourcePage": 97,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-74",
+      "number": 74,
+      "stem": "Động tác bị ảnh hưởng nhất khi liệt thần kinh nách là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "giạng cánh tay."
+        },
+        {
+          "id": "B",
+          "text": "gấp cánh tay."
+        },
+        {
+          "id": "C",
+          "text": "duỗi cánh tay."
+        },
+        {
+          "id": "D",
+          "text": "xoay cánh tay."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "giạng cánh tay=>(cơ delta).\n==>TK nách: Cơ delta và Cơ tròn nhỏ ( xoay ngoài).",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/66523251845a3b0a9ee6.webp"
+      ],
+      "sourcePage": 98,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-75",
+      "number": 75,
+      "stem": "Các mô tả sau đây về đám rối cánh tay đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó chi phối cho tất cả các cơ tham gia vận động chi trên."
+        },
+        {
+          "id": "B",
+          "text": "tk dưới vai dưới tách ra từ nó sau, chi phối cơ dưới vai và cơ tròn lớn."
+        },
+        {
+          "id": "C",
+          "text": "các cơ ngực (lớn và bé) do nhánh bên từ các bó chi phối."
+        },
+        {
+          "id": "D",
+          "text": "đám rối có 5 nhánh tận và nhiều nhánh bên."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.nó chi phối cho tất cả các cơ tham gia vận động chi trên=>Trừ cơ\nthang từ TK sọ XI.\nB.tk dưới vai dưới tách ra từ nó sau, chi phối cơ dưới vai và cơ tròn\nlớn=>Bó sau có TK dưới vai và ngực lưng.\nC.các cơ ngực (lớn và bé) do nhánh bên từ các bó chi phối=>Tk\nngực ngoài từ bó ngoài, ngực trong - bó trong.\nD.đám rối có 5 nhánh tận và nhiều nhánh bên=>Cơ bì, quay, nách,\ntrụ, giữa (Tk bì cánh tay trong, bì cẳng tay trong không tính).",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 99,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-76",
+      "number": 76,
+      "stem": "Mô tả đúng về các tk bì trong của chi trên là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "tk bì cánh tay trong chi phối cho toàn bộ mặt trong cánh tay."
+        },
+        {
+          "id": "B",
+          "text": "tk bì cẳng tay trong chỉ cảm giác cho mặt trong cẳng tay."
+        },
+        {
+          "id": "C",
+          "text": "tk bì cẳng tay trong xuyên qua mạc đi vào da ở phần ba giữa cánh tay."
+        },
+        {
+          "id": "D",
+          "text": "cả hai tk cùng là nhánh từ bó trong."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.tk bì cánh tay trong chi phối cho toàn bộ mặt trong cánh\ntay=>một phần do bì cẳng tay trong.\nC.tk bì cẳng tay trong xuyên qua mạc đi vào da ở phần ba giữa cánh\ntay=>Cùng đm bên trụ trên.\nThần kinh bì cẳng tay trong:\nGhi chú là: Thực ra cả C và D đều đúng.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/e019304dfbeb49b7056e.webp",
+        "/kb/dr-lam/images/56e075bfe0a03dfd436f.webp"
+      ],
+      "sourcePage": 100,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-77",
+      "number": 77,
+      "stem": "Mô tả đúng về liên quan của động mạch nách là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó được cơ ngực lớn chia thành ba đoạn."
+        },
+        {
+          "id": "B",
+          "text": "nó đi dọc ở phía trong tĩnh mạch nách."
+        },
+        {
+          "id": "C",
+          "text": "nó được tiếp tục bởi động mạch cánh tay ở ngang bờ dưới cơ ngực to."
+        },
+        {
+          "id": "D",
+          "text": "tên các bó của đám rối cánh tay không thể hiện vị trí của mỗi bó so với động mạch nách."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.nó được cơ ngực lớn chia thành ba đoạn=>Cơ ngực bé chia\nthành ba đoạn.\nB.nó đi dọc ở phía trong tĩnh mạch nách=>ngoài TM nách.\nD.tên các bó của đám rối cánh tay không thể hiện vị trí của mỗi bó\nso với động mạch nách=>Ở bờ dưới cơ ngực bé, bó trong ở trong,\nbó sau ở sau, bó ngoài ở ngoài ĐM nách.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 102,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-78",
+      "number": 78,
+      "stem": "Các mô tả sau về nhánh bên và tiếp nối của động mạch nách đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "động mạch ngực ngoài tách ra ở đoạn sau cơ ngực bé."
+        },
+        {
+          "id": "B",
+          "text": "nhánh dưới vai của động mạch nách tiếp nối với các động mạch vai sau và trên vai của động mạch dưới đòn."
+        },
+        {
+          "id": "C",
+          "text": "các nhánh mũ cánh tay trước và sau tách ra ở đoạn dưới cơ ngực bé."
+        },
+        {
+          "id": "D",
+          "text": "để chi trên không bị hoại tử, cần thắt động mạch nách ở dưới nguyên ủy động mạch dưới vai."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.động mạch ngực ngoài tách ra ở đoạn sau cơ ngực bé=>Trên cơ\nngực bé: ĐM ngực trên\nSau cơ ngực bé: ĐM ngực cùng vai, ĐM ngực ngoài\nDưới cơ ngực bé: ĐM dưới vai, ĐM mũ cánh tay trc và sau\nB.nhánh dưới vai của động mạch nách tiếp nối với các động mạch\nvai sau và trên vai của động mạch dưới đòn=>vòng nối quanh vai\nD.để chi trên không bị hoại tử, cần thắt động mạch nách ở dưới\nnguyên ủy động mạch dưới vai=>thắt ĐM nách ở trên nguyên uỷ ĐM\ndưới vai.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/cfc7e76fd28dd91b2631.webp"
+      ],
+      "sourcePage": 102,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-79",
+      "number": 79,
+      "stem": "Mô tả đúng về động mạch cánh tay là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó chạy tiếp theo động mạch nách sau khi động mạch nách tách ra động mạch cánh tay sâu."
+        },
+        {
+          "id": "B",
+          "text": "nó chia thành các nhánh tận ở ngang đường nếp gấp khuỷu."
+        },
+        {
+          "id": "C",
+          "text": "nó chạy dọc sau bờ trong cơ nhị đầu."
+        },
+        {
+          "id": "D",
+          "text": "không sờ thấy mạch đập của nó vì nó bị vây quanh bởi các cơ."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.nó chạy tiếp theo động mạch nách sau khi động mạch nách tách\nra động mạch cánh tay sâu=>Đm cánh tay sâu của ĐM cánh tay.\nB.nó chia thành các nhánh tận ở ngang đường nếp gấp\nkhuỷu=>Ngang cổ xương quay.\nC.nó chạy dọc sau bờ trong cơ nhị đầu=>trong ống cánh tay.\nD.không sờ thấy mạch đập của nó vì nó bị vây quanh bởi các\ncơ=>Sờ thấy ở ống cánh tay hoặc nếp khuỷu.\n==>Ở bờ dưới cơ ngực lớn.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 104,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-80",
+      "number": 80,
+      "stem": "Các mô tả sau về động mạch cánh tay đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó thường tận cùng ở ngang mức cổ xương quay."
+        },
+        {
+          "id": "B",
+          "text": "nhánh lớn nhất của nó là động mạch cánh tay sâu."
+        },
+        {
+          "id": "C",
+          "text": "nó đi xuống cùng tk giữa, lúc đầu ở trong, sau bắt chéo sau thần kinh để nằm phía ngoài."
+        },
+        {
+          "id": "D",
+          "text": "nó đi dọc ở phía trong tk trụ."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "nó đi dọc ở phía trong tk trụ  -> Bên ngoài ĐM trụ",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 104,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-81",
+      "number": 81,
+      "stem": "Các động mạch dưới đây đều là nhánh bên của động mạch cánh tay trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "động mạch bên quay."
+        },
+        {
+          "id": "B",
+          "text": "động mạch bên trụ trên."
+        },
+        {
+          "id": "C",
+          "text": "động mạch cánh tay sâu."
+        },
+        {
+          "id": "D",
+          "text": "động mách bên trụ dưới."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "động mạch bên quay -> + Đm bên giữa là nhánh ĐM cánh tay sâu.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 105,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-82",
+      "number": 82,
+      "stem": "Mô tả đúng về động mạch cánh tay là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "cơ tùy hành của nó là cơ quạ cánh tay."
+        },
+        {
+          "id": "B",
+          "text": "nó chạy dọc theo bờ ngoài cơ nhị đầu cánh tay."
+        },
+        {
+          "id": "C",
+          "text": "nó tách ra 5 nhánh bên."
+        },
+        {
+          "id": "D",
+          "text": "nó bị tk giữa bắt chéo trước từ ngoài vào trong, trên đường đi từ trên xuống dưới."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.cơ tùy hành của nó là cơ quạ cánh tay=>Cơ nhị đầu cánh tay.\nB.nó chạy dọc theo bờ ngoài cơ nhị đầu cánh tay=>Bờ trong.\nC.nó tách ra 5 nhánh bên=>3 nhánh bên: ĐM cánh tay sâu, ĐM bên\ntrụ trên, bên trụ dưới.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 105,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-83",
+      "number": 83,
+      "stem": "Các mô tả sau đây về động mạch cánh tay sâu đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó là 1 trong 3 nhánh bên lớn nhất của động mạch cánh tay."
+        },
+        {
+          "id": "B",
+          "text": "nó chui qua tam giác bả vai – tam đầu để đi tới vùng cánh tay sau."
+        },
+        {
+          "id": "C",
+          "text": "nó là nhánh bên lớn nhất của động mạch cánh tay."
+        },
+        {
+          "id": "D",
+          "text": "cấp máu nuôi dưỡng cho vùng cánh tay sau."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "nó chui qua tam giác bả vai – tam đầu để đi tới vùng cánh tay sau -\n> Chui qua tam giác cánh tay tam đầu.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/9658fd26f12a5084c979.webp"
+      ],
+      "sourcePage": 106,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-84",
+      "number": 84,
+      "stem": "Khi muốn các cơ cẳng tay không bị xơ hóa sau khi thắt, vị trị hợp lí nhất trong các vị trí thắt động mạch cánh tay dưới đây là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "phía trên của động mạch cánh tay sâu."
+        },
+        {
+          "id": "B",
+          "text": "phía dưới của động mạch cánh tay sâu."
+        },
+        {
+          "id": "C",
+          "text": "phía trên của động mạch bên trụ dưới."
+        },
+        {
+          "id": "D",
+          "text": "phía dưới của động mạch bên trụ dưới."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.phía dưới của động mạch bên trụ dưới=>(nhiều vòng nối quanh\nkhuỷu).",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/b2cc2e35375bc13c181c.webp"
+      ],
+      "sourcePage": 107,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-85",
+      "number": 85,
+      "stem": "Các mô tả sau đây về tiếp nối của động mạch cánh tay đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "tiếp nối với động mạch nách : động mạch cánh tay sâu với các động mạch mũ cánh tay trước và sau."
+        },
+        {
+          "id": "B",
+          "text": "tiếp nối với động mạch quay : động mạch bên quay với động mạch quặt ngược quay."
+        },
+        {
+          "id": "C",
+          "text": "tiếp nối với động mạch trụ : động mạch bên trụ trên với động mạch quặt ngược trụ."
+        },
+        {
+          "id": "D",
+          "text": "tiếp nối với động mạch trụ : động mạch bên giữa với động mạch quặt ngược trụ."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.tiếp nối với động mạch nách : động mạch cánh tay sâu với các\nđộng mạch mũ cánh tay trước và sau=>nhánh delta của  ĐM cánh\ntay sâu.\nC.tiếp nối với động mạch trụ : động mạch bên giữa với động mạch\nquặt ngược trụ -> bên giữa vs quặt ngược gian cốt.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/63f6f96c6283ac255433.webp"
+      ],
+      "sourcePage": 108,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-86",
+      "number": 86,
+      "stem": "Các mô tả dưới đây về động mạch quay đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó là 1 trong 2 nhánh tận của động mạch cánh tay."
+        },
+        {
+          "id": "B",
+          "text": "cơ tùy hành của nó là cơ gấp cổ tay quay."
+        },
+        {
+          "id": "C",
+          "text": "nó đi cùng với nhánh nông tk quay dưới cơ cánh tay quay."
+        },
+        {
+          "id": "D",
+          "text": "nó tận cùng bằng cách liên tiếp với cung gan tay sâu."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "cơ tùy hành của nó là cơ gấp cổ tay quay -> cơ cánh tay quay",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/951f9aff7ac26f17b6a4.webp"
+      ],
+      "sourcePage": 109,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-87",
+      "number": 87,
+      "stem": "Các mô tả sau đây về động mạch quay đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "ở cẳng tay nó đi theo đường kẻ nối điểm giữa nếp gấp khuỷu tới rãnh mạch quay."
+        },
+        {
+          "id": "B",
+          "text": "cơ tùy hành của động mạch là cơ cánh tay quay."
+        },
+        {
+          "id": "C",
+          "text": "nó nằm phía ngoài so với nhánh nông tk quay."
+        },
+        {
+          "id": "D",
+          "text": "nó trở thành cung động mạch gan tay sâu sau khi tách ra động mạch chính ngón cái ( hoặc quay ngón trỏ )."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "nó nằm phía ngoài so với nhánh nông tk quay -> Tk ở ngoài ĐM.\n==>TK quay ở ngoài hơn so với ĐM quay\nTK trụ ở trong hơn so với ĐM trụ.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 110,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-88",
+      "number": 88,
+      "stem": "Mô tả đúng về động mạch quay là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó đi cùng với nhánh sâu tk quay tạo thành bó mạch tk quay."
+        },
+        {
+          "id": "B",
+          "text": "nó được tùy hành bởi cơ gấp cổ tay quay."
+        },
+        {
+          "id": "C",
+          "text": "nó có 2 cung tiếp nối với động mạch trụ ở cổ tay."
+        },
+        {
+          "id": "D",
+          "text": "nhánh bên cuối cùng của nó là động mạch gan tay nông."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.nó đi cùng với nhánh sâu tk quay tạo thành bó mạch tk quay=>đi\ncùng nhánh nông TK quay.\nB.nó được tùy hành bởi cơ gấp cổ tay quay=>cơ cánh tay quay.\nC.nó có 2 cung tiếp nối với động mạch trụ ở cổ tay=>Cung gan cổ\ntay và mu cổ tay.\nD.nhánh bên cuối cùng của nó là động mạch gan tay nông=>nhánh\nbên cuối cùng là ĐM chính ngón cái,ĐM gan tay sâu.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 111,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-89",
+      "number": 89,
+      "stem": "Các nhánh động mạch dưới đây đều là nhánh bên của động mạch quay trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "động mạch gian cốt quặt ngược."
+        },
+        {
+          "id": "B",
+          "text": "động mạch quặt ngược quay."
+        },
+        {
+          "id": "C",
+          "text": "nhánh gan tay nông."
+        },
+        {
+          "id": "D",
+          "text": "nhánh gan cổ tay."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "động mạch gian cốt quặt ngược -> Nhánh của ĐM gian cốt sau (ĐM\ntrụ).",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 111,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-90",
+      "number": 90,
+      "stem": "Các mô tả sau về động mạch quay đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó trở thành cung gan tay sâu sau khi tách ra động mạch chính ngón cái."
+        },
+        {
+          "id": "B",
+          "text": "nó đi giữa hai đầu cơ gian cốt mu tay một trước khi vào gan tay."
+        },
+        {
+          "id": "C",
+          "text": "nó không tách ra nhánh nào lúc đi qua vùng mu cổ tay."
+        },
+        {
+          "id": "D",
+          "text": "ở cẳng tay nó đi trong vùng vách ngăn giữa các cơ vùng cẳng tay sau và vùng cẳng tay trước."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "nó không tách ra nhánh nào lúc đi qua vùng mu cổ tay -> tách ra\nnhánh mu cổ tay.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/eb852d960cb06856d9f9.webp"
+      ],
+      "sourcePage": 112,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-91",
+      "number": 91,
+      "stem": "Các mô tả sau đây về động mạch trụ đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "ở phần trên cẳng tay nó đi sau các cơ sấp tròn, gấp cổ tay quay và gan tay dài."
+        },
+        {
+          "id": "B",
+          "text": "nhánh gian cốt chung động mạch trụ chia thành 2 nhánh gian cốt trước và sau."
+        },
+        {
+          "id": "C",
+          "text": "nó trở thành cung gan tay nông sau khi tách ra nhánh gan tay sâu."
+        },
+        {
+          "id": "D",
+          "text": "nó bắt chéo trước tk giữa trên đường đi."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "nó bắt chéo trước tk giữa trên đường đi -> Bắt chéo sau Tk giữa rồi\nchạy xuống sát bên ngoài TK trụ ở 2/3 dưới cẳng tay.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/157821adf64495763dc3.webp"
+      ],
+      "sourcePage": 113,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-92",
+      "number": 92,
+      "stem": "Mô tả đúng về động mạch trụ là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó đi sát gần thần kinh trụ trên suốt đường đi."
+        },
+        {
+          "id": "B",
+          "text": "ở phần trên cẳng tay, nó đi sau cơ gấp các ngón nông và trước cơ gấp các ngón sâu."
+        },
+        {
+          "id": "C",
+          "text": "nó là nguồn dẫn máu phụ tới cung gan tay nông."
+        },
+        {
+          "id": "D",
+          "text": "nó không cấp máu cho tk giữa."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.nó đi sát gần thần kinh trụ trên suốt đường đi=>Chỉ ở 2/3 dưới\ncẳng tay.\nC.nó là nguồn dẫn máu phụ tới cung gan tay nông=>Nguồn chính,\nnhánh tận ĐM trụ là cung gan tay nông.\nD.nó không cấp máu cho tk giữa=>ĐM gian cốt trước tách ra nhánh\nĐM giữa cấp máu cho TK giữa.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 114,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-93",
+      "number": 93,
+      "stem": "Các mô tả sau đây về động mạch trụ đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó có 4 cung tiếp nối với động mạch quay ở cổ tay và gan tay."
+        },
+        {
+          "id": "B",
+          "text": "nó có cùng vị trí nguyên ủy với động mạch quay."
+        },
+        {
+          "id": "C",
+          "text": "nhánh cuối cùng của nó trước khi liên tiếp với cung gan tay nông là nhánh gan tay sâu."
+        },
+        {
+          "id": "D",
+          "text": "cơ tùy hành của nó là cơ gan tay dài."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.nó có 4 cung tiếp nối với động mạch quay ở cổ tay và gan tay=>2\ncung gan cổ tay, mu cổ tay và 2 cung gan tay sâu, nông.\nB.nó có cùng vị trí nguyên ủy với động mạch quay=>ngang cổ\nxương quay.\nD.cơ tùy hành của nó là cơ gan tay dài=>Cơ gấp cổ tay trụ.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/157821adf64495763dc3.webp"
+      ],
+      "sourcePage": 115,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-94",
+      "number": 94,
+      "stem": "Mô tả đúng về cung động mạch gan tay sâu là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó nằm sát trước chỏm các xương đốt bàn tay."
+        },
+        {
+          "id": "B",
+          "text": "nó nhô (lồi) về phía xa hơn so với cung gan tay nông."
+        },
+        {
+          "id": "C",
+          "text": "nó tách ra 4 động mạch gan tay chung."
+        },
+        {
+          "id": "D",
+          "text": "nó đi dọc theo bên cạnh nhánh sâu tk trụ."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.nó nằm sát trước chỏm các xương đốt bàn tay=>nằm trước nền\ncác xương đốt bàn.\nB.nó nhô (lồi) về phía xa hơn so với cung gan tay nông=>gần hơn.\nC.nó tách ra 4 động mạch gan tay chung=>3 ĐM gan đốt bàn.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/6a2d894e8027cc91867e.webp"
+      ],
+      "sourcePage": 116,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-95",
+      "number": 95,
+      "stem": "Các mô tả sau đây về cung động mạch gan tay nông đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nhánh tận động mạch trụ có thể nối với nhánh gan tay nông hay nhánh khác của động mạch quay (động mạch chính ngón cái hay động mạch quay ngón trỏ) để khép kín cung nông."
+        },
+        {
+          "id": "B",
+          "text": "cung nông chỉ là 1 trong hai nguồn dẫn máu tới các động mạch gan ngón tay riêng."
+        },
+        {
+          "id": "C",
+          "text": "điểm lồi ra xa nhất của cung nông ở ngang mức đường kẻ ngang qua gan tay, dọc theo bờ dưới của ngón tay cái giạng hết mức."
+        },
+        {
+          "id": "D",
+          "text": "ở phần giữa gan tay cung nông nằm sau các gân gấp và các thần kinh."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "B.cung nông chỉ là 1 trong hai nguồn dẫn máu tới các động mạch\ngan ngón tay riêng=>cung sâu cho các ĐM gan đốt bàn.\nC.điểm lồi ra xa nhất của cung nông ở ngang mức đường kẻ ngang\nqua gan tay, dọc theo bờ dưới của ngón tay cái giạng hết\nmức=>SGK tr119.\nD.ở phần giữa gan tay cung nông nằm sau các gân gấp và các thần\nkinh=>Cung nông nằm trước TK và gân gấp.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 117,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-96",
+      "number": 96,
+      "stem": "Mô tả đúng về các cơ ở bàn tay là?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ khép ngón cái được chi phối bởi thần kinh giữa."
+        },
+        {
+          "id": "B",
+          "text": "Các cơ mô cái được chi phối bởi 1 thần kinh đến từ bó sau của đám rối cánh tay."
+        },
+        {
+          "id": "C",
+          "text": "Các cơ giun có nguyên ủy bám vào các gân của cơ gấp các ngón nông."
+        },
+        {
+          "id": "D",
+          "text": "Các cơ gian cốt mu tay làm giạng các ngón tay ra xa ngón tay giữa."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Cơ khép ngón cái được chi phối bởi thần kinh giữa=>bởi Tk trụ.\nB.Các cơ mô cái được chi phối bởi 1 thần kinh đến từ bó sau của\nđám rối cánh tay=>Tk giữa từ bó ngoài, bó trg.\nC.Các cơ giun có nguyên ủy bám vào các gân của cơ gấp các\nngón nông=>gân cơ duỗi các ngón, đoạn\nđi qua đốt gần.\nD.Các cơ gian cốt mu tay làm giạng các ngón tay ra xa ngón tay\ngiữa=>mu giạng - gan khép.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 118,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-97",
+      "number": 97,
+      "stem": "Mô tả đúng về cơ ngực nhỏ là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đầu nguyên ủy của nó bám vào mỏm quạ"
+        },
+        {
+          "id": "B",
+          "text": "Nó tạo nên thành sau của nách"
+        },
+        {
+          "id": "C",
+          "text": "Nó được bọc bởi mạc đòn ngực"
+        },
+        {
+          "id": "D",
+          "text": "Cơ gấp các ngón tay nông"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Đầu nguyên ủy của nó bám vào mỏm quạ => bám tận ms vào\nmỏm quạ, nguyên uỷ xg sườn III-V\nB.Nó tạo nên thành sau của nách => thành sau của nách là cơ dưới\nvai, tròn lớn và đầu dài cơ tam đầu\nD.Cơ gấp các ngón tay nông => hạ và xoay xg vai xuống dưới, nâng\nxg sườn lúc hít vào",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/9315bf1f89175b21d597.webp"
+      ],
+      "sourcePage": 119,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-98",
+      "number": 98,
+      "stem": "Một bệnh nhân không thể gấp các khớp gian đốt ngón gần do liệt cơ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Các cơ gian cốt gan tay"
+        },
+        {
+          "id": "B",
+          "text": "Các cơ gấp ngón tay sâu"
+        },
+        {
+          "id": "C",
+          "text": "Các cơ gian cốt mu tay"
+        },
+        {
+          "id": "D",
+          "text": "Cơ gấp các ngón tay nông"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "B.Các cơ gấp ngón tay sâu ==> Gấp các khớp gian đốt ngón xa",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 120,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-99",
+      "number": 99,
+      "stem": "Một bệnh nhân không thể khép cánh tay chủ yếu do liệt:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ tròn nhỏ."
+        },
+        {
+          "id": "B",
+          "text": "Cơ trên gai."
+        },
+        {
+          "id": "C",
+          "text": "Cơ lưng rộng."
+        },
+        {
+          "id": "D",
+          "text": "Cơ dưới gai."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Cơ lưng rộng -> cơ khép cánh tay chính (còn cơ ngực lớn) cơ đối\nchiếu bám tận vào.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 121,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-100",
+      "number": 100,
+      "stem": "Mô tả đúng về các cơ của chi trên là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tất cả các cơ nội tại của mô cái bám tận vào nền đốt ngón gần của ngón cái."
+        },
+        {
+          "id": "B",
+          "text": "Tất cả các đầu của cơ tam đầu cánh tay bám vào xương vai."
+        },
+        {
+          "id": "C",
+          "text": "Ngón tay út không có cơ nào mang tên là cơ khép."
+        },
+        {
+          "id": "D",
+          "text": "Các gân cơ gấp các ngón sâu bám vào đốt giữa của các ngón tay 2-5."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Tất cả các cơ nội tại của mô cái bám tận vào nền đốt ngón gần\ncủa ngón cái=>mặt ngoài xương đốt bàn I.\nB.Tất cả các đầu của cơ tam đầu cánh tay bám vào xương vai=>Chỉ\ncó đầu dài - củ dưới ổ chảo.\nC.Ngón tay út không có cơ nào mang tên là cơ khép=>Đầu ngoài -\nphía ngoài rãnh TK quay.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 121,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-101",
+      "number": 101,
+      "stem": "Gãy xương đốt bàn tay thứ nhất có thể làm tổn thương chỗ bám tận của cơ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ giạng ngón cái ngắn."
+        },
+        {
+          "id": "B",
+          "text": "Cơ gấp ngón cái ngắn."
+        },
+        {
+          "id": "C",
+          "text": "Cơ đối chiếu ngón cái."
+        },
+        {
+          "id": "D",
+          "text": "Cơ khép ngón cái."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Cơ đối chiếu ngón cái=>mặt ngoài xg đốt bàn I.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/3b9b139adbaac67da47d.webp"
+      ],
+      "sourcePage": 122,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-102",
+      "number": 102,
+      "stem": "Mô tả đúng về vị trí của hãm gân gấp cổ tay là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó nằm nông hơn các thần kinh trụ và giữa."
+        },
+        {
+          "id": "B",
+          "text": "Nó nằm sâu hơn các thần kinh trụ và giữa."
+        },
+        {
+          "id": "C",
+          "text": "Nó nằm sâu hơn thần kinh trụ và nông hơn tk giữa."
+        },
+        {
+          "id": "D",
+          "text": "Nó nằm nông hơn thần kinh trụ và sâu hơn thần kinh giữa."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Nó nằm sâu hơn thần kinh trụ và nông hơn tk giữa=>TK trụ đi\ntrước hãm gân gấp.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/3b9b139adbaac67da47d.webp"
+      ],
+      "sourcePage": 123,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-103",
+      "number": 103,
+      "stem": "Nếu thắt thân động mạch ngực cùng vai nhánh không bị tắc trong các nhánh sau là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nhánh cùng vai."
+        },
+        {
+          "id": "B",
+          "text": "Nhánh ngực."
+        },
+        {
+          "id": "C",
+          "text": "Nhánh đòn."
+        },
+        {
+          "id": "D",
+          "text": "Nhánh ngực trên."
+        },
+        {
+          "id": "E",
+          "text": "Nhánh delta."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.Nhánh ngực trên=>là nhánh của ĐM nách.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/e14249f2c1162cf0365b.webp"
+      ],
+      "sourcePage": 124,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-104",
+      "number": 104,
+      "stem": "Mô tả đúng về động mạch quay là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó đi qua ống cổ tay."
+        },
+        {
+          "id": "B",
+          "text": "Nó đi cùng thần kinh gian cốt sau ở cẳng tay."
+        },
+        {
+          "id": "C",
+          "text": "Nó là nguồn đưa máu chính tới cung gan tay nông."
+        },
+        {
+          "id": "D",
+          "text": "Nó tách ra động mạch chính ngón cái."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "B.Nó đi cùng thần kinh gian cốt sau ở cẳng tay=>nó đi cùng nhánh\nnông tk quay.\nC.Nó là nguồn đưa máu chính tới cung gan tay nông=>cung gan tay\nsâu.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/df15436222b665c23a13.webp"
+      ],
+      "sourcePage": 125,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-105",
+      "number": 105,
+      "stem": "Các động mạch sau đây đều không là nhánh của động mạch cánh tay trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Động mạch quặt ngược quay."
+        },
+        {
+          "id": "B",
+          "text": "Động mạch quặt ngược trụ."
+        },
+        {
+          "id": "C",
+          "text": "Động mạch bên trụ trên."
+        },
+        {
+          "id": "D",
+          "text": "Động mạch mũ cánh tay sau."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Động mạch quặt ngược quay=>nhánh của đm quay.\nB.Động mạch quặt ngược trụ=>nhánh của dm trụ.\nD.Động mạch mũ cánh tay sau=>nhánh của đm nách.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/2b325d9d8f24817b7bda.webp"
+      ],
+      "sourcePage": 126,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-106",
+      "number": 106,
+      "stem": "Các động mạch sau đây đều là nhánh của động mạch dưới đòn trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Động mạch ngực trong."
+        },
+        {
+          "id": "B",
+          "text": "Động mạch trên vai."
+        },
+        {
+          "id": "C",
+          "text": "Động mạch sườn cổ."
+        },
+        {
+          "id": "D",
+          "text": "Động mạch dưới vai."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.Động mạch dưới vai=>nhánh lớn nhất của đm nách.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 127,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-107",
+      "number": 107,
+      "stem": "Mô tả đúng về động mạch nách là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó đi giữa cơ ngực lớn và cơ ngực bé."
+        },
+        {
+          "id": "B",
+          "text": "Nó được hai tĩnh mạch nách đi kèm."
+        },
+        {
+          "id": "C",
+          "text": "Nó nằm giữa động mạch dưới đòn và động mạch cánh tay."
+        },
+        {
+          "id": "D",
+          "text": "Nó chạy dọc bờ ngoài cơ quạ cánh tay."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Nó đi giữa cơ ngực lớn và cơ ngực bé=>đi sau cơ ngực bé.\nB.Nó được hai tĩnh mạch nách đi kèm=>đm lớn, chỉ có 1 TM.\nD.Nó chạy dọc bờ ngoài cơ quạ cánh tay=>dọc bờ trong cơ quạ\ncánh tay.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 127,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-108",
+      "number": 108,
+      "stem": "Mạch máu đầu tiên có khả năng bị tắc bởi 1 cục máu đông từ các tĩnh mạch chi dưới là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "các nhánh của tĩnh mạch thận."
+        },
+        {
+          "id": "B",
+          "text": "Các nhánh của động mạch vành."
+        },
+        {
+          "id": "C",
+          "text": "Các mao mạch dạng xoang của gan."
+        },
+        {
+          "id": "D",
+          "text": "Các nhánh của các động mạch phổi."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A. các nhánh của tĩnh mạch thận => Sai vì máu từ tĩnh mạch thận\nkhông phải là con đường mà cục máu đông từ tĩnh mạch chi dưới\nsẽ đi qua.\nB. các nhánh của động mạch vành => Sai vì động mạch vành là hệ\nmạch máu nuôi tim, không liên quan trực tiếp đến dòng máu tĩnh\nmạch.\nC. các mao mạch dạng xoang của gan => Sai vì gan nhận máu qua\nhệ tĩnh mạch cửa, nhưng cục máu đông từ tĩnh mạch chi dưới sẽ\nkhông đi qua đây.\nD. các nhánh của các động mạch phổi => Đúng vì dòng máu từ tĩnh\nmạch chi dưới trở về tim phải, sau đó được bơm vào động mạch\nphổi, nơi cục máu đông có thể gây tắc nghẽn.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 128,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-109",
+      "number": 109,
+      "stem": "Mô tả đúng về đám rối cánh tay là;",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó chỉ chứa các sợi tk có nguồn gôc từ rễ trước các tk sống."
+        },
+        {
+          "id": "B",
+          "text": "Nó chỉ chứa các sợi tk bắt nguồn từ các nhánh ( ngành ) trước các tk sống."
+        },
+        {
+          "id": "C",
+          "text": "Mỗi thân được tạo nên bởi các sợi bắt nguồn từ trên một nhánh trước tk sống."
+        },
+        {
+          "id": "D",
+          "text": "Tất cả các thân trực tiếp tách ra các nhánh cơ."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Nó chỉ chứa các sợi tk có nguồn gôc từ rễ trước các tk\nsống=>nhánh trc.\nC.Mỗi thân được tạo nên bởi các sợi bắt nguồn từ trên một nhánh\ntrước tk sống=>thân trên từ C V,VI\nthân dưới từ C VIII, N1.\nD.Tất cả các thân trực tiếp tách ra các nhánh cơ=>chỉ có thân trên\ncho các nhánh\ncơ: TK cơ dưới đòn, TK trên vai\n(trên gai, dưới gai, khớp vai).",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 129,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-110",
+      "number": 110,
+      "stem": "Mô tả đúng về tk trụ là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó chạy dọc bên trong ba động mạch lớn của chi trên."
+        },
+        {
+          "id": "B",
+          "text": "Nó vận động cơ gấp cổ tay trụ và các cơ duỗi cổ tay trụ."
+        },
+        {
+          "id": "C",
+          "text": "Nó vận động một nửa số cơ nội tại của bàn tay."
+        },
+        {
+          "id": "D",
+          "text": "Nó chạy sát dọc động mạch trụ từ nguyên ủy tới nơi tận cùng của động mạch này."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.Nó chạy dọc bên trong ba động mạch lớn của chi trên => liên\nquan với ba động mạch lớn của chi trên => ĐM nách, ĐM cánh tay;\nĐM trụ.\nB.Nó vận động cơ gấp cổ tay trụ và các cơ duỗi cổ tay trụ=>cơ\nduỗi cổ tay trụ là tk quay.\nC.Nó vận động một nửa số cơ nội tại của bàn tay=>vận động cho\n14,5 cơ ở bàn tay (>nửa).\nD.Nó chạy sát dọc động mạch trụ từ nguyên ủy tới nơi tận cùng của\nđộng mạch này=>nó chỉ chạy sát dọc ĐM trụ ở 2/3 dưới cẳng tay.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/85eb38326b35219c7e72.webp"
+      ],
+      "sourcePage": 130,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-111",
+      "number": 111,
+      "stem": "Mô tả về tk quay là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó đi qua tam giác cánh tay tam đầu cùng động mạch bên trụ trên."
+        },
+        {
+          "id": "B",
+          "text": "nó vận động toàn bộ các cơ ở mặt sau cánh tay và cẳng tay."
+        },
+        {
+          "id": "C",
+          "text": "nó đi qua rãnh giữa mỏm trên lồi cầu ngoài và mỏm khuỷu."
+        },
+        {
+          "id": "D",
+          "text": "nó đi qua rãnh nhị đầu ngoài cùng động mạch quay."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.nó đi qua tam giác cánh tay tam đầu cùng động mạch bên trụ\ntrên. => cùng ĐM cánh tay sâu\nC.nó đi qua rãnh giữa mỏm trên lồi cầu ngoài và mỏm khuỷu. => nó\nđi trong rãnh nhị đầu ; Rãnh giữa Cơ cánh tay và cơ cánh tay quay\nD.nó đi qua rãnh nhị đầu ngoài cùng động mạch quay. => Đi cùng\nĐM bên quay; nhánh bên quay của ĐM cánh tay sâu",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/8351a13d6e0169eebaa5.webp"
+      ],
+      "sourcePage": 131,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-112",
+      "number": 112,
+      "stem": "Mô tả đúng về thần kinh cơ bì là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó tách ra từ thân trên đám rối cánh tay"
+        },
+        {
+          "id": "B",
+          "text": "nó đi vào mô dưới da ngay sau khi xuyên qua cơ quạ cánh tay"
+        },
+        {
+          "id": "C",
+          "text": "nó chi phối cho hai cơ gấp cẳng tay ( tại khớp khuỷu )"
+        },
+        {
+          "id": "D",
+          "text": "nó cảm giác cho vùng da ở giữa mặt sau cẳng tay"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.nó tách ra từ thân trên đám rối cánh tay => tách ra từ bó ngoài\nB.nó đi vào mô dưới da ngay sau khi xuyên qua cơ quạ cánh tay\n=> đến khuỷu, bờ ngoài cơ nhị đầu mới ra da\nC.nó chi phối cho hai cơ gấp cẳng tay ( tại khớp khuỷu ) => cơ cánh\ntay và cơ nhị đầu cánh tay\nD.nó cảm giác cho vùng da ở giữa mặt sau cẳng tay => tận thành tk\nbì cẳng tay ngoài, cảm giác cho da mặt ngoài cẳng tay",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/aad1beb7b9348dbf4f2c.webp"
+      ],
+      "sourcePage": 132,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-113",
+      "number": 113,
+      "stem": "Mô tả đúng về tk nách là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó là nhánh tận của bó ngoài đám rối cánh tay."
+        },
+        {
+          "id": "B",
+          "text": "nó đi qua lỗ tứ giác cùng động mạch dưới vai."
+        },
+        {
+          "id": "C",
+          "text": "nó là tk vừa vận động vừa cảm giác."
+        },
+        {
+          "id": "D",
+          "text": "nó chỉ vận động cho một cơ : delta."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.nó là nhánh tận của bó ngoài đám rối cánh tay=>bó sau tách ra TK\nquay và TK nách: TK nách đi ngoài TK quay.\nB.nó đi qua lỗ tứ giác cùng động mạch dưới vai=>cùng đm mũ\ncánh tay sau.\nC.nó là tk vừa vận động vừa cảm giác=>Cảm giác Da vùng cơ Delta\n( mặt ngoài cánh tay).\nD.nó chỉ vận động cho một cơ : delta=>vận động cho cơ delta và\ncơ tròn bé.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 133,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-114",
+      "number": 114,
+      "stem": "Mô tả đúng về tk bì cẳng tay trong là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó chỉ cảm giác cho da mặt trong cẳng tay."
+        },
+        {
+          "id": "B",
+          "text": "nó bắt chéo trước động mạch cánh tay trên đường đi xuống."
+        },
+        {
+          "id": "C",
+          "text": "nó không liên quan với tĩnh mạch nền trên đường đi."
+        },
+        {
+          "id": "D",
+          "text": "nó tách ra từ bó trong đám rối cánh tay."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.nó chỉ cảm giác cho da mặt trong cẳng tay=>còn cả mặt trong\ncánh tay.\nB.nó bắt chéo trước động mạch cánh tay trên đường đi xuống=>nó\nchỉ đi bên trong đm cánh tay.\nC.nó không liên quan với tĩnh mạch nền trên đường đi=>Nó đi ra\nnông cùng TM nền.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/aad1beb7b9348dbf4f2c.webp",
+        "/kb/dr-lam/images/07462fe3948c88ed3020.webp"
+      ],
+      "sourcePage": 134,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-115",
+      "number": 115,
+      "stem": "Mô tả đúng về tk giữa là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó luôn đi theo đường dọc giữa cánh tay . khuỷu tay và cẳng tay"
+        },
+        {
+          "id": "B",
+          "text": "nó thường bắt chéo sau động mạch cánh tay"
+        },
+        {
+          "id": "C",
+          "text": "nó vận động cho tất cả các cơ gấp cổ tay"
+        },
+        {
+          "id": "D",
+          "text": "nó cảm giác cho hầu hết da gan bàn tay và gan các ngón tay"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.nó luôn đi theo đường dọc giữa cánh tay . khuỷu tay và cẳng\ntay=>chỉ có ở cẳng tay mới đi theo đg dọc giữa.\nB.nó thường bắt chéo sau động mạch cánh tay=>bắt chéo trước\nĐM cánh tay ở giữa cánh tay.\nC.nó vận động cho tất cả các cơ gấp cổ tay=>trừ cơ gấp cổ tay trụ\nvà 2 bó trong của cơ gấp các ngón sâu TK trụ.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/128e3f2d335cb770684f.webp"
+      ],
+      "sourcePage": 135,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-116",
+      "number": 116,
+      "stem": "Các cơ sau đều có tác dụng gấp cẳng tay . trong các cơ này . cơ được tk quay chi phối là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "cơ nhị đầu cánh tay."
+        },
+        {
+          "id": "B",
+          "text": "cơ cánh tay quay."
+        },
+        {
+          "id": "C",
+          "text": "cơ cánh tay."
+        },
+        {
+          "id": "D",
+          "text": "cơ sấp tròn."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.cơ nhị đầu cánh tay=>Tk cơ bì.\nC.cơ cánh tay quay=> TK quay.\nD.cơ sấp tròn=>Tk giữa.\nTK cơ bì: Cơ nhị đầu; cơ cạnh tay\ncơ cánh tay quay: TK quay\nCơ sấp tròn: TK giữa\nSấp cẳng tay: TK giữa  ( cơ sấp tròn)\nNgửa cẳng tay: TK quay .",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/2e7c2d49652ccb286817.webp"
+      ],
+      "sourcePage": 136,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-117",
+      "number": 117,
+      "stem": "Một bệnh nhân bị tổn thương nặng tk quay do gãy phần 3 dưới xương cánh tay sẽ có các triệu chứng:",
+      "options": [
+        {
+          "id": "A",
+          "text": "mất duỗi cổ tay . dẫn đến bàn tay rơi."
+        },
+        {
+          "id": "B",
+          "text": "cử động sấp cẳng tay yếu đi."
+        },
+        {
+          "id": "C",
+          "text": "Mất cảm giác ở mặt gan tay ngón cái."
+        },
+        {
+          "id": "D",
+          "text": "không thể đối chiếu ngón cái."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "B.cử động sấp cẳng tay yếu đi=>sấp là của TK giữa, quay là ngửa.\nC.Mất cảm giác ở mặt gan tay ngón cái=>Tk giữa.\nD.không thể đối chiếu ngón cái=>TK giữa.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/daaf2775b38adbf5b9b6.webp"
+      ],
+      "sourcePage": 138,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-118",
+      "number": 118,
+      "stem": "Tổn thương tk quay dẫn tới tình trạng:",
+      "options": [
+        {
+          "id": "A",
+          "text": "bàn tay hình móng vuốt."
+        },
+        {
+          "id": "B",
+          "text": "bàn tay rơi."
+        },
+        {
+          "id": "C",
+          "text": "bàn tay khỉ."
+        },
+        {
+          "id": "D",
+          "text": "hội chứng ống cổ tay."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.bàn tay hình móng vuốt=> TK trụ.\nC.bàn tay khỉ=> TK giữa.\nD.hội chứng ống cổ tay=>TK giữa.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 139,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-119",
+      "number": 119,
+      "stem": "Trong các nhóm tk sau nhóm có liên quan mật thiết với xương cánh tay và có thể bị tổn thương khi gãy xương cánh tay là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nách, cơ bì, quay."
+        },
+        {
+          "id": "B",
+          "text": "nách, giữa, trụ."
+        },
+        {
+          "id": "C",
+          "text": "nách, quay trụ."
+        },
+        {
+          "id": "D",
+          "text": "nách, giữa, cơ bì."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.nách, cơ bì, quay=>Cơ bì ko đi sát xương,Cơ bì đi xuyên qua Cơ\nquạ- cánh tay, rồi đi giữa Cơ nhị đầu và Cơ cánh tay.\nB.nách, giữa, trụ=>Trừ giữa\nTK quay đi trong Rãnh TK quay ở Mặt sau cánh tay\nTK nách đi qua Lỗ tứ giác ( ngoài là xương cánh tay)\nTK trụ đi giữa Mỏm trên Lồi cầu trong và Mỏm khuỷu.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 140,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-120",
+      "number": 120,
+      "stem": "Tổn thương tk trụ gây liệt các cơ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "các cơ gian cốt gan tay và cơ khép ngón tay."
+        },
+        {
+          "id": "B",
+          "text": "các cơ gian cốt mu tay và hai cơ giun bên ngoài."
+        },
+        {
+          "id": "C",
+          "text": "hai cơ giun bên trong và cơ đối chiếu ngón cái."
+        },
+        {
+          "id": "D",
+          "text": "cơ giạng ngón cái ngắn và các cơ gian cốt gan tay."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.các cơ gian cốt gan tay và cơ khép ngón tay=>(cơ khép ngón\ncái, đầu sâu cơ gấp ngón cái, 8 cơ gian cốt, 2 cơ giun 3,4.\nB.các cơ gian cốt mu tay và hai cơ giun bên ngoài=>cơ giun bên\nngoài của TK giữa.\nC.hai cơ giun bên trong và cơ đối chiếu ngón cái=>cơ đối chiếu\ncủa TK giữa,Cơ khép ngón cái: TK trụ.\nD.cơ giạng ngón cái ngắn và các cơ gian cốt gan tay=>Trừ cơ giạng\nngón cái.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 140,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-121",
+      "number": 121,
+      "stem": "Một vết thương do dao đâm làm đứt động mạch mũ cánh tay sau ở lỗ tứ giác . tk có thể bị tổn thương là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "tk quay."
+        },
+        {
+          "id": "B",
+          "text": "tk nách."
+        },
+        {
+          "id": "C",
+          "text": "tk ngực lưng."
+        },
+        {
+          "id": "D",
+          "text": "tk trên vai."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.tk quay=>Tam giác cánh tay tam đầu.\nB.tk nách=>Tk nách đi cùng ĐM mũ cánh tay sau trong lỗ tứ giác.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/7c4c468eb3a7468031f0.webp"
+      ],
+      "sourcePage": 141,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-122",
+      "number": 122,
+      "stem": "Một nạn nhân tai nạn ô tô bị liệt tất cả các cơ giạng cánh tay. Ở tình trạng này . Phần đám rối cánh tay bị tổn thương là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "thân giữa và bó sau"
+        },
+        {
+          "id": "B",
+          "text": "bó trong"
+        },
+        {
+          "id": "C",
+          "text": "bó ngoài"
+        },
+        {
+          "id": "D",
+          "text": "thân trên và bó sau"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D. thân trên và bó sauà cơ delta do TK nách ở bó sau, cơ trên gai do\nTK trên vai ở thân trên",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/a2b5ffe18261fc91f927.webp"
+      ],
+      "sourcePage": 142,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-123",
+      "number": 123,
+      "stem": "Một tổn thương tk quay khi nó đi trong rãnh ở mặt sau xương cánh tay gây ra tình trạng:",
+      "options": [
+        {
+          "id": "A",
+          "text": "tê ở mặt trong cẳng tay."
+        },
+        {
+          "id": "B",
+          "text": "không thể đối chiếu ngón cái."
+        },
+        {
+          "id": "C",
+          "text": "yếu trong sấp cẳng tay."
+        },
+        {
+          "id": "D",
+          "text": "không thể duỗi bàn tay."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.tê ở mặt trong cẳng tay. => TK bì cánh tay trong, bì cẳng tay trong\nB.không thể đối chiếu ngón cái. => TK giữa\nC.yếu trong sấp cẳng tay. => sấp- Giữa ;Quay- ngửa\nD.không thể duỗi bàn tay. => do các cơ ở khu cẳng tay sau",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/31247c3c84047acd3525.webp"
+      ],
+      "sourcePage": 143,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-124",
+      "number": 124,
+      "stem": "Một bệnh nhân có gãy gian lồi cầu xương cánh tay không thể vận động được một cơ bám tận vào xương đậu . tk có khả năng bị tổn thương nhất là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "tk quay."
+        },
+        {
+          "id": "B",
+          "text": "tk cơ bì."
+        },
+        {
+          "id": "C",
+          "text": "tk giữa."
+        },
+        {
+          "id": "D",
+          "text": "tk trụ."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.tk trụ. => Ở khuỷu, Tk trụ đi giữa mỏm khuỷu, mỏm trên lồi cầu\ntrong, chi phối cho cơ gấp cổ tay trụ",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 144,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-125",
+      "number": 125,
+      "stem": "Cử động giạng các ngón tay ( ra xa trục giữa bàn tay . đi qua ngón giữa ) bị mất nếu liệt :",
+      "options": [
+        {
+          "id": "A",
+          "text": "tk trụ."
+        },
+        {
+          "id": "B",
+          "text": "tk giữa."
+        },
+        {
+          "id": "C",
+          "text": "tk quay."
+        },
+        {
+          "id": "D",
+          "text": "tk cơ bì."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.tk trụ. => chi phối cho cơ gian cốt mu tay (mu-giạng)\n==> Cơ gian cốt mu tay: giạng các ngón tay",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 145,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-126",
+      "number": 126,
+      "stem": "Tk ngực lưng chi phối cho 1 cơ có động tác:",
+      "options": [
+        {
+          "id": "A",
+          "text": "giạng cánh tay."
+        },
+        {
+          "id": "B",
+          "text": "xoay ngoài cánh tay."
+        },
+        {
+          "id": "C",
+          "text": "khép xương vai."
+        },
+        {
+          "id": "D",
+          "text": "duỗi khép và xoay trong cánh tay."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.duỗi khép và xoay trong cánh tay->Cơ lưng rộng\n==>TK ngực lưng ---> Cơ lưng rộng : Duỗi, khép, xoay trong",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/886fe3ae7abf6598953b.webp"
+      ],
+      "sourcePage": 145,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-127",
+      "number": 127,
+      "stem": "Một nạn nhân bị ngã xuống từ trên cao, đầu cổ bị đẩy mạnh đột ngột sang phải khi va đập ( làm giãn rộng góc vai – cổ trái ), tổn thương có thể xảy ra là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "đứt các rễ trên của đám rối cánh tay bên trái."
+        },
+        {
+          "id": "B",
+          "text": "đứt các rễ dưới của đám rối cánh tay bên trái."
+        },
+        {
+          "id": "C",
+          "text": "đứt các rễ trên của đám rối cánh tay phải."
+        },
+        {
+          "id": "D",
+          "text": "đứt các rễ dưới của đám rối cánh tay phải."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.đứt các rễ trên của đám rối cánh tay bên trái. => giãn bên T -->\nCác TK bên T bị kéo giãn\n---> Tổn thương bên T\nNhớ: Rễ trên",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 146,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-128",
+      "number": 128,
+      "stem": "Một bệnh nhân không thể duỗi khớp gian đốt ngón gần của ngón nhẫn, cặp tk có thể bị tổn thương là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "các tk quay và giữa."
+        },
+        {
+          "id": "B",
+          "text": "các tk quay và nách."
+        },
+        {
+          "id": "C",
+          "text": "các tk quay và trụ."
+        },
+        {
+          "id": "D",
+          "text": "các tk trụ và giữa."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.các tk quay và trụ. => TK quay cho cơ duỗi các ngón tay, TK trụ\ncho cơ giun 3,4\n==> Cơ giun: duỗi đốt giữa, xa gấp đốt gần -> liệt trụ: bàn tay móng\nvuốt gấp đốt giữa, xa; duỗi đốt gần",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/a2ab259dd0a38ca591c6.webp"
+      ],
+      "sourcePage": 147,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-129",
+      "number": 129,
+      "stem": "Một bệnh nhân than phiền là mất cảm giác ở các mặt trước và sau phần ba trong bàn tay và một ngón tay rưỡi phía trong, tk có thể bị tổn thương là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "tk nách."
+        },
+        {
+          "id": "B",
+          "text": "tk quay."
+        },
+        {
+          "id": "C",
+          "text": "tk giữa."
+        },
+        {
+          "id": "D",
+          "text": "tk trụ."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.tk trụ. => Giang: cơ delta và cơ trên gai\n------------------> TK nách và TK trên vai\n----------------->  Bó sau và Thân trên",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/bba7957158503eb5ab80.webp"
+      ],
+      "sourcePage": 147,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-130",
+      "number": 130,
+      "stem": "Các cơ giạng cánh tay bị liệt là do tổn thương cặp tk nào?",
+      "options": [
+        {
+          "id": "A",
+          "text": "tk nách và cơ bì."
+        },
+        {
+          "id": "B",
+          "text": "tk ngực lưng và tk dưới vai trên."
+        },
+        {
+          "id": "C",
+          "text": "tk trên vai và tk nách."
+        },
+        {
+          "id": "D",
+          "text": "tk quay và tk dưới vai dưới."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "D.tk trên vai và tk nách -> cho cơ trên gai và cơ delta",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 148,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-131",
+      "number": 131,
+      "stem": "Trong các cặp tk sau đây, cặp chi phối cho cơ vận động khớp bàn tay đốt ngón tay của ngón nhẫn là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "giữa và trụ."
+        },
+        {
+          "id": "B",
+          "text": "quay và giữa."
+        },
+        {
+          "id": "C",
+          "text": "cơ bì và trụ."
+        },
+        {
+          "id": "D",
+          "text": "trụ và quay."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.trụ và quay ->2 bó trong của cơ gấp các ngón sâu và cơ duỗi các\nngón tay",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 149,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-132",
+      "number": 132,
+      "stem": "Không ngửa được cẳng tay (liệt cơ ngửa và cơ nhị đầu) có thể là hậu quả của tổn thương cặp tk:",
+      "options": [
+        {
+          "id": "A",
+          "text": "cơ bì và giữa."
+        },
+        {
+          "id": "B",
+          "text": "nách và quay."
+        },
+        {
+          "id": "C",
+          "text": "quay và cơ bì."
+        },
+        {
+          "id": "D",
+          "text": "giữa và trụ."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.quay và cơ bì. => quay chi phối cơ ngửa, cơ bì chi phối cơ nhị đầu\n==>nhị đầu: TK cơ bì\nCơ ngửa: TK quay",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 149,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-133",
+      "number": 133,
+      "stem": "Những mô tả sau đây về khớp vai đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó là 1 khớp chỏm cầu (khớp chỏm và ổ)."
+        },
+        {
+          "id": "B",
+          "text": "nó là một khớp hoạt dịch."
+        },
+        {
+          "id": "C",
+          "text": "nó là một khớp nhiều trục."
+        },
+        {
+          "id": "D",
+          "text": "nó là một khớp xoan (khớp elip)."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.nó là một khớp xoan (khớp elip). => Câu A ;D ngược nhau khớp\nchỏm cầu",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 150,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-134",
+      "number": 134,
+      "stem": "Tất cả các mô tả sau đây về mỏm trên lồi cầu trong xương cánh tay đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó là chỗ bám cho nhiều cơ gấp cổ tay."
+        },
+        {
+          "id": "B",
+          "text": "nó lồi hơn mỏm trên lồi cầu ngoài."
+        },
+        {
+          "id": "C",
+          "text": "nó ở gần tĩnh mạch nền hơn tĩnh mạch đầu."
+        },
+        {
+          "id": "D",
+          "text": "nó là điểm mà tại đó động mạch cánh tay thường chia thành các động mạch quay và trụ."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A. nó là chỗ bám cho nhiều cơ gấp cổ tay => Đúng vì mỏm trên lồi\ncầu trong là nơi bám của nhiều cơ gấp cổ tay như cơ gấp cổ tay trụ,\ncơ gấp các ngón nông, v.v.\nB. nó lồi hơn mỏm trên lồi cầu ngoài => Đúng vì mỏm trên lồi cầu\ntrong nổi bật hơn và lồi hơn mỏm trên lồi cầu ngoài.\nC. nó ở gần tĩnh mạch nền hơn tĩnh mạch đầu => Đúng vì mỏm trên\nlồi cầu trong nằm ở phía trong của cánh tay, gần với tĩnh mạch nền\nhơn so với tĩnh mạch đầu, vốn nằm ở phía ngoài.\nD. nó là điểm mà tại đó động mạch cánh tay thường chia thành các\nđộng mạch quay và trụ => Sai vì động mạch cánh tay thường chia\nthành động mạch quay và động mạch trụ tại mức cổ tay hoặc thấp\nhơn, chứ không phải tại mỏm trên lồi cầu trong.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/677f52d908575661e23a.webp"
+      ],
+      "sourcePage": 150,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-135",
+      "number": 135,
+      "stem": "Một người thợ bị đứt hoàn toàn ngón tay út, tất cả các cơ sau sẽ bị tổn thương, trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "gân cơ gấp các ngón sâu."
+        },
+        {
+          "id": "B",
+          "text": "gân cơ duỗi các ngón."
+        },
+        {
+          "id": "C",
+          "text": "cơ gian cốt mu tay."
+        },
+        {
+          "id": "D",
+          "text": "cơ gian cốt gan tay."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.gân cơ gấp các ngón sâu. => Nhớ: Cơ gian cốt mu tay: giạng các\nngón xa ngón cái\nNgón út có cơ giạng\nB.gân cơ duỗi các ngón. => gian cốt mu tay: chỉ bám vào ngón 2-4\nkhông bám vào các ngón ngón út\nC.cơ gian cốt mu tay. => bám tận vào đốt ngón gần và gân duỗi các\nngón II-IV phía xa trục giữa bàn tay\nD.cơ gian cốt gan tay. => Cơ gian cốt mu tay: nguyên ủy bám vào\nđốt bàn\nĐứt ngón út không ảnh hưởng",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 152,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-136",
+      "number": 136,
+      "stem": "Các mô tả sau đây về cử động ngửa cẳng tay đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "ngửa là làm tay hướng ra trước."
+        },
+        {
+          "id": "B",
+          "text": "cử động ngửa bị mất một phần khi tk quay bị đứt lúc đi qua cánh tay."
+        },
+        {
+          "id": "C",
+          "text": "nó cần đến sự tham gia của khớp khuỷu và khớp cổ tay."
+        },
+        {
+          "id": "D",
+          "text": "nó cần đến sự tham gia của các khớp quay trụ gần và xa."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.ngửa là làm tay hướng ra trước. => TK quay chi phối Cơ ngửa\nB.cử động ngửa bị mất một phần khi tk quay bị đứt lúc đi qua cánh\ntay. => Cơ ngửa\nC.nó cần đến sự tham gia của khớp khuỷu và khớp cổ tay. => Chỉ\nkhớp quay trụ gần và xa\nD.nó cần đến sự tham gia của các khớp quay trụ gần và xa. => Sấp-\nngửa: Khớp quay trụ gần và xa",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/f6585179aaf8bb037614.webp"
+      ],
+      "sourcePage": 153,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-137",
+      "number": 137,
+      "stem": "Những mô tả sau đây về động mạch trụ đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó là một trong số hai nhánh tận của động mạch cánh tay."
+        },
+        {
+          "id": "B",
+          "text": "nó chạy qua cẳng tay trước theo hai đoạn là đoạn chếch và đoạn thẳng."
+        },
+        {
+          "id": "C",
+          "text": "nó được cơ gấp cổ tay trụ tùy hành trên suốt chiều dài cẳng tay."
+        },
+        {
+          "id": "D",
+          "text": "nó tiếp nối rộng rãi với động mạch quay ở cổ tay và gan tay."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.nó là một trong số hai nhánh tận của động mạch cánh tay. => ĐM\ncách tay tận bằng ĐM quay, trụ ngang cổ xg quay\nB.nó chạy qua cẳng tay trước theo hai đoạn là đoạn chếch và đoạn\nthẳng. => đoạn chếch ở 1/3 trên, thẳng 2/3 dưới\nC.nó được cơ gấp cổ tay trụ tùy hành trên suốt chiều dài cẳng tay.\n=> chỉ ở 2/3 dưới cẳng tay\nD.nó tiếp nối rộng rãi với động mạch quay ở cổ tay và gan tay.\n=> nhánh gan, mu cổ tay và cung gan tay nông, sâu",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/157821adf64495763dc3.webp"
+      ],
+      "sourcePage": 154,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-138",
+      "number": 138,
+      "stem": "Những mô tả sau đây về cung gan tay nông đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó do nhánh tận động mạch quay nối với nhánh tận động mạch trụ tạo nên."
+        },
+        {
+          "id": "B",
+          "text": "nó nằm dưới cân gan tay, trên các gân gấp nông các ngón tay."
+        },
+        {
+          "id": "C",
+          "text": "nó phân nhánh đi vào 7 bờ ngón tay để cấp máu cho 3,5 ngón tay bên trong."
+        },
+        {
+          "id": "D",
+          "text": "nó có nối tiếp với cung động mạch gan tay sâu."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.nó do nhánh tận động mạch quay nối với nhánh tận động mạch\ntrụ tạo nên. => nhánh tận ĐM trụ + nhánh bên ĐM quay\nC.nó phân nhánh đi vào 7 bờ ngón tay để cấp máu cho 3,5 ngón tay\nbên trong => kể từ ngón út  => Trừ ngón cái và bờ ngoài ngón trỏ do\nĐM chính ngón cái và ĐM quay ngón trỏ cấp máu\nD.nó có nối tiếp với cung động mạch gan tay sâu. => ĐM gan đốt\nbàn (cung sâu) đổ vào ĐM ngón tay chung (cung nông)",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 156,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-139",
+      "number": 139,
+      "stem": "Mô tả đúng về xương vai là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó thuộc loại xương ngắn"
+        },
+        {
+          "id": "B",
+          "text": "Nó tiếp khớp với xương cánh tay và cột sống"
+        },
+        {
+          "id": "C",
+          "text": "Nó tiếp khớp với xương đòn qua mỏm cùng vai"
+        },
+        {
+          "id": "D",
+          "text": "Nó có hai bờ và ba góc"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A. Nó thuộc loại xương ngắn => Sai vì xương vai là xương dẹt, không\nphải xương ngắn.\nB. Nó tiếp khớp với xương cánh tay và cột sống => Sai vì xương vai\nchỉ tiếp khớp với xương cánh tay tại ổ chảo vai, không tiếp khớp với\ncột sống.\nC. Nó tiếp khớp với xương đòn qua mỏm cùng vai => Đúng vì mỏm\ncùng vai của xương vai tiếp khớp với xương đòn, tạo thành khớp\ncùng vai - đòn.\nD. Nó có hai bờ và ba góc => Sai vì xương vai có ba bờ (bờ trên, bờ\ntrong, bờ ngoài) và ba góc (góc trên, góc dưới, góc ngoài), không\nphải hai bờ.\nThông tin thêm: nó có 2 mặt (sườn, sau)",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/b95c21b77dfef26b84da.webp"
+      ],
+      "sourcePage": 157,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-140",
+      "number": 140,
+      "stem": "Mô tả đúng về đầu gần xương cánh tay là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó có 1 chỏm ngăn cách phần còn lại của đầu gần bằng cổ phẫu thuật."
+        },
+        {
+          "id": "B",
+          "text": "Nó nối với thân xương tại cỗ giải phẫu."
+        },
+        {
+          "id": "C",
+          "text": "Nó có các củ lớn và bé ngăn cách với nhau bằng rãnh gian củ."
+        },
+        {
+          "id": "D",
+          "text": "Nó khớp với xương vai bằng 1 khớp bản lề."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Đáp án: C. Nó có các củ lớn và bé ngăn cách nhau bằng rãnh gian\ncủ\nĐầu gần xương cánh tay có củ lớn (greater tubercle) và củ bé\n(lesser tubercle), nằm ở phía ngoài và trước chỏm xương. Giữa hai\ncủ này là rãnh gian củ (intertubercular groove), còn gọi là rãnh nhị\nđầu, là nơi gân đầu dài cơ nhị đầu cánh tay đi qua.\nCác đáp án còn lại mô tả chưa đúng về giải phẫu hoặc kiểu khớp:\nChỏm và cổ giải phẫu (not cổ phẫu thuật) mới là phần ngăn cách rõ\nràng chỏm với phần còn lại.\nCổ phẫu thuật nằm thấp hơn, là nơi nối đầu gần với thân xương,\nnhưng không phải là nơi nối trực tiếp với chỏm.\nKhớp giữa đầu xương cánh tay và ổ chảo xương vai là khớp chỏm,\nkhông phải khớp bản lề.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/b95c21b77dfef26b84da.webp"
+      ],
+      "sourcePage": 158,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-141",
+      "number": 141,
+      "stem": "Mô tả đúng về đầu xa xương cánh tay là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó có 1 hố duy nhất là hố vẹt"
+        },
+        {
+          "id": "B",
+          "text": "Nó có hai mỏm có thể sờ thấy được ở dưới da là các mỏm trên lồi cầu trong và ngoài"
+        },
+        {
+          "id": "C",
+          "text": "Nó tiếp khớp với xương quay tại ròng rọc và xương trụ tại chỏm con"
+        },
+        {
+          "id": "D",
+          "text": "Nó không có chỗ bám cho đầu gần của các cơ ở cẳng tay"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Nó có 1 hố duy nhất là hố vẹt ==> 3 hố: hố quay ở trc, trên chỏm\ncon, hố vẹt ở trên ròng đọc, hố khuỷu ở sau\nC.Nó tiếp khớp với xương quay tại ròng rọc và xương trụ tại chỏm\ncon ==> Ngược lại\nD.Nó không có chỗ bám cho đầu gần của các cơ ở cẳng tay\n==> MTLC trong là chỗ bám cơ ngăn trc cẳng tay,MTLC ngoài là\nchỗ bám cơ ngăn sau cẳng tay",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 159,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-142",
+      "number": 142,
+      "stem": "Mô tả đúng về xương quay là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó là 1 xương dài mà đầu gần to hơn đầu xa"
+        },
+        {
+          "id": "B",
+          "text": "Nó tiếp khớp ở đầu xa với xương thang và xương thê"
+        },
+        {
+          "id": "C",
+          "text": "Nó có 1 cổ lồi là nơi thắt hẹp giữa đầu xa và thân xương"
+        },
+        {
+          "id": "D",
+          "text": "Nó có 1 lồi củ cho cơ nhị đầu bám."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A. Nó là 1 xương dài mà đầu gần to hơn đầu xa => Sai vì xương quay\nlà xương dài, nhưng đầu xa của nó lớn hơn đầu gần.\nB. Nó tiếp khớp ở đầu xa với xương thang và xương thê => Sai vì ở\nđầu xa, xương quay tiếp khớp với xương nguyệt và xương thuyền\nchứ không phải xương thang và xương thê.\nC. Nó có 1 cổ lồi là nơi thắt hẹp giữa đầu xa và thân xương => Sai vì\ncổ xương quay là nơi thắt hẹp nằm giữa đầu gần và thân xương, chứ\nkhông phải giữa đầu xa và thân xương.\nD. Nó có 1 lồi củ cho cơ nhị đầu bám => Đúng vì lồi củ quay là nơi\nbám của gân cơ nhị đầu.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/76f6691d98c2bc4e8244.webp",
+        "/kb/dr-lam/images/4bf1fd1143690c8a6201.webp"
+      ],
+      "sourcePage": 160,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-143",
+      "number": 143,
+      "stem": "Mô tả đúng về khuyết trụ của xương quay là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó nằm ở đầu gần xương quay"
+        },
+        {
+          "id": "B",
+          "text": "Nó nằm ở mặt ngoài của đầu xa xương quay"
+        },
+        {
+          "id": "C",
+          "text": "Nó nằm ở mặt trong của đầu xa xương quay"
+        },
+        {
+          "id": "D",
+          "text": "Nó cùng với chỏm xương trụ tạo nên khớp quay trụ gần"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Nó nằm ở đầu gần xương quay ==> đầu xa, khuyết quay xg trụ ms\nở đầu gần\nB.Nó nằm ở mặt ngoài của đầu xa xương quay ==> mặt trong, tiếp\nkhớp vs chỏm xg trụ\nD.Nó cùng với chỏm xương trụ tạo nên khớp quay trụ gần ==> khớp\nquay trụ xa",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/f6a064c234145bada5fa.webp"
+      ],
+      "sourcePage": 163,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-144",
+      "number": 144,
+      "stem": "Mô tả nào đúng về xương trụ là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó gồm hai đầu và 1 thân xương hình trụ"
+        },
+        {
+          "id": "B",
+          "text": "Nó có hai khuyết ở đầu trên là khuyết ròng rọc và khuyết quay"
+        },
+        {
+          "id": "C",
+          "text": "Nó có 1 mỏm trâm ( mỏm trâm trụ ) ở thấp mỏm trâm quay"
+        },
+        {
+          "id": "D",
+          "text": "Nó có đầu gần nhỏ hơn đầu xa"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Nó gồm hai đầu và 1 thân xương hình trụ ==> hình lăng trụ tam giác\nC.Nó có 1 mỏm trâm ( mỏm trâm trụ ) ở thấp mỏm trâm quay\n==> mỏm châm trụ cao hơn (1-1,5CM)\nD.Nó có đầu gần nhỏ hơn đầu xa ==> đầu gần to hơn",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/1e1c22e252f5a27b6bed.webp"
+      ],
+      "sourcePage": 164,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-chi-tren-145",
+      "number": 145,
+      "stem": "Khi bàn tay ở tư thế ngửa . xương quay tiếp khớp ở khớp quay – cổ tay với cặp xương.",
+      "options": [
+        {
+          "id": "A",
+          "text": "xương tháp và xương thang."
+        },
+        {
+          "id": "B",
+          "text": "xương nguyệt và xương thang."
+        },
+        {
+          "id": "C",
+          "text": "xương nguyệt và xương thuyền."
+        },
+        {
+          "id": "D",
+          "text": "xương thuyền và xương móc."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Xương nguyệt và xương thuyền -> xương trụ không tiếp khớp vs\nxương cổ tay.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/f3644d8a069aa4619940.webp"
+      ],
+      "sourcePage": 165,
+      "gradable": true
+    }
+  ]
+}

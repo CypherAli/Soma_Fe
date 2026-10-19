@@ -1,0 +1,1327 @@
+{
+  "schemaVersion": 1,
+  "id": "giai-phau-than-tu-cung-nieu-quan-am-dao",
+  "title": "Giải phẫu thận tử cung niệu quản âm đạo",
+  "sourceFile": "Giải phẫu người 2025 - Test số hóa Dr. Lâm giải phẫu thận tử cung niệu quản âm đạo.pdf",
+  "sourceNote": null,
+  "sourceHash": "1ec7d978d360f4684f46c120e8b88f0cf2be3c6d3e7e5da2fe103ebcc0b1d866",
+  "pages": 37,
+  "questions": [
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-1",
+      "number": 1,
+      "stem": "Các mô tả sau đây về thận đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Kích thước thận khoảng 11cm x 6cm x 3cm."
+        },
+        {
+          "id": "B",
+          "text": "Nó có hai mặt, hai bờ, hai cực."
+        },
+        {
+          "id": "C",
+          "text": "Thận trái cao hơn thận phải."
+        },
+        {
+          "id": "D",
+          "text": "Trục của hai thận hoàn toàn song song với nhau."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.Trục của hai thận hoàn toàn song song với nhau=>Nhớ gan đè\nlàm thận P thấp hơn,trục hướng trước sau.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/cbbd6b3441d63848ee9a.webp"
+      ],
+      "sourcePage": 1,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-2",
+      "number": 2,
+      "stem": "Các mô tả sau đây về đối chiếu của thận đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cực trên thận trái ngang mức xương sườn 11."
+        },
+        {
+          "id": "B",
+          "text": "Cực trên thận phải ngang mức xương sườn 12."
+        },
+        {
+          "id": "C",
+          "text": "Cực dưới thận cách đường giữa 5cm."
+        },
+        {
+          "id": "D",
+          "text": "Trung tâm rốn thận ngang mức bờ dưới mỏm gai đốt sống TL 1."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Cực dưới thận cách đường giữa 5cm => 7,5cm, rốn thận cách\nđường giữa 5cm, cực trên cách đường giữa 2,5cm.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 2,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-3",
+      "number": 3,
+      "stem": "(Case study) Bệnh nhân vào viện với dấu hiệu thâm tím vùng hạ sườn trái do một va đập mạnh, huyết áp 90/60, mạch nhanh, trong các nhóm tạng sau đây nhóm nào dễ bị vỡ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Lách và thận trái."
+        },
+        {
+          "id": "B",
+          "text": "Thận trái và góc đại tràng trái."
+        },
+        {
+          "id": "C",
+          "text": "Đại tràng xuống và thận trái."
+        },
+        {
+          "id": "D",
+          "text": "Góc trái đại tràng trái và lách."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.Lách và thận trái=>Vùng hạ sườn trái.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/48e967b6d5fcb142ed19.webp"
+      ],
+      "sourcePage": 3,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-4",
+      "number": 4,
+      "stem": "Trên một thiết đồ cắt ngang qua thận đâu là thứ tự đúng của các lớp tính từ cơ thành bụng sau đến nhu mô thận?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Mỡ quanh thận, lá sau mạc thận, mỡ cạnh thận và bao xơ."
+        },
+        {
+          "id": "B",
+          "text": "Mỡ quanh thận, mỡ cạnh thận, bao xơ, lá sau mạc thận."
+        },
+        {
+          "id": "C",
+          "text": "Mỡ cạnh thận, bao xơ, mỡ quanh thận, lá sau mạc thận."
+        },
+        {
+          "id": "D",
+          "text": "Mỡ cạnh thận, lá sau mạc thận, mỡ quanh thận, bao xơ."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.Mỡ cạnh thận, lá sau mạc thận, mỡ quanh thận, bao xơ.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/f1f88884ea979b789ead.webp"
+      ],
+      "sourcePage": 3,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-5",
+      "number": 5,
+      "stem": "Liên quan của tầng ngực mặt sau thận lần lượt từ sâu ra nông là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ hoành, ngách sườn hoành màng phổi, các xương sườn (11+12 bên trái,12 với bên phải )."
+        },
+        {
+          "id": "B",
+          "text": "Ngách sườn hoành màng phổi, các xương sườn, cơ hoành."
+        },
+        {
+          "id": "C",
+          "text": "Cơ hoành, phổi, góc sườn hoành màng phổi."
+        },
+        {
+          "id": "D",
+          "text": "Phổi, cơ hoành, các xương sườn."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Cơ hoành, ngách sườn hoành màng phổi, các xương sườn (11+12\nbên trái,12 với bên phải )",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/63a68fdab7c9df852427.webp"
+      ],
+      "sourcePage": 4,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-6",
+      "number": 6,
+      "stem": "Các mô tả sau đây về liên quan mặt trước của thận đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thận phải liên quan đến gan, phần xuống tá tràng, góc đại tràng phải."
+        },
+        {
+          "id": "B",
+          "text": "Phần trên mặt trước thận trái liên quan với dạ dày, tụy, tuyến thượng thận trái và lách."
+        },
+        {
+          "id": "C",
+          "text": "Phần dưới mặt trước thận trái liên quan với góc đại tràng trái, đại tràng xuống và hỗng tràng."
+        },
+        {
+          "id": "D",
+          "text": "Thận phải liên quan với phần xuống tá tràng qua một ngách của ổ phúc mạc."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Thận phải liên quan đến gan, phần xuống tá tràng, góc đại tràng\nphải=>tuyến thượng thận P ở cực trên.\nD.Thận phải liên quan với phần xuống tá tràng qua một ngách của ổ\nphúc mạc=>liên quan trực tiếp vs phần xuống tá tràng,tiếp xúc trực\ntiếp với tá tràng ở trong,liên quan vs gan qua ngách ổ phúc mạc.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 5,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-7",
+      "number": 7,
+      "stem": "Mặt sau tầng thắt lưng của thận liên quan qua thể mỡ cạnh thận với những cơ sau đây, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ thắt lưng lớn."
+        },
+        {
+          "id": "B",
+          "text": "Các cơ dựng sống."
+        },
+        {
+          "id": "C",
+          "text": "Cân cơ ngang bụng."
+        },
+        {
+          "id": "D",
+          "text": "Cơ vuông thắt lưng."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.Các cơ dựng sống",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/79ba56bcc91c35ccf217.webp"
+      ],
+      "sourcePage": 6,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-8",
+      "number": 8,
+      "stem": "Các đường tới thận hay bể thận sau đây đều hợp lý, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Qua thành bụng trước và ổ phúc mạc."
+        },
+        {
+          "id": "B",
+          "text": "Qua vùng thắt lưng và thành bụng sau, không qua phúc mạc."
+        },
+        {
+          "id": "C",
+          "text": "Qua ngực và cơ hoành."
+        },
+        {
+          "id": "D",
+          "text": "Qua đường bài tiết ( niệu đạo, bàng quang, niệu quản) bằng nội soi."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Qua ngực và cơ hoành",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/626ac8edeb823d425cdb.webp"
+      ],
+      "sourcePage": 7,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-9",
+      "number": 9,
+      "stem": "Các mô tả sau đây về liên quan bờ trong của thận đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ở trên rốn thận với tuyến thượng thận và các cuống mạch của nó."
+        },
+        {
+          "id": "B",
+          "text": "Rốn thận là nơi bể thận đi từ trong thận ra, có bể thận ở sau, các mạch thận ở trước."
+        },
+        {
+          "id": "C",
+          "text": "Dưới rốn thận, bờ trong liên quan với niệu quản và các mạch cho tuyến sinh dục."
+        },
+        {
+          "id": "D",
+          "text": "Bờ trong của hai thận có liên quan giống nhau."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.Bờ trong của hai thận có liên quan giống nhau => bên P liên quan\nvs TM chủ dưới, bên T lq vs ĐM chủ bụng.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/920ee0edf60d12687239.webp"
+      ],
+      "sourcePage": 8,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-10",
+      "number": 10,
+      "stem": "Các mô tả sau đây về cấu tạo của thận đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Các cột thận thuộc vùng tủy."
+        },
+        {
+          "id": "B",
+          "text": "Tháp thận thuộc vùng tủy."
+        },
+        {
+          "id": "C",
+          "text": "Mê đạo vỏ thuộc vùng vỏ."
+        },
+        {
+          "id": "D",
+          "text": "Trên nhú thận có diện sàng."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.Các cột thận thuộc vùng tủy => vùng vỏ.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/1d25ac014aa147dcb518.webp"
+      ],
+      "sourcePage": 9,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-11",
+      "number": 11,
+      "stem": "Thành phần nào sau đây không thuộc Nephron?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tiểu thể thận."
+        },
+        {
+          "id": "B",
+          "text": "Ống góp."
+        },
+        {
+          "id": "C",
+          "text": "Ống lượn gần."
+        },
+        {
+          "id": "D",
+          "text": "Ống lượn xa."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "nephron gồm tiểu thể thận và ống thận.\nB.Ống góp=>nhiều ống thận tập trung về một ống góp.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 10,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-12",
+      "number": 12,
+      "stem": "Thành phần nào sau đây không thuộc xoang thận?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đài thận nhỏ."
+        },
+        {
+          "id": "B",
+          "text": "Nhú thận."
+        },
+        {
+          "id": "C",
+          "text": "Đài thận lớn."
+        },
+        {
+          "id": "D",
+          "text": "Bể thận."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.Nhú thận",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/fc4fc296950d8612fa0f.webp"
+      ],
+      "sourcePage": 11,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-13",
+      "number": 13,
+      "stem": "Các mô tả sau đây về niệu quản đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đi từ bể thận tới bàng quang."
+        },
+        {
+          "id": "B",
+          "text": "Dài 38cm, đường kính 3-5mm."
+        },
+        {
+          "id": "C",
+          "text": "Có 2 đoạn: đoạn bụng và đoạn chậu hông."
+        },
+        {
+          "id": "D",
+          "text": "Có 3 chỗ hẹp."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.Dài 38cm, đường kính 3-5mm=>25-28cm.\nD.Có 3 chỗ hẹp=>lúc đi ra từ bể thận, chỗ bắt chéo ĐM chậu 2 bên\n(bên P chậu ngoài, bên T chậu chung), chỗ đổ vào BQ.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 11,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-14",
+      "number": 14,
+      "stem": "Nơi nào không là chỗ hẹp của niệu quản?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nơi niệu quản bắt chéo ĐM chậu ngoài hay chậu chung."
+        },
+        {
+          "id": "B",
+          "text": "Nơi niệu quản tiếp theo với bể thận."
+        },
+        {
+          "id": "C",
+          "text": "Nơi niệu quản bắt chéo sau ĐM tử cung hay ống dẫn tinh."
+        },
+        {
+          "id": "D",
+          "text": "Nơi niệu quản xuyên qua thành bàng quang."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 12,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-15",
+      "number": 15,
+      "stem": "Đối chiếu lên thành bụng điểm niệu quản giữa nằm ở vị trí nào?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Chỗ nối các đoạn 1/3 ngoài và 2/3 trong đường nối từ gai chậu trước trên tới rốn."
+        },
+        {
+          "id": "B",
+          "text": "Điểm giữa đường nối từ gai chậu trước trên tới củ mu."
+        },
+        {
+          "id": "C",
+          "text": "Chỗ nối đoạn 1/3 ngoài và đoạn 1/3 giữa đường nối hai gai chậu trước trên."
+        },
+        {
+          "id": "D",
+          "text": "Điểm nối đoạn 1/3 ngoài và đoạn 1/3 giữa đường nối từ gai chậu trước trên tới củ mu."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Chỗ nối đoạn 1/3 ngoài và đoạn 1/3 giữa đường nối hai gai chậu\ntrước trên.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 12,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-16",
+      "number": 16,
+      "stem": "Các mô tả sau đây về liên quan của niệu quản đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Niệu quản nằm trước cơ thắt lưng lớn."
+        },
+        {
+          "id": "B",
+          "text": "Niệu quản bắt chéo phía sau các ĐM chậu ( ngoài hoặc chung)."
+        },
+        {
+          "id": "C",
+          "text": "Niệu quản bắt chéo phía sau các mạch tuyến sinh dục."
+        },
+        {
+          "id": "D",
+          "text": "Niệu quản nam bắt chéo phía sau ống dẫn tinh."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Niệu quản bắt chéo phía sau các ĐM chậu ( ngoài hoặc\nchung)=>bắt chéo trc ĐM chậu.\nC.Niệu quản bắt chéo phía sau các mạch tuyến sinh dục=>bắt\nchéo sau dưới ĐM TC.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 13,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-17",
+      "number": 17,
+      "stem": "Các mô tả sau đây về liên quan của niệu quản đoạn chậu hông đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Khúc thành chậu hông đi từ đường cung tới ngang gai ngồi."
+        },
+        {
+          "id": "B",
+          "text": "Khúc qua sàn chậu hông (khúc tạng) đi từ ngang gai ngồi tới chỗ xuyên vào bàng quang."
+        },
+        {
+          "id": "C",
+          "text": "Liên quan khúc qua sàn chậu hông khác nhau giữa nam và nữ."
+        },
+        {
+          "id": "D",
+          "text": "Niệu quản nữ bắt chéo trước ĐM tử cung cách cổ tử cung 1.5cm."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "đến ngang gai ngồi thì vòng về phía trước trong qua sàn chậu hông\nđể tới đáy bàng quang.\nD.Niệu quản nữ bắt chéo trước ĐM tử cung cách cổ tử cung\n1.5cm=>Sau.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/c473de47475f54e1e7fd.webp",
+        "/kb/dr-lam/images/ccc16188ebc35c6145f5.webp"
+      ],
+      "sourcePage": 13,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-18",
+      "number": 18,
+      "stem": "Các mô tả sau đây về liên quan của niệu quản ở đoạn chậu hông và trong thành bàng quang đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Niệu quản nam bắt chéo phía sau – dưới ống dẫn tinh."
+        },
+        {
+          "id": "B",
+          "text": "Nó chạy xuyên chếch thành bàng quang trên một đoạn dài khoảng 2.2cm."
+        },
+        {
+          "id": "C",
+          "text": "2 lỗ niệu quản cách nhau khoảng 2.5cm khi bàng quang rỗng."
+        },
+        {
+          "id": "D",
+          "text": "Niệu quản nữ đi trước buồng trứng."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.Niệu quản nữ đi trước buồng trứng=>sau,đi cùng ĐM chậu trong\ngiới hạn nên thành sau hố buồng trứng.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 16,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-19",
+      "number": 19,
+      "stem": "Các vị trí sau đây sỏi niệu quản thường bị kẹt lại, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nơi bể thận nối với niệu quản."
+        },
+        {
+          "id": "B",
+          "text": "Điểm nằm giữa mào chậu và đường cung xương chậu."
+        },
+        {
+          "id": "C",
+          "text": "Nơi niệu quản bắt chéo các ĐM chậu."
+        },
+        {
+          "id": "D",
+          "text": "Nơi niệu quản xuyên qua thành bàng quang."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.Điểm nằm giữa mào chậu và đường cung xương chậu.\n3 chỗ còn lại là Chỗ hẹp.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 16,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-20",
+      "number": 20,
+      "stem": "Mô tả đúng về niêm mạc buồng (thân) tử cung là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Liên tiếp và giống với niêm mạc vòi tử cung."
+        },
+        {
+          "id": "B",
+          "text": "Có độ dày biến đổi theo chu kì kinh nguyệt."
+        },
+        {
+          "id": "C",
+          "text": "Liên tiếp và giống với niêm mạc âm đạo."
+        },
+        {
+          "id": "D",
+          "text": "Giống với niêm mạc phần ba dưới ống cổ tử cung."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Liên tiếp và giống với niêm mạc vòi tử cung=>buồng có kinh.\nC.Liên tiếp và giống với niêm mạc âm đạo=>TB khác nhau.\nD.Giống với niêm mạc phần ba dưới ống cổ tử cung=>giống 1/3\ntrên ống CTC (BM đơn).",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/085389054ea7e3f3097b.webp"
+      ],
+      "sourcePage": 17,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-21",
+      "number": 21,
+      "stem": "Các mô tả sau đây về dây chằng rộng đều đúng , TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó đi từ bờ bên tử cung tới thành sau chậu hông."
+        },
+        {
+          "id": "B",
+          "text": "Nó gồm ba phần là mạc treo buồng trứng, mạc treo vòi tử cung, và mạc treo tử cung."
+        },
+        {
+          "id": "C",
+          "text": "Nó phủ lên dây chằng tròn của tử cung."
+        },
+        {
+          "id": "D",
+          "text": "Bờ trên của nó ôm lấy vòi tử cung."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.Nó đi từ bờ bên tử cung tới thành sau chậu hông => thành bên\nchậu hông.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 18,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-22",
+      "number": 22,
+      "stem": "Mô tả đúng về dây chằng rộng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Mặt trước của nó bị dây chằng riêng buồng trứng đội lên thành một nếp."
+        },
+        {
+          "id": "B",
+          "text": "Mặt sau của nó bị dây chằng tròn đội lên thành một nếp."
+        },
+        {
+          "id": "C",
+          "text": "Động mạch tử cung và niệu quản đi qua nền của nó."
+        },
+        {
+          "id": "D",
+          "text": "Nó được nối với buồng trứng bằng dây chằng treo buồng trứng."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Mặt trước của nó bị dây chằng riêng buồng trứng đội lên thành\nmột nếp=>bị dây chằng tròn đội lên thành một nếp.\nB.Mặt sau của nó bị dây chằng tròn đội lên thành một nếp=>trước.\nD.Nó được nối với buồng trứng bằng dây chằng treo buồng\ntrứng=>mạc treo,d/c treo buồng trứng đi từ đầu vòi buồng trg đến\nthành bên chậu hông.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/0ea18b460dbbc7b47a82.webp"
+      ],
+      "sourcePage": 18,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-23",
+      "number": 23,
+      "stem": "Mô tả đúng về các dây chằng của cổ tử cung là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Dây chằng tử cung cùng đi từ mặt sau cổ tử cung đến mặt trước xương cùng."
+        },
+        {
+          "id": "B",
+          "text": "Dây chằng ngang cổ tử cung ít có ý nghĩa về lâm sàng."
+        },
+        {
+          "id": "C",
+          "text": "Dây chằng mu – cổ tử cung đi qua đáy dây chằng rộng."
+        },
+        {
+          "id": "D",
+          "text": "Nếp tử cung - trực tràng do các dây chằng ngang cổ tử cung đội lên."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "B.Dây chằng ngang cổ tử cung ít có ý nghĩa về lâm sàng=>là d/c\nchính giữ CTC.\nC.Dây chằng mu – cổ tử cung đi qua đáy dây chằng rộng=>nó lướt\nqua 2 bên cổ bàng quang,chạy ra trước.\nD.Nếp tử cung - trực tràng do các dây chằng ngang cổ tử cung đội\nlên=>nếp tử cung trực tràng do d/c tử cung-cùng đội lên.\n\u0000Các Dây chẳng ngang cổ tử cung từ bờ bên cổ tử cung và phần\nbên vòm âm đạo -> thành bên chậu hông;\nchúng là những dây chằng lớn nhất và quan trọng nhất về lâm sàng.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 19,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-24",
+      "number": 24,
+      "stem": "Các mô tả sau đây về ĐM tử cung đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó có nguyên ủy từ ĐM chậu trong."
+        },
+        {
+          "id": "B",
+          "text": "Nó bị niệu quản bắt chéo trước cách cổ tử cung 1.5cm."
+        },
+        {
+          "id": "C",
+          "text": "Đoạn thành bên chậu hông của nó là giới hạn dưới của hố buồng trứng."
+        },
+        {
+          "id": "D",
+          "text": "Ngoài tử cung, nó cấp máu cả những cơ quan khác trong chậu hông."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.Nó bị niệu quản bắt chéo trước cách cổ tử cung 1.5cm=>niệu\nquản bắt chéo sau.\nD.Ngoài tử cung, nó cấp máu cả những cơ quan khác trong chậu\nhông=>cấp máu cho niệu quản, bàng quang, buồng trứng, vòi TC,\nthân TC, CTC, âm đạo.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/4fd5c26a375b7025aef2.webp"
+      ],
+      "sourcePage": 20,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-25",
+      "number": 25,
+      "stem": "Mô tả đúng về các cơ quan sinh dục trong ở nữ giới là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đầu trên âm đạo bám vào quanh eo tử cung."
+        },
+        {
+          "id": "B",
+          "text": "Eo tử cung là phần thấp nhất tử cung."
+        },
+        {
+          "id": "C",
+          "text": "Buồng trứng có cả chức năng nội tiết và ngoại tiết."
+        },
+        {
+          "id": "D",
+          "text": "Bóng vòi có chức năng hứng trứng."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Đầu trên âm đạo bám vào quanh eo tử cung=>bám vào quanh\nCTC.\nB.Eo tử cung là phần thấp nhất tử cung=>CTC là thấp nhất.\nC.Buồng trứng có cả chức năng nội tiết và ngoại tiết=>vừa sản sinh\nra noãn  vừa tiết ra các nội tiết tố.\nD.Bóng vòi có chức năng hứng trứng=>loa vòi hứng trứng.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/5faaea9cd0452167928b.webp"
+      ],
+      "sourcePage": 21,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-26",
+      "number": 26,
+      "stem": "Mô tả đúng về tử cung là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tử cung thường gấp và ngả ra sau."
+        },
+        {
+          "id": "B",
+          "text": "Bở bên tử cung có dây chằng rộng bám."
+        },
+        {
+          "id": "C",
+          "text": "Cổ tử cung là phần nằm giữa eo và thân."
+        },
+        {
+          "id": "D",
+          "text": "Đáy tử cung là phần thấp nhất của tử cung."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Tử cung thường gấp và ngả ra sau=>ngả ra trước 90 độ, gấp ra\ntrước 120 độ.\nC.Cổ tử cung là phần nằm giữa eo và thân=>eo nằm giữa cổ và\nthân.\nD.Đáy tử cung là phần thấp nhất của tử cung=>đáy là cao nhất.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/d5398e898c89a5761282.webp"
+      ],
+      "sourcePage": 23,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-27",
+      "number": 27,
+      "stem": "Mô tả đúng về buồng trứng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Hai mặt của buồng trứng là mặt trong và ngoài."
+        },
+        {
+          "id": "B",
+          "text": "Mặt trong nằm áp vào hố buồng trứng."
+        },
+        {
+          "id": "C",
+          "text": "Bề mặt sần sùi trong suốt cuộc đời."
+        },
+        {
+          "id": "D",
+          "text": "Chỉ được cấp máu bởi ĐM buồng trứng."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "B.Mặt trong nằm áp vào hố buồng trứng=>mặt ngoài áp vào hố\nbuồng trứng.\nC.Bề mặt sần sùi trong suốt cuộc đời=>nhẵn trước khi dậy thì.\nD.Chỉ được cấp máu bởi ĐM buồng trứng=>Còn cả ĐM tử cung\nnữa.\n-Buồng trứng có các mặt ngoài và trong\ncác bờ là bờ tự do ở sau và bờ mạc treo buồng trứng ở trước\nvà các đầu là đầu vòi (đầu trên) và đầu tử cung (đầu dưới).\nMặt ngoài tiếp xúc với Phúc mạc thành trong Hố buồng trứng\nMặt trong tx với Tua vòi, liên quan với các quai ruột.\nHố buồng trứng.\n-Ở trước bởi Thừng ĐM rốn ;\n- Ở  sau bởi niệu quản và ĐM chậu trong;\n- ngoài phúc mạc thành là mô ngoài phúc mạc chứa các mạch máu\nvà TK bịt.\n- Nơi mà mạch và TK đi vào và ra khỏi buồng trứng trên mặt ngoài,\ngần bờ mạc treo Rốn buồng trứng.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 24,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-28",
+      "number": 28,
+      "stem": "Các mô tả sau đây về hố buồng trứng đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Giới hạn sau là động mạch chậu trong và niệu quản."
+        },
+        {
+          "id": "B",
+          "text": "Giới hạn trước là thừng ĐM rốn."
+        },
+        {
+          "id": "C",
+          "text": "ĐM tử cung đi dưới hố buồng trứng, ĐM chậu ngoài đi trên."
+        },
+        {
+          "id": "D",
+          "text": "Sau mỗi lần có chửa, buồng trứng bị lệch khỏi hố buồng trứng rồi lại trở lại hố."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.Sau mỗi lần có chửa, buồng trứng bị lệch khỏi hố buồng trứng rồi\nlại trở lại hố => không trở lại được.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 25,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-29",
+      "number": 29,
+      "stem": "Bờ trước của buồng trứng là nơi bám của thành phần nào sau đây?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Dây chằng rộng."
+        },
+        {
+          "id": "B",
+          "text": "Mạc treo vòi trứng."
+        },
+        {
+          "id": "C",
+          "text": "Mạc treo buồng trứng."
+        },
+        {
+          "id": "D",
+          "text": "Dây chằng riêng buồng trứng."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Mạc treo buồng trứng=>nối lá sau d/c rộng vs bờ trước của\nbuồng trứng,nối đầu TC buồng trứng vs sừng TC.\nBờ tự do ở sau; Bờ mạc treo ở trước.\n-Bờ mạc treo Buồng trứng được gắn với mặt sau của dây chằng\nrộng bởi Mạc treo buồng trứng.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/dbd2dc6ace8ad6b07414.webp"
+      ],
+      "sourcePage": 26,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-30",
+      "number": 30,
+      "stem": "Cấu trúc nào sau đây không giữ buồng trứng tại chỗ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Mạc treo buồng trứng."
+        },
+        {
+          "id": "B",
+          "text": "Dây chằng treo buồng trứng."
+        },
+        {
+          "id": "C",
+          "text": "Dây chằng riêng buồng trứng."
+        },
+        {
+          "id": "D",
+          "text": "Dây chằng tròn."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "B.Dây chằng treo buồng trứng=>đi từ đầu vòi của buồng trứng tới\nthành bên chậu hông.\nD.Dây chằng tròn=>đi từ trước dưới sừng tử cung ra ngoài, xuống\ndưới và ra trước qua thành chậu hông ống bẹn rồi tận cùng ở mô\ndưới da của gò mu và môi lớn,Dch tròn không liên quan đến Buồng\ntrứng.\nCác cấu trúc giữ Buồng trứng tại chỗ\n-Mạc treo buồng trứng: mặt sau DC rộng ->  bờ trước buồng trứng\ncủa buồng trứng.\n-Dây chằng treo buồng trứng :đầu vòi của buồng trứng -> thành\nbên chậu hông\n-Dây chẳng riêng buồng trứng:  Đầu tử cung của buồng trứng -\n> Sừng tử cung;",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 27,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-31",
+      "number": 31,
+      "stem": "Các mô tả sau đây về vòi tử cung đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Được dây chằng rộng bao phủ."
+        },
+        {
+          "id": "B",
+          "text": "Có hai đầu là đầu ngoài và đầu trong."
+        },
+        {
+          "id": "C",
+          "text": "Mở vào buồng tử cung tại lỗ tử cung của vòi."
+        },
+        {
+          "id": "D",
+          "text": "Không thông với ổ phúc mạc."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.Không thông với ổ phúc mạc => thông vs ổ phúc mạc qua loa vòi.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 28,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-32",
+      "number": 32,
+      "stem": "Sự thụ tinh thường xảy ra ở đoạn nào của vòi tử cung?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Phễu vòi."
+        },
+        {
+          "id": "B",
+          "text": "Eo vòi."
+        },
+        {
+          "id": "C",
+          "text": "Bóng vòi."
+        },
+        {
+          "id": "D",
+          "text": "Phần tử cung của vòi."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Bóng vòi",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/4c26bd436e31d95bc82d.webp"
+      ],
+      "sourcePage": 28,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-33",
+      "number": 33,
+      "stem": "Đoạn nào của vòi tử cung thường là nơi diễn ra sự thụ tinh?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Phễu vòi."
+        },
+        {
+          "id": "B",
+          "text": "Phần tử cung của vòi."
+        },
+        {
+          "id": "C",
+          "text": "Eo vòi."
+        },
+        {
+          "id": "D",
+          "text": "Bóng vòi."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/4f3d57024623ef2959ba.webp"
+      ],
+      "sourcePage": 29,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-34",
+      "number": 34,
+      "stem": "Các mô tả sau về thân tử cung đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Hai mặt của thân tử cung là mặt bàng quang và mặt ruột."
+        },
+        {
+          "id": "B",
+          "text": "Hai bờ bên tử cung không có phúc mạc che phủ."
+        },
+        {
+          "id": "C",
+          "text": "Hai góc bên thân tử cung gọi là sừng."
+        },
+        {
+          "id": "D",
+          "text": "Đáy là phần thấp nhất."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.Đáy là phần thấp nhất=>đáy phần cao nhất.\nphần thấp nhất: Cổ tử cung.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 30,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-35",
+      "number": 35,
+      "stem": "Các mô tả sau về bờ bên thân tử cung đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Là nơi phúc mạc tử cung liên tiếp với dây chằng rộng."
+        },
+        {
+          "id": "B",
+          "text": "Được che phủ bởi phúc mạc."
+        },
+        {
+          "id": "C",
+          "text": "ĐM tử cung chạy dọc theo bờ bên thân tử cung."
+        },
+        {
+          "id": "D",
+          "text": "Ngăn cách với đáy tử cung bởi sừng tử cung."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.Được che phủ bởi phúc mạc => không có phúc mạc che phủ.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 31,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-36",
+      "number": 36,
+      "stem": "Cấu trúc nào sau đây không bám vào sừng tử cung?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Dây chằng tử cung – cùng."
+        },
+        {
+          "id": "B",
+          "text": "Dây chằng tròn."
+        },
+        {
+          "id": "C",
+          "text": "Dây chằng riêng buồng trứng."
+        },
+        {
+          "id": "D",
+          "text": "Vòi tử cung."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.Dây chằng tử cung – cùng=>bám vào mặt sau CTC đến mặt trc\nxương cùng đội phúc mạc thành nếp TC trực tràng.\nC.Dây chằng riêng buồng trứng=>đi từ đầu tử cung của buồng\ntrứng đến sừng tử cung.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/3c5a4d76a8eabd98ab73.webp"
+      ],
+      "sourcePage": 31,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-37",
+      "number": 37,
+      "stem": "Mô tả đúng về cổ tử cung là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cổ tử cung được che phủ toàn bộ bởi phúc mạc."
+        },
+        {
+          "id": "B",
+          "text": "Ở mặt trước, phần âm đạo dài hơn phần trên âm đạo."
+        },
+        {
+          "id": "C",
+          "text": "Trục cổ tử cung hợp với trục âm đạo một góc 90 độ."
+        },
+        {
+          "id": "D",
+          "text": "Đầu trên âm đạo bám quanh cổ tử cung theo đường chếch ra trước và xuống dưới."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Cổ tử cung được che phủ toàn bộ bởi phúc mạc=>mặt trc ko có\nphúc mạc phủ,A340.\nB.Ở mặt trước, phần âm đạo dài hơn phần trên âm đạo=>phần trên\nâm đạo dài hơn phần âm đạo.\nC.Trục cổ tử cung hợp với trục âm đạo một góc 90 độ=>trục tử\ncung vs cổ tử cung là 120 độ, thântử cung vs trục âm đạo mới là 90\nđộ.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/d36ac816f5e7fb99a9f9.webp"
+      ],
+      "sourcePage": 32,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-38",
+      "number": 38,
+      "stem": "Đặc điểm nào sau đây của buồng tử cung đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Buồng tử cung thông với ống cổ tử cung qua lỗ trong mô học."
+        },
+        {
+          "id": "B",
+          "text": "Các góc bên của buồng tử cung nằm ở đầu trong đoạn eo vòi tử cung."
+        },
+        {
+          "id": "C",
+          "text": "Buồng tử cung có hình trụ."
+        },
+        {
+          "id": "D",
+          "text": "Buồng tử cung có hình tam giác trên mặt cắt đứng ngang."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Buồng tử cung thông với ống cổ tử cung qua lỗ trong mô\nhọc=>lỗ trong giải phẫu, lỗ trong mô học là vùng chuyển tiếp.\nB.Các góc bên của buồng tử cung nằm ở đầu trong đoạn eo vòi tử\ncung=>nằm ở đầu trong của phần TC.\nC.Buồng tử cung có hình trụ.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 33,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-39",
+      "number": 39,
+      "stem": "Mô tả đúng về ống cổ tử cung là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ống có hình tam giác trên mặt cắt đứng ngang."
+        },
+        {
+          "id": "B",
+          "text": "Trên mỗi thành bên của ống có một gờ dọc."
+        },
+        {
+          "id": "C",
+          "text": "Lỗ ngoài tử cung thông giữa âm đạo và ống cổ tử cung."
+        },
+        {
+          "id": "D",
+          "text": "Nếp lá cọ có ở cả ống cổ tử cung và buồng tử cung."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Ống có hình tam giác trên mặt cắt đứng ngang=>hình thoi.\nB.Trên mỗi thành bên của ống có một gờ dọc=>thành trước sau có\nnếp lá cọ.\nD.Nếp lá cọ có ở cả ống cổ tử cung và buồng tử cung=>chỉ ở ống\ncổ TC.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/0a8e3c14f656b83de56c.webp"
+      ],
+      "sourcePage": 34,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-40",
+      "number": 40,
+      "stem": "Mô tả đúng về phúc mạc của tử cung là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Bọc các bờ bên của thân tử cung."
+        },
+        {
+          "id": "B",
+          "text": "Liên tiếp với phúc mạc vòi tử cung."
+        },
+        {
+          "id": "C",
+          "text": "Phủ hết mặt trước thân và cổ tử cung."
+        },
+        {
+          "id": "D",
+          "text": "Ở mặt sau, nó phủ xuống tới eo tử cung thì lật lên phủ mặt trước trực tràng."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Bọc các bờ bên của thân tử cung=>trừ 2 bờ bên liên tiếp vs d/c\nrộng.\nC.Phủ hết mặt trước thân và cổ tử cung=>phủ hết mặt sau cổ TC,\nmặt trc chỉ đến eo TC.\nD.Ở mặt sau, nó phủ xuống tới eo tử cung thì lật lên phủ mặt trước\ntrực tràng=>mặt sau phủ đến 1/3 trên âm đạo.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/850451d71196565df920.webp"
+      ],
+      "sourcePage": 35,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-than-tu-cung-nieu-quan-am-dao-41",
+      "number": 41,
+      "stem": "Mô tả đúng về cấu tạo tử cung là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Lớp cơ rối (đan chéo) tác dụng cầm máu sau đẻ."
+        },
+        {
+          "id": "B",
+          "text": "Thân tử cung có 2 lớp cơ."
+        },
+        {
+          "id": "C",
+          "text": "Cổ tử cung có lớp cơ vòng ở ngoài, cơ dọc ở trong."
+        },
+        {
+          "id": "D",
+          "text": "Lớp cơ rối có cả ở thân và cổ tử cung."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "B.Thân tử cung có 2 lớp cơ=>dọc, rối, vòng.\nC.Cổ tử cung có lớp cơ vòng ở ngoài, cơ dọc ở trong=>cơ vòng ở\ntrong, cơ dọc ở ngoài.\nD.Lớp cơ rối có cả ở thân và cổ tử cung=>chỉ ở thân ms có cơ rối.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 36,
+      "gradable": true
+    }
+  ]
+}

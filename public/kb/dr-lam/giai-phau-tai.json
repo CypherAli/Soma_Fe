@@ -1,0 +1,948 @@
+{
+  "schemaVersion": 1,
+  "id": "giai-phau-tai",
+  "title": "Giải phẫu tai",
+  "sourceFile": "Giải phẫu người 2025 - Test số hóa Dr. Lâm giải phẫu tai.pdf",
+  "sourceNote": null,
+  "sourceHash": "db7ef3e736ca54bb83f21aa08c50be59f9a9793f95f406703bdc9ba48ee627e0",
+  "pages": 28,
+  "questions": [
+    {
+      "id": "giai-phau-tai-1",
+      "number": 1,
+      "stem": "Các mô tả sau đây về loa tai đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Gờ cong ở chu vi mặt ngoài loa tai là gờ luân."
+        },
+        {
+          "id": "B",
+          "text": "Đầu trên gờ đối luân chia ra thành 2 trụ bao quanh hố tam giác."
+        },
+        {
+          "id": "C",
+          "text": "Khuyết gian bình tai là khuyết giữa bình tai và đối bình tai."
+        },
+        {
+          "id": "D",
+          "text": "Xoăn loa tai nằm giữa gờ luân và gờ đối luân."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.Xoăn loa tai nằm giữa gờ luân và gờ đối luân=>gờ đối luân vây\nquanh xoăn loa tai;giữa gờ luân và gờ đối luân là hố thuyền.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 1,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-tai-2",
+      "number": 2,
+      "stem": "Trong các mô tả sau đây về loa tai, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Sụn của loa tai không liên tiếp với sụn ống tai ngoài."
+        },
+        {
+          "id": "B",
+          "text": "Bình tai nằm sau và dưới đối bình tai."
+        },
+        {
+          "id": "C",
+          "text": "Dái tai được cấu tạo bằng mô xơ mỡ."
+        },
+        {
+          "id": "D",
+          "text": "Gờ đối luân dài hơn gờ luân."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Sụn của loa tai không liên tiếp với sụn ống tai ngoài=>có liên tiếp.\nB.Bình tai nằm sau và dưới đối bình tai=>trước và trên.\nD.Gờ đối luân dài hơn gờ luân=>ngắn.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/37280cb0f26ee0ed8148.webp"
+      ],
+      "sourcePage": 1,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-tai-3",
+      "number": 3,
+      "stem": "Trong các mô tả sau đây về ống tai ngoài, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó đi từ hố thuyền tới màng nhĩ."
+        },
+        {
+          "id": "B",
+          "text": "Nó được cấu tạo bằng sụn ở nửa ngoài và bằng xương ở nửa trong."
+        },
+        {
+          "id": "C",
+          "text": "Nó dài 4,5 cm."
+        },
+        {
+          "id": "D",
+          "text": "Sàn ống tai ngoài dài hơn trần của nó."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Nó đi từ hố thuyền tới màng nhĩ=>đi từ xoăn loa tai đến màng nhĩ.\nB.Nó được cấu tạo bằng sụn ở nửa ngoài và bằng xương ở nửa\ntrong=>sụn ở 1/3 ngoài, xương 2/3 trong.\nC.Nó dài 4,5 cm=>2,5cm.\nmàng nhĩ nằm chếch: Sàn và Thành trước dài hơn Trần và Thành sau.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/7cb2d384f2fb01d82712.webp"
+      ],
+      "sourcePage": 2,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-tai-4",
+      "number": 4,
+      "stem": "Các mô tả sau đây về ống tai ngoài đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Phần xương ống tai ngoài liên quan sau với hang chũm."
+        },
+        {
+          "id": "B",
+          "text": "Tuyến mang tai và mỏm lồi cầu xương hàm dưới nằm trước phần sụn của ống tai ngoài."
+        },
+        {
+          "id": "C",
+          "text": "Từ ngoài vào, nó đi theo đường cong hình chữ S."
+        },
+        {
+          "id": "D",
+          "text": "Phần xương ống tai ngoài ngắn hơn phần sụn."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Phần xương ống tai ngoài liên quan sau với hang chũm,ngăn cách\nbằng một mảnh xương mỏng\nC.Từ ngoài vào, nó đi theo đường cong hình chữ S=>lúc đầu trước\ntrên, rồi sau trên, cuối cùng trước dưới.\nD.Phần xương ống tai ngoài ngắn hơn phần sụn=>sụn ở 1/3 ngoài,\nxương 2/3 trong.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/fcbd7ab4adafc108e443.webp"
+      ],
+      "sourcePage": 3,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-tai-5",
+      "number": 5,
+      "stem": "Trong các mô tả sau đây về hòm nhĩ, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó là một khoang dẹt theo chiều trước sau."
+        },
+        {
+          "id": "B",
+          "text": "Chuỗi xương nhỏ trong hòm nhĩ nằm hoàn toàn trong phần hòm nhĩ thực sự."
+        },
+        {
+          "id": "C",
+          "text": "Nó nằm sau vòi tai và trước hang chũm."
+        },
+        {
+          "id": "D",
+          "text": "Đường kính chiều thẳng đứng của nó lớn hơn đường kính trước sau."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Nó là một khoang dẹt theo chiều trước sau=>dẹt theo chiều\ntrong ngoài.\nB.Chuỗi xương nhỏ trong hòm nhĩ nằm hoàn toàn trong phần hòm\nnhĩ thực sự=>ngách thượng nhĩ chứa nửa trên xương búa và hầu hết\nxương đe và các tiểu xoang chũm.\nD.Đường kính chiều thẳng đứng của nó lớn hơn đường kính trước\nsau=>thằng đứng = trước sau = 15mm, ngang: 6mm ở trên, 4mm ở\ndưới, 2mm ngang rốn màng nhĩ.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/e9abf68a52757598223f.webp"
+      ],
+      "sourcePage": 4,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-tai-6",
+      "number": 6,
+      "stem": "Các mô tả sau đây về trần và sàn hòm nhĩ đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tại sàn hòm nhĩ, gần thành trong, có một lỗ nhỏ cho nhánh thừng nhĩ thần kinh mặt đi vào hòm nhĩ."
+        },
+        {
+          "id": "B",
+          "text": "Trần hòm nhĩ chiếm một vùng ở mặt trước phần đá xương thái dương."
+        },
+        {
+          "id": "C",
+          "text": "Sàn hòm nhĩ cách hành trên tĩnh mạch cảnh trong bằng một vách xương mỏng."
+        },
+        {
+          "id": "D",
+          "text": "Trần hòm nhĩ là mảnh xương mỏng ngăn cách hòm nhĩ với khoang sọ."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.Tại sàn hòm nhĩ, gần thành trong, có một lỗ nhỏ cho nhánh thừng\nnhĩ thần kinh mặt đi vào hòm nhĩ => cho nhánh nhĩ của TK lưỡi hầu đi\nvào hòm nhĩ,TK IX.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/fb7d49d5f82bd1983fec.webp"
+      ],
+      "sourcePage": 6,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-tai-7",
+      "number": 7,
+      "stem": "Trong các mô tả sau đây về thành trong hòm nhĩ, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ụ nhô tương ứng với phần nhô vào hòm nhĩ của đỉnh ốc tai."
+        },
+        {
+          "id": "B",
+          "text": "Cửa số tiền đình nằm ở sau và dưới ụ nhô."
+        },
+        {
+          "id": "C",
+          "text": "Cửa sổ ốc tai nằm trước ụ nhô."
+        },
+        {
+          "id": "D",
+          "text": "Lồi ống TK mặt nằm ở trên cửa số tiền đình, tương ứng với đoạn 2 ống TK mặt."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Ụ nhô tương ứng với phần nhô vào hòm nhĩ của đỉnh ốc tai=>ụ nhô\ntương ứng vs đáy ốc tai;đỉnh ốc tai hướng vào trong; Vòm hướng ra\nngoài.\nB.Cửa số tiền đình nằm ở sau và dưới ụ nhô=>ở sau trên ụ nhô.\nC.Cửa sổ ốc tai nằm trước ụ nhô=>sau dưới ụ nhô.\nđoạn 1: mê đạo đoạn 2: đoạn nhĩ đoạn 3: đoạn chũm.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/9713858b413dbc771ef4.webp"
+      ],
+      "sourcePage": 7,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-tai-8",
+      "number": 8,
+      "stem": "Các mô tả sau đây về thành trong hòm nhĩ đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đây là thành liên quan với tai trong."
+        },
+        {
+          "id": "B",
+          "text": "Trên bề mặt ụ nhô có đám rối nhĩ."
+        },
+        {
+          "id": "C",
+          "text": "Cửa sổ ốc tai(tròn) là nơi nền xương bàn đạp lắp vào."
+        },
+        {
+          "id": "D",
+          "text": "Cửa sổ ốc tai được đậy bằng màng nhĩ phụ."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Cửa sổ ốc tai(tròn) là nơi nền xương bàn đạp lắp vào =>cửa sổ\ntiền đình là nơi nền xưong bàn đạp gắn.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 8,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-tai-9",
+      "number": 9,
+      "stem": "Trong các mô tả sau đây về thành sau hòm nhĩ, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đường vào hang chũm nằm ở phần dưới thành sau, thông hòm nhĩ thực sự với hang chũm."
+        },
+        {
+          "id": "B",
+          "text": "Khoang rỗng trong lồi tháp trên thành này chứa cơ búa."
+        },
+        {
+          "id": "C",
+          "text": "Đoạn chạy thẳng đứng xuống dưới của ống TK mặt nằm sau lồi tháp."
+        },
+        {
+          "id": "D",
+          "text": "Trên thành trong của đường vào hang chũm có lồi của ống bán khuyên trước."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Đường vào hang chũm nằm ở phần dưới thành sau, thông hòm nhĩ\nthực sự với hang chũm=>phần trên.\nB.Khoang rỗng trong lồi tháp trên thành này chứa cơ búa=>chứa\ncơ bàn đạp.\nD.Trên thành trong của đường vào hang chũm có lồi của ống bán\nkhuyên trước=>có lồi ống bán khuyên ngoài.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/47b9dd57870c47c57e2f.webp"
+      ],
+      "sourcePage": 9,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-tai-10",
+      "number": 10,
+      "stem": "Các mô tả sau đây về hang chũm đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thành trước:thông với hòm nhĩ qua đường vào hang."
+        },
+        {
+          "id": "B",
+          "text": "Thành ngoài là thành phẫu thuật vào hang chũm."
+        },
+        {
+          "id": "C",
+          "text": "Phía sau: liên quan với xoang ngang."
+        },
+        {
+          "id": "D",
+          "text": "Đoạn 3 của ống TK mặt đi trong thành xương ngăn cách hòm nhĩ và hang chũm."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Phía sau: liên quan với xoang ngang => ngăn cách với xoang\nSIGMA ở phía sau bằng một vách xương.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/8a362904f58831db314c.webp",
+        "/kb/dr-lam/images/b0562548f08ab3c5f98b.webp"
+      ],
+      "sourcePage": 10,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-tai-11",
+      "number": 11,
+      "stem": "Các mô tả sau đây về thành trước hòm nhĩ đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thành này liên quan với ĐM cảnh trong."
+        },
+        {
+          "id": "B",
+          "text": "Thành này có lỗ cho thừng nhĩ đi vào hòm nhĩ."
+        },
+        {
+          "id": "C",
+          "text": "Thành này có lỗ nhĩ của vòi tai, thông vòi tai với hòm nhĩ."
+        },
+        {
+          "id": "D",
+          "text": "Thành này có các lỗ nhỏ cho các nhánh nhĩ của ĐM cảnh trong đi vào hòm nhĩ."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.Thành này có lỗ cho thừng nhĩ đi vào hòm nhĩ=>có lỗ cho TK cảnh\nnhĩ (Tk giao cảm từ đám rối cảnh) còn TK thừng nhĩ đi ở thành ngoài,\ntrên màng nhĩ.\nThành trước: cho dây 9 ( kp dây 7).",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 11,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-tai-12",
+      "number": 12,
+      "stem": "Các mô tả sau đây về vòi tai đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Phần xương chiếm 1/3 chiều dài vòi tai và bằng nửa chiều dài phần sụn."
+        },
+        {
+          "id": "B",
+          "text": "Có một cơ giữa phần xương và phần sụn của vòi tai(eo)."
+        },
+        {
+          "id": "C",
+          "text": "Phần sụn của vòi tai là một ống sụn hình trụ."
+        },
+        {
+          "id": "D",
+          "text": "Đường kính của phần xương hẹp nhất tại chỗ nối với phần sụn."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Phần xương chiếm 1/3 chiều dài vòi tai và bằng nửa chiều dài\nphần sụn=>(ngược vs ống tai ngoài)\nphần xương 12mm; phận sụn 24mm.\nC.Phần sụn của vòi tai là một ống sụn hình trụ=>là một mảnh sụn\nhình tam giác.\nD.Đường kính của phần xương hẹp nhất tại chỗ nối với phần\nsụn=>đường kính lớn nhất tại Lỗ hầu.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/1dd655479b3fd158ab14.webp"
+      ],
+      "sourcePage": 12,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-tai-13",
+      "number": 13,
+      "stem": "Các mô tả sau đây về vòi tai đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Phần sụn của vòi dài 24mm."
+        },
+        {
+          "id": "B",
+          "text": "Đường kính của vòi tai hẹp nhất tại lỗ hầu của vòi."
+        },
+        {
+          "id": "C",
+          "text": "Lỗ nhĩ của vòi tai mở vào thành trước hòm nhĩ."
+        },
+        {
+          "id": "D",
+          "text": "Niêm mạc của vòi tai liên tiếp với niêm mạc tỵ hầu và hòm nhĩ."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.Đường kính của vòi tai hẹp nhất tại lỗ hầu của vòi=>lớn nhất tại lỗ\nhầu, hẹp nhất tại chỗ nối phần sụn và xương (eo).",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/eb73f4ce0bbb8a18a7ce.webp"
+      ],
+      "sourcePage": 13,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-tai-14",
+      "number": 14,
+      "stem": "Các mô tả sau đây về chuỗi xương nhỏ của tai đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Khớp búa-đe và khớp đe-bàn đạp đều là những khớp hoạt dịch."
+        },
+        {
+          "id": "B",
+          "text": "Nền xương bàn đạp bị đẩy sát hơn vào cửa sổ tiền đình trong khi cơ căng màng nhĩ co."
+        },
+        {
+          "id": "C",
+          "text": "Trụ dài xương đe được gắn vào hố đe ở thành sau hòm nhĩ bằng các sợi dây chằng."
+        },
+        {
+          "id": "D",
+          "text": "Chuỗi xương nhỏ truyền rung động của màng nhĩ( do sóng âm gây nên) tới cửa sổ tiền đình."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Trụ dài xương đe được gắn vào hố đe ở thành sau hòm nhĩ bằng\ncác sợi dây chằng=>trụ ngắn nhô ra sau được các sợi d/c gắn vào\nhố đe trong phần sau dưới của ngách thượng nhĩ.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/37a4b7a0b30d6e0240d9.webp",
+        "/kb/dr-lam/images/62b1f8ce1d9d1c0542f9.webp"
+      ],
+      "sourcePage": 14,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-tai-15",
+      "number": 15,
+      "stem": "Trong các mô tả sau đây về mê đạo xương, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ba ống bán khuyên xương thông với tiền đình bằng 6 lỗ."
+        },
+        {
+          "id": "B",
+          "text": "Tên bao ống bán khuyên là: ống trên, ống sau, ống ngoài."
+        },
+        {
+          "id": "C",
+          "text": "ống bán khuyên ngoài mở thông vào tiền đình bằng một trụ xương bóng và một trụ xương đơn."
+        },
+        {
+          "id": "D",
+          "text": "Đầu ngoài( đáy) của ống tai trong liên quan với thành trước tiền đình."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Ba ống bán khuyên xương thông với tiền đình bằng 6 lỗ=>5 lỗ, trụ\nxg đơn của trước và sau hợp thành trụ xg chung.\nB.Tên bao ống bán khuyên là: ống trên, ống sau, ống ngoài=>trước,\nsau, ngoài.\nD.Đầu ngoài( đáy) của ống tai trong liên quan với thành trước tiền\nđình=>thành trong của tiền đình liên quan với đáy ống tai trong (đầu\ntrong), có ngách bầu dục cho soan nang, và ngách cầu cho cầu\nnang,thành trong.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 15,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-tai-16",
+      "number": 16,
+      "stem": "Trong các mô tả sau đây về ốc tai, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó được mảnh xoắn xương và trụ ốc tai chia thành tiền đình và thang nhĩ."
+        },
+        {
+          "id": "B",
+          "text": "Thang tiền đình thông với thang nhĩ tại thành trước tiền đình."
+        },
+        {
+          "id": "C",
+          "text": "Thang nhĩ liên hệ với hòm nhĩ qua cửa sổ tiền đình."
+        },
+        {
+          "id": "D",
+          "text": "Thang tiền đình và thang nhĩ thông với nhau qua khe xoắn ở vòm( hay đỉnh) ốc tai."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Nó được mảnh xoắn xương và trụ ốc tai chia thành tiền đình và\nthang nhĩ=>ống.\nB.Thang tiền đình thông với thang nhĩ tại thành trước tiền đình=>tại\nkhe xoắn ở đỉnh ốc tai.\nC.Thang nhĩ liên hệ với hòm nhĩ qua cửa sổ tiền đình=>cửa sổ tròn\ncó màng nhĩ phụ.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/c48292def3936a4b9e2f.webp"
+      ],
+      "sourcePage": 16,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-tai-17",
+      "number": 17,
+      "stem": "Các mô tả sau đây về mê đạo màng đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Soan nang và cầu nang nằm trong tiền đình."
+        },
+        {
+          "id": "B",
+          "text": "Soan nang tiếp nhận năm lỗ đổ vào của ba ống bán khuyên màng."
+        },
+        {
+          "id": "C",
+          "text": "Ống nội dịch tách ra từ một ống nối soan nang với cầu nang ( ống soan- cầu)."
+        },
+        {
+          "id": "D",
+          "text": "Cầu nang nằm ở sau soan nang."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.Cầu nang nằm ở sau soan nang =.> nằm phía trước soan nang.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/404c9093ee6885862cbd.webp"
+      ],
+      "sourcePage": 17,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-tai-18",
+      "number": 18,
+      "stem": "Các mô tả sau về mê đạo màng đều đúng ,TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Trụ màng đơn của các ống bán khuyên trước và ngoài hợp lại thành trụ màng chung."
+        },
+        {
+          "id": "B",
+          "text": "Mê đạo màng chứa nội dịch."
+        },
+        {
+          "id": "C",
+          "text": "Khoang nằm giữa mê đạo màng và thành mê đạo xương chứa ngoại dịch."
+        },
+        {
+          "id": "D",
+          "text": "Mê đạo màng là hệ thống các ống và túi màng nằm trong mê đạo xương"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.Trụ màng đơn của các ống bán khuyên trước và ngoài hợp lại\nthành trụ màng chung=>sau.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/1bae7ed453dacb6fae32.webp"
+      ],
+      "sourcePage": 18,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-tai-19",
+      "number": 19,
+      "stem": "Trong các mô tả sau về mê đạo màng, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Lồi ngang trong mỗi bóng màng gọi là vết."
+        },
+        {
+          "id": "B",
+          "text": "Ở soan nang và cầu nang có mào: mào soan nang và mào cầu nang."
+        },
+        {
+          "id": "C",
+          "text": "Các mào và các vết là những nơi chứa tế bào lông cảm thụ sự thay đổi vị trí của đầu."
+        },
+        {
+          "id": "D",
+          "text": "Soan ngang nối với ống ốc tai bằng ống nối."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Lồi ngang trong mỗi bóng màng gọi là vết=>lồi ngang trong\nbóng màng gọi là mào.\nBóng--> Mào\nSoan/Cầu nang --> Vết.\nB.Ở soan nang và cầu nang có mào: mào soan nang và mào cầu\nnang=>vết soan nang và vết cầu nang.\nD.Soan ngang nối với ống ốc tai bằng ống nối=>cầu nang nối vs\nống ốc tai bằng ống nối.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 19,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-tai-20",
+      "number": 20,
+      "stem": "Các mô tả sau về ống ốc tai đều đúng , TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ống ốc tai là phần màng của ốc tai."
+        },
+        {
+          "id": "B",
+          "text": ".Ống ốc tai nằm giữa thang tiền đình và thang nhĩ."
+        },
+        {
+          "id": "C",
+          "text": "Đầu tịt của ống ốc tai lấp vào khe xoắn ở vòm ốc tai, làm cho thang tiền đình và thang nhĩ không thông nhau."
+        },
+        {
+          "id": "D",
+          "text": "Ống ốc tai nằm giữa bờ tự do của mảnh xoắn xương và thành ngoài của ống xoắn ốc tai."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Đầu tịt của ống ốc tai lấp vào khe xoắn ở vòm ốc tai, làm cho\nthang tiền đình và thang nhĩ không thông nhau=>2 thang vẫn thông\nnhau.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 20,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-tai-21",
+      "number": 21,
+      "stem": "Trong các mô tả sau về mê đạo ốc tai( ống ốc tai), mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Màng nền (hay thành nhĩ) ngăn cách ống ốc tai với thang tiền đình."
+        },
+        {
+          "id": "B",
+          "text": "Mặt cắt của ống ốc tai có hình tròn."
+        },
+        {
+          "id": "C",
+          "text": "Ống ốc tai không thông với cầu nang."
+        },
+        {
+          "id": "D",
+          "text": "Cơ quan xoắn nằm trên màng nền của ống ốc tai."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Màng nền (hay thành nhĩ) ngăn cách ống ốc tai với thang tiền\nđình=>màng tiền đình.\nB.Mặt cắt của ống ốc tai có hình tròn=>có hình tam giác.\nC.Ống ốc tai không thông với cầu nang=>thông vs cầu nang bằng\nống nối.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/5988962b101b68684526.webp"
+      ],
+      "sourcePage": 20,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-tai-22",
+      "number": 22,
+      "stem": "Trong các mô tả sau đây về màng nhĩ, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đường kính ngắn nhất của nó thường trên 10mm."
+        },
+        {
+          "id": "B",
+          "text": "Rãnh nhĩ( rãnh xương cho vòng xơ sụn ở chu vi màng nhĩ bám) là một rãnh tròn không gián đoạn."
+        },
+        {
+          "id": "C",
+          "text": "Màng nhĩ gồm 2 phần: phần chùng ở dưới và phần căng ở trên."
+        },
+        {
+          "id": "D",
+          "text": "Cán xương búa được gắn vào mặt trong màng nhĩ, từ rốn màng nhĩ trở lên."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Đường kính ngắn nhất của nó thường trên 10mm=>dài nhất\n(trước-dưới) 9-10mm, ngắn nhất 8-9mm.\nB.Rãnh nhĩ( rãnh xương cho vòng xơ sụn ở chu vi màng nhĩ bám) là\nmột rãnh tròn không gián đoạn=>khuyết ở trên, nếp búa trước và\nsau giới hạn nên phần chùng ở đây.\nC.Màng nhĩ gồm 2 phần: phần chùng ở dưới và phần căng ở\ntrên=>phần chùng ở trên, căng ở dưới.\nkhuyết ở trên ( Rãnh nhĩ gián đoạn).",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/be469ba15dd0a60afeed.webp"
+      ],
+      "sourcePage": 21,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-tai-23",
+      "number": 23,
+      "stem": "Các mô tả sau đây về màng nhĩ đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Màng nhĩ không nằm vuông góc với sàn ống tai ngoài."
+        },
+        {
+          "id": "B",
+          "text": "Màng nhĩ lồi về phía hòm nhĩ tại rốn màng nhĩ."
+        },
+        {
+          "id": "C",
+          "text": "Phần chùng và phần căng của màng nhĩ ngăn cách nhau bởi các nếp búa trước và búa sau."
+        },
+        {
+          "id": "D",
+          "text": "Màng nhĩ là một màng mỏng tròn đều."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Màng nhĩ không nằm vuông góc với sàn ống tai ngoài=>đặt ở\nmột góc khoảng 55 độ với sàn.\nD.Màng nhĩ là một màng mỏng tròn đều=>gần có hình oval, ở trên\nhơi rộng hơn ở dưới.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 22,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-tai-24",
+      "number": 24,
+      "stem": "Các mô tả sau đây về thành ngoài hòm nhĩ đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó ngăn cách hòm nhĩ với ống tai ngoài."
+        },
+        {
+          "id": "B",
+          "text": "Phần trên màng nhĩ hơi rộng hơn phần dưới."
+        },
+        {
+          "id": "C",
+          "text": "Tầng niêm mạc ở phần chùng của màng nhĩ mỏng hơn phần căng."
+        },
+        {
+          "id": "D",
+          "text": "Mặt ngoài màng nhĩ lõm."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Tầng niêm mạc ở phần chùng của màng nhĩ mỏng hơn phần\ncăng=>ở phần chùng tầng niêm mạc được thay thế bằng mô liên\nkết lỏng lẻo\nD.Mặt ngoài màng nhĩ lõm,mặt trong lồi về phía hòm nhĩ.\nKhông phải NM ; mà là Tầng sợi mỏng hơn\ndo Tầng sợi của Phần chùng được thay thể bằng MLK lỏng lẻo.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 23,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-tai-25",
+      "number": 25,
+      "stem": "Các mô tả sau đây về thành ngoài hòm nhĩ đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thành ngoài chủ yếu do màng nhĩ tạo nên."
+        },
+        {
+          "id": "B",
+          "text": "Lỗ cho thừng nhĩ đi vào hòm nhĩ nằm trong góc giữa các thành sau và ngoài của hòm nhĩ."
+        },
+        {
+          "id": "C",
+          "text": "Màng nhĩ là một màng mỏng bán trong suốt."
+        },
+        {
+          "id": "D",
+          "text": "Rốn màng nhĩ là chỗ mà màng nhĩ nhô về phía hòm nhĩ."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "Câu này thấy đúngh hết.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 24,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-tai-26",
+      "number": 26,
+      "stem": "Các mô tả sau đây về xương búa đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Chỏm xương búa nằm trong ngách thượng nhĩ, là phần khớp với xương đe."
+        },
+        {
+          "id": "B",
+          "text": "Chiều dài không vượt quá 10mm."
+        },
+        {
+          "id": "C",
+          "text": "Cán và mỏm ngoài của xương búa được gắn với màng nhĩ."
+        },
+        {
+          "id": "D",
+          "text": "Mỏm trước xương búa được gắn với các đầu của lỗ khuyết ở rãnh nhĩ bằng các nếp búa trước và sau."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Chỏm xương búa nằm trong ngách thượng nhĩ, là phần khớp với\nxương đe=>tiếp khớp ở sau vs xương đe.\nB.Chiều dài không vượt quá 10mm=>xương búa dài 8-10mm.\nC.Cán và mỏm ngoài của xương búa được gắn với màng nhĩ=>mỏm\nngoài không phải mỏm trước.\nD.Mỏm trước xương búa được gắn với các đầu của lỗ khuyết ở rãnh\nnhĩ bằng các nếp búa trước và sau=>mỏm ngoài xương búa gắn với\nphần trên màng nhĩ và với các đầu chỗ khuyết phần trên rãnh nhĩ\nbằng nếp búa trước và sau mỏm trước từ chỗ phình bên dưới cổ\nnhô ra trước và nối với khe đá-nhĩ bằng các sợi dây chằng.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 24,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-tai-27",
+      "number": 27,
+      "stem": "Các mô tả sau đây về xương đe đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó giống như một răng tiền cối."
+        },
+        {
+          "id": "B",
+          "text": "Thân xương đe có mặt khớp tiếp khớp với chỏm xương búa."
+        },
+        {
+          "id": "C",
+          "text": "Trụ dài chạy gần thẳng đứng xuống dưới ở trước cán xương búa."
+        },
+        {
+          "id": "D",
+          "text": "Đầu dưới của trụ dài là mỏm thấu kính khớp với chỏm xương bàn đạp."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Nó giống như một răng tiền cối=>với 2 rễ tách xa nhau.\nC.Trụ dài chạy gần thẳng đứng xuống dưới ở trước cán xương\nbúa=>chạy ở sau, song song vs cán xương búa.\nThân xương đe có mặt khớp hình yên hướng ra trước => Tiếp khớp\nchỏm xương búa.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/2a2c445e1d21706f5a5a.webp"
+      ],
+      "sourcePage": 25,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-tai-28",
+      "number": 28,
+      "stem": "Các mô tả sau đây về xương bàn đạp đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Chỏm xương bàn đạp hướng ra ngoài, tiếp khớp với xương đe."
+        },
+        {
+          "id": "B",
+          "text": "Gân cơ bàn đạp bám vào mặt trước cổ xương bàn đạp."
+        },
+        {
+          "id": "C",
+          "text": "Nền xương bàn đạp hướng vào trong, lắp vào cửa sổ tiền đình."
+        },
+        {
+          "id": "D",
+          "text": "Nền xương bàn đạp được nối với bờ của cửa sổ tiền đình bằng một vòng sợi."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.Gân cơ bàn đạp bám vào mặt trước cổ xương bàn đạp=>cổ gắn\nở phía sau vs gân cơ bàn đạp=> cơ bàn đạp kéo xương bàn đạp ra\nsau.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 26,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-tai-29",
+      "number": 29,
+      "stem": "Các mô tả sau đây về mê đạo xương đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ngách bầu dục và ngách cầu nằm trên thành sau của tiền đình."
+        },
+        {
+          "id": "B",
+          "text": "Thành ngoài của tiền đình liên hệ với hòm nhĩ qua cửa sổ tiền đình."
+        },
+        {
+          "id": "C",
+          "text": "Tiền đình thông ở thành trước với thang tiền đình của ốc tai."
+        },
+        {
+          "id": "D",
+          "text": "Thành sau và trên của tiền đình thông với các ống bán khuyên xương."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.Ngách bầu dục và ngách cầu nằm trên thành sau của tiền đình\n=> ngách bầu dục và ngách cầu nằm ở thành trong.\nTiền đình:\n- thành trước: thông với\nThang tiền đình của ốc tai\n- thành sau: Ống bán khuyên\n- Thành ngoài: qua cửa sổ\ntiền đình với Hõm nhĩ\n- thành trong: Ngách bầu dục\nvà ngách cầu.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/30cb57cb12a7c1d02a29.webp"
+      ],
+      "sourcePage": 27,
+      "gradable": true
+    }
+  ]
+}

@@ -1,0 +1,4905 @@
+{
+  "schemaVersion": 1,
+  "id": "de-thi-thu-9",
+  "title": "Đề thi thử 9",
+  "sourceFile": "Giải phẫu người 2025 - Test số hóa Dr. Lâm đề thi thử 9.pdf",
+  "sourceNote": null,
+  "sourceHash": "83eb9ebb455969f3cdc04d1fbf308d86be07e839cdba1841178d3e6c96f78c4e",
+  "pages": 125,
+  "questions": [
+    {
+      "id": "de-thi-thu-9-1",
+      "number": 1,
+      "stem": "Các mô tả sau đây về cử động ngửa cẳng tay đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "ngửa là làm tay hướng ra trước."
+        },
+        {
+          "id": "B",
+          "text": "cử động ngửa bị mất một phần khi tk quay bị đứt lúc đi qua cánh tay."
+        },
+        {
+          "id": "C",
+          "text": "nó cần đến sự tham gia của khớp khuỷu và khớp cổ tay."
+        },
+        {
+          "id": "D",
+          "text": "nó cần đến sự tham gia của các khớp quay trụ gần và xa."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.ngửa là làm tay hướng ra trước. => TK quay chi phối Cơ ngửa\nB.cử động ngửa bị mất một phần khi tk quay bị đứt lúc đi qua cánh\ntay. => Cơ ngửa\nC.nó cần đến sự tham gia của khớp khuỷu và khớp cổ tay. => Chỉ\nkhớp quay trụ gần và xa\nD.nó cần đến sự tham gia của các khớp quay trụ gần và xa. => Sấp-\nngửa: Khớp quay trụ gần và xa",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/f6585179aaf8bb037614.webp"
+      ],
+      "sourcePage": 1,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-2",
+      "number": 2,
+      "stem": "Một người thợ bị đứt hoàn toàn ngón tay út, tất cả các cơ sau sẽ bị tổn thương, trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "gân cơ gấp các ngón sâu."
+        },
+        {
+          "id": "B",
+          "text": "gân cơ duỗi các ngón."
+        },
+        {
+          "id": "C",
+          "text": "cơ gian cốt mu tay."
+        },
+        {
+          "id": "D",
+          "text": "cơ gian cốt gan tay."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.gân cơ gấp các ngón sâu. => Nhớ: Cơ gian cốt mu tay: giạng các\nngón xa ngón cái\nNgón út có cơ giạng\nB.gân cơ duỗi các ngón. => gian cốt mu tay: chỉ bám vào ngón 2-4\nkhông bám vào các ngón ngón út\nC.cơ gian cốt mu tay. => bám tận vào đốt ngón gần và gân duỗi các\nngón II-IV phía xa trục giữa bàn tay\nD.cơ gian cốt gan tay. => Cơ gian cốt mu tay: nguyên ủy bám vào\nđốt bàn\nĐứt ngón út không ảnh hưởng",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 2,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-3",
+      "number": 3,
+      "stem": "Tất cả các mô tả sau đây về mỏm trên lồi cầu trong xương cánh tay đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó là chỗ bám cho nhiều cơ gấp cổ tay."
+        },
+        {
+          "id": "B",
+          "text": "nó lồi hơn mỏm trên lồi cầu ngoài."
+        },
+        {
+          "id": "C",
+          "text": "nó ở gần tĩnh mạch nền hơn tĩnh mạch đầu."
+        },
+        {
+          "id": "D",
+          "text": "nó là điểm mà tại đó động mạch cánh tay thường chia thành các động mạch quay và trụ."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A. nó là chỗ bám cho nhiều cơ gấp cổ tay => Đúng vì mỏm trên lồi\ncầu trong là nơi bám của nhiều cơ gấp cổ tay như cơ gấp cổ tay trụ,\ncơ gấp các ngón nông, v.v.\nB. nó lồi hơn mỏm trên lồi cầu ngoài => Đúng vì mỏm trên lồi cầu\ntrong nổi bật hơn và lồi hơn mỏm trên lồi cầu ngoài.\nC. nó ở gần tĩnh mạch nền hơn tĩnh mạch đầu => Đúng vì mỏm trên\nlồi cầu trong nằm ở phía trong của cánh tay, gần với tĩnh mạch nền\nhơn so với tĩnh mạch đầu, vốn nằm ở phía ngoài.\nD. nó là điểm mà tại đó động mạch cánh tay thường chia thành các\nđộng mạch quay và trụ => Sai vì động mạch cánh tay thường chia\nthành động mạch quay và động mạch trụ tại mức cổ tay hoặc thấp\nhơn, chứ không phải tại mỏm trên lồi cầu trong.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/677f52d908575661e23a.webp"
+      ],
+      "sourcePage": 3,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-4",
+      "number": 4,
+      "stem": "Những mô tả sau đây về khớp vai đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó là 1 khớp chỏm cầu (khớp chỏm và ổ)."
+        },
+        {
+          "id": "B",
+          "text": "nó là một khớp hoạt dịch."
+        },
+        {
+          "id": "C",
+          "text": "nó là một khớp nhiều trục."
+        },
+        {
+          "id": "D",
+          "text": "nó là một khớp xoan (khớp elip)."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.nó là một khớp xoan (khớp elip). => Câu A ;D ngược nhau khớp\nchỏm cầu",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 5,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-5",
+      "number": 5,
+      "stem": "Không ngửa được cẳng tay (liệt cơ ngửa và cơ nhị đầu) có thể là hậu quả của tổn thương cặp tk:",
+      "options": [
+        {
+          "id": "A",
+          "text": "cơ bì và giữa."
+        },
+        {
+          "id": "B",
+          "text": "nách và quay."
+        },
+        {
+          "id": "C",
+          "text": "quay và cơ bì."
+        },
+        {
+          "id": "D",
+          "text": "giữa và trụ."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.quay và cơ bì. => quay chi phối cơ ngửa, cơ bì chi phối cơ nhị đầu\n==>nhị đầu: TK cơ bì\nCơ ngửa: TK quay",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 5,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-6",
+      "number": 6,
+      "stem": "Trong các cặp tk sau đây, cặp chi phối cho cơ vận động khớp bàn tay đốt ngón tay của ngón nhẫn là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "giữa và trụ."
+        },
+        {
+          "id": "B",
+          "text": "quay và giữa."
+        },
+        {
+          "id": "C",
+          "text": "cơ bì và trụ."
+        },
+        {
+          "id": "D",
+          "text": "trụ và quay."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.trụ và quay ->2 bó trong của cơ gấp các ngón sâu và cơ duỗi các\nngón tay",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 6,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-7",
+      "number": 7,
+      "stem": "Các cơ giạng cánh tay bị liệt là do tổn thương cặp tk nào?",
+      "options": [
+        {
+          "id": "A",
+          "text": "tk nách và cơ bì."
+        },
+        {
+          "id": "B",
+          "text": "tk ngực lưng và tk dưới vai trên."
+        },
+        {
+          "id": "C",
+          "text": "tk trên vai và tk nách."
+        },
+        {
+          "id": "D",
+          "text": "tk quay và tk dưới vai dưới."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "D.tk trên vai và tk nách -> cho cơ trên gai và cơ delta",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 6,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-8",
+      "number": 8,
+      "stem": "Một bệnh nhân than phiền là mất cảm giác ở các mặt trước và sau phần ba trong bàn tay và một ngón tay rưỡi phía trong, tk có thể bị tổn thương là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "tk nách."
+        },
+        {
+          "id": "B",
+          "text": "tk quay."
+        },
+        {
+          "id": "C",
+          "text": "tk giữa."
+        },
+        {
+          "id": "D",
+          "text": "tk trụ."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.tk trụ. => Giang: cơ delta và cơ trên gai\n------------------> TK nách và TK trên vai\n----------------->  Bó sau và Thân trên",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/bba7957158503eb5ab80.webp"
+      ],
+      "sourcePage": 7,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-9",
+      "number": 9,
+      "stem": "Một bệnh nhân không thể duỗi khớp gian đốt ngón gần của ngón nhẫn, cặp tk có thể bị tổn thương là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "các tk quay và giữa."
+        },
+        {
+          "id": "B",
+          "text": "các tk quay và nách."
+        },
+        {
+          "id": "C",
+          "text": "các tk quay và trụ."
+        },
+        {
+          "id": "D",
+          "text": "các tk trụ và giữa."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.các tk quay và trụ. => TK quay cho cơ duỗi các ngón tay, TK trụ\ncho cơ giun 3,4\n==> Cơ giun: duỗi đốt giữa, xa gấp đốt gần -> liệt trụ: bàn tay móng\nvuốt gấp đốt giữa, xa; duỗi đốt gần",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/a2ab259dd0a38ca591c6.webp"
+      ],
+      "sourcePage": 8,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-10",
+      "number": 10,
+      "stem": "Một nạn nhân bị ngã xuống từ trên cao, đầu cổ bị đẩy mạnh đột ngột sang phải khi va đập ( làm giãn rộng góc vai – cổ trái ), tổn thương có thể xảy ra là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "đứt các rễ trên của đám rối cánh tay bên trái."
+        },
+        {
+          "id": "B",
+          "text": "đứt các rễ dưới của đám rối cánh tay bên trái."
+        },
+        {
+          "id": "C",
+          "text": "đứt các rễ trên của đám rối cánh tay phải."
+        },
+        {
+          "id": "D",
+          "text": "đứt các rễ dưới của đám rối cánh tay phải."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.đứt các rễ trên của đám rối cánh tay bên trái. => giãn bên T -->\nCác TK bên T bị kéo giãn\n---> Tổn thương bên T\nNhớ: Rễ trên",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 8,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-11",
+      "number": 11,
+      "stem": "Tk ngực lưng chi phối cho 1 cơ có động tác:",
+      "options": [
+        {
+          "id": "A",
+          "text": "giạng cánh tay."
+        },
+        {
+          "id": "B",
+          "text": "xoay ngoài cánh tay."
+        },
+        {
+          "id": "C",
+          "text": "khép xương vai."
+        },
+        {
+          "id": "D",
+          "text": "duỗi khép và xoay trong cánh tay."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.duỗi khép và xoay trong cánh tay->Cơ lưng rộng\n==>TK ngực lưng ---> Cơ lưng rộng : Duỗi, khép, xoay trong",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/886fe3ae7abf6598953b.webp"
+      ],
+      "sourcePage": 9,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-12",
+      "number": 12,
+      "stem": "Những mô tả sau đây về động mạch trụ đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó là một trong số hai nhánh tận của động mạch cánh tay."
+        },
+        {
+          "id": "B",
+          "text": "nó chạy qua cẳng tay trước theo hai đoạn là đoạn chếch và đoạn thẳng."
+        },
+        {
+          "id": "C",
+          "text": "nó được cơ gấp cổ tay trụ tùy hành trên suốt chiều dài cẳng tay."
+        },
+        {
+          "id": "D",
+          "text": "nó tiếp nối rộng rãi với động mạch quay ở cổ tay và gan tay."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.nó là một trong số hai nhánh tận của động mạch cánh tay. => ĐM\ncách tay tận bằng ĐM quay, trụ ngang cổ xg quay\nB.nó chạy qua cẳng tay trước theo hai đoạn là đoạn chếch và đoạn\nthẳng. => đoạn chếch ở 1/3 trên, thẳng 2/3 dưới\nC.nó được cơ gấp cổ tay trụ tùy hành trên suốt chiều dài cẳng tay.\n=> chỉ ở 2/3 dưới cẳng tay\nD.nó tiếp nối rộng rãi với động mạch quay ở cổ tay và gan tay.\n=> nhánh gan, mu cổ tay và cung gan tay nông, sâu",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/157821adf64495763dc3.webp"
+      ],
+      "sourcePage": 10,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-13",
+      "number": 13,
+      "stem": "Các mô tả sau về sự tiếp nối của động mạch chày sau đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nhánh mắt cá ngoài của động mạch mác tiếp nối với nhánh cổ chân ngoài của động mạch mu chân."
+        },
+        {
+          "id": "B",
+          "text": "nhánh xuyên của động mạch mác tiếp nối với nhánh mắt cá trước ngoài của động mạch chày trước."
+        },
+        {
+          "id": "C",
+          "text": "nhánh mũ mác tiếp nối với nhánh gối dưới trong của động mạch khoeo."
+        },
+        {
+          "id": "D",
+          "text": "nhánh mắt cá trong của động mạch chày sau tiếp nối với các nhánh của các động mạch chày trước và mu chân ở mạng mạch mắt cá trong."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.nhánh mũ mác tiếp nối với nhánh gối dưới trong của động mạch\nkhoeo=>nhánh mũ mác nối vs gối dưới ngoài.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 11,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-14",
+      "number": 14,
+      "stem": "Các mô tả sau về động mạch chày sau đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó đi xuống giữa hai lớp cơ vùng cẳng chân sau."
+        },
+        {
+          "id": "B",
+          "text": "nó nằm sâu dưới cơ tam đầu và mạc ngang sâu cẳng chân."
+        },
+        {
+          "id": "C",
+          "text": "phần dưới cẳng chân . mặt sau động mạch chỉ có mạc và da che phủ."
+        },
+        {
+          "id": "D",
+          "text": "nó tận cùng ở điểm nằm cách đều mắt cá trong và củ gót ngoài."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "nó tận cùng ở điểm nằm cách đều mắt cá trong và củ gót ngoài\n=> củ gót trong.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/00aa74472a721b5ac9f1.webp"
+      ],
+      "sourcePage": 12,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-15",
+      "number": 15,
+      "stem": "Các mô tả sau về động mạch chày trước đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "ở trên nó đi giữa cơ chày trước và cơ duỗi các ngón chân dài."
+        },
+        {
+          "id": "B",
+          "text": "ở dưới. nó đi giữa cơ chày trước và cơ duỗi ngón chân cái dài."
+        },
+        {
+          "id": "C",
+          "text": "nó đi cùng thần kinh mác sâu."
+        },
+        {
+          "id": "D",
+          "text": "nó bắt chéo trước gân cơ duỗi ngón chân cái dài từ ngoài vào trong."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "Nó bắt chéo trước gân cơ duỗi ngón chân cái dài từ ngoài vào\ntrong -> bị gân cơ duỗi ngón chân cái dài bắt chéo trước từ ngoài\nvào trong.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/ed366d3ac1e94d969902.webp"
+      ],
+      "sourcePage": 13,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-16",
+      "number": 16,
+      "stem": "Động mạch nào dưới đây không tham gia vào mạng mạch quanh gối và bánh chè:",
+      "options": [
+        {
+          "id": "A",
+          "text": "động mạch gối giữa."
+        },
+        {
+          "id": "B",
+          "text": "các động mạch gối trên."
+        },
+        {
+          "id": "C",
+          "text": "động mạch gối dưới."
+        },
+        {
+          "id": "D",
+          "text": "các động mạch quặt ngược chày trước và sau."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.động mạch gối giữa=>xuyên qua mặt sau bao khớp để cấp máu\ncho cấu trúc trong bao khớp.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 14,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-17",
+      "number": 17,
+      "stem": "Mô tả đúng về động mạch khoeo là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "đoạn giữa của nó không bị cơ che phủ ở mặt sau."
+        },
+        {
+          "id": "B",
+          "text": "từ đỉnh khoeo đi xuống . tk chày càng lúc càng xa dần khỏi động mạch."
+        },
+        {
+          "id": "C",
+          "text": "từ TM khoeo nằm trước và trong động mạch."
+        },
+        {
+          "id": "D",
+          "text": "tk mác chung nằm trong động mạch."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.đoạn giữa của nó không bị cơ che phủ ở mặt sau=>ở trám khoeo.\nB.từ đỉnh khoeo đi xuống . tk chày càng lúc càng xa dần khỏi động\nmạch=>đi gần ĐM.\nD.tk mác chung nằm trong động mạch=>ngoài ĐM.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/6aa4202ac010702f29cb.webp"
+      ],
+      "sourcePage": 15,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-18",
+      "number": 18,
+      "stem": "Mô tả đúng về động mạch đùi sâu là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó tách ra từ động mạch đùi ở ngang dây chằng bẹn."
+        },
+        {
+          "id": "B",
+          "text": "nó là nguồn cấp máu chính cho các cơ đùi."
+        },
+        {
+          "id": "C",
+          "text": "nó tận cùng bằng động mạch khoeo."
+        },
+        {
+          "id": "D",
+          "text": "vòng nối chữ thập được tạo nên do các nhánh của động mạch đùi sâu với động mạch bịt."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.nó tách ra từ động mạch đùi ở ngang dây chăng bẹn=> Ở dưới\nd/c bẹn 3,5cm.\nC.nó tận cùng bằng động mạch khoeo=>Tận cùng bằng nhánh\nxuyên thứ 4.\nD.vòng nối chữ thập được tạo nên do các nhánh của động mạch\nđùi sâu với động mạch bịt=>Vòng nối chữ thập Các nhánh ĐM đùi\nsâu + ĐM mông dưới.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/fd2420b5f0bb059f9fcd.webp"
+      ],
+      "sourcePage": 16,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-19",
+      "number": 19,
+      "stem": "Các câu sau về động mạch đùi đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó chạy tiếp theo động mạch chậu ngoài bắt đầu từ sau dây chằng bẹn."
+        },
+        {
+          "id": "B",
+          "text": "từ trên xuống cơ may bắt chéo trước động mạch từ ngoài vào trong."
+        },
+        {
+          "id": "C",
+          "text": "nó tiếp nối với động mạch khoeo tại bờ dưới cơ khép dài."
+        },
+        {
+          "id": "D",
+          "text": "nhánh gối xuống là nhánh dưới cùng của động mạch đùi."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.nó tiếp nối với động mạch khoeo tại bờ dưới cơ khép dài.\nD.nhánh gối xuống là nhánh dưới cùng của động mạch đùi=>Nó\ntiếp nối vs động mạch khoeo khi đi qua lỗ gân cơ khép (cơ khép\nlớn).",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/a815993f2cced8208a15.webp"
+      ],
+      "sourcePage": 17,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-20",
+      "number": 20,
+      "stem": "Các mô tả sau về động mạch đùi đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nhánh mũ đùi ngoài của nó đi sau cơ thẳng đùi."
+        },
+        {
+          "id": "B",
+          "text": "nhánh mũ đùi trong của nó đi giữa cơ thắt lưng lớn và cơ lược."
+        },
+        {
+          "id": "C",
+          "text": "nó đi trước các cơ: thắt lưng lớn . lược . khép dài và khép lớn."
+        },
+        {
+          "id": "D",
+          "text": "nó bắt chéo trước thần kinh hiển ở trong ống cơ khép."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.nó bắt chéo trước thần kinh hiển ở trong ống cơ khép=>sau.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/e55199c4c9d8d9f476ee.webp"
+      ],
+      "sourcePage": 18,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-21",
+      "number": 21,
+      "stem": "Các mô tả sau đây về các cơ mác dài và ngắn đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "chúng có động tác gấp gan chân."
+        },
+        {
+          "id": "B",
+          "text": "chúng là các cơ nghiêng ngoài bàn chân."
+        },
+        {
+          "id": "C",
+          "text": "chúng đều có nguyên ủy từ mặt ngoài xương mác."
+        },
+        {
+          "id": "D",
+          "text": "chúng không có tác dụng giữ vững vòm gan chân."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "gấp gan chân; nghiêng ngoài; có nguyên ủy: Mặt ngoài xương Mác.\nD.chúng không có tác dụng giữ vững vòm gan chân ->có giữ vòm\ngan chân.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 19,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-22",
+      "number": 22,
+      "stem": "Các mô tả sau đây về cơ vùng cẳng chân sau đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "cơ dép có nguyên ủy từ cả xương chày và xương mác."
+        },
+        {
+          "id": "B",
+          "text": "cơ bụng chân là cơ duy nhất có nguyên ủy từ xương đùi."
+        },
+        {
+          "id": "C",
+          "text": "nguyên ủy cơ gấp ngón chân cái dài : bám vào mặt sau thân xương mác."
+        },
+        {
+          "id": "D",
+          "text": "nguyên ủy cơ gấp các ngón chân dài : bám vào mặt sau thân xương chày."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.cơ bụng chân là cơ duy nhất có nguyên ủy từ xương đùi=>cả cơ\nkhoeo và cơ gan chân nữa.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 20,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-23",
+      "number": 23,
+      "stem": "Mô tả đúng về các cơ vùng cẳng chân trước là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "đầu nguyên ủy cơ chày trước bám vào lồi cầu trong và nửa trên mặt trong xương chày."
+        },
+        {
+          "id": "B",
+          "text": "gân cơ duỗi các ngón chân dài bám tận vào các ngón chân 1 tới 4."
+        },
+        {
+          "id": "C",
+          "text": "gân cơ duỗi ngón chân cái dài bám vào mặt mu của nền đốt gần ngón cái."
+        },
+        {
+          "id": "D",
+          "text": "gân các cơ vùng này phải đi dưới các hãm gân cơ duỗi ở cổ chân."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "Đáp án: D\nCác cơ vùng cẳng chân trước (chày trước, duỗi ngón cái dài, duỗi\ncác ngón dài, mác ba) đều có gân đi ra cổ chân và đi dưới các hãm\ngân cơ duỗi trên và dưới. Cấu trúc này cố định gân, giúp tăng hiệu\nquả lực khi vận động cổ chân và các ngón.\nA. Nguyên ủy của cơ chày trước thực chất nằm ở lồi cầu ngoài và\nnửa trên mặt ngoài xương chày.\nB. Gân cơ duỗi các ngón dài chỉ đến 4 ngón ngoài II–V, không đến\nngón cái.\nC. Gân cơ duỗi ngón cái dài bám vào nền đốt xa ngón cái, không ở\nđốt gần.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/9d1fd66d878e48a994b0.webp"
+      ],
+      "sourcePage": 20,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-24",
+      "number": 24,
+      "stem": "Mô tả đúng về động mạch mu chân:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó tận cùng ở khoảng kẽ giữa các ngón chân 1 và 2."
+        },
+        {
+          "id": "B",
+          "text": "nó đi ở phía trong gân cơ gấp ngón chân cái dài."
+        },
+        {
+          "id": "C",
+          "text": "nó tận cùng bằng cách chia thành động mạch mu đốt bàn chân thứ nhất và động mạch gan chân sâu."
+        },
+        {
+          "id": "D",
+          "text": "nó không có nhánh nào tham gia vào các mạng mạch mắt cá."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.nó tận cùng ở khoảng kẽ giữa các ngón chân 1 và 2=>ở đầu gần\nkhoang gian xương đốt bàn 1,2.\nB.nó đi ở phía trong gân cơ gấp ngón chân cái dài=>đi giữa gân cơ\nduỗi ngón cái dài và chẽ gân trong cùng cơ duỗi các ngón dài.\nC.nó tận cùng bằng cách chia thành động mạch mu đốt bàn chân\nthứ nhất và động mạch gan chân sâu=>\nD.nó không có nhánh nào tham gia vào các mạng mạch mắt cá=>",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 23,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-25",
+      "number": 25,
+      "stem": "các mô tả sau đây về mặt sườn của phổi đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "áp vào mặt trong lồng ngực."
+        },
+        {
+          "id": "B",
+          "text": "phần sau của mặt sườn áp vào rãnh Phổi của lồng ngực."
+        },
+        {
+          "id": "C",
+          "text": "phần cột sống của mặt sườn Ngăn cách với phần còn lại bằng một bờ sắc."
+        },
+        {
+          "id": "D",
+          "text": "là mặt lồi duy nhất trong ba mặt của phổi."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.phần cột sống của mặt sườn Ngăn cách với phần còn lại bằng\nmột bờ sắc=>Phần cột sống với phần sườn không có ranh giới rõ.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/6719f54a81c1a2129c34.webp",
+        "/kb/dr-lam/images/ee34bff7b8317806fa30.webp",
+        "/kb/dr-lam/images/995a73d2bb8c177450f8.webp"
+      ],
+      "sourcePage": 23,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-26",
+      "number": 26,
+      "stem": "phổi có tất cả các mặt sau đây, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "mặt đáy."
+        },
+        {
+          "id": "B",
+          "text": "mặt Hoành."
+        },
+        {
+          "id": "C",
+          "text": "mặt sườn."
+        },
+        {
+          "id": "D",
+          "text": "mặt Trung thấp."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.mặt đáy=>3 mặt: mặt hoành, mặt sườn, mặt trung thất.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 25,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-27",
+      "number": 27,
+      "stem": "đặc điểm nào sau đây của phổi đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "phổi là một tạng xốp và thể tích rất thay đổi."
+        },
+        {
+          "id": "B",
+          "text": "phổi trẻ em nặng hơn nước."
+        },
+        {
+          "id": "C",
+          "text": "phổi người lớn màu hồng."
+        },
+        {
+          "id": "D",
+          "text": "phổi trẻ em màu xanh đen."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "B.phổi trẻ em nặng hơn nước=>Phổi trẻ em nhẹ hơn nước.\nC.phổi người lớn màu hồng=>Phổi người lớn màu xanh biếc hoặc\nxám.\nD.phổi trẻ em màu xanh đen=>Phổi trẻ em màu hồng.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 26,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-28",
+      "number": 28,
+      "stem": "các mô tả chung sau đây về phổi đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "có hai phổi nằm ở hai bên trung thất."
+        },
+        {
+          "id": "B",
+          "text": "hai phổi nối với khí quản qua 2 phế quản chính."
+        },
+        {
+          "id": "C",
+          "text": "hai phổi nối với tim bằng các ĐM và TM phổi."
+        },
+        {
+          "id": "D",
+          "text": "giữa hai phổi là ổ màng phổi."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.giữa hai phổi là ổ màng phổi=>Giữa 2 phổi là trung thất.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 27,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-29",
+      "number": 29,
+      "stem": "Các mô tả sau về cấu tạo khí quản đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "các vòng sụn khí quản hình chữ C được liên kết với nhau bởi các mảng sợi."
+        },
+        {
+          "id": "B",
+          "text": "thành mảng nằm ở phía sau, căng giữa đầu của các vòng sụn."
+        },
+        {
+          "id": "C",
+          "text": "Niêm mạc do khí quản thuộc loại thượng mô lát tầng."
+        },
+        {
+          "id": "D",
+          "text": "mỗi vòng sụn khí quản có chiều dày nhỏ hơn chiều cao."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Niêm mạc do khí quản thuộc loại thượng mô lát tầng. => Niêm\nmạc lót khí quản thuộc loại biểu mô trụ đơn\nD.Mỗi vòng sụn khí quản có chiều dày nhỏ hơn chiều cao. => dày\n1mm; cao 2-5mm.\n==> Liên hệ việc đẩy chất bẩn, nhầy, dịch tiết\nra ngoài cần hệ thông lông chuyển\ntrong lòng Khí quản .",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/d5431af0a0a62ee3ef0b.webp"
+      ],
+      "sourcePage": 27,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-30",
+      "number": 30,
+      "stem": "các mô tả sau đây về liên quan khí quản đoạn ngực đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nằm ở trung thất sau."
+        },
+        {
+          "id": "B",
+          "text": "nằm sau cung ĐM chủ."
+        },
+        {
+          "id": "C",
+          "text": "nằm giữa hai ổ màng phổi."
+        },
+        {
+          "id": "D",
+          "text": "nằm trước thực quản."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.nằm ở trung thất sau=>Nằm ở trung thất trên.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 28,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-31",
+      "number": 31,
+      "stem": "các mô tả sau đây về liên quan khí quản đoạn cổ đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "khí quản và thực quản nằm chung trong bao mạc tạng do lá trước khí quản mạc cổ tạo nên."
+        },
+        {
+          "id": "B",
+          "text": "hai cơ ức Giáp và hai cơ ức móng giới hạn nên trám mở khí quản."
+        },
+        {
+          "id": "C",
+          "text": "Khí quản cổ nằm sau eo tuyến giáp."
+        },
+        {
+          "id": "D",
+          "text": "cơ ức đòn chũm bắt chéo phía trước khí quản."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.cơ ức đòn chũm bắt chéo phía trước khí quản=>Cơ ức đòn chũm\nko bắt chéo phía trước khí quản.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/f931b1943168406bf67b.webp"
+      ],
+      "sourcePage": 29,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-32",
+      "number": 32,
+      "stem": "các mô tả sau đây về liên quan khí quản đoạn cổ đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nằm sau sụn Giáp."
+        },
+        {
+          "id": "B",
+          "text": "nằm trước thực quản."
+        },
+        {
+          "id": "C",
+          "text": "đằng sau các cơ dưới móng."
+        },
+        {
+          "id": "D",
+          "text": "nằm hai bên khí quản là bó mạch cảnh."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.nằm sau sụn Giáp=>Nằm dưới sụn giáp.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/270a861b3c7702272a97.webp"
+      ],
+      "sourcePage": 30,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-33",
+      "number": 33,
+      "stem": "các mô tả sau đây về khí quản đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đi từ bờ dưới sụn nhẫn tới khoang gian đốt sống ngực IV - V."
+        },
+        {
+          "id": "B",
+          "text": "đầu trên ở ngang mức đốt sống cổ VII."
+        },
+        {
+          "id": "C",
+          "text": "dài khoảng 15 cm và đường kính khoảng 1.2 cm."
+        },
+        {
+          "id": "D",
+          "text": "do 16- 20 Nửa Vòng sụn tạo nên."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Đi từ bờ dưới sụn nhẫn tới khoang gian đốt sống ngực IV - V.\nB.đầu trên ở ngang mức đốt sống cổ VII=>Đầu trên ở ngang mức\nđốt sống cổ VI.\nD.do 16- 20 Nửa Vòng sụn tạo nên=>ở phía trước.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/9babb20b03006a72dd90.webp",
+        "/kb/dr-lam/images/269b9458be512d67921d.webp"
+      ],
+      "sourcePage": 30,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-34",
+      "number": 34,
+      "stem": "trên hình chụp XQuang tim, cung nào sau đây đúng ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "cung trên phải ứng với tâm nhĩ phải."
+        },
+        {
+          "id": "B",
+          "text": "cung dưới phải ứng với tâm thất phải."
+        },
+        {
+          "id": "C",
+          "text": "cung trên trái ứng với cung ĐM chủ."
+        },
+        {
+          "id": "D",
+          "text": "cung giữa trái ứng với tâm thất trái."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.cung trên phải ứng với tâm nhĩ phải=>Cung trên phải với ứng vs\nTM chủ trên.\nB.cung dưới phải ứng với tâm thất phải=>Cung dưới phải ứng với\nnhĩ phải.\nC.cung trên trái ứng với cung ĐM chủ.\nD.cung giữa trái ứng với tâm thất trái=>Cung giữa trái ứng với thân\nĐM phổi.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 32,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-35",
+      "number": 35,
+      "stem": "Các mô tả sau về hình ảnh XQuang tim đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cung trên trái ứng với thân ĐM phổi."
+        },
+        {
+          "id": "B",
+          "text": "Cung dưới trái ứng với tâm thất trái."
+        },
+        {
+          "id": "C",
+          "text": "Cung trên phải ứng với TM chủ trên."
+        },
+        {
+          "id": "D",
+          "text": "Cung dưới phải ứng với tâm nhĩ phải."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.Cung trên trái ứng với thân ĐM phổi=>Cung trên trái là ĐM chủ,\nCung giữa trái là ĐM phổi.\nBên P:\n- cung trên phải: TM chủ trên\n- cung dưới phải: Nhĩ phải\nBên T:\n- cung trên trái: ĐM chủ\n- cung giữa trái: ĐM phổi\n- cung dưới trái: Tâm thất trái.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 33,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-36",
+      "number": 36,
+      "stem": "điểm nghe rõ của van tim nào đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ổ van ĐM phổi ở góc trên phải của hình tứ giác đối chiếu tim lên lồng ngực."
+        },
+        {
+          "id": "B",
+          "text": "Ổ van ĐM chủ ở góc trên trái của hình tứ giác đối chiếu tim lên lồng ngực."
+        },
+        {
+          "id": "C",
+          "text": "Ổ van 2 lá ở góc dưới phải của hình tứ giác của hình đối chiếu tim lên lồng ngực."
+        },
+        {
+          "id": "D",
+          "text": "Ổ van 3 lá ở đầu trong sụn sườn VI phải."
+        },
+        {
+          "id": "E",
+          "text": "Tất cả đều sai."
+        }
+      ],
+      "answers": [
+        "E"
+      ],
+      "explanation": "A.Ổ van ĐM phổi ở góc trên phải của hình tứ giác đối chiếu tim lên\nlồng ngực.\nB.Ổ van ĐM chủ ở góc trên trái của hình tứ giác đối chiếu tim lên\nlồng ngực=>trên phải.\nC.Ổ van 2 lá ở góc dưới phải của hình tứ giác của hình đối chiếu tim\nlên lồng ngực=>Góc dưới trái.\nD.Ổ van 3 lá ở đầu trong sụn sườn VI phải=>Ổ van ĐM phổi ở góc\ntrên trái của hình tứ giác đối chiếu tim lên lồng ngực\nỔ van ĐM chủ ở góc trên phải\nỔ van 2 lá ở góc dưới trái của hình tứ giác\nỔ van 3 lá ở góc dưới phải.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 34,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-37",
+      "number": 37,
+      "stem": "các mô tả sau về 4 góc của hình tứ giác đối chiếu tim lên lồng ngực đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Góc trên phải ở sụn sườn III phải, cách bờ phải xương ức 1.3 cm."
+        },
+        {
+          "id": "B",
+          "text": "góc trên trái ở sụn sườn II, trên đường giữa đòn trái."
+        },
+        {
+          "id": "C",
+          "text": "góc dưới ở khoang liên sườn V trên đường giữa đòn trái."
+        },
+        {
+          "id": "D",
+          "text": "Góc dưới phải ở đầu trong sụn sườn VI phải."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Góc trên phải ở sụn sườn III phải, cách bờ phải xương ức 1.3\ncm=>Góc trên phải là điểm nằm trên sụn sườn III bên phải cách bờ\nphải xương ức 1,3cm.\nB.góc trên trái ở sụn sườn II, trên đường giữa đòn trái=>Góc trên\ntrái là một điểm nằm trên sụn sườn II cách bờ trái xương ức 1,3cm.\nC.góc dưới ở khoang liên sườn V trên đường giữa đòn trái=>Góc\ndưới trái ở khoang liên sườn V trên đường vú trái.\nD.Góc dưới phải ở đầu trong sụn sườn VI phải=>Góc dưới phải ở\nđầu trong sụn sườn VI bên phải.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/011ae4cc0b5b31e0747b.webp"
+      ],
+      "sourcePage": 35,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-38",
+      "number": 38,
+      "stem": "TM nào sau đây không đổ vào xoang TM vành ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "TM tim lớn."
+        },
+        {
+          "id": "B",
+          "text": "TM tim nhỏ."
+        },
+        {
+          "id": "C",
+          "text": "TM tim trước."
+        },
+        {
+          "id": "D",
+          "text": "TM tim giữa."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.TM tim trước=>đổ vào nhĩ P.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/3ba49e1afddaa0c35b06.webp"
+      ],
+      "sourcePage": 36,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-39",
+      "number": 39,
+      "stem": "Các mô tả sau về đường đi các ĐM của tim đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thân ĐM vành trái chạy trong nửa trái rãnh vành."
+        },
+        {
+          "id": "B",
+          "text": "ĐM vành phải chạy trong nửa phải rãnh vành trước khi đi vào rãnh gian thất sau."
+        },
+        {
+          "id": "C",
+          "text": "ĐM gian thất trước chạy trong rãnh gian thất trước."
+        },
+        {
+          "id": "D",
+          "text": "ĐM gian thất sau là nhánh tận của ĐM vành phải."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.Thân ĐM vành trái chạy trong nửa trái rãnh vành => ĐM mũ chạy\ntrong rãnh vành trái.\nĐM mạch vành trái Tận luôn --> ĐM mũ và ĐM gian thất trước.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 37,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-40",
+      "number": 40,
+      "stem": "các mô tả sau đây về mặt Trung thất của phổi đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "mặt Trung thất của phổi liên quan với TK hoành."
+        },
+        {
+          "id": "B",
+          "text": "trước dưới rốn phổi có ấn tim."
+        },
+        {
+          "id": "C",
+          "text": "Ấn tim ở phổi phải sâu hơn ở phổi trái."
+        },
+        {
+          "id": "D",
+          "text": "Nếp màng phổi ở dưới rốn phổi là dây chằng phổi."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.mặt Trung thất của phổi liên quan với TK hoành=>TK hoành chạy\ngiữa màng phổi và màng tim.\nC.Ấn tim ở phổi phải sâu hơn ở phổi trái.=>Ấn tim phổi trái sâu hơn\nphải.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/00f909c5714304f258cd.webp"
+      ],
+      "sourcePage": 38,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-41",
+      "number": 41,
+      "stem": "Một bệnh nhân nam đái tháo đường 50 tuổi đến gặp bạn vì đái khó. Khi thăm khám, bệnh nhân có giảm cảm giác vùng đáy chậu. Phản xạ nào sau đây nhiều khả năng đã bị ảnh?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Phản xạ bánh chè."
+        },
+        {
+          "id": "B",
+          "text": "Phản xạ gân gót."
+        },
+        {
+          "id": "C",
+          "text": "Phản xạ da bìu."
+        },
+        {
+          "id": "D",
+          "text": "Phản xạ nhấp nháy hậu môn (anal wink)."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "Các sợi cảm giác bị tổn thương ở bệnh nhân này là S2 đến S4. Các\nrễ này chi phối vùng đáy chậu và là đường truyền vào của phản xạ\nnhấp nháy hậu môn.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 39,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-42",
+      "number": 42,
+      "stem": "Một người đàn ông 45 tuổi phàn nàn về đau chói cẳng chân phải tăng lên khi ngồi và ho. Bệnh nhân cũng có tê bì ở vùng này. Bác sĩ đang khám cảm giác của vùng đùi ngoài. Những rễ thần kinh nào sau đây đang được kiểm tra ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "L1 và L2."
+        },
+        {
+          "id": "B",
+          "text": "L2 và L3."
+        },
+        {
+          "id": "C",
+          "text": "L4 và L5."
+        },
+        {
+          "id": "D",
+          "text": "S1 và S2."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Đùi ngoài được chi phối bởi rễ L5.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/dc1ff83513be605d83ea.webp"
+      ],
+      "sourcePage": 39,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-43",
+      "number": 43,
+      "stem": "Một phụ nữ 34 tuổi đang trải qua thủ thuật soi bàng quang với phương pháp vô cảm là gây tê tủy sống. Khi bác sĩ gây mê đưa kim vào khoang dưới nhện để tiêm thuốc tê, kim sẽ xuyên qua các lớp khác nhau. Câu nào dưới đây mô tả chính xác trình tự của các lớp từ da đến khoang dưới nhện ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Da, dây chằng trên gai, dây chằng gian gai, dây chằng dọc sau, màng cứng, khoang dưới nhện."
+        },
+        {
+          "id": "B",
+          "text": "Da, dây chằng trên gai, dây chằng gian gai, màng cứng, khoang dưới nhện."
+        },
+        {
+          "id": "C",
+          "text": "Da, dây chằng trên gai, dây chằng gian gai, khoang nhện, khoang dưới nhện."
+        },
+        {
+          "id": "D",
+          "text": "Da, dây chằng gian gai, dây chằng dọc trước, màng cứng, khoang dưới nhện."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "Trình tự đúng là da, dây chằng trên gai, dây chằng gian gai, màng\ncứng và khoang dưới nhện.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 40,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-44",
+      "number": 44,
+      "stem": "Một phụ nữ 30 tuổi tình cờ phát hiện chỉ có một thận. Có khả năng người này còn có ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Không có buồng trứng 2 bên."
+        },
+        {
+          "id": "B",
+          "text": "Tử cung một sừng (Unicornuate uterus)."
+        },
+        {
+          "id": "C",
+          "text": "Màng trinh không thủng (Imperforate hymen)."
+        },
+        {
+          "id": "D",
+          "text": "Thoát vị bẹn."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "Ống cạnh trung thận (ống Muller) (paramesonephric duct) và ống\ntiết niệu (urinary duct) liên quan gần với nhau về cả mặt giải phẫu lẫn\nchức năng trong quá trình phát triển phôi. Do đó, một bất thường\nbẩm sinh trong thận hoặc niệu quản thường kèm theo bất thường\ncủa ống cùng bên, sừng tử cung, hoặc cổ tử cung. Tử cung một\nsừng là một bất thường bẩm sinh, trong đó một ống  Muller không\nhình thành hoặc đi xuống bình thường trong quá trình phát triển\nphôi, dẫn đến tử cung chỉ có một sừng. Đoạn xa âm đạo, âm hộ và\nbuồng trứng có một nguồn gốc phôi khác so với những cấu trúc\ntrên đây.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 40,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-45",
+      "number": 45,
+      "stem": "Trong một phẫu thuật cắt bỏ một khối u sau phúc mạc, phẫu thuật viên đã phải kiểm tra niệu quản rất cẩn thận để chắc chắn rằng cấp máu cho niệu quản không bị gián đoạn do phẫu thuật. Mô tả đúng nhất về cấp máu động mạch cho niệu quản ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Động mạch niệu quản tách ra từ động mạch chủ bụng."
+        },
+        {
+          "id": "B",
+          "text": "Động mạch niệu quản tách ra từ động mạch chậu ngoài."
+        },
+        {
+          "id": "C",
+          "text": "Động mạch niệu quản tách ra từ động mạch chậu trong."
+        },
+        {
+          "id": "D",
+          "text": "Không có động mạch riêng (động mạch niệu quản), nhưng được cấp máu bởi nhiều nhánh nhỏ tách ra từ các động mạch gần nó."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "Niệu quản không có bất kỳ động mạch riêng nào cấp máu (không\ncó động mạch niệu quản) nhưng nó được cấp máu bởi nhiều nhánh\nnhỏ tách ra từ các động mạch gần đó như động mạch chủ và động\nmạch thận thận, động mạch sinh dục, động mạch chậu trong và\nchậu chung, động mạch bàng quang và động mạch tử cung.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 41,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-46",
+      "number": 46,
+      "stem": "Một phụ nữ 39 tuổi vào viện vì đái đỏ và đau vùng hông lưng khá dữ dội. Bệnh nhân có tiền sử sỏi thận. CLVT bụng được chỉ định, cho thấy đoạn bụng của niệu quản nằm trước một cơ. Tên của cơ này?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ thắt lưng lớn."
+        },
+        {
+          "id": "B",
+          "text": "Cơ răng trước."
+        },
+        {
+          "id": "C",
+          "text": "Cơ bịt."
+        },
+        {
+          "id": "D",
+          "text": "Cơ thẳng bụng."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Niệu quản đoạn bụng nằm trước cơ thắt lưng lớn.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 42,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-47",
+      "number": 47,
+      "stem": "Trong một vụ án, một trinh sát đã cạo một số vết bẩn tại hiện trường để kiểm tra sự có mặt của phosphatase kiềm để đánh giá xem liệu có tinh dịch tại hiện trường hay không. Nguồn gốc của phosphatase kiềm (alkalin phosphatase) trong tinh dịch.",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tuyến tiền liệt."
+        },
+        {
+          "id": "B",
+          "text": "Tuyến hành niệu đạo."
+        },
+        {
+          "id": "C",
+          "text": "Tuyến tinh."
+        },
+        {
+          "id": "D",
+          "text": "Ụ tinh."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Tuyến tinh là nguồn gốc của phosphatase kiềm (ALP) trong tinh\ndịch. ALP giúp trung hòa môi trường acid trong âm đạo tạo điều\nkiện cho tinh trùng sống để đến gặp được trứng.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 42,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-48",
+      "number": 48,
+      "stem": "Một bệnh nhân nam đang trải qua thủ thuật soi bàng quang (cystoscopic). Khi ống soi đang đưa qua phần niệu đạo dương vật, cấu trúc nào sau đây vây quanh niệu đạo.",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tuyến tiền liệt."
+        },
+        {
+          "id": "B",
+          "text": "Vật xốp."
+        },
+        {
+          "id": "C",
+          "text": "Ụ tinh."
+        },
+        {
+          "id": "D",
+          "text": "Cơ thắt niệu đạo ngoài."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "Phần dài nhất của niệu đạo là niệu đạo dương vật, nơi nó đi qua vật\nxốp dương vật.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 43,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-49",
+      "number": 49,
+      "stem": "Một người đàn ông 66 tuổi đến gặp bạn vì đái khó. Bạn đang nghi ngờ BPH. Thùy nào của tuyền tiền liệt chịu trách nhiệm cho triệu chứng của bệnh nhân?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thùy trước."
+        },
+        {
+          "id": "B",
+          "text": "Thùy sau."
+        },
+        {
+          "id": "C",
+          "text": "Thùy bên."
+        },
+        {
+          "id": "D",
+          "text": "Thùy giữa."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "Thùy giữa là phần mà niệu đạo đi qua và nó có thể gây tắc niệu đạo\nkhi BPH.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 44,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-50",
+      "number": 50,
+      "stem": "Một bệnh nhân được chẩn đoán thai ngoài tử cung vỡ gây chảy máu trong ổ bụng. Khối thai ngoài ở phần eo vòi và có kích thước 3cm. Máu trong ổ bụng chủ yếu là chảy ra từ động mạch nào?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Động mạch tử cung."
+        },
+        {
+          "id": "B",
+          "text": "Động mạch buồng trứng."
+        },
+        {
+          "id": "C",
+          "text": "Động mạch buồng trứng và động mạch tử cung."
+        },
+        {
+          "id": "D",
+          "text": "Không có đáp án nào đúng."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Động mạch tử cung (nhánh lên) và động mạch buồng trứng nối với\nnhau trong mạc treo vòi tử cung để tới cấp máu cho vòi tử cung.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 44,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-51",
+      "number": 51,
+      "stem": "Phẫu thuật cắt buồng trứng hai bên được thực hiện ở một bệnh nhân nữ ung thư buồng trứng. Để hoàn thành phẫu thuật này, các động mạch buồng trứng đã được thắt. Mô tả đúng nhất về giải phẫu của các mạch buồng trứng.",
+      "options": [
+        {
+          "id": "A",
+          "text": "Động mạch buồng trứng phải tách ra từ động mạch thận phải."
+        },
+        {
+          "id": "B",
+          "text": "Tĩnh mạch buồng trứng phải đổ vào tĩnh mạch chủ dưới."
+        },
+        {
+          "id": "C",
+          "text": "Động mạch buồng trứng trái tách ra từ động mạch chậu trong trái."
+        },
+        {
+          "id": "D",
+          "text": "Tĩnh mạch buồng trứng trái đổ vào tĩnh mạch chủ dưới."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "Cả 2 động mạch buồng trứng đều tách ra từ động mạch chủ bụng.\nTĩnh mạch buồng trứng phải đổ về tĩnh mạch chủ dưới trong khi tĩnh\nmạch buồng trứng trái đổ về tĩnh mạch thận trái.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 45,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-52",
+      "number": 52,
+      "stem": "Một người phụ nữ 22 tuổi trong quá trình phẫu thuật được ghi nhận có một khối thai ngoài tử cung 3 cm trong phần bóng của vòi tử cung. Mô tả đúng nhất về phần bóng vòi này?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Phần nằm trong cơ tử cung."
+        },
+        {
+          "id": "B",
+          "text": "Phần hẹp nhất và di động nhất."
+        },
+        {
+          "id": "C",
+          "text": "Phần dài nhất và rộng nhất của vòi tử cung."
+        },
+        {
+          "id": "D",
+          "text": "Phần có các tua vòi hình ngón tay."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Phần bóng vòi là vị trí thường gặp thai ngoài tử cung nhất, đây cũng\nlà phần rộng nhất của vòi tử cung.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 45,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-53",
+      "number": 53,
+      "stem": "Một phụ nữ 42 tuổi vào viện vì chảy máu âm đạo khá nhiều. Bệnh nhân đã được chẩn đoán u xơ tử cung và được chỉ định phẫu thuật cắt tử cung toàn phần đường bụng Trong quá trình phẫu thuật, phẫu thuật viên đã định vị niệu quản trái để đảm bảo an toàn trước khi kẹp động mạch tử cung. Các niệu quản được tìm thấy ở eo trên. Tại vị trí này, niệu quản trái nằm ngay ngoài cấu trúc nào sau đây?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tĩnh mạch buồng trứng trái."
+        },
+        {
+          "id": "B",
+          "text": "Động mạch chậu ngoài trái."
+        },
+        {
+          "id": "C",
+          "text": "Động mạch chủ bụng."
+        },
+        {
+          "id": "D",
+          "text": "Động mạch chậu trong trái."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "Một trong những mốc giải phẫu quan trọng của niệu quản trong\nphẫu thuật là tại eo trên, ở đó niệu quản đi vào phía trong bắt chéo\nchỗ chia đôi động mạch chậu chung. Tại vị trí này, niệu quản nằm\nphía trong so với buồng trứng và nằm phía ngoài các mạch chậu\ntrong. Từ vị trí này, niệu quản sẽ đi về phía trong hơn, đi ở dưới động\nmạch tử cung để sau đó cắm vào bàng quang.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 46,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-54",
+      "number": 54,
+      "stem": "Trước một bệnh nhân nghi ngờ thai ngoài tử cung (EP), bạn đã dùng kim 20G (gauge) đưa qua cùng đồ sau âm đạo để đánh giá xem có máu trong khoang phúc mạc hay không. Mục đích bạn đang muốn đưa kim vào vùng nào của phúc mạc hay chậu hông?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nếp tử cung bàng quang."
+        },
+        {
+          "id": "B",
+          "text": "Khoang cạnh trực tràng."
+        },
+        {
+          "id": "C",
+          "text": "Khoang cạnh bàng quang."
+        },
+        {
+          "id": "D",
+          "text": "Túi cùng trực tràng tử cung (túi cùng Douglas)."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "Vùng thấp nhất của chậu hông là túi cùng trực tràng tử cung hay túi\ncùng Douglas. Thủ thuật được mô tả được gọi là chọc dò túi cùng\n(culdocentesis), trong đó kim được đưa qua cùng đồ âm đạo sau\nđể vào túi cùng Douglas.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 47,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-55",
+      "number": 55,
+      "stem": "Một phụ nữ 45 tuổi vào viện vì chảy máu tử cung đáng kể do u xơ tử. Bác Bác sĩ điện quang đã thực hiện nút mạch động mạch tử cung. Theo bạn, động mạch tử cung đi qua cấu trúc nào?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Dây chằng ngang cổ tử cung."
+        },
+        {
+          "id": "B",
+          "text": "Dây chằng tử cung cùng."
+        },
+        {
+          "id": "C",
+          "text": "Nếp tử cung bàng quang."
+        },
+        {
+          "id": "D",
+          "text": "Cùng đồ âm đạo trước."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Các động mạch tử cung đi qua các dây chằng ngang cổ tử cung.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 47,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-56",
+      "number": 56,
+      "stem": "Một phụ nữ 31 tuổi đến gặp bạn để xem xét đặt dụng cụ tử cung (IUD).Bạn đã thăm khám tiểu khung để đảm bảo thiết bị được đặt đúng hướng và nhận thấy rằng thân tử cung đổ về phía trực tràng và đáy tử cung đổ ra phía trước. Tư thế tử cung của bệnh nhân này?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ngả ra trước, gấp ra trước."
+        },
+        {
+          "id": "B",
+          "text": "Ngả ra trước, gấp ra sau."
+        },
+        {
+          "id": "C",
+          "text": "Ngả ra sau, gấp ra trước."
+        },
+        {
+          "id": "D",
+          "text": "Ngả ra sau, gấp ra sau."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "\"Ngả\" (version) thể hiện liên quan giữa trục dọc tử cung với âm đạo,\ntrong khi \"Gấp\" (flexion) thể hiện liên quan giữa thân và cổ tử cung.\nDo đó, tử cung ở bệnh nhân này trong tư thế ngả ra sau và gấp ra\ntrước.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 48,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-57",
+      "number": 57,
+      "stem": "Một cậu bé 7 tuổi đi khám sức khoẻ định kỳ. Bác sĩ nhi khoa đã phát hiện tinh hoàn phải tăng kích thước và ấn không đau. Dấu hiệu soi đèn qua tinh hoàn dương tính rõ chứng tỏ có dịch quanh tinh hoàn phải. Dịch bất thường này nằm trong khoang nào?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Áo trắng."
+        },
+        {
+          "id": "B",
+          "text": "Mạc tinh ngoài."
+        },
+        {
+          "id": "C",
+          "text": "Ống phúc tinh mạc."
+        },
+        {
+          "id": "D",
+          "text": "Cơ bìu và mạc cơ bìu."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Bệnh nhi này nhiều khả năng có tràn dịch màng tinh hoàn\n(hydrocele), là tình trạng tích tụ dịch bất thường trong ống phúc\ntinh mạc. Ống này hình thành ở thời kỳ thai khi tinh hoàn đi từ bụng\nqua ống bẹn xuống bìu kéo theo một phần của phúc mạc. Dịch của\nphúc mạc đôi khi tích tụ lại trong khoang này.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 49,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-58",
+      "number": 58,
+      "stem": "Một bệnh nhân nam 18 tuổi với nghi ngờ ung thư tinh hoàn đang trải qua một cuộc phẫu thuật. Sau khi rạch bìu, phẫu thuật viên dự tính tiếp cận nhu mô tinh hoàn. Để đến được nhu mô tinh hoàn, cần phải rạch qua lớp nào dưới đây?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Mạc Buck."
+        },
+        {
+          "id": "B",
+          "text": "Áo trắng."
+        },
+        {
+          "id": "C",
+          "text": "Mạc Dartos."
+        },
+        {
+          "id": "D",
+          "text": "Mạc Scarpa."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "Mỗi tinh hoàn được bao bọc bởi một bao dày là áo trắng tinh hoàn",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 49,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-59",
+      "number": 59,
+      "stem": "Bệnh nhân sau khi bó bột cẳng chân có biểu hiện tê vùng mu chân và không gấp được mu chân. Tổn thương nhiều khả năng xảy ra ở vị trí nào?",
+      "options": [
+        {
+          "id": "A",
+          "text": "1/3 giữa xương chày."
+        },
+        {
+          "id": "B",
+          "text": "Chỏm xương mác."
+        },
+        {
+          "id": "C",
+          "text": "Gót chân."
+        },
+        {
+          "id": "D",
+          "text": "Lồi cầu ngoài xương đùi."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "Đáp án: B. Chỏm xương mác\nThần kinh mác chung vòng quanh chỏm xương mác, dễ bị chèn ép\nkhi bó bột hoặc chấn thương\nThần kinh này chi phối vận động các cơ làm gấp mu chân và cảm\ngiác vùng mu chân\nTổn thương gây mất gấp mu chân và tê mu chân, đặc trưng cho tổn\nthương tại chỏm xương mác",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 50,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-60",
+      "number": 60,
+      "stem": "Bệnh nhân khàn tiếng, ghi nhận có tổn thương cung động mạch chủ đoạn vòng trên cuống phổi. Tổn thương nhiều khả năng ở cấu trúc nào?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thần kinh X."
+        },
+        {
+          "id": "B",
+          "text": "Thần kinh thanh quản quặt ngược."
+        },
+        {
+          "id": "C",
+          "text": "Thần kinh hoành."
+        },
+        {
+          "id": "D",
+          "text": "Thần kinh giao cảm cổ."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "Đáp án: B. Thần kinh thanh quản quặt ngược\nThần kinh thanh quản quặt ngược trái vòng quanh cung động mạch\nchủ ở ngay trên cuống phổi rồi đi lên để chi phối hầu hết các cơ nội\ntại của thanh quản\nTổn thương tại vị trí này gây khàn tiếng do liệt cơ thanh quản\nThần kinh X đi cao hơn, thần kinh hoành đi trước cuống phổi, thần\nkinh giao cảm cổ nằm ở cổ nên không liên quan trực tiếp.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 51,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-61",
+      "number": 61,
+      "stem": "Màng ngoài tim có đặc điểm nào sau đây là đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Lớp ngoài cùng là ngoại tâm mạc sợi."
+        },
+        {
+          "id": "B",
+          "text": "Lớp ngoài cùng là ngoại tâm mạc thanh mạc."
+        },
+        {
+          "id": "C",
+          "text": "Các dây chằng ức – ngoại tâm mạc gắn vào lớp ngoại tâm mạc sợi."
+        },
+        {
+          "id": "D",
+          "text": "Các dây chằng ức – ngoại tâm mạc gắn vào lớp ngoại tâm mạc thanh mạc."
+        },
+        {
+          "id": "E",
+          "text": "A và C đúng."
+        },
+        {
+          "id": "F",
+          "text": "A và D đúng."
+        }
+      ],
+      "answers": [
+        "E"
+      ],
+      "explanation": "Đáp án: E. A và C đúng.\nNgoại tâm mạc sợi là lớp ngoài cùng, chắc và không đàn hồi, bọc\nlấy tim và các mạch lớn\nCác dây chằng ức – ngoại tâm mạc bám từ xương ức vào ngoại tâm\nmạc sợi, giúp cố định tim trong lồng ngực.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 51,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-62",
+      "number": 62,
+      "stem": "Cấu trúc nào giúp mắt nhìn gần, xa?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thể mi."
+        },
+        {
+          "id": "B",
+          "text": "Mống mắt."
+        },
+        {
+          "id": "C",
+          "text": "Đồng tử."
+        },
+        {
+          "id": "D",
+          "text": "Thấu kính."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Đáp án: A. Thể mi\nThể mi co giãn làm thay đổi độ cong của thấu kính, giúp mắt điều\ntiết để nhìn rõ các vật ở gần hoặc xa\nMống mắt và đồng tử điều chỉnh lượng ánh sáng vào mắt, thấu kính\nchỉ khúc xạ ánh sáng nhưng không tự điều chỉnh được.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 52,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-63",
+      "number": 63,
+      "stem": "Động mạch dưới đòn có đặc điểm nào sau đây ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nguyên ủy 2 bên giống nhau."
+        },
+        {
+          "id": "B",
+          "text": "Ngăn cách với tĩnh mạch dưới đòn bởi cơ bậc thang trước."
+        },
+        {
+          "id": "C",
+          "text": "Đi giữa cơ bậc thang giữa và cơ bậc thang sau."
+        },
+        {
+          "id": "D",
+          "text": "Không cho nhánh nào đi lên cổ."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "Đáp án: B. Ngăn cách với tĩnh mạch dưới đòn bởi cơ bậc thang\ntrước\nĐộng mạch dưới đòn bên phải tách từ thân động mạch cánh tay\nđầu, bên trái từ cung động mạch chủ nên nguyên ủy khác nhau\nNó đi sau cơ bậc thang trước, trong khi tĩnh mạch dưới đòn đi trước\ncơ này, do đó bị ngăn cách bởi cơ bậc thang trước\nĐộng mạch dưới đòn còn cho nhiều nhánh lên cổ, đi qua khe giữa\ncơ bậc thang trước và giữa chứ không phải giữa cơ bậc thang giữa\nvà sau.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 53,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-64",
+      "number": 64,
+      "stem": "Cung gan tay nông có đặc điểm nào sau đây là sai?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đi vào 7 bờ ngón tay từ ngón út."
+        },
+        {
+          "id": "B",
+          "text": "B. Nhánh tận của mạch trụ và nhánh tận của mạch quay."
+        },
+        {
+          "id": "C",
+          "text": "Đi sau cân gan tay và trước các gân gấp."
+        },
+        {
+          "id": "D",
+          "text": "Nằm nông hơn cung gan tay sâu."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 54,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-65",
+      "number": 65,
+      "stem": "Động mạch cánh tay cho nhánh nào sau đây?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Động mạch gian cốt sau."
+        },
+        {
+          "id": "B",
+          "text": "Động mạch bên trụ trên."
+        },
+        {
+          "id": "C",
+          "text": "Động mạch quặt ngược quay."
+        },
+        {
+          "id": "D",
+          "text": "Động mạch gian cốt trước."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "Đáp án: B. Động mạch bên trụ trên\nĐộng mạch cánh tay cho các nhánh quan trọng như động mạch\ncánh tay sâu, động mạch bên trụ trên và bên trụ dưới\nCác động mạch gian cốt trước, sau và quặt ngược quay xuất phát\ntừ động mạch trụ hoặc động mạch quay chứ không từ động mạch\ncánh tay.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 54,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-66",
+      "number": 66,
+      "stem": "Động mạch mu chân có đặc điểm nào sau đây là sai?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Là sự tiếp nối của động mạch chày trước."
+        },
+        {
+          "id": "B",
+          "text": "Cho nhánh động mạch cổ chân ngoài và động mạch cổ chân trong."
+        },
+        {
+          "id": "C",
+          "text": "Cho nhánh động mạch mắt cá trước ngoài."
+        },
+        {
+          "id": "D",
+          "text": "Kết thúc bằng động mạch gan chân sâu."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Đáp án: C. Cho nhánh động mạch mắt cá trước ngoài\nĐộng mạch mu chân không cho nhánh động mạch mắt cá trước\nngoài, vì nhánh này xuất phát từ động mạch chày trước\nĐộng mạch mu chân có các nhánh chính: động mạch cổ chân\nngoài, động mạch cổ chân trong, động mạch mu bàn chân và kết\nthúc bằng động mạch gan chân sâu.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 55,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-67",
+      "number": 67,
+      "stem": "Đứt thần kinh bịt sẽ ảnh hưởng đến động tác nào?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Duỗi đùi."
+        },
+        {
+          "id": "B",
+          "text": "Gấp đùi."
+        },
+        {
+          "id": "C",
+          "text": "Dạng đùi."
+        },
+        {
+          "id": "D",
+          "text": "Khép đùi."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "Đáp án: D. Khép đùi\nThần kinh bịt chi phối các cơ khép của đùi, vì vậy khi bị tổn thương\nsẽ làm yếu hoặc mất động tác khép đùi.\nCác động tác gấp, duỗi và dạng đùi do các nhóm cơ và thần kinh\nkhác đảm nhiệm.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 55,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-68",
+      "number": 68,
+      "stem": "Cơ gấp cẳng tay nào sau đây do thần kinh quay chi phối?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ cánh tay quay."
+        },
+        {
+          "id": "B",
+          "text": "Cơ sấp tròn."
+        },
+        {
+          "id": "C",
+          "text": "Cơ gấp các ngón nông."
+        },
+        {
+          "id": "D",
+          "text": "Cơ gấp cổ tay quay."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Đáp án: A. Cơ cánh tay quay\nThần kinh quay chủ yếu chi phối nhóm cơ duỗi cẳng tay, nhưng\nriêng cơ cánh tay quay là cơ gấp cẳng tay ở tư thế ngửa và được chi\nphối bởi thần kinh quay.\nCác cơ gấp khác ở cẳng tay do thần kinh giữa hoặc thần kinh trụ chi\nphối.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 56,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-69",
+      "number": 69,
+      "stem": "Động mạch buồng trứng có đặc điểm nào sau đây là sai?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Xuất phát từ động mạch chậu trong."
+        },
+        {
+          "id": "B",
+          "text": "Là nhánh bên của động mạch chủ bụng."
+        },
+        {
+          "id": "C",
+          "text": "Đi trong dây chằng treo buồng trứng."
+        },
+        {
+          "id": "D",
+          "text": "Tham gia nối với động mạch tử cung."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Đáp án: A. Xuất phát từ động mạch chậu trong\nĐộng mạch buồng trứng xuất phát từ động mạch chủ bụng, đi\ntrong dây chằng treo buồng trứng và có vòng nối với động mạch tử\ncung. Nó không tách từ động mạch chậu trong.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 57,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-70",
+      "number": 70,
+      "stem": "Thần kinh chày có đặc điểm nào sau đây là đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Dài hơn động mạch chày sau."
+        },
+        {
+          "id": "B",
+          "text": "Cho nhánh cảm giác là thần kinh mác nông."
+        },
+        {
+          "id": "C",
+          "text": "Kết thúc ở khoeo."
+        },
+        {
+          "id": "D",
+          "text": "Không đi qua ống gót."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Đáp án: A. Dài hơn động mạch chày sau\nThần kinh chày đi từ hố khoeo, chạy cùng động mạch chày sau\nnhưng dài hơn vì tận cùng ở gan chân chia thành thần kinh gan chân\ntrong và ngoài.\nNó cho nhánh vận động cơ cẳng chân sau và cơ gan chân, đồng\nthời đi qua ống gót cùng động mạch chày sau.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 57,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-71",
+      "number": 71,
+      "stem": "Cảm giác chính của gan chân do thần kinh nào chi phối?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thần kinh hiển."
+        },
+        {
+          "id": "B",
+          "text": "Thần kinh mác nông."
+        },
+        {
+          "id": "C",
+          "text": "Thần kinh gan chân trong."
+        },
+        {
+          "id": "D",
+          "text": "Thần gân chày ngoài."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Đáp án: C. Thần kinh gan chân trong\nThần kinh gan chân trong (nhánh của thần kinh chày) chi phối cảm\ngiác phần lớn gan chân và vận động các cơ gan chân trong.\nThần kinh gan chân ngoài chỉ chi phối vùng nhỏ phía ngoài gan\nchân.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 58,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-72",
+      "number": 72,
+      "stem": "Động mạch chày sau, chọn câu đúng:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đường định hướng từ giữa nếp gấp khoeo đến mắt cá trong."
+        },
+        {
+          "id": "B",
+          "text": "Không có nhánh bên là động mạch mác."
+        },
+        {
+          "id": "C",
+          "text": "Có nhánh bên là động mạch mũ mác."
+        },
+        {
+          "id": "D",
+          "text": "Không đi qua ống gót."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Đáp án: C. Có nhánh bên là động mạch mũ mác\nĐộng mạch chày sau đi theo đường từ giữa khoeo đến mắt cá\ntrong, cho nhiều nhánh bên, trong đó có động mạch mác và động\nmạch mũ mác, đồng thời đi qua ống gót trước khi chia thành động\nmạch gan chân trong và ngoài.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 59,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-73",
+      "number": 73,
+      "stem": "Trong ống cơ khép, động mạch đùi có liên quan như thế nào với tĩnh mạch đùi?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nằm sau tĩnh mạch đùi."
+        },
+        {
+          "id": "B",
+          "text": "Nằm ngoài tĩnh mạch đùi."
+        },
+        {
+          "id": "C",
+          "text": "Bắt chéo trước tĩnh mạch đùi."
+        },
+        {
+          "id": "D",
+          "text": "Nằm trong so với tĩnh mạch đùi."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Đáp án: C. Bắt chéo trước tĩnh mạch đùi\nTrong ống cơ khép, động mạch đùi từ vị trí ngoài so với tĩnh mạch\nđùi sẽ bắt chéo ra trước và đi vào trong tĩnh mạch đùi, tạo nên mối\nliên quan đặc trưng khi đi xuống phía khoeo",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 59,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-74",
+      "number": 74,
+      "stem": "Tắc sỏi ở vị trí nào sau đây sẽ không gây vàng da?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ống gan chung."
+        },
+        {
+          "id": "B",
+          "text": "Ống mật chủ."
+        },
+        {
+          "id": "C",
+          "text": "Ống túi mật."
+        },
+        {
+          "id": "D",
+          "text": "Hợp lưu ống gan chung và ống túi mật."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Đáp án: C. Ống túi mật\nSỏi tắc ở ống túi mật chỉ gây viêm túi mật cấp, không cản trở dòng\nchảy mật từ gan xuống tá tràng nên không gây vàng da\nNgược lại, sỏi ở ống gan chung hoặc ống mật chủ sẽ gây ứ mật và\nvàng da",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 60,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-75",
+      "number": 75,
+      "stem": "Túi mật có đặc điểm nào sau đây là sai?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nằm ở mặt dưới gan phải."
+        },
+        {
+          "id": "B",
+          "text": "Có chức năng bài tiết dịch mật."
+        },
+        {
+          "id": "C",
+          "text": "Gồm đáy, thân và cổ."
+        },
+        {
+          "id": "D",
+          "text": "Liên quan với ống mật chủ qua ống túi mật."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "Đáp án: B. Có chức năng bài tiết dịch mật\nTúi mật không có chức năng bài tiết dịch mật mà chỉ dự trữ và cô\nđặc mật\nDịch mật do gan bài tiết ra rồi theo đường mật xuống túi mật hoặc\nruột non",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 60,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-76",
+      "number": 76,
+      "stem": "Tĩnh mạch nào sau đây không đổ về tĩnh mạch mạc treo tràng trên?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tĩnh mạch hồi tràng."
+        },
+        {
+          "id": "B",
+          "text": "Tĩnh mạch đại tràng phải."
+        },
+        {
+          "id": "C",
+          "text": "Tĩnh mạch đại tràng ngang."
+        },
+        {
+          "id": "D",
+          "text": "Tĩnh mạch đại tràng trái."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "Đáp án: D. Tĩnh mạch đại tràng trái\nCác tĩnh mạch hồi tràng, đại tràng phải và đại tràng ngang đều đổ\nvề tĩnh mạch mạc treo tràng trên\nTĩnh mạch đại tràng trái lại đổ về tĩnh mạch mạc treo tràng dưới",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 61,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-77",
+      "number": 77,
+      "stem": "Động mạch ruột thừa, chọn câu sai:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tách từ động mạch hồi manh tràng sau."
+        },
+        {
+          "id": "B",
+          "text": "Là nhánh của động mạch mạc treo tràng trên."
+        },
+        {
+          "id": "C",
+          "text": "Cấp máu chủ yếu cho ruột thừa."
+        },
+        {
+          "id": "D",
+          "text": "Tách trực tiếp từ động mạch mạc treo tràng trên."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "Đáp án: D. Tách trực tiếp từ động mạch mạc treo tràng trên\nĐộng mạch ruột thừa là nhánh của động mạch hồi manh tràng sau,\nthuộc hệ động mạch mạc treo tràng trên\nKhông tách trực tiếp từ động mạch mạc treo tràng trên",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 61,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-78",
+      "number": 78,
+      "stem": "Đâm giữa ngực trước xương ức, cấu trúc nào sau đây ít có nguy cơ bị tổn thương nhất?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tĩnh mạch chủ trên."
+        },
+        {
+          "id": "B",
+          "text": "Thân động mạch phổi."
+        },
+        {
+          "id": "C",
+          "text": "Động mạch chủ lên."
+        },
+        {
+          "id": "D",
+          "text": "Tĩnh mạch phổi."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "Đáp án: D. Tĩnh mạch phổi\nCác cấu trúc trước tim ngay sau xương ức gồm động mạch chủ lên,\nthân động mạch phổi, tĩnh mạch chủ trên\nTĩnh mạch phổi nằm phía sau nhĩ trái, xa mặt trước tim nên thường\nkhông bị tổn thương khi đâm giữa ngực",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 62,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-79",
+      "number": 79,
+      "stem": "Cơ chéo bụng ngoài tham gia tạo thành các cấu trúc sau, trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thành trước ống bẹn."
+        },
+        {
+          "id": "B",
+          "text": "Dây chằng bẹn."
+        },
+        {
+          "id": "C",
+          "text": "Trụ ngoài lỗ bẹn ngoài."
+        },
+        {
+          "id": "D",
+          "text": "Liềm bẹn."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "Đáp án: D. Liềm bẹn\nGiải thích:\nCơ chéo bụng ngoài cho cân tạo thành trước ống bẹn, dây chằng\nbẹn và trụ ngoài lỗ bẹn ngoài\nLiềm bẹn được tạo bởi cơ chéo bụng trong và cơ ngang bụng,\nkhông phải do cơ chéo bụng ngoài",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 63,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-80",
+      "number": 80,
+      "stem": "Liên quan của ống bẹn, chọn câu sai:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ống bẹn đi sau mạc ngang."
+        },
+        {
+          "id": "B",
+          "text": "Ống bẹn đi sau cơ chéo bụng ngoài."
+        },
+        {
+          "id": "C",
+          "text": "Thành sau ống bẹn do mạc ngang tạo nên."
+        },
+        {
+          "id": "D",
+          "text": "Thành trước ống bẹn do cân cơ chéo bụng ngoài tạo nên."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Đáp án sai: A. Ống bẹn đi sau mạc ngang\nỐng bẹn thực tế nằm trước mạc ngang, chứ không đi sau.\nThành trước: cân cơ chéo bụng ngoài.\nThành sau: mạc ngang.\nThành trên: bờ dưới cơ chéo bụng trong và cơ ngang bụng.\nThành dưới: dây chằng bẹn.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 63,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-81",
+      "number": 81,
+      "stem": "Thành trước của ống bẹn được tạo bởi cấu trúc nào?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cân cơ chéo bụng ngoài."
+        },
+        {
+          "id": "B",
+          "text": "Cân cơ chéo bụng trong."
+        },
+        {
+          "id": "C",
+          "text": "Mạc ngang."
+        },
+        {
+          "id": "D",
+          "text": "Dây chằng bẹn."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Đáp án đúng: A. Cân cơ chéo bụng ngoài\nThành trước ống bẹn chủ yếu do cân cơ chéo bụng ngoài tạo\nthành, đây cũng là nơi có lỗ bẹn nông. Các thành phần khác tạo\nnên thành sau (mạc ngang), thành trên (bờ dưới cơ chéo bụng\ntrong và cơ ngang bụng), và thành dưới (dây chằng bẹn).",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 64,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-82",
+      "number": 82,
+      "stem": "Bệnh nhân không duỗi được đốt giữa ngón nhẫn. Tổn thương nhiều khả năng liên quan đến cấu trúc nào?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thần kinh giữa."
+        },
+        {
+          "id": "B",
+          "text": "Thần kinh trụ."
+        },
+        {
+          "id": "C",
+          "text": "Thần kinh quay."
+        },
+        {
+          "id": "D",
+          "text": "Gân duỗi chung ngón tay."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "Vì duỗi đốt giữa do tk trụ và quay chi phối và đều nhờ vào gân duỗi\ncác ngón nên đáp án D thì bao quát hơn.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 65,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-83",
+      "number": 83,
+      "stem": "Một nam thanh niên 24 tuổi vừa tham gia một vụ ẩu đả bằng dao ở một quán bar. Sau đó bệnh nhân được đưa tới phòng cấp cứu với một vết thương khoảng 2cm vùng cổ trước ngoài. Vết thương chỉ ở lớp nông, nhưng bác sĩ đang quan sát các sợi cơ ở sâu hơn mạc nông. Cơ nào dưới đây đang được quan sát.",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ bám da cổ."
+        },
+        {
+          "id": "B",
+          "text": "Cơ ức đòn chũm."
+        },
+        {
+          "id": "C",
+          "text": "Cơ vai móng."
+        },
+        {
+          "id": "D",
+          "text": "Cơ thang."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Cơ bám da cổ là một phiến cơ rộng, phẳng và che phủ vùng cổ\ntrước ngoài.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 65,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-84",
+      "number": 84,
+      "stem": "Một nha sĩ sử dụng thuốc tê tại chỗ để chuẩn bị cho một thủ thuật với các răng hàm lớn hàm dưới. Nha sĩ sẽ gây tê dây thần kinh nào ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thần kinh dưới cằm."
+        },
+        {
+          "id": "B",
+          "text": "Thần kinh hàm trên."
+        },
+        {
+          "id": "C",
+          "text": "Thần kinh hàm dưới."
+        },
+        {
+          "id": "D",
+          "text": "Thần kinh lang thang."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Gây tê các răng hàm lớn hàm dưới được gọi là chẹn hàm dưới phần\nthấp (lower mandibular block). Thần kinh được gây tê là nhánh\nhuyệt răng dưới của thần kinh hàm dưới (V3).",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 66,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-85",
+      "number": 85,
+      "stem": "Một người đàn ông 67 tuổi xuất hiện một áp xe răng sau 2 tuần làm lơ. Hiện tại, bệnh nhân đau ngực dữ dội do nhiễm trùng trung thất. Nhiễm trùng lan xuống trung thất thường đi qua con đường nào dưới đây?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Khoang cơ nhai."
+        },
+        {
+          "id": "B",
+          "text": "Khoang trước khí quản."
+        },
+        {
+          "id": "C",
+          "text": "Khoang sau hầu."
+        },
+        {
+          "id": "D",
+          "text": "Khoang trên ức."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Con đường chính để nhiễm trùng từ cổ lan vào ngực là qua khoang\nsau hầu, đây là một khoang tiềm tàng nằm giữa mạc trước cột sống\ncủa mạc cổ sâu và mạc miệng hầu bao quanh hầu.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 66,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-86",
+      "number": 86,
+      "stem": "Trong một tai nạn ô tô, một người phụ nữ 24 tuổi bị văng khỏi xe và đập đầu vào vỉa hè. Bệnh nhân mất ý thức ngay nhưng hiện tại, bệnh nhân tỉnh, phản xạ đồng tử hai bên đều nhau. Bệnh nhân không có triệu chứng gì ngoại trừ chảy dịch trong từ lỗ mũi bên phải và không giảm sau 24h. Nguyên nhân có khả năng nhất?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Chảy dịch xoang do thần kinh giao cảm."
+        },
+        {
+          "id": "B",
+          "text": "Viêm mũi dị ứng do túi khí của ô tô."
+        },
+        {
+          "id": "C",
+          "text": "Tổn thương mảnh sàng."
+        },
+        {
+          "id": "D",
+          "text": "Rò lệ mũi."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Bệnh nhân này nhiều khả năng có chảy dịch não tủy (CSF) qua hốc\nmũi; tình trạng này không phải là hiếm sau các chấn thương vùng\nđầu. Mảnh sàng bị vỡ và các màng não bị rách, do đó cho phép\nCSF trong khoang dưới nhện chảy vào mũi. Bệnh cảnh này là điều\nkiện thuận lợi để dẫn đến viêm màng não.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 67,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-87",
+      "number": 87,
+      "stem": "Một thiếu nữ 18 tuổi vào viện vì chảy máu mũi kéo dài. Thăm khám thấy máu chảy từ lỗ mũi bên phải. Chảy máu nhiều khả năng xuất phát từ vị trí nào dưới đây.",
+      "options": [
+        {
+          "id": "A",
+          "text": "Phần trước vách mũi."
+        },
+        {
+          "id": "B",
+          "text": "Phần sau vách mũi."
+        },
+        {
+          "id": "C",
+          "text": "Phần trước xoăn mũi."
+        },
+        {
+          "id": "D",
+          "text": "Phần sau xoăn mũi."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Vị trí thường gặp nhất của chảy máu mũi là một vùng ở phần trước\nvách mũi, được gọi là đám rối Kiesselbach, nơi có vòng nối động\nmạch rất phong phú.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 68,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-88",
+      "number": 88,
+      "stem": "Một người đàn ông 55 tuổi được chẩn đoán chảy máu mũi trước mức độ nặng gây thiếu máu và tụt huyết áp. Một bác sĩ tai mũi họng (ENT) được mời hội chẩn để xác định vị trí chảy máu. Vị bác sỹ này nói rằng có thể cần phải làm tắc các động mạch cấp máu chính. Động mạch nào dưới đây chịu trách nhiệm cho chảy máu ở bệnh nhân này?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Động mạch sàng."
+        },
+        {
+          "id": "B",
+          "text": "Động mạch bướm khẩu cái."
+        },
+        {
+          "id": "C",
+          "text": "Động mạch môi trên."
+        },
+        {
+          "id": "D",
+          "text": "Động mạch khẩu cái lớn."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "Cấp máu cho phần trước vách mũi chủ yếu đến từ động mạch\nbướm khẩu cái. Động mách bướm khẩu cái tách ra từ động mạch\nhàm trên - là nhánh tận của động mạch cảnh ngoài.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 68,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-89",
+      "number": 89,
+      "stem": "Trước một bệnh nhân, mở màng nhẫn giáp cấp cứu đã được chỉ định vì hẹp đường thở và phù thanh quản nặng. Mô tả chính xác nhất về vị trí của màng nhẫn giáp ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ngay trên sụn giáp."
+        },
+        {
+          "id": "B",
+          "text": "Ngay dưới sụn giáp."
+        },
+        {
+          "id": "C",
+          "text": "Ngay dưới sụn nhẫn."
+        },
+        {
+          "id": "D",
+          "text": "Nằm sâu hơn eo tuyến giáp."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "Màng nhẫn giáp nằm ngay dưới sụn giáp và nằm trên sụn nhẫn.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 69,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-90",
+      "number": 90,
+      "stem": "Một người phụ nữ 54 tuổi đã trải qua phẫu thuật cắt bỏ một phần tuyến giáp do một nhân lạnh không đau nghi ngờ ung thư. Một tuần sau phẫu thuật, bệnh nhân phàn nàn về co rút cánh tay phải và co quắp cả 2 bàn tay. Giải thích hợp lý nhất?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Lo lắng sau phẫu thuật."
+        },
+        {
+          "id": "B",
+          "text": "Ảnh hưởng của thuốc gây mê."
+        },
+        {
+          "id": "C",
+          "text": "Tuyến cận giáp bị cắt bỏ."
+        },
+        {
+          "id": "D",
+          "text": "Tổn thương thần kinh lang thang."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Tuyến cận giáp có một vị trí thay đổi bên trong nhu mô tuyến giáp.\nKhi cắt bỏ tuyến giáp, các tuyến cận giáp với kích thước nhỏ cũng\ncó thể bị ảnh hưởng, dẫn tới giảm nồng độ calcitonin và vì thế, gây\nra hạ calci máu. Nồng độ calci máu thấp có thể gây ra các triệu\nchứng trên lâm sàng như co rút cơ, tetany, thậm chí là co giật.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 69,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-91",
+      "number": 91,
+      "stem": "Một người phụ nữ 45 tuổi đang được tiến hành phẫu thuật tuyến giáp vì nghi ngờ ung thư tuyến giáp. Phẫu thuật viên đã tiếp cận tuyến giáp theo đường giữa và phát hiện chảy máu đáng kể ở dưới eo tuyến giáp. Nguyên nhân của chảy máu.",
+      "options": [
+        {
+          "id": "A",
+          "text": "Xuyên vào khí quản."
+        },
+        {
+          "id": "B",
+          "text": "Động mạch giáp trên."
+        },
+        {
+          "id": "C",
+          "text": "Động mạch giáp dưới."
+        },
+        {
+          "id": "D",
+          "text": "Động mạch giáp dưới cùng (Thyroid ima artery)."
+        },
+        {
+          "id": "E",
+          "text": "Động mạch thanh quản dưới."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "Lên đến 12% dân số có thêm một động mạch nhỏ, được gọi là\nđộng mạch giáp dưới cùng, tách ra từ cung động mạch chủ hoặc\nthân cánh tay đầu, đi lên theo đường giữa để tới bờ dưới eo tuyến\ngiáp.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 70,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-92",
+      "number": 92,
+      "stem": "Một nam thanh niên 24 tuổi đang được thăm khám về những bất thường ở đường thở. Bình thường sờ được sụn nhẫn ngang mức đốt sống cổ thứ mấy.",
+      "options": [
+        {
+          "id": "A",
+          "text": "C2."
+        },
+        {
+          "id": "B",
+          "text": "C4."
+        },
+        {
+          "id": "C",
+          "text": "C6."
+        },
+        {
+          "id": "D",
+          "text": "T1."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Sụn nhẫn thường nằm ngang mức đốt sống cổ C6.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 71,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-93",
+      "number": 93,
+      "stem": "Thành phần nào đi qua khoảng trống giữa cơ khít hầu trên và cơ khít hầu giữa ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Động mạch thanh quản quặt ngược."
+        },
+        {
+          "id": "B",
+          "text": "Thần kinh thanh quản trong."
+        },
+        {
+          "id": "C",
+          "text": "Động mạch thanh quản trên."
+        },
+        {
+          "id": "D",
+          "text": "Thần kinh thiệt hầu."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "Thần kinh thiệt hầu (IX) đi qua khoảng trống giữa cơ khít hầu trên và\ncơ khít hầu giữa, chạy dọc theo cơ trâm hầu và dây chằng trâm\nmóng.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 71,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-94",
+      "number": 94,
+      "stem": "Một bệnh nhân đến gặp bạn vì ho kéo dài mức độ nhẹ. Nghe phổi bình thường. Không có dấu hiệu của viêm phế quản. Bạn đang nghi ngờ hội chứng chảy dịch mũi sau (postnasal drip) do dị ứng. Thần kinh nào là đường truyền vào của phản xạ ho.",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thần kinh V2."
+        },
+        {
+          "id": "B",
+          "text": "Thần kinh V3."
+        },
+        {
+          "id": "C",
+          "text": "Thần kinh VII."
+        },
+        {
+          "id": "D",
+          "text": "Thần kinh IX."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "Phản xạ ho được kích thích bởi các kích thích ở vùng hầu họng,\nvùng được chi phối bởi thần kinh IX. Dây thần kinh sinh ba (V1 và V2)\nchi phối cho khoang miệng và khoang mũi.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 72,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-95",
+      "number": 95,
+      "stem": "Trong quá trình phẫu thuật cắt bỏ hạnh nhân khẩu cái, vùng phẫu thuật đột nhiên chảy nhiều máu đỏ tươi. Động mạch nào dưới đây đã vô tình bị tổn thương.",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nhánh hạnh nhân của động mạch mặt."
+        },
+        {
+          "id": "B",
+          "text": "Động mạch hầu lên."
+        },
+        {
+          "id": "C",
+          "text": "Động mạch khẩu cái lên."
+        },
+        {
+          "id": "D",
+          "text": "Động mạch khẩu cái xuống."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Nhánh hạnh nhân của động mạch mặt nằm trong giường của hạnh\nnhân khẩu cái và rất dễ bị tổn thương. Mặc dù động mạch khẩu cái\nlên cũng tách ra các nhánh tới hạnh nhân, nhưng nó ít bị ảnh hưởng\ntrong các thủ thuật thường quy.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 72,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-96",
+      "number": 96,
+      "stem": "Một sinh viên 28 tuổi tốt nghiệp chuyên ngành giải phẫu thần kinh ghi nhận đau ở gốc mũi và đã được chẩn đoán là nhiễm trùng “xoang”. Anh ta đang suy nghĩ về dây thần kinh chi phối cảm giác cho vùng này. Thần kinh nào chịu trách nhiệm về cảm giác cho vùng này ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Các nhánh của thần kinh sọ III."
+        },
+        {
+          "id": "B",
+          "text": "Các nhánh của thần kinh sọ V."
+        },
+        {
+          "id": "C",
+          "text": "Các nhánh của thần kinh sọ VII."
+        },
+        {
+          "id": "D",
+          "text": "Các nhánh của thần kinh sọ IX."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "Các xoang cạnh mũi được chi phối bởi các nhánh của dây V.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 73,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-97",
+      "number": 97,
+      "stem": "Một sinh viên 22 tuổi đang được nghi ngờ viêm xoang. Bác sĩ thấy có mủ chảy ra từ ngách mũi trên. Xoang nào dưới đây nhiều khả năng đã bị nhiễm trùng.",
+      "options": [
+        {
+          "id": "A",
+          "text": "Xoang trán."
+        },
+        {
+          "id": "B",
+          "text": "Xoang hàm trên."
+        },
+        {
+          "id": "C",
+          "text": "Xoang bướm."
+        },
+        {
+          "id": "D",
+          "text": "Xoang sàng."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "Các xoang sàng sau dẫn lưu dịch vào ngách mũi trên.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 74,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-98",
+      "number": 98,
+      "stem": "Một sinh viên y 24 tuổi đã được chẩn đoán viêm xoang hỏi bác sĩ của mình tại sao sự dẫn lưu của mũi xảy ra vào ban đêm mà không phải là ban ngày. Đâu là giải thích hợp lý nhất?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Vị trí của các lỗ mở trong xoang."
+        },
+        {
+          "id": "B",
+          "text": "Vị trí của các lỗ mở trong hốc mũi."
+        },
+        {
+          "id": "C",
+          "text": "Gián đoạn dẫn lưu do hoạt động nhai."
+        },
+        {
+          "id": "D",
+          "text": "Sản xuất chất nhầy tăng lên về đêm."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Xoang dễ bị nhiễm trùng nhất là xoang hàm trên. Lỗ mở của xoang\nhàm trên nằm ở phía trên, ở vị trí không thuận lợi cho thoát dịch nhờ\nvào trọng lực. Trong khi ngủ vào ban đêm, dịch được chảy ra ngoài\nqua lỗ thông.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 74,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-99",
+      "number": 99,
+      "stem": "Một cậu bé 3 tuổi có 3 đợt viêm tai giữa trong năm vừa qua. Mẹ cậu bé hỏi bác sĩ nhi khoa tại sao mà trẻ em có xu huớng hay mắc nhiễm trùng tai hơn nguời lớn. Giải thích về giải phẫu hợp lý nhất?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Các thay đổi trong vòi tai."
+        },
+        {
+          "id": "B",
+          "text": "Thay đổi cấu trúc loa tai."
+        },
+        {
+          "id": "C",
+          "text": "Thay đổi cấu trúc ống tai ngoài."
+        },
+        {
+          "id": "D",
+          "text": "Thay đổi ở xuơng bàn đạp."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Vòi nhĩ nối thông tai giữa với tỵ hầu. Vòi nhĩ ở trẻ em ngắn hơn và\nnằm ngang hơn so với nguời lớn.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 75,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-100",
+      "number": 100,
+      "stem": "Một phụ nữ 30 tuổi vừa trải qua một chấn thương kín vào mắt trái và phát hiện ra rằng mắt trái không thể tiết nước mắt. Vị trí có khả năng nhất của chấn thương.",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thành trên trong hốc mắt."
+        },
+        {
+          "id": "B",
+          "text": "Thành dưới trong hốc mắt."
+        },
+        {
+          "id": "C",
+          "text": "Thành trên ngoài hốc mắt."
+        },
+        {
+          "id": "D",
+          "text": "Thành dưới ngoài hốc mắt."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Tuyến lệ là nơi sản xuất ra nước mắt, nằm ở thành trên ngoài hốc\nmắt.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 75,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-101",
+      "number": 101,
+      "stem": "Nhánh nào tách ra từ động mạch đùi sâu.",
+      "options": [
+        {
+          "id": "A",
+          "text": "Động mạch mũ chậu nông."
+        },
+        {
+          "id": "B",
+          "text": "Động mạch mũ chậu sâu."
+        },
+        {
+          "id": "C",
+          "text": "Động mạch mũ đùi ngoài."
+        },
+        {
+          "id": "D",
+          "text": "Động mạch thượng vị nông."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Đáp án: C. Động mạch mũ đùi ngoài\n→ Là nhánh bên lớn của động mạch đùi sâu, chia các nhánh lên,\nngang và xuống để cấp máu cho cơ đùi trước và vùng khớp háng.\nĐây là nhánh đặc trưng và quan trọng của hệ thống cấp máu sâu\nvùng đùi.\nCác đáp án còn lại:\nA. Là nhánh bên của động mạch đùi nông.\nB. Là nhánh của động mạch chậu ngoài.\nD. Là nhánh nông từ động mạch đùi nông gần ống đùi.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 76,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-102",
+      "number": 102,
+      "stem": "Động mạch trụ ở vùng cẳng tay,trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ở phía trên, nó bắt chéo sau thần kinh giữa."
+        },
+        {
+          "id": "B",
+          "text": "Bắt chéo sau cơ sấp tròn, cơ gấp cổ tay trụ và cơ gan tay dài."
+        },
+        {
+          "id": "C",
+          "text": "Tạo thành cung gan tay nông sau khi tách ra nhánh gan tay sâu."
+        },
+        {
+          "id": "D",
+          "text": "Nằm giữa hai đầu cơ sấp tròn rồi đi sâu vào cơ gấp các ngón nông."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 77,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-103",
+      "number": 103,
+      "stem": "Tổn thương thần kinh quay dẫn tới?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Bàn tay khỉ."
+        },
+        {
+          "id": "B",
+          "text": "Bàn tay vuốt."
+        },
+        {
+          "id": "C",
+          "text": "Bàn tay rơi."
+        },
+        {
+          "id": "D",
+          "text": "Hội chứng ống cổ tay."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Đáp án đúng: C. Bàn tay rơi\n→ Tổn thương thần kinh quay gây liệt các cơ duỗi cẳng tay, khiến\nbàn tay không thể duỗi được, dẫn đến hiện tượng “bàn tay rơi”\n(wrist drop). Dẫn chứng: hay gặp trong gãy thân xương cánh tay\nlàm tổn thương thần kinh quay tại rãnh xoắn.\nCác đáp án còn lại:\nA. Do tổn thương TK giữa.\nB. Do tổn thương TK trụ.\nD. Do chèn ép TK giữa tại ống cổ tay.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 77,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-104",
+      "number": 104,
+      "stem": "Đám rối cánh tay được cấu tạo từ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Rễ trước thần kinh sống."
+        },
+        {
+          "id": "B",
+          "text": "Nhánh trước thần kinh sống."
+        },
+        {
+          "id": "C",
+          "text": "Bó trước thần kinh sống."
+        },
+        {
+          "id": "D",
+          "text": "Rễ sau thần kinh sống."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "Đáp án: B. Nhánh trước thần kinh sống\nGiải thích:\nĐám rối cánh tay được hình thành từ các nhánh trước của thần kinh\nsống cổ C5 đến C8 và ngực T1. Các nhánh này kết hợp lại thành\nthân, bó và nhánh cuối chi phối chi trên.\nCác lựa chọn còn lại:\nA. Rễ trước chỉ là phần vận động của thần kinh sống.\nC. \"Bó trước\" không phải là thành phần khởi đầu tạo nên đám rối.\nD. Rễ sau là phần cảm giác, không tham gia hình thành đám rối.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 78,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-105",
+      "number": 105,
+      "stem": "Về thần kinh bịt:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thần kinh bịt không có nhánh chi phối cho khớp hông."
+        },
+        {
+          "id": "B",
+          "text": "Nó chi phối cho một phần vùng da ở mặt trong đùi."
+        },
+        {
+          "id": "C",
+          "text": "Nhánh sau của thần kinh bịt đi sau cơ khép ngắn."
+        },
+        {
+          "id": "D",
+          "text": "Thần kinh hiện ra ở bờ ngoài cơ thắt lưng lớn."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "Chọn: B\nGiải thích:\nThần kinh bịt có nhánh cảm giác chi phối vùng da mặt trong đùi,\nthường ở 1/3 giữa hoặc dưới. Nhánh này xuất phát từ nhánh trước\ncủa thần kinh bịt, đi qua ống bịt và phân bố ở tam giác đùi, đây là\nvùng da đặc trưng được dùng để đánh giá tổn thương thần kinh bịt\nvề mặt cảm giác.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 78,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-106",
+      "number": 106,
+      "stem": "Về động mạch trụ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nhánh gian cốt chung của động mạch trụ thường chia rah ai nhánh gian cốt trước và sau."
+        },
+        {
+          "id": "B",
+          "text": "Ở đoạn cẳng tay bắt chéo sau thần kinh giữa."
+        },
+        {
+          "id": "C",
+          "text": "Nó trở thành cung gan tay nông sau khi tách ra nhánh gan tay sâu."
+        },
+        {
+          "id": "D",
+          "text": "Ở phần trên cẳng tay, nó đi sau các cơ sấp tròn, gấp cổ tay quay và gan tay dài."
+        }
+      ],
+      "answers": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "explanation": "Chọn: A, B, C, D\nGiải thích ngắn gọn:\nA – Nhánh gian cốt chung tách từ động mạch trụ và chia thành\nđộng mạch gian cốt trước và gian cốt sau → đặc điểm giải phẫu\nchuẩn.\nB – Ở đoạn gần khuỷu, động mạch trụ có thể đi phía sau thần kinh\ngiữa trước khi vòng ra trong → cấu trúc quan hệ có thể xảy ra tùy\nbiến thể.\nC – Động mạch trụ sau khi cho nhánh gan tay sâu sẽ tiếp tục tạo\nthành cung gan tay nông.\nD – Ở phần trên cẳng tay, động mạch trụ đi phía sâu dưới lớp cơ\nnông gồm cơ sấp tròn, cơ gấp cổ tay quay, cơ gan tay dài → mô tả\nđúng lớp giải phẫu.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 79,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-107",
+      "number": 107,
+      "stem": "Về động mạch cẳng tay:",
+      "options": [
+        {
+          "id": "A",
+          "text": "ĐM trụ bắt chéo trước TK giữa ở đoạn trên cẳng tay."
+        },
+        {
+          "id": "B",
+          "text": "ĐM gian cốt chung chia làm 2 nhánh ĐM gian cốt trước và sau."
+        },
+        {
+          "id": "C",
+          "text": "ĐM trụ tạo cung ĐM gan tay nông và một nhánh cho cung ĐM gan tay sâu."
+        },
+        {
+          "id": "D",
+          "text": "ĐM trụ đi phía sau cơ sấp tròn, cơ cánh tay quay và cơ gan tay dài."
+        }
+      ],
+      "answers": [
+        "B",
+        "C"
+      ],
+      "explanation": "Đáp án đúng: B, C\nGiải thích:\nB: Động mạch gian cốt chung là nhánh của ĐM trụ, sau khi tách ra\nthì chia thành ĐM gian cốt trước và ĐM gian cốt sau → đúng.\nC: ĐM trụ là thành phần chính tạo nên cung gan tay nông, đồng thời\ngóp một nhánh nối vào cung gan tay sâu do ĐM quay tạo nên →\nđúng.\nA: Sai. ĐM trụ không bắt chéo trước TK giữa, mà ĐM quay mới có\nđoạn bắt chéo TK giữa ở phần trên cẳng tay.\nbệnh nhân đang ngủ đột ngột mất nhận thức ánh sáng.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 80,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-108",
+      "number": 108,
+      "stem": "Mất nhận thức ánh sáng khi đang ngủ – tổn thương ở đâu?",
+      "options": [
+        {
+          "id": "A",
+          "text": "thùy chẩm."
+        },
+        {
+          "id": "B",
+          "text": "thùy thái Dương."
+        },
+        {
+          "id": "C",
+          "text": "dây thần kinh thị giác."
+        },
+        {
+          "id": "D",
+          "text": "võng mạc."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 81,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-109",
+      "number": 109,
+      "stem": "Bệnh nhân không khép được tay phần lớn tổn thg ở đâu?",
+      "options": [
+        {
+          "id": "A",
+          "text": "cơ lưng rộng."
+        },
+        {
+          "id": "B",
+          "text": "cơ trên gai."
+        },
+        {
+          "id": "C",
+          "text": "cơ tròn bé."
+        },
+        {
+          "id": "D",
+          "text": "cơ tròn lớn."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 81,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-110",
+      "number": 110,
+      "stem": "Một vận động viên bị chấn thương khớp vai, bác sĩ đã dựa vào kiến thức y học giải thích về tính vững chắc của khớp vai phụ thuộc vào?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Dây chằng ổ chảo."
+        },
+        {
+          "id": "B",
+          "text": "Các cơ đai xoay."
+        },
+        {
+          "id": "C",
+          "text": "Dây chằng quạ cánh tay."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 82,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-111",
+      "number": 111,
+      "stem": "Bệnh nhân nam là thợ xây, sau cú ngã , bệnh nhân muốn kiểm tra xem có bị gãy cánh tay không thì bác sĩ dùng thử pháp gì?",
+      "options": [
+        {
+          "id": "A",
+          "text": "dạng ngón cái, trỏ, út."
+        },
+        {
+          "id": "B",
+          "text": "gấp bàn tay tại khớp cổ tay."
+        },
+        {
+          "id": "C",
+          "text": "gấp cánh tay từ khớp khuỷu."
+        },
+        {
+          "id": "D",
+          "text": "ngửa bàn tay tại khớp cổ tay."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 82,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-112",
+      "number": 112,
+      "stem": "Bệnh nhân bị bệnh về gan hay gì đó đau vùng thượng vị lan 2 sườn dữ dội, là biểu hiện thần kinh nòa chi phối.",
+      "options": [
+        {
+          "id": "A",
+          "text": "Dây thần kinh lang thang (X)."
+        },
+        {
+          "id": "B",
+          "text": "Dây thần kinh hoành."
+        },
+        {
+          "id": "C",
+          "text": "Dây thần kinh liên sườn."
+        },
+        {
+          "id": "D",
+          "text": "Đám rối tạng."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "1. Mất nhận thức ánh sáng khi đang ngủ – tổn thương ở đâu?\nĐáp án đúng: A. Thùy chẩm\nGiải thích:\nThùy chẩm chứa vỏ não thị giác nguyên phát (Brodmann 17), nơi\ntiếp nhận xung động từ võng mạc qua đường thị giác.\nDù mắt, dây thần kinh thị giác và võng mạc còn nguyên, nếu vỏ não\nthị giác bị tổn thương → bệnh nhân không nhận biết ánh sáng, gọi là\nmù vỏ não.\nHiện tượng này vẫn xảy ra dù mắt mở hay nhắm, và đặc biệt có thể\nphát hiện ngay cả khi bệnh nhân đang ngủ.\n2. Không khép được tay – tổn thương chủ yếu ở đâu?\nĐáp án đúng: A. Cơ lưng rộng\nGiải thích:\nCơ lưng rộng (latissimus dorsi) là cơ mạnh nhất thực hiện động tác\nkhép tay từ tư thế dạng.\nCơ bám từ cột sống, mào chậu và xương sườn, hướng tới rãnh gian\ncủ xương cánh tay → khi co sẽ kéo cánh tay sát vào thân mình.\nTổn thương cơ này hoặc dây thần kinh ngực lưng (thần kinh chi\nphối) sẽ làm mất chức năng khép tay, rõ nhất khi chống đẩy hoặc\nleo trèo.\n5. Đau thượng vị lan 2 bên – thần kinh chi phối nào?\nĐáp án đúng: C. Dây thần kinh liên sườn\nGiải thích:\nVùng thượng vị tương ứng với T6–T9, hai bên sườn là T10–T12.\nCác nhánh thần kinh liên sườn đi ra từ đoạn tủy ngực này, chi phối\ncảm giác da và phúc mạc thành.\nKhi gan, dạ dày hoặc tụy bị kích thích phúc mạc → gây đau lan theo\nvùng phân bố của dây thần kinh liên sườn, đôi khi đau kiểu “vòng\ncung quanh bụng”.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 82,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-113",
+      "number": 113,
+      "stem": "Đặc điểm giải phẫu vùng cẳng chân:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Điểm yếu của x.chày là điểm tiếp giáp giữa 1/3 trên và 1/3 giữa thân xương."
+        },
+        {
+          "id": "B",
+          "text": "Mạch máu nuôi dưỡng x.chày càng về dưới thì càng nghèo nàn."
+        },
+        {
+          "id": "C",
+          "text": "Màng liên cốt, các vách liên cơ và xương chày, xương mác chia cẳng chân làm 3 khoang."
+        },
+        {
+          "id": "D",
+          "text": "Lớp da vùng bắp chân có các cuống mạch nuôi rất không ổn định."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "Đáp án đúng: B.\nGiải thích:\nB: Mạch máu nuôi xương chày chủ yếu từ động mạch chày sau và\nđộng mạch mác, nhánh nuôi thân xương đi vào từ 1/3 trên. Càng về\ndưới, lượng máu nuôi xương càng kém → dễ chậm liền xương.\nA: Điểm yếu thường là 1/3 giữa, không phải ranh giới 1/3 trên – 1/3\ngiữa.\nC: Cẳng chân chia làm 4 khoang (trước, ngoài, sau nông, sau sâu)\nchứ không phải 3.\nD: Vùng bắp chân có hệ thống mạch máu tương đối ổn định, đặc\nbiệt là từ nhánh chày sau và tĩnh mạch hiển bé.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 84,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-114",
+      "number": 114,
+      "stem": "Mô tả nào trong các mô tả sau về thành ngoài ổ mũi đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó có lỗ đổ vào mũi của ¾ số xoang cạnh mũi."
+        },
+        {
+          "id": "B",
+          "text": "Nó chỉ do xương sàng và xương hàm trên tạo nên."
+        },
+        {
+          "id": "C",
+          "text": "Có có 3 xoăn mũi đều từ mê đạo sàng mọc ra."
+        },
+        {
+          "id": "D",
+          "text": "Nó thông với góc mắt trong bởi ống lệ - mũi."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "Đáp án: D. Nó thông với góc mắt trong bởi ống lệ – mũi\nThành ngoài ổ mũi chứa lỗ đổ của ống lệ – mũi ở ngách mũi dưới,\nđây là đường dẫn nước mắt từ túi lệ ở góc mắt trong xuống hốc\nmũi. Cấu trúc này giúp dẫn lưu nước mắt vào mũi, lý giải hiện tượng\nchảy nước mũi khi khóc.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 85,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-115",
+      "number": 115,
+      "stem": "Mô tả nào sau đây không đúng về cầu não:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Chứa nhân TK giạng ở trần cầu gần sàn não thất 4."
+        },
+        {
+          "id": "B",
+          "text": "Các nhân TK 5,6,7,8 chỉ nằm ở cầu não."
+        },
+        {
+          "id": "C",
+          "text": "Nền cầu chứa các sợi liên hệ cầu tiểu."
+        },
+        {
+          "id": "D",
+          "text": "Nền cầu chứa các sợi vỏ tủy đi xuống."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "Đáp án: B. Các nhân TK 5, 6, 7, 8 chỉ nằm ở cầu não\nTrong số các dây thần kinh sọ từ số V đến VIII:\nNhân thần kinh V (tam thoa) có phần nằm ở cầu não, nhưng trải dài\nlên trung não và xuống hành não (đặc biệt là nhân bó gai).\nNhân thần kinh VIII (tiền đình ốc tai) cũng không chỉ giới hạn ở cầu\nnão mà còn kéo dài xuống phần trên hành não.\nVì vậy, mô tả \"chỉ nằm ở cầu não\" là chưa phù hợp với phân bố nhân\nthực tế.\nCác đáp án còn lại phản ánh đúng cấu trúc và vị trí giải phẫu của cầu\nnão, bao gồm thành phần nhân, sợi dọc vỏ tủy và các sợi liên hệ với\ntiểu não.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 85,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-116",
+      "number": 116,
+      "stem": "Mô tả sau về ốc tai đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Mảnh xoắn ốc tai xoắn 2,5 vòng."
+        },
+        {
+          "id": "B",
+          "text": "ống xoắn ốc tai xoắn quanh trụ ốc tai."
+        },
+        {
+          "id": "C",
+          "text": "ốc tai có đỉnh hướng vào trong, đáy hướng ra ngoài."
+        },
+        {
+          "id": "D",
+          "text": "Màng nền nằm giữa ống ốc tai và thang nhĩ."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Đáp án: C. Ốc tai có đỉnh hướng vào trong, đáy hướng ra ngoài\nĐỉnh ốc tai (cupula) thực tế hướng ra ngoài và ra trước, trong khi đáy\nốc tai nằm gần ống tai trong, tức là hướng vào trong. Hướng này\nquan trọng khi mô tả hình chiếu giải phẫu trong tai trong và trên\nphim cắt lớp.\nCác đáp án còn lại phản ánh chính xác các đặc điểm giải phẫu cơ\nbản và định hướng cấu trúc của ốc tai trong tai trong.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 86,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-117",
+      "number": 117,
+      "stem": "Chọn ý đúng về tai ngoài.",
+      "options": [
+        {
+          "id": "A",
+          "text": "Dái tai được cấu tạo bởi mô xơ mỡ."
+        },
+        {
+          "id": "B",
+          "text": "Sụn loa tai ko liên tiếp với sụn ống tai ngoài."
+        },
+        {
+          "id": "C",
+          "text": "Gờ đối luân kích thước lớn hơn gờ luân."
+        },
+        {
+          "id": "D",
+          "text": "Ống tai ngoài hoàn toàn được cấu tạo bởi sụn đàn hồi."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Đáp án: A. Dái tai được cấu tạo bởi mô xơ mỡ\nDái tai là phần thấp nhất của loa tai, không chứa sụn mà được cấu\ntạo chủ yếu từ mô liên kết lỏng lẻo và mô mỡ, tạo nên tính mềm mại,\nlinh hoạt của vùng này. Đây là đặc điểm giải phẫu điển hình giúp\nphân biệt dái tai với phần còn lại của loa tai.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 87,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-118",
+      "number": 118,
+      "stem": ". Chọn ý sai về xương hàm dưới.",
+      "options": [
+        {
+          "id": "A",
+          "text": "Lồi cầu XHD xoay ngược chiều kim đh khi há miệng."
+        },
+        {
+          "id": "B",
+          "text": "Lồi cầu XHD chuyển động theo trục xoay khi đưa XHD ra trước hoặc ra sau."
+        },
+        {
+          "id": "C",
+          "text": "Cử động hạ XHD được thực hiện bởi sự co của các cơ chân bướm."
+        },
+        {
+          "id": "D",
+          "text": "Cả A, B và C."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A cùng chiều kim đồng hồ\nB cđ trượt\nC co cơ hai bụng, cơ cằm móng và có hàm móng ( các cơ chân\nbướm quan trọng trong đưa hàm dưới ra trước)",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 88,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-119",
+      "number": 119,
+      "stem": "Chọn ý đúng về manh tràng.",
+      "options": [
+        {
+          "id": "A",
+          "text": "Chiều dài lớn hơn chiều rộng của nó."
+        },
+        {
+          "id": "B",
+          "text": "Nằm ở ¼ bụng dưới bên P, ½ ngoài dưới dây chắng bẹn."
+        },
+        {
+          "id": "C",
+          "text": "có 3 dải phúc mạc nối mặt sau của nó với phúc mạc thành."
+        },
+        {
+          "id": "D",
+          "text": "TK sinh dục đùi đi sau nó và trước cơ thắt lưng chậu."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Đáp án: C. Có 3 dải phúc mạc nối mặt sau của nó với phúc mạc\nthành\nManh tràng có 3 dải cơ dọc (taeniae coli), ở mặt sau mỗi dải đều có\nphúc mạc phủ qua và có thể liên tiếp với phúc mạc thành sau. Đây\nlà đặc điểm giải phẫu điển hình giúp định vị và nhận diện manh\ntràng.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 88,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-120",
+      "number": 120,
+      "stem": "Về khí quản ở đoạn cổ, chọn câu sai.",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nằm trước thực quản."
+        },
+        {
+          "id": "B",
+          "text": "Hai bên có bao tạng."
+        },
+        {
+          "id": "C",
+          "text": "Nằm sau sụn giáp."
+        },
+        {
+          "id": "D",
+          "text": "Sau sau cơ ức-giáp."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Đáp án: C. Nằm sau sụn giáp\nGiải thích:\nKhí quản đoạn cổ nằm dưới sụn giáp, không phải sau. Sụn giáp là\nmột phần của thanh quản và nằm phía trước trên khí quản, đặc biệt\nlà ở mức các vòng đầu tiên. Do đó, khí quản không nằm sau sụn\ngiáp mà nằm bên dưới sụn giáp.\nCác phương án còn lại:\nKhí quản nằm trước thực quản — đúng về tương quan giải phẫu.\nHai bên khí quản có bao tạng — bao gồm tuyến giáp, mạch máu và\nthần kinh.\nKhí quản nằm sau cơ ức-giáp — đúng vị trí lớp nông phía trước khí\nquản.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 89,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-121",
+      "number": 121,
+      "stem": "Tổn thương bó sau đám rối cánh tay dẫn đến liệt tất cả các cơ sau đây trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ dưới vai."
+        },
+        {
+          "id": "B",
+          "text": "Cơ dưới gai."
+        },
+        {
+          "id": "C",
+          "text": "Cơ lưng rộng."
+        },
+        {
+          "id": "D",
+          "text": "Cơ tròn lớn."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "Đáp án: C. Cơ dưới gai\nCơ dưới gai do thần kinh suprascapularis chi phối – đây là nhánh\nxuất phát từ thân trên của đám rối cánh tay, không thuộc bó sau.\nCác cơ còn lại gồm:\nCơ dưới vai – do thần kinh dưới vai trên/dưới (thuộc bó sau)\nCơ lưng rộng – do thần kinh ngực lưng (thuộc bó sau)\nCơ tròn lớn – do thần kinh dưới vai dưới (thuộc bó sau)\nCác đáp án còn lại đều được chi phối bởi nhánh xuất phát từ bó\nsau, nên sẽ bị ảnh hưởng khi bó sau tổn thương.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 90,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-122",
+      "number": 122,
+      "stem": "bệnh nhân bị tai biến mất vận động tay chân, phần dưới mặt, thất ngôn kèm rối loạn cảm giác thì tổn thương ĐM nào sau đây:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Não trước."
+        },
+        {
+          "id": "B",
+          "text": "Não giữa."
+        },
+        {
+          "id": "C",
+          "text": "Não sau."
+        },
+        {
+          "id": "D",
+          "text": "Nền."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "Đáp án: B. Động mạch não giữa\nĐộng mạch não giữa cấp máu cho:\nVỏ vận động và cảm giác vùng mặt, tay, thân (diện bên của hồi\ntrước và sau trung tâm)\nVùng Broca và Wernicke (liên quan đến ngôn ngữ, trên bán cầu ưu\nthế)\nTổn thương động mạch này gây ra:\nLiệt tay chân và vùng dưới mặt bên đối diện\nMất cảm giác cùng bên chi phối\nThất ngôn (nếu tổn thương bán cầu ưu thế)\nCác đáp án còn lại cấp máu cho các vùng khác không liên quan\ntrực tiếp đến toàn bộ triệu chứng nêu trên.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 91,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-123",
+      "number": 123,
+      "stem": "Mô tả đúng về đầu gần xương cánh tay là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó có 1 chỏm ngăn cách phần còn lại của đầu gần bằng cổ phẫu thuật."
+        },
+        {
+          "id": "B",
+          "text": "Nó nối với thân xương tại cỗ giải phẫu."
+        },
+        {
+          "id": "C",
+          "text": "Nó có các củ lớn và bé ngăn cách với nhau bằng rãnh gian củ."
+        },
+        {
+          "id": "D",
+          "text": "Nó khớp với xương vai bằng 1 khớp bản lề."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Đáp án: C. Nó có các củ lớn và bé ngăn cách nhau bằng rãnh gian\ncủ\nĐầu gần xương cánh tay có củ lớn (greater tubercle) và củ bé\n(lesser tubercle), nằm ở phía ngoài và trước chỏm xương. Giữa hai\ncủ này là rãnh gian củ (intertubercular groove), còn gọi là rãnh nhị\nđầu, là nơi gân đầu dài cơ nhị đầu cánh tay đi qua.\nCác đáp án còn lại mô tả chưa đúng về giải phẫu hoặc kiểu khớp:\nChỏm và cổ giải phẫu (not cổ phẫu thuật) mới là phần ngăn cách rõ\nràng chỏm với phần còn lại.\nCổ phẫu thuật nằm thấp hơn, là nơi nối đầu gần với thân xương,\nnhưng không phải là nơi nối trực tiếp với chỏm.\nKhớp giữa đầu xương cánh tay và ổ chảo xương vai là khớp chỏm,\nkhông phải khớp bản lề.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/b95c21b77dfef26b84da.webp"
+      ],
+      "sourcePage": 92,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-124",
+      "number": 124,
+      "stem": "Một bệnh nhân bị mất cảm giác bờ ngoài ngón chân cái . bờ trong ngón chân hai và không thể gấp bàn chân về phía mu chân . đây là những dấu hiệu của tổn thương tk:",
+      "options": [
+        {
+          "id": "A",
+          "text": "TK mác sâu."
+        },
+        {
+          "id": "B",
+          "text": "TK mác nông."
+        },
+        {
+          "id": "C",
+          "text": "TK chày."
+        },
+        {
+          "id": "D",
+          "text": "TK gan chân ngoài."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Đáp án: A. Thần kinh mác sâu\nThần kinh mác sâu chi phối:\nVận động các cơ vùng trước cẳng chân – thực hiện gấp mu bàn\nchân (dorsiflexion).\nCảm giác cho kẽ giữa ngón chân cái và ngón hai (bờ ngoài ngón 1,\nbờ trong ngón 2).\nVì vậy, mất cảm giác vùng này kèm theo mất động tác gấp mu bàn\nchân là đặc trưng tổn thương thần kinh mác sâu.\nCác đáp án còn lại chi phối vùng da và cơ khác, không gây ra đồng\nthời cả hai dấu hiệu nêu trên.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 93,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-125",
+      "number": 125,
+      "stem": "Ống đổ vào gò tinh",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ống tiết của túi tinh"
+        },
+        {
+          "id": "B",
+          "text": "Ống của TLT"
+        },
+        {
+          "id": "C",
+          "text": "Ống phóng tinh"
+        },
+        {
+          "id": "D",
+          "text": "Ống của mào tinh"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 94,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-126",
+      "number": 126,
+      "stem": "Cấu trúc tạo nên giới hạn trên của ngăn đáy chậu nông",
+      "options": [
+        {
+          "id": "A",
+          "text": "Hoành chậu hông"
+        },
+        {
+          "id": "B",
+          "text": "Lớp màng của tấm dưới da đáy chậu"
+        },
+        {
+          "id": "C",
+          "text": "Lớp mỡ của tấm dưới da đáy chậu"
+        },
+        {
+          "id": "D",
+          "text": "Màng đáy chậu"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 95,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-127",
+      "number": 127,
+      "stem": "Mô tả đúng về cơ thắt hậu môn ngoài",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó chủ yếu được chi phối bởi TK tự chủ"
+        },
+        {
+          "id": "B",
+          "text": "Nó gồm phần sâu, nông và dưới da"
+        },
+        {
+          "id": "C",
+          "text": "Những sợi ngoại vi của nó đan xen với những sợi cơ bịt trong"
+        },
+        {
+          "id": "D",
+          "text": "Nó kéo dài lên trên tới tận đầu dưới ĐT sigma"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 95,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-128",
+      "number": 128,
+      "stem": "Hủy hoại cấu trúc nằm trong khoang giữa màng đáy chậu và hoành chậu hông sẽ làm tổn thương cơ nào",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ thắt niệu đạo"
+        },
+        {
+          "id": "B",
+          "text": "Cơ cụt"
+        },
+        {
+          "id": "C",
+          "text": "Cơ ngang đáy chậu nông"
+        },
+        {
+          "id": "D",
+          "text": "Cơ nâng hậu môn"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 95,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-129",
+      "number": 129,
+      "stem": "Một khối u lành nằm trong khe giữa dây chằng cung mu và dây chằng ngang đáy chậu có thể đè ép vào",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tk mu dương vật"
+        },
+        {
+          "id": "B",
+          "text": "Tm mu sâu dương vật"
+        },
+        {
+          "id": "C",
+          "text": "Tm mu nông"
+        },
+        {
+          "id": "D",
+          "text": "Đm mu dương vật"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 96,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-130",
+      "number": 130,
+      "stem": "Một bác sĩ sản khoa làm tổn thương thể đáy chậu khi rạch TSM theo đường giữa, chức năng cơ nào bị tổn hại",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ ngồi hang và cơ thắt niệu đạo"
+        },
+        {
+          "id": "B",
+          "text": "Cơ ngang đáy chậu sâu và bịt trong"
+        },
+        {
+          "id": "C",
+          "text": "Cơ hành xốp và cơ ngang đáy chậu nông"
+        },
+        {
+          "id": "D",
+          "text": "Phần nông cơ thắt HM ngoài và cơ thắt niệu đạo"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 96,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-131",
+      "number": 131,
+      "stem": "Mô tả đúng về hố ngồi trực tràng",
+      "options": [
+        {
+          "id": "A",
+          "text": "Giới hạn trước bởi dây chằng ngang đáy chậu"
+        },
+        {
+          "id": "B",
+          "text": "Giới hạn 1 phần ở sau bởi cơ mông lớn"
+        },
+        {
+          "id": "C",
+          "text": "Ống thẹn chạy dọc phần trong của nó"
+        },
+        {
+          "id": "D",
+          "text": "Cơ nâng hậu môn ngăn cách hố với tam giác niệu dục"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 97,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-132",
+      "number": 132,
+      "stem": "Thành phần nào nằm giữa ở khoang giữa màng đáy chậu và hoành chậu hông",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ ngang đáy chậu sâu, tuyến hành niệu đạo, niệu đạo màng"
+        },
+        {
+          "id": "B",
+          "text": "Cơ ngang đáy chậu sâu, cơ hành xốp, 1 phần niệu đạo xốp"
+        },
+        {
+          "id": "C",
+          "text": "Các Đm đi tới hành xốp, cơ ngồi hang, tuyến hành niệu đạo"
+        },
+        {
+          "id": "D",
+          "text": "Cơ thắt niệu đạo, tuyến hành niệu đạo và tuyến tiền đình lớn"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 97,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-133",
+      "number": 133,
+      "stem": "Một Bn nam 60 tuổi mất khả năng cương dương vật sau khi trải qua 1 phẫu thuật trực tràng kèm theo cắt bỏ TLT. Bn có khả năng tổn thương TK nào",
+      "options": [
+        {
+          "id": "A",
+          "text": "TK mu dương vật"
+        },
+        {
+          "id": "B",
+          "text": "Tk đáy chậu"
+        },
+        {
+          "id": "C",
+          "text": "Tk hạ vị"
+        },
+        {
+          "id": "D",
+          "text": "Tk tạng cùng"
+        },
+        {
+          "id": "E",
+          "text": "Tk tạng chậu hông"
+        }
+      ],
+      "answers": [
+        "E"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 98,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-134",
+      "number": 134,
+      "stem": "Để gây tê toàn bộ da tam giác niệu dục, cần nhằm vào tất cả TK sau, TRỪ",
+      "options": [
+        {
+          "id": "A",
+          "text": "TK chậu bẹn ( nhánh bìu trước/ môi trước)"
+        },
+        {
+          "id": "B",
+          "text": "TK chậu hạ vị"
+        },
+        {
+          "id": "C",
+          "text": "TK bì đùi sau ( nhánh đáy chậu)"
+        },
+        {
+          "id": "D",
+          "text": "TK thẹn"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 98,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-135",
+      "number": 135,
+      "stem": "Eo dưới được tạo bởi tất cả các cấu trúc sau, TRỪ",
+      "options": [
+        {
+          "id": "A",
+          "text": "Dây chằng cùng củ"
+        },
+        {
+          "id": "B",
+          "text": "Ngành dưới xương mu"
+        },
+        {
+          "id": "C",
+          "text": "Củ mu"
+        },
+        {
+          "id": "D",
+          "text": "Củ ngồi"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 98,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-136",
+      "number": 136,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về động mạch trụ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "ở phần trên cẳng tay , nó đi sau các cơ sấp tròn , gấp cổ tay quay và gan tay dài."
+        },
+        {
+          "id": "B",
+          "text": "nhánh gian cốt chung của động mạch trụ thường chia ra hai nhánh gian cốt trước và sau."
+        },
+        {
+          "id": "C",
+          "text": "nó trở thành cung gan tay nông sau khi tách ra nhánh gan tay sâu."
+        },
+        {
+          "id": "D",
+          "text": "nó bắt chéo sau tk giữa trên đường đi."
+        }
+      ],
+      "answers": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "explanation": "A. ở phần trên cẳng tay , nó đi sau các cơ sấp tròn , gấp cổ tay quay\nvà gan tay dài à xem atlas.\nD. nó bắt chéo sau tk giữa trên đường đi à đm trụ bắt chéo sau thần\nkinh giữa ở 1/3 trên cẳng tay.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/eea6ac5fd850b7940424.webp"
+      ],
+      "sourcePage": 99,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-137",
+      "number": 137,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về nhánh bên và tiếp nối của động mạch nách:",
+      "options": [
+        {
+          "id": "A",
+          "text": "động mạch ngực ngoài tách ra ở đoạn sau cơ ngực bé."
+        },
+        {
+          "id": "B",
+          "text": "động mạch mũ cánh tay sau của động mạch nách tiếp nối với các động mạch dưới vai sau và trên vai của động mạch dưới đòn tạo nên vòng nối quanh vai."
+        },
+        {
+          "id": "C",
+          "text": "các nhánh mũ cánh tay trước và sau tách ra ở đoạn dưới cơ ngực bé."
+        },
+        {
+          "id": "D",
+          "text": "để chi trên không bị hoại tử , cần thắt động mạch nách ở dưới nguyên ủy của động mạch dưới vai."
+        }
+      ],
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "==>ĐM nách có 6 nhánh:\n- ĐM ngực trên: tách ở đoạn Trên cơ ngực bé\n- ĐM ngực- cùng vai, ĐM ngực ngoài:  Sau cơ ngực bé\n- ĐM dưới vai, ĐM mũ ctay trc-sau : Dưới cơ ngực bé.\nB. động mạch mũ cánh tay sau của động mạch nách tiếp nối với\ncác động mạch dưới vai sau và trên vai của động mạch dưới đòn\ntạo nên vòng nối quanh vai à động mạch vai trên+ mũ cánh tay sau+\nnhánh cùng vai của động mạch ngực cùng vaià bó mạch của khớp\nvai.\nC.các nhánh mũ cánh tay trước và sau tách ra ở đoạn dưới cơ ngực\nbé=>Thắt ở trên ĐM dưới vai.\nD.để chi trên không bị hoại tử , cần thắt động mạch nách ở dưới\nnguyên ủy của động mạch dưới vai=>trên.\nSách cũ thì cơ ngực béo  chia động mạch nách thành 3 đoạn trên,\nsau, và dưới. Động mạch mũ cánh tay trước, sau, dm dưới vai tách ở\nđoạn dưới cơ ngực bé.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 100,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-138",
+      "number": 138,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về tk trụ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó không mang các sợi từ ngành trước các thần kinh C5, C6, C7."
+        },
+        {
+          "id": "B",
+          "text": "trên đường đi xuống nó đi từ ngăn cơ trước cánh tay xuống ngăn cơ sau cánh tay."
+        },
+        {
+          "id": "C",
+          "text": "nó đi trong rãnh giữa mỏm trên lồi cầu ngoài xương cánh tay và mỏm khuỷu xương trụ."
+        },
+        {
+          "id": "D",
+          "text": "nó không đi trong ống cổ tay."
+        }
+      ],
+      "answers": [
+        "A",
+        "B",
+        "D"
+      ],
+      "explanation": "A.nó không mang các sợi từ ngành trước các thần kinh C5, C6,\nC7=>bó trong (C8,N1),Đi cùng ĐM bên trụ trên ( ĐM cánh tay).\nB.trên đường đi xuống nó đi từ ngăn cơ trước cánh tay xuống ngăn\ncơ sau cánh tay=>ở giữa cánh tay thì chọc qua vách gian cơ trong\nra sau.\nC.nó đi trong rãnh giữa mỏm trên lồi cầu ngoài xương cánh tay và\nmỏm khuỷu xương trụ=>trong.\nD.nó không đi trong ống cổ tay => trước hãm gân gấp",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/77dd375c660e24ab51e8.webp"
+      ],
+      "sourcePage": 101,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-139",
+      "number": 139,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về dấu hiệu tổn thương THẦN KINH quay ở mức giữa cánh tay:",
+      "options": [
+        {
+          "id": "A",
+          "text": "yếu động tác ngửa bàn tay."
+        },
+        {
+          "id": "B",
+          "text": "mất duỗi bàn tay và các ngón tay."
+        },
+        {
+          "id": "C",
+          "text": "không mất cảm giác mặt sau cánh tay."
+        },
+        {
+          "id": "D",
+          "text": "mất cảm giác mặt sau cẳng tay và nửa ngoài mu tay."
+        }
+      ],
+      "answers": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "explanation": "==>Tổn thương TK quay: Mức giữa cánh tay cái gì cũng đều bị tổn\nthường Trừ Cảm giác mặt sau cánh tay ( nách).\nA.yếu động tác ngửa bàn tay=>cơ cánh tay quay và cơ ngửa.\nB.mất duỗi bàn tay và các ngón tay=>các cơ vùng cẳng tay sau.\nC.không mất cảm giác mặt sau cánh tay => di nhánh bì cánh tay sau\n=>tách ra từ nách nên không bị ảnh hưởng ở mức giữa cánh tay.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/02a5802cf30e69b57683.webp"
+      ],
+      "sourcePage": 103,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-140",
+      "number": 140,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: tk quay hay nhánh của nó liên quan với các cấu trúc sau đây:",
+      "options": [
+        {
+          "id": "A",
+          "text": "rãnh xoắn ở mặt sau xương cánh tay."
+        },
+        {
+          "id": "B",
+          "text": "động mạch cánh tay sâu."
+        },
+        {
+          "id": "C",
+          "text": "vách gian cơ trong cánh tay."
+        },
+        {
+          "id": "D",
+          "text": "cơ nhị đầu cánh tay."
+        }
+      ],
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "B.động mạch cánh tay sâu=>ở tam giác cánh tay tam đầu.\nC.vách gian cơ trong cánh tay=>vách gian cơ ngoài.\nD.cơ nhị đầu cánh tay=>đi giữa cơ cánh tay và cánh tay quay (rãnh\nnhị đầu ngoài).",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/e54e36d4d4c4f9714999.webp",
+        "/kb/dr-lam/images/9e21c303562e644bdfb1.webp"
+      ],
+      "sourcePage": 104,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-141",
+      "number": 141,
+      "stem": "Một bác sĩ cắt cụt chi trên bằng đường cắt qua chỗ nối phần ba trên với phần ba giữa cánh tay, các thành phần sẽ bị cắt qua ở vị trí như mô tả sau đây, trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "tk quay trong rãnh tk quay xương cánh tay."
+        },
+        {
+          "id": "B",
+          "text": "tk trụ nằm sau vách gian cơ cánh tay trong."
+        },
+        {
+          "id": "C",
+          "text": "tk giữa đang nằm ở trước ngoài động mạch cánh tay."
+        },
+        {
+          "id": "D",
+          "text": "tk bì cẳng tay trong còn nằm sâu dưới mạc cánh tay."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.tk trụ nằm sau vách gian cơ cánh tay trong=>đến giữa cánh tay\nTK trụ mới xuyên qua vách gian cơ trong ra sau.\nD.tk bì cẳng tay trong còn nằm sâu dưới mạc cánh tay => trong ống\ncánh tay =>đến giữa cánh tay mới cùng TM nền xuyên qua mạc\ncánh tay ra nông.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/fda22e6307f38b912c23.webp",
+        "/kb/dr-lam/images/f60d1c4120c8a4fe895f.webp"
+      ],
+      "sourcePage": 107,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-142",
+      "number": 142,
+      "stem": "Mạng tiếp nối động mạch quanh khuỷu không có sự tham gia của động mạch:",
+      "options": [
+        {
+          "id": "A",
+          "text": "động mạch quặt ngược trụ, động mạch quặt ngược quay."
+        },
+        {
+          "id": "B",
+          "text": "nhánh của động mạch gian cốt trước."
+        },
+        {
+          "id": "C",
+          "text": "nhánh của động mạch gian cốt sau."
+        },
+        {
+          "id": "D",
+          "text": "các động mạch bên trụ trên và dưới, các nhánh bên quay và bên giữa của động mạch cánh tay sâu."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.nhánh của động mạch gian cốt trước=>cấp máu cho cơ lớp sâu\nvà TK giữa.\nC.nhánh của động mạch gian cốt sau=>Đm gian cốt quặt ngược.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/f31d2f4ebcb8280ff206.webp"
+      ],
+      "sourcePage": 108,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-143",
+      "number": 143,
+      "stem": "Các mô tả sau về nhánh bên và tiếp nối của động mạch nách đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "động mạch ngực ngoài tách ra ở đoạn sau cơ ngực bé."
+        },
+        {
+          "id": "B",
+          "text": "nhánh dưới vai của động mạch nách tiếp nối với các động mạch vai sau và trên vai của động mạch dưới đòn."
+        },
+        {
+          "id": "C",
+          "text": "các nhánh mũ cánh tay trước và sau tách ra ở đoạn dưới cơ ngực bé."
+        },
+        {
+          "id": "D",
+          "text": "để chi trên không bị hoại tử, cần thắt động mạch nách ở dưới nguyên ủy động mạch dưới vai."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.động mạch ngực ngoài tách ra ở đoạn sau cơ ngực bé=>Trên cơ\nngực bé: ĐM ngực trên\nSau cơ ngực bé: ĐM ngực cùng vai, ĐM ngực ngoài\nDưới cơ ngực bé: ĐM dưới vai, ĐM mũ cánh tay trc và sau\nB.nhánh dưới vai của động mạch nách tiếp nối với các động mạch\nvai sau và trên vai của động mạch dưới đòn=>vòng nối quanh vai\nD.để chi trên không bị hoại tử, cần thắt động mạch nách ở dưới\nnguyên ủy động mạch dưới vai=>thắt ĐM nách ở trên nguyên uỷ ĐM\ndưới vai.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/cfc7e76fd28dd91b2631.webp"
+      ],
+      "sourcePage": 109,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-144",
+      "number": 144,
+      "stem": "Mô tả đúng về liên quan của động mạch nách là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó được cơ ngực lớn chia thành ba đoạn."
+        },
+        {
+          "id": "B",
+          "text": "nó đi dọc ở phía trong tĩnh mạch nách."
+        },
+        {
+          "id": "C",
+          "text": "nó được tiếp tục bởi động mạch cánh tay ở ngang bờ dưới cơ ngực to."
+        },
+        {
+          "id": "D",
+          "text": "tên các bó của đám rối cánh tay không thể hiện vị trí của mỗi bó so với động mạch nách."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.nó được cơ ngực lớn chia thành ba đoạn=>Cơ ngực bé chia\nthành ba đoạn.\nB.nó đi dọc ở phía trong tĩnh mạch nách=>ngoài TM nách.\nD.tên các bó của đám rối cánh tay không thể hiện vị trí của mỗi bó\nso với động mạch nách=>Ở bờ dưới cơ ngực bé, bó trong ở trong,\nbó sau ở sau, bó ngoài ở ngoài ĐM nách.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 111,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-145",
+      "number": 145,
+      "stem": "Mô tả đúng về tk bì đùi sau là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó do sợi sau của các nhánh trước các thần kinh cùng 1 .2 và cùng 3 tạo nên."
+        },
+        {
+          "id": "B",
+          "text": "nó đi vào cơ mông ở trên cơ hình quả lên."
+        },
+        {
+          "id": "C",
+          "text": "nó nằm dưới sự che phủ của phần dưới cơ mông to."
+        },
+        {
+          "id": "D",
+          "text": "nó chỉ chi phối cho da của mặt sau đùi."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.nó do sợi sau của các nhánh trước các thần kinh cùng 1 .2 và cùng\n3 tạo nên => sợi sau s1,s2 và sợi trước s2, s3.\nB.nó đi vào cơ mông ở trên cơ hình quả lên=>qua lỗ ngồi lớn, dưới\ncơ hình lê.\nC.nó nằm dưới sự che phủ của phần dưới cơ mông to=>nhìn hình.\nD.nó chỉ chi phối cho da của mặt sau đùi.=>vùng mông (nhánh bì\nmông dưới), bìu hoặc môi lớn (nhánh đáy chậu) mặt sau đùi, hố\nkhoeo và phần trên mặt sau cẳng chân.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/d43df2bad1181641c061.webp"
+      ],
+      "sourcePage": 112,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-146",
+      "number": 146,
+      "stem": "Mô tả đúng về các nhánh của đám rối cùng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "tk tới các cơ vuông đùi và sinh đôi dưới do các sợi sau của các nhánh trước TL 4.5 và cùng 1 tạo nên."
+        },
+        {
+          "id": "B",
+          "text": "tk mông dưới chi phối cơ mông to và cơ mông nhỡ."
+        },
+        {
+          "id": "C",
+          "text": "tk cơ hình quả lê do các sợi sau của nhánh trước thần kinh cùng 1 tạo nên."
+        },
+        {
+          "id": "D",
+          "text": "tk tới các cơ sinh đôi trên và bịt trong do các sợi trước của các nhánh trước các tk 5 . cùng 1 và cùng 2 tạo nên."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.tk tới các cơ vuông đùi và sinh đôi dưới do các sợi sau của các\nnhánh trước TL 4.5 và cùng 1 tạo nên=>sợi trước nhánh trước TK 4,5,\nCg1.\nB.tk mông dưới chi phối cơ mông to và cơ mông nhỡ=>Chỉ cơ\nmông lớn.\nC.tk cơ hình quả lê do các sợi sau của nhánh trước thần kinh cùng 1\ntạo nên=>sợi sau, nhánh trc của Cg2.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/271c3b858663258bde55.webp",
+        "/kb/dr-lam/images/1786a0cfe1e953051543.webp",
+        "/kb/dr-lam/images/b63f91549128be26da90.webp"
+      ],
+      "sourcePage": 113,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-147",
+      "number": 147,
+      "stem": "Các mô tả sau về đám rối cùng đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó chi phối hầu hết các cơ giạng đùi."
+        },
+        {
+          "id": "B",
+          "text": "nó chi phối tất cả các cơ duỗi đùi."
+        },
+        {
+          "id": "C",
+          "text": "nó chi phối hầu hết các cơ xoay ngoài đùi."
+        },
+        {
+          "id": "D",
+          "text": "nó chi phối tất cả các cơ vùng mông."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "ĐR cùng: chi phối hết các cơ giạng và duỗi đùi.\nA.nó chi phối tất cả cá cơ giạng đùi=>cơ mông nhỡ, bé, cơ hình lê,\ncơ sinh đôi trên,=dưới, cơ bịt trong, cơ vuông đùi, căng mạc đùi.\nB.nó chi phối tất cả các cơ duỗi đùi=>cơ mông lớn, cơ nhị đầu đùi,\ncơ bán gân, bán màng, khép lớn (phần bám vào củ ngồi).\nC.nó chi phối hầu hết các cơ xoay ngoài đùi=>trừ cơ bịt ngoài.\nD.nó chi phối tất cả các cơ vùng mông=>trừ cơ bịt ngoài do TK bịt\n(ĐRTL).",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 116,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-148",
+      "number": 148,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về các cơ ở ngăn trước vùng cẳng chân trước:",
+      "options": [
+        {
+          "id": "A",
+          "text": "các động tác duỗi bàn chân và ngón chân của chúng đối kháng với các cơ vùng cẳng chân sau."
+        },
+        {
+          "id": "B",
+          "text": "cơ chày trước có động tác hiệp đồng với cơ lớp sâu vùng cẳng chân sau."
+        },
+        {
+          "id": "C",
+          "text": "chúng đều do nhánh mác nông của thần kinh mác chung chi phối."
+        },
+        {
+          "id": "D",
+          "text": "chúng được ngăn cách với các cơ ở ngăn ngoài vùng cẳng chân trước bằng 1 vách gian cơ."
+        }
+      ],
+      "answers": [
+        "A",
+        "B",
+        "D"
+      ],
+      "explanation": "A.các động tác duỗi bàn chân và ngón chân của chúng đối kháng\nvới các cơ vùng cẳng chân sau.\nB.cơ chày trước có động tác hiệp đồng với cơ lớp sâu vùng cẳng\nchân sau=>cùng nghiêng trong bàn chân vs cơ chày sau.\nC.chúng đều do nhánh mác nông của thần kinh mác chung chi\nphối=>ngăn trước do TK mác sâu, ngăn ngoài do mác nông.\nD.chúng được ngăn cách với các cơ ở ngăn ngoài vùng cẳng chân\ntrước bằng 1 vách gian cơ=>Vách gian cơ trước.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 117,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-149",
+      "number": 149,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về nhóm cơ ở vùng cẳng chân sâu:",
+      "options": [
+        {
+          "id": "A",
+          "text": "cơ dép là cơ gấp cẳng chân."
+        },
+        {
+          "id": "B",
+          "text": "cơ lớp nông có tác dụng nghiêng trong bàn chân."
+        },
+        {
+          "id": "C",
+          "text": "có 1 cơ không bám tận vào các xương bàn chân."
+        },
+        {
+          "id": "D",
+          "text": "tất cả do thần kinh chày chi phối."
+        }
+      ],
+      "answers": [
+        "C",
+        "D"
+      ],
+      "explanation": "A.cơ dép là cơ gấp cẳng chân=>Cơ dép không bám tận vào xg đùi\nnên ko gấp cảng chân đc.\nB.cơ lớp nông có tác dụng nghiêng trong bàn chân=>cơ chày sau,\ngấp ngón chân cái dài ở lớp sâu.\nC.có 1 cơ không bám tận vào các xương bàn chân=>cơ khoeo bám\ntận vào mặt sau xg chày, trên đg cơ dép.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/07035a1121553e948799.webp"
+      ],
+      "sourcePage": 118,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-150",
+      "number": 150,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về cơ ở vùng mông:",
+      "options": [
+        {
+          "id": "A",
+          "text": "phần trước cơ mông nhỡ không bị che phủ bởi cơ mông lớn."
+        },
+        {
+          "id": "B",
+          "text": "cơ mông to và cơ hình quả lê có đầu nguyên ủy bám vào xương cùng."
+        },
+        {
+          "id": "C",
+          "text": "chúng được cấp máu bởi động mạch thẹn trong và động mạch bịt."
+        },
+        {
+          "id": "D",
+          "text": "không cơ nào có tác dụng xoay đùi vào trong."
+        }
+      ],
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "A.phần trước cơ mông nhỡ không bị che phủ bởi cơ mông lớn=>Cơ\nmông lớn nằm sau cùng nhất.\nB.cơ mông to và cơ hình quả lê có đầu nguyên ủy bám vào xương\ncùng=>cơ mông to bám vào mặt sau xg cùng, cơ hình lê bám vào\nmặt trc xg cùng, cùng bám vào d/c cùng củ.\nC.chúng được cấp máu bởi động mạch thẹn trong và động mạch\nbịt=>ĐM mông trên và ĐM mông dưới ;cấp máu bởi ĐM mông trên\nvà dưới.\nD.không cơ nào có tác dụng xoay đùi vào trong=>cơ mông nhỡ, bé\nxoay đùi vào trong.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/824633111e2fc4cacf75.webp",
+        "/kb/dr-lam/images/2d4021b9f7b8d81fba62.webp"
+      ],
+      "sourcePage": 119,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-151",
+      "number": 151,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về thần kinh bì đùi sau:",
+      "options": [
+        {
+          "id": "A",
+          "text": "nó là nhánh tách ra từ thân thắt lưng cùng."
+        },
+        {
+          "id": "B",
+          "text": "ở mông , nó nằm trước ( sâu hơn ) cơ mông to."
+        },
+        {
+          "id": "C",
+          "text": "ở mông , nó nằm sau các cơ sinh đôi và cơ bịt trong."
+        },
+        {
+          "id": "D",
+          "text": "nó chi phối cho da của khoeo , mặt sau đùi . phần dưới mông và đáy chậu."
+        }
+      ],
+      "answers": [
+        "B",
+        "C",
+        "D"
+      ],
+      "explanation": "A.nó là nhánh tách ra từ thân thắt lưng cùng=>từ sợi sau của TL\nCg1,2 và sợi trc của TL Cg2,3;TK bì đùi sau: nhánh của Đám rối cùng.\nB.ở mông , nó nằm trước ( sâu hơn ) cơ mông to=>nằm sau TK ngồi.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/6ffbee3ede4adf795a9b.webp"
+      ],
+      "sourcePage": 121,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-152",
+      "number": 152,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: về các nhánh của đám rối cùng:",
+      "options": [
+        {
+          "id": "A",
+          "text": "cơ vuông đùi và cơ sinh đôi dưới do hai tk khác nhau chi phối."
+        },
+        {
+          "id": "B",
+          "text": "thần kinh mông dưới chi phối cơ mông nhỡ."
+        },
+        {
+          "id": "C",
+          "text": "thần kinh cơ hình quả lê do các sợi từ thần kinh cùng 2 tạo nên."
+        },
+        {
+          "id": "D",
+          "text": "cơ sinh đôi trên và bịt trong do cùng một thần kinh chi phối."
+        }
+      ],
+      "answers": [
+        "C",
+        "D"
+      ],
+      "explanation": "A.cơ vuông đùi và cơ sinh đôi dưới do hai tk khác nhau chi\nphối=>do cùng 1 TK từ sợi trc của TL 4-5, Cg1.\nB.thần kinh mông dưới chi phối cơ mông nhỡ=>mông dưới chi phối\ncơ mông lớn,Cơ mông nhỡ: TK mông trên.\nC.thần kinh cơ hình quả lê do các sợi từ thần kinh cùng 2 tạo\nnên=>sợi sau của TK Cg2.\nD.cơ sinh đôi trên và bịt trong do cùng một thần kinh chi phối=>sợi\ntrc tk TL5, Cg1,2.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/4b231dd7f6136aad0267.webp"
+      ],
+      "sourcePage": 122,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-153",
+      "number": 153,
+      "stem": "Những mô tả sau về cơ thắt lưng chậu đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "có nguyên ủy bám vào các đốt sống thắt lưng và bám tận vào xương chậu."
+        },
+        {
+          "id": "B",
+          "text": "có tác dụng gấp đùi vào thân."
+        },
+        {
+          "id": "C",
+          "text": "do một nhánh của đám rối thắt lưng và một nhánh từ thần kinh đùi vận động."
+        },
+        {
+          "id": "D",
+          "text": "có liên quan đến thần kinh đùi (mạc bọc cơ bọc cả thần kinh đùi )."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.có nguyên ủy bám vào các đốt sống thắt lưng và bám tận vào\nxương chậu=>Nguyên uỷ bám vào ĐS ngực XII - TL IV,Bám tận vào\nmấu chuyển bé.\nC.do một nhánh của đám rối thắt lưng và một nhánh từ thần kinh đùi\nvận động.=>Cơ chậu (TK đùi), cơ TL (nhánh ĐRTL, không phải do TK\nđùi).\nD.có liên quan đến thần kinh đùi (mạc bọc cơ bọc cả thần kinh đùi\n)=>TK đùi đi giữa 2 phần cơ TL lớn.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 123,
+      "gradable": true
+    },
+    {
+      "id": "de-thi-thu-9-154",
+      "number": 154,
+      "stem": "Tìm các đáp án đúng cho câu hỏi sau: trên 1 thiết đồ nằm ngang qua ống cơ khép , ở gần đầu trên ống cơ khép:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ thon nằm trong các cơ khép đùi."
+        },
+        {
+          "id": "B",
+          "text": "các mạch đùi nằm trong khe giữa cơ rộng trong và cơ khép dài."
+        },
+        {
+          "id": "C",
+          "text": "cơ may nằm ở phía trước và ngoài động mạch đùi."
+        },
+        {
+          "id": "D",
+          "text": "không có mặt thần kinh hiển trên mặt cắt."
+        }
+      ],
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "A.Cơ thon nằm trong các cơ khép đùi=>Cơ rộng trong: trước\nngoài\ncơ khép dài, lớn: sau.\nC.cơ may nằm ở phía trước và ngoài động mạch đùi=>trước trong\nĐM đùi,cơ may: ngoài -> trong  ĐM đùi.\nD.không có mặt thần kinh hiển trên mặt cắt=>TK hiển đi trong ống\ncơ khép.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/f94adcf65b7a4338ebf8.webp"
+      ],
+      "sourcePage": 124,
+      "gradable": true
+    }
+  ]
+}

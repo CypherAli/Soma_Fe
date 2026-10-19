@@ -1,3 +1,5 @@
+
+import { contentFetch } from '@/lib/content/fetch';
 import type { QuizItem } from "./quiz";
 import { rng, shuffle } from "./random";
 import { countByRegion, examBankErrors } from "./examBankRules.mjs";
@@ -34,7 +36,7 @@ let cache: ExamBank | null = null;
 
 export async function loadExamBank(): Promise<ExamBank> {
   if (cache) return cache;
-  const res = await fetch("/kb/anatomy-mcq.json");
+  const res = await contentFetch("/kb/anatomy-mcq.json");
   if (!res.ok) throw new Error(`exam bank ${res.status}`);
   const candidate = (await res.json()) as unknown;
   // Kiểm ngay lúc nạp: JSON hỏng thì báo một lỗi đọc được, còn hơn để giao diện

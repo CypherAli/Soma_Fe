@@ -1,0 +1,2327 @@
+{
+  "schemaVersion": 1,
+  "id": "dau-mat-co",
+  "title": "Đầu mặt cổ",
+  "sourceFile": "Giải phẫu người 2025 - Test số hóa Dr. Lâm · đầu mặt cổ.pdf",
+  "sourceNote": "Bản PDF nguồn ghi nhận có tài nguyên ảnh chưa tải được.",
+  "sourceHash": "6b62f42b543bcf03f8d0a9cc19f24dc0849fc7d1003ea0df3da64c74f6d0e33a",
+  "pages": 82,
+  "questions": [
+    {
+      "id": "dau-mat-co-1",
+      "number": 1,
+      "stem": "Trong các mô tả sau đây về ống tuyến mang tai, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó dài khoảng 7cm."
+        },
+        {
+          "id": "B",
+          "text": "Nó đi ra trước trên mặt nông cơ cắn."
+        },
+        {
+          "id": "C",
+          "text": "Nó thường đi trên tuyến mang tai phụ."
+        },
+        {
+          "id": "D",
+          "text": "Lỗ đổ của nó vào mặt trong của má đối diện thân răng cối thứ ba hàm trên."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Nó dài khoảng 7cm=>5cm.\nB.Nó đi ra trước trên mặt nông cơ cắn=>bắt chéo trc cơ cắn, ở bờ\ntrc cơ này hướng vào trong xuyên qua thể mỡ má và cơ mút.\nC.Nó thường đi trên tuyến mang tai phụ=>nằm ngay dưới tuyến\nmang tai phụ.\nD.Lỗ đổ của nó vào mặt trong của má đối diện thân răng cối thứ ba\nhàm trên=>răng cối thứ hai.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/e7514f9a011ef7f081f4.webp",
+        "/kb/dr-lam/images/1e3b0aaeeb7d1e49c7c9.webp"
+      ],
+      "sourcePage": 1,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-2",
+      "number": 2,
+      "stem": "Trong các mô tả sau đây về phần nông của tuyến dưới hàm, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Mặt (trên) ngoài của nó liên quan với cơ hàm móng."
+        },
+        {
+          "id": "B",
+          "text": "Mặt (trên) trong của nó tựa lên hố dưới hàm của xương hàm dưới."
+        },
+        {
+          "id": "C",
+          "text": "Mặt dưới của nó bị ĐM mặt bắt chéo."
+        },
+        {
+          "id": "D",
+          "text": "Nó nằm trong tam giác dưới hàm dưới."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Mặt (trên) ngoài của nó liên quan với cơ hàm móng. => mặt ngoài\nliên quan vs bám tận chân bướm trong liên quan vs cơ hàm móng\nB.Mặt (trên) trong của nó tựa lên hố dưới hàm của xương hàm dưới.\n=> mặt ngoài tựa lên hố dưới hàm và chỗ bám tận cơ chân bướm\ntrong\nC.Mặt dưới của nó bị ĐM mặt bắt chéo. => mặt dưới bị TM mặt và\nnhánh cổ TK mặt bắt chéo\nD.Nó nằm trong tam giác dưới hàm dưới. => ĐM mặt lách giữa mặt\nngoài và chỗ bám tận cơ chân bướm trong",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/7fad9a4aba4c97b0147b.webp"
+      ],
+      "sourcePage": 2,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-3",
+      "number": 3,
+      "stem": "Các mô tả sau đây về tuyến dưới hàm đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Mặt trong của phần nông tuyến dưới hàm liên quan với TK XII và nhánh lưỡi TK hàm dưới."
+        },
+        {
+          "id": "B",
+          "text": "Phần sâu tuyến dưới hàm nằm sau tuyến dưới lưỡi."
+        },
+        {
+          "id": "C",
+          "text": "ĐM mặt liên quan với mặt ngoài phần nông tuyến dưới hàm."
+        },
+        {
+          "id": "D",
+          "text": "Phần sâu tuyến dưới hàm lớn hơn phần nông."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "C.ĐM mặt liên quan với mặt ngoài phần nông tuyến dưới hàm=>ĐM\nmặt lách giữa mặt ngoài và chỗ bám cơ chân bướm trong.\nD.Phần sâu tuyến dưới hàm lớn hơn phần nông=>phần nông lớn\nhơn phần sâu.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 4,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-4",
+      "number": 4,
+      "stem": "Các mô tả sau đây về tiền đình miệng đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó được ngăn cách với ổ miệng chính bởi hai cung răng."
+        },
+        {
+          "id": "B",
+          "text": "Niêm mạc môi trên được nối với lợi hàm trên bởi hãm môi trên."
+        },
+        {
+          "id": "C",
+          "text": "Khi hai hàm răng cắn khít với nhau, không còn khe thông giữa tiền đình và ổ miệng chính."
+        },
+        {
+          "id": "D",
+          "text": "Niêm mạc môi dưới được nối với lợi hàm dưới bởi hãm môi dưới."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Khi hai hàm răng cắn khít với nhau, không còn khe thông giữa tiền\nđình và ổ miệng chính.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/53ecd45e519538936750.webp"
+      ],
+      "sourcePage": 5,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-5",
+      "number": 5,
+      "stem": "Các mô tả sau đây về ổ miệng chính đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó thông với hầu qua eo họng."
+        },
+        {
+          "id": "B",
+          "text": "Nó được giới hạn ở trước và hai bên bởi các cung huyệt răng, các răng và lợi."
+        },
+        {
+          "id": "C",
+          "text": "Sàn của nó được tạo nên bởi: toàn bộ mặt lưng lưỡi và phần niêm mạc lật từ lưỡi lên mặt trong xương hàm dưới."
+        },
+        {
+          "id": "D",
+          "text": "Trần của nó do khẩu cái cứng và khẩu cái mềm tạo nên."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Sàn của nó được tạo nên bởi: toàn bộ mặt lưng lưỡi và phần niêm\nmạc lật từ lưỡi lên mặt trong xương hàm dưới => sàn tạo bởi phần\ntrc của lưỡi và phần niêm mạc từ lưỡi lên mặt trong xương hàm dưới.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 6,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-6",
+      "number": 6,
+      "stem": "Các mô tả sau đây về chỗ đổ của các ống tuyến nước bọt vào ổ miệng đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ống tuyến dưới hàm đổ vào sàn ổ miệng chính tại cục dưới lưỡi."
+        },
+        {
+          "id": "B",
+          "text": "Các ống tuyến dưới lưỡi nhỏ đổ vào sàn ổ miệng chính tại đỉnh của nếp dưới lưỡi."
+        },
+        {
+          "id": "C",
+          "text": "Ống tuyến mang tai đổ vào tiền đình miệng."
+        },
+        {
+          "id": "D",
+          "text": "Ống tuyến dưới lưỡi lớn là chỗ đổ vào của các ống tuyến dưới lưỡi nhỏ."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Ống tuyến dưới hàm đổ vào sàn ổ miệng chính tại cục dưới\nlưỡi=>8-20 ống tuyến dưới lưỡi nhỏ.\nC.Ống tuyến mang tai đổ vào tiền đình miệng=>đổ vào mặt trong\nmá bởi 1 lỗ đối diện răng cối thứ 2 hàm trên.\nD.Ống tuyến dưới lưỡi lớn là chỗ đổ vào của các ống tuyến dưới\nlưỡi nhỏ=>đổ vào sàn miệng ở cùng hoặc gần lỗ ống tuyến dưới\nhàm\nTuyến dưới lưỡi\n- ống tuyến dưới lưỡi nhỏ: Đỉnh Nếp dưới lưỡi\n- Ống tuyến lưỡi lớn => Sàn miệng: cùng/ gần Ống tuyến dưới hàm.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 6,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-7",
+      "number": 7,
+      "stem": "Trong các mô tả sau đây về cơ dưới móng, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ ức giáp nằm sâu hơn cơ ức móng."
+        },
+        {
+          "id": "B",
+          "text": "Nguyên ủy của cơ ức móng không bám vào xương đòn."
+        },
+        {
+          "id": "C",
+          "text": "Tất cả 4 cơ dưới móng đều do quai cổ chi phối."
+        },
+        {
+          "id": "D",
+          "text": "Cơ vai móng có động tác giống hệt cơ ức móng."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "B.Nguyên ủy của cơ ức móng không bám vào xương đòn=>mặt sau\nđầu trong xương đòn, d/c ức-đòn sau, mặt sau cán xương ức.\nC.Tất cả 4 cơ dưới móng đều do quai cổ chi phối=>trừ cơ giáp\nmóng do C1 qua đường TK 12 (và cơ cầm móng).\nD.Cơ vai móng có động tác giống hệt cơ ức móng=>cơ vai móng\ncòn kéo xương móng ra sau, kéo căng phần dưới mạc cổ sâu.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/ceb7d9c4175d0e926418.webp"
+      ],
+      "sourcePage": 7,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-8",
+      "number": 8,
+      "stem": "Các mô tả sau đây về cơ dưới móng đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Các đầu bám của cơ ức móng ở 2 bên giới hạn một tam giác mà đáy hướng xuống dưới."
+        },
+        {
+          "id": "B",
+          "text": "Đầu bám tận của cơ ức móng ở 2 bên gặp nhau trên đường giữa xương móng."
+        },
+        {
+          "id": "C",
+          "text": "Đầu bám tận của cơ ức giáp ở gần đường giữa hơn so với đầu nguyên ủy của nó."
+        },
+        {
+          "id": "D",
+          "text": "Chỗ bám tận của cơ ức giáp trên sụn giáp cũng là chỗ nguyên ủy của cơ giáp móng."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Các đầu bám của cơ ức móng ở 2 bên giới hạn một tam giác mà\nđáy hướng xuống dưới=>bám tận cơ ức móng sát đg giữa hơn =>\nđáy xuống dưới.\nC.Đầu bám tận của cơ ức giáp ở gần đường giữa hơn so với đầu\nnguyên ủy của nó=>nguyên uỷ gần đường giữa hơn.\nD.Chỗ bám tận của cơ ức giáp trên sụn giáp cũng là chỗ nguyên ủy\ncủa cơ giáp móng=>đường chéo mảnh sụn giáp.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/8024c9ee19439e179b0b.webp"
+      ],
+      "sourcePage": 8,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-9",
+      "number": 9,
+      "stem": "Các mô tả sau đây về các cơ trên móng đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ hàm móng ở 2 bên đan với nhau trên đường giữa."
+        },
+        {
+          "id": "B",
+          "text": "Bụng trước cơ hai bụng nằm dưới cơ hàm móng."
+        },
+        {
+          "id": "C",
+          "text": "Tất cả các cơ trên móng có tác dụng nâng xương móng và hạ xương hàm dưới."
+        },
+        {
+          "id": "D",
+          "text": "Cơ trâm móng và bụng sau cơ hai bụng do TK mặt chi phối."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Tất cả các cơ trên móng có tác dụng nâng xương móng và hạ\nxương hàm dưới=>cơ cằm-móng và trâm móng ko hạ xương hàm\ndưới đc.\nTất cả cơ trên móng: đều nâng xương móng\nnhưng kp tất cả đều hạ xương hàm dưới.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/ef02c960edbc0f17434b.webp"
+      ],
+      "sourcePage": 10,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-10",
+      "number": 10,
+      "stem": "Trong các mô tả sau đây về cơ ức đòn chũm, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó nằm giữa vùng cổ trước bên và vùng cổ sau."
+        },
+        {
+          "id": "B",
+          "text": "Nó do đám rối cổ chi phối về vận động."
+        },
+        {
+          "id": "C",
+          "text": "Nó ngăn cách tam giác cổ trước với tam giác cổ sau."
+        },
+        {
+          "id": "D",
+          "text": "Nguyên ủy của nó bám vào mặt sau cán xương ức."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Nó nằm giữa vùng cổ trước bên và vùng cổ sau=>bờ trước cơ\nthang ms là ranh giới vùng cổ trước bên và sau;tam giác cổ trước và\ntam giác cổ sau.\nB.Nó do đám rối cổ chi phối về vận động=>TK 11 chi phối vận động,\nTK C2 chi phối cg bản thể.\nD.Nguyên ủy của nó bám vào mặt sau cán xương ức=>phần trên\nmặt trước cán xương ức và 1/3 trong mặt trên xương đòn.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/f349fbe0fedf61da5ea2.webp"
+      ],
+      "sourcePage": 11,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-11",
+      "number": 11,
+      "stem": "Các mô tả sau đây về ĐM cảnh chung đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đoạn ngực của ĐM cảnh chung T nằm sau TM cánh tay đầu T."
+        },
+        {
+          "id": "B",
+          "text": "ở cổ, ĐM cảnh chung nằm trong TM cảnh trong."
+        },
+        {
+          "id": "C",
+          "text": "cơ ức giáp bắt chéo trước ĐM cảnh chung."
+        },
+        {
+          "id": "D",
+          "text": "Nó đi trước mỏm ngang các đốt sống cổ, dọc hai bên thực quản."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.cơ ức giáp bắt chéo trước ĐM cảnh chung=>vai-móng bắt chéo\ntrước ĐM cảnh chung.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/b3ad804264b7dcc5d43f.webp"
+      ],
+      "sourcePage": 12,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-12",
+      "number": 12,
+      "stem": "Trong các mô tả sau đây về ĐM cảnh ngoài, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó tận cùng ở sau chỏm lồi cầu xương hàm dưới."
+        },
+        {
+          "id": "B",
+          "text": "ở gần nguyên ủy, nó nằm trước hơn và ngoài hơn ĐM cảnh trong."
+        },
+        {
+          "id": "C",
+          "text": "Nó đc đi kèm bởi hai TM cảnh ngoài."
+        },
+        {
+          "id": "D",
+          "text": "Đoạn cuối của nó đi trong tuyến mang tai, ở sâu hơn TK mặt."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Nó tận cùng ở sau chỏm lồi cầu xương hàm dưới=>tận cùng ở sau\nCỔ lồi cầu xương hàm dưới.\nB.ở gần nguyên ủy, nó nằm trước hơn và ngoài hơn ĐM cảnh\ntrong=>nằm trong hơn ĐM cảnh trong.\nC.Nó đc đi kèm bởi hai TM cảnh ngoài=>1TM cảnh ngoài.\nD.Đoạn cuối của nó đi trong tuyến mang tai, ở sâu hơn TK mặt=>ĐM\ncảnh ngoài nằm sâu nhất, rồi đến TM sau hàm dưới, TK mặt nông\nnhất.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/1894c043d62bb821ded1.webp"
+      ],
+      "sourcePage": 13,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-13",
+      "number": 13,
+      "stem": "Các mô tả sau đây về nhánh của ĐM cảnh ngoài đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nhánh chẩm của nó tiếp nối với nhánh cổ sâu của ĐM dưới đòn."
+        },
+        {
+          "id": "B",
+          "text": "Nhánh giáp trên của nó tiếp nối với ĐM giáp dưới của ĐM dưới đòn."
+        },
+        {
+          "id": "C",
+          "text": "Các nhánh của nó ở hai bên tiếp nối nhiều với nhau qua đường giữa."
+        },
+        {
+          "id": "D",
+          "text": "ĐM mặt là nhánh duy nhất của ĐM cảnh ngoài có thể sờ thấy."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Nhánh chẩm của nó tiếp nối với nhánh cổ sâu của ĐM dưới đòn=>\n(nhánh cổ sâu của thân sườn cổ).\nD.ĐM mặt là nhánh duy nhất của ĐM cảnh ngoài có thể sờ\nthấy=>ĐM thái dương nông cx sờ đc.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 15,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-14",
+      "number": 14,
+      "stem": "Các mô tả sau đây về liên quan của ĐM cảnh ngoài đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Bụng sau cơ hai bụng bắt chéo mặt ngoài( mặt nông) của nó."
+        },
+        {
+          "id": "B",
+          "text": "Từ dưới lên, nó đi ở trong tuyến mang tai rồi sau đó đi ở mặt trong của tuyến."
+        },
+        {
+          "id": "C",
+          "text": "Trên bụng sau cơ hai bụng, nó được ngăn cách với ĐM cảnh trong bởi mỏm trâm và các cơ trâm."
+        },
+        {
+          "id": "D",
+          "text": "Trong tuyến mang tai có được ngăn cách với TK mặt bởi TM sau hàm dưới."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.Từ dưới lên, nó đi ở trong tuyến mang tai rồi sau đó đi ở mặt trong\ncủa tuyến=>Đi ở mặt trong tuyến r ms vào trong tuyến.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 16,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-15",
+      "number": 15,
+      "stem": "Trong các mô tả sau đây về ĐM cảnh trong, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đoạn cổ của nó đi cùng TM sau hàm dưới."
+        },
+        {
+          "id": "B",
+          "text": "Đoạn đá của nó liên quan với thành sau hòm nhĩ."
+        },
+        {
+          "id": "C",
+          "text": "Nó ra khỏi đoạn xoang hang ở bờ trong của mỏm yên trước."
+        },
+        {
+          "id": "D",
+          "text": "Đoạn não của nó đi trên TK II."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Đoạn cổ của nó đi cùng TM sau hàm dưới=>ĐM cảnh ngoài đi\ncùng TM sau hàm dưới,ĐM cảnh trong đi cùng TM cảnh trong.\nB.Đoạn đá của nó liên quan với thành sau hòm nhĩ=>liên quan vs\nthành trước hòm nhĩ.\nD.Đoạn não của nó đi trên TK II=>đi dưới ngoài dây TK II.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/dc6fccf2d2b6f0e0e179.webp"
+      ],
+      "sourcePage": 16,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-16",
+      "number": 16,
+      "stem": "Các mô tả sau đây về liên quan của ĐM cảnh trong đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "ở gần( ngay dưới) nền sọ TM cảnh trong đi sau ĐM cảnh trong."
+        },
+        {
+          "id": "B",
+          "text": "ở đoạn xoang hang ĐM cảnh trong liên quan với TK III, IV, VI."
+        },
+        {
+          "id": "C",
+          "text": "ở đoạn não ĐM cảnh trong nằm trên TK thị giác."
+        },
+        {
+          "id": "D",
+          "text": "ở đoạn não, ĐM cảnh trong đi từ trước ra sau, tới chất thủng trước thì tận cùng."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.ở đoạn não ĐM cảnh trong nằm trên TK thị giác=>nằm dưới TK 2.\nD.ở đoạn não, ĐM cảnh trong đi từ trước ra sau, tới chất thủng trước\nthì tận cùng=>thành ĐM não trc và giữa.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/20ac3392aa9d656facba.webp"
+      ],
+      "sourcePage": 17,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-17",
+      "number": 17,
+      "stem": "Các mô tả sau đây về sự cấp máu của các ĐM não đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "ĐM não trước cấp máu cho vùng vỏ não chi phối vận động và cảm giác vùng đầu mặt và chi trên."
+        },
+        {
+          "id": "B",
+          "text": "ĐM não giữa cấp máu cho mặt ngoài các thùy trán, đỉnh và thái dương của bán cầu."
+        },
+        {
+          "id": "C",
+          "text": "Các ĐM não trước và giữa cung cấp máu cho mặt dưới thùy trán."
+        },
+        {
+          "id": "D",
+          "text": "ĐM não sau cấp máu cho thùy chẩm và mặt dưới thùy thái dương."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.ĐM não trước cấp máu cho vùng vỏ não chi phối vận động và\ncảm giác vùng đầu mặt và chi trên=>ĐM não trước cấp máu cho\nvùng mặt trong bán cầu => vđ, cg chi dưới.\nC.Các ĐM não trước và giữa cung cấp máu cho mặt dưới thùy\ntrán=>mặt dưới bán cầu trước rãnh bên.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 18,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-18",
+      "number": 18,
+      "stem": "Khi thắt ĐM cảnh chung ở một bên, máu vẫn tới được ĐM cảnh trong ở bên có ĐM cảnh chung bị thắt nhờ các tiếp nối sau TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Các tiếp nối giữa các nhánh của ĐM cảnh ngoài ở 2 bên."
+        },
+        {
+          "id": "B",
+          "text": "Các tiếp nối giữa ĐM cảnh ngoài và ĐM dưới đòn ở bên có ĐM cảnh chung bị thắt."
+        },
+        {
+          "id": "C",
+          "text": "Máu từ ĐM cảnh ngoài (ở bên có ĐM cảnh chung bị thắt) chảy ngược về chỗ trẽ đôi của ĐM cảnh chung."
+        },
+        {
+          "id": "D",
+          "text": "Sự tiếp nối giữa các nhánh của ĐM cảnh ngoài ở bên có ĐM cảnh chung bị thắt."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.Sự tiếp nối giữa các nhánh của ĐM cảnh ngoài ở bên có ĐM cảnh\nchung bị thắt=>Tiếp nối một bên không có ý nghĩa.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 19,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-19",
+      "number": 19,
+      "stem": "Các mô tả sau đây về ĐM dưới đòn P đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó bị bắt chéo trước bởi TK X phải và TK hoành P."
+        },
+        {
+          "id": "B",
+          "text": "Nó nằm trước sườn trước vòm màng phổi."
+        },
+        {
+          "id": "C",
+          "text": "Nó nằm sau cơ bậc thang trước và TM dưới đòn."
+        },
+        {
+          "id": "D",
+          "text": "Nó đi giữa các cơ bậc thang giữa và sau."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Nó bị bắt chéo trước bởi TK X phải và TK hoành P=>TK hoành ở\nngoài, X ở trong.\nC.Nó nằm sau cơ bậc thang trước và TM dưới đòn=>nằm sau Cơ\nbậc thang trước ;trước Cơ bậc thang giữa và sau.\nD.Nó đi giữa các cơ bậc thang giữa và sau=>giữa cơ bậc thang\ntrước và giữa.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/e2d8ed381df26827df41.webp"
+      ],
+      "sourcePage": 20,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-20",
+      "number": 20,
+      "stem": "Các mô tả sau đây về đoạn ngực ĐM dưới đòn T đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó đi lên, dọc bên ngoài bờ T khí quản hơn là bên ngoài bờ trái thực quản."
+        },
+        {
+          "id": "B",
+          "text": "Nó nằm sau và ở bên T đoạn ngực ĐM cảnh chung T."
+        },
+        {
+          "id": "C",
+          "text": "Nó nằm trước ống ngực."
+        },
+        {
+          "id": "D",
+          "text": "Nó liên quan ở ngoài với màng phổi."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A. Nó đi lên, dọc bên ngoài bờ T khí quản hơn là bên ngoài bờ trái\nthực quản=>nằm bên ngoài thực quản do ở sau hơn,theo sgk.\nC. Nó nằm trước ống ngực => Ống ngực bắt chéo trước ở đoạn\nnền, ở đoạn ngực thì động mạch vẫn nằm trước.\nD. Nó liên quan ở ngoài với màng phổi=>màng phổi trung thất trái.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 21,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-21",
+      "number": 21,
+      "stem": "Các mô tả sau đây về phân nhánh và tiếp nối của ĐM dưới đòn đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nhánh của ĐM ngực trong tiếp nối với nhánh của các ĐM chủ ngực, cảnh ngoài, nách"
+        },
+        {
+          "id": "B",
+          "text": "Nhánh của ĐM giáp cổ tiếp nối với nhánh của ĐM cảnh ngoài và ĐM nách"
+        },
+        {
+          "id": "C",
+          "text": "Các tiếp nối giữa ĐM dưới đòn và ĐM cảnh ngoài được phát huy khi thắt ĐM cảnh chung"
+        },
+        {
+          "id": "D",
+          "text": "Các nhánh của ĐM dưới đòn không tham gia vào vòng ĐM não"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "6 ĐM gian sườn trc (ĐM ngực trong) + ĐM ngực ngoài , ĐM ngực\ncùng vai (nách) + nhánh gian sườn sau (ĐM chủ ngực)\nANhánh của ĐM ngực trong tiếp nối với nhánh của các ĐM chủ\nngực, cảnh ngoài, nách => ĐM thượng vị trên (nhánh tận ĐM ngực\ntrong) + ĐM thượng vị dưới (chậu ngoài)\nD.Các nhánh của ĐM dưới đòn không tham gia vào vòng ĐM não\n=> ĐM đốt sống 2 bên => ĐM nền => 2 ĐM não sau",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 22,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-22",
+      "number": 22,
+      "stem": "Trong các mô tả sau đây về ĐM dưới đòn P, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó bị bắt chéo trước bởi ống ngực."
+        },
+        {
+          "id": "B",
+          "text": "Từ ngoài vào trong, các TK bắt chéo trước ĐM lần lượt là: TK lang thang, TK hoành."
+        },
+        {
+          "id": "C",
+          "text": "TM dưới đòn P nằm trước và dưới ĐM , ngăn cách với ĐM bởi cơ bậc thang trước."
+        },
+        {
+          "id": "D",
+          "text": "Nó ngăn cách với mặt trên xương sườn 1 bởi TM dưới đòn."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Nó bị bắt chéo trước bởi ống ngực=>ĐM dưới đòn phải chỉ ở cổ\nnên ko liên quan ống ngực;ống ngực ở sau ĐM dưới đòn T.\nB.Từ ngoài vào trong, các TK bắt chéo trước ĐM lần lượt là: TK lang\nthang, TK hoành=>TK hoành ở ngoài, lang thang ở trong.\nD.Nó ngăn cách với mặt trên xương sườn 1 bởi TM dưới đòn=>ĐM\ntựa lên mặt trên xương sườn.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/f6696820ff534fb52dce.webp"
+      ],
+      "sourcePage": 22,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-23",
+      "number": 23,
+      "stem": "Các vùng cấp máu sau đây của ĐM cảnh ngoài đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Toàn bộ da mặt và da đầu( không có sự tham gia của ĐM cảnh trong)."
+        },
+        {
+          "id": "B",
+          "text": "Khẩu cái cứng và mềm, lưỡi và sàn miệng."
+        },
+        {
+          "id": "C",
+          "text": "Phần sau ổ mũi."
+        },
+        {
+          "id": "D",
+          "text": "Các xương và răng của hai hàm, các cơ nhai."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.Toàn bộ da mặt và da đầu( không có sự tham gia của ĐM cảnh\ntrong)=>Hầu hết;ĐM mắt cấp máu cho trán đỉnh và phần trước ổ\nmũi.\nB.Khẩu cái cứng và mềm, lưỡi và sàn miệng=>ĐM hàm trên;ĐM lưỡi.\nC.Phần sau ổ mũi=>ĐM hàm trên.\nD.Các xương và răng của hai hàm, các cơ nhai=>ĐM hàm trên.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/9dcb71b69f9dbbf30e4e.webp"
+      ],
+      "sourcePage": 23,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-24",
+      "number": 24,
+      "stem": "Các mô tả sau đây về đám rối cổ đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đi từ sâu ra, các nhánh nông của nó đều lộ diện ở bờ sau cơ ức đòn chũm."
+        },
+        {
+          "id": "B",
+          "text": "Rễ dưới của quai cổ do các nhánh từ TK CI và CII tạo nên."
+        },
+        {
+          "id": "C",
+          "text": "Các TK tai lớn và ngang cổ đều do các nhánh từ các TK CII CIII tạo nên."
+        },
+        {
+          "id": "D",
+          "text": "Các TK trên đòn đi xuống qua tam giác cổ sau."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Đi từ sâu ra, các nhánh nông của nó đều lộ diện ở bờ sau cơ ức\nđòn chũm=>A32 33 nhánh nông\nA128 130: nhánh sâu.\nB.Rễ dưới của quai cổ do các nhánh từ TK CI và CII tạo nên=>C 2,3.\nD.Các TK trên đòn đi xuống qua tam giác cổ sau=>dưới cơ bám da\ncổ và mạc cổ, tới thành ngực trc + vùng vai.\n[Ảnh chưa lưu được]",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/eae84cb79f506a86eade.webp",
+        "/kb/dr-lam/images/1b4b08a998e8db2831cc.webp"
+      ],
+      "sourcePage": 25,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-25",
+      "number": 25,
+      "stem": "Những mô tả sau đây về các nhánh nông của đám rối cổ đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "TK chẩm nhỏ cảm giác cho toàn bộ da vùng chẩm."
+        },
+        {
+          "id": "B",
+          "text": "TK tai lớn chi phối cho da vùng tuyến mang tai."
+        },
+        {
+          "id": "C",
+          "text": "TK ngang cổ cảm giác vùng da cổ từ thân xương hàm dưới tới xương ức."
+        },
+        {
+          "id": "D",
+          "text": "Các TK tai lớn và ngang cổ đều đi trên mặt nông cơ ức đòn chũm."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.TK chẩm nhỏ cảm giác cho toàn bộ da vùng chẩm=>chỉ cảm giác\ncho da phần bên vùng chẩm, còn TK chẩm lớn nữa.\nC.TK ngang cổ cảm giác vùng da cổ từ thân xương hàm dưới tới\nxương ức=>vùng trc bên của cổ.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/ae9f3224cdc9186f98c2.webp"
+      ],
+      "sourcePage": 27,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-26",
+      "number": 26,
+      "stem": "Trong các mô tả sau đây về TK hoành, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó được tạo nên ở bờ trong cơ bậc thang trước."
+        },
+        {
+          "id": "B",
+          "text": "Nó chỉ gồm các sợi vận động."
+        },
+        {
+          "id": "C",
+          "text": "Nó do 3 nhánh tách ra từ nhánh trước các TK sống cổ II, III và IV hợp lại."
+        },
+        {
+          "id": "D",
+          "text": "Ở cổ, nó đi xuống trước cơ bậc thang trước rồi bắt chéo trước ĐM dưới đòn."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Nó được tạo nên ở bờ trong cơ bậc thang trước=>Rồi đi từ Bờ\nngoài tới Bờ trong: bắt chéo mặt trước Cơ bậc thang trước;ở bờ\nngoài cơ bậc thang trc.\nB.Nó chỉ gồm các sợi vận động=>gồm cả sợi vận động cho cơ\nhoành, cảm giác cho cơ hoành, màng phổi và phúc mạc phủ cơ\nhoành.\nC.Nó do 3 nhánh tách ra từ nhánh trước các TK sống cổ II, III và IV\nhợp lại=>C3,4,5;nhìn hình trên P  không có C2.\nD.Ở cổ, nó đi xuống trước cơ bậc thang trước rồi bắt chéo trước\nĐM dưới đòn=>lách giữa ĐM và TM dưới đòn.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/ae9f3224cdc9186f98c2.webp"
+      ],
+      "sourcePage": 28,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-27",
+      "number": 27,
+      "stem": "Các mô tả sau đây về các TM nông của đầu cổ đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Máu từ phần bên da đầu và phần sau của mặt chỉ đổ về TM cảnh ngoài."
+        },
+        {
+          "id": "B",
+          "text": "TM mặt bắt đầu từ TM góc ở góc mắt trong."
+        },
+        {
+          "id": "C",
+          "text": "Máu TM từ các phần bên và sau da đầu đổ vào các TM chẩm và tai sau."
+        },
+        {
+          "id": "D",
+          "text": "TM mặt đổ về TM cảnh trong."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.Máu từ phần bên da đầu và phần sau của mặt chỉ đổ về TM cảnh\nngoài=>Máu từ phần bên da đầu và phần sâu đổ vào TM sau hàm\ndưới rồi nhánh trước sau hàm dưới đổ vào TM mặt => cảnh trong\nnhánh sau + TM tai sau => TM cảnh ngoài;đổ cả về TM cảnh trong và\nTM cảnh ngoài.\nB.TM mặt bắt đầu từ TM góc ở góc mắt trong=>TM góc = TM trên\nròng rọc và TM trên ổ mắt.\nDa đầu:\n- phần trước da đầu và Mặt => TM mặt => TM cảnh trong\n- phần bên và phần sâu Mặt => TM sau hàm dưới => TM cảnh trong\nvà ngoài\n- phần sau Da đầu => TM chẩm ( cảnh trong) và TM tai sau ( TM cảnh\nngoài).\nTM xem Altas 32 33 73.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 29,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-28",
+      "number": 28,
+      "stem": "Trong các mô tả sau đây về TM cảnh ngoài, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó được tạo nên do sự hợp lại của TM chẩm với nhánh sau của TM sau hàm dưới."
+        },
+        {
+          "id": "B",
+          "text": "Nó đi xuống ở cổ theo đường nối góc hàm dưới với đầu ức của xương đòn."
+        },
+        {
+          "id": "C",
+          "text": "Nó bắt chéo mặt nông cơ ức đòn chũm."
+        },
+        {
+          "id": "D",
+          "text": "Nó tiếp nhận các TM đốt sống và giáp dưới đổ vào."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Nó được tạo nên do sự hợp lại của TM chẩm với nhánh sau của TM\nsau hàm dưới=>TM tai sau + nhánh sau TM sau hàm dưới.\nB.Nó đi xuống ở cổ theo đường nối góc hàm dưới với đầu ức của\nxương đòn=>Đường thẳng đứng;từ góc hàm => điểm giữa xg đòn.\nC.Nó bắt chéo mặt nông cơ ức đòn chũm=>nhiều khi nhìn thấy\nngay dưới da.\nD.Nó tiếp nhận các TM đốt sống và giáp dưới đổ vào=>TM đốt sống\nvà giáp dưới đổ vào TM cánh tay đầu;nhận các nhánh : TM cảnh\ntrước; TM ngang cổ; TM trên vai.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/96fad5984815371f1a89.webp"
+      ],
+      "sourcePage": 30,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-29",
+      "number": 29,
+      "stem": "Các mô tả sau đây về TĨNH MẠCH sau hàm dưới đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó được tạo nên do sự hợp lại của TM thái dương nông và TM hàm trên."
+        },
+        {
+          "id": "B",
+          "text": "Nó thường nằm giữa TK mặt và ĐM cảnh ngoài ở trong tuyến mang tai."
+        },
+        {
+          "id": "C",
+          "text": "Nhánh sau của nó kết hợp với TM tai sau tạo nên TM cảnh ngoài."
+        },
+        {
+          "id": "D",
+          "text": "Trong tuyến mang tai, nó nằm trong(sâu hơn) ĐM cảnh ngoài."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.Trong tuyến mang tai, nó nằm trong(sâu hơn) ĐM cảnh ngoài\n=> ĐM cảnh ngoài sâu nhất, TM nằm ở giữa.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/be6bac626223ea56ced5.webp"
+      ],
+      "sourcePage": 31,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-30",
+      "number": 30,
+      "stem": "Trong các mô tả sau đây về TM cảnh trong, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Hành dưới TM cảnh trước nằm ở tam giác vai đòn."
+        },
+        {
+          "id": "B",
+          "text": "TM giáp dưới đổ vào TM cảnh trong"
+        },
+        {
+          "id": "C",
+          "text": "Hành trên TM cảnh trong nằm trong hố TM cảnh ở mặt dưới nền sọ"
+        },
+        {
+          "id": "D",
+          "text": "Các hạch bạch huyết cổ sâu chủ yếu nằm dọc trên mặt sâu TM cảnh trong"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Hành dưới TM cảnh trước nằm ở tam giác vai đòn. => TM cảnh\nngoài ms đi ở tam giác cổ sau, giữa đầu ức và đầu đòn của của ƯDC\nB.TM giáp dưới đổ vào TM cảnh trong => TM giáp dưới đồ vào thân\ncánh tay đầu\nD.Các hạch bạch huyết cổ sâu chủ yếu nằm dọc trên mặt sâu TM\ncảnh trong => dọc mặt nông",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/805276fe6bacd261d8d4.webp"
+      ],
+      "sourcePage": 32,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-31",
+      "number": 31,
+      "stem": "Các mô tả sau đây về TM cảnh trong đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó liên tiếp với xoang sigma."
+        },
+        {
+          "id": "B",
+          "text": "Nó đi xuống trong bao cảnh, dọc mặt trong các ĐM cảnh trong và chung."
+        },
+        {
+          "id": "C",
+          "text": "Nó thu máu từ sọ-não và một phần máu từ da đầu, mặt và cổ."
+        },
+        {
+          "id": "D",
+          "text": "Nó cùng với TM dưới đòn hợp nên thân TM cánh tay đầu."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Nó liên tiếp với xoang sigma=>Bắt đầu từ Hố TM cảnh;altas 73.\nB.Nó đi xuống trong bao cảnh, dọc mặt trong các ĐM cảnh trong\nvà chung=>dọc bờ ngoài ĐM cảnh trong và chung.\nMáu từ phần bên da đầu và phần sâu đổ\nvào TM sau hàm dưới rồi nhánh trước sau\nhàm dưới đổ vào mặt => cảnh trong.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/f7d54f1d48fb2d1f5a2e.webp"
+      ],
+      "sourcePage": 34,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-32",
+      "number": 32,
+      "stem": "Các mô tả sau đây về xoang TM dọc trên đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó khía thành một rãnh ở đường dọc giữa trai xương trán, trai xương chẩm và các bờ trên của 2 xương đỉnh."
+        },
+        {
+          "id": "B",
+          "text": "Nó đi dọc bờ lồi của liềm đại não."
+        },
+        {
+          "id": "C",
+          "text": "Nó thường liên tiếp với xoang ngang bên T hơn là xoang ngang P."
+        },
+        {
+          "id": "D",
+          "text": "Nó tiếp nhận các TM não trên đổ vào."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Nó thường liên tiếp với xoang ngang bên T hơn là xoang ngang P\n=>liên tiếp vs xoang ngang bên phải.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/1ac1e3ad813e2cd20f2d.webp",
+        "/kb/dr-lam/images/3e27d897410e7a7c8371.webp"
+      ],
+      "sourcePage": 36,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-33",
+      "number": 33,
+      "stem": "Trong các mô tả sau đây về các xoang TM màng cứng của nhóm sau trên, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Xoang chẩm đi từ bờ trước lỗ lớn xương chẩm tới hội lưu các xoang."
+        },
+        {
+          "id": "B",
+          "text": "Xoang dọc dưới chạy dọc ¾ sau bờ tự do của liềm đại não."
+        },
+        {
+          "id": "C",
+          "text": "Xoang ngang đi trong một rãnh cùng tên."
+        },
+        {
+          "id": "D",
+          "text": "Xoang sigma đi qua phần trước của lỗ TM cảnh."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Xoang chẩm đi từ bờ trước lỗ lớn xương chẩm tới hội lưu các\nxoang=>từ bờ sau lỗ lớn => hội lưu.\nB.Xoang dọc dưới chạy dọc ¾ sau bờ tự do của liềm đại não=>dọc\n1/2-2/3 sau.\nD.Xoang sigma đi qua phần trước của lỗ TM cảnh=>phần sau lỗ TM\ncảnh.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/bb0b8abf01f6e9dee030.webp"
+      ],
+      "sourcePage": 37,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-34",
+      "number": 34,
+      "stem": "Các mô tả sau đây về các xoang TM màng cứng của nhóm sau trên đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Xoang dọc trên thông với các hồ tĩnh mạch."
+        },
+        {
+          "id": "B",
+          "text": "Xoang sigma liên quan với các xoang chũm và hang chũm."
+        },
+        {
+          "id": "C",
+          "text": "Nhóm xoang sau trên không tiếp nối với đám rối TM đốt sống trong."
+        },
+        {
+          "id": "D",
+          "text": "Nhóm xoang sau trên tiếp nối với nhóm xoang trước dưới qua các xoang đá trên."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "B.Xoang sigma liên quan với các xoang chũm và hang\nchũm=>Ngăn cách với xoang và hang chũm ở phía trước bởi 1 mảnh\nxương mỏng.\nC.Nhóm xoang sau trên không tiếp nối với đám rối TM đốt sống\ntrong=>xoang chẩm tiếp nối vs ĐR TM đốt sống trong.\nD.Nhóm xoang sau trên tiếp nối với nhóm xoang trước dưới qua\ncác xoang đá trên=>xoang đá trên dẫn máu từ xoang hang tới\nxoang ngang;A105.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/fe5212a4af45e8f5fa1a.webp"
+      ],
+      "sourcePage": 38,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-35",
+      "number": 35,
+      "stem": "Trong các mô tả sau đây về các xoang TM hang, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "TK hàm dưới của TK sinh ba đi ở thành ngoài xoang hang."
+        },
+        {
+          "id": "B",
+          "text": "TK VI đi trong xoang hang, phía trong ĐM cảnh trong."
+        },
+        {
+          "id": "C",
+          "text": "Xoang hang hai bên nối thông với nhau qua các xoang gian hang."
+        },
+        {
+          "id": "D",
+          "text": "Xoang hang không tiếp nối với đám rối TM chân bướm."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.TK hàm dưới của TK sinh ba đi ở thành ngoài xoang hang=>chỉ có\nTK mắt và hàm trên đi ở thành ngoài xoang hang.\nB.TK VI đi trong xoang hang, phía trong ĐM cảnh trong=>TK giạng\nnằm ở dưới-ngoài ĐM.\nD.Xoang hang không tiếp nối với đám rối TM chân bướm=>xoang\nhang tiếp nối vs ĐR TM chân bướm qua ĐR TM lỗ bầu dục, TM mặt\nqua TM mắt trên.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/2255347997773fc82935.webp",
+        "/kb/dr-lam/images/3c66f34f9cb9907df8d6.webp"
+      ],
+      "sourcePage": 40,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-36",
+      "number": 36,
+      "stem": "Các mô tả sau đây về các xoang TM màng cứng của nhóm trước dưới đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Xoang đá dưới ở hai bên tiếp nối với nhau qua đám rối nền."
+        },
+        {
+          "id": "B",
+          "text": "Đám rối nền tiếp nối với đám rối TM đốt sống trong."
+        },
+        {
+          "id": "C",
+          "text": "Các TM mắt không tiếp nối với các TM ở ngoài sọ."
+        },
+        {
+          "id": "D",
+          "text": "Xoang đá trên nối tiếp các nhóm xoang sau trên và trước dưới với nhau."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Các TM mắt không tiếp nối với các TM ở ngoài sọ => TM mắt tiếp\nnối vs ĐR tĩnh mạch chân bướm.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/bacb62690370621a9b7c.webp",
+        "/kb/dr-lam/images/a6c20b06518a07e6d10b.webp"
+      ],
+      "sourcePage": 41,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-37",
+      "number": 37,
+      "stem": "Các mô tả sau đây về cấu tạo của răng đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tủy thân răng được chứa trong ổ tủy thân răng."
+        },
+        {
+          "id": "B",
+          "text": "Tủy chân răng được chứa trong ống chân răng."
+        },
+        {
+          "id": "C",
+          "text": "Các lớp bao quanh ổ tủy răng gồm: ở thân răng là ngà răng và men răng, ở chân răng là ngà răng và xi măng răng."
+        },
+        {
+          "id": "D",
+          "text": "ở chân răng, lớp ngà răng nằm ở bề mặt."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.ở chân răng, lớp ngà răng nằm ở bề mặt => lớp xi măng răng ở bề\nmặt.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/3f40c142e4f623d4ebe2.webp"
+      ],
+      "sourcePage": 42,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-38",
+      "number": 38,
+      "stem": "Trong các mô tả sau đây về bộ răng sữa, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Mọc trong khoảng thời gian từ 18-36 tháng tuổi."
+        },
+        {
+          "id": "B",
+          "text": "Được thay thế bằng răng vĩnh viễn trong khoảng thời gian từ 6-12 tuổi."
+        },
+        {
+          "id": "C",
+          "text": "5 răng ở mỗi nửa cung răng là: răng cửa giữa, răng cửa bên, răng nanh, răng tiền cối( hai mấu) thứ nhất, răng tiền cối(hai mấu) thứ hai."
+        },
+        {
+          "id": "D",
+          "text": "Mỗi răng sữa được thay thế bằng một răng vĩnh viễn cùng loại."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Mọc trong khoảng thời gian từ 18-36 tháng tuổi=>6 tháng đến\n30 tháng tuổi.\nC.5 răng ở mỗi nửa cung răng là: răng cửa giữa, răng cửa bên, răng\nnanh, răng tiền cối( hai mấu) thứ nhất, răng tiền cối(hai mấu) thứ\nhai=>răng cối thứ nhất và thứ 2, chưa có răng tièn cối.\nD.Mỗi răng sữa được thay thế bằng một răng vĩnh viễn cùng\nloại=>răng tiền cối thay thế các răng cối.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/8bd26f356a2e6c610444.webp"
+      ],
+      "sourcePage": 43,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-39",
+      "number": 39,
+      "stem": "Các trình bày sau đây về gọi tên răng đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Mỗi răng hàm trên có một mặt khẩu cái."
+        },
+        {
+          "id": "B",
+          "text": "Mỗi răng hàm dưới có một mặt lưỡi."
+        },
+        {
+          "id": "C",
+          "text": "Mặt hướng về điểm giữa cung răng của mỗi răng được gọi là mặt trong."
+        },
+        {
+          "id": "D",
+          "text": "Mặt cắn là mặt tiếp xúc với răng của cung răng đối diện."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Mỗi răng hàm trên có một mặt khẩu cái=>mặt hướng về ổ miệng\nchính thức là mặt khẩu cái (lưỡi).\nC.Mặt hướng về điểm giữa cung răng của mỗi răng được gọi là mặt\ntrong=>là mặt giữa hay mặt gần.\nD.Mặt cắn là mặt tiếp xúc với răng của cung răng đối diện=>mặt\nhướng về tiền đình miệng là mặt môi hay mặt má.\nmặt má (môi): tiền đình miệng\nmặt lưỡi ( khẩu cái) : ổ miệng chính thức\nmặt gần ( giữa): điểm giữa cung răng\nmặt xa: mặt đối diện\nmặt cắn: răng đối diện.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/a91d9634d61a752117a5.webp"
+      ],
+      "sourcePage": 44,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-40",
+      "number": 40,
+      "stem": "Các mô tả sau đây về bộ răng sữa đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Có 20 răng sữa."
+        },
+        {
+          "id": "B",
+          "text": "Thứ tự mọc ở mỗi nửa cung răng thường là: răng cửa trung tâm, răng cửa bên, răng nanh, răng cối thứ một, răng cối thứ 2."
+        },
+        {
+          "id": "C",
+          "text": "Mọc trong khoảng thời gian từ 6 tháng đến 2 tuổi rưỡi."
+        },
+        {
+          "id": "D",
+          "text": "Bộ răng sữa có thể nhai và nghiền thức ăn."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.Thứ tự mọc ở mỗi nửa cung răng thường là: răng cửa trung tâm,\nrăng cửa bên, răng nanh, răng cối thứ một, răng cối thứ 2=>A, B, D,\nC, E (răng cối thứ nhất trước răng nanh);\nC.Mọc trong khoảng thời gian từ 6 tháng đến 2 tuổi rưỡi=>6- 30\ntháng tuổi.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/7fa7c7d17e527d8f4f18.webp"
+      ],
+      "sourcePage": 45,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-41",
+      "number": 41,
+      "stem": "Các mô tả sau đây về bộ răng vĩnh viễn đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Bộ răng vĩnh viễn có 8 răng trên mỗi nửa cung răng."
+        },
+        {
+          "id": "B",
+          "text": "Các răng cối của bộ răng vĩnh viễn đều có 4 mấu trên mặt cắn."
+        },
+        {
+          "id": "C",
+          "text": "Kích thước các răng cối giảm dần từ răng thứ nhất tới răng thứ ba."
+        },
+        {
+          "id": "D",
+          "text": "Trình tự mọc các răng cối: răng thứ nhất, thứ hai, thứ ba."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Bộ răng vĩnh viễn có 8 răng trên mỗi nửa cung răng=>Răng vĩnh\nviễn có 32 răng.\nB.Các răng cối của bộ răng vĩnh viễn đều có 4 mấu trên mặt\ncắn=>răng cối thứ nhất hàm dưới có 5 mấu.\nD.Trình tự mọc các răng cối: răng thứ nhất, thứ hai, thứ b=>răng cối\nthứ nhất mọc 6 tuổi\nrăng cối thứ 2 mọc 12 tuổi\nrăng thứ 3 ( răng khôn) mọc 17 tuổi\ncác răng cối không thay thể răng sữa nào.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 47,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-42",
+      "number": 42,
+      "stem": "Trong các mô tả sau đây về thứ tự mọc răng của bộ răng vĩnh viễn, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Răng cối thứ nhất thường mọc trước tất cả các răng của bộ răng vĩnh viễn."
+        },
+        {
+          "id": "B",
+          "text": "Răng cối thứ hai thường mọc sau răng cối thứ nhất nhưng trước các răng còn lại."
+        },
+        {
+          "id": "C",
+          "text": "Răng nanh mọc trước các răng cửa."
+        },
+        {
+          "id": "D",
+          "text": "Răng tiền cối thứ hai mọc trước răng tiền cối thứ nhất."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.Răng cối thứ nhất thường mọc trước tất cả các răng của bộ răng\nvĩnh viễn=>6,1,2,3,4,5,7,8.\nB.Răng cối thứ hai thường mọc sau răng cối thứ nhất nhưng trước\ncác răng còn lại=>chỉ trước răng cối thứ 3;răng cối t2 mọc lúc 12\ntuổi.\nC.Răng nanh mọc trước các răng cửa=>1 2 3  răng nanh mọc sau\ncác răng cửa.\nD.Răng tiền cối thứ hai mọc trước răng tiền cối thứ nhất=>mọc sau.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/8cf0b58cd8ac81e6ce85.webp"
+      ],
+      "sourcePage": 47,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-43",
+      "number": 43,
+      "stem": "Các mô tả sau đây về hình thể của lưỡi đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Phần ba sau của mặt lưng lưỡi hướng vào khẩu hầu"
+        },
+        {
+          "id": "B",
+          "text": "Niêm mạc mặt dưới lưỡi có nhiều nhú lưỡi"
+        },
+        {
+          "id": "C",
+          "text": "Nếp niêm mạc nối mặt dưới lưỡi với nền miệng được gọi là hãm lưỡi"
+        },
+        {
+          "id": "D",
+          "text": "Các nhú dạng lá nằm trên bờ lưỡi, ngay trước cung khẩu cái lưỡi"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Phần ba sau của mặt lưng lưỡi hướng vào khẩu hầu => tạo nên\nthành trước khẩu hầu\nB.Niêm mạc mặt dưới lưỡi có nhiều nhú lưỡi => mặt dưới lưỡi nhẵn\nnối vs nền miệng bằng hãm lưới",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/0b0c378f613316a94879.webp"
+      ],
+      "sourcePage": 49,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-44",
+      "number": 44,
+      "stem": "Trong các mô tả sau đây về lưỡi, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ở mặt lưng lưỡi, các nhú luỡi nằm sau rãnh tận."
+        },
+        {
+          "id": "B",
+          "text": "TK lưỡi hầu cảm giác cho 1/3 sau lưỡi."
+        },
+        {
+          "id": "C",
+          "text": "nhân lưỡi nằm trong niêm mạc phần miệng của mặt lưng lưỡi."
+        },
+        {
+          "id": "D",
+          "text": "TK hạ thiệt chỉ vận động cho các cơ nội tại của lưỡi."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Ở mặt lưng lưỡi, các nhú luỡi nằm sau rãnh tận=>nằm ở trước rãnh\ntận\nnằm sau Rãnh tận: Thành trước hầu: Hạnh nhân lưỡi.\nB.TK lưỡi hầu cảm giác cho 1/3 sau lưỡi=>+ các nhú dạng đài.\nC.nhân lưỡi nằm trong niêm mạc phần miệng của mặt lưng\nlưỡi=>phần hầu (1/3 sau).\nD.TK hạ thiệt chỉ vận động cho các cơ nội tại của lưỡi=>TK hạ thiệt\nvận động cho tất cả các cơ của lưỡi.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/b3a2c04e5ec5a5137fc2.webp"
+      ],
+      "sourcePage": 50,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-45",
+      "number": 45,
+      "stem": "Các mô tả sau đây về tuyến nước bọt mang tai đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Mặt trước trong của nó tiếp xúc với ngành xương hàm dưới."
+        },
+        {
+          "id": "B",
+          "text": "Mặt sau trong của nó tiếp xúc trực tiếp với ĐM cảnh trong."
+        },
+        {
+          "id": "C",
+          "text": "Mặt nông tuyến mang tai là mặt có da phủ."
+        },
+        {
+          "id": "D",
+          "text": "Bờ trong nằm giáp với thành bên của hầu."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Mặt trước trong của nó tiếp xúc với ngành xương hàm dưới,trùm\nlên phần sau-dưới cơ cắn, khớp thái dương hàm.\nB.Mặt sau trong của nó tiếp xúc trực tiếp với ĐM cảnh trong=>ĐM\ncảnh ngoài đi vào tuyến từ mặt sau-trong.\nCác thành phần đi trong Tuyến mang tai: nông- sâu\n- ĐM cảnh ngoài\n- TM sau hàm dưới\n- TK mặt ( nông nhất) : phân thành 5 nhánh trong tuyến.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 51,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-46",
+      "number": 46,
+      "stem": "Trong các mô tả sau đây về tuyến nước bọt mang tai, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đáy tuyến mang tai hướng xuống dưới."
+        },
+        {
+          "id": "B",
+          "text": "ĐM cảnh ngoài không đi vào trong tuyến mang tai."
+        },
+        {
+          "id": "C",
+          "text": "TK mặt đi vào tuyến từ mặt sau trong."
+        },
+        {
+          "id": "D",
+          "text": "Tuyến mang tai là tuyến lớn thứ hai sau tuyến dưới hàm."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Đáy tuyến mang tai hướng xuống dưới=>đáy lên trên, đỉnh xuống\ndưới.\nB.ĐM cảnh ngoài không đi vào trong tuyến mang tai.\nD.Tuyến mang tai là tuyến lớn thứ hai sau tuyến dưới hàm=>lớn\nnhất.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/b8a5b3915067d262258b.webp"
+      ],
+      "sourcePage": 52,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-47",
+      "number": 47,
+      "stem": "Các mô tả sau đây về các thành phần đi qua tuyến mang tai đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "ĐM cảnh ngoài chia thành hai nhánh tận khi đang đi trong tuyến mang tai."
+        },
+        {
+          "id": "B",
+          "text": "TM sau hàm dưới nằm giữa TK mặt và ĐM cảnh ngoài."
+        },
+        {
+          "id": "C",
+          "text": "TK mặt chia thành các nhánh tận sau khi đã ra khỏi tuyến mang tai."
+        },
+        {
+          "id": "D",
+          "text": "TK mặt đi gần mặt nông của tuyến( mặt có da phủ) hơn so với ĐM cảnh ngoài."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.ĐM cảnh ngoài chia thành hai nhánh tận khi đang đi trong tuyến\nmang tai=>hàm trên + thái dương nông.\nB.TM sau hàm dưới nằm giữa TK mặt và ĐM cảnh ngoài=>ĐM sâu\nnhất => TM => TK nông nhất.\nC.TK mặt chia thành các nhánh tận sau khi đã ra khỏi tuyến mang\ntai=>chia thành nhánh tận ở trong tuyến.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/f8acad9a1b95f6738727.webp"
+      ],
+      "sourcePage": 53,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-48",
+      "number": 48,
+      "stem": "Trong các mô tả sau đây về xương sọ, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "bao gồm 8 xương hộp sọ và 12 xương mặt."
+        },
+        {
+          "id": "B",
+          "text": "hộp sọ bao gồm phần nền và phần vòm."
+        },
+        {
+          "id": "C",
+          "text": "tất cả các xương sọ liên kết với nhau bằng dạng khớp sợi."
+        },
+        {
+          "id": "D",
+          "text": "ổ mũi và ổ mắt là những khoang htoan do các xương sọ mặt tạo nên."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.bao gồm 8 xương hộp sọ và 12 xương mặt=>8 xương sọ và 14\nxương mặt.\nC.tất cả các xương sọ liên kết với nhau bằng dạng khớp\nsợi=>xương hàm dưới liên kết bằng khớp hoạt dịch.\nD.ổ mũi và ổ mắt là những khoang htoan do các xương sọ mặt tạo\nnên=>còn do các xg hộp sọ.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/80da6b89208e15e8ede9.webp",
+        "/kb/dr-lam/images/20a32b31789d26f8d972.webp"
+      ],
+      "sourcePage": 54,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-49",
+      "number": 49,
+      "stem": "Các mô tả sau đây về xương trán đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Bờ trên ổ mắt ngăn cách trai trán với phần ổ mắt của xương trán."
+        },
+        {
+          "id": "B",
+          "text": "Mào trán nằm trên mặt trong đường dọc giữa của trai trán."
+        },
+        {
+          "id": "C",
+          "text": "Phần ổ mắt xương trán tạo nên phần lớn trần ổ mắt."
+        },
+        {
+          "id": "D",
+          "text": "Phần ổ mắt xương trán tạo nên toàn bộ sàn hố sọ trước."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "B.Mào trán nằm trên mặt trong đường dọc giữa của trai trán=>nằm\ngiữa lỗ tịt và rãnh xoang dọc trên.\nD.Phần ổ mắt xương trán tạo nên toàn bộ sàn hố sọ trước=>chỉ tạo\nnên hầu hết hố sọ trc, còn cả cánh nhỏ xương bướm nữa.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 56,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-50",
+      "number": 50,
+      "stem": "Trong các mô tả sau đây về xương trán, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Hõm ròng rọc là chỗ bám cho một cơ mà thần kinh IV chi phối."
+        },
+        {
+          "id": "B",
+          "text": "Xoang trán nằm trong phần ổ mắt của xương trán."
+        },
+        {
+          "id": "C",
+          "text": "Hố tuyến lệ nằm ở phần trước trong của mặt dưới phần ổ mắt xương trán."
+        },
+        {
+          "id": "D",
+          "text": "Cung mày nằm giữa trai trán và phần ổ mắt xương trán."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.Hõm ròng rọc là chỗ bám cho một cơ mà thần kinh IV chi\nphối=>cơ chéo trên bám.\nB.Xoang trán nằm trong phần ổ mắt của xương trán=>Thuộc phần\ntrong của Trai trán ; nằm trên Phần ổ mắt;2 xoang trán nằm trong\ntrai trán.\nC.Hố tuyến lệ nằm ở phần trước trong của mặt dưới phần ổ mắt\nxương trán=>ở phía trước ngoài.\nD.Cung mày nằm giữa trai trán và phần ổ mắt xương trán=>Cung\nmày nằm ngay trên Bờ trên ổ mắt;bờ trên ổ mắt nằm giữa trai trán\nvà phần ổ mắt.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 57,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-51",
+      "number": 51,
+      "stem": "Các mô tả sau đây về xương thái dương đều đúng, trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó bao gồm ba phần: phần trai, phần đá, phần nhĩ."
+        },
+        {
+          "id": "B",
+          "text": "Nó chỉ tiếp khớp với 3 xương: xương chẩm, xương bướm, xương đỉnh."
+        },
+        {
+          "id": "C",
+          "text": "Phần trai xương thái dương nằm trên mặt dưới bên của hộp sọ."
+        },
+        {
+          "id": "D",
+          "text": "Phần đá xương thái dương nằm ở nền sọ, giữa xương bướm và xương chẩm."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.Nó chỉ tiếp khớp với 3 xương: xương chẩm, xương bướm, xương\nđỉnh=>và cả xương gò má nữa;xương trán.\nC.Phần trai xương thái dương nằm trên mặt dưới bên của hộp\nsọ=>xương thái dương nằm ở mặt dưới bên.\nMỗi xương thái dương: tạo nên Mặt dưới bên của Hộp sọ và 1 phần\nNền sọ.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/c9be11ab02cb9ba7491a.webp"
+      ],
+      "sourcePage": 58,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-52",
+      "number": 52,
+      "stem": "Các mô tả sau đây về phần đá xương thái dương đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Bờ trước ngoài lỗ tĩnh mạch cảnh do bờ sau xương đá tạo nên."
+        },
+        {
+          "id": "B",
+          "text": "ấn thần kinh sinh ba nằm gần đỉnh xương."
+        },
+        {
+          "id": "C",
+          "text": "ống động mạch cảnh đi từ mặt dưới xương đá đến đỉnh xương đá."
+        },
+        {
+          "id": "D",
+          "text": "mỏm trâm xương thái dương nằm sau lỗ trâm chũm."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.mỏm trâm xương thái dương nằm sau lỗ trâm chũm => mỏm trâm\nnằm trước mõm chũm,  nằm trước lỗ trâm chũm.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 59,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-53",
+      "number": 53,
+      "stem": "Các mô tả sau đây về xương thái dương, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Bờ trên phần đá là ranh giới giữa các hố sọ giữa và sau."
+        },
+        {
+          "id": "B",
+          "text": "Lỗ ống tai trong nằm ở mặt trước phần đá."
+        },
+        {
+          "id": "C",
+          "text": "Mỏm trâm là một phần của mỏm chũm."
+        },
+        {
+          "id": "D",
+          "text": "Mỏm chũm là mỏm nhô ra từ mặt dưới phần đá."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "B.Lỗ ống tai trong nằm ở mặt trước phần đá=>mặt sau phần đá.\nC.Mỏm trâm là một phần của mỏm chũm=>KLQ.\nD.Mỏm chũm là mỏm nhô ra từ mặt dưới phần đá=>mỏm trâm nhô\nxuống từ mặt dưới phần đá,mỏm lồi trên nền phần đá là mỏm chủm.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/634df47b5d29fd83f403.webp"
+      ],
+      "sourcePage": 60,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-54",
+      "number": 54,
+      "stem": "Trong các mô tả sau đây về xương bướm, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cánh lớn xương bướm tạo nên toàn bộ hố sọ giữa."
+        },
+        {
+          "id": "B",
+          "text": "Bờ sau cánh nhỏ xương bướm tận cùng ở phía trong tại mỏm yên trước."
+        },
+        {
+          "id": "C",
+          "text": "Xương bướm không tham gia tạo nên các thành ổ mắt."
+        },
+        {
+          "id": "D",
+          "text": "Xương bướm không tiếp khớp với xương đỉnh và xương sàng."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Cánh lớn xương bướm tạo nên toàn bộ hố sọ giữa=>cả xương\nthái dương nữa.\nC.Xương bướm không tham gia tạo nên các thành ổ mắt=>có tạo\nnên các thành ổ mắt.\nXương bướm góp phần tạo: Hộp sọ; Trần ổ mũi; Thành ổ mắt.\nD.Xương bướm không tiếp khớp với xương đỉnh và xương\nsàng=>iếp khớp vs tất cả các xương của hộp sọ.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 61,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-55",
+      "number": 55,
+      "stem": "Các mô tả sau đây về xương bướm đều đúng , TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Hai đầu rãnh trước giao thoa thị gác thông với hai ống thị giác."
+        },
+        {
+          "id": "B",
+          "text": "Là xương sọ có nhiều lỗ hay ống, khe cho các thần kinh sọ đi qua."
+        },
+        {
+          "id": "C",
+          "text": "Hố tuyến yên nằm sau lưng yên."
+        },
+        {
+          "id": "D",
+          "text": "thân xương bướm tiếp khớp ở sau với xương chẩm."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Hai đầu rãnh trước giao thoa thị gác thông với hai ống thị\ngiác=>thông nên U tuyến yên hay chèn ép Giao thoa thị giác;nhìn\nhình A8.\nC.Hố tuyến yên nằm sau lưng yên=>hố tuyến yên nằm trước lưng\nyên.\nLƯNG yên: tạo ra thành sau cho Hố tuyến yên\nHố tuyến yên: bao phủ:\nmỏm yên trước\nlưng yên\nmỏm yên sau.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/2a96ed6cd6d3db24c0b6.webp",
+        "/kb/dr-lam/images/4dedc74c71c5c4519bc9.webp"
+      ],
+      "sourcePage": 61,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-56",
+      "number": 56,
+      "stem": "Trong các mô tả sau đây về những liên quan của xương bướm, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Về giải phẫu, có thể phẫu thuật cắt tuyến yên bằng đường mổ đi qua ổ mũi và thân xương bướm."
+        },
+        {
+          "id": "B",
+          "text": "Lỗ gai trên cánh lớn xương bướm là nơi đi qua của thần kinh hàm dưới."
+        },
+        {
+          "id": "C",
+          "text": "Hai TM mắt trên và dưới đi cùng ĐM mắt qua ống thị giác."
+        },
+        {
+          "id": "D",
+          "text": "Xoang bướm đỉnh không liên quan với xương bướm."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "B.Lỗ gai trên cánh lớn xương bướm là nơi đi qua của thần kinh hàm\ndưới=>chỉ có nhánh màng não của TK hàm dưới qua lỗ gai;TK hàm\ndưới qua lỗ bầu dục.\nC.Hai TM mắt trên và dưới đi cùng ĐM mắt qua ống thị giác=>chỉ có\nĐM mắt + TK II qua ống thị;TM mắt: Khe ổ mắt trên.\nD.Xoang bướm đỉnh không liên quan với xương bướm=>xoang\nbướm đỉnh chạy trên bờ sau cánh nhỏ xg bướm;xoang bướm ở trên\nthân xương bướm, thông với ngách bướm sàng của ổ mũi.\nXoang bướm đỉnh nằm bờ sau cánh nhỏ xương bướm, đổ vào\nphía trước xoang hang.\n[Ảnh chưa lưu được]\n[Ảnh chưa lưu được]",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 63,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-57",
+      "number": 57,
+      "stem": "Trong các mô tả sau đây về xương chẩm, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Lồi cầu chẩm ở phần bên xương chẩm tiếp khớp với đốt trục."
+        },
+        {
+          "id": "B",
+          "text": "Có hai rãnh xoang TM ngang nằm hai bên ụ chẩm trong."
+        },
+        {
+          "id": "C",
+          "text": "Mào chẩm trong nằm ở phía trên ụ chẩm trong."
+        },
+        {
+          "id": "D",
+          "text": "Dốc nền nằm ở mặt dưới của phần nền xương chẩm."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Lồi cầu chẩm ở phần bên xương chẩm tiếp khớp với đốt\ntrục=>tiếp khớp vs đốt đội (C1).\nC.Mào chẩm trong nằm ở phía  trên ụ chẩm trong=>mào chẩm\ntrong ở trước dưới ụ chẩm trong.\nD.Dốc nền nằm ở mặt dưới của phần nền xương chẩm=>mặt trên.\nPhần nền Xương chẩm:\n- Mặt trên: Dốc\n- Mặt dưới: Củ hầu.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/e86e7bd2d30d330447fb.webp"
+      ],
+      "sourcePage": 64,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-58",
+      "number": 58,
+      "stem": "Các mô tả sau đây về xương chẩm đúng Trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Trên xương chẩm có lỗ cho TK sọ XII đi qua"
+        },
+        {
+          "id": "B",
+          "text": "Xương chẩm cùng phần đá xương thái dương tạo nên một lỗ cho ba TK sọ đi qua"
+        },
+        {
+          "id": "C",
+          "text": "Rễ sống của TK XI không đi qua lỗ chẩm"
+        },
+        {
+          "id": "D",
+          "text": "Rãnh xoang ngang liên tục với rãnh xoang sigma"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Trên xương chẩm có lỗ cho TK sọ XII đi qua => ống TK hạ thiệt ở\ntrước lồi cầu chẩm",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 65,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-59",
+      "number": 59,
+      "stem": "Các mô tả sau đây về thân xương hàm trên đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Mặt ổ mắt tạo nên phần nhỏ sàn ổ mắt."
+        },
+        {
+          "id": "B",
+          "text": "Mặt trước ( mặt mặt) có lỗ dưới ổ mắt."
+        },
+        {
+          "id": "C",
+          "text": "Xoang hàm trên nằm trong thân xương hàm trên."
+        },
+        {
+          "id": "D",
+          "text": "Mặt trước và mặt ổ mắt của thân xương thông với nhau qua ống dưới ổ mắt."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.Mặt ổ mắt tạo nên phần nhỏ sàn ổ mắt=>tạo nên phần lớn sàn ổ\nmắt.\nB.Mặt trước ( mặt mặt) có lỗ dưới ổ mắt=>ngay bờ dưới ổ mắt.\nD.Mặt trước và mặt ổ mắt của thân xương thông với nhau qua ống\ndưới ổ mắt=>rãnh dưới ổ mắt (mặt ổ mắt) => ống dưới ổ mắt => lỗ\ndưới ổ mắt (mặt trước).",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/1f12e737a47743a86967.webp"
+      ],
+      "sourcePage": 66,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-60",
+      "number": 60,
+      "stem": "Trong các mô tả sau đây về xương hàm trên mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Mỏm khẩu cái xương hàm trên lớn hơn mảnh nằm ngang của xương khẩu cái."
+        },
+        {
+          "id": "B",
+          "text": "Lỗ xoang hàm trên nằm trên mặt dưới thái dương của thân xương hàm trên."
+        },
+        {
+          "id": "C",
+          "text": "Mỏm khẩu cái xương hàm trên tạo nên phần sau của khẩu cái cứng."
+        },
+        {
+          "id": "D",
+          "text": "Mặt mũi của thân xương hàm trên tạo nên toàn bộ thành ngoài ổ mắt."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.Mỏm khẩu cái xương hàm trên lớn hơn mảnh nằm ngang của\nxương khẩu cái=>tạo nên phần lớn Khẩu cái cứng;mỏm khẩu cái\nxương hàm trên chiếm 2/3, mảnh ngang xg khẩu cái 1/3.\nB.Lỗ xoang hàm trên nằm trên mặt dưới thái dương của thân xương\nhàm trên=>lỗ xoang hàm trên nằm trên mặt mũi của thân xg hàm\ntrên.\nC.Mỏm khẩu cái xương hàm trên tạo nên phần sau của khẩu cái\ncứng=>trc.\nD.Mặt mũi của thân xương hàm trên tạo nên toàn bộ thành ngoài ổ\nmắt=>góp phần tạo nên thành ngoài ổ mũi.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/c7dfdd6c9a993eaec3d4.webp",
+        "/kb/dr-lam/images/817897032abfa8b88d3d.webp"
+      ],
+      "sourcePage": 67,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-61",
+      "number": 61,
+      "stem": "Các mô tả sau đây về xương hàm dưới đều đúng, Trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thân xương hàm dưới gồm một nền ở dưới và phần huyệt răng ở trên."
+        },
+        {
+          "id": "B",
+          "text": "Hố dưới hàm cho tuyến dưới hàm nằm nằm trên đường hàm móng xương hàm dưới."
+        },
+        {
+          "id": "C",
+          "text": "Lồi cằm nằm ở giữa mặt trước của nền xương hàm dưới."
+        },
+        {
+          "id": "D",
+          "text": "Đường hàm móng là nơi bám nguyên ủy của cơ hàm móng."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.Hố dưới hàm cho tuyến dưới hàm nằm nằm trên đường hàm\nmóng xương hàm dưới => Hố dưới hàm ở dưới 2/3 sau của đường\nhàm móng, hố dưới lưỡi ở trên 1/3 trước đg hàm móng.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/5b92ecd1ef9257a432e9.webp"
+      ],
+      "sourcePage": 68,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-62",
+      "number": 62,
+      "stem": "Trong các mô tả sau đây về xương hàm dưới,mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Gai cằm dưới là nơi bám cho cơ cằm lưỡi."
+        },
+        {
+          "id": "B",
+          "text": "Lỗ cằm là nơi TK huyệt răng dưới đi ra khỏi xương hàm dưới."
+        },
+        {
+          "id": "C",
+          "text": "Góc hàm dưới là góc giữa hai nửa P và T của thân xương hàm dưới."
+        },
+        {
+          "id": "D",
+          "text": "Mỏm vẹt của ngành hàm dưới là nơi bám tận của cơ chân bướm ngoài."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Gai cằm dưới là nơi bám cho cơ cằm lưỡi=>cơ cằm lưỡi bám vào\ngai cằm trên.\nB.Lỗ cằm là nơi TK huyệt răng dưới đi ra khỏi xương hàm dưới.\nC.Góc hàm dưới là góc giữa hai nửa P và T của thân xương hàm\ndưới=>giữa bờ sau ngành hàm dưới vs bờ dưới thân hàm dưới.\nD.Mỏm vẹt của ngành hàm dưới là nơi bám tận của cơ chân bướm\nngoài=>cơ thái dương;Cơ chân bướm ngoài: mặt ngoài mảnh\nngoài mỏm chân bướm, cánh lớn -> lồi cầu xg hàm dưới, đĩa khớp.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/59700828d38d71ff3fa7.webp",
+        "/kb/dr-lam/images/944939f062399cc95625.webp"
+      ],
+      "sourcePage": 69,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-63",
+      "number": 63,
+      "stem": "Các mô tả sau đây về khớp thái dương- hàm dưới đều đúng , TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đĩa khớp nằm xen giữa các mặt khớp của xương thái dương với chỏm của xương hàm dưới."
+        },
+        {
+          "id": "B",
+          "text": "Dây chằng bướm hàm dưới nằm ở mặt ngoài của khớp."
+        },
+        {
+          "id": "C",
+          "text": "Gân cơ chân bướm ngoài bám vào cổ lồi cầu xương hàm dưới và đĩa khớp."
+        },
+        {
+          "id": "D",
+          "text": "Các dây chằng ngoài và trong là những phần dày lên của bao khớp."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.Dây chằng bướm hàm dưới nằm ở mặt ngoài của khớp=>nằm ở\nmặt trong.\nD.Các dây chằng ngoài và trong là những phần dày lên của bao\nkhớp=>của mặt ngoài và trong của bao khớp.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/035bc93f84ec45a43a46.webp"
+      ],
+      "sourcePage": 71,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-64",
+      "number": 64,
+      "stem": "Các mô tả sau đây về các cử động của xương hàm dưới đều đúng trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đa số cơ trong nhóm 4 cơ nhai có tác dụng hạ xương hàm dưới."
+        },
+        {
+          "id": "B",
+          "text": "Trong cử động hạ xương hàm dưới, chỏm xương hàm dưới và đĩa khớp được kéo ra trước để nằm dưới củ khớp xương thái dương."
+        },
+        {
+          "id": "C",
+          "text": "Chỏm xương hàm dưới và đĩa khớp được đưa ra trước nhờ cơ chân bướm ngoài."
+        },
+        {
+          "id": "D",
+          "text": "Có các cử động đưa xương hàm dưới ra trước hay ra sau."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.Đa số cơ trong nhóm 4 cơ nhai có tác dụng hạ xương hàm dưới\n=> hạ xương hàm: chân bướm ngoài, cơ 2 bụng, cằm móng, hàm\nmóng.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/944939f062399cc95625.webp"
+      ],
+      "sourcePage": 72,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-65",
+      "number": 65,
+      "stem": "Trong các mô tả sau đây về các cơ quanh miệng, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nhóm này có số cơ ít hơn nhóm cơ quanh ổ mắt."
+        },
+        {
+          "id": "B",
+          "text": "Cơ gò má nhỏ có tác dụng hạ môi dưới."
+        },
+        {
+          "id": "C",
+          "text": "Cơ nâng góc miệng nằm sâu hơn cơ nâng môi trên."
+        },
+        {
+          "id": "D",
+          "text": "Cơ cười là cơ duy nhất gây nên động tác cười."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Nhóm này có số cơ ít hơn nhóm cơ quanh ổ mắt=>cơ quanh\nmiệng: 11 cơ, quanh ổ mắt: 3 cơ.\nB.Cơ gò má nhỏ có tác dụng hạ môi dưới=>Cơ gò má nhỏ: nâng\nmôi trên.\nC.Cơ nâng góc miệng nằm sâu hơn cơ nâng môi trên=>A48.\nD.Cơ cười là cơ duy nhất gây nên động tác cười=>còn cơ gò má\nlớn, cơ nâng góc miệng.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/6aa18df0af8bf78d207c.webp"
+      ],
+      "sourcePage": 73,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-66",
+      "number": 66,
+      "stem": "Các mô tả sau đây về các cơ nhai đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ chân bướm ngoài bám tận vào cổ lồi cầu xương hàm dưới."
+        },
+        {
+          "id": "B",
+          "text": "Cơ chân bướm trong là một cơ nâng xương hàm dưới."
+        },
+        {
+          "id": "C",
+          "text": "Phần trước cơ thái dương có tác dụng kéo xương hàm dưới ra sau."
+        },
+        {
+          "id": "D",
+          "text": "Nguyên ủy của cơ cắn bám vào cung gò má."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Cơ chân bướm ngoài bám tận vào cổ lồi cầu xương hàm\ndưới=>Cơ chân bướm trong Bám vào Ngành & Góc xương hàm\ndưới.\nB.Cơ chân bướm trong là một cơ nâng xương hàm dưới=>Cơ thái\ndương: Nâng xương hàm dưới khi Cả cơ co; Sợi sau: kéo Ra sau.\nC.Phần trước cơ thái dương có tác dụng kéo xương hàm dưới ra\nsau=>phần sau ms kéo ra sau.\nD.Nguyên ủy của cơ cắn bám vào cung gò má=>bám tận vào góc\nvà ngành xương hàm dưới.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/aa2bce5a0bb4fb281aa3.webp"
+      ],
+      "sourcePage": 74,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-67",
+      "number": 67,
+      "stem": "Trong các mô tả sau đây về các cơ nhai, mô tả đúng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đầu dưới cơ chân bướm ngoài bám vào mặt trong của mảnh ngoài chân bướm."
+        },
+        {
+          "id": "B",
+          "text": "Cơ chân bướm ngoài phối hợp cùng cơ hàm móng và bụng trước cơ hai bụng trong động tác há miệng."
+        },
+        {
+          "id": "C",
+          "text": "Cơ cắn bám tận vào mặt trong của góc và ngành xương hàm dưới."
+        },
+        {
+          "id": "D",
+          "text": "Ngoài 4 cơ nhai không có cơ nào khác vận động xương hàm dưới."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Đầu dưới cơ chân bướm ngoài bám vào mặt trong của mảnh\nngoài chân bướm=>Đầu trên Bám vào Cánh lớn;măt ngoài mảnh\nngoài mỏm chân bướm.\nC.Cơ cắn bám tận vào mặt trong của góc và ngành xương hàm\ndưới=>mặt ngoài.\nD.Ngoài 4 cơ nhai không có cơ nào khác vận động xương hàm\ndưới=>còn các cơ trên móng.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/30f830b48af3a0d54e32.webp"
+      ],
+      "sourcePage": 76,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-68",
+      "number": 68,
+      "stem": "Các mô tả sau đây về tam giác cổ trước đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó được ngăn cách với tam giác cổ sau bởi cơ ức đòn chũm."
+        },
+        {
+          "id": "B",
+          "text": "Nó được giới hạn ở trên bởi đường kẻ dọc bờ dưới nền xương hàm dưới."
+        },
+        {
+          "id": "C",
+          "text": "Nó được cơ hai bụng và bụng trên cơ vai móng chia thành các tam giác nhỏ."
+        },
+        {
+          "id": "D",
+          "text": "Bụng sau cơ hai bụng là một cạnh của tam giác cơ."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.Bụng sau cơ hai bụng là một cạnh của tam giác cơ=>tam giác\ncơ: bờ trước cơ ƯĐC, đường giữa, bụng trên cơ vai móng.\nTam giác cổ trước: Giới hạn:\n- Trước: Đường giữa trước\n- trên: Nền xương hàm dưới -> Góc hàm dưới -> Mỏm chũm\n- Sau: Bờ trước Cơ Ức Đòn Chũm.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/9f0613641b7d4faf5268.webp"
+      ],
+      "sourcePage": 77,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-69",
+      "number": 69,
+      "stem": "Các mô tả sau đây về tam giác cổ sau đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đây là nơi đi qua của TM cảnh ngoài."
+        },
+        {
+          "id": "B",
+          "text": "TK XI không đi qua tam giác cổ sau."
+        },
+        {
+          "id": "C",
+          "text": "Cạnh trước của tam giác cổ sau là bờ sau cơ ức đòn chũm."
+        },
+        {
+          "id": "D",
+          "text": "Đoạn ngoài cơ bậc thang của ĐM dưới đòn đi trong tam giác cổ sau."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Đây là nơi đi qua của TM cảnh ngoài=>A32.\nB.TK XI không đi qua tam giác cổ sau=>TK phụ có đi qua tam giác\ncổ sau.\nTam giác cổ sau: Giới hạn\n- Trước: Cơ UDC\n- sau: Bờ trước Cơ thang\n- dưới: 1/3 giữa Xương đòn\nBụng dưới Cơ vai- móng chia làm\nTam giác chẩm và Tam giác vai đòn.\nCác thành phần đi qua Tam giác cổ sau: TK phụ ; ĐR cổ; ĐR cánh\ntay\nĐM dưới đòn; ĐM ngang cổ; ĐM trên vai; TM cảnh ngoai và Các\nnhánh.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/5ee1575892b9b0c98b7a.webp"
+      ],
+      "sourcePage": 78,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-70",
+      "number": 70,
+      "stem": "Các mô tả sau đây về tam giác cổ trước đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ hàm móng tạo nên sàn của tam giác cảnh."
+        },
+        {
+          "id": "B",
+          "text": "Bụng sau cơ hai bụng là cạnh của hai tam giác: tam giác dưới hàm và tam giác cảnh."
+        },
+        {
+          "id": "C",
+          "text": "Động mạch cảnh ngoài đi qua tam giác cảnh."
+        },
+        {
+          "id": "D",
+          "text": "Cạnh sau của tam giác cảnh là bờ trước cơ ức đòn chũm."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.Cơ hàm móng tạo nên sàn của tam giác cảnh=>sàn tam giác\ncảnh: cơ khít hầu giữa và dưới, cơ giáp móng, móng lưỡi;tam giác\ndưới hàm và dưới cằm.\nC.Động mạch cảnh ngoài đi qua tam giác cảnh=>Tam giác cảnh thì\ntất nhiên có ĐM cảnh và TM cảnh trong đi qua.\nD.Cạnh sau của tam giác cảnh là bờ trước cơ ức đòn chũm=>Tam\ngiác cảnh: cơ ức đòn chũm, bụng trên cơ vai móng; bụng sau cơ\nhai bụng.sàn do các cơ khít hầu giữa và dưới ,một phần của các cơ\ngiáp móng và móng lưỡi.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/b175545ee474f1393cbb.webp"
+      ],
+      "sourcePage": 79,
+      "gradable": true
+    },
+    {
+      "id": "dau-mat-co-71",
+      "number": 71,
+      "stem": "Những mô tả sau về mạch mạc đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nằm sâu hơn củng mạc nhưng nông hơn võng mạc."
+        },
+        {
+          "id": "B",
+          "text": "Tiếp nối với thể mi ở ngang mức miệng thắt."
+        },
+        {
+          "id": "C",
+          "text": "Nuôi dưỡng cho võng mạc thị giác."
+        },
+        {
+          "id": "D",
+          "text": "Là nguồn cấp máu duy nhất cho võng mạc."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.Là nguồn cấp máu duy nhất cho võng mạc. => chỉ nuôi dưỡng lớp\nngoài của võng mạc (lớp sắc tố) Võng mạc còn có ĐM, TM trung\ntâm võng mạc nuôi dưỡng",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/9d76fcd3dafe1f754e76.webp"
+      ],
+      "sourcePage": 81,
+      "gradable": true
+    }
+  ]
+}

@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import { allFacts, factsBySystem, SYSTEM_LABEL, type AnatomyFact } from "./knowledge";
 import { rng, shuffle } from "./random";
 import { pick, type Loc, type T3 } from "@/lib/homeContent";
@@ -34,7 +36,7 @@ export type QuizItem = {
   imageAnswer?: string;
 };
 
-const PROMPT: Record<QuizKind, T3> = {
+const PROMPT: Record<QuizKind, T3> = bindContentSource("data:src/lib/anatomy/quiz.ts#PROMPT", {
   identify: {
     vi: "Cấu trúc nào ứng với mô tả sau?",
     en: "Which structure matches this description?",
@@ -50,7 +52,7 @@ const PROMPT: Record<QuizKind, T3> = {
     en: "What is the Latin name of this structure?",
     zh: "该结构的拉丁名是什么？",
   },
-};
+});
 
 /** Cắt ghi chú thành một đoạn mô tả gọn, BỎ tên cấu trúc để khỏi lộ đáp án. */
 function describe(fact: AnatomyFact, locale: Loc): string {

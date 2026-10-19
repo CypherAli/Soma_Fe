@@ -1,0 +1,2371 @@
+{
+  "schemaVersion": 1,
+  "id": "da-day-gan-ruot",
+  "title": "Dạ dày gan ruột",
+  "sourceFile": "Giải phẫu người 2025 - Test số hóa Dr. Lâm dạ dày gan ruột.pdf",
+  "sourceNote": null,
+  "sourceHash": "019acf7963c5faec58797a9b12a0d9e05b10d181a3ada41fd793567717aeba5d",
+  "pages": 65,
+  "questions": [
+    {
+      "id": "da-day-gan-ruot-1",
+      "number": 1,
+      "stem": "Các mô tả sau đây về đại tràng lên đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó đi từ chỗ tiếp nối với manh tràng tới dưới mặt tạng của gan phải."
+        },
+        {
+          "id": "B",
+          "text": "Có một rãnh giữa đại tràng lên và thành bụng bên."
+        },
+        {
+          "id": "C",
+          "text": "Dài khoảng 15cm."
+        },
+        {
+          "id": "D",
+          "text": "Khi lên tới mặt tạng của gan, nó hướng đột ngột sang trái và ra sau tại góc đại tràng phải."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Nó đi từ chỗ tiếp nối với manh tràng tới dưới mặt tạng của gan\nphải=>góc đại tràng phải).\nẤn đại tràng: trước, dưới nhất Của Thùy gan phải\nD.Khi lên tới mặt tạng của gan, nó hướng đột ngột sang trái và ra\nsau tại góc đại tràng phải=>Trước.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/e4979d4b39861e9ea841.webp"
+      ],
+      "sourcePage": 1,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-2",
+      "number": 2,
+      "stem": "Mô tả đúng về đại tràng lên là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó dài khoảng 20cm (50cm)."
+        },
+        {
+          "id": "B",
+          "text": "Nó được phúc mạc bọc ở tất cả các mặt."
+        },
+        {
+          "id": "C",
+          "text": "Mặt sau của nó dính với cực trên thận phải."
+        },
+        {
+          "id": "D",
+          "text": "Nó có thể có mạc treo ngắn ở một số trường hợp."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Nó dài khoảng 20cm (50cm)=>15cm.\nB.Nó được phúc mạc bọc ở tất cả các mặt=>Chỉ đc phủ ở mặt\ntrước và 2 mặt bên.\nC.Mặt sau của nó dính với cực trên thận phải=>Mặt sau dính vào\nthành bụng sau và đầu dưới thận P bằng mô liên kết.\nD.Nó có thể có mạc treo ngắn ở một số trường hợp=>12% trường\nhợp.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 2,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-3",
+      "number": 3,
+      "stem": "Các mô tả sau đây về đại tràng ngang đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó dài hơn đại tràng lên."
+        },
+        {
+          "id": "B",
+          "text": "Đầu phải của nó thấp hơn đầu trái."
+        },
+        {
+          "id": "C",
+          "text": "Nó thường nằm ở phần dưới vùng rốn."
+        },
+        {
+          "id": "D",
+          "text": "Toàn bộ chiều dài của đại tràng ngang di động được."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Nó dài hơn đại tràng lên=>50cm > 15cm.\nB.Đầu phải của nó thấp hơn đầu trái=>góc trái ở cao hơn và sâu\nhơn, ngang mức xg sườn X và XI.\nD.Toàn bộ chiều dài của đại tràng ngang di động được=>Mặt sau\nđầu P ko có phúc mạc bọc, dính với mặt trc tá tràng xuống và đầu\ntuỵ bằng mô liên kết => ko di động.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 3,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-4",
+      "number": 4,
+      "stem": "Những mô tả sau đây về các góc đại tràng đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Góc đại tràng phải nằm ở ngoài phần xuống tá tràng."
+        },
+        {
+          "id": "B",
+          "text": "Góc đại tràng phải nằm dưới thùy phải gan, trước thận phải."
+        },
+        {
+          "id": "C",
+          "text": "Góc đại tràng trái nằm ở vùng thắt lưng trái."
+        },
+        {
+          "id": "D",
+          "text": "Góc đại tràng trái nằm ở dưới lách và trước thận trái."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Góc đại tràng phải nằm ở ngoài phần xuống tá tràng=>nằm ở sau\nngoài phần xuống tá tràng.\nC.Góc đại tràng trái nằm ở vùng thắt lưng trái => nằm ở vùng.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/fdfb73914d81cbf6f1f5.webp"
+      ],
+      "sourcePage": 4,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-5",
+      "number": 5,
+      "stem": "Mô tả đúng về đại tràng xuống là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó có chiều dài lớn hơn đại tràng lên."
+        },
+        {
+          "id": "B",
+          "text": "Nó nằm nông hơn đại tràng lên."
+        },
+        {
+          "id": "C",
+          "text": "Nó là đoạn đại tràng di động được ở phần lớn trường hợp."
+        },
+        {
+          "id": "D",
+          "text": "Mặt sau của nó không có các mạch thần kinh bắt chéo."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.Nó có chiều dài lớn hơn đại tràng lên=>25cm > 15cm.\nB.Nó nằm nông hơn đại tràng lên=>đại tràng xuống có đường kính\nnhỏ hơn và nằm sâu hơn đại tràng lên.\nC.Nó là đoạn đại tràng di động được ở phần lớn trường hợp=>mạc\ntreo đại tràng xuống chỉ có 22% trường hợp.\nD.Mặt sau của nó không có các mạch thần kinh bắt chéo=>mặt sau\ncó các mạch, TK dưới sườn, các TK chậu-bẹn và chậu hạ vị, các TK\nbì đùi ngoài, TK đùi, sinh dục đùi, mạch tinh hoàn (buồng trứng) và\nĐM chậu ngoài.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/0935b1de594a195f66b8.webp"
+      ],
+      "sourcePage": 4,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-6",
+      "number": 6,
+      "stem": "Các mô tả sau đây về đại tràng sigma đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó là đoạn ruột già nằm giữa đại tràng xuống và trực tràng."
+        },
+        {
+          "id": "B",
+          "text": "Nó thường dài hơn đại tràng lên."
+        },
+        {
+          "id": "C",
+          "text": "Nó được cấp máu bởi động mạch mạc treo tràng dưới."
+        },
+        {
+          "id": "D",
+          "text": "Nó là đoạn đại tràng cố định."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "B.Nó thường dài hơn đại tràng lên=>40cm > 15cm.\nD.Nó là đoạn đại tràng cố định => ĐT sigma di động đc vì đc treo\nvào thành chậu hông bởi.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 6,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-7",
+      "number": 7,
+      "stem": "Các mô tả sau đây về trực tràng đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó đi từ ngang mức đốt sống cùng 3 tới ngang mức hơi ở dưới đỉnh xương cụt."
+        },
+        {
+          "id": "B",
+          "text": "Nó đi theo một đường cong lõm ra trước."
+        },
+        {
+          "id": "C",
+          "text": "Nó không có các bướu, túi thừa mạc nối và dải sần như ở các đoạn của đại tràng."
+        },
+        {
+          "id": "D",
+          "text": "Các mặt bên trực tràng hoàn toàn không có phúc mạc phủ."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.Các mặt bên trực tràng hoàn toàn không có phúc mạc phủ\n=>  phúc mạc phủ nửa trên của mặt trước và 1/3 trên của mặt bên\ntrực tràng rồi lật lên BQ (thành sau âm đạo).\nnhớ các Túi cùng BQ-TT\ntúi cùng Âm đạo- TT.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/2747c030f31d52ade9f7.webp"
+      ],
+      "sourcePage": 7,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-8",
+      "number": 8,
+      "stem": "Mô tả đúng về liên quan trước của trực tràng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ở nam: liên quan qua túi cùng trực tràng bàng quang với tuyến tiền liệt, ống dẫn tinh và phần dưới túi tinh."
+        },
+        {
+          "id": "B",
+          "text": "Ở nam: phần dưới phúc mạc liên quan với phần trên đáy bàng quang."
+        },
+        {
+          "id": "C",
+          "text": "Ở nữ: liên quan qua túi cùng trực tràng- tử cung với tử cung, phần trên âm đạo và các thành phần chứa trong túi cùng."
+        },
+        {
+          "id": "D",
+          "text": "Ở nữ: phần nằm dưới túi cùng liên quan với đáy bàng quang."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Ở nam: liên quan qua túi cùng trực tràng bàng quang với tuyến\ntiền liệt, ống dẫn tinh và phần dưới túi tinh=>vs phần TRÊN của đáy\nBQ và của các túi tinh, túi cùng trực tràng-BQ và các thành phần\ntrong túi cùng (các quai hồi tràng cuối và đại tràng sigma).\nB.Ở nam: phần dưới phúc mạc liên quan với phần trên đáy bàng\nquang=>vs phần dưới của đáy BQ và túi tinh, ống dẫn tinh, phần tận\ncùng của niệu quản và TTL.\nD.Ở nữ: phần nằm dưới túi cùng liên quan với đáy bàng\nquang => Liên quan với thành sau âm đạo =>vs phần dưới âm đạo.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 8,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-9",
+      "number": 9,
+      "stem": "Mô tả đúng về trực tràng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Trong lòng trực tràng có hai nếp ngang: nếp trên và nếp dưới."
+        },
+        {
+          "id": "B",
+          "text": "Phúc mạc phủ 2/3 trên mặt trước trực tràng."
+        },
+        {
+          "id": "C",
+          "text": "Theo chiều giữa – bên, trực tràng có hai đường cong: một lồi sang phải, một lồi sang trái."
+        },
+        {
+          "id": "D",
+          "text": "Trực tràng ngắn hơn đại tràng lên, phần trên của nó có đường kính bằng đại tràng sigma."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Trong lòng trực tràng có hai nếp ngang: nếp trên và nếp dưới=>3\nnếp: nếp trên ở gần đầu trên TT, nếp giữa ngay trên bóng TT và nếp\ndưới ở dưới nếp giữa khoảng 2,5cm.\nB.Phúc mạc phủ 2/3 trên mặt trước trực tràng=>phủ nửa trên mặt\ntrước TT.\nC.Theo chiều giữa – bên, trực tràng có hai đường cong: một lồi\nsang phải, một lồi sang trái=>3 đg cong: sang P, sang T, sang P.\nD.Trực tràng ngắn hơn đại tràng lên, phần trên của nó có đường\nkính bằng đại tràng sigma=>12cm < 15cm, đường kính phần trên =\nĐT sigma, phần dưới phồng to thành bóng TT.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/6dce56523e181b2a5828.webp"
+      ],
+      "sourcePage": 9,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-10",
+      "number": 10,
+      "stem": "Mô tả đúng về manh tràng là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó nằm dưới mặt phẳng gian củ, ngoài mặt phẳng bên phải và trên nửa ngoài dây chằng bẹn."
+        },
+        {
+          "id": "B",
+          "text": "Nó có chiều cao lớn hơn bề ngang."
+        },
+        {
+          "id": "C",
+          "text": "Thần kinh sinh dục đùi nằm giữa mặt sau của nó và cơ chậu."
+        },
+        {
+          "id": "D",
+          "text": "Mặt trước của nó được nối với phúc mạc thành bụng trước bởi các nếp phúc mạc."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.Nó nằm dưới mặt phẳng gian củ, ngoài mặt phẳng bên phải và\ntrên nửa ngoài dây chằng bẹn=>chiếm 1 vùng hình tam giác nằm\ngiữa các mặt phẳng bên phải, gian củ và d/c bẹn.\nB.Nó có chiều cao lớn hơn bề ngang=> Cao 6cm,rộng ngang\n7,5cm.\nC.Thần kinh sinh dục đùi nằm giữa mặt sau của nó và cơ chậu=> TK\nbì đùi ngoài nằm giữa manh tràng và cơ chậu.\nD.Mặt trước của nó được nối với phúc mạc thành bụng trước bởi\ncác nếp phúc mạc=>phía trước tiếp xúc với thành bụng trước,\nnhưng mạc nối lớn và quai ruột non có thể xen giữa, nếp phúc mạc\n(nếp sau manh tràng) nối mặt sau với phúc mạc thành.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 10,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-11",
+      "number": 11,
+      "stem": "Các mô tả sau đây về van hồi – manh tràng đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Lỗ hồi tràng là chỗ mà lòng hồi tràng mở thông vào ruột già."
+        },
+        {
+          "id": "B",
+          "text": "Lỗ hồi tràng nằm ở 2cm trên chỗ ruột thừa đổ vào manh tràng."
+        },
+        {
+          "id": "C",
+          "text": "Lỗ hồi tràng nằm trong nhú hồi tràng."
+        },
+        {
+          "id": "D",
+          "text": "Nhú hồi tràng gồm hai môi: môi trước và môi sau ."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "C.Lỗ hồi tràng nằm trong nhú hồi tràng => còn gọi là van hồi – manh\ntràng\nD.Nhú hồi tràng gồm hai môi: môi trước và môi sau =>môi trên (môi\nhồi-đại tràng) và môi dưới (môi-hồi mang tràng).",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 11,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-12",
+      "number": 12,
+      "stem": "Các mô tả sau đây về vị trí của ruột thừa đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "ở sau manh tràng và phần dưới đại tràng lên."
+        },
+        {
+          "id": "B",
+          "text": "Nằm trước hoặc sau đoạn tận của hồi tràng."
+        },
+        {
+          "id": "C",
+          "text": "Treo trên vành chậu hông, sát với buồng trứng phải của nữ."
+        },
+        {
+          "id": "D",
+          "text": "Nằm trước manh tràng."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "C.Treo trên vành chậu hông, sát với buồng trứng phải của nữ=>sát\nvs vòi TC + buồng trứng P.\nD.Nằm trước manh tràng=>Nằm dưới manh tràng.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 12,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-13",
+      "number": 13,
+      "stem": "Mô tả đúng về vị trí ruột thừa là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Vị trí chiếu lên thành bụng trước của gốc ruột thừa nằm ở điểm giữa của đường nối gai chậu trước trên bên phải với rốn."
+        },
+        {
+          "id": "B",
+          "text": "Vị trí chiếu lên thành bụng trước của gốc ruột thừa nằm ở điểm nối đoạn 1/3 giữa và đoạn 1/3 trên trong của đường nối gai chậu trước trên bên phải với rốn."
+        },
+        {
+          "id": "C",
+          "text": "Chiều dài ruột thừa rất biến đổi."
+        },
+        {
+          "id": "D",
+          "text": "Gốc của nó bám vào mặt trước trong manh tràng."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Vị trí chiếu lên thành bụng trước của gốc ruột thừa nằm ở điểm\ngiữa của đường nối gai chậu trước trên bên phải với rốn=>Điểm Mc\nBurney.\nB.Vị trí chiếu lên thành bụng trước của gốc ruột thừa nằm ở điểm\nnối đoạn 1/3 giữa và đoạn 1/3 trên trong của đường nối gai chậu\ntrước trên bên phải với rốn=>điểm nối 1/3 ngoài và 1/3 giữa của đg\nnối gai chậu trước trên bên P tới rốn (Mcburney).\nC.Chiều dài ruột thừa rất biến đổi=>2-20cm, TB 9cm.\nD.Gốc của nó bám vào mặt trước trong manh tràng=>lỗ ruột thừa ở\ndưới và hơi sau lỗ hồi-manh tràng.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/d756f8d7ff37884375b7.webp"
+      ],
+      "sourcePage": 12,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-14",
+      "number": 14,
+      "stem": "Các mô tả sau đây về phần xuống tá tràng đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó thường là phần dài nhất của tá tràng."
+        },
+        {
+          "id": "B",
+          "text": "Mặt trước của nó liên quan với đầu phải của đại tràng ngang."
+        },
+        {
+          "id": "C",
+          "text": "Mặt sau của nó dính với mặt trước thận phải."
+        },
+        {
+          "id": "D",
+          "text": "Nó nằm giữa các góc tá tràng trên và dưới."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.Nó thường là phần dài nhất của tá tràng=>phần ngang dài nhất\n(10cm), phần xuống 8cm,5-8-10-2,5.\nB.Mặt trước của nó liên quan với đầu phải của đại tràng\nngang=>dính vs ĐT ngang bằng mô liên kết.\nC.Mặt sau của nó dính với mặt trước thận phải=>dính vs phần trong\nmặt trc thận phải.\nD.Nó nằm giữa các góc tá tràng trên và dưới=>là chỗ gấp góc giữa\nphần trên và xuống / xuống và ngang.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/78289a199df76e302500.webp"
+      ],
+      "sourcePage": 14,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-15",
+      "number": 15,
+      "stem": "Các mô tả sau đây về các phần ngang và lên của tá tràng đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Phúc mạc phủ mặt trước phần ngang tá tràng lật lên mạc treo ruột non."
+        },
+        {
+          "id": "B",
+          "text": "Phần ngang tá tràng nằm trước ĐM chủ bụng và nằm sau ĐM mạc treo tràng trên."
+        },
+        {
+          "id": "C",
+          "text": "Phần lên tá tràng chạy lên ở bên trái ĐM chủ bụng, tận cùng ở ngang bờ trên thân đốt sống thắt lưng III."
+        },
+        {
+          "id": "D",
+          "text": "Phần ngang đi dưới đầu tụy, trước thân đốt thắt lưng III."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Phúc mạc phủ mặt trước phần ngang tá tràng lật lên mạc treo\nruột non=>mặt trc bắt chéo bởi rễ mạc treo ruột.\nC.Phần lên tá tràng chạy lên ở bên trái ĐM chủ bụng, tận cùng ở\nngang bờ trên thân đốt sống thắt lưng III=>ngang bờ trên thân đốt\nsống thắt lưng II, tại góc tá hỗng tràng,, TM chủ dưới, ĐM chủ bụng.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 15,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-16",
+      "number": 16,
+      "stem": "Các mô tả sau đây về phần trên của tá tràng đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đoạn gần môn vị (nửa trái) của phần trên phình to thành bóng (hay hành) tá tràng."
+        },
+        {
+          "id": "B",
+          "text": "Liên quan sau với ống mật chủ."
+        },
+        {
+          "id": "C",
+          "text": "Liên quan trước với thùy đuôi của gan."
+        },
+        {
+          "id": "D",
+          "text": "Bóng tá tràng nằm giữa mạc nối nhỏ với mạc nối lớn."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "B.Liên quan sau với ống mật chủ=>ĐM vị-tá tràng, TM cửa, sau-\ndưới vs đầu tuỵ.\nC.Liên quan trước với thùy đuôi của gan=>lq trước trên vs thuỳ\nvuông và túi mật.\nD.Bóng tá tràng nằm giữa mạc nối nhỏ với mạc nối lớn=>di động.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 16,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-17",
+      "number": 17,
+      "stem": "Mô tả đúng về ruột non là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó có đường kính tăng dần về phía đầu tận cùng."
+        },
+        {
+          "id": "B",
+          "text": "Chiều dài của nó ở người trưởng thành đang sống nhỏ hơn chiều dài khi chết nhưng lớn hơn chiều dài ở xác ngâm formalin."
+        },
+        {
+          "id": "C",
+          "text": "Đoạn hỗng tràng dài hơn đoạn hồi tràng."
+        },
+        {
+          "id": "D",
+          "text": "Toàn bộ ruột non di động được."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Nó có đường kính tăng dần về phía đầu tận cùng=>hỗng tràng\n4cm, hồi tràng 3,5cm.\nC.Đoạn hỗng tràng dài hơn đoạn hồi tràng=>hồi tràng dài hơn\nhỗng tràng.\nD.Toàn bộ ruột non di động được=>tá tràng chỉ có hành tá tràng di\nđộng được.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 17,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-18",
+      "number": 18,
+      "stem": "Các mô tả sau đây về tá tràng đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó bắt đầu môn vị và kết thúc tại góc tá hỗng tràng."
+        },
+        {
+          "id": "B",
+          "text": "Nó được phúc mạc bọc ít hơn các đoạn khác của ruột non."
+        },
+        {
+          "id": "C",
+          "text": "Niêm mạc trên mặt sau – trong phần xuống tá tràng có hai nhú tá tràng."
+        },
+        {
+          "id": "D",
+          "text": "Nhú tá tràng lớn nằm ở chỗ nối đoạn 2/3 dưới với đoạn 1/3 trên của phần xuống tá tràng."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "B.Nó được phúc mạc bọc ít hơn các đoạn khác của ruột non=>chủ\nyếu chỉ được phúc mạc phủ mặt trước.\nC.Niêm mạc trên mặt sau – trong phần xuống tá tràng có hai nhú tá\ntràng=>nhú tá lớn: bóng gan-tuỵ, nhú tá bé: ống tuỵ phụ đổ vào,\ntrên nhú tá lớn 2cm.\nD.Nhú tá tràng lớn nằm ở chỗ nối đoạn 2/3 dưới với đoạn 1/3 trên\ncủa phần xuống tá tràng=>2/3 trên và 1/3 dưới.\nNhú tá lớn nằm dưới\nNhú tá bé.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/9ac363be7904f712967f.webp"
+      ],
+      "sourcePage": 17,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-19",
+      "number": 19,
+      "stem": "Các mô tả sau đây về sự cấp máu cho tá tràng đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Mặt sau tá tràng và đầu tụy được cấp máu bởi động mạch tá – tụy trên sau và nhánh sau của động mạch tá – tụy dưới."
+        },
+        {
+          "id": "B",
+          "text": "Mặt trước tá tràng và đầu tụy do động mạch tá – tụy trên trước và nhánh trước của động mạch tá – tụy dưới cấp máu."
+        },
+        {
+          "id": "C",
+          "text": "Động mạch tá – tụy trên sau là nhánh của động mạch gan"
+        },
+        {
+          "id": "D",
+          "text": "Động mạch tá –tụy trên trước tiếp nối với động mạch tụy lưng"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Mặt sau tá tràng và đầu tụy được cấp máu bởi động mạch tá – tụy\ntrên sau và nhánh sau của động mạch tá – tụy dưới =>Cung mạch\nsau tá tụy=>tá tuỵ trên trước và sau của ĐM vị-tá tràng, tá tuỵ dưới\ncủa ĐM mạc treo tràng trên.\nB.Mặt trước tá tràng và đầu tụy do động mạch tá – tụy trên trước và\nnhánh trước của động mạch tá – tụy dưới cấp máu => Cung mạch\ntrước tá tụy\nC.Động mạch tá – tụy trên sau là nhánh của động mạch gan=>của\nĐM vị- tá tràng: tách ra từ ĐM gan chung\nD.Động mạch tá –tụy trên trước tiếp nối với động mạch tụy\nlưng=>nhánh của ĐM lách.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 19,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-20",
+      "number": 20,
+      "stem": "Mô tả nào sau đây về hỗng tràng đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Luôn có một ranh giới rõ giữa hỗng tràng và hồi tràng."
+        },
+        {
+          "id": "B",
+          "text": "Hỗng tràng có ít nếp vòng của niêm mạc hơn hồi tràng."
+        },
+        {
+          "id": "C",
+          "text": "Hỗng tràng có nhiều nang bạch huyết chùm hơn hồi tràng."
+        },
+        {
+          "id": "D",
+          "text": "Phần lớn hỗng tràng nằm ở vùng rốn."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "B.Hỗng tràng có ít nếp vòng của niêm mạc hơn hồi tràng=>nếp\nvòng chỉ có ở phần gần hồi tràng.\nC.Hỗng tràng có nhiều nang bạch huyết chùm hơn hồi\ntràng=>nang bach huyết chùm gần như không có ở phần gần hỗng\ntràng, phần xa nang này vẫn ít hơn và nhỏ hơn hồi tràng,hồi tràng\nchủ yếu nằm ở hạ vị và chậu hông.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 19,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-21",
+      "number": 21,
+      "stem": "Các mô tả sau đây về hồi tràng đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó nằm chủ yếu ở vùng hạ vị và trong chậu hông."
+        },
+        {
+          "id": "B",
+          "text": "Nó tận cùng tại chỗ nối manh tràng với đại tràng lên, tại nhú hồi tràng."
+        },
+        {
+          "id": "C",
+          "text": "Nó có đường kính trên 4cm."
+        },
+        {
+          "id": "D",
+          "text": "Nó có thành mỏng hơn thành hỗng tràng."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Nó có đường kính trên 4cm => đường kính 3,5cm.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/63c5d3b72de1605f7266.webp"
+      ],
+      "sourcePage": 20,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-22",
+      "number": 22,
+      "stem": "Hệ TM cửa nối thông với các TM sau của hệ TM chủ, trừ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Các TM thực quản."
+        },
+        {
+          "id": "B",
+          "text": "TM trực tràng dưới."
+        },
+        {
+          "id": "C",
+          "text": "Các TM thành bụng ở quanh rốn."
+        },
+        {
+          "id": "D",
+          "text": "Đám rối TM hình dây leo."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.Đám rối TM hình dây leo => ở ống bẹn, quanh thừng tinh.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/3cbe1d6d170b823cd30b.webp"
+      ],
+      "sourcePage": 21,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-23",
+      "number": 23,
+      "stem": "Mô tả nào sau đây về hình thể ngoài và liên quan của gan đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Toàn bộ mặt hoành có phúc mạc che phủ."
+        },
+        {
+          "id": "B",
+          "text": "Rốn gan nằm sau thùy đuôi."
+        },
+        {
+          "id": "C",
+          "text": "Ấn đại tràng nằm ở mặt tạng của thùy trái."
+        },
+        {
+          "id": "D",
+          "text": "Ngách gan thận nằm giữa gan và thận phải."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Toàn bộ mặt hoành có phúc mạc che phủ=>trừ vùng trần.\nB.Rốn gan nằm sau thùy đuôi=>ở trước thuỳ đuôi.\nC.Ấn đại tràng nằm ở mặt tạng của thùy trái=>ở thuỳ phải.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 22,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-24",
+      "number": 24,
+      "stem": "(Case study) Một nạn nhân bị va đập mạnh vào vùng hạ sườn phải, khám có đau bụng, huyết áp tụt, nghĩ tới chẩn đoán gì?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Chảy máu màng phổi phải."
+        },
+        {
+          "id": "B",
+          "text": "Giập, vỡ gan."
+        },
+        {
+          "id": "C",
+          "text": "Tổn thương đại tràng ngang."
+        },
+        {
+          "id": "D",
+          "text": "Chảy máu dạ dày."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.Giập, vỡ gan => rõ ràng.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 23,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-25",
+      "number": 25,
+      "stem": "(Case study) Khi khám bụng bác sĩ không sờ thấy bờ dưới gan, dữ kiện này cho thấy gì?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Gan không có u."
+        },
+        {
+          "id": "B",
+          "text": "Gan không viêm."
+        },
+        {
+          "id": "C",
+          "text": "Gan nhỏ."
+        },
+        {
+          "id": "D",
+          "text": "Gan bình thường về kích thước trong khám lâm sàng."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 23,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-26",
+      "number": 26,
+      "stem": "(Case study) Khám bụng thấy có điểm đau tại chỗ giao giữa bờ dưới sườn phải và bờ ngoài cơ thẳng bụng, nên nghĩ tới bệnh lý tạng nào?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thùy gan phải."
+        },
+        {
+          "id": "B",
+          "text": "Thùy gan trái."
+        },
+        {
+          "id": "C",
+          "text": "Túi mật."
+        },
+        {
+          "id": "D",
+          "text": "Hành tá tràng."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 24,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-27",
+      "number": 27,
+      "stem": "(Case study) Một bênh nhân đau bụng vùng thượng vị, nghĩ nhiều tới bệnh lý tạng nào?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Gan và thận phải."
+        },
+        {
+          "id": "B",
+          "text": "Dạ dày và gan."
+        },
+        {
+          "id": "C",
+          "text": "Hỗng tràng và dạ dày."
+        },
+        {
+          "id": "D",
+          "text": "Tá tràng và hỗng tràng."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.Dạ dày và gan=>Thượng vị.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 24,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-28",
+      "number": 28,
+      "stem": "(Case study) Bệnh nhân có nôn ra máu tươi, có tiền sử xơ gan và không có viêm loét dạ dày, phổi bình thường, nên nghĩ nhiều tới bệnh lý nào trong các khả năng sau?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Chảy máu thực quản do tăng áp lực TM cửa."
+        },
+        {
+          "id": "B",
+          "text": "Chảy máu dạ dày."
+        },
+        {
+          "id": "C",
+          "text": "Chảy máu đường mật."
+        },
+        {
+          "id": "D",
+          "text": "Ung thư gan."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 24,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-29",
+      "number": 29,
+      "stem": "(Case study) Một bệnh nhân có phù, gõ bụng thấy có nước trong ổ bụng, trên da bụng có nhiều tĩnh mạch nổi rõ ở quanh rốn, nên nghĩ tới nguyên nhân gì?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tăng áp lực TM chủ trên."
+        },
+        {
+          "id": "B",
+          "text": "Tăng áp lực TM cửa và các TM cạnh rốn."
+        },
+        {
+          "id": "C",
+          "text": "Tăng áp lực TM chủ dưới."
+        },
+        {
+          "id": "D",
+          "text": "Bệnh lý hệ TM."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.Tăng áp lực TM cửa và các TM cạnh rốn.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 25,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-30",
+      "number": 30,
+      "stem": "Mô tả nào sau đây về mặt hoành của gan đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Toàn bộ diện tích mặt này tiếp xúc với cơ hoành."
+        },
+        {
+          "id": "B",
+          "text": "Phần lớn mặt này có phúc mạc phủ."
+        },
+        {
+          "id": "C",
+          "text": "Mặt này có bốn phần: phải, trái trước và sau."
+        },
+        {
+          "id": "D",
+          "text": "Vùng trần của gan nằm ở bên trái rãnh TM chủ dưới."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Toàn bộ diện tích mặt này tiếp xúc với cơ hoành=>Còn tiếp xúc vs\nthành bụng trước.\nC.Mặt này có bốn phần: phải, trái trước và sau=>trên, sau, trước,\nphải.\nD.Vùng trần của gan nằm ở bên trái rãnh TM chủ dưới=>bên phải TM\nchủ dưới.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/75732d6a36d53ff7ace0.webp"
+      ],
+      "sourcePage": 25,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-31",
+      "number": 31,
+      "stem": "Mô tả nào sau đây về mặt tạng của gan đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ấn thận nằm ở phía sau và trên so với ấn đại tràng."
+        },
+        {
+          "id": "B",
+          "text": "Đầu sau của hố túi mật tiếp giáp với đầu trái của cửa gan."
+        },
+        {
+          "id": "C",
+          "text": "Thùy vuông là vùng gan nằm sau cửa gan."
+        },
+        {
+          "id": "D",
+          "text": "Thùy đuôi nằm ở bên trái khe dây chằng TM."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.Ấn thận nằm ở phía sau và trên so với ấn đại tràng=>Ấn đại tràng\nnằm trước nhất.\nB.Đầu sau của hố túi mật tiếp giáp với đầu trái của cửa gan=>đầu\nphải cửa gan.\nC.Thùy vuông là vùng gan nằm sau cửa gan=>nằm trc.\nD.Thùy đuôi nằm ở bên trái khe dây chằng TM=>bên phải,Thùy đuôi\nnằm sau Cửa gan,Thùy đuôi nằm bên T TMCD.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/3fe5e5d2589224791915.webp"
+      ],
+      "sourcePage": 26,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-32",
+      "number": 32,
+      "stem": "Các mô tả sau đây về gan đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Bờ dưới của gan ngăn cách phần trước và phần phải của mặt hoành với mặt tạng của gan."
+        },
+        {
+          "id": "B",
+          "text": "Khuyết dây chằng tròn nằm ở đầu trước và dưới của khe dây chằng tròn."
+        },
+        {
+          "id": "C",
+          "text": "Ấn tá tràng của gan là vùng gan tiếp xúc với góc tá tràng trên."
+        },
+        {
+          "id": "D",
+          "text": "Toàn bộ bờ dưới của gan nằm trên (cao hơn) bờ sườn phải."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.Toàn bộ bờ dưới của gan nằm trên (cao hơn) bờ sườn phải => ở\nthượng vị thì bờ dưới gan chạy ít chếch hơn so vs bờ sườn => nằm\ndưới.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/bedee6e53c2d5ea85bf5.webp"
+      ],
+      "sourcePage": 27,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-33",
+      "number": 33,
+      "stem": "Mô tả nào sau đây về các dây chằng của gan đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Vùng gan nằm giữa các lá của dây chằng vành không có phúc mạc phủ."
+        },
+        {
+          "id": "B",
+          "text": "Giữa các lá của dây chằng vành, toàn bộ vùng gan không có phúc mạc phủ tiếp xúc trực tiếp với cơ hoành."
+        },
+        {
+          "id": "C",
+          "text": "Lá trước và trên của dây chằng vành liên tiếp với hai lá của mạc nối nhỏ."
+        },
+        {
+          "id": "D",
+          "text": "Lá sau và dưới của dây chằng vành đi liên tục từ dây chằng tam giác trái tới dây chằng tam giác phải."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.Vùng gan nằm giữa các lá của dây chằng vành không có phúc\nmạc phủ=>Vùng trần.\nB.Giữa các lá của dây chằng vành, toàn bộ vùng gan không có\nphúc mạc phủ tiếp xúc trực tiếp với cơ hoành =>TRỪ rãnh tĩnh mạch\nchủ dưới =>tiếp xúc bằng mô liên kết.\nC.Lá trước và trên của dây chằng vành liên tiếp với hai lá của mạc\nnối nhỏ=>lá sau dưới mới liên tiếp với mạc nối nhỏ.\nD.Lá sau và dưới của dây chằng vành đi liên tục từ dây chằng tam\ngiác trái tới dây chằng tam giác phải=>lá trên và lá dưới.\ncòn có phần tiếp xúc\nThành ngực trước .",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 28,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-34",
+      "number": 34,
+      "stem": "Mô tả nào sau đây về túi mật đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thân túi mật được treo vào gan bằng một mạc treo."
+        },
+        {
+          "id": "B",
+          "text": "Đáy túi mật không vượt quá bờ dưới gan."
+        },
+        {
+          "id": "C",
+          "text": "Có một chỗ thắt giữa cổ và ống túi mật."
+        },
+        {
+          "id": "D",
+          "text": "Niêm mạc ống túi mật nhẵn, không gấp nếp."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Thân túi mật được treo vào gan bằng một mạc treo=>dính trực\ntiếp bằng mô liên kết.\nB.Đáy túi mật không vượt quá bờ dưới gan=>có vượt bờ dưới,tiếp\nxúc với Thành ngực trước.\nD.Niêm mạc ống túi mật nhẵn, không gấp nếp=>nhiều nếp gấp.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/df9bad0c398b2f5ed248.webp"
+      ],
+      "sourcePage": 29,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-35",
+      "number": 35,
+      "stem": "Mô tả nào sau đây về các ĐM gan đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "ĐM gan chung là nhánh của ĐM thân tạng."
+        },
+        {
+          "id": "B",
+          "text": "ĐM gan chung tách ra ĐM vị tá tràng ở ngang bờ phải của TM cửa."
+        },
+        {
+          "id": "C",
+          "text": "Trong mạc nối nhỏ. ĐM gan chung nằm ở bên phải ống mật chủ và ống gan chung."
+        },
+        {
+          "id": "D",
+          "text": "ĐM gan chung không cấp máu cho dạ dày."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.ĐM gan chung tách ra ĐM vị tá tràng ở ngang bờ phải của TM\ncửa=>ngang bờ trái TM cửa.\nC.Trong mạc nối nhỏ. ĐM gan chung nằm ở bên phải ống mật chủ\nvà ống gan chung=>bên T ống mật chủ.\nD.ĐM gan chung không cấp máu cho dạ dày=>ĐM gan chung tách\nra ĐM vị phải.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/868306c37e8d74a2cb88.webp"
+      ],
+      "sourcePage": 31,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-36",
+      "number": 36,
+      "stem": "Các mô tả sau đây về ĐM của gan đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nhánh phải của ĐM gan riêng chia thành các nhánh cho các phân thùy của gan phải."
+        },
+        {
+          "id": "B",
+          "text": "Nhánh phải ĐM gan riêng thường bắt chéo trước ống gan chung."
+        },
+        {
+          "id": "C",
+          "text": "Nhánh trái ĐM gan riêng phân nhánh vào các phân thùy của gan trái."
+        },
+        {
+          "id": "D",
+          "text": "Nhánh trái ĐM gan riêng thường không tách ra ĐM túi mật."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.Nhánh phải ĐM gan riêng thường bắt chéo trước ống gan chung\n(bắt chéo sau)=>ĐM gan riêng ở sau ống gan chung.\nD.Nhánh trái ĐM gan riêng thường không tách ra ĐM túi mật=>ĐM\ntúi mật tách từ ĐM gan phải.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 32,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-37",
+      "number": 37,
+      "stem": "Sự tiếp nối cửa-chủ tồn tại giữa tất cả các cặp TM sau, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Các TM gan và TM chủ dưới."
+        },
+        {
+          "id": "B",
+          "text": "TM trực tràng trên và TM trực tràng giữa."
+        },
+        {
+          "id": "C",
+          "text": "TM vị trái và TM thực quản của hệ TM đơn."
+        },
+        {
+          "id": "D",
+          "text": "TM cạnh rốn và TM thượng vị nông."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "C.TM vị trái và TM thực quản của hệ TM đơn=>Nhánh thực quản ĐM\nvị trái.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 33,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-38",
+      "number": 38,
+      "stem": "Mô tả nào trong các mô tả sau về TM cửa đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó được tạo nên ở sau cổ tụy bởi sự hợp lại của các TM lách và thận."
+        },
+        {
+          "id": "B",
+          "text": "Nó đi trong cuống gan ở trước ống mật và ĐM gan riêng."
+        },
+        {
+          "id": "C",
+          "text": "Nó đi trước lỗ mạc nối, trong bờ tự do của mạc nối bé."
+        },
+        {
+          "id": "D",
+          "text": "Nó không nhận nhánh nào ở trên nguyên ủy của nó."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Nó được tạo nên ở sau cổ tụy bởi sự hợp lại của các TM lách và\nthận=>TM lách và TM mạc treo tràng trên.\nB.Nó đi trong cuống gan ở trước ống mật và ĐM gan riêng=>TM\ncửa đi sau cùng.\nD.Nó không nhận nhánh nào ở trên nguyên ủy của nó=>thân TM\ncửa: vị P, vị T, tá tụy trên\nnhánh T: TM cạnh rốn\nnhánh P: TM túi mật.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 34,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-39",
+      "number": 39,
+      "stem": "Tắc TM mạc treo tràng trên có khả năng gây giãn tất cả các TM sau, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "TM đại tràng giữa."
+        },
+        {
+          "id": "B",
+          "text": "TM đại tràng phải."
+        },
+        {
+          "id": "C",
+          "text": "TM tá tụy dưới."
+        },
+        {
+          "id": "D",
+          "text": "TM đại tràng trái."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.TM đại tràng trái=>Đổ về TM mạc treo tràng dưới rồi đổ về TM\nlách.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/5a3f72535ff821f95c59.webp"
+      ],
+      "sourcePage": 34,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-40",
+      "number": 40,
+      "stem": "Tất cả các TM sau thuộc về hệ thống cửa, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "TM đại tràng phải."
+        },
+        {
+          "id": "B",
+          "text": "TM trực tràng trên."
+        },
+        {
+          "id": "C",
+          "text": "TM thượng thận phải."
+        },
+        {
+          "id": "D",
+          "text": "TM lách."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Tất cả các TM sau thuộc về hệ thống cửa, TRỪ:các TM từ dạ dày,\nruột, tuỵ, lách và túi mật.\nB.TM trực tràng trên=>TM MTTT.\nC.TM thượng thận phải=>TM chủ dưới thu máu của thành bụng, cơ\nhoành, thận, tuyến sinh dục, thượng thận.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/90d48980ee5067935609.webp"
+      ],
+      "sourcePage": 35,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-41",
+      "number": 41,
+      "stem": "Một khối u ở cửa gan sẽ chèn ép tất cả các cấu trúc sau, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "ĐM gan phải."
+        },
+        {
+          "id": "B",
+          "text": "Các nhánh của TM cửa."
+        },
+        {
+          "id": "C",
+          "text": "ĐM gan chung."
+        },
+        {
+          "id": "D",
+          "text": "Ống gan trái."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Vì ĐM gan chung tách ra ĐM vị phải để thành ĐM gan riêng từ trong\nmạc nối nhỏ",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 36,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-42",
+      "number": 42,
+      "stem": "Thùy vuông của gan có liên quan với tạng nào sau đây?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thận phải và góc đại tràng phải."
+        },
+        {
+          "id": "B",
+          "text": "Đáy vị và thân vị."
+        },
+        {
+          "id": "C",
+          "text": "Tụy và tá tràng."
+        },
+        {
+          "id": "D",
+          "text": "Môn vị và phần trên tá tràng."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "Thùy vuông: nằm giữa Hố túi mật và Khe dc tròn\ntrùm lên mặt trước phần trên Tá tràng .",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 37,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-43",
+      "number": 43,
+      "stem": "Thùy trái của gan KHÔNG tiếp xúc với cấu trúc nào sau đây?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Vòm hoành trái."
+        },
+        {
+          "id": "B",
+          "text": "Dạ dày."
+        },
+        {
+          "id": "C",
+          "text": "Hỗng tràng."
+        },
+        {
+          "id": "D",
+          "text": "Thực quản."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "B.Dạ dày=>ấn dạ dày ở sau.\nD.Thực quản=>ấn TQ ở trước.\nThùy trái: Nằm bên trái Khe dch tròn và Khe dch TM\nẤn thực quản ở sau\nẤn dạ dày ở trước.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 38,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-44",
+      "number": 44,
+      "stem": "Thùy phải của gan KHÔNG liên quan với cấu trúc nào sau đây?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Phổi."
+        },
+        {
+          "id": "B",
+          "text": "Thực quản."
+        },
+        {
+          "id": "C",
+          "text": "Góc đại tràng phải."
+        },
+        {
+          "id": "D",
+          "text": "Tuyến thượng thận phải."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Phổi => qua cơ hoành\nB.Thực quản=>TQ liên quan với thuỳ T.\nC.Góc đại tràng phải=>ẤN ĐT ở trước nhất và dưới nhất.\nD.Tuyến thượng thận phải=>Ấn thượng thận ở sau ấn tá tràng.\nThùy Phải: nằm bên P Hố túi mật và Rãnh TMC dưới\nẤn đại tràng do Góc ĐT P\nẤn thận do Cực trên thận P nằm sau và trên Ấn ĐT\nẤn tá tràng: Do góc tá tràng trên, nằm trong so với Ấn thận.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 38,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-45",
+      "number": 45,
+      "stem": "Thành phần nào thường nằm trước nhất ở cửa gan?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Các ống gan phải và trái."
+        },
+        {
+          "id": "B",
+          "text": "Các ĐM gan phải và trái."
+        },
+        {
+          "id": "C",
+          "text": "Các nhánh phải và trái của TM cửa."
+        },
+        {
+          "id": "D",
+          "text": "Ống túi mật."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "D.Ống túi mật=>từ trc ra sau: Ống túi mật => ĐM gan => TM cửa.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/e2b4fd6ceb6ef822cf8f.webp"
+      ],
+      "sourcePage": 39,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-46",
+      "number": 46,
+      "stem": "Nhú tá tràng lớn nằm ở phần nào của tá tràng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Phần trên."
+        },
+        {
+          "id": "B",
+          "text": "Phần xuống."
+        },
+        {
+          "id": "C",
+          "text": "Góc tá tràng dưới."
+        },
+        {
+          "id": "D",
+          "text": "Phần lên."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 40,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-47",
+      "number": 47,
+      "stem": "Mô tả nào sau đây về mặt hoành của gan đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Phần trước của nó ngăn cách với phần trên bởi lá trên dây chằng vành."
+        },
+        {
+          "id": "B",
+          "text": "Phần trên nằm hoàn toàn dưới vòm hoành phải."
+        },
+        {
+          "id": "C",
+          "text": "Vùng trần nằm bên phải rãnh TM chủ dưới."
+        },
+        {
+          "id": "D",
+          "text": "Phần phải của nó tiếp xúc trực tiếp với thành ngực."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Phần trước của nó ngăn cách với phần trên bởi lá trên dây chằng\nvành=>phần trên ngăn vs phần sau.\nB.Phần trên nằm hoàn toàn dưới vòm hoành phải=>tiếp xúc vs cả\nvòm hoành trái.\nC.Vùng trần nằm bên phải rãnh TM chủ dưới.\nD.Phần phải của nó tiếp xúc trực tiếp với thành ngực=>tiếp xúc vs\nthành ngực qua vòm hoành, ngách sườn hoành, xg sườn 7,8,9.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/12047c60100c3f74e976.webp"
+      ],
+      "sourcePage": 40,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-48",
+      "number": 48,
+      "stem": "Mô tả nào sau đây về vùng trần của gan đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Giới hạn bên trái là khe dây chằng TM."
+        },
+        {
+          "id": "B",
+          "text": "Giới hạn bên phải là rãnh TM chủ dưới."
+        },
+        {
+          "id": "C",
+          "text": "Giới hạn dưới bởi lá dưới dây chằng vành."
+        },
+        {
+          "id": "D",
+          "text": "Ngăn cách với cơ hoành bởi một lá phúc mạc."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Giới hạn bên trái là khe dây chằng TM=>bên T là rãnh TM chủ dưới.\nC.Giới hạn dưới bởi lá dưới dây chằng vành=>giới hạn dưới là lá\ndưới d/c vành,giới hạn trên là lá trên d/c vành.\nD.Ngăn cách với cơ hoành bởi một lá phúc mạc=>không có phúc\nmạc phủ, dính vs cơ hoành bằng mô liên kết.\nVùng trần Gan: gh bởi 2 lá DC vành ở Lá trên, dưới\nbên T: Rãnh TM chủ dưới và mặt trước nhận các TM\ngan đổ vào\nThùy đuôi; Khe DC TM\nbênP: Các XS; ngách sườn hoành ; vòm hoành P",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 41,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-49",
+      "number": 49,
+      "stem": "Mô tả nào sau đây về mặt tạng của của gan đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Khe dây chằng tròn đi từ khuyết dây chằng tròn tới đầu phải cửa gan."
+        },
+        {
+          "id": "B",
+          "text": "Đầu sau trên hố túi mật là đầu trái cửa gan."
+        },
+        {
+          "id": "C",
+          "text": "Thùy vuông nằm sau cửa gan."
+        },
+        {
+          "id": "D",
+          "text": "Cửa gan đi từ đầu sau- trên của hố túi mật tới đầu sau – trên khe dây chằng tròn."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Khe dây chằng tròn đi từ khuyết dây chằng tròn tới đầu phải cửa\ngan=>khe d/c tròn tới đầu T cửa gan.\nB.Đầu sau trên hố túi mật là đầu trái cửa gan=>đầu P cửa gan.\nC.Thùy vuông nằm sau cửa gan=>trước cửa gan.\nD.Cửa gan đi từ đầu sau- trên của hố túi mật tới đầu sau – trên khe\ndây chằng tròn=>Khe DC TM: Bờ dưới chạy lên trên ra sau đến đầu\ntrái Cửa gan.\nHố túi mật: ( chứa phần lớn Thân túi mật)\nchạy lên trên và ra sau đến đầu P Cửa gan.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 42,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-50",
+      "number": 50,
+      "stem": "Mô tả nào sau đây về mặt tạng của gan đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ấn thận chiếm phần trước nhất ở thùy phải."
+        },
+        {
+          "id": "B",
+          "text": "Ấn tá tràng nằm bên phải ấn thận."
+        },
+        {
+          "id": "C",
+          "text": "Ấn dạ dày nằm sau ấn thực quản."
+        },
+        {
+          "id": "D",
+          "text": "Mỏm đuôi và mỏm nhú của thùy đuôi nằm sát cửa gan."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Ấn thận chiếm phần trước nhất ở thùy phải=>Ấn ĐT là trước nhất.\nB.Ấn tá tràng nằm bên phải ấn thận=>Ấn Tá tràng nằm ở bên trong\nấn thận (bên T).\nC.Ấn dạ dày nằm sau ấn thực quản=>Ấn TQ ở sau ấn dạ dày.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/9a71739c3b24b3490aa4.webp"
+      ],
+      "sourcePage": 43,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-51",
+      "number": 51,
+      "stem": "Mô tả nào sau đây về phúc mạc phủ gan đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Phủ toàn bộ mặt hoành của gan trừ rãnh TM chủ dưới."
+        },
+        {
+          "id": "B",
+          "text": "Phủ toàn bộ mặt tạng của gan trừ cửa gan."
+        },
+        {
+          "id": "C",
+          "text": "Phúc mạc lật từ mặt hoành của gan lên cơ hoành tạo nên dây chằng hoành – gan."
+        },
+        {
+          "id": "D",
+          "text": "Phúc mạc phủ mặt tạng của gan liên tiếp với các lá của mạc nối nhỏ."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Phủ toàn bộ mặt hoành của gan trừ rãnh TM chủ dưới=>trừ vùng\ntrần của gan.\nB.Phủ toàn bộ mặt tạng của gan trừ cửa gan=>khe d/c tròn, hố túi\nmật.\nC.Phúc mạc lật từ mặt hoành của gan lên cơ hoành tạo nên dây\nchằng hoành – gan=>d/c hoành gan là mô liên kết,dính vùng trần vs\ncơ hoành.\nD.Phúc mạc phủ mặt tạng của gan liên tiếp với các lá của mạc nối\nnhỏ=>liên tiếp tại cửa gan.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 44,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-52",
+      "number": 52,
+      "stem": "Mô tả nào sau đây về dây chằng liềm đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Là một nếp phúc mạc gồm hai lá liên tiếp với hai lá của mạc nối nhỏ."
+        },
+        {
+          "id": "B",
+          "text": "Bờ lõm của nó dính vào cơ hoành."
+        },
+        {
+          "id": "C",
+          "text": "Bờ lồi của nó dính vào mặt hoành của gan."
+        },
+        {
+          "id": "D",
+          "text": "Bờ tự do của nó chứa dây chằng tròn của gan."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Là một nếp phúc mạc gồm hai lá liên tiếp với hai lá của mạc nối\nnhỏ=>nếp phúc mạc hình liềm nối mặt hoành vs cơ hoành.\nB.Bờ lõm của nó dính vào cơ hoành=>Bờ lõm với gan.\nC.Bờ lồi của nó dính vào mặt hoành của gan=>Bờ lồi dính vs cơ\nhoành.\nBờ tự do: đi từ Rốn -> Mặt dưới Gan\nchứa Dây chằng tròn và Các TM cạnh rốn.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/7eb010f26fb2a4887173.webp"
+      ],
+      "sourcePage": 45,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-53",
+      "number": 53,
+      "stem": "Mô tả nào sau đây về dây chằng vành đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Phần phải của lá dưới liên tiếp với lá phải của dây chằng liềm."
+        },
+        {
+          "id": "B",
+          "text": "Phần trái của lá trên liên tiếp với lá sau của mạc nối nhỏ."
+        },
+        {
+          "id": "C",
+          "text": "Lá trên là ranh giới giữa phần trước và phần sau của mặt hoành"
+        },
+        {
+          "id": "D",
+          "text": "Dây chằng tam giác phải là nơi gặp nhau của các lá trên phải và dưới phải của dây chằng vành."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Phần phải của lá dưới liên tiếp với lá phải của dây chằng liềm =>\ndc tĩnh mạch\nB.Phần trái của lá trên liên tiếp với lá sau của mạc nối nhỏ => lá\ntrước của mạc nối nhỏ\nD.Dây chằng tam giác phải là nơi gặp nhau của các lá trên phải và\ndưới phải của dây chằng vành => lá trên là ranh giới giữa phần trên\nvà phần sau",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/b078cbb88b62d7611d4a.webp"
+      ],
+      "sourcePage": 46,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-54",
+      "number": 54,
+      "stem": "Các cấu trúc sau đây đều có vai trò giữ gan tại chỗ, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Dây chằng liềm."
+        },
+        {
+          "id": "B",
+          "text": "Dây chằng hoành – gan."
+        },
+        {
+          "id": "C",
+          "text": "TM chủ dưới."
+        },
+        {
+          "id": "D",
+          "text": "Dây chằng TM."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.Dây chằng TM=>+ dc gan vị + dc gan tá + dc tròn gan ko có vai\ntrò giữ gan.\n-Gan được giữ tại chỗ bởi:\nTĩnh mạch chủ dưới cùng các tĩnh mạch gan\nDây chằng hoành-gan (là lớp mô liên kết dính vùng trần của gan với\ncơ hoành);\nDây chằng vành và dây chằng liềm.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 47,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-55",
+      "number": 55,
+      "stem": "Các mô tả sau đây về ống gan chung đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đi dọc bờ tự do của mạc nối nhỏ."
+        },
+        {
+          "id": "B",
+          "text": "Đi bên phải ĐM gan riêng khi ở trong dây chằng gan – tá tràng."
+        },
+        {
+          "id": "C",
+          "text": "Đi ở trước tụy."
+        },
+        {
+          "id": "D",
+          "text": "Thường kết hợp với ống túi mật tạo thành ống mật chủ."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "B.Đi bên phải ĐM gan riêng khi ở trong dây chằng gan – tá tràng =>\nbắt chéo trước ngành phải đm gan riêng\nC.Đi ở trước tụy => đi ở sau tụy",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/87379ec326991b90db7b.webp"
+      ],
+      "sourcePage": 48,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-56",
+      "number": 56,
+      "stem": "Những mô tả sau đây về túi mật đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Mặt trên dính với gan bởi mô liên kết."
+        },
+        {
+          "id": "B",
+          "text": "Mặt dưới được phúc mạc phủ."
+        },
+        {
+          "id": "C",
+          "text": "Nó có khả năng bài tiết dịch mật."
+        },
+        {
+          "id": "D",
+          "text": "Đáy của nó thường vượt quá bờ dưới gan."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Nó có khả năng bài tiết dịch mật => chỉ chứa mật thôi.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/bbda7adf451063fa12bc.webp"
+      ],
+      "sourcePage": 49,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-57",
+      "number": 57,
+      "stem": "Các mô tả sau đây về túi mật đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đáy của nó tiếp xúc với thành bụng trước."
+        },
+        {
+          "id": "B",
+          "text": "Thân của nó liên tiếp với cổ tại bờ phải cửa gan."
+        },
+        {
+          "id": "C",
+          "text": "Cổ của nó chạy thẳng."
+        },
+        {
+          "id": "D",
+          "text": "Giữa cổ và ống túi mật có một chỗ thắt."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Cổ của nó chạy thẳng => cổ hẹp uốn cong lên trên ra trước rồi lại\ngấp ra sau và xuống dưới.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/eccacddd30490be75cc5.webp"
+      ],
+      "sourcePage": 50,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-58",
+      "number": 58,
+      "stem": "TM cửa không thu máu từ TM nào?",
+      "options": [
+        {
+          "id": "A",
+          "text": "TM vị trái."
+        },
+        {
+          "id": "B",
+          "text": "TM vị phải."
+        },
+        {
+          "id": "C",
+          "text": "TM túi mật."
+        },
+        {
+          "id": "D",
+          "text": "TM cùng giữa."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.TM cùng giữa => TM cửa thu máu của phần bụng ống tiêu hoá (trừ\nphần dưới ống hậu môn), lách, tuỵ và túi mật.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/60ac8f1b37d2a5852d16.webp"
+      ],
+      "sourcePage": 51,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-59",
+      "number": 59,
+      "stem": "Dạ dày nằm ở tất cả các vùng sau, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Vùng thượng vị."
+        },
+        {
+          "id": "B",
+          "text": "Vùng hạ sườn trái."
+        },
+        {
+          "id": "C",
+          "text": "Vùng rốn."
+        },
+        {
+          "id": "D",
+          "text": "Vùng hạ sườn phải."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "3 vùng A244.\nD.Vùng hạ sườn phải=>không có,Hạ sườn phải: Gan chiếm gần hết\nrồi.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/548dd58f81534a4989ae.webp"
+      ],
+      "sourcePage": 52,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-60",
+      "number": 60,
+      "stem": "Mô tả nào sau đây về dung tích của dạ dày đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Rất thay đổi."
+        },
+        {
+          "id": "B",
+          "text": "Khoảng 100ml ở trẻ sơ sinh."
+        },
+        {
+          "id": "C",
+          "text": "Khoảng 1500ml ở tuổi dạy thì."
+        },
+        {
+          "id": "D",
+          "text": "Khoảng 2500ml ở người trưởng thành."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.Rất thay đổi=>Dung tích thay đổi, phụ thuộc nhiều yếu tố.\nB.Khoảng 100ml ở trẻ sơ sinh =>sơ sinh 30ml.\nC.Khoảng 1500ml ở tuổi dạy thì ==>1000ml.\nD.Khoảng 2500ml ở người trưởng thành ==>1500ml, có thể đạt tới\n2000ml khi ăn no.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/7e6a93881f50c4dae2cf.webp"
+      ],
+      "sourcePage": 53,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-61",
+      "number": 61,
+      "stem": "Các mô tả sau đây về hình thể dạ dày khi rỗng đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Có hình chữ J."
+        },
+        {
+          "id": "B",
+          "text": "Có 2 thành trước và sau."
+        },
+        {
+          "id": "C",
+          "text": "Có khuyết góc nằm bên trái thực quản."
+        },
+        {
+          "id": "D",
+          "text": "Có hai bờ cong: bờ cong nhỏ và bờ cong lớn."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Có khuyết góc nằm bên trái thực quản=>khuyết góc ở bên P\nthực quản, khuyết tâm vị mới bên T thực quản.\nKhuyết góc: nằm ở Bờ cong nhỏ; Giữa Thân vị và Phần môn vị DD.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/7e6a93881f50c4dae2cf.webp"
+      ],
+      "sourcePage": 54,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-62",
+      "number": 62,
+      "stem": "Đi theo chiều bờ cong lớn của dạ dày, thứ tự đúng của các phần của dạ dày là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đáy vị, phần môn vị, thân vị."
+        },
+        {
+          "id": "B",
+          "text": "Khuyết tâm vị, đáy vị, môn vị."
+        },
+        {
+          "id": "C",
+          "text": "Phần tâm vị, đáy vị, thân vị, phần môn vị."
+        },
+        {
+          "id": "D",
+          "text": "Hang môn vị, môn vị, đáy vị."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 55,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-63",
+      "number": 63,
+      "stem": "Các mô tả sau đây về liên quan dạ dày đều đúng. TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Mặt trước dạ dày có 2 phần liên quan: phần trên và phần dưới bờ sườn trái."
+        },
+        {
+          "id": "B",
+          "text": "Phần dạ dày dưới bờ sườn liên quan trước với thành bụng trước."
+        },
+        {
+          "id": "C",
+          "text": "Đáy vị là phần cao nhất của dạ dày."
+        },
+        {
+          "id": "D",
+          "text": "Mặt sau dạ dày liên quan với mặt dạ dày của lách qua túi mạc nối."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Mặt trước dạ dày có 2 phần liên quan: phần trên và phần dưới bờ\nsườn trái=>Phần trên áp vào Cơ hoành ( Gan trái lách 1  phần vào\ngiữa)\nPhần dưới ( bụng) liên quan đến Thành bụng trước.\nD.Mặt sau dạ dày liên quan với mặt dạ dày của lách qua túi mạc\nnối=>qua một ngách ổ phúc mạc.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 56,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-64",
+      "number": 64,
+      "stem": "Các mô tả sau đây về dạ dày đều đúng. TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Dọc theo bờ cong nhỏ có vòng ĐM bờ cong nhỏ."
+        },
+        {
+          "id": "B",
+          "text": "Phần viền quanh đáy vị của bờ cong lớn có dây chằng vị - hoành bám."
+        },
+        {
+          "id": "C",
+          "text": "Phần bờ cong ở bờ trái thân vị có dây chằng vị - lách bám."
+        },
+        {
+          "id": "D",
+          "text": "Dịch tràn ra từ lỗ thủng ở mặt trước dạ dày thường đổ vào túi mạc nối."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.Dịch tràn ra từ lỗ thủng ở mặt trước dạ dày thường đổ vào túi mạc\nnối=>thủng ở mặt sau mới đổ vào túi mạc nối thủng ở mặt trc đổ\nvào ổ phúc mạc lớn",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 56,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-65",
+      "number": 65,
+      "stem": "ĐM nào sau đây không tham gia tạo thành các vòng ĐM của dạ dày?",
+      "options": [
+        {
+          "id": "A",
+          "text": "ĐM vị- mạc nối phải."
+        },
+        {
+          "id": "B",
+          "text": "ĐM vị - mạc nối trái."
+        },
+        {
+          "id": "C",
+          "text": "ĐM vị sau."
+        },
+        {
+          "id": "D",
+          "text": "ĐM vị trái."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.ĐM vị sau=>ĐM vị sau, vị ngắn là của ĐM lách.\nD.ĐM vị trái=>bụng+ ĐM vị phải.\nVòng bờ cong nhỏ: ĐM vị P và vị T\nVòng bờ cong lớn: ĐM mạc nối T và P\nVòng tách ra các nhánh vị và nhánh mạc nối.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 57,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-66",
+      "number": 66,
+      "stem": "Các mô tả sau đây về ĐM cấp máu cho dạ dày đều đúng. TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Các ĐM vị trái và vị phải tạo nên vòng ĐM bờ cong bé."
+        },
+        {
+          "id": "B",
+          "text": "Các ĐM vị ngắn tách từ ĐM lách."
+        },
+        {
+          "id": "C",
+          "text": "ĐM vị mạc nối trái và ĐM vị ngắn tạo thành vòng mạch bờ cong lớn."
+        },
+        {
+          "id": "D",
+          "text": "ĐM vị sau tách từ ĐM lách."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.ĐM vị mạc nối trái và ĐM vị ngắn tạo thành vòng mạch bờ cong\nlớn=>Vị mạc nối T và vị mạc nối P.\nĐM mạc nối T: từ ĐM lách\nĐM mạc nối P: 1 trong 2 nhánh tận của ĐM vị- trá tràng.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 57,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-67",
+      "number": 67,
+      "stem": "Một nhát dao nhỏ đâm thẳng từ trước ra sau ở vùng rốn. có thể làm tổn thương các tạng nào?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Hỗng tràng."
+        },
+        {
+          "id": "B",
+          "text": "Đại tràng xuống."
+        },
+        {
+          "id": "C",
+          "text": "Gan."
+        },
+        {
+          "id": "D",
+          "text": "Đại tràng lên."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Đáp án: A. Hỗng tràng\nVùng rốn tương ứng với vùng quanh rốn (periumbilical region) trên\nthành bụng trước. Khi đâm thẳng từ trước ra sau, tạng đầu tiên dễ\nbị tổn thương là ruột non, đặc biệt là hỗng tràng – đoạn đầu của\nruột non nằm chủ yếu ở phần trên trái của ổ bụng, trong khi quanh\nrốn thường thấy các quai hỗng tràng di động.\nB. Đại tràng xuống: nằm ở hố chậu và bên trái, sát thành bụng bên,\nkhông nằm ngay sau rốn.\nC. Gan: chủ yếu nằm ở hạ sườn phải, chỉ phần thùy trái có thể chạm\ntới trên rốn, ít khi ngay sau rốn.\nD. Đại tràng lên: nằm ở bên phải ổ bụng, sát thành bụng bên, không\nnằm sau rốn.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 58,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-68",
+      "number": 68,
+      "stem": "Thủng mặt trước dạ dày, dịch dạ dày thường đổ vào đâu?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tiền đình túi mạc nối."
+        },
+        {
+          "id": "B",
+          "text": "Túi mạc nối chính."
+        },
+        {
+          "id": "C",
+          "text": "Ổ phúc mạc lớn."
+        },
+        {
+          "id": "D",
+          "text": "Ngách dưới túi mạc nối."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "B.Túi mạc nối chính=>Thủng mặt sau dạ dày đổ vào Túi mạc nối\nchính.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/0ec0d87a48315ddc7190.webp"
+      ],
+      "sourcePage": 59,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-69",
+      "number": 69,
+      "stem": "(Case study) Một nạn nhân bị va đập mạnh vào vùng hạ sườn phải tạng nào hay bị tổn thương?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Dạ dày."
+        },
+        {
+          "id": "B",
+          "text": "Gan phải."
+        },
+        {
+          "id": "C",
+          "text": "Gan trái."
+        },
+        {
+          "id": "D",
+          "text": "Góc phải đại tràng."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 60,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-70",
+      "number": 70,
+      "stem": "Một va đập mạnh vào vùng hạ sườn trái tạng nào dễ vỡ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thận trái."
+        },
+        {
+          "id": "B",
+          "text": "Góc trái đại tràng."
+        },
+        {
+          "id": "C",
+          "text": "Lách."
+        },
+        {
+          "id": "D",
+          "text": "Dạ dày."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/7e6a93881f50c4dae2cf.webp"
+      ],
+      "sourcePage": 60,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-71",
+      "number": 71,
+      "stem": "Mô tả nào sau đây về dạ dày đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Mặt ngoài tâm vị hơi thắt lại do có cơ thắt tâm vị."
+        },
+        {
+          "id": "B",
+          "text": "Mặt trước của dạ dày tiếp xúc với cơ hoành. gan và thành bụng trước."
+        },
+        {
+          "id": "C",
+          "text": "Môn vị nằm trên đường giữa."
+        },
+        {
+          "id": "D",
+          "text": "Khuyết góc nằm giữa thực quản và đáy vị."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Mặt ngoài tâm vị hơi thắt lại do có cơ thắt tâm vị=>mặt ngoài tâm\nvị không bị thắt lại mặc dù có cơ thắt.\nC.Môn vị nằm trên đường giữa=>môn vị nằm lệch bên phải > 1cm,\nngang TL1.\nD.Khuyết góc nằm giữa thực quản và đáy vị=>khuyết tâm vị ms giữa\nthực quản và đáy vị.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 61,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-72",
+      "number": 72,
+      "stem": "Các mô tả sau về dạ dày đều đúng. TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Dạ dày nằm giữa các mạc nối lớn và bé."
+        },
+        {
+          "id": "B",
+          "text": "Mặt sau dạ dày tựa lên giường dạ dày."
+        },
+        {
+          "id": "C",
+          "text": "Bờ cong lớn dạ dày có một phình ở phần thân vị."
+        },
+        {
+          "id": "D",
+          "text": "Tâm vị của dạ dày nằm sau sụn sườn VII trái."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Bờ cong lớn dạ dày có một phình ở phần thân vị=>phình ở hang\nmôn vị.\nD.Tâm vị của dạ dày nằm sau sụn sườn VII trái=>cách đường giữa >\n2cm, ngang ĐS ngực XI.\nGiường DD: Tụy; ĐM lách; thận T; Cơ hoành; Lách; Mạc treo Đại\ntràng ngang.\n( ngăn cách với DD qua Túi mạc nối).",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/5d40024922865989ed7e.webp"
+      ],
+      "sourcePage": 62,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-73",
+      "number": 73,
+      "stem": "Mô tả nào sau đây về mạch máu của dạ dày đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nhánh thực quản của ĐM vị trái không chỉ cấp máu cho thực quản."
+        },
+        {
+          "id": "B",
+          "text": "ĐM vị trái là một nhánh của ĐM gan chung."
+        },
+        {
+          "id": "C",
+          "text": "ĐM vị phải tách ra từ ĐM vị tá tràng."
+        },
+        {
+          "id": "D",
+          "text": "Các ĐM vị ngắn đi tới dạ dày qua dây chằng vị - hoành."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.Nhánh thực quản của ĐM vị trái không chỉ cấp máu cho thực\nquản=>còn cấp máu cho đáy vị, tâm vị.\nB.ĐM vị trái là một nhánh của ĐM gan chung=>vị trái tách ra từ ĐM\nthân tạng.\nC.ĐM vị phải tách ra từ ĐM vị tá tràng=>ĐM vị phải tách từ ĐM gan\nchung, ĐM vị mạc nối P ms tách từ ĐM vị tá tràng.\nD.Các ĐM vị ngắn đi tới dạ dày qua dây chằng vị - hoành=>qua dc\nvị lách.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/fd25306416c792b2cfdb.webp"
+      ],
+      "sourcePage": 63,
+      "gradable": true
+    },
+    {
+      "id": "da-day-gan-ruot-74",
+      "number": 74,
+      "stem": "Mô tả nào sau đây về dạ dày đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Dạ dày chỉ nằm ở hai vùng: hạ sườn trái và thượng vị."
+        },
+        {
+          "id": "B",
+          "text": "Các ĐM vị mạc nối phải và trái đi sát thành bờ cong lớn."
+        },
+        {
+          "id": "C",
+          "text": "Hai đầu của dạ dày ở về hai phía của đường giữa."
+        },
+        {
+          "id": "D",
+          "text": "Các nhánh ĐM tới bờ cong nhỏ đều là nhánh trực tiếp từ ĐM thân tạng."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Dạ dày chỉ nằm ở hai vùng: hạ sườn trái và thượng vị=>cả ở vùng\nrốn nữa.\nB.Các ĐM vị mạc nối phải và trái đi sát thành bờ cong lớn=>đi cách\nbờ cong lớn 1 đoạn.\nC.Hai đầu của dạ dày ở về hai phía của đường giữa=>tâm vị ở bên\ntrái, môn vị ở bên phải.\nD.Các nhánh ĐM tới bờ cong nhỏ đều là nhánh trực tiếp từ ĐM thân\ntạng=>ĐM vị phải tách từ ĐM gan chung.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 65,
+      "gradable": true
+    }
+  ]
+}

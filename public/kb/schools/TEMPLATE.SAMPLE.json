@@ -1,0 +1,26 @@
+{
+  "_note": "MẪU ĐỊNH DẠNG — file này KHÔNG được nạp (không có trong index.json). Để thêm đề một trường: copy file này thành <id-truong>.json, thay câu hỏi thật có rõ nguồn, kiểm tra bằng `node scripts/verify-quiz-bank.mjs <file>`, rồi thêm một dòng vào index.json. TUYỆT ĐỐI không bịa câu hỏi.",
+  "schemaVersion": 1,
+  "source": {
+    "title": "Đề thi kết thúc học phần Giải phẫu — Trường...(niên khoá...)",
+    "section": "Bộ đề trường",
+    "note": "Nguồn file/PDF gốc và người kiểm duyệt. Chỉ đề có nguồn rõ ràng mới được vào thư viện mặc định."
+  },
+  "questions": [
+    {
+      "id": "truong-001",
+      "region": "CHI TRÊN",
+      "stem": "Câu hỏi nguyên văn...",
+      "options": {
+        "A": "Phương án A nguyên văn...",
+        "B": "Phương án B nguyên văn...",
+        "C": "Phương án C nguyên văn...",
+        "D": "Phương án D nguyên văn...",
+        "E": "Phương án E nguyên văn..."
+      },
+      "answer": "C",
+      "explanation": "Lời giải kèm căn cứ (sách, trang).",
+      "source": { "title": "Tên tài liệu gốc", "questionPage": 12, "answerPage": 210 }
+    }
+  ]
+}

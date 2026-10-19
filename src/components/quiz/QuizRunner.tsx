@@ -1,9 +1,14 @@
 "use client";
 
+
+
+import { useContent } from "@/components/content/ContentProvider";
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { buildQuiz, quizQuestionCount, quizSystems, type QuizItem } from "@/lib/anatomy/quiz";
 import { rng, shuffle } from "@/lib/anatomy/random";
 import { loadExamBank, examQuestionCount, examRegions, examToQuizItems, type ExamBank } from "@/lib/anatomy/examBank";
+import { loadSchoolIndex, loadSchoolBank, schoolQuestionCount, schoolToQuizItems, type SchoolEntry } from "@/lib/anatomy/schoolBank";
 import { loadAtlasBank, atlasQuestionCount, atlasToQuizItems, type AtlasBank } from "@/lib/anatomy/atlasBank";
 import {
   loadPersonalBank,
@@ -21,6 +26,7 @@ import { quizText } from "./quizText";
 import PathPanel from "./PathPanel";
 import SignInGate from "./SignInGate";
 import PdfPanel from "./PdfPanel";
+import QuizConfirmDialog from "./QuizConfirmDialog";
 import { regionViewerConfig } from "@/lib/scenes/regions";
 import type { SystemKey } from "@/store/useAnatomyStore";
 
@@ -55,15 +61,27 @@ const LETTERS = ["A", "B", "C", "D", "E", "F"];
 const QUESTION_COUNTS = [5, 10, 20, 45, 60, 100] as const;
 /** 45 giây mỗi câu — bằng nhịp đề thi giải phẫu thường gặp (40 câu / 30 phút). */
 const SECONDS_PER_QUESTION = 45;
+export type QuizTool = "quick" | "adaptive" | "ai" | "pdf";
 
 export default function QuizRunner({
   locale,
   defaultSource = "model",
+  embedded = false,
+  tool: controlledTool,
+  onToolChange,
+  onSessionActiveChange,
 }: {
   locale: Loc;
   /** Nguồn đề mở sẵn khi vào trang (trang /quiz để mặc định "model"). */
   defaultSource?: QuizSourceKey;
+  embedded?: boolean;
+  tool?: QuizTool;
+  onToolChange?: (tool: QuizTool) => void;
+  onSessionActiveChange?: (active: boolean) => void;
 }) {
+  const cmsContent = useContent();
+  const SYSTEM_LABEL = cmsContent.resolve(cmsSourceSYSTEM_LABEL());
+
   const t = quizText(locale);
   const systems = useMemo(() => quizSystems(locale), [locale]);
   /**
@@ -73,6 +91,19 @@ export default function QuizRunner({
   const structureCount = useMemo(() => quizQuestionCount(locale, "all"), [locale]);
 
   const [mode, setMode] = useState<"practice" | "exam">("practice");
+  /**
+   * Khi nào lộ đáp án — tách khỏi `mode` (vốn gộp cả đếm giờ):
+   * "instant" = giải thích ngay sau mỗi câu, "end" = chỉ xem đáp án
+   * và giải thích khi làm xong tất cả (trang kết quả). Mặc định đi
+   * theo mode, người dùng được đổi tay ở bảng thiết lập.
+   */
+  const [reveal, setReveal] = useState<"instant" | "end">("instant");
+  /**
+   * Bảng hỏi giữa màn hình khi bấm Bắt đầu / Đề ngẫu nhiên — người học
+   * chọn xong mới vào bài. Giữ cấu hình chờ ở đây để nút modal gọi
+   * `start` đúng một lần với đủ tham số.
+   */
+  const [askReveal, setAskReveal] = useState<null | { system?: SystemKey | "all"; count?: number; mode?: "practice" | "exam"; source?: QuizSourceKey }>(null);
   const [left, setLeft] = useState<number | null>(null);   // giây còn lại
   const [timedOut, setTimedOut] = useState(false);
   // `defaultSource` để trang "Trắc nghiệm giải phẫu" trong mục Giải phẫu mở
@@ -81,6 +112,10 @@ export default function QuizRunner({
   const [bank, setBank] = useState<ExamBank | null>(null);
   const [atlas, setAtlas] = useState<AtlasBank | null>(null);
   const [personal, setPersonal] = useState<PersonalBank | null>(null);
+  /** Đề trường Y: danh mục trường + id trường đang chọn + ngân hàng đã nạp. */
+  const [schoolIndex, setSchoolIndex] = useState<SchoolEntry[] | null>(null);
+  const [schoolId, setSchoolId] = useState<string>("all");
+  const [schoolData, setSchoolData] = useState<{ id: string; bank: ExamBank } | null>(null);
   /**
    * Danh sách khoá câu của BUỔI ÔN HÔM NAY.
    *
@@ -95,7 +130,12 @@ export default function QuizRunner({
   const [region, setRegion] = useState<string>("all");
   const [system, setSystem] = useState<SystemKey | "all">("all");
   const [count, setCount] = useState(10);
-  const [tool, setTool] = useState<"quick" | "adaptive" | "ai" | "pdf">("quick");
+  const [internalTool, setInternalTool] = useState<QuizTool>("quick");
+  const tool = controlledTool ?? internalTool;
+  function setTool(next: QuizTool) {
+    setInternalTool(next);
+    onToolChange?.(next);
+  }
   const [brief, setBrief] = useState("");
   const [composing, setComposing] = useState(false);
   const [composeNote, setComposeNote] = useState("");
@@ -112,6 +152,10 @@ export default function QuizRunner({
   const [idx, setIdx] = useState(0);
   const [picked, setPicked] = useState<Record<number, string>>({});
   const [done, setDone] = useState(false);
+  const [exitPrompt, setExitPrompt] = useState(false);
+  useEffect(() => {
+    onSessionActiveChange?.(seed !== null && !done);
+  }, [seed, done, onSessionActiveChange]);
   const recordedSeed = useRef<number | null>(null);
   /** Mốc bắt đầu bài, để đo thời lượng THẬT — chế độ ôn tập không có đồng hồ. */
   const startedAt = useRef<number>(0);
@@ -126,6 +170,17 @@ export default function QuizRunner({
     void sync();
     window.addEventListener(AUTH_CHANGED_EVENT, sync);
     return () => window.removeEventListener(AUTH_CHANGED_EVENT, sync);
+  }, []);
+
+  // Danh mục trường Y rất nhẹ nên nạp sẵn từ đầu: con số "nguồn học" trên đầu
+  // trang đúng ngay, và nút "ôn nhanh điểm yếu" định tuyến được scope đề
+  // trường mà không cần mở nguồn đó trước.
+  useEffect(() => {
+    let alive = true;
+    loadSchoolIndex()
+      .then((idx) => alive && setSchoolIndex((prev) => prev ?? idx.schools))
+      .catch(() => alive && setSchoolIndex((prev) => prev ?? []));
+    return () => { alive = false; };
   }, []);
 
   // Nạp ngân hàng đề khi người dùng chọn nguồn đó (lười nạp: hàng trăm KB JSON
@@ -143,6 +198,51 @@ export default function QuizRunner({
     loadExamBank().then((b) => alive && setBank(b)).catch(() => alive && setBank(null));
     return () => { alive = false; };
   }, [source, bank]);
+
+  // Danh mục trường nạp khi chọn nguồn; ngân hàng từng trường nạp khi chọn
+  // đúng trường đó — đề trường có thể nặng, không tải cả chùm.
+  useEffect(() => {
+    if (source !== "school" || schoolIndex) return;
+    let alive = true;
+    loadSchoolIndex().then((idx) => alive && setSchoolIndex(idx.schools)).catch(() => alive && setSchoolIndex([]));
+    return () => { alive = false; };
+  }, [source, schoolIndex]);
+
+  /**
+   * Trường đang dùng: người dùng chọn chip thì theo chip; buổi ôn theo lịch
+   * (dueOnly) trỏ vào câu đề trường mà chưa chọn trường nào thì theo trường
+   * của câu đến hạn — tính ra chứ không setState trong effect.
+   */
+  const dueSchoolId = useMemo(() => {
+    if (source !== "school" || !dueOnly?.length) return null;
+    const match = dueOnly[0].match(/^school:([^:]+):/);
+    return match ? match[1] : null;
+  }, [source, dueOnly]);
+  const effectiveSchoolId = schoolId !== "all" ? schoolId : (dueSchoolId ?? "all");
+
+  const activeSchool: SchoolEntry | undefined = useMemo(
+    () => schoolIndex?.find((s) => s.id === effectiveSchoolId),
+    [schoolIndex, effectiveSchoolId],
+  );
+
+  useEffect(() => {
+    if (source !== "school" || !activeSchool) return;
+    const entry = activeSchool;
+    let alive = true;
+    loadSchoolBank(entry)
+      .then((b) => alive && setSchoolData({ id: entry.id, bank: b }))
+      .catch(() => alive && setSchoolData(null));
+    return () => { alive = false; };
+  }, [source, activeSchool]);
+
+  /**
+   * Ngân hàng đang hiển thị: chỉ nhận khi đúng trường đang chọn — đang chuyển
+   * trường thì coi như chưa nạp (hiện "đang nạp") chứ không hiện đề trường cũ.
+   */
+  const schoolBank =
+    schoolData && activeSchool && schoolData.id === activeSchool.id
+      ? schoolData.bank
+      : null;
 
   // Ngân hàng đề cá nhân nằm sau đăng nhập nên không nạp sẵn được như hai kho
   // tĩnh kia; nạp khi chọn nguồn, và nạp lại khi người dùng vừa duyệt thêm câu.
@@ -189,8 +289,13 @@ export default function QuizRunner({
     if (source === "book") return bank ? examQuestionCount(bank, activeRegion) : null;
     if (source === "atlas") return atlas ? atlasQuestionCount(atlas) : null;
     if (source === "personal") return personal ? personalQuestionCount(personal) : null;
+    if (source === "school") {
+      if (!schoolIndex) return null;
+      if (!activeSchool) return 0;
+      return schoolQuestionCount(schoolBank);
+    }
     return quizQuestionCount(locale, system);
-  }, [source, bank, activeRegion, atlas, personal, locale, system]);
+  }, [source, bank, activeRegion, atlas, personal, locale, system, schoolIndex, activeSchool, schoolBank]);
 
   /**
    * Số câu THỰC SỰ ra đề: hạ xuống mức cao nhất kho hiện tại còn đáp ứng được.
@@ -218,6 +323,11 @@ export default function QuizRunner({
       if (source === "personal") {
         return personal ? personalToQuizItems(personal, { count: effectiveCount, seed, only }) : [];
       }
+      if (source === "school") {
+        return activeSchool && schoolBank
+          ? schoolToQuizItems(activeSchool, schoolBank, { count: effectiveCount, seed, only })
+          : [];
+      }
       // Đề trộn: ra từng phần theo đúng hệ và số câu của phần đó, mỗi phần một
       // hạt giống riêng (không thì hai phần cùng thứ tự bốc), rồi xáo chung để
       // bài đọc như MỘT đề chứ không phải ba đề nối đuôi.
@@ -240,9 +350,19 @@ export default function QuizRunner({
       if (due.length) return due;
     }
     return build();
-  }, [seed, locale, system, effectiveCount, source, bank, activeRegion, atlas, personal, dueOnly, blueprint]);
+  }, [seed, locale, system, effectiveCount, source, bank, activeRegion, atlas, personal, dueOnly, blueprint, activeSchool, schoolBank]);
 
-  const start = () => {
+  const start = (ov?: { system?: SystemKey | "all"; count?: number; mode?: "practice" | "exam"; reveal?: "instant" | "end"; source?: QuizSourceKey }) => {
+    const nextMode = ov?.mode ?? mode;
+    const nextReveal = ov?.reveal ?? (ov?.mode ? (ov.mode === "exam" ? "end" : "instant") : reveal);
+    // The current bank may contain fewer questions than the remembered choice.
+    // Use the same effective count shown in setup for the exam countdown.
+    const nextCount = ov?.count ?? effectiveCount;
+    if (ov?.system !== undefined) setSystem(ov.system);
+    if (ov?.count !== undefined) setCount(ov.count);
+    if (ov?.mode !== undefined) setMode(ov.mode);
+    if (ov?.reveal !== undefined || ov?.mode !== undefined) setReveal(nextReveal);
+    if (ov?.source !== undefined) setSource(ov.source);
     startedAt.current = Date.now();
     setDueOnly(null);
     setSeed(Math.floor(Math.random() * 2 ** 31));
@@ -251,18 +371,32 @@ export default function QuizRunner({
     setDone(false);
     setTimedOut(false);
     setView3d(null);
-    setLeft(mode === "exam" ? effectiveCount * SECONDS_PER_QUESTION : null);
+    setLeft(nextMode === "exam" ? nextCount * SECONDS_PER_QUESTION : null);
+  };
+
+  /** Đề ngẫu nhiên: bốc hệ bất kỳ + số câu bất kỳ rồi hỏi cách hiện đáp án. */
+  const randomStart = () => {
+    const keys: (SystemKey | "all")[] = ["all", ...systems.map((s) => s.key)];
+    const systemKey = keys[Math.floor(Math.random() * keys.length)] as SystemKey | "all";
+    const n = QUESTION_COUNTS[Math.floor(Math.random() * QUESTION_COUNTS.length)];
+    setBlueprint(null);
+    setAskReveal({ system: systemKey, count: n, mode: "practice", source: "model" });
   };
 
   /** Bỏ bài đang làm, quay về bảng thiết lập. */
-  const exitQuiz = () => {
-    if (!done && Object.keys(picked).length > 0 && !window.confirm(t.exitConfirm)) return;
+  const confirmExit = () => {
+    setExitPrompt(false);
     setSeed(null);
     setDueOnly(null);
     setLeft(null);
     setDone(false);
     setTimedOut(false);
     setView3d(null);
+    requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: "smooth" }));
+  };
+  const exitQuiz = () => {
+    if (!done && Object.keys(picked).length > 0) setExitPrompt(true);
+    else confirmExit();
   };
 
   const composeQuiz = async () => {
@@ -291,6 +425,7 @@ export default function QuizRunner({
       // hai hệ mà chip chỉ tô đúng một cái là nói sai về bài sắp làm.
       setSystem(mixed ? "all" : config.system);
       setMode(config.mode);
+      setReveal(config.mode === "exam" ? "end" : "instant");
       setSource(config.source);
       // Đề giáo trình chia theo VÙNG chứ không theo hệ, nên đổi nguồn phải bỏ
       // vùng cũ — không thì cấu hình AI vừa dựng lại bị vùng lần trước chặn.
@@ -317,12 +452,16 @@ export default function QuizRunner({
     if (asSystem) {
       setSource("model");
       setSystem(asSystem.key);
+    } else if (schoolIndex?.some((s) => s.id === scope)) {
+      setSource("school");
+      setSchoolId(scope);
     } else {
       setSource("book");
       setRegion(scope);
     }
     setCount(20);
     setMode("practice");
+    setReveal("instant");
     setTool("quick");
     setBlueprint(null);
     setDueOnly(null);
@@ -361,6 +500,7 @@ export default function QuizRunner({
     // lần trước bẻ lái đề của buổi hôm nay.
     setBlueprint(null);
     setMode("practice");
+    setReveal("instant");
     setTool("quick");
     startedAt.current = Date.now();
     setSeed(Math.floor(Math.random() * 2 ** 31));
@@ -382,6 +522,10 @@ export default function QuizRunner({
     // thô "joints" giữa những dòng tiếng Việt.
     const known = SYSTEM_LABEL[scope as SystemKey];
     if (known) return pick(known, locale);
+    // Phạm vi đề trường là id trường ("y-ha-noi") — hiện tên trường chứ không
+    // hiện mã thô trong lịch sử và dàn bài lộ trình.
+    const school = schoolIndex?.find((s) => s.id === scope);
+    if (school) return school.name;
     // Lượt làm bài bên thú y ghi `scope` là MÃ LOÀI ("cattle", "chicken"), không
     // phải mã hệ cơ quan — tra hai bảng trên đều trượt, và bảng lịch sử hiện ra
     // "cattle" trần giữa những dòng tiếng Việt. Tra tiếp bảng loài.
@@ -409,6 +553,19 @@ export default function QuizRunner({
   const mmss = (sec: number) =>
     `${Math.floor(sec / 60)}:${String(Math.max(0, sec % 60)).padStart(2, "0")}`;
 
+  /**
+   * Bấm "Bắt đầu làm bài" là nhảy tới đúng chỗ đề — trước đây trang giữ
+   * nguyên vị trí cuộn nên đề hiện tít dưới cuối, người dùng tưởng chưa
+   * có gì xảy ra.
+   */
+  useEffect(() => {
+    if (seed === null) return;
+    const id = requestAnimationFrame(() => {
+      document.querySelector(".quiz-shell")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+    return () => cancelAnimationFrame(id);
+  }, [seed]);
+
   const score = items.reduce(
     (n, it, i) => n + (it.options.find((o) => o.id === picked[i])?.correct ? 1 : 0),
     0,
@@ -428,7 +585,7 @@ export default function QuizRunner({
     recordedSeed.current = seed;
     void recordAttempt({
       source,
-      scope: source === "model" ? system : source === "book" ? activeRegion : "all",
+      scope: source === "model" ? system : source === "book" ? activeRegion : source === "school" ? effectiveSchoolId : "all",
       mode,
       score,
       total: items.length,
@@ -438,14 +595,14 @@ export default function QuizRunner({
       items: items.map((it, i) => ({
         itemKey: itemKeyOf(source, it.id),
         source,
-        scope: source === "model" ? system : source === "book" ? activeRegion : "all",
+        scope: source === "model" ? system : source === "book" ? activeRegion : source === "school" ? effectiveSchoolId : "all",
         correct: !!it.options.find((o) => o.id === picked[i])?.correct,
       })),
     });
     // `picked`/`left` cố ý không nằm trong danh sách phụ thuộc: chúng đã đứng
     // yên khi `done` bật lên, thêm vào chỉ khiến effect chạy lại vô ích.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [done, seed, items, score, source, system, activeRegion, mode]);
+  }, [done, seed, items, score, source, system, activeRegion, effectiveSchoolId, mode]);
 
   // Lớp phủ 3D: Esc để đóng và khoá cuộn nền, đúng thói quen của một hộp thoại.
   useEffect(() => {
@@ -469,11 +626,11 @@ export default function QuizRunner({
    * gõ chữ "a" vào ô mô tả lại thành chọn đáp án A.
    */
   const answer = useCallback((optionId: string) => {
-    setPicked((prev) => (prev[idx] !== undefined && mode === "practice" ? prev : { ...prev, [idx]: optionId }));
-  }, [idx, mode]);
+    setPicked((prev) => (prev[idx] !== undefined && reveal === "instant" ? prev : { ...prev, [idx]: optionId }));
+  }, [idx, reveal]);
 
   useEffect(() => {
-    if (!inQuestion || view3d) return;
+    if (!inQuestion || view3d || exitPrompt) return;
     const onKey = (e: KeyboardEvent) => {
       const el = e.target as HTMLElement | null;
       if (e.metaKey || e.ctrlKey || e.altKey) return;
@@ -494,7 +651,7 @@ export default function QuizRunner({
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [inQuestion, view3d, items, idx, answer]);
+  }, [inQuestion, view3d, exitPrompt, items, idx, answer]);
 
   /** Lớp phủ 3D dùng chung cho cả lúc làm bài lẫn lúc xem lại kết quả. */
   const overlay3d = view3d && (
@@ -512,9 +669,13 @@ export default function QuizRunner({
   );
 
   if (seed === null) {
-    return (
+    return <ContentSurface scope="src/components/quiz/QuizRunner.tsx">{(
       <main className="quiz-shell quiz-dashboard">
-        <header className="quiz-dashboard-head">
+        {embedded && <header className="quiz-tool-heading">
+          <h1>{tool === "pdf" ? t.toolPdf : tool === "adaptive" ? t.toolPath : tool === "ai" ? t.toolAi : t.toolQuick}</h1>
+          <p>{tool === "pdf" ? t.toolPdfSub : tool === "adaptive" ? t.toolPathSub : tool === "ai" ? t.toolAiSub : t.toolQuickSub}</p>
+        </header>}
+        {!embedded && <header className="quiz-dashboard-head">
           <div>
             <span className="quiz-eyebrow">{t.eyebrow}</span>
             <h1>{t.title}</h1>
@@ -523,16 +684,16 @@ export default function QuizRunner({
           <div className="quiz-overview" aria-label={t.title}>
             <span><b>{systems.length}</b>{t.statSystems}</span>
             <span><b>{structureCount}</b>{t.statStructures}</span>
-            <span><b>3</b>{t.statSources}</span>
+            <span><b>{3 + (schoolIndex && schoolIndex.length > 0 ? 1 : 0)}</b>{t.statSources}</span>
           </div>
-        </header>
+        </header>}
 
-        <nav className="quiz-workflows" aria-label={t.configTitle}>
+        {!embedded && <nav className="quiz-workflows" aria-label={t.configTitle}>
           <button type="button" className={tool === "quick" ? "on" : ""} aria-pressed={tool === "quick"} onClick={() => setTool("quick")}><b>{t.toolQuick}</b><span>{t.toolQuickSub}</span></button>
           <button type="button" className={tool === "adaptive" ? "on" : ""} aria-pressed={tool === "adaptive"} onClick={() => setTool("adaptive")}><b>{t.toolPath}</b><span>{t.toolPathSub}</span></button>
           <button type="button" className={tool === "ai" ? "on" : ""} aria-pressed={tool === "ai"} onClick={() => setTool("ai")}><b>{t.toolAi}</b><span>{t.toolAiSub}</span></button>
           <button type="button" className={tool === "pdf" ? "on" : ""} aria-pressed={tool === "pdf"} onClick={() => setTool("pdf")}><b>{t.toolPdf}</b><span>{t.toolPdfSub}</span></button>
-        </nav>
+        </nav>}
 
         {tool === "ai" && !signedIn && <SignInGate t={t} />}
         {tool === "ai" && signedIn && <section className="quiz-ai-composer">
@@ -555,7 +716,7 @@ export default function QuizRunner({
 
         {tool === "pdf" && <PdfPanel t={t} onBankChanged={() => void reloadPersonal()} />}
 
-        <div className="quiz-dashboard-grid">
+        {(!embedded || tool === "quick") && <div className="quiz-dashboard-grid">
         <section className="quiz-setup quiz-config-card">
           <div className="quiz-card-heading">
             <span>01</span>
@@ -590,6 +751,17 @@ export default function QuizRunner({
                   {n}
                 </button>
               ))}
+              {/* Full hệ: có người muốn làm trọn 666 câu hệ xương. */}
+              {available !== null && available > 0 && (
+                <button
+                  type="button"
+                  className={`quiz-chip${effectiveCount === available ? " on" : ""}`}
+                  aria-pressed={effectiveCount === available}
+                  onClick={() => { setCount(available); setBlueprint(null); }}
+                >
+                  {t.fullAll} <i>{available}</i>
+                </button>
+              )}
             </div>
           </div>
 
@@ -599,10 +771,10 @@ export default function QuizRunner({
               <div className="quiz-chips">
                 <button type="button" className={`quiz-chip${mode === "practice" ? " on" : ""}`}
                   aria-pressed={mode === "practice"}
-                  onClick={() => setMode("practice")}>{t.modePractice}</button>
+                  onClick={() => { setMode("practice"); setReveal("instant"); }}>{t.modePractice}</button>
                 <button type="button" className={`quiz-chip${mode === "exam" ? " on" : ""}`}
                   aria-pressed={mode === "exam"}
-                  onClick={() => setMode("exam")}>
+                  onClick={() => { setMode("exam"); setReveal("end"); }}>
                   {t.modeExam} <i>{examMinutes(effectiveCount)} {t.minutes}</i>
                 </button>
               </div>
@@ -630,6 +802,11 @@ export default function QuizRunner({
                 aria-pressed={source === "personal"}
                 onClick={() => setSource("personal")}>
                 {t.srcPersonal}{personal ? <i>{personal.questions.length}</i> : null}
+              </button>
+              <button type="button" className={`quiz-chip${source === "school" ? " on" : ""}`}
+                aria-pressed={source === "school"}
+                onClick={() => setSource("school")}>
+                {t.srcSchool}{schoolIndex ? <i>{schoolIndex.length}</i> : null}
               </button>
             </div>
           </div>
@@ -661,6 +838,33 @@ export default function QuizRunner({
                   </p>
                 )}
               </div>
+            </div>
+          ) : source === "school" ? (
+            <div className="quiz-field">
+              <label>{t.schoolPick}</label>
+              {!schoolIndex ? (
+                <p className="quiz-lead">{t.loading}</p>
+              ) : !schoolIndex.length ? (
+                <p className="quiz-srcnote">{t.schoolEmpty}</p>
+              ) : (
+                <div>
+                  <div className="quiz-chips">
+                    {schoolIndex.map((s) => (
+                      <button key={s.id} type="button"
+                        className={`quiz-chip${effectiveSchoolId === s.id ? " on" : ""}`}
+                        aria-pressed={effectiveSchoolId === s.id}
+                        onClick={() => setSchoolId(s.id)}>
+                        {s.name}{schoolBank && effectiveSchoolId === s.id ? <i>{schoolBank.questions.length}</i> : null}
+                      </button>
+                    ))}
+                  </div>
+                  <p className="quiz-srcnote">
+                    {activeSchool && schoolBank
+                      ? `${activeSchool.name} — ${schoolBank.source.title}`
+                      : t.schoolPick}
+                  </p>
+                </div>
+              )}
             </div>
           ) : source === "book" ? (
             <div className="quiz-field">
@@ -713,33 +917,58 @@ export default function QuizRunner({
           </div>
           )}
 
-          <button type="button" className="quiz-start" onClick={start}
+          <button type="button" className="quiz-start" onClick={() => setAskReveal({})}
             disabled={
               (source === "book" && !bank) ||
               (source === "atlas" && !atlas) ||
               (source === "personal" && !personal) ||
+              (source === "school" && (!activeSchool || !schoolBank)) ||
               available === 0
             }>
             {t.start}
           </button>
+          <div className="quiz-rand-row">
+            <button type="button" className="quiz-ghost" onClick={randomStart}
+              disabled={available === 0}>
+              {t.randomQuiz} — {t.randomQuizSub}
+            </button>
+          </div>
+          {/* Bảng hỏi giữa màn hình: bấm Bắt đầu mới hỏi hiện đáp án khi nào. */}
+          {askReveal !== null && (
+            <div className="quiz-reveal-back" role="dialog" aria-modal="true" aria-label={t.revealAskTitle} onClick={() => setAskReveal(null)}>
+              <div className="quiz-reveal-modal" onClick={(e) => e.stopPropagation()}>
+                <h3>{t.revealAskTitle}</h3>
+                <p>{t.revealAskLead}</p>
+                <div className="opt">
+                  <button type="button" onClick={() => { const cfg = askReveal; setAskReveal(null); start({ ...cfg, reveal: "instant" }); }}>
+                    <b>{t.revealInstant}</b><span>{t.revealInstantSub}</span>
+                  </button>
+                  <button type="button" onClick={() => { const cfg = askReveal; setAskReveal(null); start({ ...cfg, reveal: "end" }); }}>
+                    <b>{t.revealEnd}</b><span>{t.revealEndSub}</span>
+                  </button>
+                </div>
+                <button type="button" className="quiz-reveal-cancel" onClick={() => setAskReveal(null)}>{t.close3d}</button>
+              </div>
+            </div>
+          )}
         </section>
         <aside className="quiz-session-card">
           <span className="quiz-session-kicker">{t.sessionKicker}</span>
           <h2>{mode === "exam" ? t.modeExam : t.modePractice}</h2>
           <dl>
             <div><dt>{t.numQ}</dt><dd>{effectiveCount}</dd></div>
-            <div><dt>{t.src}</dt><dd>{source === "model" ? t.srcModel : source === "book" ? t.srcBook : source === "atlas" ? t.srcAtlas : t.srcPersonal}</dd></div>
+            <div><dt>{t.src}</dt><dd>{source === "model" ? t.srcModel : source === "book" ? t.srcBook : source === "atlas" ? t.srcAtlas : source === "school" ? (activeSchool ? `${t.srcSchool} · ${activeSchool.name}` : t.srcSchool) : t.srcPersonal}</dd></div>
             <div><dt>{t.duration}</dt><dd>{mode === "exam" ? `${examMinutes(effectiveCount)} ${t.minutes}` : t.untimed}</dd></div>
           </dl>
-          <div className="quiz-session-note"><i />{mode === "exam" ? t.modeHintExam : t.modeHintPractice}</div>
+          <div className="quiz-session-note"><i />{reveal === "end" ? t.revealEnd : t.modeHintPractice}</div>
         </aside>
-        </div>
+        </div>}
       </main>
-    );
+    )}</ContentSurface>;
   }
 
   if (!items.length) {
-    return (
+    return <ContentSurface scope="src/components/quiz/QuizRunner.tsx">{(
       <main className="quiz-shell">
         <h1>{t.title}</h1>
         <p className="quiz-lead">{t.empty}</p>
@@ -747,12 +976,12 @@ export default function QuizRunner({
           {t.restart}
         </button>
       </main>
-    );
+    )}</ContentSurface>;
   }
 
   if (done) {
     const pct = Math.round((score / items.length) * 100);
-    return (
+    return <ContentSurface scope="src/components/quiz/QuizRunner.tsx">{(
       <main className="quiz-shell">
         <span className="quiz-eyebrow">{t.scoreTitle}</span>
         {timedOut && <p className="quiz-timeup" role="status">{t.timeUp}</p>}
@@ -799,28 +1028,29 @@ export default function QuizRunner({
           })}
         </div>
         <div className="quiz-actions">
-          <button type="button" className="quiz-start" onClick={start}>{t.restart}</button>
+          <button type="button" className="quiz-start" onClick={() => start()}>{t.restart}</button>
           <button type="button" className="quiz-ghost" onClick={exitQuiz}>{t.exit}</button>
         </div>
         {overlay3d}
       </main>
-    );
+    )}</ContentSurface>;
   }
 
   const item = items[idx];
   const chosen = picked[idx];
-  // Ở chế độ thi, chọn xong vẫn KHÔNG lộ đáp án — chỉ đánh dấu ô đã chọn.
-  const answered = chosen !== undefined && mode === "practice";
+  // reveal "instant": chọn xong lộ đáp án ngay; reveal "end": chỉ đánh dấu
+  // ô đã chọn, đáp án + giải thích xem ở trang kết quả sau khi làm xong.
+  const answered = chosen !== undefined && reveal === "instant";
   const chosenOpt = item.options.find((o) => o.id === chosen);
   const desc = item.prompt.split("\n").slice(1).join(" ").trim();
-  // Ôn tập tính theo số câu ĐÃ trả lời, thi tính theo vị trí — thi chưa chấm nên
+  // Ôn tập hiện-ngay tính theo số câu ĐÃ trả lời, còn lại tính theo vị trí —
   // câu đã chọn vẫn quay lại sửa được, thanh tiến độ phải nói đúng điều đó.
-  const progress = mode === "exam"
+  const progress = reveal === "end"
     ? (idx + 1) / items.length
     : (idx + (answered ? 1 : 0)) / items.length;
 
-  return (
-    <main className="quiz-shell">
+  return <ContentSurface scope="src/components/quiz/QuizRunner.tsx">{(
+    <main className="quiz-shell quiz-doing">
       <div className="quiz-head">
         <span className="quiz-count">
           <b>{idx + 1}</b> {t.of} {items.length}
@@ -896,17 +1126,18 @@ export default function QuizRunner({
       )}
 
       {overlay3d}
+      {exitPrompt && <QuizConfirmDialog title={t.exit} description={t.exitConfirm} cancelLabel={t.close3d} confirmLabel={t.exit} onCancel={() => setExitPrompt(false)} onConfirm={confirmExit} />}
 
-      {/* Luôn dựng hàng thao tác: ở chế độ ôn tập, câu CHƯA trả lời trước đây
+      {/* Luôn dựng hàng thao tác: ở chế độ hiện-ngay, câu CHƯA trả lời trước đây
           không có hàng này nên quay lại câu trước là không còn nút nào. */}
-      {(answered || mode === "exam" || idx > 0) && (
+      {(answered || reveal === "end" || idx > 0) && (
         <div className="quiz-actions">
           {idx > 0 && (
             <button type="button" className="quiz-ghost" onClick={() => setIdx(idx - 1)}>
               ← {t.prev}
             </button>
           )}
-          {!answered && mode === "practice" ? null : idx + 1 < items.length ? (
+          {!answered && reveal === "instant" ? null : idx + 1 < items.length ? (
             <button type="button" className="quiz-start" onClick={() => setIdx(idx + 1)}>
               {t.next}
             </button>
@@ -915,7 +1146,7 @@ export default function QuizRunner({
               {mode === "exam" ? t.submit : t.finish}
             </button>
           )}
-          {mode === "exam" && (
+          {reveal === "end" && (
             <span className="quiz-left">
               {items.length - Object.keys(picked).length} {t.unanswered}
             </span>
@@ -923,10 +1154,12 @@ export default function QuizRunner({
         </div>
       )}
     </main>
-  );
+  )}</ContentSurface>;
 }
 
 /** Thời lượng bài thi, làm tròn lên ít nhất 1 phút. */
 function examMinutes(questions: number): number {
   return Math.max(1, Math.round((questions * SECONDS_PER_QUESTION) / 60));
 }
+
+function cmsSourceSYSTEM_LABEL() { return SYSTEM_LABEL; }

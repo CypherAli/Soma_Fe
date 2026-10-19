@@ -1,0 +1,1406 @@
+{
+  "schemaVersion": 1,
+  "id": "on-tap-giai-phau-4",
+  "title": "Ôn tập giải phẫu 4",
+  "sourceFile": "Giải phẫu người 2025 - Test số hóa Dr. Lâm ôn tập giải phẫu 4.pdf",
+  "sourceNote": null,
+  "sourceHash": "37ac018a940d430e673b6ae6e198203f55b48ad17e618234f47fd6d295a08ee6",
+  "pages": 22,
+  "questions": [
+    {
+      "id": "on-tap-giai-phau-4-1",
+      "number": 1,
+      "stem": "Mô tả nào sau đây về cơ hoành đúng",
+      "options": [
+        {
+          "id": "A",
+          "text": "Phần sườn là các bó cơ bám vào 3 xương sườn thấp nhất"
+        },
+        {
+          "id": "B",
+          "text": "Các trụ phải và trái của phần thắt lưng giới hạn lên lỗ tĩnh mạch chủ và lỗ động mạch chủ"
+        },
+        {
+          "id": "C",
+          "text": "Bám tận vào cơ hoành chính là phần gân của cơ được gọi là gân trung tâm"
+        },
+        {
+          "id": "D",
+          "text": "Lỗ thực quản là nơi mà thực quản và ống ngực chui qua"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 1,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-2",
+      "number": 2,
+      "stem": "Mô tả nào sau đây về các cơ thành bụng đúng",
+      "options": [
+        {
+          "id": "A",
+          "text": "Phần dưới thành bụng trước bên được cấu tạo nên bởi các cơ chéo bụng ngoài và trong"
+        },
+        {
+          "id": "B",
+          "text": "Cơ ngang bụng là cơ nông nhất trong số các cơ rộng bụng"
+        },
+        {
+          "id": "C",
+          "text": "Liềm bẹn là phần dính vào nhau của cân cơ ngang bụng và chéo bụng trong"
+        },
+        {
+          "id": "D",
+          "text": "Các sợi của cơ chéo bụng ngoài chạy chếch lên trên và vào trong"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 1,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-3",
+      "number": 3,
+      "stem": "Về hình thể trong của đại não, các mô tả sau đều đúng, TRỪ",
+      "options": [
+        {
+          "id": "A",
+          "text": "Các nhân bèo nằm ở trong hơn so với các nhân trước tường"
+        },
+        {
+          "id": "B",
+          "text": "Bao trong nằm giữa nhân bèo ở ngoài, nhân đuôi và đồi thị ở trong"
+        },
+        {
+          "id": "C",
+          "text": "Các sừng trán của não thất bên ở hai bên được ngăn cách bởi vách trong suốt"
+        },
+        {
+          "id": "D",
+          "text": "Vòm (thể tam giác) là mép liên bán cầu lớn nhất"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 1,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-4",
+      "number": 4,
+      "stem": "Mô tả nào sau đây về các sợi mép và các sợi mép liên hợp trong mỗi bán cầu đúng",
+      "options": [
+        {
+          "id": "A",
+          "text": "Bó dọc trên và bó dọc dưới là các sợi liên hợp ngắn trong mỗi bán cầu"
+        },
+        {
+          "id": "B",
+          "text": "Bó móc nối thùy trán và cực trước của thùy Thái dương mỗi bên"
+        },
+        {
+          "id": "C",
+          "text": "Các phần của thể trai lần lượt từ trước ra sau là: mỏ, lồi, lưng và gối thể trai"
+        },
+        {
+          "id": "D",
+          "text": "Các mép trước và sau là nơi tập trung ít sợi mép nhất"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 2,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-5",
+      "number": 5,
+      "stem": "Các mô tả sau đây về các cấu trúc của đáy chậu đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Giới hạn giữa tam giác niệu dục và tam giác hậu môn là đường nối giữa các củ ngồi"
+        },
+        {
+          "id": "B",
+          "text": "Cơ thắt hậu môn ngoài có 3 phần đều bám tận vào thể đáy chậu"
+        },
+        {
+          "id": "C",
+          "text": "Giống với nam giới, nữ giới cũng có có ngồi hang và cơ hành xốp"
+        },
+        {
+          "id": "D",
+          "text": "Các tạng cương của các cơ quan sinh dục ngoài được đựng trong khoang đáy chậu sâu"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 2,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-6",
+      "number": 6,
+      "stem": "Các cơ sau đây là phần của cơ nâng hậu môn tại hoành chậu hông, trừ",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cơ mu - cụt"
+        },
+        {
+          "id": "B",
+          "text": "Cơ ngồi - cụt"
+        },
+        {
+          "id": "C",
+          "text": "Cơ chậu - cụt"
+        },
+        {
+          "id": "D",
+          "text": "Cơ mu-trực tràng"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 3,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-7",
+      "number": 7,
+      "stem": "Mô tả nào sau đây về các khoang của đáy chậu đúng",
+      "options": [
+        {
+          "id": "A",
+          "text": "Túi dưới da đáy chậu là khoang tiềm tàng, thông với mô dưới da của các vùng lân cận"
+        },
+        {
+          "id": "B",
+          "text": "ngăn đáy chậu nông thông với (hố) ngồi – hậu môn"
+        },
+        {
+          "id": "C",
+          "text": "ngăn đáy chậu sâu được giới hạn bởi mạc đáy chậu và màng đáy chậu"
+        },
+        {
+          "id": "D",
+          "text": "các hố ngồi – hậu môn ở hai bên không thông với nhau"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 3,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-8",
+      "number": 8,
+      "stem": "Mô tả nào sau đây về ống bẹn đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Hố trên bàng quang nằm giữa nếp rốn trong và nếp rốn ngoài"
+        },
+        {
+          "id": "B",
+          "text": "Thừng động mạch rốn là nếp rốn trong"
+        },
+        {
+          "id": "C",
+          "text": "Thoát vị bẹn gián tiếp là thoát vị từ hố bẹn trong hoặc hố trên bàng quang"
+        },
+        {
+          "id": "D",
+          "text": "Thoát vị bẹn không xảy ra ở nữ"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "Hố trên BQ nằm giữa nếp rốn giữa và nếp rốn trong. Thoát vị bẹn\ngián tiếp là thoát vị từ hố bẹn ngoài. Thoát vị bẹn có xảy ra ở nữ.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 3,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-9",
+      "number": 9,
+      "stem": "Các mô tả sau đây đều đúng về ống bẹn, trừ",
+      "options": [
+        {
+          "id": "A",
+          "text": "Giới hạn trên của ống bẹn là liềm bẹn"
+        },
+        {
+          "id": "B",
+          "text": "Thành sau của ống bẹn là mạc ngang, mô ngoài phúc mạc và phúc mạc"
+        },
+        {
+          "id": "C",
+          "text": "Lỗ bẹn sâu nằm ở hố bẹn trong"
+        },
+        {
+          "id": "D",
+          "text": "Lỗ bẹn nông được giới hạn bởi các trụ trong và ngoài của cơ chéo bụng ngoài"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 4,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-10",
+      "number": 10,
+      "stem": "Cấu trúc nào sau đây không mất hoàn toàn sau khi sinh.",
+      "options": [
+        {
+          "id": "A",
+          "text": "Động mạch rốn"
+        },
+        {
+          "id": "B",
+          "text": "Tĩnh mạch rốn"
+        },
+        {
+          "id": "C",
+          "text": "ống tĩnh mạch"
+        },
+        {
+          "id": "D",
+          "text": "ống động mạch"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Đáp án A\nA. Động mạch rốn ==>trở thành thừng động mạch rốn\nB. Tĩnh mạch rốn ==>trở thành dây chằng tròn của gan\nC. ống tĩnh mạch ==>trở thành dây chằng tĩnh mạch\nD. ống động mạch ==>trở thành dây chằng đọng mạch",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 4,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-11",
+      "number": 11,
+      "stem": "Mô tả sau về các vòng tuần hoàn đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Vòng tuần hoàn hệ thống chạy theo động mạch chủ và bắt đầu từ tâm thất trái"
+        },
+        {
+          "id": "B",
+          "text": "Xoang vành là một phần tĩnh mạch của vòng tuần hoàn hệ thống"
+        },
+        {
+          "id": "C",
+          "text": "Các tĩnh mạch phổi đổ về tâm nhĩ trái để kết thúc vòng tuần hoàn phổi"
+        },
+        {
+          "id": "D",
+          "text": "Động mạch và tĩnh mạch phế quản cũng là các mạch tham gia vào vòng tuần hoàn phổi"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 5,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-12",
+      "number": 12,
+      "stem": "Mô tả nào sau đây về vòng tuần hoàn thai nhi đúng",
+      "options": [
+        {
+          "id": "A",
+          "text": "Động mạch rốn mang máu từ mẹ tới thai."
+        },
+        {
+          "id": "B",
+          "text": "ống tĩnh mạch là ống nối giữa tĩnh mạch chủ trên và dưới."
+        },
+        {
+          "id": "C",
+          "text": "ống động mạch làm giảm áp lực máu lên phổi."
+        },
+        {
+          "id": "D",
+          "text": "hố bầu dục là di tích của lỗ bầu dục có ở mặt phải của vách gian thất."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 5,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-13",
+      "number": 13,
+      "stem": "Phần cơ thể không dẫn lưu bạch huyết về ống ngực là",
+      "options": [
+        {
+          "id": "A",
+          "text": "Các chi dưới"
+        },
+        {
+          "id": "B",
+          "text": "Phần trái ngực"
+        },
+        {
+          "id": "C",
+          "text": "Nửa phải của đầu"
+        },
+        {
+          "id": "D",
+          "text": "Bụng"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "Đáp án: C. Nửa phải của đầu\nA. Các chi dưới => Giải thích: Bạch huyết từ hai chi dưới đổ vào bể\ndưỡng trấp rồi theo ống ngực đi lên.\nB. Phần trái ngực => Giải thích: Nửa trái của lồng ngực nằm trong\nvùng dẫn lưu của ống ngực trước khi đổ vào tĩnh mạch.\nC. Nửa phải của đầu => Giải thích: Vùng này cùng với tay phải và nửa\nngực phải được dẫn lưu bởi ống bạch huyết phải (right lymphatic\nduct).\nD. Bụng => Giải thích: Toàn bộ bạch huyết vùng bụng tập trung về\nbể dưỡng trấp và dẫn lưu trực tiếp lên ống ngực.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 6,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-14",
+      "number": 14,
+      "stem": "Mô tả nào sau đây về cấu trúc bạch huyết đúng",
+      "options": [
+        {
+          "id": "A",
+          "text": "Mỗi hạch bạch huyết có nhiều mạch bạch huyết đi vào"
+        },
+        {
+          "id": "B",
+          "text": "Tuyến ức và lách là cơ quan bạch huyết lớn nhất ở người trưởng thành"
+        },
+        {
+          "id": "C",
+          "text": "Ngoài tuyến ức, lách và các hạnh nhân, không tồn tại mô dạng bạch huyết nào khác"
+        },
+        {
+          "id": "D",
+          "text": "Các mạch bạch huyết tạo nên một hệ thống lưu thông riêng biệt với hệ tuần hoàn"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 7,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-15",
+      "number": 15,
+      "stem": "Bạch huyết của chi trên bên phải sẽ được dẫn lưu về mạch bạch huyết nào sau đây trước khi đổ vào tĩnh mạch",
+      "options": [
+        {
+          "id": "A",
+          "text": "ống bạch huyết phải"
+        },
+        {
+          "id": "B",
+          "text": "thân cảnh phải"
+        },
+        {
+          "id": "C",
+          "text": "thân dưới đòn phải"
+        },
+        {
+          "id": "D",
+          "text": "ống ngực"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 7,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-16",
+      "number": 16,
+      "stem": "Mô tả nào sau đây về liên quan của tim đúng",
+      "options": [
+        {
+          "id": "A",
+          "text": "Mặt hoành của tim liên quan qua cơ hoành với gan, dạ dày và tỳ"
+        },
+        {
+          "id": "B",
+          "text": "Xen vào giữa các mặt phổi của tim và mặt trung thất của phổi là các dây thần kinh X"
+        },
+        {
+          "id": "C",
+          "text": "Khi to ra, phần tâm nhĩ phải tại đáy tim đè vào thực quản gây khó nuốt"
+        },
+        {
+          "id": "D",
+          "text": "Mặt ức sườn nấp sau xương ức và các sụn sườn từ III đến VI"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 7,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-17",
+      "number": 17,
+      "stem": "Các rãnh bề mặt của tim có đặc điểm sau, trừ",
+      "options": [
+        {
+          "id": "A",
+          "text": "Rãnh vành xuất hiện ở cả ba mặt ức sườn, hoành và phổi của tim"
+        },
+        {
+          "id": "B",
+          "text": "Rãnh gian thất trước là nơi chứa ĐM gian thất trước và TM tim lớn"
+        },
+        {
+          "id": "C",
+          "text": "TM tim nhỏ chạy cùng với động mạch vành phải và nằm trong phần phải rãnh vành"
+        },
+        {
+          "id": "D",
+          "text": "Rãnh gian nhĩ chỉ thấy ở đáy tim"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 8,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-18",
+      "number": 18,
+      "stem": "Mô tả nào sau đây về hình thể ngoài của tim đúng",
+      "options": [
+        {
+          "id": "A",
+          "text": "Mặt ức sườn của tim chỉ có các tâm thất và phần lớn là tâm thất phải"
+        },
+        {
+          "id": "B",
+          "text": "Rãnh gian thất sau là nơi chứa động mạch gian thất sau và tĩnh mạch tim nhỏ"
+        },
+        {
+          "id": "C",
+          "text": "Các mặt phổi phải và trái đều bao gồm cả tâm thất và tâm nhĩ ngăn cách bởi rãnh vành"
+        },
+        {
+          "id": "D",
+          "text": "Phần tâm nhĩ trái ở đáy tim liên quan với thực quản"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 8,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-19",
+      "number": 19,
+      "stem": "Mô tả nào sau đây về hình thể trong của tim đúng",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thành của tâm thất phải dày hơn so với thành của tâm thất trái"
+        },
+        {
+          "id": "B",
+          "text": "Mặt phải vách gian nhĩ có hố bầu dục, di tích của lỗ bầu dục trong tuần hoàn thai nhi"
+        },
+        {
+          "id": "C",
+          "text": "Phần tâm thất trái trước khi liên tiếp với động mạch chủ được gọi là nón động mạch"
+        },
+        {
+          "id": "D",
+          "text": "ở mặt trong của tim, các gờ cơ, cầu cơ và cơ nhú nổi lên trên bề mặt"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 9,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-20",
+      "number": 20,
+      "stem": "Mô tả nào sau đây về hình thể trong của tim đúng",
+      "options": [
+        {
+          "id": "A",
+          "text": "Van nhĩ thất trái có cấu tạo gồm 3 lá van"
+        },
+        {
+          "id": "B",
+          "text": "Thừng gân (dây chằng van tim) là cấu trúc đính mặt dưới của các lá van tim vào các cơ nhú"
+        },
+        {
+          "id": "C",
+          "text": "Cấu trúc van động mạch phổi khác van động mạch chủ"
+        },
+        {
+          "id": "D",
+          "text": "Các van nhĩ thất phải và trái đóng, mở lệch pha nhau trong một chu kì"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 9,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-21",
+      "number": 21,
+      "stem": "Các đặc điểm sau đây về hình thể của tim đều đúng, TRỪ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Mặt trong của tâm thất phải nhẵn, mặt trong của tâm thất trái gồ ghề do có cơ phủ."
+        },
+        {
+          "id": "B",
+          "text": "Vách gian thất có cấu tạo gồm phần màng mỏng ở trên và phần cơ dày ở dưới."
+        },
+        {
+          "id": "C",
+          "text": "Các tiểu nhĩ P và T là phần phình ra của các tâm nhĩ tương ứng."
+        },
+        {
+          "id": "D",
+          "text": "Các vách gian nhĩ và vách gian thất đều là vách kín."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 9,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-22",
+      "number": 22,
+      "stem": "Mô tả nào sau đây về hệ thống dẫn truyền của tim đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nút xoang nhĩ nằm ở thành của tâm nhĩ P, ở phía dưới ngoài lỗ TMCD."
+        },
+        {
+          "id": "B",
+          "text": "Nút nhĩ thất chi phối cho cơ tâm thất và 1 phần cơ tâm nhĩ."
+        },
+        {
+          "id": "C",
+          "text": "Có các sợi từ nút xoang nhĩ tới nút nhĩ thất để kích thích nút này."
+        },
+        {
+          "id": "D",
+          "text": "Có các trụ P và T của bó nhĩ thất chui qua phần màng của vách gian thất để xuống chi phối cho cơ tâm thất."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 10,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-23",
+      "number": 23,
+      "stem": "Mô tả nào sau đây về ngoại tâm mạc đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Lá thành của ngoại tâm mạc thanh mạc lót mặt trong của ngoại tâm mạc sợi."
+        },
+        {
+          "id": "B",
+          "text": "Tại gốc của các mạch máu lớn, ngoại tâm mạc sợi quặt ra để liên tiếp với màng phổi thành."
+        },
+        {
+          "id": "C",
+          "text": "Ổ ngoại tâm mạc là khoang nằm giữa ngoại tâm mạc sợi và ngoại tâm mạc thanh mạc."
+        },
+        {
+          "id": "D",
+          "text": "Các ĐM vành nằm giữa lá thành và lá tạng của ngoại tâm mạc thanh mạc."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 10,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-24",
+      "number": 24,
+      "stem": "Mô tả nào sau đây về cấu tạo cơ tim đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Các tế bào cơ tim có các nhánh nối với nhau tạo thành khối cơ duy nhất."
+        },
+        {
+          "id": "B",
+          "text": "Các sợi cơ tim bám vào các vòng sợi của van tim và van ĐM."
+        },
+        {
+          "id": "C",
+          "text": "Các sợi cơ tim vòng quanh riêng từng buồng tim hoặc chung cho các buồng tim."
+        },
+        {
+          "id": "D",
+          "text": "Giống tế bào cơ vân, tế bào cơ tim cũng có vân và được chi phối bởi thần kinh thân thể."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 11,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-25",
+      "number": 25,
+      "stem": "Về các ĐM nuôi dưỡng tim, các câu sau đây đều đúng, TRỪ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Các ĐM vành tách ra từ ĐM chủ lên, ngay trên các lỗ van ĐMC."
+        },
+        {
+          "id": "B",
+          "text": "Các ĐM vành đều lách giữa thân động mạch phổi và các tiểu nhĩ tương ứng."
+        },
+        {
+          "id": "C",
+          "text": "ĐM vành trái chạy trong rãnh vành rồi chia thành ĐM gian thất trước và nhánh mũ."
+        },
+        {
+          "id": "D",
+          "text": "ĐM vành phải chạy trong rãnh vành sang phải và kết thúc ở rãnh gian thất sau."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 11,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-26",
+      "number": 26,
+      "stem": "Mô tả nào sau đây về các mạch máu của tim đúng",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tĩnh mạch tim lớn là sự hợp nhất của tĩnh mạch gian thất trước và tĩnh mạch bờ trái của tim"
+        },
+        {
+          "id": "B",
+          "text": "Tĩnh mạch tim nhỏ và tĩnh mạch tim cực nhỏ đều đổ về xoang vành"
+        },
+        {
+          "id": "C",
+          "text": "Xoang vành tạo thành quai đổ vào tĩnh mạch chủ trên ngay sát nơi tĩnh mạch này đổ về tâm nhĩ phải"
+        },
+        {
+          "id": "D",
+          "text": "Theo vòng tuần hoàn hệ thống, toàn bộ máu TM của tim sẽ dẫn lưu về tâm nhĩ phải."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 11,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-27",
+      "number": 27,
+      "stem": "Mô tả nào sau về chi phối thần kinh tim đúng",
+      "options": [
+        {
+          "id": "A",
+          "text": "Hệ dẫn truyền của tim hoạt động nhờ sự chi phối của thần kinh giao cảm và đối giao cảm"
+        },
+        {
+          "id": "B",
+          "text": "Thần kinh giao cảm tới tim thu các dây thần kinh tách ra từ các hạch giao cảm ở cổ và ngực"
+        },
+        {
+          "id": "C",
+          "text": "Các sợi đối giao cảm có vai trò làm tăng nhịp tim"
+        },
+        {
+          "id": "D",
+          "text": "điều hòa hoạt động cơ tim của hệ thần kinh là có ý thức"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 12,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-28",
+      "number": 28,
+      "stem": "Đỉnh tim được xác định trên bề mặt tại vị trí nào sau",
+      "options": [
+        {
+          "id": "A",
+          "text": "Sụn sườn III bên phải cách bờ phải xương ức 1,3cm"
+        },
+        {
+          "id": "B",
+          "text": "Khoang gian sườn V trên đường vú trái"
+        },
+        {
+          "id": "C",
+          "text": "Sụn sườn II bên trái, cách bờ phải xương ức 1,3cm"
+        },
+        {
+          "id": "D",
+          "text": "Đầu trong sụn sườn IV bên phải."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 12,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-29",
+      "number": 29,
+      "stem": "Trên hình ảnh XQ tim. Các thành phần tạo nên các cung giới hạn 2 bên. Hình mờ gồm các mạch sau, trừ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "ĐMC"
+        },
+        {
+          "id": "B",
+          "text": "Thân ĐM phổi."
+        },
+        {
+          "id": "C",
+          "text": "TM chủ trên"
+        },
+        {
+          "id": "D",
+          "text": "Các TM phổi trái."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 13,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-30",
+      "number": 30,
+      "stem": "Vị trí nào sau đây là nơi nghe tiếng đập van 2 lá rõ nhất?",
+      "options": [
+        {
+          "id": "A",
+          "text": "GIữa sụn sườn III bên phải"
+        },
+        {
+          "id": "B",
+          "text": "Khoang gian sườn V trên đường vú trái"
+        },
+        {
+          "id": "C",
+          "text": "Giữa sụn sườn II bên trái"
+        },
+        {
+          "id": "D",
+          "text": "Đầu trong sụn sườn VI bên phải."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 13,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-31",
+      "number": 31,
+      "stem": "Các mô tả sau đây về giới hạn của trung thất đều đúng, TRỪ",
+      "options": [
+        {
+          "id": "A",
+          "text": "Giới hạn hai bên của trung thất là các ổ màng phổi"
+        },
+        {
+          "id": "B",
+          "text": "Mặt ngoài của màng ngoài tim là giới hạn giữa các trung thất trước, sau và giữa"
+        },
+        {
+          "id": "C",
+          "text": "Mặt phẳng ngang qua bờ dưới đốt sống ngực V là giới hạn dưới của trung thất trên"
+        },
+        {
+          "id": "D",
+          "text": "Xương ức là thành trước của toàn bộ trung thất"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 13,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-32",
+      "number": 32,
+      "stem": "Mô tả nào sau đây về các thành phần đựng trong trung thất đúng",
+      "options": [
+        {
+          "id": "A",
+          "text": "Các tĩnh mạch trong trung thất trên gồm các tĩnh mạch chủ trên và dưới, các tĩnh mạch đơn và bán đơn"
+        },
+        {
+          "id": "B",
+          "text": "Khí quản cũng là một thành phần của trung thất dưới"
+        },
+        {
+          "id": "C",
+          "text": "Trung thất sau là nơi đi qua của cả thần kinh X và thần kinh hoành"
+        },
+        {
+          "id": "D",
+          "text": "Di tích của tuyến ức trải dài từ trung thất trên xuống dưới trung thất trước"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 14,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-33",
+      "number": 33,
+      "stem": "Mô tả nào sau đây về liên quan của các thành phần đựng trong trung thất sau đúng",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ngay sau thực quản, từ trái qua phải là tĩnh mạch đơn, ống ngực và động mạch chủ ngực"
+        },
+        {
+          "id": "B",
+          "text": "Các thần kinh X trái và phải luôn chạy sát hai bên của thực quản cho tới khi xuống bụng."
+        },
+        {
+          "id": "C",
+          "text": "ở 2 bên thân các đốt sống, bên phải có tĩnh mạch bán đơn, bên trái có tĩnh mạch bán đơn phụ"
+        },
+        {
+          "id": "D",
+          "text": "chuỗi hạch giao cảm ngực là thành phần của trung thất sau xa thực quản nhất"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 14,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-34",
+      "number": 34,
+      "stem": "Các tĩnh mạch gian sườn sau trong khoang gian sườn II đổ vào",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tĩnh mạch đơn"
+        },
+        {
+          "id": "B",
+          "text": "Tĩnh mạch bán đơn"
+        },
+        {
+          "id": "C",
+          "text": "Tĩnh mạch bán đơn phụ"
+        },
+        {
+          "id": "D",
+          "text": "Tm gian sườn trên"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 15,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-35",
+      "number": 35,
+      "stem": "Tĩnh mạch nào sau đây đổ về hệ thống tĩnh mạch đơn",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tm gian sườn trên trái"
+        },
+        {
+          "id": "B",
+          "text": "Các tm tim lớn và nhỏ"
+        },
+        {
+          "id": "C",
+          "text": "Tm gian sườn bên phải"
+        },
+        {
+          "id": "D",
+          "text": "Tm ngực trong"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 15,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-36",
+      "number": 36,
+      "stem": "Cấu tạo hệ thống TM đơn có đặc điểm :",
+      "options": [
+        {
+          "id": "A",
+          "text": "TM đơn và TM bán đơn đều được hình thành từ TM dưới sườn và T thắt lưng lên"
+        },
+        {
+          "id": "B",
+          "text": "TM bán đơn phụ nhận máu từ 3-4 TM gian sườn sau trên cùng"
+        },
+        {
+          "id": "C",
+          "text": "TM bán đơn uốn cong trên cuống phổi để đổ vào T chủ trên"
+        },
+        {
+          "id": "D",
+          "text": "TM gian sườn trên P đổ vào TM cánh tay đầu P mà không đổ về TM đơn"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "Đáp án A\nI. Tĩnh mạch đơn\n1. Nguyên ủy: Hình thành ngang đầ u sau x sương XII P, do 3 Tm hợp\nlại:\n– Tm dưới sườn P\n– Tm thắt lưng lên P\n– Và 1 nhánh từ TmC d’ chạy lên\n2. Đường đi và liên quan\n– Tm đơn đi lên ở mặt P của thân các đsố ng ngực phía sau bờ P\nthực quản\n– Tới ngang T4, uố n cong ra trc thành 1 cung đi trên cuố ng phổi P (\ncung TM đơn ) rồ i đổ vào mặt sau\nTmC trên\n3. Nhánh bên\n– Thu nhận mỏu toàn bộ 11 Tm gian sườn P. trong đó 3 Tm gian sườn\ntrên cùng hợp\nthành thân Tm gian sườn trên P trc khi đổ vào Tm đơn.\n– Tm bán đơn\n– Tm bán đơn phụ\n– Nhánh từ trung thấ t, thực quản, phế quản & cơ hoành\nII. Tĩnh mạch bán đơn\n1. Nguyên ủy: Hình thành từ đầ u sau xương sườn XII bên T, do 3 Tm\nhợp lại:\n– Tm d’ sườn T\n– Tm thắt lưng lên T\n– 1 nhánh từ Tm thận T\n2. Đường đi\n– Tm bán đơn chạy lên ở trên mặt T của thân các đs ngực & ở sau so\nvới ĐmC ngực.\n– Khi lên ngang x sườn 7 thì chạy vòng sang P ở trc cột sống & đổ\nvào Tm đơn\n3. Nhánh bên\n– Thu nhận 5 Tm gian sườn trái từ 7-11\nIII. TM bán đơn phụ\n1. Nguyên ủy- đường đi- tận cùng\n– Là một Tm ngắ n, chạy xuố ng ở mặt T thân đs ngực\n– Khi đến ngang x sườn 6 thì vòng sang P, trước CS ngực để đổ vào\nTm đơn.\n2. Nhánh bên\n– Các Tm gian sườn 4,5,6 bên T\n– Và có thể cả thân TM gian sườn trên trái.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 16,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-37",
+      "number": 37,
+      "stem": "mô tả sau đây về cây phế quản là đều đúng. trừ",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cây PQ chính trái to hơn ngắn hơn và dốc hơn PQ chính phải"
+        },
+        {
+          "id": "B",
+          "text": "PQ chính phải chia thành 3 PQ thùy trong khi bên trái chỉ là 2"
+        },
+        {
+          "id": "C",
+          "text": "Các PQ thùy lại chia thành các PQ phân thùy"
+        },
+        {
+          "id": "D",
+          "text": "Các Phế nang mọc ra bắt đầu từ tiểu PQ hô hấp cho đến các túi Phế nang"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 18,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-38",
+      "number": 38,
+      "stem": "Cấu trúc nào sau đây của PQ có kích thước lớn nhất",
+      "options": [
+        {
+          "id": "A",
+          "text": "ống phế nang"
+        },
+        {
+          "id": "B",
+          "text": "tiểu phế quản tận"
+        },
+        {
+          "id": "C",
+          "text": "tiểu phế quản tiểu thùy"
+        },
+        {
+          "id": "D",
+          "text": "tiểu phế quản hô hấp"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 18,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-39",
+      "number": 39,
+      "stem": "phế quản thùy nào sau đây chui vào phổi từ ngoài rốn phổi",
+      "options": [
+        {
+          "id": "A",
+          "text": "Phế quản thùy trên T"
+        },
+        {
+          "id": "B",
+          "text": "Phế quản thùy trên P"
+        },
+        {
+          "id": "C",
+          "text": "phế quản thùy giữa P"
+        },
+        {
+          "id": "D",
+          "text": "phế quản thùy dưới T"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 19,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-40",
+      "number": 40,
+      "stem": "phân thùy nào sau đây không có ở phổi P",
+      "options": [
+        {
+          "id": "A",
+          "text": "phân thùy trước"
+        },
+        {
+          "id": "B",
+          "text": "phân thùy trên"
+        },
+        {
+          "id": "C",
+          "text": "phân thùy lưỡi trên"
+        },
+        {
+          "id": "D",
+          "text": "phân thùy đáy sau"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 19,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-41",
+      "number": 41,
+      "stem": "Phổi có các liên quan sau TRỪ",
+      "options": [
+        {
+          "id": "A",
+          "text": "Qua cơ hoành, mặt hoành của phổi liên quan với các tạng trong bụng"
+        },
+        {
+          "id": "B",
+          "text": "Các mặt trung thất của phổi đều có ấn tim, ấn nằm ngay dưới các rốn phổi"
+        },
+        {
+          "id": "C",
+          "text": "Mặt sườn có các rãnh lõm do các xương sườn đè vào"
+        },
+        {
+          "id": "D",
+          "text": "Liên quan của các phổi phải và trái giống nhau"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "Đáp án D\nA. Qua cơ hoành, mặt hoành của phổi liên quan với các tạng trong\nbụng ==>dạ dày, gan",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 19,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-42",
+      "number": 42,
+      "stem": "Mô tả nào sau đây về hình thể ngoài của phổi ĐÚNG",
+      "options": [
+        {
+          "id": "A",
+          "text": "Phổi trái được chia thành 3 thùy trên, giữa, dưới"
+        },
+        {
+          "id": "B",
+          "text": "Phổi phải có khe chếch và khe ngang ngăn cách các thùy phổi"
+        },
+        {
+          "id": "C",
+          "text": "Bờ trước phổi phải có khuyết tim và ngay dưới khuyết là lưỡi phổi"
+        },
+        {
+          "id": "D",
+          "text": "Mặt hoành của phổi còn được gọi là đáy phổi"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 20,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-43",
+      "number": 43,
+      "stem": "Mô tả nào sau đây về màng phổi ĐÚNG",
+      "options": [
+        {
+          "id": "A",
+          "text": "Các lá phổi phải và trái được bọc chung trong một màng phổi"
+        },
+        {
+          "id": "B",
+          "text": "Hai lá màng phổi còn len lỏi vào trong các khe gian thùy"
+        },
+        {
+          "id": "C",
+          "text": "Ổ màng phổi có áp lực âm hơn so với áp suất khí quyển"
+        },
+        {
+          "id": "D",
+          "text": "Ngách sườn – trung thất của ổ màng phổi là nơi lắng đọng dịch nếu bị tràn dịch"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 20,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-44",
+      "number": 44,
+      "stem": "Thành phần nào sau đây thuộc cuống phổi dinh dưỡng",
+      "options": [
+        {
+          "id": "A",
+          "text": "ĐM phế quản"
+        },
+        {
+          "id": "B",
+          "text": "Phế quản chính"
+        },
+        {
+          "id": "C",
+          "text": "Đm phổi"
+        },
+        {
+          "id": "D",
+          "text": "Tm phổi"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 21,
+      "gradable": true
+    },
+    {
+      "id": "on-tap-giai-phau-4-45",
+      "number": 45,
+      "stem": "Mô tả nào sau đây về đối chiếu của phổi và màng phổi lên lồng ngực đúng",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đối chiếu của các phổi hai bên là như nhau"
+        },
+        {
+          "id": "B",
+          "text": "Đỉnh phổi cao hơn đầu trước xương sườn I 5 cm, xương đòn 3cm, cách đường giữa 4cm"
+        },
+        {
+          "id": "C",
+          "text": "Ngách sườn trung thất của phổi phải gần vào đường giữa hơn và phủ mặt trước tim"
+        },
+        {
+          "id": "D",
+          "text": "Bờ dưới của phổi được xác định ở khoang gian sườn X trên đường nách"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 21,
+      "gradable": true
+    }
+  ]
+}

@@ -1,0 +1,583 @@
+{
+  "schemaVersion": 1,
+  "id": "giai-phau-phuc-mac",
+  "title": "Giải phẫu phúc mạc",
+  "sourceFile": "Giải phẫu người 2025 - Test số hóa Dr. Lâm giải phẫu phúc mạc.pdf",
+  "sourceNote": null,
+  "sourceHash": "a6f845703b19c3da9722b93fd17b30398b7d20827a14b16b03736cb7c130ad58",
+  "pages": 15,
+  "questions": [
+    {
+      "id": "giai-phau-phuc-mac-1",
+      "number": 1,
+      "stem": "Các trình bày sau đây về khái niệm phúc mạc đều đúng. TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Phúc mạc thành là phần phúc mạc che phủ mặt trong thành ổ bụng."
+        },
+        {
+          "id": "B",
+          "text": "Phúc mạc tạng là phần phúc mạc bọc các tạng."
+        },
+        {
+          "id": "C",
+          "text": "Mạc nối là phần phúc mạc đi từ tạng nọ tới tạng kia."
+        },
+        {
+          "id": "D",
+          "text": "Mạc treo là phần phúc mạc treo các tạng không thuộc ống tiêu hóa vào thành bụng."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.Mạc treo là phần phúc mạc treo các tạng không thuộc ống tiêu\nhóa vào thành bụng. => treo các tạng ống tiêu hoá.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 1,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-phuc-mac-2",
+      "number": 2,
+      "stem": "Các trình bày sau đây về phúc mạc đều đúng. TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ổ phúc mạc là khoang nằm giữa các phần của phúc mạc."
+        },
+        {
+          "id": "B",
+          "text": "Khoang ngoài phúc mạc là khoang nằm giữa ổ phúc mạc và thành ổ bụng."
+        },
+        {
+          "id": "C",
+          "text": "Tạng chỉ được phúc mạc bọc một phần bề mặt là những tạng có mạc treo."
+        },
+        {
+          "id": "D",
+          "text": "Tạng được phúc mạc bao bọc hầu hết bề mặt và có mạc treo là những tạng di động."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.Tạng chỉ được phúc mạc bọc một phần bề mặt là những tạng có\nmạc treo => tạng có mạc treo là bọc hầu hết.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 1,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-phuc-mac-3",
+      "number": 3,
+      "stem": "Các mô tả sau đây về mạc treo đều đúng. TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Treo một số đoạn ruột vào thành bụng."
+        },
+        {
+          "id": "B",
+          "text": "Gồm 2 lá."
+        },
+        {
+          "id": "C",
+          "text": "Giữa 2 lá có chứa mạch máu và thần kinh."
+        },
+        {
+          "id": "D",
+          "text": "Khối tá tụy cũng có một mạc treo."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.Khối tá tụy cũng có một mạc treo=>không có.\nMạc treo tràng trên; Mạc treo đại tràng ngang\nMạc treo đại tràng Sigma; Mạc treo ruột thừa.\nmạc dính tá tuỵ:\ndính phần cố định khối tá tuỵ vào thành sau bụng.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 2,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-phuc-mac-4",
+      "number": 4,
+      "stem": "Có tất cả các mạc treo sau đây, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Mạc treo ruột thừa."
+        },
+        {
+          "id": "B",
+          "text": "Mạc treo đại tràng lên."
+        },
+        {
+          "id": "C",
+          "text": "Mạc treo đại tràng ngang."
+        },
+        {
+          "id": "D",
+          "text": "Mạc treo đại tràng sigma."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.Mạc treo đại tràng lên =>lên và xuống cố định.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 2,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-phuc-mac-5",
+      "number": 5,
+      "stem": "Các mô tả sau đây về mạc nối nhỏ đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Gồm 2 lá phúc mạc."
+        },
+        {
+          "id": "B",
+          "text": "Có nhiều mạch máu giữa 2 lá."
+        },
+        {
+          "id": "C",
+          "text": "Là phần phúc mạc nối gan với dạ dày và tá tràng."
+        },
+        {
+          "id": "D",
+          "text": "Dây chằng gan – tá tràng không thuộc mạc nối nhỏ."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.Dây chằng gan – tá tràng không thuộc mạc nối nhỏ=>phần P là\ndây chằng gan-tá, phần T là d/c gan vị,Mạc nối nhỏ: Dây chằng\ngan-tá tràng và Dây chằng gan- vị,Mạc nối nhỏ: Khe dây chằng TM .\nMạc nối nhỏ: gan -> bờ cong nhỏ dạ dày\n--> bám vào Khe dây chằng tĩnh mạch\nDây chằng gan- tá tràng; Dây chằng gan-vị",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/d0417834850a94b5757d.webp"
+      ],
+      "sourcePage": 3,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-phuc-mac-6",
+      "number": 6,
+      "stem": "Thành phần nào sau đây không thuộc mạc nối lớn?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Dây chằng vị - hoành."
+        },
+        {
+          "id": "B",
+          "text": "Dây chằng vị - gan."
+        },
+        {
+          "id": "C",
+          "text": "Dây chằng vị - đại tràng."
+        },
+        {
+          "id": "D",
+          "text": "Dây chằng vị lách."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.Dây chằng vị - gan=>d/c vị-gan là ở mạc nối nhỏ.\nD.Dây chằng vị lách=>ngoài ra còn d/c lách-thận.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 4,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-phuc-mac-7",
+      "number": 7,
+      "stem": "Các mô tả sau đây về các cấu trúc phúc mạc đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nếp phúc mạc là do thành phần ngoài phúc mạc đội phúc mạc nhô vào lòng ổ phúc mạc tạo nên."
+        },
+        {
+          "id": "B",
+          "text": "Các hố phúc mạc là những vùng trũng nằm giữa các nếp phúc mạc."
+        },
+        {
+          "id": "C",
+          "text": "Các ngách nằm ở vùng thấp của ổ phúc mạc được gọi là túi cùng."
+        },
+        {
+          "id": "D",
+          "text": "Túi mạc nối không phải là một ngách phúc mạc."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.Túi mạc nối không phải là một ngách phúc mạc=>túi mạc nối là\nngách lớn nhất của phúc mạc,túi mạc nối được vây kín xung quanh\nbởi dạ dày, gan, lách, tuỵ, thận trái, đại tràng ngang.\nNếp PM ngoài: ĐM thượng vị dưới đội lên\nNếp PM  giữa: Thừng ĐM rốn\nNếp trong: DCh treo bàng quang.\nHố trên bàng quang\nHố BQ trong\nHố BQ ngoài.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 4,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-phuc-mac-8",
+      "number": 8,
+      "stem": "Các mô tả sau đây về túi mạc nối đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Phần chính của túi mạc nối nằm ở giữa gan và dạ dày."
+        },
+        {
+          "id": "B",
+          "text": "Lỗ mạc nối thông túi mạc nối với phần còn lại của ổ phúc mạc."
+        },
+        {
+          "id": "C",
+          "text": "Tiền đình là phần túi mạc nối nằm giữa lỗ mạc nối và lỗ nếp vị tụy."
+        },
+        {
+          "id": "D",
+          "text": "Lỗ nếp vị tụy ngăn cách giữa tiền đình và túi mạc nối chính."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "A.Phần chính của túi mạc nối nằm ở giữa gan và dạ dày=>tiền đình\nmạc nối nằm giữa gan và dạ dày.\nD.Lỗ nếp vị tụy ngăn cách giữa tiền đình và túi mạc nối chính=>ĐM\nvị trái đội lên thành nếp vị-tuỵ,ĐM gan chung đội lên thành nếp gan-\ntuỵ.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 5,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-phuc-mac-9",
+      "number": 9,
+      "stem": "Các mô tả sau đây về tiền đình túi mạc nối đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thành trước là mạc nối nhỏ."
+        },
+        {
+          "id": "B",
+          "text": "Thành sau là khoảng nằm giữa ĐM Gan và TM chủ dưới."
+        },
+        {
+          "id": "C",
+          "text": "Thành trên là thùy đuôi của gan."
+        },
+        {
+          "id": "D",
+          "text": "Thành dưới là bờ trên mạc dính tá tụy."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.Thành sau là khoảng nằm giữa ĐM Gan và TM chủ dưới (Đm chủ\nbụng và TM chủ dưới)=>thành sau ĐM chủ bụng và TM chủ dưới.\nTiền đình mạc nối:\ngan ờ trên\nkhối tá-tụy (dính) ở dưới\nmạc nối nhỏ trước\ncác mạch chú (ĐM chủ bụng; TM chủ bụng ) ở sau.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/df6b477bb83e16520849.webp"
+      ],
+      "sourcePage": 6,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-phuc-mac-10",
+      "number": 10,
+      "stem": "Các mô tả sau đây về đường vào phần chính túi mạc nối đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đường qua lỗ mạc nối: đường tự nhiên."
+        },
+        {
+          "id": "B",
+          "text": "Đường rạch qua dây chằng gan- tá tràng."
+        },
+        {
+          "id": "C",
+          "text": "Đường rạch qua 2 lá trước mạc nối lớn."
+        },
+        {
+          "id": "D",
+          "text": "Đường rạch qua mạch treo đại tràng ngang."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.Đường rạch qua dây chằng gan- tá tràng=>d/c gan tá- tràng và\nphần T d/c gan vị dày => qua phần P d/c gan vị,thuộc về Tiền đình\nmạc nối.\nD.Đường rạch qua mạch treo đại tràng ngang=>+ rạch qua 2 lá sau\nmạc nối lớn.\nĐường vào túi mạc nối:\n-Đường tự nhiên qua túi mạc nối\n-Giữa 2 lá mạc nối nhỏ phần mỏng (cuống gan) hoặc phần dày (bờ\nphải của dây chằng gan vị)\n-2 lá trước mạc nối lớn\n-2 lá sau mạc nối lớn\n-Qua mạc treo đại tràng ngang.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/7d47272e02dda9efcf50.webp"
+      ],
+      "sourcePage": 7,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-phuc-mac-11",
+      "number": 11,
+      "stem": "Mô tả nào sau đây về mạc nối nhỏ đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Bờ gan của nó bám vào các mép của khe dây chằng tròn."
+        },
+        {
+          "id": "B",
+          "text": "Nó liên tiếp với phúc mạc của dạ dày dọc theo bờ cong lớn."
+        },
+        {
+          "id": "C",
+          "text": "Đoạn ngang của bờ gan bám vào hai mép của cửa gan."
+        },
+        {
+          "id": "D",
+          "text": "Nó liên tiếp với hai lá của dây chằng liềm."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "A.Bờ gan của nó bám vào các mép của khe dây chằng tròn=>khe\nd/c tĩnh mạch.\nB.Nó liên tiếp với phúc mạc của dạ dày dọc theo bờ cong\nlớn=>dọc theo bờ cong nhỏ.\nC.Đoạn ngang của bờ gan bám vào hai mép của cửa gan.\nD.Nó liên tiếp với hai lá của dây chằng liềm=>liên tiếp với 2 lá phúc\nmạc phủ dạ dày và hành tá tràng.\n==>Đoạn dọc: Khe dây chằng TM\nĐoạn ngang: 2 mép của Cửa gan.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/38074ffb114629d39a47.webp"
+      ],
+      "sourcePage": 8,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-phuc-mac-12",
+      "number": 12,
+      "stem": "Các mô tả về mạc nối nhỏ đều đúng, TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó bị mặt tạng của gan trùm lên."
+        },
+        {
+          "id": "B",
+          "text": "Nó là thành dưới của tiền đình túi mạc nối."
+        },
+        {
+          "id": "C",
+          "text": "Nó gồm các thành phần từ gan tới hành trá tràng. dạ dày và thực quản. mỗi phần được gọi là một dây chằng."
+        },
+        {
+          "id": "D",
+          "text": "Bờ phải của nó nằm trước TM chủ dưới."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "B.Nó là thành dưới của tiền đình túi mạc nối => thành trước tiền đình\nmạc nối.\nD.Bờ phải của nó nằm trước TM chủ dưới=>TM chủ dưới là bờ sau lỗ\nmạc nối, bờ trc là bờ phải mạc nối nhỏ.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 9,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-phuc-mac-13",
+      "number": 13,
+      "stem": "Các mô tả nào sau đây về tiền đình của túi mạc nối đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đầu trái của nó thông với phần chính của túi mạc nối."
+        },
+        {
+          "id": "B",
+          "text": "Đầu phải của nó là lỗ nếp vị - tụy."
+        },
+        {
+          "id": "C",
+          "text": "Thành trên của nó là thùy vuông của gan."
+        },
+        {
+          "id": "D",
+          "text": "Thành dưới của nó là thân và đuôi tụy."
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "explanation": "B.Đầu phải của nó là lỗ nếp vị - tụy=>đầu trái là lỗ nếp vị tụy,ĐM vị\ntrái: Nếp vị tụy.\nC.Thành trên của nó là thùy vuông của gan=>thành trên là thuỳ\nđuôi.\nD.Thành dưới của nó là thân và đuôi tụy=>khối tá tụy.\nTiền đình mạc nối:\ngan ờ trên\nkhối tá-tụy (dính) ở dưới\nmạc nối nhỏ trước\ncác mạch chú (ĐM chủ bụng; TM chủ bụng ) ở sau.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/a0e3b9e51ed3f64d35c7.webp"
+      ],
+      "sourcePage": 10,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-phuc-mac-14",
+      "number": 14,
+      "stem": "Các mô tả sau đây về túi mạc nối đều đúng. TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nó có một ngách nằm giữa các lá trước và sau của mạc nối lớn."
+        },
+        {
+          "id": "B",
+          "text": "Nó là khoang mà qua đó dạ dày liên quan với thân tụy và thận trái."
+        },
+        {
+          "id": "C",
+          "text": "Nó được giới hạn ở bên trái bởi lách và các dây chằng của lách."
+        },
+        {
+          "id": "D",
+          "text": "Nó có hai đường vào bằng các lỗ tự nhiên."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.Nó có hai đường vào bằng các lỗ tự nhiên => Nó chỉ có 1 đường\nvào bằng các lỗ tự nhiên (lỗ mạc nối)",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/6dab68c01f02af0c576f.webp"
+      ],
+      "sourcePage": 11,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-phuc-mac-15",
+      "number": 15,
+      "stem": "Mô tả nào sau đây về túi mạc nối đúng?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thành sau của phần chính túi mạc nối tạo nên bởi thân tụy và thận phải."
+        },
+        {
+          "id": "B",
+          "text": "Giới hạn trên của phần chính túi mạc nối là dây chằng vị- hoành."
+        },
+        {
+          "id": "C",
+          "text": "Các ĐM vị ngắn đi trên thành sau của nó."
+        },
+        {
+          "id": "D",
+          "text": "Nó không mở rộng xuống dưới đại tràng ngang."
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "explanation": "A.Thành sau của phần chính túi mạc nối tạo nên bởi thân tụy và thận\nphải=>thân và đuôi tuỵ, thận trái, ĐM lách và cơ hoành.\nC.Các ĐM vị ngắn đi trên thành sau của nó=>Đm lách mới đi trên\nthành sau của nó.\nD.Nó không mở rộng xuống dưới đại tràng ngang.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 12,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-phuc-mac-16",
+      "number": 16,
+      "stem": "Tất cả các mô tả sau về mạc nối bé đều đúng TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Bờ phải tự do của nó tạo nên một giới hạn của lỗ mạc nối."
+        },
+        {
+          "id": "B",
+          "text": "Bờ phải tự do của nó chứa các thành phần của cuống gan."
+        },
+        {
+          "id": "C",
+          "text": "Nó tạo nên thành trước của tiền đình túi mạc nối."
+        },
+        {
+          "id": "D",
+          "text": "Nó bám vào phần xuống của tá tràng."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "D.Nó bám vào phần xuống của tá tràng=>bám vào phần trên của tá\ntràng.",
+      "images": [],
+      "explanationImages": [
+        "/kb/dr-lam/images/9602f7293c89cc4f2aa7.webp"
+      ],
+      "sourcePage": 13,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-phuc-mac-17",
+      "number": 17,
+      "stem": "(Case study) Nếu một nhiễm trùng bụng lan rộng sau phúc mạc. cấu trúc nào trong các cấu trúc sau dễ bị ảnh hưởng nhất?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Dạ dày."
+        },
+        {
+          "id": "B",
+          "text": "Đại tràng ngang."
+        },
+        {
+          "id": "C",
+          "text": "Hỗng tràng."
+        },
+        {
+          "id": "D",
+          "text": "Đại tràng xuống."
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "explanation": "A.Dạ dày,B.Đại tràng ngang,C.Hỗng tràng=>trong phúc mạc.\nD.Đại tràng xuống=>Đại tràng xuống nằm sau phúc mạc.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 14,
+      "gradable": true
+    },
+    {
+      "id": "giai-phau-phuc-mac-18",
+      "number": 18,
+      "stem": "Tất cả các ĐM sau đi qua mạc treo hoặc mạc nối để tới các cơ quan mà chúng cấp máu TRỪ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "ĐM đại tràng giữa."
+        },
+        {
+          "id": "B",
+          "text": "Các ĐM sigma."
+        },
+        {
+          "id": "C",
+          "text": "ĐM tụy lưng."
+        },
+        {
+          "id": "D",
+          "text": "ĐM mạc treo tràng trên."
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "explanation": "C.ĐM tụy lưng => Tuỵ sau phúc mạc nên các ĐM nuôi ko đi qua mạc\ntreo, mạc nối.",
+      "images": [],
+      "explanationImages": [],
+      "sourcePage": 15,
+      "gradable": true
+    }
+  ]
+}
