@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Catalog — lớp dữ liệu dùng chung cho trang chủ, tìm kiếm và trang khám phá.
  *
@@ -13,7 +15,7 @@
 import { pick, type Loc, type T3 } from "./homeContent";
 import { sceneModules, type SceneModule } from "./sceneModules";
 import { regionViewerConfig } from "./scenes/regions";
-import { atlasScenes } from "./humanAtlas/scenes";
+import { atlasScenes, atlasSceneAliases } from "./humanAtlas/scenes";
 
 /** Nhóm hệ cơ quan dùng để gom scene trên trang chủ. */
 export type SystemGroupKey =
@@ -42,7 +44,7 @@ export type SystemGroup = {
   accent: string;
 };
 
-export const systemGroups: SystemGroup[] = [
+export const systemGroups: SystemGroup[] = bindContentSource("data:src/lib/catalog.ts#systemGroups", [
   { key: "skeletal", slug: "he-xuong", label: { vi: "Hệ xương", en: "Skeletal system", zh: "骨骼系统" }, icon: "i-bone", accent: "g-bone" },
   { key: "muscular", slug: "he-co", label: { vi: "Hệ cơ", en: "Muscular system", zh: "肌肉系统" }, icon: "i-muscle", accent: "g-muscle" },
   { key: "nervous", slug: "he-than-kinh", label: { vi: "Hệ thần kinh", en: "Nervous system", zh: "神经系统" }, icon: "i-brain", accent: "g-nerve" },
@@ -58,7 +60,7 @@ export const systemGroups: SystemGroup[] = [
   { key: "reproductive", slug: "he-sinh-san", label: { vi: "Hệ sinh sản", en: "Reproductive system", zh: "生殖系统" }, icon: "i-gyn", accent: "g-repro" },
   { key: "fascia", slug: "he-mac-nhom", label: { vi: "Hệ mạc", en: "Fascial system", zh: "筋膜系统" }, icon: "i-cell", accent: "g-fascia" },
   { key: "connective", slug: "mo-lien-ket-nhom", label: { vi: "Mô liên kết", en: "Connective tissue", zh: "结缔组织" }, icon: "i-cell", accent: "g-connective" },
-];
+]);
 
 export const systemBySlug = new Map(systemGroups.map((g) => [g.slug, g]));
 export const systemByKey = new Map(systemGroups.map((g) => [g.key, g]));
@@ -150,7 +152,7 @@ const sceneSystem: Record<string, SystemGroupKey> = {
   "thanh-bung": "muscular",
   "dai-nao": "nervous",
   "than-nao-day-so-full": "nervous",
-  "tieu-nao-day-du": "nervous",
+  "hoi-vo-dai-nao": "nervous",
   "tuy-song-dam-roi": "nervous",
   "he-dong-mach-chu": "cardiovascular",
   "he-bach-huyet": "cardiovascular",
@@ -279,7 +281,7 @@ const thumbnails: Record<string, string> = {
   "thanh-bung": "/thumbnails/thanh-bung.jpg",
   "dai-nao": "/thumbnails/dai-nao.jpg",
   "than-nao-day-so-full": "/thumbnails/than-nao-day-so-full.jpg",
-  "tieu-nao-day-du": "/thumbnails/tieu-nao-day-du.jpg",
+  "hoi-vo-dai-nao": "/thumbnails/tieu-nao-day-du.jpg",
   "tuy-song-dam-roi": "/thumbnails/tuy-song-dam-roi.jpg",
   "he-dong-mach-chu": "/thumbnails/he-dong-mach-chu.jpg",
   "he-bach-huyet": "/thumbnails/he-bach-huyet.jpg",
@@ -381,7 +383,7 @@ function buildSearchText(scene: SceneModule): string {
 function atlasCard(scene: SceneModule): Partial<CatalogScene> | null {
   const a = atlasScenes[scene.slug];
   if (!a) return null;
-  const names = a.groups.map((g) => [g.name.vi, g.name.en, g.latin ?? ""].join(" "));
+  const names = a.groups.map((g) => [g.name.vi, g.name.en, g.name.zh, g.latin ?? "", ...(g.landmarks ?? []).flatMap(m => [m.name.vi, m.name.en, m.name.zh, m.latin])].join(" "));
   return {
     title: a.title,
     description: a.intro,
@@ -392,7 +394,7 @@ function atlasCard(scene: SceneModule): Partial<CatalogScene> | null {
   };
 }
 
-export const catalogScenes: CatalogScene[] = Object.values(sceneModules).map((scene) => ({
+export const catalogScenes: CatalogScene[] = Object.values(sceneModules).filter(scene=>!atlasSceneAliases[scene.slug]).map((scene) => ({
   slug: scene.slug,
   title: scene.title,
   description: scene.description,
@@ -427,7 +429,7 @@ for (const a of Object.values(atlasScenes)) {
     href: `/giai-phau/mo-hinh/${a.slug}`,
     thumb: thumbnails[a.slug] ?? `/thumbnails/${a.slug}.jpg`,
     structureCount: a.groups.length,
-    searchText: [a.title.vi, a.title.en, a.title.zh, a.latin ?? "", ...a.groups.map((g) => `${g.name.vi} ${g.name.en} ${g.latin ?? ""}`)]
+    searchText: [a.title.vi, a.title.en, a.title.zh, a.latin ?? "", ...a.groups.map((g) => [g.name.vi,g.name.en,g.name.zh,g.latin ?? "",...(g.landmarks ?? []).flatMap(m=>[m.name.vi,m.name.en,m.name.zh,m.latin])].join(" "))]
       .join(" ")
       .toLowerCase(),
   });
@@ -446,7 +448,7 @@ export type RegionKey =
  * trang `/giai-phau/<slug>` và một mục trong sidebar, thay cho hàng tab lọc cũ
  * nằm trong trang "Giải phẫu theo vùng".
  */
-export const regionGroups: { key: RegionKey; slug: string; label: T3; icon: string }[] = [
+export const regionGroups: { key: RegionKey; slug: string; label: T3; icon: string }[] = bindContentSource("data:src/lib/catalog.ts#regionGroups", [
   { key: "head-neck", slug: "vung-dau-co", label: { vi: "Đầu và cổ", en: "Head and neck", zh: "头颈部" }, icon: "i-brain" },
   { key: "thorax", slug: "vung-nguc", label: { vi: "Ngực", en: "Thorax", zh: "胸部" }, icon: "i-heart" },
   { key: "abdomen", slug: "vung-bung", label: { vi: "Bụng", en: "Abdomen", zh: "腹部" }, icon: "i-stomach" },
@@ -454,7 +456,7 @@ export const regionGroups: { key: RegionKey; slug: string; label: T3; icon: stri
   { key: "upper-limb", slug: "vung-chi-tren", label: { vi: "Chi trên", en: "Upper limb", zh: "上肢" }, icon: "i-muscle" },
   { key: "pelvis", slug: "vung-chau-hong", label: { vi: "Chậu hông", en: "Pelvis", zh: "骨盆" }, icon: "i-bone" },
   { key: "lower-limb", slug: "vung-chi-duoi", label: { vi: "Chi dưới", en: "Lower limb", zh: "下肢" }, icon: "i-muscle" },
-];
+]);
 
 export const regionBySlug = new Map(regionGroups.map((g) => [g.slug, g]));
 
@@ -473,7 +475,7 @@ const sceneRegion: Record<string, RegionKey> = {
   "mui-xoang": "head-neck", "mieng-luoi-rang": "head-neck", "bo-rang": "head-neck",
   "hau-thanh-quan": "head-neck", "thanh-quan": "head-neck", "co-mat": "head-neck",
   "dai-nao": "head-neck", "than-nao-day-so": "head-neck", "than-nao-day-so-full": "head-neck",
-  "tieu-nao": "head-neck", "tieu-nao-day-du": "head-neck", "gian-nao-he-vien": "head-neck",
+  "tieu-nao": "head-neck", "hoi-vo-dai-nao": "head-neck", "gian-nao-he-vien": "head-neck",
   "da-giac-willis": "head-neck",
   // Ngực
   "giai-phau-than": "thorax", "tim-day-du": "thorax", "giai-phau-tim": "thorax",

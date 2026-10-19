@@ -1,5 +1,11 @@
 "use client";
 
+
+
+
+import { useContent } from "@/components/content/ContentProvider";
+import { bindContentSource } from "@/lib/content/source";
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
 import { useGLTF, OrbitControls } from "@react-three/drei";
@@ -27,11 +33,11 @@ import { fitDistance, modelFrame, VIEW_DIR, type ModelFrame } from "@/lib/anatom
 
 type LayerState = Record<CatKey, { visible: boolean; faded: boolean }>;
 
-const VIEWER_TEXT: Record<Loc, { title: string; shown: string; hidden: string; clear: string; faded: string; hint: string; layers: Record<CatKey, string> }> = {
+const VIEWER_TEXT: Record<Loc, { title: string; shown: string; hidden: string; clear: string; faded: string; hint: string; layers: Record<CatKey, string> }> = bindContentSource("data:src/components/home/ArmViewer.tsx#VIEWER_TEXT", {
   vi: { title: "LỚP GIẢI PHẪU", shown: "Hiện", hidden: "Ẩn", clear: "Rõ", faded: "Mờ", hint: "Nhấp vào một bộ phận để xem thông tin", layers: { skin: "Da", muscle: "Cơ", brain: "Não", organ: "Nội tạng", artery: "Động mạch", vein: "Tĩnh mạch", nerve: "Thần kinh", lymph: "Bạch huyết", eye: "Mắt", bone: "Xương" } },
   en: { title: "ANATOMICAL LAYERS", shown: "Shown", hidden: "Hidden", clear: "Solid", faded: "Faded", hint: "Select a structure to view its details", layers: { skin: "Skin", muscle: "Muscle", brain: "Brain", organ: "Organs", artery: "Arteries", vein: "Veins", nerve: "Nerves", lymph: "Lymphatic", eye: "Eye", bone: "Bone" } },
   zh: { title: "解剖层", shown: "显示", hidden: "隐藏", clear: "清晰", faded: "淡化", hint: "选择一个结构以查看详细信息", layers: { skin: "皮肤", muscle: "肌肉", brain: "脑", organ: "内脏", artery: "动脉", vein: "静脉", nerve: "神经", lymph: "淋巴", eye: "眼", bone: "骨" } },
-};
+});
 
 const HL_HOVER = new THREE.Color("#0ea5e9");
 const HL_SEL = new THREE.Color("#38bdf8");
@@ -56,6 +62,9 @@ function ownMat(m: THREE.Mesh): THREE.MeshStandardMaterial {
 }
 
 function ArmModel({ url, layers }: { url: string; layers: LayerState }) {
+  const cmsContent = useContent();
+  const CATS = cmsContent.resolve(cmsSourceCATS());
+
   const { scene } = useGLTF(url, "/draco/");
   const hiddenIds = useAnatomyStore((s) => s.hiddenIds);
   const fadedIds = useAnatomyStore((s) => s.fadedIds);
@@ -123,7 +132,7 @@ function ArmModel({ url, layers }: { url: string; layers: LayerState }) {
       }
       mat.needsUpdate = true;
     });
-  }, [layers]);
+  }, [CATS, layers]);
 
   /**
    * Trạng thái TỪNG CẤU TRÚC (Ẩn/Mờ/Cô lập/đang chọn/đang rê chuột) chồng lên
@@ -200,7 +209,7 @@ function ArmModel({ url, layers }: { url: string; layers: LayerState }) {
     (window as unknown as { somaScene?: THREE.Object3D }).somaScene = scn;
   }, [scn]);
 
-  return <primitive object={scn} />;
+  return <ContentSurface scope="src/components/home/ArmViewer.tsx"><primitive object={scn} /></ContentSurface>;
 }
 
 /**
@@ -383,6 +392,10 @@ export default function ArmViewer({
   defaultFaded?: CatKey[]; // lớp mở ra ở trạng thái MỜ sẵn (vd da) để lộ chi tiết bên trong
   hotspots?: SceneHotspot[]; // nhãn đã biên soạn — để click trúng mesh nào thì hiện đúng tên tiếng Việt
 }) {
+  const cmsContent = useContent();
+  const VIEWER_TEXT = cmsContent.resolve(cmsSourceVIEWER_TEXT());
+  const CATS = cmsContent.resolve(cmsSourceCATS());
+
   const locale = useLocale() as Loc;
   const text = VIEWER_TEXT[locale];
   const selected = useAnatomyStore((s) => s.selected);
@@ -407,7 +420,7 @@ export default function ArmViewer({
   const toggle = (k: CatKey, field: "visible" | "faded") =>
     setLayers((s) => ({ ...s, [k]: { ...s[k], [field]: !s[k][field] } }));
 
-  return (
+  return <ContentSurface scope="src/components/home/ArmViewer.tsx">{(
     <div className="viewer-stage" style={{ position: "relative", width: "100%", height: "100%" }}>
       <Canvas
         dpr={[1, 1.6]}
@@ -463,7 +476,7 @@ export default function ArmViewer({
         {selected ? selected.name : text.hint}
       </p>
     </div>
-  );
+  )}</ContentSurface>;
 }
 
 const panelStyle: React.CSSProperties = {
@@ -491,3 +504,6 @@ const hintStyle: React.CSSProperties = {
 };
 
 useGLTF.preload("/models/arm.glb", "/draco/");
+
+function cmsSourceCATS() { return CATS; }
+function cmsSourceVIEWER_TEXT() { return VIEWER_TEXT; }

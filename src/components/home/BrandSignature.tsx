@@ -1,8 +1,10 @@
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 
 export default function BrandSignature() {
-  return (
+  return <ContentSurface scope="src/components/home/BrandSignature.tsx">{(
     <Link href="/" className="brand-signature" aria-label="Soma Atlas — giải phẫu 3D">
       <span className="brand-signature-emblem" aria-hidden="true">
         <Image src="/brand/soma-emblem-light.png" alt="" width={64} height={64} priority unoptimized />
@@ -12,5 +14,5 @@ export default function BrandSignature() {
         <small>Giải phẫu tương tác · 3D</small>
       </span>
     </Link>
-  );
+  )}</ContentSurface>;
 }

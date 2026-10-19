@@ -1,47 +1,68 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+
+
+import { useContent } from "@/components/content/ContentProvider";
+import { ContentSurface } from "@/components/content/ContentProvider";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { useRouter, Link } from "@/i18n/navigation";
 import { homeContent as C, pick, type Loc } from "@/lib/homeContent";
-import { searchScenes, systemByKey } from "@/lib/catalog";
+import { searchHref, searchWeb } from "@/lib/site/siteSearch";
 import { Icon } from "./IconSprite";
 
 const MAX_SUGGESTIONS = 6;
 
 /**
- * Ô tìm kiếm trang chủ — lọc THẬT trên catalog scene.
- *
- * Khớp theo tên scene, tên hệ, và tên từng cấu trúc bên trong scene (Việt,
- * Anh, Latin) nên gõ "hepar" hay "ốc tai" đều ra đúng mô hình. Bỏ dấu tiếng
- * Việt nên "coi song" vẫn tìm được "Cột sống".
+ * Shared public search: real model names/structures, source sets and tools.
+ * Enter opens the complete result page; arrow keys can choose a suggestion.
  */
 export default function HomeSearch({ locale, compact = false }: { locale: Loc; compact?: boolean }) {
+  const cmsContent = useContent();
+  const C = cmsContent.resolve(cmsSourceC());
+
   const router = useRouter();
   const [query, setQuery] = useState("");
   const [focused, setFocused] = useState(false);
+  const [active, setActive] = useState(-1);
+  const listId = useId();
   const blurTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const results = useMemo(() => searchScenes(query, locale), [query, locale]);
+  useEffect(() => () => { if (blurTimer.current) clearTimeout(blurTimer.current); }, []);
+  const results = useMemo(() => searchWeb(query, locale), [query, locale]);
   const suggestions = results.slice(0, MAX_SUGGESTIONS);
   const open = focused && query.trim().length > 0;
 
-  const goToFirstResult = () => {
-    if (results.length > 0) router.push(results[0].href);
+  const submitSearch = () => {
+    if (!query.trim()) return;
+    router.push(open && active >= 0 && suggestions[active] ? suggestions[active].href : searchHref(query));
   };
 
-  return (
+  return <ContentSurface scope="src/components/home/HomeSearch.tsx">{(
     <div className={`search-wrap${compact ? " search-compact" : ""}`}>
       <form
         className="search"
         onSubmit={(e) => {
           e.preventDefault();
-          goToFirstResult();
+          submitSearch();
         }}
       >
         <svg className="search-leading-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
         <input
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={(e) => { setQuery(e.target.value); setActive(-1); }}
+          maxLength={500}
+          role="combobox"
+          aria-expanded={open && suggestions.length > 0}
+          aria-controls={open && suggestions.length > 0 ? listId : undefined}
+          aria-autocomplete="list"
+          aria-activedescendant={open && active >= 0 ? `${listId}-${active}` : undefined}
+          onKeyDown={event => {
+            if (event.key === "Escape") { setFocused(false); setActive(-1); }
+            if ((event.key === "ArrowDown" || event.key === "ArrowUp") && suggestions.length) {
+              event.preventDefault(); setFocused(true);
+              setActive(index => event.key === "ArrowDown" ? (index + 1) % suggestions.length : (index <= 0 ? suggestions.length : index) - 1);
+            }
+          }}
           onFocus={() => {
             if (blurTimer.current) clearTimeout(blurTimer.current);
             setFocused(true);
@@ -50,10 +71,10 @@ export default function HomeSearch({ locale, compact = false }: { locale: Loc; c
           onBlur={() => {
             blurTimer.current = setTimeout(() => setFocused(false), 150);
           }}
-          placeholder={pick(C.hero.search, locale)}
-          aria-label={pick(C.hero.search, locale)}
+          placeholder={pick({vi:"Tìm mô hình, bộ đề, tính năng…",en:"Search models, quizzes, features…",zh:"搜索模型、题库、功能…"}, locale)}
+          aria-label={pick({vi:"Tìm trong Soma",en:"Search Soma",zh:"搜索 Soma"}, locale)}
         />
-        <button type="submit" className="go" disabled={!query.trim() || results.length === 0}>
+        <button type="submit" className="go" disabled={!query.trim()}>
           {!compact && <span>{pick(C.hero.searchBtn, locale)}</span>}
           {compact ? (
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
@@ -64,31 +85,37 @@ export default function HomeSearch({ locale, compact = false }: { locale: Loc; c
       </form>
 
       {open && (
-        <div className="search-panel">
+        <div className="search-panel" data-lenis-prevent>
           {suggestions.length === 0 ? (
             <p className="search-empty">{pick(C.hero.noResult, locale)}</p>
           ) : (
             <>
-              {suggestions.map((scene) => {
-                const group = systemByKey.get(scene.system);
+              <div id={listId} role="listbox" aria-label={pick({vi:"Gợi ý tìm kiếm",en:"Search suggestions",zh:"搜索建议"},locale)}>
+              {suggestions.map((item, index) => {
                 return (
-                  <Link key={scene.slug} href={scene.href} className="search-hit">
-                    <Icon id={group?.icon ?? "i-grid"} />
-                    <span className="sh-title">{pick(scene.title, locale)}</span>
-                    <span className="sh-sys">{group ? pick(group.label, locale) : ""}</span>
+                  <Link key={item.id} id={`${listId}-${index}`} role="option" aria-selected={active === index} href={item.href} className="search-hit">
+                    <Icon id={item.kind === "model" ? "i-grid" : "i-search"} />
+                    <span className="sh-title">{item.title}</span>
+                    <span className="sh-sys">{item.section}</span>
                   </Link>
                 );
               })}
+              </div>
               {results.length > suggestions.length && (
-                <Link href="/giai-phau/tat-ca" className="search-more">
+                <Link href={searchHref(query)} className="search-more">
                   {pick(C.sections.viewAll, locale)} ({results.length})
                 </Link>
               )}
             </>
           )}
+          <Link href={searchHref(query)} className="search-more">
+            {pick({vi:"Xem kết quả & hỏi AI theo nguồn →",en:"View results & ask with sources →",zh:"查看结果及有据问答 →"},locale)}
+          </Link>
         </div>
       )}
 
     </div>
-  );
+  )}</ContentSurface>;
 }
+
+function cmsSourceC() { return C; }

@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { T3 } from "./homeContent";
 import {
   catalogScenes, regionGroups, scenesOfRegion, scenesOfSystem, systemByKey, systemGroups,
@@ -19,12 +21,12 @@ export type SidebarItem = {
   href: string; // đường dẫn tương đối (không kèm locale)
 };
 
-export const sidebarAllModels: SidebarItem = {
+export const sidebarAllModels: SidebarItem = bindContentSource("data:src/lib/exploreContent.ts#sidebarAllModels", {
   slug: "tat-ca",
   icon: "i-grid",
   label: { vi: "Tất cả mô hình", en: "All Models", zh: "所有模型" },
   href: "/giai-phau/tat-ca",
-};
+});
 
 /**
  * Mọi mục ở đây đều có trang thật. "Trắc nghiệm giải phẫu" đã được gỡ khỏi
@@ -32,13 +34,13 @@ export const sidebarAllModels: SidebarItem = {
  * chạy và vẫn tới được từ mục Quiz trên thanh điều hướng, chỉ không còn chiếm
  * một dòng trong menu Giải phẫu.
  */
-export const sidebarAnatomy: SidebarItem[] = [
+export const sidebarAnatomy: SidebarItem[] = bindContentSource("data:src/lib/exploreContent.ts#sidebarAnatomy", [
   { slug: "theo-vung", icon: "i-region", label: { vi: "Giải phẫu theo vùng", en: "Anatomy by region", zh: "按区域" }, href: "/giai-phau/theo-vung" },
   { slug: "theo-he", icon: "i-system", label: { vi: "Giải phẫu theo hệ", en: "Anatomy by system", zh: "按系统" }, href: "/giai-phau/theo-he" },
   { slug: "toan-than", icon: "i-full", label: { vi: "Giải phẫu toàn thân", en: "Complete anatomy", zh: "完整解剖" }, href: "/viewer" },
   { slug: "lat-cat", icon: "i-cross", label: { vi: "Lát cắt & vi giải phẫu", en: "Cross sections & microanatomy", zh: "断面与微观解剖" }, href: "/giai-phau/lat-cat" },
   { slug: "moc-xuong", icon: "i-bone", label: { vi: "Mốc xương, nguyên uỷ & bám tận", en: "Bony landmarks, origins & insertions", zh: "骨性标志与肌肉起止" }, href: "/giai-phau/moc-xuong" },
-];
+]);
 
 export type FilterTab = { key: string; label: T3 };
 export type ContentType = "anatomy" | "condition" | "procedure";
@@ -104,7 +106,7 @@ const systemFilters: FilterTab[] = [
  * dùng ô chọn "Hệ" trên thanh công cụ; còn lối vào từng hệ nằm ở trang "Giải
  * phẫu theo hệ" và ở sidebar.
  */
-const wholeBodyCard: ResultCard = {
+const wholeBodyCard: ResultCard = bindContentSource("data:src/lib/exploreContent.ts#wholeBodyCard", {
   img: "an-skel",
   icon: "i-full",
   thumb: "/thumbnails/toan-than-7-he.jpg",
@@ -113,7 +115,7 @@ const wholeBodyCard: ResultCard = {
   href: "/viewer",
   real: true,
   type: "anatomy",
-};
+});
 
 /**
  * Thẻ cho mọi scene có model 3D thật — DẪN XUẤT từ `catalog` thay vì liệt kê

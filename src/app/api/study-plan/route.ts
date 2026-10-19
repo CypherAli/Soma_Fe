@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { complete, isConfigured } from "@/lib/llm";
 import { userFromRequest } from "@/lib/apiAuth";
 import { retrieve, systemDigest } from "@/lib/anatomy/retrieve";
+import { readJsonObject, readString } from "@/lib/requestBody";
 
 export const runtime = "nodejs";
 
@@ -106,8 +107,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Cần đăng nhập" }, { status: 401 });
   }
 
-  const body = await request.json().catch(() => ({}));
-  const brief = String(body.brief ?? "").trim().slice(0, 800);
+  const body = await readJsonObject(request);
+  if (!body) return NextResponse.json({ error: "body không phải JSON object" }, { status: 400 });
+  const brief = readString(body.brief, 800);
   if (!brief) return NextResponse.json({ error: "empty brief" }, { status: 400 });
 
   const fallback = ruleIntent(brief);

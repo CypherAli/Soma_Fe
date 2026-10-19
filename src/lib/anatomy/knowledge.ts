@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import { sceneModules } from "@/lib/sceneModules";
 import { pick, type Loc, type T3 } from "@/lib/homeContent";
 import type { SystemKey } from "@/store/useAnatomyStore";
@@ -70,7 +72,7 @@ export function factsBySystem(): Map<SystemKey, AnatomyFact[]> {
   return m;
 }
 
-export const SYSTEM_LABEL: Record<SystemKey, T3> = {
+export const SYSTEM_LABEL: Record<SystemKey, T3> = bindContentSource("data:src/lib/anatomy/knowledge.ts#SYSTEM_LABEL", {
   skeletal: { vi: "Hệ xương", en: "Skeletal system", zh: "骨骼系统" },
   muscular: { vi: "Hệ cơ", en: "Muscular system", zh: "肌肉系统" },
   nervous: { vi: "Hệ thần kinh", en: "Nervous system", zh: "神经系统" },
@@ -78,7 +80,7 @@ export const SYSTEM_LABEL: Record<SystemKey, T3> = {
   visceral: { vi: "Nội tạng", en: "Visceral systems", zh: "内脏系统" },
   lymphoid: { vi: "Hệ bạch huyết", en: "Lymphoid system", zh: "淋巴系统" },
   joints: { vi: "Khớp", en: "Joints", zh: "关节" },
-};
+});
 
 /** Bỏ dấu tiếng Việt để tìm kiếm gõ không dấu vẫn ra. */
 export function fold(s: string): string {

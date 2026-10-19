@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { complete, isConfigured } from "@/lib/llm";
 import { userFromRequest } from "@/lib/apiAuth";
+import { readJsonObject } from "@/lib/requestBody";
 
 export const runtime = "nodejs";
 
@@ -46,8 +47,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Chưa cấu hình AI" }, { status: 503 });
   }
 
-  const body = await request.json().catch(() => ({}));
-  const text = String(body.text ?? "");
+  const body = await readJsonObject(request);
+  if (!body || typeof body.text !== "string") {
+    return NextResponse.json({ error: "thiếu văn bản tài liệu" }, { status: 400 });
+  }
+  const text = body.text;
   if (text.trim().length < 40) {
     return NextResponse.json({ questions: [], chunks: 0 });
   }

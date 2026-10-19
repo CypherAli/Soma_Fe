@@ -1,5 +1,9 @@
 "use client";
 
+
+
+import { useContent } from "@/components/content/ContentProvider";
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import { pick, homeContent as C, type Loc } from "@/lib/homeContent";
@@ -25,6 +29,9 @@ export default function SceneCarousel({
   locale: Loc;
   viewAllHref?: string;
 }) {
+  const cmsContent = useContent();
+  const C = cmsContent.resolve(cmsSourceC());
+
   const rowRef = useRef<HTMLDivElement>(null);
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
@@ -59,7 +66,7 @@ export default function SceneCarousel({
 
   if (scenes.length === 0) return null;
 
-  return (
+  return <ContentSurface scope="src/components/home/SceneCarousel.tsx">{(
     <section className="sec">
       <div className="wrap">
         <div className="sec-head">
@@ -103,12 +110,15 @@ export default function SceneCarousel({
         </div>
       </div>
     </section>
-  );
+  )}</ContentSurface>;
 }
 
 export function SceneCard({ scene, locale }: { scene: CatalogScene; locale: Loc }) {
+  const cmsContent = useContent();
+  const C = cmsContent.resolve(cmsSourceC());
+
   const group = systemByKey.get(scene.system);
-  return (
+  return <ContentSurface scope="src/components/home/SceneCarousel.tsx">{(
     <Link href={scene.href} className="card sm">
       <div className={`img ${group?.accent ?? "g-organ"}`}>
         {scene.thumb ? (
@@ -130,5 +140,7 @@ export function SceneCard({ scene, locale }: { scene: CatalogScene; locale: Loc 
         </div>
       </div>
     </Link>
-  );
+  )}</ContentSurface>;
 }
+
+function cmsSourceC() { return C; }

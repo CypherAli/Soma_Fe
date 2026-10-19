@@ -5,9 +5,11 @@ import { citation, search as searchPathology, type Hit } from "@/lib/pathologyRe
 import { complete, isConfigured } from "@/lib/llm";
 import { fetchPathologies } from "@/lib/pathologies";
 import { searchSiteFacts, type SiteFact } from "@/lib/site/siteKnowledge";
+import { isSystemNavigationQuestion } from "@/lib/site/grounding";
 import { VET_SYSTEM_LABEL, searchVetFactsScored, speciesInfo } from "@/lib/vet/knowledge";
 import type { VetFact } from "@/lib/vet/types";
-import slugAlias from "@/../data/slug-alias.json";
+import slugAlias from "@/../data/slug-alias.json" with { type: "json" };
+import { searchAtlasKnowledge } from "@/lib/humanAtlas/knowledge";
 
 /**
  * Lớp tra cứu HỢP NHẤT cho trợ lý: một câu hỏi, tra cả hai kho.
@@ -101,7 +103,9 @@ const siteToSource = (f: SiteFact, locale: Loc): UnifiedSource => ({
   href: f.href,
   meta:
     f.kind === "model"
-      ? pick({ vi: "Mô hình 3D trong Soma", en: "3D model in Soma", zh: "Soma 三维模型" }, locale)
+      ? pick({ vi: "Mô hình giải phẫu người trong Soma", en: "Human anatomy model in Soma", zh: "Soma 人体解剖模型" }, locale)
+      : f.kind === "quiz"
+      ? pick({ vi: "Bộ đề nhập từ PDF nguồn", en: "Set imported from its source PDF", zh: "由原始 PDF 导入的题库" }, locale)
       : pick({ vi: "Hướng dẫn dùng Soma", en: "Using Soma", zh: "Soma 使用说明" }, locale),
 });
 
@@ -121,7 +125,7 @@ const anatomyToSource = (f: AnatomyFact, locale: Loc): UnifiedSource => ({
   /* Khoá theo TÊN chứ không theo id: một cấu trúc có mặt ở nhiều scene nên
      cùng "Thần kinh giữa" từng hiện hai dòng nguồn giống hệt nhau, chỉ khác
      scene phía sau. Người đọc không cần biết chuyện đó. */
-  id: `anatomy:${fold(pick(f.label, locale))}`,
+  id: `anatomy:${pick(f.label, locale).normalize("NFC").toLowerCase()}`,
   title: pick(f.label, locale),
   detail: pick(f.note, locale),
   href: `/xem/${f.sceneSlug}?structure=${encodeURIComponent(f.meshName)}`,
@@ -236,17 +240,52 @@ const SPECIES_WORDS = new Set([
 ]);
 
 function namesAnimal(question: string): boolean {
-  const raw = question.toLowerCase();
+  const raw = question.normalize("NFC").toLowerCase();
   const words = raw.split(/[^\p{L}\p{N}]+/u).filter(Boolean);
   if (words.some((w) => SPECIES_WORDS.has(w))) return true;
   // Tiếng Trung không tách từ bằng dấu cách nên phải dò chuỗi con.
-  return [...SPECIES_WORDS].some((w) => /[㐀-鿿]/.test(w) && raw.includes(w));
+  return [...SPECIES_WORDS].some((w) =>
+    /[㐀-鿿]/.test(w) ? raw.includes(w) : w.includes(" ") && containsName(raw, w),
+  );
+}
+
+function containsName(question: string, name: string): boolean {
+  const normalize = (value: string) => value.normalize("NFC").toLowerCase()
+    .split(/[^\p{L}\p{N}]+/u).filter(Boolean).join(" ");
+  const label = normalize(name);
+  return !!label && ` ${normalize(question)} `.includes(` ${label} `);
+}
+
+function scopeSources<T extends { src: UnifiedSource }>(results: T[], question: string): T[] {
+  const exactNames = new Map<string, Set<string>>();
+  for (const { src } of results) {
+    const name = src.title.normalize("NFC").toLowerCase();
+    if (!containsName(question, name)) continue;
+    const variants = exactNames.get(fold(name)) ?? new Set<string>();
+    variants.add(name);
+    exactNames.set(fold(name), variants);
+  }
+  const animal = namesAnimal(question);
+  const human = containsName(question, "người") || containsName(question, "human") ||
+    containsName(question, "humans") || question.includes("人");
+  return results.filter(({ src }) => {
+    if (!animal && src.kind === "vet") return false;
+    if (animal && !human && src.kind !== "vet" && src.kind !== "site") return false;
+    if (animal && !human && src.kind === "site" && /^(model:|quiz:)/.test(src.id)) return false;
+    const name = src.title.normalize("NFC").toLowerCase();
+    const exact = exactNames.get(fold(name));
+    return !exact || exact.has(name);
+  });
 }
 
 export async function retrieve(
   question: string,
   locale: Loc,
 ): Promise<{ rel: number; src: UnifiedSource }[]> {
+  const systemHits = searchSiteFacts(question, locale);
+  if (!namesAnimal(question) && isSystemNavigationQuestion(question) && systemHits.some(hit => hit.score >= 2)) {
+    return systemHits.filter(hit => hit.score >= 2).map(hit => ({ rel: hit.score, src: siteToSource(hit.fact, locale) }));
+  }
   /* Dò tên cấu trúc trên CẢ BA ngôn ngữ, không chỉ ngôn ngữ giao diện.
      Người Việt vẫn hỏi tiếng Việt khi đang để giao diện tiếng Anh — lúc đó
      nhãn đem ra so là "Median nerve" nên "dây thần kinh giữa" không khớp nổi
@@ -283,7 +322,7 @@ export async function retrieve(
   const namedExactly = (f: AnatomyFact) =>
     langs.some((l) => {
       const label = fold(pick(f.label, l));
-      return label.length >= 3 && foldedQ.includes(label);
+      return label.length >= 3 && containsName(foldedQ, label);
     });
 
   const topA = strongFacts[0]?.score ?? 1;
@@ -303,10 +342,10 @@ export async function retrieve(
     ...(() => {
       const hits = searchVetFactsScored(question, locale, 5);
       const top = hits[0]?.score ?? 1;
-      // Gọi tên loài -> tư liệu thú y phải đứng trên tư liệu người (hệ số 3
-      // vượt cả nguồn giải phẫu gọi đúng tên, tối đa 2). Không gọi tên loài thì
-      // chỉ là nguồn bổ sung, không được lấn câu hỏi về người.
-      const weight = namesAnimal(question) ? 3 : 0.9;
+      // Only retrieve animal sources when the question names an animal or
+      // veterinary context; the human library is the default scope.
+      if (!namesAnimal(question)) return [];
+      const weight = 3;
       return hits
         .filter((h) => h.score >= 10) // dưới 10 là chưa khớp trọn từ nào trong TÊN
         .map((h) => ({ rel: (h.score / top) * weight, src: vetToSource(h.fact, locale) }));
@@ -316,6 +355,7 @@ export async function retrieve(
        — một hotspot xương quay, một bài loãng xương — đều lạc đề. rel = 3 để
        vượt cả nguồn giải phẫu gọi đúng tên (tối đa 2). */
     ...searchGeneralFacts(question).map((g) => ({ rel: 3, src: generalToSource(g.fact, locale) })),
+    ...searchAtlasKnowledge(question,locale).map(({score,...source})=>({rel:score>=40?2:0.9,src:{kind:'anatomy' as const,...source}})),
     ...strongFacts.map((f) => ({
       rel: (f.score / topA) * (namedExactly(f.fact) ? 2 : 1),
       src: anatomyToSource(f.fact, locale),
@@ -324,8 +364,10 @@ export async function retrieve(
     // loãng ngữ cảnh đưa cho mô hình.
     ...hits.filter((h) => h.score >= 0.35 * topP).map((h) => ({ rel: h.score / topP, src: pathologyToSource(h, names, locale) })),
   ];
-  merged.sort((a, b) => b.rel - a.rel);
-  return merged;
+  // Resolve accent collisions across both the mesh and curated Atlas sources.
+  const scoped = scopeSources(merged, question);
+  scoped.sort((a, b) => b.rel - a.rel);
+  return scoped;
 }
 
 /* ------------------------------------------------------------------ *
@@ -380,13 +422,14 @@ Giữ nguyên tên riêng, tên thuốc, mã ICD. Chỉ trả JSON, không thêm
  * Không có khoá AI thì trả về chính câu gốc — trợ lý vẫn chạy, chỉ kém nhạy
  * với cách diễn đạt lạ.
  */
-export async function understand(question: string): Promise<Understood> {
+export async function understand(question: string, signal?: AbortSignal): Promise<Understood> {
   if (!isConfigured()) return { intent: "lookup", queries: [question] };
   try {
     const raw = await complete({
       system: UNDERSTAND_SYSTEM,
       user: question,
       maxTokens: 200,
+      signal,
     });
     const parsed = JSON.parse(raw.replace(/^```(?:json)?|```$/gm, "").trim()) as Understood;
     const queries = (parsed.queries ?? []).filter((q) => typeof q === "string" && q.trim());
@@ -422,7 +465,9 @@ export async function retrieveMany(queries: string[], locale: Loc) {
       if (!prev || score > prev.rel) best.set(src.id, { rel: score, src });
     }
   }
-  return [...best.values()]
+  // Rewritten queries can omit a species or alter accents. The original
+  // question remains the scope boundary for the combined context.
+  return scopeSources([...best.values()], queries[0] ?? "")
     .sort((a, b) => b.rel - a.rel)
     .slice(0, 8)
     .map((x) => x.src);

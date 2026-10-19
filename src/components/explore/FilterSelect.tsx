@@ -1,5 +1,7 @@
 "use client";
 
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useEffect, useRef, useState } from "react";
 import { pick, type Loc } from "@/lib/homeContent";
 import type { FilterTab } from "@/lib/exploreContent";
@@ -60,7 +62,7 @@ export default function FilterSelect({
   const current = options.find((o) => o.key === value);
   const isDefault = value === options[0]?.key;
 
-  return (
+  return <ContentSurface scope="src/components/explore/FilterSelect.tsx">{(
     <div className="tb-filter" ref={rootRef}>
       <button
         type="button"
@@ -100,5 +102,5 @@ export default function FilterSelect({
         </div>
       )}
     </div>
-  );
+  )}</ContentSurface>;
 }

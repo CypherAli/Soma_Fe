@@ -132,6 +132,19 @@ async function load() {
  * không phải dựng thêm dịch vụ vector nào. Đổi sang embedding chỉ đáng khi
  * người dùng hỏi bằng từ đồng nghĩa mà giáo trình không dùng.
  */
+/** Contextual summaries don't need to mention the disease name again. */
+export async function articlePassages(slug: string, limit = 4): Promise<Hit[]> {
+  const { chunks } = await load();
+  const article = chunks.filter(chunk => chunk.slug === slug);
+  const count = Math.min(article.length, Math.max(1, Math.min(8, limit)));
+  if (!count) return [];
+  // Sample across the actual article rather than summarizing only its opening.
+  return Array.from({ length: count }, (_, index) => ({
+    ...article[count === 1 ? 0 : Math.round(index * (article.length - 1) / (count - 1))],
+    score: 0,
+  }));
+}
+
 export async function search(
   question: string,
   opts: { slug?: string; limit?: number } = {},

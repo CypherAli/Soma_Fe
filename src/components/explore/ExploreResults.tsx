@@ -1,11 +1,21 @@
 "use client";
 
+
+
+
+import { useContent } from "@/components/content/ContentProvider";
+import { bindContentSource } from "@/lib/content/source";
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useMemo, useState } from "react";
+import Image from "next/image";
 import { useRouter } from "@/i18n/navigation";
 import { pick, type Loc } from "@/lib/homeContent";
 import { type CategoryData, type ResultCard } from "@/lib/exploreContent";
 import AtlasIcon from "./AtlasIcon";
 import FilterSelect from "./FilterSelect";
+import { catalogScenes } from '@/lib/catalog';
+const searchByHref=new Map(catalogScenes.map(scene=>[scene.href,scene.searchText]));
+const fold=(value:string)=>value.toLowerCase().normalize('NFD').replace(/\p{M}/gu,'').replace(/đ/g,'d');
 
 const IMG_ICON_FALLBACK: Record<string, string> = {
   "an-heart": "i-heart", "an-skel": "i-bone", "an-muscle": "i-muscle",
@@ -17,7 +27,7 @@ function systemPlaceholderIcon(c: ResultCard): string {
   return c.icon ?? IMG_ICON_FALLBACK[c.img] ?? "i-cell";
 }
 
-const SPECIMEN_LABELS: Record<string, { vi: string; en: string; zh: string }> = {
+const SPECIMEN_LABELS: Record<string, { vi: string; en: string; zh: string }> = bindContentSource("data:src/components/explore/ExploreResults.tsx#SPECIMEN_LABELS", {
   "i-stomach": { vi: "Hệ tiêu hóa", en: "Digestive system", zh: "消化系统" },
   "i-heart": { vi: "Tim mạch", en: "Cardiovascular", zh: "心血管" },
   "i-bone": { vi: "Xương học", en: "Osteology", zh: "骨学" },
@@ -28,7 +38,7 @@ const SPECIMEN_LABELS: Record<string, { vi: string; en: string; zh: string }> = 
   "i-eye": { vi: "Thị giác", en: "Ophthalmic", zh: "视觉系统" },
   "i-ear": { vi: "Thính giác", en: "Auditory", zh: "听觉系统" },
   "i-cell": { vi: "Vi giải phẫu", en: "Microanatomy", zh: "微观解剖" },
-};
+});
 
 function specimenLabel(c: ResultCard, locale: Loc) {
   const label = SPECIMEN_LABELS[systemPlaceholderIcon(c)] ?? SPECIMEN_LABELS["i-cell"];
@@ -39,13 +49,16 @@ function specimenLabel(c: ResultCard, locale: Loc) {
 const SORT_MODES = ["relevance", "az", "za"] as const;
 type SortMode = (typeof SORT_MODES)[number];
 
-const SORT_LABELS: Record<SortMode, { vi: string; en: string; zh: string }> = {
+const SORT_LABELS: Record<SortMode, { vi: string; en: string; zh: string }> = bindContentSource("data:src/components/explore/ExploreResults.tsx#SORT_LABELS", {
   relevance: { vi: "Liên quan", en: "Relevance", zh: "相关性" },
   az: { vi: "Tên A → Z", en: "Name A → Z", zh: "名称 A → Z" },
   za: { vi: "Tên Z → A", en: "Name Z → A", zh: "名称 Z → A" },
-};
+});
 
 export default function ExploreResults({ data, locale }: { data: CategoryData; locale: Loc }) {
+  const cmsContent = useContent();
+  const SORT_LABELS = cmsContent.resolve(cmsSourceSORT_LABELS());
+
   const [active, setActive] = useState("all");
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState<SortMode>("relevance");
@@ -54,7 +67,8 @@ export default function ExploreResults({ data, locale }: { data: CategoryData; l
   const cards = useMemo(() => {
     const filtered = data.cards.filter((c) => {
       const matchesFilter = active === "all" || c.filters.includes(active);
-      const matchesQuery = query.trim() === "" || pick(c.title, locale).toLowerCase().includes(query.trim().toLowerCase());
+      const haystack=fold([c.title.vi,c.title.en,c.title.zh,searchByHref.get(c.href??'')??''].join(' '));
+      const matchesQuery = fold(query.trim()).split(/\s+/).filter(Boolean).every(term=>haystack.includes(term));
       return matchesFilter && matchesQuery;
     });
     if (sort === "relevance") return filtered; // giữ nguyên thứ tự biên tập
@@ -64,7 +78,7 @@ export default function ExploreResults({ data, locale }: { data: CategoryData; l
     );
   }, [data.cards, active, query, sort, locale]);
 
-  return (
+  return <ContentSurface scope="src/components/explore/ExploreResults.tsx">{(
     <>
       <div className="toolbar">
         <div className="tb-search">
@@ -112,7 +126,7 @@ export default function ExploreResults({ data, locale }: { data: CategoryData; l
           {cards.map((c, i) => (
             <button type="button" key={`${pick(c.title, "en")}-${i}`} className="result-card" onClick={() => c.href && router.push(c.href)} disabled={!c.href}>
               <div className={`thumb ${c.img}${c.thumb ? " has-photo" : ""}`}>
-                {c.thumb ? <img src={c.thumb} alt={pick(c.title, locale)} loading="lazy" /> : (
+                {c.thumb ? <Image src={c.thumb} alt={pick(c.title, locale)} fill sizes="(max-width: 620px) 100vw, (max-width: 1100px) 50vw, 33vw" /> : (
                   <div className="anatomy-plate" aria-hidden="true">
                     <span className="plate-kicker">SPECIMEN · {String(i + 1).padStart(3, "0")}</span>
                     <AtlasIcon id={systemPlaceholderIcon(c)} className="atlas-icon thumb-icon" />
@@ -133,5 +147,7 @@ export default function ExploreResults({ data, locale }: { data: CategoryData; l
         </div>
       )}
     </>
-  );
+  )}</ContentSurface>;
 }
+
+function cmsSourceSORT_LABELS() { return SORT_LABELS; }

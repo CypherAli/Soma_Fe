@@ -1,4 +1,4 @@
-import { API_URL, getToken } from "@/lib/auth";
+import { API_URL, authRequest, getToken } from "@/lib/auth";
 
 /**
  * TIẾN ĐỘ HỌC — lượt làm bài, lộ trình, hàng đợi ôn theo khoảng cách.
@@ -16,7 +16,7 @@ import { API_URL, getToken } from "@/lib/auth";
 
 /* "vet" = trắc nghiệm khu thú y. Nằm chung một hệ tiến độ với các nguồn kia để
    lịch sử học của một người là MỘT dòng liền, không tách người/thú y. */
-export type QuizSourceKey = "model" | "book" | "atlas" | "personal" | "vet";
+export type QuizSourceKey = "model" | "book" | "atlas" | "personal" | "vet" | "school";
 
 export type GradedItem = {
   itemKey: string;
@@ -287,11 +287,8 @@ export async function expandBlock(
 
 export async function deletePath(): Promise<void> {
   const token = getToken();
-  if (!token) return;
-  await fetch(`${API_URL}/study/path`, {
-    method: "DELETE",
-    headers: { Authorization: `Bearer ${token}` },
-  }).catch(() => undefined);
+  if (!token) throw new Error("Cần đăng nhập để xóa lộ trình");
+  await authRequest("/study/path", { method: "DELETE" });
 }
 
 // ---------------------------------------------------------- phần lưu ở máy

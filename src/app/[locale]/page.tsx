@@ -1,3 +1,5 @@
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { setRequestLocale } from "next-intl/server";
 import { hasLocale } from "next-intl";
 import { routing } from "@/i18n/routing";
@@ -14,5 +16,5 @@ export default async function Home({
   setRequestLocale(locale);
   const loc = (hasLocale(routing.locales, locale) ? locale : routing.defaultLocale) as Loc;
 
-  return <HomePage locale={loc} />;
+  return <ContentSurface scope="src/app/[locale]/page.tsx"><HomePage locale={loc} /></ContentSurface>;
 }

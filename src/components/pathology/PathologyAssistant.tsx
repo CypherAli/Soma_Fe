@@ -1,5 +1,11 @@
 "use client";
 
+
+
+
+import { useContent } from "@/components/content/ContentProvider";
+import { bindContentSource } from "@/lib/content/source";
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useEffect, useRef, useState } from "react";
 import type { Loc } from "@/lib/homeContent";
 import { Icon } from "@/components/home/IconSprite";
@@ -17,12 +23,12 @@ import { Icon } from "@/components/home/IconSprite";
 
 type Source = { slug: string; book: string; page: number; excerpt: string };
 
-const copy = {
+const copy = bindContentSource("data:src/components/pathology/PathologyAssistant.tsx#copy", {
   vi: {
     diseaseTitle: "Hỏi về bệnh này",
     diseasePlaceholder: "Vd: tiêu chuẩn chẩn đoán? phân biệt với bệnh nào?",
     summarize: "Tóm tắt bài này",
-    summarizePrompt: "Tóm tắt bài này: định nghĩa, triệu chứng chính, chẩn đoán và hướng điều trị.",
+    summarizePrompt: "Tóm tắt GỌN bài này trong ≤180 từ, đúng 4 gạch đầu dòng: định nghĩa · triệu chứng chính · chẩn đoán · hướng điều trị. Không chép nguyên văn.",
     symptomTitle: "Tra theo triệu chứng",
     symptomPlaceholder: "Vd: sưng đau khớp ngón chân cái về đêm, sốt nhẹ",
     send: "Hỏi", thinking: "Đang tra giáo trình…",
@@ -36,7 +42,7 @@ const copy = {
     diseaseTitle: "Ask about this condition",
     diseasePlaceholder: "E.g. diagnostic criteria? differential diagnosis?",
     summarize: "Summarise this article",
-    summarizePrompt: "Summarise this article: definition, key symptoms, diagnosis and treatment.",
+    summarizePrompt: "Summarise this article in ≤180 words, exactly 4 bullets: definition · key symptoms · diagnosis · treatment. Do not copy verbatim.",
     symptomTitle: "Search by symptom",
     symptomPlaceholder: "E.g. night-time swelling and pain in the big toe joint",
     send: "Ask", thinking: "Searching the textbook…",
@@ -50,7 +56,7 @@ const copy = {
     diseaseTitle: "询问本病",
     diseasePlaceholder: "例如：诊断标准？与哪些病鉴别？",
     summarize: "概括本篇",
-    summarizePrompt: "概括本篇：定义、主要症状、诊断与治疗方向。",
+    summarizePrompt: "用≤180字概括本篇，正好4条：定义·主要症状·诊断·治疗方向。不要照抄原文。",
     symptomTitle: "按症状检索",
     symptomPlaceholder: "例如：夜间大脚趾关节红肿疼痛，低热",
     send: "提问", thinking: "正在检索教材…",
@@ -60,7 +66,7 @@ const copy = {
     examples: ["大脚趾关节红肿疼痛", "夜间呼吸困难", "黄疸、尿色深", "长期发热、体重下降"],
     symptomWarn: "学习检索工具。不作诊断，不能替代就医。",
   },
-} as const;
+} as const);
 
 export default function PathologyAssistant({
   locale,
@@ -74,6 +80,9 @@ export default function PathologyAssistant({
   /** Câu hỏi đưa từ ngoài vào (ô tìm kiếm gộp). Đổi giá trị thì tự hỏi lại. */
   question?: string;
 }) {
+  const cmsContent = useContent();
+  const copy = cmsContent.resolve(cmsSourcecopy());
+
   const t = copy[locale];
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState<string | null>(null);
@@ -81,9 +90,20 @@ export default function PathologyAssistant({
   const [engine, setEngine] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const asked = useRef<string | null>(null);
+  const request = useRef<AbortController | null>(null);
+  useEffect(() => {
+    let active = true;
+    void Promise.resolve().then(() => {
+      if (!active || request.current) return;
+      setBusy(false); setAnswer(null); setSources([]); setEngine(null);
+    });
+    return () => { active = false; request.current?.abort(); request.current = null; };
+  }, [mode, slug, locale]);
 
   async function ask(text: string) {
-    if (!text.trim() || busy) return;
+    if (!text.trim()) return;
+    request.current?.abort();
+    const controller = new AbortController(); request.current = controller;
     setBusy(true);
     setAnswer(null);
     setSources([]);
@@ -91,18 +111,21 @@ export default function PathologyAssistant({
       const res = await fetch("/api/pathology-chat", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ question: text, mode, slug }),
+        body: JSON.stringify({ question: text, mode, slug, locale }),
+        signal: controller.signal,
       });
       const data = await res.json();
+      if (controller.signal.aborted || request.current !== controller) return;
       if (!res.ok) throw new Error(data?.error ?? "http");
       setAnswer(data.answer);
       setSources(data.sources ?? []);
       setEngine(data.engine ?? null);
     } catch {
+      if (controller.signal.aborted || request.current !== controller) return;
       setAnswer(t.failed);
       setEngine(null);
     } finally {
-      setBusy(false);
+      if (request.current === controller) { request.current = null; setBusy(false); }
     }
   }
 
@@ -110,17 +133,18 @@ export default function PathologyAssistant({
     const q = (external ?? "").trim();
     // Chốt lại câu đã hỏi: thiếu nó thì mỗi lần component render lại là gọi
     // API thêm một lần cho cùng một câu.
-    if (!q || asked.current === q) return;
-    asked.current = q;
+    const key = [mode, slug, locale, q].join(":");
+    if (!q || asked.current === key) return;
+    asked.current = key;
     setQuestion(q);
     ask(q);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [external]);
+  }, [external, mode, slug, locale]);
 
   const note =
     engine === "lookup-nokey" ? t.lookupNote : engine === "lookup-fallback" ? t.fallbackNote : null;
 
-  return (
+  return <ContentSurface scope="src/components/pathology/PathologyAssistant.tsx">{(
     <section className="pth-ai">
       <header className="pth-ai-head">
         <Icon id={mode === "disease" ? "i-spark" : "i-steth"} />
@@ -197,5 +221,7 @@ export default function PathologyAssistant({
         </div>
       )}
     </section>
-  );
+  )}</ContentSurface>;
 }
+
+function cmsSourcecopy() { return copy; }

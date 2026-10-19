@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { searchFacts, SYSTEM_LABEL, type AnatomyFact } from "@/lib/anatomy/knowledge";
 import { pick, type Loc } from "@/lib/homeContent";
 import { complete, isConfigured } from "@/lib/llm";
+import { readJsonObject, readString } from "@/lib/requestBody";
 
 /**
  * TRỢ LÝ GIẢI PHẪU — HAI TẦNG.
@@ -56,15 +57,13 @@ const LEAD: Record<Loc, (n: number) => string> = {
 };
 
 export async function POST(req: Request) {
-  let body: { question?: string; locale?: string };
-  try {
-    body = await req.json();
-  } catch {
+  const body = await readJsonObject(req);
+  if (!body) {
     return NextResponse.json({ error: "bad json" }, { status: 400 });
   }
 
-  const question = (body.question ?? "").toString().slice(0, 500).trim();
-  const locale = (["vi", "en", "zh"].includes(body.locale ?? "") ? body.locale : "vi") as Loc;
+  const question = readString(body.question, 500);
+  const locale: Loc = body.locale === "en" || body.locale === "zh" ? body.locale : "vi";
   if (!question) return NextResponse.json({ error: "empty question" }, { status: 400 });
 
   const facts = searchFacts(question, locale, 5);

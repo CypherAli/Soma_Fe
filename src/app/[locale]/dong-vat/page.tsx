@@ -1,3 +1,5 @@
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { setRequestLocale } from "next-intl/server";
 import VetHome from "@/components/vet/VetHome";
 import { vetCopy } from "@/lib/vet/copy";
@@ -16,5 +18,5 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function AnimalsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  return <VetHome locale={locale as Loc} />;
+  return <ContentSurface scope="src/app/[locale]/dong-vat/page.tsx"><VetHome locale={locale as Loc} /></ContentSurface>;
 }

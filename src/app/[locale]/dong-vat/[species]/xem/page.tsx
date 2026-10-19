@@ -1,3 +1,5 @@
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import VetViewerShell from "@/components/vet/VetViewerShell";
@@ -38,5 +40,5 @@ export default async function VetSpeciesViewerPage({
   const { locale, species } = await params;
   setRequestLocale(locale);
   if (!VET_SPECIES.includes(species as VetSpeciesKey)) notFound();
-  return <VetViewerShell locale={locale as Loc} speciesKey={species as VetSpeciesKey} />;
+  return <ContentSurface scope="src/app/[locale]/dong-vat/[species]/xem/page.tsx"><VetViewerShell locale={locale as Loc} speciesKey={species as VetSpeciesKey} /></ContentSurface>;
 }

@@ -1,5 +1,7 @@
 "use client";
 
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { use } from "react";
 import { Link } from "@/i18n/navigation";
 import ArmScenePage from "@/components/home/ArmScenePage";
@@ -18,7 +20,7 @@ export default function XemVung({ params }: { params: Promise<{ slug: string }> 
   // `null` — trình duyệt hiện một TRANG ĐEN TRỐNG không chữ nào, trông hệt như
   // trang hỏng. Nay báo rõ và chỉ đường về danh mục.
   if (!mod?.modelFile || !view) {
-    return (
+    return <ContentSurface scope="src/app/[locale]/xem/[slug]/page.tsx">{(
       <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-[var(--surf-3)] p-8 text-center">
         <p className="text-lg font-semibold text-[var(--body-fg)]">
           Không có mô hình nào ứng với đường dẫn “{slug}”.
@@ -31,15 +33,15 @@ export default function XemVung({ params }: { params: Promise<{ slug: string }> 
           Tất cả mô hình
         </Link>
       </div>
-    );
+    )}</ContentSurface>;
   }
 
-  return (
+  return <ContentSurface scope="src/app/[locale]/xem/[slug]/page.tsx">{(
     <ArmScenePage
       slug={slug}
       modelUrl={mod.modelFile}
       cats={view.cats}
       defaultFaded={view.faded}
     />
-  );
+  )}</ContentSurface>;
 }

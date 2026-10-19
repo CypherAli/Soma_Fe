@@ -1,5 +1,7 @@
 "use client";
 
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useState } from "react";
 import { Link } from "@/i18n/navigation";
 import { Icon } from "./IconSprite";
@@ -34,7 +36,7 @@ export default function SystemGrid({
   const hidden = cards.length - VISIBLE;
   const shown = open ? cards : cards.slice(0, VISIBLE);
 
-  return (
+  return <ContentSurface scope="src/components/home/SystemGrid.tsx">{(
     <>
       <div className="sec-head sys-head">
         <div className="sec-head-text">
@@ -69,5 +71,5 @@ export default function SystemGrid({
       </div>
 
     </>
-  );
+  )}</ContentSurface>;
 }

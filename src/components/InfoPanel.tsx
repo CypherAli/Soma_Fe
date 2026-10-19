@@ -1,5 +1,7 @@
 "use client";
 
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useTranslations } from "next-intl";
 import { useAnatomyStore } from "@/store/useAnatomyStore";
 import ViewerPathologyPanel from "./pathology/ViewerPathologyPanel";
@@ -18,7 +20,7 @@ export default function InfoPanel() {
   const isFaded = selected ? !!fadedIds[selected.id] : false;
   const isIsolated = selected ? isolatedId === selected.id : false;
 
-  return (
+  return <ContentSurface scope="src/components/InfoPanel.tsx">{(
     <aside
       className="viewer-info-panel flex w-80 shrink-0 flex-col overflow-y-auto border-l border-[var(--line)] bg-[var(--surf)]"
       data-lenis-prevent
@@ -94,5 +96,5 @@ export default function InfoPanel() {
         </div>
       )}
     </aside>
-  );
+  )}</ContentSurface>;
 }

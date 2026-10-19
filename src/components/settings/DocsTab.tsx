@@ -1,5 +1,9 @@
 "use client";
 
+
+
+import { useContent } from "@/components/content/ContentProvider";
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useEffect, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import { pick, type Loc } from "@/lib/homeContent";
@@ -9,6 +13,9 @@ import { Card, Notice, Skeleton, errorText } from "./parts";
 
 /** Tài liệu PDF cá nhân — nguồn của bộ đề riêng ở trang Trắc nghiệm. */
 export default function DocsTab({ locale }: { locale: Loc }) {
+  const cmsContent = useContent();
+  const S = cmsContent.resolve(cmsSourceS());
+
   const D = S.docs;
   const [docs, setDocs] = useState<PersonalDoc[] | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -35,7 +42,7 @@ export default function DocsTab({ locale }: { locale: Loc }) {
   const statusLabel = (doc: PersonalDoc) =>
     pick(doc.status === "ready" ? D.ready : doc.status === "failed" ? D.failed : D.processing, locale);
 
-  return (
+  return <ContentSurface scope="src/components/settings/DocsTab.tsx">{(
     <Card title={pick(D.heading, locale)} note={pick(D.intro, locale)}>
       {error && <Notice kind="error">{error}</Notice>}
 
@@ -89,5 +96,7 @@ export default function DocsTab({ locale }: { locale: Loc }) {
         </div>
       )}
     </Card>
-  );
+  )}</ContentSurface>;
 }
+
+function cmsSourceS() { return S; }

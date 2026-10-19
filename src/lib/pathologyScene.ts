@@ -16,6 +16,15 @@
  */
 export type PathologyTarget = { scene: string; focus?: string };
 
+/** These routes show anatomical context, never a simulated lesion. */
+export function pathologySceneNote(slug:string,locale:'vi'|'en'|'zh'){
+  const thyroid=['cuong-giap','suy-giap','buou-giap-don-thuan'].includes(slug);
+  const note=thyroid?{vi:'Mô hình này chỉ có cơ vùng cổ liên quan; chưa biểu diễn tuyến giáp hoặc tổn thương tuyến giáp.',en:'This model shows related neck muscles; the thyroid and thyroid lesions are not represented.',zh:'本模型仅显示相关颈部肌肉，未表示甲状腺或其病变。'}:
+    slug==='benh-nhuoc-co'?{vi:'Liên kết mở tuyến ức để học mối liên quan giải phẫu; không biểu diễn tổn thương bản vận động trong bệnh nhược cơ.',en:'The link opens the thymus as related anatomy; it does not model the neuromuscular junction lesion in myasthenia.',zh:'链接打开胸腺以学习相关解剖，未模拟重症肌无力的神经肌肉接头病变。'}:
+    {vi:'Liên kết 3D dùng để học giải phẫu liên quan. Mô hình là giải phẫu bình thường, chưa biểu diễn tổn thương đặc hiệu của bệnh.',en:'The 3D link shows related normal anatomy; disease-specific lesions are not represented.',zh:'三维链接显示相关正常解剖，未表示疾病特异性病变。'};
+  return note[locale];
+}
+
 export const PATHOLOGY_SCENE: Record<string, PathologyTarget> = {
   // ── Cơ xương khớp
   "benh-gout": { scene: "bo-phan-co-chan-ban-chan", focus: "tien-tuc" },

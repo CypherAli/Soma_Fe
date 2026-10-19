@@ -1,5 +1,7 @@
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 export default function IconSprite() {
-  return (
+  return <ContentSurface scope="src/components/home/IconSprite.tsx">{(
     <svg width="0" height="0" style={{ position: "absolute" }} aria-hidden="true">
       <defs>
         <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="7" /><line x1="15.5" y1="15.5" x2="21" y2="21" /></symbol>
@@ -43,16 +45,17 @@ export default function IconSprite() {
         <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><ellipse cx="12" cy="12" rx="4" ry="9" /><line x1="3" y1="12" x2="21" y2="12" /></symbol>
         <symbol id="i-bookmark" viewBox="0 0 24 24"><path d="M6 4h12v17l-6-4.2L6 21z" /></symbol>
         <symbol id="i-close" viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18" /><line x1="18" y1="6" x2="6" y2="18" /></symbol>
+        <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 1 1 12 0v5l1.5 2.5h-15z" /><path d="M10 21a2.2 2.2 0 0 0 4 0" /></symbol>
         <symbol id="i-muscle" viewBox="0 0 24 24"><path className="fill" d="M5 14c0-3 1-6 3.5-7.8C10 5 11.5 4.5 13 5c1.8.6 2.6 2.3 2.3 4-.2 1.1-1 1.9-1 3 0 1.8 1.5 2.3 2.7 1.8 1.7-.7 2-3 2-3l1 1.4c0 3-1.4 5.6-4 6.6-2 .8-3.8.2-4.5-1-.5.6-1.3.9-2.2.7-2-.5-4.3-2.3-4.3-5.5z" /></symbol>
       </defs>
     </svg>
-  );
+  )}</ContentSurface>;
 }
 
 export function Icon({ id, className = "isvg" }: { id: string; className?: string }) {
-  return (
+  return <ContentSurface scope="src/components/home/IconSprite.tsx">{(
     <svg className={className} aria-hidden="true">
       <use href={`#${id}`} />
     </svg>
-  );
+  )}</ContentSurface>;
 }

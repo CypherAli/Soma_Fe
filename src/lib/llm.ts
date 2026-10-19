@@ -101,7 +101,7 @@ export async function complete(opts: {
     method: "POST",
     headers,
     body: JSON.stringify(body),
-    signal: opts.signal,
+    signal: opts.signal ? AbortSignal.any([opts.signal, AbortSignal.timeout(25_000)]) : AbortSignal.timeout(25_000),
   });
   if (!res.ok) {
     // Kèm phần đầu thân lỗi: "401" trơ trọi không cho biết là sai khoá, hết

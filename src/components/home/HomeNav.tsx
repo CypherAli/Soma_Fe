@@ -1,5 +1,9 @@
 "use client";
 
+
+
+import { useContent } from "@/components/content/ContentProvider";
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useState } from "react";
 import { useLocale } from "next-intl";
 import { usePathname, Link } from "@/i18n/navigation";
@@ -11,6 +15,7 @@ import LanguageSwitcher from "../LanguageSwitcher";
 import BrandSignature from "./BrandSignature";
 import HomeSearch from "./HomeSearch";
 import AccountMenu from "./AccountMenu";
+import NotifBell from "./NotifBell";
 
 export default function HomeNav({
   minimal = false,
@@ -22,6 +27,10 @@ export default function HomeNav({
   /** Khu vực đang xem — quyết định thanh menu nào hiện ra. */
   section?: "human" | "vet";
 }) {
+  const cmsContent = useContent();
+  const C = cmsContent.resolve(cmsSourceC());
+  const systemGroups = cmsContent.resolve(cmsSourcesystemGroups());
+
   const locale = useLocale() as Loc;
   const pathname = usePathname();
   const menu = section === "vet" ? C.vetMenu : C.mainMenu;
@@ -38,7 +47,7 @@ export default function HomeNav({
     .sort((a, b) => b.length - a.length)[0];
 
   const [megaOpen, setMegaOpen] = useState(false);
-  return (
+  return <ContentSurface scope="src/components/home/HomeNav.tsx">{(
     <>
       <nav className={`nav${commerce ? " home-commerce-nav" : ""}`}>
         <div className="nav-inner">
@@ -60,6 +69,7 @@ export default function HomeNav({
           <div className="nav-r">
             <ThemeToggle />
             <LanguageSwitcher />
+            <NotifBell locale={locale} />
             <AccountMenu locale={locale} />
           </div>
         </div>
@@ -119,5 +129,8 @@ export default function HomeNav({
       </nav>
       <div className={`mega-back${megaOpen ? " open" : ""}`} onClick={() => setMegaOpen(false)} />
     </>
-  );
+  )}</ContentSurface>;
 }
+
+function cmsSourceC() { return C; }
+function cmsSourcesystemGroups() { return systemGroups; }

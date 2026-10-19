@@ -1,5 +1,7 @@
 "use client";
 
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
@@ -50,7 +52,7 @@ export default function SceneDetailPage({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sceneModule, locale]);
 
-  return (
+  return <ContentSurface scope="src/components/scene/SceneDetailPage.tsx">{(
     <div className="bd flex h-screen flex-col bg-[var(--surf-3)]">
       <header className="flex h-14 shrink-0 items-center gap-4 border-b border-[var(--line)] bg-[var(--surf)] px-4">
         <Link
@@ -132,5 +134,5 @@ export default function SceneDetailPage({
         <InfoPanel />
       </div>
     </div>
-  );
+  )}</ContentSurface>;
 }

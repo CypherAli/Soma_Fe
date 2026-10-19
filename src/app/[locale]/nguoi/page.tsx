@@ -1,3 +1,5 @@
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { setRequestLocale } from "next-intl/server";
 import { hasLocale } from "next-intl";
 import { routing } from "@/i18n/routing";
@@ -14,5 +16,5 @@ export default async function Nguoi({
   setRequestLocale(locale);
   const loc = (hasLocale(routing.locales, locale) ? locale : routing.defaultLocale) as Loc;
 
-  return <HumanPage locale={loc} />;
+  return <ContentSurface scope="src/app/[locale]/nguoi/page.tsx"><HumanPage locale={loc} /></ContentSurface>;
 }

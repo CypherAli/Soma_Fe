@@ -1,3 +1,5 @@
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { setRequestLocale } from "next-intl/server";
 import { hasLocale } from "next-intl";
 import { routing } from "@/i18n/routing";
@@ -13,5 +15,5 @@ export default async function ThuVienPage({
   setRequestLocale(locale);
   const loc = (hasLocale(routing.locales, locale) ? locale : routing.defaultLocale) as Loc;
 
-  return <LibraryPage locale={loc} />;
+  return <ContentSurface scope="src/app/[locale]/thu-vien/page.tsx"><LibraryPage locale={loc} /></ContentSurface>;
 }

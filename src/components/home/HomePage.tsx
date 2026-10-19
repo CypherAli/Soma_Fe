@@ -1,3 +1,7 @@
+
+import { getContent } from "@/lib/content/server";
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { homeContent as C, pick, type Loc } from "@/lib/homeContent";
 import { Link } from "@/i18n/navigation";
 import IconSprite from "./IconSprite";
@@ -5,17 +9,20 @@ import HomeNav from "./HomeNav";
 import HomeFooter from "./HomeFooter";
 import HomeMotion from "./HomeMotion";
 
-export default function HomePage({ locale }: { locale: Loc }) {
+export default async function HomePage({ locale }: { locale: Loc }) {
+  const cmsContent = await getContent();
+  const C = cmsContent.resolve(cmsSourceC());
+
   const cols = [C.twoCol.corpus, C.twoCol.anima] as const;
 
-  return (
+  return <ContentSurface scope="src/components/home/HomePage.tsx">{(
     <div className="bd home-motion-root">
       <IconSprite />
       <HomeMotion />
       <HomeNav minimal commerce />
 
       {/* Khối 2 cột: Corpus (người) · Anima (thú y) — như mẫu Corpus & Anima */}
-      <section className="twocol">
+      <main className="twocol">
         <div className="twocol-inner">
           {cols.map((col, i) => (
             <Link
@@ -45,9 +52,10 @@ export default function HomePage({ locale }: { locale: Loc }) {
             </Link>
           ))}
         </div>
-      </section>
-
+      </main>
       <HomeFooter locale={locale} />
     </div>
-  );
+  )}</ContentSurface>;
 }
+
+function cmsSourceC() { return C; }

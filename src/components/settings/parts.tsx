@@ -1,5 +1,9 @@
 "use client";
 
+
+
+import { useContent } from "@/components/content/ContentProvider";
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { initialsOf, type Plan } from "@/lib/account";
 import { pick, type Loc } from "@/lib/homeContent";
 import { settingsContent as S } from "@/lib/settingsContent";
@@ -20,7 +24,7 @@ export function Avatar({
   src?: string | null;
   size?: number;
 }) {
-  return (
+  return <ContentSurface scope="src/components/settings/parts.tsx">{(
     <span className="ava" style={{ width: size, height: size, fontSize: Math.round(size / 2.9) }}>
       {src ? (
         /* eslint-disable-next-line @next/next/no-img-element */
@@ -29,16 +33,19 @@ export function Avatar({
         initialsOf(name)
       )}
     </span>
-  );
+  )}</ContentSurface>;
 }
 
 /** Nhãn gói. Vuông góc mềm chứ không phải viên thuốc — đỡ giống badge mặc định. */
 export function PlanBadge({ plan, locale }: { plan: Plan; locale: Loc }) {
-  return (
+  const cmsContent = useContent();
+  const S = cmsContent.resolve(cmsSourceS());
+
+  return <ContentSurface scope="src/components/settings/parts.tsx">{(
     <span className={`plan-badge${plan === "pro" ? " pro" : ""}`}>
       {pick(plan === "pro" ? S.plan.proShort : S.plan.freeShort, locale)}
     </span>
-  );
+  )}</ContentSurface>;
 }
 
 /** Khung thẻ hai lớp: vỏ ngoài mảnh, lõi trong đậm hơn. */
@@ -53,7 +60,7 @@ export function Card({
   aside?: React.ReactNode;
   children: React.ReactNode;
 }) {
-  return (
+  return <ContentSurface scope="src/components/settings/parts.tsx">{(
     <section className="st-card">
       {(title || aside) && (
         <header className="st-card-head">
@@ -66,26 +73,26 @@ export function Card({
       )}
       {children}
     </section>
-  );
+  )}</ContentSurface>;
 }
 
 /** Khung xương lúc chờ dữ liệu — không dùng vòng xoay chung chung. */
 export function Skeleton({ rows = 3 }: { rows?: number }) {
-  return (
+  return <ContentSurface scope="src/components/settings/parts.tsx">{(
     <div className="st-skeleton" aria-hidden="true">
       {Array.from({ length: rows }, (_, index) => (
         <span key={index} />
       ))}
     </div>
-  );
+  )}</ContentSurface>;
 }
 
 export function Notice({ kind, children }: { kind: "error" | "ok"; children: React.ReactNode }) {
-  return (
+  return <ContentSurface scope="src/components/settings/parts.tsx">{(
     <p className={kind === "error" ? "st-error" : "st-ok"} role={kind === "error" ? "alert" : "status"}>
       {children}
     </p>
-  );
+  )}</ContentSurface>;
 }
 
 export function errorText(cause: unknown) {
@@ -108,3 +115,5 @@ export function formatDateTime(value: string, locale: Loc) {
     minute: "2-digit",
   });
 }
+
+function cmsSourceS() { return S; }

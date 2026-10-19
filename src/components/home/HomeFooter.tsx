@@ -1,16 +1,22 @@
 "use client";
 
+
+
+
+import { useContent } from "@/components/content/ContentProvider";
+import { bindContentSource } from "@/lib/content/source";
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { FormEvent, useState } from "react";
 import { homeContent as C, pick, type Loc, type T3 } from "@/lib/homeContent";
 import { Link } from "@/i18n/navigation";
 
-const copy = {
+const copy = bindContentSource("data:src/components/home/HomeFooter.tsx#copy", {
   newsletter: { vi: "Đăng ký ngay để nhận những thông tin mới nhất", en: "Subscribe now for the latest updates", zh: "立即订阅，获取最新资讯" },
   email: { vi: "Địa chỉ email của bạn", en: "Your email address", zh: "您的电子邮箱" },
   subscribe: { vi: "Đăng ký", en: "Subscribe", zh: "订阅" },
   subscribed: { vi: "Đã ghi nhận email", en: "Email saved", zh: "邮箱已保存" },
   copyright: { vi: "© 2026 Soma Atlas · Hà Nội", en: "© 2026 Soma Atlas · Hanoi", zh: "© 2026 Soma Atlas · 河内" },
-} satisfies Record<string, T3>;
+} satisfies Record<string, T3>);
 
 function SocialIcon({ name }: { name: string }) {
   const paths: Record<string, string> = {
@@ -19,25 +25,39 @@ function SocialIcon({ name }: { name: string }) {
     TikTok: "M14.5 2h3.2c.2 1.9 1.2 3.7 2.8 4.8v3.25a9.1 9.1 0 0 1-5.95-2.2v7.25a6.1 6.1 0 1 1-6.1-6.1c.38 0 .76.04 1.12.11v3.3a2.9 2.9 0 1 0 1.75 2.66V2h3.18Z",
     X: "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.451-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z",
   };
-  return <svg viewBox="0 0 24 24" aria-hidden="true"><path d={paths[name]} /></svg>;
+  return <ContentSurface scope="src/components/home/HomeFooter.tsx"><svg viewBox="0 0 24 24" aria-hidden="true"><path d={paths[name]} /></svg></ContentSurface>;
 }
 
 export default function HomeFooter({ locale }: { locale: Loc }) {
+  const cmsContent = useContent();
+  const C = cmsContent.resolve(cmsSourceC());
+  const copy = cmsContent.resolve(cmsSourcecopy());
+
   const [saved, setSaved] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState(false);
   const aboutGroup = C.footer.groups.find((group) => group.key === "about")!;
   const servicesGroup = C.footer.groups.find((group) => group.key === "services")!;
   const supportingGroups = C.footer.groups.filter((group) => !["about", "services"].includes(group.key));
 
-  function subscribe(event: FormEvent<HTMLFormElement>) {
+  async function subscribe(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
     const email = String(form.get("email") ?? "").trim();
-    if (!email) return;
-    localStorage.setItem("soma_newsletter_email", email);
-    setSaved(true);
+    if (!email || saving) return;
+    setSaving(true); setSaved(false); setSaveError(false);
+    try {
+      const response = await fetch("/api/subscribe", {
+        method: "POST", headers: { "content-type": "application/json" },
+        body: JSON.stringify({ email }), signal: AbortSignal.timeout(10_000),
+      });
+      if (!response.ok || (await response.json()).ok !== true) throw new Error("Subscription failed");
+      setSaved(true);
+    } catch { setSaveError(true); }
+    finally { setSaving(false); }
   }
 
-  return (
+  return <ContentSurface scope="src/components/home/HomeFooter.tsx">{(
     <footer className="foot soma-footer">
       <div className="wrap">
         <section className="footer-newsletter" aria-labelledby="footer-newsletter-title">
@@ -46,8 +66,9 @@ export default function HomeFooter({ locale }: { locale: Loc }) {
           </div>
           <form className="footer-subscribe" onSubmit={subscribe}>
             <label className="sr-only" htmlFor="footer-email">{pick(copy.email, locale)}</label>
-            <input id="footer-email" name="email" type="email" required placeholder={pick(copy.email, locale)} onInput={() => setSaved(false)} />
-            <button type="submit">{saved ? pick(copy.subscribed, locale) : pick(copy.subscribe, locale)} <span aria-hidden="true">→</span></button>
+            <input id="footer-email" name="email" type="email" required maxLength={254} disabled={saving} placeholder={pick(copy.email, locale)} onInput={() => { setSaved(false); setSaveError(false); }} />
+            <button type="submit" disabled={saving || saved}>{saving ? pick({vi:"Đang lưu…",en:"Saving…",zh:"保存中…"},locale) : saved ? pick(copy.subscribed, locale) : pick(copy.subscribe, locale)} <span aria-hidden="true">→</span></button>
+            {saveError && <span role="status" style={{gridColumn:"1 / -1",fontSize:12}}>{pick({vi:"Chưa lưu được email. Vui lòng thử lại.",en:"Could not save your email. Please try again.",zh:"邮箱尚未保存，请重试。"},locale)}</span>}
           </form>
         </section>
 
@@ -91,5 +112,8 @@ export default function HomeFooter({ locale }: { locale: Loc }) {
         </div>
       </div>
     </footer>
-  );
+  )}</ContentSurface>;
 }
+
+function cmsSourceC() { return C; }
+function cmsSourcecopy() { return copy; }

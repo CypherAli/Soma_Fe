@@ -14,7 +14,7 @@ export type ApiUser = { id: string; name: string; email: string };
 
 export function bearerToken(request: Request): string | undefined {
   const header = request.headers.get("authorization") ?? "";
-  return header.startsWith("Bearer ") ? header.slice(7) : undefined;
+  return /^Bearer\s+(\S+)$/i.exec(header.trim())?.[1];
 }
 
 /**
@@ -23,13 +23,16 @@ export function bearerToken(request: Request): string | undefined {
  * Backend không chạy cũng trả `null`: thà từ chối còn hơn mở toang cửa AI mỗi
  * khi dịch vụ xác thực chập chờn.
  */
-export async function userFromRequest(request: Request): Promise<ApiUser | null> {
+export async function userFromRequest(
+  request: Request,
+): Promise<ApiUser | null> {
   const token = bearerToken(request);
   if (!token) return null;
   try {
     const res = await fetch(`${API_URL}/auth/me`, {
       headers: { Authorization: `Bearer ${token}` },
       cache: "no-store",
+      signal: AbortSignal.timeout(5000),
     });
     if (!res.ok) return null;
     const data = (await res.json()) as { user?: ApiUser };

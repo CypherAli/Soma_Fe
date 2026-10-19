@@ -1,3 +1,5 @@
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { hasLocale } from "next-intl";
@@ -22,5 +24,5 @@ export default async function GiaiPhauPage({
   const data = categoryData[slug as keyof typeof categoryData];
   if (!data) notFound();
 
-  return <ExplorePage data={data} locale={loc} activeSlug={slug} />;
+  return <ContentSurface scope="src/app/[locale]/giai-phau/[slug]/page.tsx"><ExplorePage data={data} locale={loc} activeSlug={slug} /></ContentSurface>;
 }

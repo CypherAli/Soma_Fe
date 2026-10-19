@@ -1,5 +1,7 @@
 "use client";
 
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useEffect, useMemo } from "react";
 import { Canvas } from "@react-three/fiber";
 import { useGLTF, Center, Bounds, OrbitControls } from "@react-three/drei";
@@ -85,7 +87,7 @@ function Skull({ url, colored }: { url: string; colored: boolean }) {
     return root;
   }, [scene, colored]);
 
-  return <primitive object={prepared} />;
+  return <ContentSurface scope="src/components/home/SkullTurntable.tsx"><primitive object={prepared} /></ContentSurface>;
 }
 
 export default function SkullTurntable({
@@ -113,7 +115,7 @@ export default function SkullTurntable({
     };
   }, []);
 
-  return (
+  return <ContentSurface scope="src/components/home/SkullTurntable.tsx">{(
     <Canvas
       dpr={[1, 1.6]}
       camera={{ position: [0, 0.1, 2.8], fov: 38, near: 0.01, far: 100 }}
@@ -165,7 +167,7 @@ export default function SkullTurntable({
         maxPolarAngle={THREE.MathUtils.degToRad(98)}
       />
     </Canvas>
-  );
+  )}</ContentSurface>;
 }
 
 useGLTF.preload("/models/skull.glb", "/draco/");

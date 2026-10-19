@@ -87,9 +87,16 @@ export type PathologyResult =
 export async function fetchPathologies(structure?: string): Promise<PathologyResult> {
   const url = `${API_URL}/pathologies${structure ? `?structure=${encodeURIComponent(structure)}` : ""}`;
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, { signal: AbortSignal.timeout(8_000) });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    return { ok: true, items: (await response.json()) as Pathology[] };
+    const data: unknown = await response.json();
+    if (!Array.isArray(data) || !data.every(item => item && typeof item === "object" &&
+      typeof item.id === "string" && typeof item.slug === "string" && typeof item.nameVi === "string" &&
+      (item.content === undefined || (Array.isArray(item.content) && item.content.every((content: unknown) =>
+        !!content && typeof content === "object" && "locale" in content && typeof content.locale === "string"))))) {
+      throw new Error("Invalid pathology response");
+    }
+    return { ok: true, items: data as Pathology[] };
   } catch (error) {
     return {
       ok: false,

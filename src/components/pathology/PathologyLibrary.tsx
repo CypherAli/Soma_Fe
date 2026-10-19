@@ -1,5 +1,11 @@
 "use client";
 
+
+
+
+import { useContent } from "@/components/content/ContentProvider";
+import { bindContentSource } from "@/lib/content/source";
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import type { Loc } from "@/lib/homeContent";
 import {
@@ -13,10 +19,10 @@ import { Link } from "@/i18n/navigation";
 import IconSprite, { Icon } from "@/components/home/IconSprite";
 import { pathologyFigures } from "@/lib/pathologyFigures.generated";
 import { getScene } from "@/lib/catalog";
-import { pathologySceneHref } from "@/lib/pathologyScene";
+import { pathologySceneHref, pathologySceneNote } from "@/lib/pathologyScene";
 import PathologyAssistant from "./PathologyAssistant";
 
-const copy = {
+const copy = bindContentSource("data:src/components/pathology/PathologyLibrary.tsx#copy", {
   vi: {
     eyebrow: "Chỉ mục lâm sàng", title: "Tra cứu bệnh lý",
     lead: "Tra theo tên bệnh, mã ICD-10 hoặc hệ cơ quan, rồi đối chiếu thẳng với cấu trúc giải phẫu 3D.",
@@ -37,6 +43,7 @@ const copy = {
     bookFigs: "Hình trong giáo trình", pageGuess: "trang suy ra",
     noTranslation: "Phần bệnh học chưa có bản dịch — đang hiển thị nguyên văn tiếng Việt.",
     machineTranslated: "Bản dịch máy, chưa qua thẩm định chuyên môn. Bản tiếng Việt là bản gốc.",
+    pendingReview: "Nội dung hồ sơ này đang chờ thẩm định chuyên môn. Đối chiếu nguồn và hướng dẫn hiện hành trước khi sử dụng.",
     relatedFigs: "Cấu trúc & cơ chế liên quan",
     relatedNote: "Hình lấy từ sách giải phẫu/sinh lý, mô tả cấu trúc liên quan — không phải ảnh tổn thương của bệnh này.",
     offline: "Không kết nối được máy chủ dữ liệu bệnh lý.",
@@ -62,6 +69,7 @@ const copy = {
     bookFigs: "Textbook figures", pageGuess: "page inferred",
     noTranslation: "This article has not been translated yet — showing the original Vietnamese text.",
     machineTranslated: "Machine translation, not yet reviewed by a clinician. The Vietnamese text is the original.",
+    pendingReview: "This record is awaiting clinical review. Check its sources and current guidelines before using it.",
     relatedFigs: "Related structure & mechanism",
     relatedNote: "Taken from anatomy/physiology texts; shows the related structure, not a lesion image of this condition.",
     offline: "Cannot reach the pathology data server.",
@@ -87,12 +95,13 @@ const copy = {
     bookFigs: "教材插图", pageGuess: "页码为推算",
     noTranslation: "本篇尚无译文——显示越南语原文。",
     machineTranslated: "机器翻译，尚未经专业人员审核。越南语版本为原文。",
+    pendingReview: "此记录尚待专业审核。使用前请核对来源与现行指南。",
     relatedFigs: "相关结构与机制",
     relatedNote: "取自解剖／生理教材，展示相关结构，并非本病的病变图像。",
     offline: "无法连接病理数据服务器。",
     disclaimer: "ICD-10 代码与译名尚未经专业审核。仅供学习查阅，不能替代诊断或治疗。",
   },
-} as const;
+} as const);
 
 /* Bookmark nằm ở localStorage — nguồn dữ liệu ngoài React. */
 const BOOKMARK_KEY = "soma3d-pathology-bookmarks";
@@ -156,7 +165,7 @@ const SYSTEM_ICONS: [string[], string][] = [
 
 /* Hệ lâm sàng trong DB chỉ có tiếng Việt. Chín giá trị, dịch tay ngay ở đây
    còn hơn để cột trái trơ tiếng Việt khi người dùng đang xem bản tiếng Anh. */
-const SYSTEM_LABELS: Record<string, { en: string; zh: string }> = {
+const SYSTEM_LABELS: Record<string, { en: string; zh: string }> = bindContentSource("data:src/components/pathology/PathologyLibrary.tsx#SYSTEM_LABELS", {
   "Cơ xương khớp": { en: "Musculoskeletal", zh: "肌肉骨骼" },
   "Hô hấp": { en: "Respiratory", zh: "呼吸" },
   "Hồi sức cấp cứu": { en: "Critical care", zh: "重症急救" },
@@ -166,7 +175,7 @@ const SYSTEM_LABELS: Record<string, { en: string; zh: string }> = {
   "Thận - Tiết niệu": { en: "Nephrology & urology", zh: "肾脏与泌尿" },
   "Tiêu hóa": { en: "Gastroenterology", zh: "消化" },
   "Tim mạch": { en: "Cardiology", zh: "心血管" },
-};
+});
 
 const systemLabel = (name: string, locale: Loc) =>
   locale === "vi" ? name : SYSTEM_LABELS[name]?.[locale] ?? name;
@@ -201,6 +210,9 @@ function view3dHref(p: { id: string; slug: string; lesionMesh?: string | null; s
 }
 
 export default function PathologyLibrary({ locale }: { locale: Loc }) {
+  const cmsContent = useContent();
+  const copy = cmsContent.resolve(cmsSourcecopy());
+
   const t = copy[locale];
   const [items, setItems] = useState<Pathology[]>([]);
   const [loading, setLoading] = useState(true);
@@ -377,7 +389,7 @@ export default function PathologyLibrary({ locale }: { locale: Loc }) {
     writeBookmarks(next);
   }
 
-  return (
+  return <ContentSurface scope="src/components/pathology/PathologyLibrary.tsx">{(
     <div className="pth-shell">
       <IconSprite />
 
@@ -631,6 +643,7 @@ export default function PathologyLibrary({ locale }: { locale: Loc }) {
                 <h3>{t.bookFigs}</h3>
                 {figures.map((fig) => (
                   <figure key={fig.src} className="pth-fig">
+                    {/* eslint-disable-next-line @next/next/no-img-element -- Source scans have unknown dimensions; preserve their native aspect ratio. */}
                     <img src={fig.src} alt={fig.caption} loading="lazy" />
                     <figcaption>
                       {fig.source}
@@ -652,6 +665,7 @@ export default function PathologyLibrary({ locale }: { locale: Loc }) {
                 <p className="pth-figs-note">{t.relatedNote}</p>
                 {relatedFigures.map((fig) => (
                   <figure key={fig.src} className="pth-fig">
+                    {/* eslint-disable-next-line @next/next/no-img-element -- Source scans have unknown dimensions; preserve their native aspect ratio. */}
                     <img src={fig.src} alt={fig.caption} loading="lazy" />
                     <figcaption>
                       {fig.caption} — {fig.source}
@@ -703,6 +717,7 @@ export default function PathologyLibrary({ locale }: { locale: Loc }) {
               ].filter(([, body]) => body) as [string, string][];
               return sections.length > 0 ? (
                 <>
+                  {selected.needsReview&&<p className="pth-untranslated">{t.pendingReview}</p>}
                   {untranslated && <p className="pth-untranslated">{t.noTranslation}</p>}
                   {machine && <p className="pth-untranslated">{t.machineTranslated}</p>}
                   {sections.map(([heading, body]) => (
@@ -756,16 +771,19 @@ export default function PathologyLibrary({ locale }: { locale: Loc }) {
                 <Icon id="i-bookmark" />
                 {bookmarks.includes(selected.id) ? t.unsave : t.save}
               </button>
-              {selected.structure && (
+              {(selected.structure || pathologySceneHref(selected.slug)) && (
                 <Link href={view3dHref(selected)}>
                   {t.view3d}
                   <Icon id="i-right" />
                 </Link>
               )}
             </div>
+            {pathologySceneHref(selected.slug)&&<p className="pth-source-note">{pathologySceneNote(selected.slug,locale)}</p>}
           </aside>
         </div>
       )}
     </div>
-  );
+  )}</ContentSurface>;
 }
+
+function cmsSourcecopy() { return copy; }

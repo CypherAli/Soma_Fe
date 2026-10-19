@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { T3 } from "./homeContent";
 
 /**
@@ -6,7 +8,7 @@ import type { T3 } from "./homeContent";
  * Chỉ đặt ở đây những mục có API thật bên `soma_be`. Nhãn cho chức năng chưa
  * tồn tại còn tệ hơn là không có nhãn: người dùng bấm vào rồi không có gì xảy ra.
  */
-export const settingsContent = {
+export const settingsContent = bindContentSource("data:src/lib/settingsContent.ts#settingsContent", {
   title: { vi: "Tài khoản", en: "Account", zh: "账户" } as T3,
   subtitle: {
     vi: "Hồ sơ, bảo mật và tuỳ chọn hiển thị của bạn trên Soma 3D.",
@@ -214,4 +216,4 @@ export const settingsContent = {
     clearChatAsk: { vi: "Xoá toàn bộ hội thoại với SomaBot?", en: "Clear the whole SomaBot conversation?", zh: "清除全部 SomaBot 对话？" } as T3,
     done: { vi: "Đã xoá.", en: "Deleted.", zh: "已删除。" } as T3,
   },
-};
+});

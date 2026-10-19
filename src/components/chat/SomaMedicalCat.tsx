@@ -1,5 +1,7 @@
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 export default function SomaMedicalCat() {
-  return <svg className="soma-medical-cat" viewBox="0 0 180 190" role="img" aria-label="Mèo trợ lý y khoa Soma">
+  return <ContentSurface scope="src/components/chat/SomaMedicalCat.tsx"><svg className="soma-medical-cat" viewBox="0 0 180 190" role="img" aria-label="Mèo trợ lý y khoa Soma">
     <defs>
       <linearGradient id="catCoat" x1="0" y1="0" x2="0" y2="1"><stop stopColor="#fffdf8"/><stop offset="1" stopColor="#e8eee9"/></linearGradient>
       <linearGradient id="catScreen" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#163c42"/><stop offset="1" stopColor="#0e2429"/></linearGradient>
@@ -31,5 +33,5 @@ export default function SomaMedicalCat() {
     </g>
     <g className="cat-hologram"><rect x="103" y="66" width="53" height="39" rx="7" fill="#173b42" fillOpacity=".92" stroke="#64e6dd" strokeWidth="2"/><path d="M118 76v20m-5-15h10m-11 6h12m-10 6h8" stroke="#70f2e3" strokeWidth="2" strokeLinecap="round"/><path d="M135 88c0-8 12-8 12 0 0 6-6 9-6 9s-6-3-6-9Z" fill="#e1716d"/></g>
     <g className="cat-thinking-dots" fill="#65e5d8"><circle cx="137" cy="44" r="3"/><circle cx="147" cy="35" r="4"/><circle cx="158" cy="23" r="5"/></g>
-  </svg>;
+  </svg></ContentSurface>;
 }
