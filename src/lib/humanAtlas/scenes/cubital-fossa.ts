@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Hố khuỷu" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const cubitalFossaScene: AtlasSceneDef = {
+export const cubitalFossaScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/cubital-fossa.ts#cubitalFossaScene", {
   "slug": "ho-khuyu",
   "title": {
     "vi": "Hố khuỷu",
@@ -155,4 +157,4 @@ export const cubitalFossaScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

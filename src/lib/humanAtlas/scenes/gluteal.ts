@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Vùng mông" (bên trái) dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const glutealScene: AtlasSceneDef = {
+export const glutealScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/gluteal.ts#glutealScene", {
   "slug": "vung-mong",
   "title": {
     "vi": "Vùng mông",
@@ -165,4 +167,4 @@ export const glutealScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

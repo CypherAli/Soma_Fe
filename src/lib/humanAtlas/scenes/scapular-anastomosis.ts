@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Vòng nối động mạch quanh vai" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const scapularAnastomosisScene: AtlasSceneDef = {
+export const scapularAnastomosisScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/scapular-anastomosis.ts#scapularAnastomosisScene", {
   "slug": "khop-vai-khuyu",
   "title": {
     "vi": "Động mạch nách và vòng nối quanh vai",
@@ -181,4 +183,4 @@ export const scapularAnastomosisScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

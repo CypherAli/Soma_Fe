@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Bài bộ phận "Đùi và mông — học theo lớp" học theo lớp — nhóm lấy từ thigh-muscles.ts (đã kiểm), chỉ thêm lớp.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const partThighScene: AtlasSceneDef = {
+export const partThighScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/part-thigh.ts#partThighScene", {
   "slug": "bo-phan-dui",
   "title": {
     "vi": "Đùi và mông — học theo lớp",
@@ -255,4 +257,4 @@ export const partThighScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

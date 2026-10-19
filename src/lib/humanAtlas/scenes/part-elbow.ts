@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Bài bộ phận "Khuỷu" học theo lớp, dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const partElbowScene: AtlasSceneDef = {
+export const partElbowScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/part-elbow.ts#partElbowScene", {
   "slug": "bo-phan-khuyu",
   "title": {
     "vi": "Khuỷu — học theo lớp",
@@ -336,4 +338,4 @@ export const partElbowScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

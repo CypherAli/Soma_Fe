@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { SceneModule } from "./types";
 import type { RegionViewKey } from "./regions";
 
@@ -11,7 +13,7 @@ import type { RegionViewKey } from "./regions";
  * "Nhóm J" trong `region_config.py`), mọi `meshName` đọc từ file .glb đã xuất
  * rồi kiểm lại bằng `npm run verify:scenes`.
  */
-export const regionScenes7: Record<string, SceneModule> = {
+export const regionScenes7: Record<string, SceneModule> = bindContentSource("data:src/lib/scenes/regions7.ts#regionScenes7", {
   "thuc-quan": {
     slug: "thuc-quan",
     title: { vi: "Thực quản", en: "The Oesophagus", zh: "食管" },
@@ -273,7 +275,7 @@ export const regionScenes7: Record<string, SceneModule> = {
         note: { vi: "Mặt trong xương chày ở một phần ba dưới nằm ngay dưới da, không có cơ che — đây chính là “vùng cổ chân” hay bị loét ứ trệ tĩnh mạch. Da mỏng, mô dưới da nghèo, cộng thêm áp lực tĩnh mạch cao là ba yếu tố khiến vết loét ở đây lâu lành và hay tái phát.", en: "The medial surface of the tibia in its lower third lies directly under the skin with no muscle cover — this is the gaiter area where venous ulcers form. Thin skin, sparse subcutaneous tissue and high venous pressure are the three reasons ulcers here heal slowly and recur.", zh: "胫骨下1/3内侧面直接位于皮下而无肌肉覆盖——此即静脉性溃疡好发的足靴区。皮肤菲薄、皮下组织稀少加之静脉高压，是此处溃疡愈合缓慢且易复发的三个原因。" } },
     ],
   },
-};
+});
 
 export const regionViewerConfig7: Record<string, { cats: RegionViewKey[]; faded?: RegionViewKey[] }> = {
   // Cột sống và lồng ngực bọc quanh thực quản — để đục thì không thấy ống.

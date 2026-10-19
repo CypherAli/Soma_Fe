@@ -142,6 +142,39 @@ export function angleDelta(now: number, base: number): number {
   return d;
 }
 
+/**
+ * Góc vặn bàn tay trong mặt phẳng ảnh (radian, 0 = ngón hướng lên,
+ * + = cùng chiều kim đồng hồ trên màn hình) — đúng công thức `rollOf` của
+ * WonderSnap: trục cổ tay → khớp bàn ngón giữa, x nhân aspect vì x/y landmark
+ * được chuẩn hoá riêng theo từng chiều (video 480×360 mà không nhân thì gain
+ * xoay méo tới ~8° ở hướng chéo). Không phụ thuộc ngón gập/duỗi.
+ */
+export function handRoll(lms: Landmark[], aspect = 1): number {
+  return Math.atan2(
+    (lms[LM.MIDDLE_MCP].x - lms[LM.WRIST].x) * aspect,
+    -(lms[LM.MIDDLE_MCP].y - lms[LM.WRIST].y),
+  );
+}
+
+/**
+ * Độ lật lòng bàn tay (−1..1): thành phần x của pháp tuyến lòng bàn tay
+ * (Newell trên đa giác cổ tay + 4 khớp bàn). Vặn cổ tay kiểu núm cửa gần như
+ * KHÔNG đổi trục cổ tay→ngón giữa (handRoll đứng yên) nhưng lật pháp tuyến
+ * này — đây mới là tín hiệu của "xoay bàn tay". Lấy tương đối so với neo nên
+ * dấu tuyệt đối (trái/phải, sấp/ngửa) không quan trọng.
+ */
+export function handTwist(lms: Landmark[]): number {
+  const ids = [LM.WRIST, LM.INDEX_MCP, LM.MIDDLE_MCP, LM.RING_MCP, LM.PINKY_MCP];
+  let nx = 0, ny = 0, nz = 0;
+  for (let i = 0; i < ids.length; i++) {
+    const a = lms[ids[i]], b = lms[ids[(i + 1) % ids.length]];
+    nx += (a.y - b.y) * (a.z + b.z);
+    ny += (a.z - b.z) * (a.x + b.x);
+    nz += (a.x - b.x) * (a.y + b.y);
+  }
+  return nx / (Math.hypot(nx, ny, nz) || 1e-6);
+}
+
 export const MODE_LABEL: Record<HandMode, string> = {
   point: "Trỏ",
   zoom: "Phóng to / thu nhỏ",
@@ -244,15 +277,24 @@ export type AnalyzedHand = {
 export function analyze(
   hands: TrackedHand[],
   stabilizers?: Map<string, ModeStabilizer>,
+  /**
+   * Khoá định danh một bàn tay qua các khung hình. Mặc định là nhãn
+   * `handedness` của MediaPipe — NHƯNG nhãn này lật liên tục (tay phải giơ trỏ
+   * hay bị đọc thành "Left" rồi lại "Right"), mỗi lần lật là bộ ổn định tưởng
+   * tay mới và chế độ chập chờn. Truyền khoá bám theo VỊ TRÍ (do trang gọi tự
+   * ghép) thì lật nhãn cũng không mất dấu tay.
+   */
+  keyOf: (hand: TrackedHand, index: number) => string = (hand) => hand.handedness,
 ): AnalyzedHand[] {
-  return hands.map((hand) => {
+  return hands.map((hand, index) => {
     const fingers = readHand(hand.landmarks);
     let mode = detectHandMode(fingers);
     if (stabilizers) {
-      let st = stabilizers.get(hand.handedness);
+      const k = keyOf(hand, index);
+      let st = stabilizers.get(k);
       if (!st) {
         st = new ModeStabilizer();
-        stabilizers.set(hand.handedness, st);
+        stabilizers.set(k, st);
       }
       mode = st.push(mode);
     }

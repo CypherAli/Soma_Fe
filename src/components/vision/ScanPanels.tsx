@@ -1,12 +1,18 @@
 "use client";
 
-import { Link } from "@/i18n/navigation";
+
+
+import { useContent } from "@/components/content/ContentProvider";
+import { ContentSurface } from "@/components/content/ContentProvider";
+import { useEffect, useState } from "react";
+
+import { getControlModel } from "@/lib/anatomy/controlModels";
 import { getScene } from "@/lib/catalog";
-import { getLayeredModel } from "@/lib/anatomy/layeredModels";
 import { pick, type Loc } from "@/lib/homeContent";
 import type { CropQuality } from "@/lib/vision/framing";
 import { VISION_PARTS, getVisionPart, type VisionGuess, type VisionPartKey } from "@/lib/vision/parts";
 import type { VisionText } from "@/lib/vision/visionText";
+import { scanControlModel, scanControlModelName } from "@/lib/vision/scanControlModel";
 
 // GIAO DIỆN CHẾ ĐỘ QUÉT — thuần trình bày, không giữ trạng thái, không đụng
 // camera. Vòng lặp bàn tay nằm ở trang /cu-chi và điều khiển cả hai chế độ.
@@ -64,7 +70,7 @@ export function ScanOverlay({
   askConsent,
   fire,
 }: OverlayProps) {
-  return (
+  return <ContentSurface scope="src/components/vision/ScanPanels.tsx">{(
     <>
       {stage === "scan" && !askConsent && (
         <div className="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full bg-black/70 px-4 py-1.5 text-sm text-white">
@@ -125,7 +131,11 @@ export function ScanOverlay({
                         }`}
                       >
                         <span className="block text-sm font-semibold">{pick(part.label, locale)}</span>
-                        <span className="block text-xs text-white/60">{Math.round(g.score * 100)}%</span>
+                        {/* MỨC TIN CẬY chứ không phải phần trăm — xem ConfidenceTier trong parts.ts. */}
+                        <span className="block text-xs text-white/60">
+                          {g.side ? `${t.side[g.side]} · ` : ""}
+                          {t.tier[g.tier ?? "unsure"]}
+                        </span>
                       </button>
                     );
                   })}
@@ -182,7 +192,7 @@ export function ScanOverlay({
         </div>
       )}
     </>
-  );
+  )}</ContentSurface>;
 }
 
 type SidebarProps = {
@@ -195,15 +205,37 @@ type SidebarProps = {
 
 /** Cột phải của chế độ quét: các bước, tự chọn vùng, mô hình, giới hạn camera. */
 export function ScanSidebar({ t, locale, shownPart, consent, fire }: SidebarProps) {
-  const part = shownPart ? getVisionPart(shownPart) : undefined;
-  const scenes = part?.scenes ?? [];
+  const cmsContent = useContent();
+  const VISION_PARTS = cmsContent.resolve(cmsSourceVISION_PARTS());
 
-  return (
+  const part = shownPart ? getVisionPart(shownPart) : undefined;
+  const scenes = (part?.scenes ?? []).filter((slug,index,list)=>list.findIndex(other=>scanControlModel(other,shownPart)===scanControlModel(slug,shownPart))===index);
+  // Hỏi server có GPU không; chưa có thì hiện badge để khỏi hiểu lầm
+  // (quét mặt/cổ lúc này chỉ còn tầng MediaPipe → rớt về tự chọn).
+  const [gpu, setGpu] = useState<boolean | null>(null);
+  useEffect(() => {
+    fetch("/api/vision/identify").then((r) => r.json()).then(
+      (d) => setGpu(Boolean((d as { configured?: boolean }).configured)),
+      () => setGpu(null),
+    );
+  }, []);
+
+  return <ContentSurface scope="src/components/vision/ScanPanels.tsx">{(
     <>
-      <div className="rounded-xl border border-[var(--line)] bg-[var(--surf)] p-4">
-        <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-[var(--muted-2)]">
+      {gpu === false && (
+        <details className="rounded-xl border border-[var(--line)] bg-[var(--surf)] p-3 text-xs leading-relaxed text-[var(--muted)]"><summary className="cursor-pointer text-[var(--ink)]">{locale==='vi'?'Khả năng nhận diện':locale==='zh'?'识别能力':'Recognition availability'}</summary><p className="mt-2">
+          {locale === "vi"
+            ? "Chưa cấu hình GPU nhận diện — quét bàn tay/cẳng tay vẫn ra kết quả (tầng mốc trên máy), quét mặt/cổ/vai chỉ tự chọn vùng."
+            : locale === "zh"
+              ? "未配置 GPU 识别——手/前臂扫描仍可用（本机标志点），面部/颈/肩仅手动选择。"
+              : "GPU recognition not configured — hand/forearm scan still works (on-device landmarks); face/neck/shoulder falls back to manual pick."}
+        </p></details>
+      )}
+      <details className="rounded-xl border border-[var(--line)] bg-[var(--surf)] p-4">
+        <summary className="cursor-pointer text-sm font-semibold text-[var(--ink)]">
           {t.title}
-        </h2>
+        </summary>
+        <p className="my-3 text-xs leading-relaxed text-[var(--muted)]">{locale==='vi'?'Quét → chọn vùng → mở mô hình trong Vision. Camera tiếp tục dùng để điều khiển.':locale==='zh'?'扫描 → 选择部位 → 在 Vision 中打开模型。摄像头继续用于控制。':'Scan → select a region → open its model in Vision. The camera continues for gesture control.'}</p>
         <ol className="space-y-2 text-sm leading-relaxed text-[var(--body-fg)]">
           {t.steps.map((s, i) => (
             <li key={i} className="flex gap-2">
@@ -214,50 +246,54 @@ export function ScanSidebar({ t, locale, shownPart, consent, fire }: SidebarProp
             </li>
           ))}
         </ol>
-      </div>
+        <p className="mt-3 border-t border-[var(--line)] pt-3 text-xs leading-relaxed text-[var(--muted)]">
+          {t.voiceHint}
+        </p>
+      </details>
 
       {part && (
         <div className="rounded-xl border border-[var(--line)] bg-[var(--surf)] p-4">
           <h2 className="mb-1 text-sm font-semibold text-[var(--ink)]">{pick(part.label, locale)}</h2>
           <p className="mb-3 text-xs text-[var(--muted)]">{t.models(scenes.length)}</p>
-          {/* Mô hình BÓC LỚP ĐƯỢC xếp lên trước và mở thẳng trong chế độ điều
-              khiển — đó mới là mạch chính: quét ra vùng rồi điều khiển ngay
-              bằng cử chỉ, không phải nhảy sang một trang cầm chuột. Mô hình
-              một khối thì không có gì để bóc nên vẫn mở trang scene như cũ. */}
+          {/* MỌI mô hình gợi ý đều mở NGAY TRONG TRANG NÀY ở chế độ điều khiển —
+              luật đã chốt: không bao giờ chuyển sang trang thư viện (camera tắt,
+              người dùng phải cầm chuột lại). Giữ đúng thứ tự của `parts.ts`: bài
+              bộ phận học theo lớp đứng đầu. Tên lấy từ CHÍNH mô hình sẽ nạp, nên
+              nút ghi gì thì hiện ra đúng cái đó. */}
           <div className="flex flex-col gap-2">
-            {[...scenes]
-              .sort((a, b) => Number(!!getLayeredModel(b)) - Number(!!getLayeredModel(a)))
-              .map((slug) => {
-                const scene = getScene(slug);
-                if (!scene) return null;
-                const layered = !!getLayeredModel(slug);
-                if (!layered) {
-                  return (
-                    <Link
-                      key={slug}
-                      href={scene.href}
-                      data-gesture-target={`scene:${slug}`}
-                      className="rounded-lg border border-[var(--line)] bg-[var(--surf-2)] px-3 py-2 text-sm text-[var(--ink)] hover:border-[#0f8a7c]"
-                    >
-                      {pick(scene.title, locale)}
-                      <span className="ml-1 text-xs text-[var(--muted)]">· {t.openPage}</span>
-                    </Link>
-                  );
-                }
-                return (
-                  <button
-                    key={slug}
-                    data-gesture-target={`control:${slug}`}
-                    onClick={() => fire(`control:${slug}`)}
-                    className="rounded-lg border border-[#0f8a7c]/60 bg-[#0f8a7c]/10 px-3 py-2 text-left text-sm text-[var(--ink)] hover:border-[#0f8a7c]"
-                  >
-                    {pick(scene.title, locale)}
-                    <span className="ml-1 text-xs text-[#0f8a7c]">· {t.openGesture}</span>
-                  </button>
-                );
-              })}
+            {scenes.map((slug) => {
+              const model = getControlModel(slug);
+              if (!model) return null;
+              const thumb = getScene(slug)?.thumb;
+              return (
+                <button
+                  key={slug}
+                  data-gesture-target={`control:${slug}`}
+                  onClick={() => fire(`control:${slug}`)}
+                  className="flex items-center gap-2.5 rounded-lg border border-[#0f8a7c]/60 bg-[#0f8a7c]/10 p-1.5 pr-3 text-left text-sm text-[var(--ink)] hover:border-[#0f8a7c]"
+                >
+                  {/* Ảnh bìa: nhìn ảnh nhận ra bài nhanh hơn đọc tên, nhất là khi đang
+                      giơ tay dwell chứ không cầm chuột. */}
+                  {thumb ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={thumb} alt="" className="h-10 w-10 shrink-0 rounded-md bg-[var(--surf-2)] object-cover" />
+                  ) : (
+                    <span className="h-10 w-10 shrink-0 rounded-md bg-[var(--surf-2)]" />
+                  )}
+                  <span className="min-w-0">
+                    {scanControlModelName(slug,shownPart)}
+                    <span className="block text-xs text-[#0f8a7c]">{t.openGesture}</span>
+                  </span>
+                </button>
+              );
+            })}
           </div>
           <p className="mt-3 text-xs leading-relaxed text-[var(--muted)]">{pick(part.hint, locale)}</p>
+          {part.note && (
+            <p className="mt-2 rounded-md border border-amber-500/40 bg-amber-500/10 px-2.5 py-2 text-xs leading-relaxed text-[var(--body-fg)]">
+              {pick(part.note, locale)}
+            </p>
+          )}
 
           {/* LỐI RẼ XUỐNG VÙNG CON. Quét cả cái đầu thì bước tự nhiên kế tiếp
               là soi riêng mắt, tai hay miệng — cho sẵn đường đi thay vì bắt
@@ -309,16 +345,23 @@ export function ScanSidebar({ t, locale, shownPart, consent, fire }: SidebarProp
         </div>
       </div>
 
-      <div className="rounded-xl border border-[var(--line)] bg-[var(--surf)] p-4">
-        <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-[var(--muted-2)]">
-          {t.limitsTitle}
-        </h2>
-        <ul className="space-y-2 text-xs leading-relaxed text-[var(--muted)]">
+      {/* Gập lại mặc định: bốn giới hạn camera là thứ cần biết khi gặp trục trặc,
+          không phải thứ phải đọc hết trước khi được quét. */}
+      <details className="group rounded-xl border border-[var(--line)] bg-[var(--surf)] p-4">
+        <summary className="cursor-pointer list-none text-xs font-semibold uppercase tracking-wider text-[var(--muted-2)]">
+          {t.limitsTitle} <span className="inline-block transition group-open:rotate-90">›</span>
+        </summary>
+        <ul className="mt-2 space-y-2 text-xs leading-relaxed text-[var(--muted)]">
           {t.limits.map((l, i) => (
             <li key={i}>· {l}</li>
           ))}
         </ul>
-        <p className="mt-3 border-t border-[var(--line)] pt-3 text-xs leading-relaxed text-[var(--muted)]">
+      </details>
+
+      {/* Quyền gửi ảnh thì KHÔNG được giấu trong khối gập: người dùng phải luôn
+          thấy mình đang bật hay tắt, và đổi được ngay. */}
+      <div className="rounded-xl border border-[var(--line)] bg-[var(--surf)] p-4">
+        <p className="text-xs leading-relaxed text-[var(--muted)]">
           {t.privacy}
         </p>
         {/* Đổi ý lúc nào cũng được — chọn "không" một lần rồi kẹt luôn thì lựa
@@ -332,5 +375,7 @@ export function ScanSidebar({ t, locale, shownPart, consent, fire }: SidebarProp
         </button>
       </div>
     </>
-  );
+  )}</ContentSurface>;
 }
+
+function cmsSourceVISION_PARTS() { return VISION_PARTS; }

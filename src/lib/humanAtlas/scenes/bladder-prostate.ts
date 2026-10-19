@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Bàng quang và tiền liệt tuyến" dựng từ bộ atlas BodyParts3D.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const bladderProstateScene: AtlasSceneDef = {
+export const bladderProstateScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/bladder-prostate.ts#bladderProstateScene", {
   "slug": "bang-quang-tien-liet",
   "title": {
     "vi": "Bàng quang và tiền liệt tuyến",
@@ -186,4 +188,4 @@ export const bladderProstateScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

@@ -1,5 +1,7 @@
 "use client";
 
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { Suspense, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Bounds, OrbitControls, useGLTF } from "@react-three/drei";
@@ -201,7 +203,7 @@ function Specimen({
     }
 
     return { model: root, centre: c, span: s, byMaterial: groups };
-  }, [scene, tint]);
+  }, [scene, tint, highlight]);
 
   /*
    * Mẫu có tách được bộ phận hay không: nhiều hơn một vật liệu nghĩa là tác
@@ -322,7 +324,7 @@ function Specimen({
     return bestD > (span * 0.22) ** 2 ? null : best;
   };
 
-  return (
+  return <ContentSurface scope="src/components/vet/VetModelScene.tsx">{(
     <group ref={shellRef} scale={1 / span}>
       <group
         position={[-centre.x, -centre.y, -centre.z]}
@@ -410,7 +412,7 @@ function Specimen({
           );
         })}
     </group>
-  );
+  )}</ContentSurface>;
 }
 
 export default function VetModelScene({
@@ -454,7 +456,7 @@ export default function VetModelScene({
   // Giữ ở đây chứ không ở `Specimen`: `Specimen` bị treo bởi Suspense của
   // `useGLTF`, đặt state trong đó là lặp lại đúng lỗi thứ tự hook đã trả giá.
   const [hovered, setHovered] = useState<string | null>(null);
-  return (
+  return <ContentSurface scope="src/components/vet/VetModelScene.tsx">{(
     /* Camera đặt ở MẶT BÊN, không phải chính diện.
 
        Bên người mặc định nhìn chính diện là đúng, vì người đứng thẳng và mặt
@@ -496,5 +498,5 @@ export default function VetModelScene({
       </Suspense>
       <OrbitControls makeDefault enablePan={false} minDistance={0.6} maxDistance={12} />
     </Canvas>
-  );
+  )}</ContentSurface>;
 }

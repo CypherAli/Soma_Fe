@@ -1,7 +1,9 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { SceneModule } from "./types";
 
 /** He co - 4 scene. */
-export const muscularScenes: Record<string, SceneModule> = {
+export const muscularScenes: Record<string, SceneModule> = bindContentSource("data:src/lib/scenes/muscular.ts#muscularScenes", {
   "co-mat": {
     slug: "co-mat",
     title: { vi: "Cơ Mặt", en: "Facial Muscles", zh: "面部肌肉" },
@@ -311,4 +313,4 @@ export const muscularScenes: Record<string, SceneModule> = {
         note: { vi: "Cơ nhỏ hình tam giác nằm trước phần dưới cơ thẳng bụng, căng ĐƯỜNG TRẮNG khi co. Khoảng 20% người không có cơ này ở một hoặc cả hai bên — một biến thể vô hại, nhưng phẫu thuật viên dùng nó làm mốc tìm đường trắng ở vùng dưới rốn nên vắng nó thì phải tìm mốc khác.", en: "A small triangular muscle in front of the lower rectus abdominis that tenses the LINEA ALBA when it contracts. About 20% of people lack it on one or both sides — a harmless variant, but since surgeons use it as a landmark for the linea alba below the umbilicus, its absence means finding another landmark.", zh: "位于腹直肌下部前方的小三角形肌，收缩时紧张白线。约20%的人单侧或双侧缺如——为无害变异，但外科医师以其作为脐下寻找白线的标志，缺如时须另寻标志。" } },
     ],
   },
-};
+});

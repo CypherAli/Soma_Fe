@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Giải phẫu Thanh quản" dựng từ bộ atlas BodyParts3D.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const larynxScene: AtlasSceneDef = {
+export const larynxScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/larynx.ts#larynxScene", {
   "slug": "thanh-quan",
   "title": {
     "vi": "Giải phẫu Thanh quản",
@@ -215,4 +217,4 @@ export const larynxScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

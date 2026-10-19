@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Động mạch não giữa" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const mcaScene: AtlasSceneDef = {
+export const mcaScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/mca.ts#mcaScene", {
   "slug": "khop-thai-duong-ham",
   "title": {
     "vi": "Động mạch não giữa và nhánh vỏ",
@@ -188,4 +190,4 @@ export const mcaScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

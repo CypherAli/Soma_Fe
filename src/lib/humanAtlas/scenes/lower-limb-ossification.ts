@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Xương chi dưới và mốc cốt hoá" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const lowerLimbOssificationScene: AtlasSceneDef = {
+export const lowerLimbOssificationScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/lower-limb-ossification.ts#lowerLimbOssificationScene", {
   "slug": "moc-xuong-chi-duoi",
   "title": {
     "vi": "Xương chi dưới và mốc cốt hoá",
@@ -147,4 +149,4 @@ export const lowerLimbOssificationScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

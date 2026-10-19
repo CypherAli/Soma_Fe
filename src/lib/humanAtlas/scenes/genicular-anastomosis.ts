@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Vòng nối động mạch quanh gối" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const genicularAnastomosisScene: AtlasSceneDef = {
+export const genicularAnastomosisScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/genicular-anastomosis.ts#genicularAnastomosisScene", {
   "slug": "vung-ben",
   "title": {
     "vi": "Động mạch khoeo và vòng nối quanh gối",
@@ -153,4 +155,4 @@ export const genicularAnastomosisScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

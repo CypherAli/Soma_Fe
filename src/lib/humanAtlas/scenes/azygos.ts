@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Hệ tĩnh mạch đơn và mạch gian sườn" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const azygosScene: AtlasSceneDef = {
+export const azygosScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/azygos.ts#azygosScene", {
   "slug": "than-kinh-tu-chu",
   "title": {
     "vi": "Hệ tĩnh mạch đơn và mạch gian sườn",
@@ -205,4 +207,4 @@ export const azygosScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

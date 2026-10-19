@@ -19,23 +19,27 @@ import { boxFromHand, boxFromIndexTips, boxIsStable, type Box } from "./framing"
 // └──────────────────────────────────────────────────────────────────────────┘
 //
 // ┌─ HAI TAY (cho mọi thứ KHÔNG phải bàn tay: mặt, cổ, vai, ngực, gối…) ─────┐
-// │ Ô ngắm hiện giữa hai đầu ngón trỏ và đi theo tay (kiểu PuzzleCam), bên    │
-// │ trong đổ đen–trắng. NẮM ĐẤM CẢ HAI TAY (hoặc chụm cả hai tay) và giữ →    │
-// │ ô ĐÓNG BĂNG → đếm ngược 3 giây để rút tay ra và đưa bộ phận vào → chụp.   │
-// │ Trong lúc đếm ngược mọi tư thế BỊ BỎ QUA; huỷ = buông tay ra rồi ra lại   │
-// │ đúng cử chỉ chốt ấy một lần nữa.                                         │
+// │ Ô ngắm hiện giữa hai đầu ngón trỏ và đi theo tay: chụm vào là nhỏ lại,    │
+// │ giãn ra là to ra, bên trong đổ đen–trắng (đó chính là tấm ảnh sắp chụp).   │
+// │ NẮM CHẶT CẢ HAI TAY (hoặc chụm cả hai tay) và giữ ~0,4 giây → CHỤP NGAY    │
+// │ đúng vùng trong ô, kể cả hai tay còn nằm trong khung. Không đếm ngược,    │
+// │ không rút tay — người dùng muốn "nắm lại là chụp phần đó".                │
 // └──────────────────────────────────────────────────────────────────────────┘
 //
 // KHOẢNG ÂN HẠN 450 ms (PuzzleCam gọi là FRAME_GRACE_MS): nhận diện hụt một
 // nhịp thì ô cũ vẫn còn thay vì chớp tắt. Không có nó thì ô nhấp nháy liên tục.
 
-/** Giữ cử chỉ chốt bao lâu thì ô hai tay đóng băng. */
+/** Giữ cử chỉ chốt bao lâu thì CHỤP, ở cách hai tay (nắm là chụp ngay). */
 export const FREEZE_HOLD_MS = 400;
-/** Giữ yên bàn tay bao lâu thì chụp, ở cách một tay. */
-export const HAND_HOLD_MS = 1400;
+/** Giữ yên bàn tay bao lâu thì chụp, ở cách một tay (kể cả GIƠ NGANG như ảnh
+ *  chụp cẳng tay: trục tay nằm ngang, ô tự bám vẫn bao trọn nhờ boxFromHand đo
+ *  trong hệ vuông — chỉ cần giữ yên là chụp, không cần ngắm). */
+export const HAND_HOLD_MS = 1200;
 export const COUNTDOWN_MS = 3000;
 /** Mất dấu tay dưới ngần này thì vẫn giữ ô cũ (chống nhấp nháy). */
 export const FRAME_GRACE_MS = 450;
+/** A briefly detected second hand must not replace an established scan box. */
+export const MODE_HOLD_MS = 180;
 /** Số ngón duỗi tối thiểu để coi một bàn tay là ĐỐI TƯỢNG cần quét. */
 export const SUBJECT_MIN_FINGERS = 3;
 /**
@@ -45,10 +49,10 @@ export const SUBJECT_MIN_FINGERS = 3;
  * nên ô bám thẳng vào landmark thì vừa GIẬT THEO NHỊP 20 Hz vừa rung theo cái
  * run của tay — người dùng tả đúng là "khựng, không mượt". Làm mượt theo THỜI
  * GIAN THẬT (1 - e^(-dt/τ)) nên ô đi đều ở 60 Hz và không phụ thuộc tốc độ máy.
- * τ nhỏ thì bám sát tay nhưng còn rung; τ lớn thì mượt nhưng trễ. 70 ms là chỗ
- * đứng được cả hai.
+ * τ nhỏ thì bám sát tay nhưng còn rung; τ lớn thì mượt nhưng trễ. 90 ms làm
+ * dịu bước nhảy của landmark thô từ worker; rAF vẫn nội suy ô giữa hai lần đo.
  */
-export const SMOOTH_TAU_MS = 70;
+export const SMOOTH_TAU_MS = 90;
 
 /**
  * CỬ CHỈ CHỐT KHUNG (cách hai tay).
@@ -96,6 +100,10 @@ export class ScanMachine {
   private anchor: Box | null = null;
   private lastSeenAt = 0;
   private since = 0;
+  private progress = 0;
+  private missingSince: number | null = null;
+  private candidateMode: ScanMode = "none";
+  private candidateSince = 0;
   /** Ô đã làm mượt — thứ thực sự vẽ ra và thực sự dùng để cắt. */
   private smooth: Box | null = null;
   private lastNow = 0;
@@ -104,16 +112,10 @@ export class ScanMachine {
    *
    * Vì sao phải giữ riêng: ô hai tay đo bằng hai ĐẦU NGÓN TRỎ, mà nắm tay lại
    * thì đầu ngón trỏ cuộn vào lòng bàn tay — ô co rúm lại đúng lúc chốt và ảnh
-   * cắt ra bé hơn hẳn thứ người dùng vừa ngắm. Đóng băng ô của khoảnh khắc
-   * TRƯỚC cử chỉ chốt thì cắt đúng cái đã ngắm.
+   * cắt ra bé hơn hẳn thứ người dùng vừa ngắm. Chụp ô của khoảnh khắc TRƯỚC
+   * cử chỉ chốt thì cắt đúng cái đã ngắm.
    */
   private framedBox: Box | null = null;
-  /**
-   * Trong lúc đếm ngược: đã có lần nào BUÔNG cử chỉ chốt chưa. Chỉ khi đã buông
-   * rồi mà ra lại cử chỉ chốt (hay nắm đấm) mới tính là huỷ — nhờ vậy giữ
-   * nguyên tay sau khi chốt không bao giờ huỷ nhầm.
-   */
-  private armReleased = false;
 
   reset(): void {
     this.phase = "idle";
@@ -122,9 +124,12 @@ export class ScanMachine {
     this.anchor = null;
     this.lastSeenAt = 0;
     this.since = 0;
+    this.progress = 0;
+    this.missingSince = null;
+    this.candidateMode = "none";
+    this.lastNow = 0;
     this.smooth = null;
     this.framedBox = null;
-    this.armReleased = false;
   }
 
   /**
@@ -160,42 +165,25 @@ export class ScanMachine {
 
     const two = hands.length >= 2;
     const bothLock = two && isLockPose(hands[0].fingers) && isLockPose(hands[1].fingers);
-
-    // ---- đang đếm ngược (chỉ có ở cách hai tay): ô đã đóng băng ----
-    if (this.phase === "armed") {
-      // HUỶ = BUÔNG RA RỒI RA LẠI CỬ CHỈ CHỐT.
-      //
-      // Bài học đã trả giá hai lần: cử chỉ huỷ KHÔNG được trùng với tư thế mà
-      // người dùng đang giữ sẵn ngay sau khi chốt. Bản đầu lấy "chụm hai tay"
-      // làm huỷ → giữ nguyên thế chụm là huỷ ngay, đếm ngược không bao giờ
-      // chạy hết. Bản sau lấy "nắm đấm" làm huỷ → nay nắm đấm chính là cử chỉ
-      // CHỐT, nên vẫn hỏng y hệt.
-      //
-      // Cách chắc chắn: phải có một khung hình KHÔNG còn cử chỉ chốt (buông
-      // tay, hoặc rút tay khỏi khung — đằng nào cũng phải làm để đưa bộ phận
-      // vào ô) rồi mới nhận cử chỉ ấy như lệnh huỷ.
-      if (!bothLock && !hands.some((h) => h.fingers.extendedCount === 0)) {
-        this.armReleased = true;
+    const desiredMode: ScanMode = two ? "frame" : hands.length === 1 ? "hand" : "none";
+    if (!fresh && now - this.lastSeenAt > FRAME_GRACE_MS) return this.idleOrGrace(now);
+    if (desiredMode !== "none" && this.mode !== "none" && desiredMode !== this.mode) {
+      if (this.candidateMode !== desiredMode) {
+        this.candidateMode = desiredMode;
+        this.candidateSince = now;
       }
-      if (this.armReleased && (bothLock || hands.some((h) => h.fingers.extendedCount === 0))) {
-        this.phase = "idle";
-        this.since = 0;
-        this.armReleased = false;
-        return { phase: "idle", mode: this.mode, box: this.box, progress: 0, countdown: 0, shoot: false };
+      if (!fresh || now - this.candidateSince < MODE_HOLD_MS) return this.idleOrGrace(now);
+      this.reset();
+    } else if (fresh) {
+      this.candidateMode = "none";
+    }
+    if (this.missingSince !== null && desiredMode !== "none" && fresh) {
+      if (now - this.lastSeenAt > FRAME_GRACE_MS) this.reset();
+      else {
+        // Pause the hold timer during a dropout; do not erase the user's progress.
+        this.since += now - this.missingSince;
+        this.missingSince = null;
       }
-      const elapsed = now - this.since;
-      if (elapsed >= COUNTDOWN_MS) {
-        this.phase = "busy";
-        return { phase: "busy", mode: "frame", box: this.box, progress: 1, countdown: 0, shoot: true };
-      }
-      return {
-        phase: "armed",
-        mode: "frame",
-        box: this.box,
-        progress: elapsed / COUNTDOWN_MS,
-        countdown: Math.ceil((COUNTDOWN_MS - elapsed) / 1000),
-        shoot: false,
-      };
     }
 
     // ---- CÁCH MỘT TAY: ô tự bám chính bàn tay đang giơ ----
@@ -209,25 +197,27 @@ export class ScanMachine {
         const shown = this.smoothTo(live, now);
         this.mode = "hand";
         this.box = shown;
-        this.lastSeenAt = now;
+        if (fresh) this.lastSeenAt = now;
         if (!this.anchor || !boxIsStable(this.anchor, shown)) {
           // tay còn đang di chuyển → đặt lại mốc và đồng hồ
           this.anchor = shown;
           this.since = now;
           this.phase = "framing";
+          this.progress = 0;
           return { phase: "framing", mode: "hand", box: shown, progress: 0, countdown: 0, shoot: false };
         }
         const held = now - this.since;
-        if (held >= HAND_HOLD_MS) {
+        if (held >= HAND_HOLD_MS && fresh) {
           this.phase = "busy";
           return { phase: "busy", mode: "hand", box: shown, progress: 1, countdown: 0, shoot: true };
         }
         this.phase = "locking";
+        this.progress = Math.min(held / HAND_HOLD_MS, 0.99);
         return {
           phase: "locking",
           mode: "hand",
           box: shown,
-          progress: held / HAND_HOLD_MS,
+          progress: this.progress,
           countdown: 0,
           shoot: false,
         };
@@ -248,33 +238,28 @@ export class ScanMachine {
       this.mode = "frame";
       this.box = shown;
       this.framedBox = shown;
-      this.lastSeenAt = now;
+      if (fresh) this.lastSeenAt = now;
       this.anchor = null;
 
       if (this.phase !== "locking") {
         this.phase = "locking";
         this.since = now;
+        this.progress = 0;
         return { phase: "locking", mode: "frame", box: shown, progress: 0, countdown: 0, shoot: false };
       }
       const held = now - this.since;
-      if (held >= FREEZE_HOLD_MS) {
-        this.phase = "armed";
-        this.since = now;
-        this.armReleased = false;
-        return {
-          phase: "armed",
-          mode: "frame",
-          box: shown,
-          progress: 0,
-          countdown: Math.ceil(COUNTDOWN_MS / 1000),
-          shoot: false,
-        };
+      if (held >= FREEZE_HOLD_MS && fresh) {
+        // NẮM LÀ CHỤP NGAY đúng ô đã ngắm (framedBox — ô trước lúc nắm, vì
+        // nắm vào là đầu ngón trỏ cuộn lại làm ô đo mới co rúm).
+        this.phase = "busy";
+        return { phase: "busy", mode: "frame", box: shown, progress: 1, countdown: 0, shoot: true };
       }
+      this.progress = Math.min(held / FREEZE_HOLD_MS, 0.99);
       return {
         phase: "locking",
         mode: "frame",
         box: shown,
-        progress: held / FREEZE_HOLD_MS,
+        progress: this.progress,
         countdown: 0,
         shoot: false,
       };
@@ -286,31 +271,27 @@ export class ScanMachine {
     this.mode = "frame";
     this.box = shown;
     this.framedBox = shown;
-    this.lastSeenAt = now;
+    if (fresh) this.lastSeenAt = now;
     this.anchor = null;
 
     // Buông cử chỉ chốt giữa chừng thì bỏ tiến trình — nhưng chỉ khi có dữ liệu
     // nhận diện MỚI, để một nhịp đọc hụt không xoá công giữ tay.
-    if (fresh || this.phase === "idle") this.phase = "framing";
-    return { phase: this.phase, mode: "frame", box: shown, progress: 0, countdown: 0, shoot: false };
+    if (fresh || this.phase === "idle") { this.phase = "framing"; this.progress = 0; }
+    return { phase: this.phase, mode: "frame", box: shown, progress: this.progress, countdown: 0, shoot: false };
   }
 
   /** Không ngắm được gì: giữ ô cũ trong khoảng ân hạn rồi mới buông. */
   private idleOrGrace(now: number): ScanState {
     if (now - this.lastSeenAt > FRAME_GRACE_MS) {
-      this.box = null;
-      this.anchor = null;
-      this.mode = "none";
-      this.phase = "idle";
-      this.since = 0;
-      this.framedBox = null;
+      this.reset();
       return { phase: "idle", mode: "none", box: null, progress: 0, countdown: 0, shoot: false };
     }
+    if (this.missingSince === null) this.missingSince = now;
     return {
-      phase: this.phase === "idle" ? "idle" : "framing",
+      phase: this.phase,
       mode: this.mode,
       box: this.box,
-      progress: 0,
+      progress: this.progress,
       countdown: 0,
       shoot: false,
     };

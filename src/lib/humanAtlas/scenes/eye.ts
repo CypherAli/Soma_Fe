@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Giải phẫu Mắt" (mắt trái) dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const eyeScene: AtlasSceneDef = {
+export const eyeScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/eye.ts#eyeScene", {
   "slug": "giai-phau-mat",
   "title": {
     "vi": "Giải phẫu Mắt",
@@ -171,4 +173,4 @@ export const eyeScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

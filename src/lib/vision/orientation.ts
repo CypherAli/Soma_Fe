@@ -130,6 +130,18 @@ const POSE_AXIS: Partial<Record<VisionPartKey, [number, number][]>> = {
     [POSE.HIP_L, POSE.KNEE_L],
     [POSE.HIP_R, POSE.KNEE_R],
   ],
+  thigh: [
+    [POSE.HIP_L, POSE.KNEE_L],
+    [POSE.HIP_R, POSE.KNEE_R],
+  ],
+  leg: [
+    [POSE.KNEE_L, POSE.ANKLE_L],
+    [POSE.KNEE_R, POSE.ANKLE_R],
+  ],
+  ankle: [
+    [POSE.KNEE_L, POSE.ANKLE_L],
+    [POSE.KNEE_R, POSE.ANKLE_R],
+  ],
   foot: [
     [POSE.ANKLE_L, POSE.FOOT_L],
     [POSE.ANKLE_R, POSE.FOOT_R],
@@ -171,6 +183,47 @@ export function orientationFromPose(
   return null;
 }
 
+/**
+ * Bên của một mô hình, suy từ tâm khung ngắm theo trục x của atlas.
+ *
+ * ĐO TRÊN DỮ LIỆU, không đoán: trong BodyParts3D "Left humerus" nằm ở x = 0,14…0,24
+ * còn "Right humerus" ở x = −0,24…−0,14 — tức bên TRÁI của người là x DƯƠNG.
+ * Gần đường giữa (tim, sọ, thanh quản) thì không có bên nào để lật.
+ */
+export type ModelSide = "left" | "right" | "mid";
+export const MIDLINE_X = 0.04;
+export function sideFromCenterX(x: number): ModelSide {
+  if (x > MIDLINE_X) return "left";
+  if (x < -MIDLINE_X) return "right";
+  return "mid";
+}
+
+/**
+ * Có lật gương mô hình hay không.
+ *
+ * `PartOrientation.mirror` nghĩa là "người dùng vừa quét bên TRÁI". Trước đây nó
+ * được dùng thẳng làm cờ lật vì mọi mô hình .glb đều dựng bên phải. Các bài bộ
+ * phận atlas lại dựng bên TRÁI (`leftSide()` trong gen-scene-parts.mjs) — dùng
+ * thẳng cờ cũ thì quét tay phải lại hiện tay trái. Lật khi và chỉ khi bên đã quét
+ * KHÁC bên của mô hình; mô hình ở đường giữa thì không bao giờ lật.
+ */
+export function mirrorFor(scannedLeft: boolean | null, modelSide: ModelSide): boolean {
+  if (scannedLeft === null || modelSide === "mid") return false;
+  return scannedLeft !== (modelSide === "left");
+}
+
+/**
+ * Góc nghiêng cho mô hình ATLAS.
+ *
+ * `rollFromAxis` quy về mô hình .glb dựng đứng, đầu xa hướng LÊN (-90° trên ảnh).
+ * Atlas BodyParts3D ở TƯ THẾ GIẢI PHẪU: chi buông xuôi, đầu xa hướng XUỐNG — đo
+ * trên dữ liệu, chỏm xương cánh tay ở y = 1,415 còn bàn tay nằm thấp hơn. Cùng
+ * một góc tay nên phải cộng thêm nửa vòng, rồi quy về (-π, π].
+ */
+export function atlasRoll(rollRad: number): number {
+  return rad(normaliseDeg(deg(rollRad) + 180));
+}
+
 /** Ảnh chụp lại mọi thứ cần để suy hướng, ghi ngay lúc bấm chụp. */
 export type OrientationSnapshot = {
   hand?: { landmarks: Landmark[]; handedness: string };
@@ -186,13 +239,19 @@ export type OrientationSnapshot = {
 export function orientationFor(
   part: VisionPartKey,
   snap: OrientationSnapshot,
+  /**
+   * Bên mà tầng nhận diện đã khớp. Không truyền thì `orientationFromPose` lấy bên
+   * TRÁI trước nếu nhìn thấy — quét cẳng tay phải mà khuỷu trái cũng lọt khung là
+   * mô hình lật sai bên.
+   */
+  side?: "left" | "right",
 ): PartOrientation | null {
   const handParts: VisionPartKey[] = ["hand", "wrist"];
   if (snap.hand && handParts.includes(part)) {
     return orientationFromHand(snap.hand.landmarks, snap.hand.handedness);
   }
   if (snap.pose) {
-    const fromPose = orientationFromPose(part, snap.pose);
+    const fromPose = orientationFromPose(part, snap.pose, side);
     if (fromPose) return fromPose;
   }
   // Không có mốc pose (tay sát camera) nhưng vẫn có bàn tay: trục cẳng tay

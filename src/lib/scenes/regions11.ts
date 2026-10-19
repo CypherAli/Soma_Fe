@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { SceneModule } from "./types";
 import type { RegionViewKey } from "./regions";
 
@@ -8,7 +10,7 @@ import type { RegionViewKey } from "./regions";
  * quan sinh dục theo yêu cầu của chủ đồ án; các chủ đề còn lại chọn theo chỗ
  * atlas còn hổng, không đè lên 113 scene đã có.
  */
-export const regionScenes11: Record<string, SceneModule> = {
+export const regionScenes11: Record<string, SceneModule> = bindContentSource("data:src/lib/scenes/regions11.ts#regionScenes11", {
   "ho-khuyu": {
     slug: "ho-khuyu",
     title: { vi: "Hố khuỷu", en: "The Cubital Fossa", zh: "肘窝" },
@@ -122,7 +124,7 @@ export const regionScenes11: Record<string, SceneModule> = {
         note: { vi: "Thành NGOÀI của góc, cứng như đá và chứa trọn tai trong. Ba đường mổ vào góc — sau xoang sigma, qua mê nhĩ, qua hố giữa — khác nhau chính ở chỗ có hy sinh mê nhĩ hay không, tức là có chấp nhận mất thính lực bên đó để đổi lấy trường mổ rộng hay không.", en: "The LATERAL wall of the angle, stone-hard and containing the whole inner ear. The three approaches to the angle — retrosigmoid, translabyrinthine and middle fossa — differ mainly in whether the labyrinth is sacrificed, that is, whether hearing on that side is traded for a wider exposure.", zh: "该角的外侧壁，坚硬如石，内含整个内耳。三种入路——乙状窦后、经迷路与颅中窝——的主要区别在于是否牺牲迷路，即是否以该侧听力换取更宽敞的术野。" } },
     ],
   },
-};
+});
 
 export const regionViewerConfig11: Record<string, { cats: RegionViewKey[]; faded?: RegionViewKey[] }> = {
   "ho-khuyu": { cats: ["muscle", "artery", "vein", "nerve", "bone"], faded: ["muscle", "bone"] },

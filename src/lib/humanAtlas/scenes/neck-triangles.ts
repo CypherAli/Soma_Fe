@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Tam giác cổ" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const neckTrianglesScene: AtlasSceneDef = {
+export const neckTrianglesScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/neck-triangles.ts#neckTrianglesScene", {
   "slug": "tam-giac-co",
   "title": {
     "vi": "Các tam giác cổ",
@@ -175,4 +177,4 @@ export const neckTrianglesScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Tuỵ và lách" dựng từ bộ atlas BodyParts3D.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const pancreasSpleenScene: AtlasSceneDef = {
+export const pancreasSpleenScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/pancreas-spleen.ts#pancreasSpleenScene", {
   "slug": "tuy-lach",
   "title": {
     "vi": "Tuỵ và lách",
@@ -160,4 +162,4 @@ export const pancreasSpleenScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

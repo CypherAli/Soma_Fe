@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Hệ não thất" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const ventriclesScene: AtlasSceneDef = {
+export const ventriclesScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/ventricles.ts#ventriclesScene", {
   "slug": "nao-that-mang-nao",
   "title": {
     "vi": "Hệ não thất và dịch não tuỷ",
@@ -181,4 +183,4 @@ export const ventriclesScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

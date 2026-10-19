@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { SceneModule } from "./types";
 import type { RegionViewKey } from "./regions";
 
@@ -14,7 +16,7 @@ import type { RegionViewKey } from "./regions";
  * (`npm run structures public/models/<file>.glb`) rồi kiểm lại bằng
  * `npm run verify:scenes` — không tên nào gõ theo trí nhớ.
  */
-export const regionScenes6: Record<string, SceneModule> = {
+export const regionScenes6: Record<string, SceneModule> = bindContentSource("data:src/lib/scenes/regions6.ts#regionScenes6", {
   "dam-roi-canh-tay": {
     slug: "dam-roi-canh-tay",
     title: { vi: "Đám rối thần kinh cánh tay", en: "The Brachial Plexus", zh: "臂丛" },
@@ -274,7 +276,7 @@ export const regionScenes6: Record<string, SceneModule> = {
         note: { vi: "Lát thành TRONG của hố nách và giữ xương bả vai áp vào lồng ngực. Trong gây tê vùng, khoang giữa cơ này và cơ lưng rộng là đích của phong bế mặt phẳng cơ răng trước — cách giảm đau hiệu quả cho gãy nhiều xương sườn và cho mổ vú mà không cần gây tê ngoài màng cứng.", en: "It lines the MEDIAL wall of the axilla and holds the scapula against the chest. In regional anaesthesia the plane between it and latissimus dorsi is the target of the serratus anterior plane block — effective analgesia for multiple rib fractures and breast surgery without an epidural.", zh: "构成腋窝内侧壁并将肩胛骨固定于胸壁。区域麻醉中，其与背阔肌之间的间隙是前锯肌平面阻滞的靶点——为多发肋骨骨折与乳房手术提供有效镇痛而无需硬膜外麻醉。" } },
     ],
   },
-};
+});
 
 export const regionViewerConfig6: Record<string, { cats: RegionViewKey[]; faded?: RegionViewKey[] }> = {
   // Cơ thang và cơ ức đòn chũm phủ kín đám rối khi nhìn từ ngoài — mở sẵn ở

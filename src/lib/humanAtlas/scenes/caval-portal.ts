@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Hệ tĩnh mạch chủ và tĩnh mạch cửa" dựng từ bộ atlas BodyParts3D.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const cavalPortalScene: AtlasSceneDef = {
+export const cavalPortalScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/caval-portal.ts#cavalPortalScene", {
   "slug": "he-tinh-mach-chu-cua",
   "title": {
     "vi": "Hệ tĩnh mạch chủ và tĩnh mạch cửa",
@@ -231,4 +233,4 @@ export const cavalPortalScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

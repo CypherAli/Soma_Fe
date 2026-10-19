@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Nhân nền và bao trong" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const basalNucleiScene: AtlasSceneDef = {
+export const basalNucleiScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/basal-nuclei.ts#basalNucleiScene", {
   "slug": "than-nao-day-so-full",
   "title": {
     "vi": "Nhân nền và bao trong",
@@ -166,4 +168,4 @@ export const basalNucleiScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

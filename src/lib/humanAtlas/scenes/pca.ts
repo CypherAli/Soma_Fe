@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Động mạch não sau" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const pcaScene: AtlasSceneDef = {
+export const pcaScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/pca.ts#pcaScene", {
   "slug": "ho-duoi-thai-duong",
   "title": {
     "vi": "Động mạch não sau và nhánh vỏ",
@@ -167,4 +169,4 @@ export const pcaScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

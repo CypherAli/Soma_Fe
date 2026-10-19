@@ -1,5 +1,7 @@
 "use client";
 
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useRef, useEffect, useState } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls, useGLTF, Center, Bounds } from "@react-three/drei";
@@ -29,7 +31,7 @@ function SectionModel({ url }: { url: string }) {
     applyVisibility(scene, hiddenIds, fadedIds, isolatedId);
   }, [scene, hiddenIds, fadedIds, isolatedId]);
 
-  return <primitive object={scene} />;
+  return <ContentSurface scope="src/components/viewer/SectionModelScene.tsx"><primitive object={scene} /></ContentSurface>;
 }
 
 /** Raycast hover + click cho model cắt (R3F event trên cây gltf ngoài không đáng tin). */
@@ -183,7 +185,7 @@ export default function SectionModelScene({
 
   const { ref: boxRef, ready: boxReady } = useBoxReady();
 
-  return (
+  return <ContentSurface scope="src/components/viewer/SectionModelScene.tsx">{(
     <div ref={boxRef} style={{ width: "100%", height: "100%" }}>
     {boxReady && <Canvas
       dpr={[1, 1.75]}
@@ -215,7 +217,7 @@ export default function SectionModelScene({
       <OrbitControls ref={controls} makeDefault enablePan={false} minDistance={0.1} maxDistance={8} />
     </Canvas>}
     </div>
-  );
+  )}</ContentSurface>;
 }
 
 // KHÔNG preload cứng một file ở đây. Trước đây dòng này preload

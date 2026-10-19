@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { VetFact } from "../types";
 
 /**
@@ -24,7 +26,7 @@ const KL = "König & Liebich, Veterinary Anatomy of Domestic Mammals, 7th ed. (2
 const MILLER = "Evans & de Lahunta, Miller's Anatomy of the Dog, 4th ed. (2013)";
 const DYCE = "Dyce, Sack & Wensing, Textbook of Veterinary Anatomy, 5th ed. (2018)";
 
-export const visceraFacts: VetFact[] = [
+export const visceraFacts: VetFact[] = bindContentSource("data:src/lib/vet/facts/viscera.ts#visceraFacts", [
   // ── CHÓ · TIM ────────────────────────────────────────────────────────────
   {
     id: "dogcat-heart-position",
@@ -341,4 +343,4 @@ export const visceraFacts: VetFact[] = [
     source: KL,
     keys: ["khung chau bo", "de kho", "dystocia", "bat tuong xung", "mom hong", "u ngoi", "keo thai"],
   },
-];
+]);

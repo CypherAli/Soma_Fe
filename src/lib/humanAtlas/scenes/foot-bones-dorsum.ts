@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Xương bàn chân và mạch mu chân" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const footBonesDorsumScene: AtlasSceneDef = {
+export const footBonesDorsumScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/foot-bones-dorsum.ts#footBonesDorsumScene", {
   "slug": "ban-chan-chi-tiet",
   "title": {
     "vi": "Xương bàn chân và mạch mu chân",
@@ -183,4 +185,4 @@ export const footBonesDorsumScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

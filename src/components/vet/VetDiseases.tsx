@@ -1,5 +1,9 @@
 "use client";
 
+
+
+import { useContent } from "@/components/content/ContentProvider";
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useMemo, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import HomeNav from "@/components/home/HomeNav";
@@ -20,6 +24,11 @@ import type { VetSpeciesKey } from "@/lib/vet/types";
  * tới một atlas giải phẫu nữa.
  */
 export default function VetDiseases({ locale }: { locale: Loc }) {
+  const cmsContent = useContent();
+  const vetDiseases = cmsContent.resolve(cmsSourcevetDiseases());
+  const SPECIES = cmsContent.resolve(cmsSourceSPECIES());
+  const VET_SYSTEM_LABEL = cmsContent.resolve(cmsSourceVET_SYSTEM_LABEL());
+
   const t = vetCopy(locale);
   const [species, setSpecies] = useState<VetSpeciesKey | "all">("all");
   const [severity, setSeverity] = useState<VetSeverity | "all">("all");
@@ -38,10 +47,11 @@ export default function VetDiseases({ locale }: { locale: Loc }) {
     info: t.sevInfo,
   };
 
-  return (
+  return <ContentSurface scope="src/components/vet/VetDiseases.tsx">{(
     <div className="bd animal-home">
       <IconSprite />
       <HomeNav section="vet" />
+      <main>
 
       <header className="vet-species-head vet-disease-head">
         <div>
@@ -141,7 +151,12 @@ export default function VetDiseases({ locale }: { locale: Loc }) {
         })}
       </section>
 
+      </main>
       <HomeFooter locale={locale} />
     </div>
-  );
+  )}</ContentSurface>;
 }
+
+function cmsSourcevetDiseases() { return vetDiseases; }
+function cmsSourceSPECIES() { return SPECIES; }
+function cmsSourceVET_SYSTEM_LABEL() { return VET_SYSTEM_LABEL; }

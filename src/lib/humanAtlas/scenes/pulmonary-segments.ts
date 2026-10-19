@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Động mạch và tĩnh mạch phổi phân thùy" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const pulmonarySegmentsScene: AtlasSceneDef = {
+export const pulmonarySegmentsScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/pulmonary-segments.ts#pulmonarySegmentsScene", {
   "slug": "mang-phoi",
   "title": {
     "vi": "Động mạch và tĩnh mạch phổi phân thùy",
@@ -425,4 +427,4 @@ export const pulmonarySegmentsScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

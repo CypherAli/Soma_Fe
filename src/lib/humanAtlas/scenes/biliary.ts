@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Gan và đường mật" dựng từ bộ atlas BodyParts3D.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const biliaryScene: AtlasSceneDef = {
+export const biliaryScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/biliary.ts#biliaryScene", {
   "slug": "gan-duong-mat",
   "title": {
     "vi": "Gan và đường mật",
@@ -203,4 +205,4 @@ export const biliaryScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

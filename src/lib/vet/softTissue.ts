@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { VetLayerKey, VetModelPart, VetRegionKey, VetSpeciesKey } from "./types";
 import type { T3 } from "@/lib/homeContent";
 
@@ -79,7 +81,7 @@ export type VetSoftTissueSource = {
 
 const skfb = (uid: string) => `https://sketchfab.com/3d-models/${uid}`;
 
-export const VET_SOFT_TISSUE: VetSoftTissueSource[] = [
+export const VET_SOFT_TISSUE: VetSoftTissueSource[] = bindContentSource("data:src/lib/vet/softTissue.ts#VET_SOFT_TISSUE", [
   // ── MÈO ──────────────────────────────────────────────────────────────────
   {
     uid: "4c08824eb4914ff4b6e71b4dc2ba080e",
@@ -344,7 +346,7 @@ export const VET_SOFT_TISSUE: VetSoftTissueSource[] = [
       { factId: "cattle-paralumbar-fossa", position: [-59.752, 195.403, 184.84] },
     ],
   },
-];
+]);
 
 export const softTissueSourceUrl = (s: VetSoftTissueSource) => skfb(s.uid);
 

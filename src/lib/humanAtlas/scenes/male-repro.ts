@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Hệ sinh sản nam" dựng từ bộ atlas BodyParts3D.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const maleReproScene: AtlasSceneDef = {
+export const maleReproScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/male-repro.ts#maleReproScene", {
   "slug": "he-sinh-san-nam",
   "title": {
     "vi": "Hệ sinh sản nam",
@@ -182,4 +184,4 @@ export const maleReproScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

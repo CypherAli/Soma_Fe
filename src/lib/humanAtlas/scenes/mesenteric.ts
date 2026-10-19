@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Mạch mạc treo và ruột" dựng từ bộ atlas BodyParts3D.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const mesentericScene: AtlasSceneDef = {
+export const mesentericScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/mesenteric.ts#mesentericScene", {
   "slug": "mach-mac-treo",
   "title": {
     "vi": "Mạch mạc treo và ruột",
@@ -257,4 +259,4 @@ export const mesentericScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

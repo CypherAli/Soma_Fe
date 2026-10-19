@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { SceneModule } from "./types";
 
 /**
@@ -9,7 +11,7 @@ import type { SceneModule } from "./types";
  * tách ống bán khuyên. Những cấu trúc đó được nêu trong ghi chú thay vì dựng
  * hình phỏng đoán.
  */
-export const auditoryScenes: Record<string, SceneModule> = {
+export const auditoryScenes: Record<string, SceneModule> = bindContentSource("data:src/lib/scenes/auditory.ts#auditoryScenes", {
   "he-thinh-giac": {
     slug: "he-thinh-giac",
     title: {
@@ -135,4 +137,4 @@ export const auditoryScenes: Record<string, SceneModule> = {
       },
     ],
   },
-};
+});

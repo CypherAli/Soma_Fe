@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Động mạch cảnh và dưới đòn" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const carotidSystemScene: AtlasSceneDef = {
+export const carotidSystemScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/carotid-system.ts#carotidSystemScene", {
   "slug": "dong-mach-canh",
   "title": {
     "vi": "Động mạch cảnh và dưới đòn vùng cổ",
@@ -191,4 +193,4 @@ export const carotidSystemScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

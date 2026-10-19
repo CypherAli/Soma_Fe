@@ -1,5 +1,9 @@
 "use client";
 
+
+
+import { useContent } from "@/components/content/ContentProvider";
+import { ContentSurface } from "@/components/content/ContentProvider";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { Fragment, useMemo, useState } from "react";
@@ -54,23 +58,23 @@ const VET_LAYER_SWATCH: Record<VetLayerKey, string> = {
 };
 
 function EyeIcon({ on }: { on: boolean }) {
-  return (
+  return <ContentSurface scope="src/components/vet/VetViewerShell.tsx">{(
     <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12Z" />
       <circle cx="12" cy="12" r="2.6" />
       {!on && <path d="M4 4l16 16" />}
     </svg>
-  );
+  )}</ContentSurface>;
 }
 
 function AloneIcon({ on }: { on: boolean }) {
-  return (
+  return <ContentSurface scope="src/components/vet/VetViewerShell.tsx">{(
     <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <circle cx="12" cy="12" r="7" opacity={on ? 1 : 0.75} />
       <circle cx="12" cy="12" r="2.2" fill="currentColor" stroke="none" />
       <path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3" />
     </svg>
-  );
+  )}</ContentSurface>;
 }
 
 export default function VetViewerShell({
@@ -80,6 +84,9 @@ export default function VetViewerShell({
   locale: Loc;
   speciesKey: VetSpeciesKey;
 }) {
+  const cmsContent = useContent();
+  const VET_LAYER_LABEL = cmsContent.resolve(cmsSourceVET_LAYER_LABEL());
+
   const t = vetCopy(locale);
   const info = speciesInfo(speciesKey);
   const models = useMemo(() => vetModelsOfSpecies(speciesKey), [speciesKey]);
@@ -178,7 +185,7 @@ export default function VetViewerShell({
       })
     : [];
 
-  return (
+  return <ContentSurface scope="src/components/vet/VetViewerShell.tsx">{(
     <div className="bd vet-viewer">
       <IconSprite />
       <HomeNav section="vet" />
@@ -454,5 +461,7 @@ export default function VetViewerShell({
         </aside>
       </div>
     </div>
-  );
+  )}</ContentSurface>;
 }
+
+function cmsSourceVET_LAYER_LABEL() { return VET_LAYER_LABEL; }

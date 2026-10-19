@@ -1,0 +1,11 @@
+<!doctype html><html lang="vi"><meta charset="utf-8"><title>Hand worker check</title><body><p id="result">Đang kiểm tra worker…</p><script type="module">
+const result=document.querySelector('#result'),worker=new Worker('../src/hand-worker.js');
+let count=0;const times=[];
+worker.onerror=event=>result.textContent='FAIL '+event.message;
+worker.onmessage=async({data})=>{
+ if(data.type==='progress'){result.textContent=data.stage;return;}
+ if(data.type==='ready'){const canvas=new OffscreenCanvas(320,180),ctx=canvas.getContext('2d');ctx.fillStyle='#555';ctx.fillRect(0,0,320,180);const frame=canvas.transferToImageBitmap();worker.postMessage({type:'detect',frame,timestamp:1},[frame]);}
+ else if(data.type==='result'){times.push(Math.round(data.detectMs));if(++count<4){worker.postMessage({type:'detect',frame:data.frame,timestamp:1+count*100},[data.frame]);return;}result.textContent=`PASS worker inference: ${data.hands.length} hands, warmup/next frames ${times.join('/')} ms; preview ${data.frame.width}×${data.frame.height}`;data.frame.close();worker.terminate();}
+ else if(data.type==='error'){result.textContent='FAIL '+data.error;worker.terminate();}
+};worker.postMessage({type:'init'});
+</script></body></html>

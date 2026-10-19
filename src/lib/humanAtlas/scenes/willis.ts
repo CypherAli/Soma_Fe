@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Đa giác Willis" dựng từ bộ atlas BodyParts3D.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const willisScene: AtlasSceneDef = {
+export const willisScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/willis.ts#willisScene", {
   "slug": "da-giac-willis",
   "title": {
     "vi": "Đa giác Willis",
@@ -239,4 +241,4 @@ export const willisScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

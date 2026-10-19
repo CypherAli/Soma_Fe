@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Bài bộ phận "Cẳng chân — học theo lớp" học theo lớp — nhóm lấy từ leg.ts (đã kiểm), chỉ thêm lớp.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const partLegScene: AtlasSceneDef = {
+export const partLegScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/part-leg.ts#partLegScene", {
   "slug": "bo-phan-cang-chan",
   "title": {
     "vi": "Cẳng chân — học theo lớp",
@@ -317,4 +319,4 @@ export const partLegScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

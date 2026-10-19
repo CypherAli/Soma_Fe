@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Bài bộ phận "Nhãn cầu — học theo lớp" học theo lớp — nhóm lấy từ eye.ts (đã kiểm), chỉ thêm lớp.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const partEyeScene: AtlasSceneDef = {
+export const partEyeScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/part-eye.ts#partEyeScene", {
   "slug": "bo-phan-mat",
   "title": {
     "vi": "Nhãn cầu — học theo lớp",
@@ -213,4 +215,4 @@ export const partEyeScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Giải phẫu Cẳng tay – Bàn tay" (bên trái) dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const forearmScene: AtlasSceneDef = {
+export const forearmScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/forearm.ts#forearmScene", {
   "slug": "giai-phau-cang-tay",
   "title": {
     "vi": "Giải phẫu Cẳng tay – Bàn tay",
@@ -297,4 +299,4 @@ export const forearmScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

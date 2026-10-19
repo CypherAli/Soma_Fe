@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Bài bộ phận "Thanh quản — học theo lớp" học theo lớp — nhóm lấy từ larynx.ts (đã kiểm), chỉ thêm lớp.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const partLarynxScene: AtlasSceneDef = {
+export const partLarynxScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/part-larynx.ts#partLarynxScene", {
   "slug": "bo-phan-thanh-quan",
   "title": {
     "vi": "Thanh quản — học theo lớp",
@@ -258,4 +260,4 @@ export const partLarynxScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

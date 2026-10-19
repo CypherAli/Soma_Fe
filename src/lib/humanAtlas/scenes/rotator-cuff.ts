@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Chóp xoay vai" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const rotatorCuffScene: AtlasSceneDef = {
+export const rotatorCuffScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/rotator-cuff.ts#rotatorCuffScene", {
   "slug": "chop-xoay-vai",
   "title": {
     "vi": "Chóp xoay vai",
@@ -162,4 +164,4 @@ export const rotatorCuffScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

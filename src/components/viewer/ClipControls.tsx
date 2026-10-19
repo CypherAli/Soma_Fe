@@ -1,5 +1,7 @@
 "use client";
 
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useTranslations } from "next-intl";
 import { useAnatomyStore } from "@/store/useAnatomyStore";
 
@@ -15,7 +17,7 @@ export default function ClipControls() {
   const setClipPercent = useAnatomyStore((s) => s.setClipPercent);
   const toggleClipDirection = useAnatomyStore((s) => s.toggleClipDirection);
 
-  return (
+  return <ContentSurface scope="src/components/viewer/ClipControls.tsx">{(
     <div className="absolute left-4 top-4 z-10 w-64 rounded-lg border border-[var(--line)] bg-white/95 p-3 shadow-lg backdrop-blur">
       <label className="flex items-center justify-between text-xs font-semibold uppercase tracking-wide text-[var(--muted-2)]">
         {t("title")}
@@ -65,5 +67,5 @@ export default function ClipControls() {
         </div>
       )}
     </div>
-  );
+  )}</ContentSurface>;
 }

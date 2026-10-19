@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Bài bộ phận "Cột sống thắt lưng — học theo lớp" học theo lớp — nhóm lấy từ lumbar-spine.ts (đã kiểm), chỉ thêm lớp.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const partLumbarScene: AtlasSceneDef = {
+export const partLumbarScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/part-lumbar.ts#partLumbarScene", {
   "slug": "bo-phan-cot-song-that-lung",
   "title": {
     "vi": "Cột sống thắt lưng — học theo lớp",
@@ -167,4 +169,4 @@ export const partLumbarScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

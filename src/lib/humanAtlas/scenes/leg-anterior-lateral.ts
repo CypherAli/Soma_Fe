@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Khoang cẳng chân trước và ngoài" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const legAnteriorLateralScene: AtlasSceneDef = {
+export const legAnteriorLateralScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/leg-anterior-lateral.ts#legAnteriorLateralScene", {
   "slug": "co-mat",
   "title": {
     "vi": "Khoang cẳng chân trước và ngoài",
@@ -192,4 +194,4 @@ export const legAnteriorLateralScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

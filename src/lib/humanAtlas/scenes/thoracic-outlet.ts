@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Lỗ trên lồng ngực" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const thoracicOutletScene: AtlasSceneDef = {
+export const thoracicOutletScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/thoracic-outlet.ts#thoracicOutletScene", {
   "slug": "tuyen-noi-tiet",
   "title": {
     "vi": "Lỗ trên lồng ngực và các cấu trúc đi qua",
@@ -148,4 +150,4 @@ export const thoracicOutletScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

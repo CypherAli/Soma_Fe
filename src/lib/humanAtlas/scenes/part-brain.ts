@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Bài bộ phận "Não — học theo lớp" học theo lớp — nhóm lấy từ brain.ts (đã kiểm), chỉ thêm lớp.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const partBrainScene: AtlasSceneDef = {
+export const partBrainScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/part-brain.ts#partBrainScene", {
   "slug": "bo-phan-nao",
   "title": {
     "vi": "Não — học theo lớp",
@@ -459,4 +461,4 @@ export const partBrainScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

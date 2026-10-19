@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Giải phẫu thân mình" (tổng quan) dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const trunkOverviewScene: AtlasSceneDef = {
+export const trunkOverviewScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/trunk-overview.ts#trunkOverviewScene", {
   "slug": "giai-phau-than",
   "title": {
     "vi": "Giải phẫu thân mình: tổng quan theo lớp",
@@ -422,4 +424,4 @@ export const trunkOverviewScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

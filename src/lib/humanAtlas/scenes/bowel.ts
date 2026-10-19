@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Ruột non và ruột già" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const bowelScene: AtlasSceneDef = {
+export const bowelScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/bowel.ts#bowelScene", {
   "slug": "ruot-non-ruot-gia",
   "title": {
     "vi": "Ruột non và ruột già",
@@ -259,4 +261,4 @@ export const bowelScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

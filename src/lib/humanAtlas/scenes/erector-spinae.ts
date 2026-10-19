@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Cơ dựng sống và cơ ngang gai" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const erectorSpinaeScene: AtlasSceneDef = {
+export const erectorSpinaeScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/erector-spinae.ts#erectorSpinaeScene", {
   "slug": "co-bung",
   "title": {
     "vi": "Cơ lưng sâu: dựng sống và ngang gai",
@@ -221,4 +223,4 @@ export const erectorSpinaeScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

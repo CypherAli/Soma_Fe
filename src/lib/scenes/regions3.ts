@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { SceneModule } from "./types";
 import type { RegionViewKey } from "./regions";
 
@@ -14,7 +16,7 @@ import type { RegionViewKey } from "./regions";
  * lấy từ `npm run structures <file.glb>` chứ không đoán, và được kiểm lại bằng
  * `npm run verify:scenes`.
  */
-export const regionScenes3: Record<string, SceneModule> = {
+export const regionScenes3: Record<string, SceneModule> = bindContentSource("data:src/lib/scenes/regions3.ts#regionScenes3", {
   "nao-that-mang-nao": {
     slug: "nao-that-mang-nao",
     title: { vi: "Não thất và màng não", en: "Ventricles & Meninges", zh: "脑室与脑膜" },
@@ -262,7 +264,7 @@ export const regionScenes3: Record<string, SceneModule> = {
         note: { vi: "Đi lên từ đám rối tĩnh mạch hình dây leo trong thừng tinh, và hai bên đổ về hai nơi KHÁC NHAU: bên phải đổ chếch vào tĩnh mạch chủ dưới, bên trái đổ VUÔNG GÓC vào tĩnh mạch thận trái. Góc vuông đó cản dòng nhiều hơn, nên giãn tĩnh mạch thừng tinh gặp ở bên trái tới khoảng chín phần mười trường hợp. Giãn tĩnh mạch thừng tinh mới xuất hiện ở bên PHẢI người lớn tuổi phải nghĩ tới khối u sau phúc mạc chèn ép.", en: "Ascends from the pampiniform plexus in the spermatic cord, and the two sides drain DIFFERENTLY: the right joins the inferior vena cava obliquely, the left enters the left renal vein at a RIGHT ANGLE. That right angle impedes flow, which is why about nine in ten varicoceles are left-sided. A new RIGHT-sided varicocele in an older man raises the suspicion of a retroperitoneal mass.", zh: "自精索内的蔓状静脉丛上行，两侧回流去向不同：右侧斜行汇入下腔静脉，左侧则以直角汇入左肾静脉。该直角阻碍回流，故约九成精索静脉曲张位于左侧。老年男性新发右侧精索静脉曲张须警惕腹膜后肿物压迫。" } },
     ],
   },
-};
+});
 
 export const regionViewerConfig3: Record<string, { cats: RegionViewKey[]; faded?: RegionViewKey[] }> = {
   // Vòm sọ để mờ sẵn: không mờ thì khối xương che kín toàn bộ não thất bên trong.

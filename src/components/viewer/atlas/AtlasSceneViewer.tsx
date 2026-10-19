@@ -1,5 +1,13 @@
 "use client";
 
+
+
+
+
+import { useContent } from "@/components/content/ContentProvider";
+import { bindContentSource } from "@/lib/content/source";
+import { contentFetch } from '@/lib/content/fetch';
+import { ContentSurface } from "@/components/content/ContentProvider";
 /**
  * Trang chuyên đề dựng trên atlas BodyParts3D.
  *
@@ -41,27 +49,37 @@ import {
   sceneTint,
   type AtlasSceneDef,
 } from "@/lib/humanAtlas/scenes/types";
+import { createSceneLabels } from "@/lib/humanAtlas/sceneLabels";
+import { localizedPartNames } from "@/lib/humanAtlas/partNames";
+import PartLearning from './PartLearning';
+import { partLearning } from '@/lib/humanAtlas/learning';
 import { pick, type Loc } from "@/lib/homeContent";
+import { bestByName, resolveMany, type VoiceAction } from "@/lib/voice/match";
+import { useVoiceActions } from "@/lib/voice/registry";
 
 const AtlasScene = dynamic(() => import("./AtlasScene"), { ssr: false });
 
-const VIEWS: { id: View; label: string; key: string }[] = [
+const VIEWS: { id: View; label: string; key: string }[] = bindContentSource("data:src/components/viewer/atlas/AtlasSceneViewer.tsx#VIEWS", [
   { id: "three-quarter", label: "¾", key: "viewThreeQuarter" },
   { id: "front", label: "T", key: "viewFront" },
   { id: "side", label: "B", key: "viewSide" },
   { id: "back", label: "S", key: "viewBack" },
-];
+]);
 
 /** Thông báo lỗi tải — ném từ trong `.then()` nên không dùng được hook ở đó. */
 const ERR_LOAD = "ATLAS_LOAD_FAILED";
 
-const CLIP_AXES: { id: ClipAxis; label: string }[] = [
+const CLIP_AXES: { id: ClipAxis; label: string }[] = bindContentSource("data:src/components/viewer/atlas/AtlasSceneViewer.tsx#CLIP_AXES", [
   { id: "x", label: "X" },
   { id: "y", label: "Y" },
   { id: "z", label: "Z" },
-];
+]);
 
 export default function AtlasSceneViewer({ scene }: { scene: AtlasSceneDef }) {
+  const cmsContent = useContent();
+  const VIEWS = cmsContent.resolve(cmsSourceVIEWS());
+  const CLIP_AXES = cmsContent.resolve(cmsSourceCLIP_AXES());
+
   const t = useTranslations("atlas");
   const loc = useLocale() as Loc;
   const focus = useMemo(() => scenePartIds(scene), [scene]);
@@ -89,25 +107,23 @@ export default function AtlasSceneViewer({ scene }: { scene: AtlasSceneDef }) {
   );
 
   const [atlas, setAtlas] = useState<Atlas | null>(null);
+  const partNames=useMemo(()=>localizedPartNames(atlas?.parts??[],loc,cmsContent),[atlas,loc,cmsContent]);
   const [state, setState] = useState<SceneState>(initial);
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState("");
   const [openGroup, setOpenGroup] = useState<string | null>(null);
   /** Thu gọn hai tấm điều khiển để nhường chỗ cho mô hình. */
   const [railOpen, setRailOpen] = useState(true);
+  const [mobileLessons, setMobileLessons] = useState(false);
   const [dockOpen, setDockOpen] = useState(true);
   const detailRef = useRef<HTMLDivElement>(null);
+  const partNumbers=useMemo(()=>new Map([...new Set(scene.groups.flatMap(group=>group.parts))].map((id,index)=>[id,index+1])),[scene]);
 
   /**
    * Nhãn chỉ dẫn: một nhãn cho mỗi nhóm, TRỪ nhóm mốc làm mờ sẵn (xương nền…)
    * — gắn nhãn cho nền chỉ làm rối hình.
    */
-  const labels = useMemo<SceneLabel[]>(() => {
-    const faded = new Set(scene.fadedGroups ?? []);
-    return scene.groups
-      .filter((g) => !faded.has(g.key))
-      .map((g) => ({ key: g.key, ids: g.parts, text: pick(g.name, loc), color: g.tint ?? "#9aa4ae" }));
-  }, [scene, loc]);
+  const labels = useMemo<SceneLabel[]>(()=>createSceneLabels(scene,atlas?.parts??[],loc,state),[scene,atlas,loc,state]);
 
   /**
    * `?thumb` — chế độ chụp ảnh bìa cho thư viện (scripts/atlas/thumb-atlas.mjs):
@@ -139,11 +155,11 @@ export default function AtlasSceneViewer({ scene }: { scene: AtlasSceneDef }) {
       faded: [],
       ...(view ? { view, reset: s.reset + 1 } : {}),
     }));
-  }, [fadedAtStart, scene.layers]);
+  }, [VIEWS, fadedAtStart, scene.layers]);
 
   useEffect(() => {
     const abort = new AbortController();
-    fetch(ATLAS_MANIFEST, { signal: abort.signal })
+    contentFetch(ATLAS_MANIFEST, { signal: abort.signal })
       .then((r) => {
         if (!r.ok) throw new Error(ERR_LOAD);
         return r.json();
@@ -163,6 +179,7 @@ export default function AtlasSceneViewer({ scene }: { scene: AtlasSceneDef }) {
   /** Chọn cả nhóm nhãn — một cấu trúc giải phẫu thường gồm nhiều mảnh. */
   const pickGroup = useCallback((key: string, ids: string[]) => {
     setOpenGroup(key);
+    setMobileLessons(false);
     setState((s) => ({ ...s, selected: ids, isolate: false, rotate: false }));
   }, []);
 
@@ -206,10 +223,93 @@ export default function AtlasSceneViewer({ scene }: { scene: AtlasSceneDef }) {
     setState((s) => ({ ...initial, reset: s.reset + 1 }));
   };
 
+  /**
+   * LỆNH GIỌNG NÓI CỦA TRANG MÔ HÌNH — Soma Bot hỏi sổ đăng ký này trước lệnh chung.
+   * Mọi lệnh dùng setState dạng hàm nên không phải đăng ký lại mỗi lần render.
+   */
+  const voiceActions = useMemo<VoiceAction[]>(() => {
+    const say = (vi: string, en: string, zh: string) => ({ ok: true, say: loc === "en" ? en : loc === "zh" ? zh : vi });
+    const fail = (vi: string, en: string, zh: string) => ({ ...say(vi, en, zh), ok: false });
+    const layerItems = (scene.layers ?? []).map((l) => ({ key: l.key, names: [l.name.vi, l.name.en, l.name.zh] }));
+    const groupItems = scene.groups.map((g) => ({ key: g.key, names: [g.name.vi, g.name.en, g.name.zh, g.latin ?? ""] }));
+    const nameOf = (names: { vi: string; en: string; zh: string }) => pick(names, loc);
+
+    /** Bật/tắt theo LỚP nếu bài có lớp, không thì theo NHÓM cấu trúc. */
+    const show = (arg: string, on: boolean) => {
+      // "bật lớp cơ" khi bài có hai lớp cơ = bật CẢ HAI (resolveMany), đúng cách nói tiếng Việt.
+      const lks = layerItems.length ? resolveMany(arg, layerItems) : [];
+      if (lks.length) {
+        const ls = scene.layers!.filter((x) => lks.includes(x.key));
+        setLayersOn((v) => (on ? [...new Set([...v, ...lks])] : v.filter((k) => !lks.includes(k))));
+        const names = (k: "vi" | "en" | "zh") => ls.map((l) => l.name[k]).join(", ");
+        return on
+          ? say(`Đã bật lớp ${names("vi")}.`, `${names("en")} on.`, `已打开${names("zh")}。`)
+          : say(`Đã tắt lớp ${names("vi")}.`, `${names("en")} off.`, `已关闭${names("zh")}。`);
+      }
+      const gk = bestByName(arg, groupItems);
+      if (!gk) return fail(`Bài này không có lớp hay cấu trúc "${arg}".`, `This lesson has no layer or structure "${arg}".`, `本课没有"${arg}"。`);
+      const g = scene.groups.find((x) => x.key === gk)!;
+      setState((s) => ({
+        ...s,
+        hidden: on ? s.hidden.filter((id) => !g.parts.includes(id)) : [...s.hidden, ...g.parts.filter((id) => !s.hidden.includes(id))],
+      }));
+      return on ? say(`Đã hiện ${nameOf(g.name)}.`, `Showing ${g.name.en}.`, `已显示${g.name.zh}。`) : say(`Đã ẩn ${nameOf(g.name)}.`, `Hid ${g.name.en}.`, `已隐藏${g.name.zh}。`);
+    };
+    const view = (v: View, vi: string, en: string, zh: string): VoiceAction["run"] => () => {
+      setState((s) => ({ ...s, view: v, reset: s.reset + 1, rotate: false, explode: v === "front" ? s.explode : Math.min(s.explode, 0.8) }));
+      return say(vi, en, zh);
+    };
+
+    return [
+      // "bậc/bặc" và "tắc": cách nhận dạng tiếng Việt hay nghe lệch "bật" và "tắt".
+      { id: "layer-on", phrases: ["bật lớp {x}", "bậc lớp {x}", "mở lớp {x}", "hiện lớp {x}", "hiện {x}", "bật {x}", "turn on {x}", "show {x}", "打开{x}层", "显示{x}"], run: (a) => show(a, true) },
+      { id: "layer-off", phrases: ["tắt lớp {x}", "tắc lớp {x}", "ẩn lớp {x}", "ẩn {x}", "tắt {x}", "turn off {x}", "hide {x}", "关闭{x}层", "隐藏{x}"], run: (a) => show(a, false) },
+      {
+        id: "layers-all",
+        phrases: ["bật tất cả các lớp", "bật hết các lớp", "hiện tất cả", "show all layers", "turn on all layers", "显示所有层"],
+        run: () => (setLayersOn(scene.layers?.map((l) => l.key) ?? []), setState((s) => ({ ...s, hidden: [] })), say("Đã bật mọi lớp.", "All layers on.", "已打开所有层。")),
+      },
+      {
+        id: "select",
+        phrases: ["chọn {x}", "chỉ vào {x}", "cho xem {x}", "xem {x}", "select {x}", "highlight {x}", "选择{x}"],
+        run: (a) => {
+          const gk = bestByName(a, groupItems);
+          if (!gk) return fail(`Không thấy "${a}" trong bài này.`, `No "${a}" in this lesson.`, `本课中没有"${a}"。`);
+          const g = scene.groups.find((x) => x.key === gk)!;
+          const layer = scene.layers?.find((l) => l.groups.includes(g.key));
+          if (layer) setLayersOn((v) => (v.includes(layer.key) ? v : [...v, layer.key]));
+          pickGroup(g.key, g.parts);
+          return say(`Đang chỉ ${g.name.vi}.`, `Showing ${g.name.en}.`, `正在显示${g.name.zh}。`);
+        },
+      },
+      { id: "explode", phrases: ["tách lớp", "tách rời", "tách ra", "explode", "分解"], run: () => (setState((s) => ({ ...s, explode: 1, rotate: false })), say("Đã tách rời.", "Exploded.", "已分解。")) },
+      { id: "collapse", phrases: ["gộp lại", "gộp lớp", "ghép lại", "collapse", "合并"], run: () => (setState((s) => ({ ...s, explode: 0 })), say("Đã gộp lại.", "Collapsed.", "已合并。")) },
+      { id: "view-front", phrases: ["nhìn phía trước", "nhìn trước", "mặt trước", "front view", "正面"], run: view("front", "Nhìn từ trước.", "Front view.", "正面观。") },
+      { id: "view-back", phrases: ["nhìn phía sau", "nhìn sau", "mặt sau", "back view", "后面"], run: view("back", "Nhìn từ sau.", "Back view.", "后面观。") },
+      { id: "view-side", phrases: ["nhìn bên", "nhìn nghiêng", "mặt bên", "side view", "侧面"], run: view("side", "Nhìn từ bên.", "Side view.", "侧面观。") },
+      { id: "view-34", phrases: ["nhìn chéo", "ba phần tư", "three quarter view", "四分之三"], run: view("three-quarter", "Nhìn chéo ¾.", "Three-quarter view.", "四分之三视角。") },
+      { id: "labels-on", phrases: ["hiện nhãn", "bật nhãn", "show labels", "显示标签"], run: () => (setState((s) => ({ ...s, showLabels: true })), say("Đã hiện nhãn.", "Labels on.", "已显示标签。")) },
+      { id: "labels-off", phrases: ["ẩn nhãn", "tắt nhãn", "hide labels", "隐藏标签"], run: () => (setState((s) => ({ ...s, showLabels: false })), say("Đã ẩn nhãn.", "Labels off.", "已隐藏标签。")) },
+      { id: "rotate", phrases: ["tự xoay", "xoay tròn", "auto rotate", "自动旋转"], run: () => (setState((s) => ({ ...s, rotate: true, explode: Math.min(s.explode, 0.3) })), say("Đang tự xoay.", "Rotating.", "正在旋转。")) },
+      { id: "rotate-stop", phrases: ["dừng xoay", "thôi xoay", "stop rotating", "停止旋转"], run: () => (setState((s) => ({ ...s, rotate: false })), say("Đã dừng xoay.", "Stopped.", "已停止。")) },
+      { id: "clip-on", phrases: ["bật mặt cắt", "cắt lát", "turn on section", "打开剖面"], run: () => (setState((s) => ({ ...s, clip: { ...s.clip, enabled: true } })), say("Đã bật mặt cắt.", "Section on.", "已打开剖面。")) },
+      { id: "clip-off", phrases: ["tắt mặt cắt", "turn off section", "关闭剖面"], run: () => (setState((s) => ({ ...s, clip: { ...s.clip, enabled: false } })), say("Đã tắt mặt cắt.", "Section off.", "已关闭剖面。")) },
+      {
+        id: "reset",
+        phrases: ["đặt lại", "về ban đầu", "làm lại từ đầu", "reset", "重置"],
+        run: () => {
+          setOpenGroup(null);
+          setLayersOn(scene.layers?.filter((l) => l.on).map((l) => l.key) ?? []);
+          setState((s) => ({ ...initial, reset: s.reset + 1 }));
+          return say("Đã đặt lại.", "Reset.", "已重置。");
+        },
+      },
+    ];
+  }, [scene, loc, initial, pickGroup]);
+  useVoiceActions("atlas-scene", voiceActions);
+
   const active = scene.groups.find((g) => g.key === openGroup) ?? null;
-  const selectedNames = state.selected
-    .map((id) => parts.get(id)?.name)
-    .filter((n): n is string => !!n);
+  const members = active?.parts.map((id) => parts.get(id)).filter((part) => !!part) ?? [];
   const allHidden =
     state.selected.length > 0 &&
     state.selected.every((id) => state.hidden.includes(id));
@@ -225,23 +325,30 @@ export default function AtlasSceneViewer({ scene }: { scene: AtlasSceneDef }) {
         : [...s[field], ...s.selected.filter((id) => !s[field].includes(id))],
     }));
 
-  return (
+  return <ContentSurface scope="src/components/viewer/atlas/AtlasSceneViewer.tsx">{(
     <main className={`atlas-studio atlas-scene ${thumb ? "is-thumb" : ""}`}>
       {atlas && (
         <AtlasScene
           atlas={atlas}
           state={{
             ...state,
+            partNames,
             inspectorOpen: !!active,
             labels,
             hidden: layerHidden.length ? [...state.hidden, ...layerHidden] : state.hidden,
-            showLabels: !!state.showLabels && !thumb && !active,
+            showLabels: !!state.showLabels && !thumb,
             bare: thumb,
           }}
           onSelect={pickPart}
           onLabelPick={(key) => {
-            const g = scene.groups.find((x) => x.key === key);
-            if (g) pickGroup(g.key, g.parts);
+            const [groupKey,kind,detail]=key.split("::");
+            const g=scene.groups.find(x=>x.key===groupKey);
+            if(!g)return;
+            setOpenGroup(g.key);
+            setMobileLessons(false);
+            if(kind==="part")setState(s=>({...s,selected:[detail],rotate:false}));
+            else setState(s=>({...s,selected:kind==="landmark"&&s.selected.some(id=>g.parts.includes(id))?s.selected:g.parts,rotate:false}));
+            if(kind==="landmark")requestAnimationFrame(()=>detailRef.current?.querySelector(`[data-landmark="${detail}"]`)?.scrollIntoView({block:"nearest",behavior:"smooth"}));
           }}
           onProgress={(n) => {
             setProgress(n);
@@ -289,7 +396,8 @@ export default function AtlasSceneViewer({ scene }: { scene: AtlasSceneDef }) {
         </p>
       </header>
 
-      <aside className={`scene-rail ${railOpen ? "" : "is-collapsed"}`}>
+      <button type="button" className="mobile-lessons-trigger" aria-expanded={mobileLessons} onClick={()=>setMobileLessons(v=>!v)}>{pick({vi:"Cấu trúc & lớp",en:"Structures & layers",zh:"结构与分层"},loc)}</button>
+      <aside className={`scene-rail ${railOpen ? "" : "is-collapsed"} ${mobileLessons ? "mobile-open" : ""}`}>
         <button
           type="button"
           data-slot="button"
@@ -591,24 +699,45 @@ export default function AtlasSceneViewer({ scene }: { scene: AtlasSceneDef }) {
             <div className="detail-accent" style={{ background: "#b96760" }} />
             <div className="eyebrow">{pick(scene.title, loc)}</div>
             <h2 className="structure-title">{pick(active.name, loc)}</h2>
+            {active.latin && <p className="context-note structure-latin">{active.latin}</p>}
+            {active.parts.length > 1 && state.selected.length===1 && <p className="context-note structure-latin">{partNames[state.selected[0]]}</p>}
           </div>
-          <div className="detail-scroll" ref={detailRef}>
-            {active.latin && <p className="context-note">{active.latin}</p>}
-            {active.note && (
+          <div className="detail-scroll" key={active.key} ref={detailRef} data-lenis-prevent>
+            {active.note && !(state.selected.length===1&&partLearning(state.selected[0],cmsContent)?.note?.[loc]) && (
               <p className="structure-description">{pick(active.note, loc)}</p>
             )}
+            {state.selected.length===1&&parts.get(state.selected[0])&&<PartLearning part={parts.get(state.selected[0])!} locale={loc} showTopics={false} hideIdentity={active.parts.length===1}/>}
+            {active.note&&state.selected.length===1&&partLearning(state.selected[0],cmsContent)?.note?.[loc]&&active.note[loc]!==partLearning(state.selected[0],cmsContent)?.note?.[loc]&&<details className="anatomy-learning"><summary>{pick({vi:'Ghi chú của bài học',en:'Lesson note',zh:'课程注释'},loc)}</summary><p>{active.note[loc]}</p></details>}
+            {active.landmarks?.length ? (
+              <section className="anatomy-landmarks" aria-label={pick({vi:"Mốc giải phẫu",en:"Anatomical landmarks",zh:"解剖标志"},loc)}>
+                <h3>{pick({vi:"Mốc giải phẫu",en:"Anatomical landmarks",zh:"解剖标志"},loc)}</h3>
+                <p className="context-note">{pick({vi:"Mốc có vị trí đối chiếu được gắn tag trên mô hình; các mốc còn lại nằm trong danh mục đọc thêm.",en:"Landmarks with mapped positions have model tags; the remaining landmarks are listed for reference.",zh:"具有映射位置的标志在模型上带有标签，其余标志列出供参考。"},loc)}</p>
+                {active.landmarks.map((landmark,index)=>(
+                  <article key={landmark.latin} data-landmark={index}>
+                    <h4>{pick(landmark.name,loc)}</h4>
+                    <i>{landmark.latin}</i>
+                    <p>{pick(landmark.note,loc)}</p>
+                    <a href={landmark.source} target="_blank" rel="noopener noreferrer">{landmark.sourceTitle??pick({vi:"Đối chiếu nguồn",en:"Reference",zh:"参考资料"},loc)} ↗</a>
+                  </article>
+                ))}
+              </section>
+            ) : null}
             <div className="structure-meta">
               <span>
                 {t("partCount")}
-                <strong>{active.parts.length}</strong>
+                <strong>{state.selected.length} / {active.parts.length}</strong>
               </span>
             </div>
-            {selectedNames.length > 0 && (
+            {members.length > 0 && (
               <div className="member-list">
-                <h3>{t("sourceNames")}</h3>
-                {[...new Set(selectedNames)].slice(0, 30).map((n) => (
-                  <p key={n}>{n}</p>
+                <h3>{pick({vi:"Thành phần mô hình",en:"Model components",zh:"模型组成部分"},loc)}</h3>
+                <p className="context-note">{pick({vi:"Chọn một thành phần để cô lập riêng. Mã mảnh giúp đối chiếu dữ liệu gốc; tên nhóm được dùng khi chưa có tên riêng đã biên tập.",en:"Select a component to isolate it. IDs identify source meshes; a group name is used when an individual term has not been curated.",zh:"选择组成部分以单独隔离。编号对应源网格；尚未编写单独术语时使用分组名称。"},loc)}</p>
+                {members.map((part) => (
+                  <button type="button" key={part.id} aria-pressed={state.isolate && state.selected.length===1 && state.selected[0]===part.id} onClick={()=>setState((s)=>({...s,selected:[part.id],isolate:true,explode:0,rotate:false,hidden:s.hidden.filter(id=>id!==part.id)}))}>
+                    <span><b className="member-tag-number">{partNumbers.get(part.id)}</b> {partNames[part.id]}<small>{part.id}</small></span><ChevronRight size={14}/>
+                  </button>
                 ))}
+                {active.parts.length > 1 && <button type="button" onClick={()=>setState((s)=>({...s,selected:active.parts,isolate:true,explode:0,rotate:false,hidden:s.hidden.filter(id=>!active.parts.includes(id))}))}>{pick({vi:"Cô lập cả nhóm",en:"Isolate the whole group",zh:"隔离整个组"},loc)}</button>}
               </div>
             )}
           </div>
@@ -647,5 +776,8 @@ export default function AtlasSceneViewer({ scene }: { scene: AtlasSceneDef }) {
         </aside>
       )}
     </main>
-  );
+  )}</ContentSurface>;
 }
+
+function cmsSourceVIEWS() { return VIEWS; }
+function cmsSourceCLIP_AXES() { return CLIP_AXES; }

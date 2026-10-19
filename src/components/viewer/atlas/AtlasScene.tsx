@@ -1,5 +1,9 @@
 "use client";
 
+
+
+import { useContent } from "@/components/content/ContentProvider";
+import { ContentSurface } from "@/components/content/ContentProvider";
 /**
  * Bộ dựng hình atlas toàn thân — chuyển gần như NGUYÊN VĂN từ
  * human-atlas/app/scene.tsx (MIT). Cố ý giữ nguyên lối viết dày đặc của bản
@@ -20,15 +24,20 @@ import {RoomEnvironment} from '@/lib/humanAtlas/roomEnvironment';
 import {mergeGeometries} from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import {createExplosionLayout} from '@/lib/humanAtlas/explosionLayout';
 import {decodeModelResponse} from '@/lib/humanAtlas/modelDownload';
+import {frameAnatomyBox} from '@/lib/humanAtlas/cameraFraming';
 import {PointerTap} from '@/lib/humanAtlas/pointerTap';
 import {SYSTEMS,atlasAsset,type Atlas,type SceneState} from '@/lib/humanAtlas/anatomy';
 interface Props {atlas:Atlas;state:SceneState;onSelect:(id:string)=>void;onProgress:(n:number)=>void;onError:(s:string)=>void;onLabelPick?:(key:string)=>void}
+function canvasDescription(){const lang=document.documentElement.lang;return lang==='vi'?'Mô hình giải phẫu người tương tác. Kéo để xoay, cuộn để phóng to và chọn cấu trúc để xem chi tiết.':lang==='zh'?'交互式人体解剖模型。拖动旋转，滚动缩放，选择结构查看详情。':'Interactive human anatomy. Drag to orbit, pinch or scroll to zoom, and tap a structure to inspect it.';}
 export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,onLabelPick}:Props){
+  const cmsContent = useContent();
+  const SYSTEMS = cmsContent.resolve(cmsSourceSYSTEMS());
+
  const host=useRef<HTMLDivElement>(null),latest=useRef(state),select=useRef(onSelect),progress=useRef(onProgress),fail=useRef(onError),labelPick=useRef(onLabelPick);
  // Bản gốc gán thẳng trong thân hàm; React 19 cấm ghi ref lúc dựng nên chuyển
  // vào effect KHÔNG có mảng phụ thuộc — chạy sau mỗi lần dựng, nên vòng lặp
  // rAF bên dưới vẫn luôn đọc được trạng thái mới nhất.
- useEffect(()=>{latest.current=state;select.current=onSelect;progress.current=onProgress;fail.current=onError;labelPick.current=onLabelPick;});
+ useEffect(()=>{latest.current=state;select.current=onSelect;progress.current=onProgress;fail.current=onError;labelPick.current=onLabelPick;host.current?.querySelector('canvas')?.setAttribute('aria-label',canvasDescription());});
  useEffect(()=>{
   const el=host.current!;let disposed=false,frame=0,dirty=true,ready=false,lastView='',lastReset=-1,lastIsolate='',layoutKey='',amount=0;
   let lastState:SceneState|null=null;
@@ -36,9 +45,9 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,on
   let renderer:T.WebGLRenderer;
   try{renderer=new T.WebGLRenderer({antialias:true,alpha:false,powerPreference:'high-performance'});}catch{fail.current('Trình duyệt này không khởi động được trình xem 3D. Hãy dùng trình duyệt có bật WebGL.');return;}
   renderer.setPixelRatio(Math.min(devicePixelRatio,innerWidth<768?1.5:2));renderer.localClippingEnabled=true;renderer.setClearColor('#f2f3f3');renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.12;el.appendChild(renderer.domElement);
-  renderer.domElement.setAttribute('aria-label','Interactive human anatomy. Drag to orbit, pinch or scroll to zoom, and tap a structure to inspect it.');
+  renderer.domElement.setAttribute('aria-label',canvasDescription());
   const scene=new T.Scene(),camera=new T.PerspectiveCamera(34,1,.005,100),controls=new OrbitControls(camera,renderer.domElement);
-  camera.position.set(1.4,1.05,3.6);controls.target.set(0,.85,0);controls.enableDamping=true;controls.dampingFactor=.085;controls.minDistance=.07;controls.maxDistance=40;controls.maxPolarAngle=Math.PI*.96;controls.addEventListener('change',()=>{dirty=true;});
+  camera.position.set(1.4,1.05,3.6);controls.target.set(0,.85,0);controls.enableDamping=true;controls.dampingFactor=.085;controls.zoomSpeed=.65;controls.minDistance=.07;controls.maxDistance=40;controls.maxPolarAngle=Math.PI*.96;controls.addEventListener('change',()=>{dirty=true;});
   const pmrem=new T.PMREMGenerator(renderer),room=new RoomEnvironment(),env=pmrem.fromScene(room,.04);scene.environment=env.texture;room.dispose();pmrem.dispose();
   scene.add(new T.HemisphereLight(0xffffff,0xa7acb2,1.05));
   const key=new T.DirectionalLight(0xfffaf4,2.3);key.position.set(-2,4,3);scene.add(key);
@@ -92,17 +101,13 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,on
   const materials:T.Material[]=[],geometries:T.BufferGeometry[]=[],pickers:(T.Mesh|undefined)[]=[],centers=atlas.parts.map(p=>new T.Vector3().fromArray(p.bounds[0]).add(new T.Vector3().fromArray(p.bounds[1])).multiplyScalar(.5));
   const offsets:T.Vector3[]=[],bounds=atlas.parts.map(p=>new T.Box3(new T.Vector3().fromArray(p.bounds[0]),new T.Vector3().fromArray(p.bounds[1])));
   let packingWidth=1,packingHeight=1;
-  const markerPositions=new Float32Array(atlas.parts.length*3),markerGeometry=new T.BufferGeometry();markerGeometry.setAttribute('position',new T.BufferAttribute(markerPositions,3));
-  const markerMaterial=new T.PointsMaterial({color:0x64748b,size:5,sizeAttenuation:false,transparent:true,opacity:.72,depthTest:false});
-  markerMaterial.onBeforeCompile=shader=>{shader.fragmentShader=shader.fragmentShader.replace('#include <clipping_planes_fragment>','#include <clipping_planes_fragment>\nif (distance(gl_PointCoord, vec2(0.5)) > 0.5) discard;');};
-  const markers=new T.Points(markerGeometry,markerMaterial);markers.frustumCulled=false;markers.renderOrder=10;markers.visible=false;scene.add(markers);
   const hover=document.createElement('div');hover.className='part-hover';hover.setAttribute('role','tooltip');hover.hidden=true;el.appendChild(hover);
   /**
    * Nhãn chỉ dẫn kiểu atlas giáo khoa (Soma 3D thêm). Mỗi nhóm một nhãn: điểm
    * neo là TÂM MẢNH LỚN NHẤT còn hiện của nhóm (tâm trung bình của nhóm hai bên
    * rơi vào khoảng trống giữa hai bên), nhãn xếp thành hai cột hai bên mô hình,
    * dãn dọc để không chồng nhau, nối về điểm neo bằng đường dẫn cùng màu nhóm.
-   * Chỉ vẽ khi còn NGUYÊN KHỐI — lúc tách rời các mảnh bay đi, nhãn vô nghĩa.
+   * Khi tách rời, cộng đúng độ dịch chuyển của mesh vào điểm neo.
    */
   const labelLayer=document.createElement('div');labelLayer.className='scene-labels';labelLayer.hidden=true;el.appendChild(labelLayer);
   const labelSvg=document.createElementNS('http://www.w3.org/2000/svg','svg');labelSvg.classList.add('scene-label-lines');labelLayer.appendChild(labelSvg);
@@ -113,33 +118,43 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,on
   const frameBox=new T.Box3();
   const drawLabels=(s:SceneState)=>{
    const list=s.labels??[],w=el.clientWidth,h=el.clientHeight;
-   const on=!!s.showLabels&&list.length>0&&ready&&amount<.05&&!s.isolate&&w>=768;
+   const on=!!s.showLabels&&list.length>0&&ready&&w>=320;
    labelLayer.hidden=!on;if(!on)return;
    const key=list.map(l=>l.key+''+l.text+''+l.color).join('');
    if(key!==labelsKey){labelsKey=key;labelEls.forEach(b=>b.remove());labelEls.clear();
-    for(const l of list){const b=document.createElement('button');b.type='button';b.className='scene-label';const dot=document.createElement('i');dot.style.background=l.color;const tx=document.createElement('span');tx.textContent=l.text;b.append(dot,tx);b.addEventListener('click',()=>labelPick.current?.(l.key));labelLayer.appendChild(b);labelEls.set(l.key,b);}}
+    for(const l of list){const b=document.createElement('button');b.type='button';b.className='scene-label';b.title=l.title??l.text;b.setAttribute('aria-label',l.title&&l.title!==l.text?l.text+' · '+l.title:l.text);const dot=document.createElement('i');dot.style.background=l.color;const tx=document.createElement('span');tx.textContent=l.text;b.append(dot,tx);b.addEventListener('click',()=>labelPick.current?.(l.key));labelLayer.appendChild(b);labelEls.set(l.key,b);}}
    const pts:{key:string;ax:number;ay:number;color:string}[]=[];
    for(const l of list){
     let best=-1,vol=-1;for(const id of l.ids){const i=idIndex.get(id);if(i===undefined||data[i*4+3]<.5)continue;bounds[i].getSize(sizeP);const v=(sizeP.x+1e-4)*(sizeP.y+1e-4)*(sizeP.z+1e-4);if(v>vol){vol=v;best=i;}}
     const b=labelEls.get(l.key)!;if(best<0){b.hidden=true;continue;}
-    anchorP.copy(centers[best]);if(!frameBox.isEmpty())anchorP.clamp(frameBox.min,frameBox.max);
+    if(l.anchor)anchorP.fromArray(l.anchor);else anchorP.copy(centers[best]);
+    if(!l.anchor&&amount<.05&&!s.isolate&&!frameBox.isEmpty())anchorP.clamp(frameBox.min,frameBox.max);
     // Mặt cắt đang bật: tâm mảnh có thể nằm ở nửa ĐÃ BỊ CẮT — nhãn chỉ vào khoảng không (bài
     // mặt cắt ngang bụng). Kéo điểm neo về đúng mặt cắt.
-    if(clipOnUniform.value>.5){const d=clipPlane.distanceToPoint(anchorP);if(d<0)anchorP.addScaledVector(clipPlane.normal,-d);}
+    if(clipOnUniform.value>.5){const d=clipPlane.distanceToPoint(anchorP);if(d<0){if(l.anchor){b.hidden=true;continue;}anchorP.addScaledVector(clipPlane.normal,-d);}}
+    anchorP.add(new T.Vector3(data[best*4],data[best*4+1],data[best*4+2]));
     anchorP.project(camera);if(anchorP.z>1||anchorP.z< -1){b.hidden=true;continue;}
     pts.push({key:l.key,ax:(anchorP.x+1)/2*w,ay:(1-anchorP.y)/2*h,color:l.color});
    }
-   const side=Math.min(420,w*.3),cx=w/2,top=130,bottom=h-190,gap=30;
-   const minAx=Math.min(cx,...pts.map(p=>p.ax)),maxAx=Math.max(cx,...pts.map(p=>p.ax));
-   const leftX=Math.max(side+190,Math.min(cx-60,minAx-50)),rightX=Math.min(w-290,Math.max(cx+60,maxAx+50));
+   const origin=el.getBoundingClientRect(),root=el.parentElement;
+   const inspector=root?.querySelector('.detail-sheet')?.getBoundingClientRect();
+   const rail=root?.querySelector('.scene-rail')?.getBoundingClientRect();
+   const mobile=w<768;
+   const left=mobile?12:Math.max(16,rail&&rail.right>origin.left?rail.right-origin.left+12:16);
+   const right=mobile?w-12:Math.min(w-90,inspector?inspector.left-origin.left-12:w-90);
+   const cx=(left+right)/2,top=mobile?180:130,bottom=mobile&&inspector?inspector.top-origin.top-16:h-175,gap=30;
+   const leftX=left+10,rightX=right-10;
    let lines='';
    const place=(arr:typeof pts,x:number,alignRight:boolean)=>{
     arr.sort((a,b)=>a.ay-b.ay);let y=top;const ys=arr.map(p=>{y=Math.max(p.ay,y);const r=y;y+=gap;return r;});
     for(let k=ys.length-1,lim=bottom;k>=0;k--){if(ys[k]>lim)ys[k]=lim;lim=ys[k]-gap;}
-    arr.forEach((p,k)=>{const b=labelEls.get(p.key)!;b.hidden=false;b.dataset.side=alignRight?'l':'r';b.style.top=`${ys[k]}px`;b.style.left=alignRight?'':`${x}px`;b.style.right=alignRight?`${w-x}px`:'';
+    arr.forEach((p,k)=>{const b=labelEls.get(p.key)!;b.hidden=false;b.classList.remove('is-pin');b.style.maxWidth=`${Math.max(80,(right-left)/2-20)}px`;b.dataset.side=alignRight?'r':'l';b.style.top=`${ys[k]}px`;b.style.left=alignRight?`${x}px`:'';b.style.right=alignRight?'':`${w-x}px`;
      lines+=`<line x1="${p.ax.toFixed(1)}" y1="${p.ay.toFixed(1)}" x2="${x.toFixed(1)}" y2="${ys[k].toFixed(1)}" stroke="${p.color}"/><circle cx="${p.ax.toFixed(1)}" cy="${p.ay.toFixed(1)}" r="3.2" fill="${p.color}" stroke="#fff" stroke-width="1"/>`;});
    };
-   place(pts.filter(p=>p.ax<cx),leftX,true);place(pts.filter(p=>p.ax>=cx),rightX,false);
+   const compact=amount>.05&&list.filter(l=>!l.anchor).length>12;
+   const columns:typeof pts=[],labelByKey=new Map(list.map(label=>[label.key,label]));
+   for(const p of pts){const label=labelByKey.get(p.key)!;if(compact&&!label.anchor){const b=labelEls.get(p.key)!;b.hidden=p.ax<left||p.ax>right||p.ay<top||p.ay>bottom;b.classList.add('is-pin');b.style.maxWidth='32px';b.style.left=`${p.ax+8}px`;b.style.right='';b.style.top=`${p.ay-14}px`;lines+=`<line x1="${p.ax.toFixed(1)}" y1="${p.ay.toFixed(1)}" x2="${(p.ax+8).toFixed(1)}" y2="${(p.ay-14).toFixed(1)}" stroke="${p.color}"/>`;}else columns.push(p);}
+   place(columns.filter(p=>p.ax<cx),leftX,true);place(columns.filter(p=>p.ax>=cx),rightX,false);
    labelSvg.setAttribute('viewBox',`0 0 ${w} ${h}`);labelSvg.innerHTML=lines;
   };
   type Target={index:number;x:number;y:number;left:number;right:number;top:number;bottom:number};let targets:Target[]=[];
@@ -261,10 +276,16 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,on
    */
   let sceneDistance=0,sceneRadius=0;const sceneTarget=new T.Vector3();
   const fit=(view:string,extent=0)=>{
-   const focused=latest.current.focus.length>0&&sceneDistance>0;
+   if(el.clientWidth<1||el.clientHeight<1)return;
+   const focused=sceneDistance>0;
    const mobile=el.clientWidth<768,bodyDistance=mobile?Math.max(4.5,1.8*el.clientHeight/Math.max(160,el.clientHeight-350)/(2*Math.tan(T.MathUtils.degToRad(camera.fov/2)))):4;
    const normalDistance=focused?sceneDistance:bodyDistance;
-   const reservedHeight=mobile?350:270;const availableAspect=Math.max(.35,(el.clientWidth-(mobile?40:340))/Math.max(160,el.clientHeight-reservedHeight));const atlasDistance=Math.max(packingHeight,packingWidth/availableAspect)/(2*Math.tan(T.MathUtils.degToRad(camera.fov/2)))*(el.clientHeight/Math.max(160,el.clientHeight-reservedHeight))*1.08;
+   const origin=el.getBoundingClientRect(),root=el.parentElement,rail=root?.querySelector('.scene-rail,.layers-panel')?.getBoundingClientRect(),inspector=root?.querySelector('.detail-sheet')?.getBoundingClientRect();
+   const left=mobile?20:Math.max(20,rail&&rail.right>origin.left?rail.right-origin.left+12:20),right=mobile?el.clientWidth-20:Math.min(el.clientWidth-90,inspector?inspector.left-origin.left-12:el.clientWidth-90),top=mobile?220:150,bottom=mobile&&inspector?inspector.top-origin.top-16:el.clientHeight-170;
+   const availableHeight=Math.max(80,bottom-top),availableWidth=Math.max(100,right-left),availableAspect=availableWidth/availableHeight;
+   const atlasDistance=Math.max(packingHeight,packingWidth/availableAspect)/(2*Math.tan(T.MathUtils.degToRad(camera.fov/2)))*(el.clientHeight/availableHeight)*1.1;
+   if(extent>0)camera.setViewOffset(el.clientWidth,el.clientHeight,el.clientWidth/2-(left+right)/2,el.clientHeight/2-(top+bottom)/2,el.clientWidth,el.clientHeight);
+
    const distance=T.MathUtils.lerp(normalDistance,Math.max(.2,atlasDistance),extent);if(extent>.8)view='front';
    const direction=view==='front'?new T.Vector3(0,.02,1):view==='back'?new T.Vector3(0,.02,-1):view==='side'?new T.Vector3(1,.02,0):new T.Vector3(.35,.06,1).normalize();
    // Bố cục xếp mảnh của scene được neo quanh TÂM SCENE (xem offsets bên
@@ -274,7 +295,7 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,on
    // né bảng lớp rộng 340px. Ở trang chuyên đề, packingWidth tính theo cỡ
    // scene nên số này thành một cú kéo ngang lớn — đúng hiện tượng kéo thanh
    // tách rời thì model trôi khỏi giữa.
-   const packX=!focused&&extent>.1&&el.clientWidth>767?-packingWidth*.12:0;
+   const packX=0;
    const packY=focused?sceneTarget.y:(extent>.1||mobile?.85:.68);
    // Ở trang chuyên đề, tâm ngắm chạy mượt từ tâm của scene sang tâm của bố
    // cục xếp mảnh thay vì nhảy cóc về giữa thân người.
@@ -328,7 +349,7 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,on
   const sizeTimers=[0,150,500,1200,2500].map(ms=>setTimeout(resize,ms));
   const raycaster=new T.Raycaster(),pointer=new T.Vector2(),tap=new PointerTap(),worldBox=new T.Box3(),hitPoint=new T.Vector3();
   const down=(e:PointerEvent)=>{hover.hidden=true;tap.down(e.pointerId,e.clientX,e.clientY,e.pointerType==='touch'?12:5);};
-  const move=(e:PointerEvent)=>{tap.move(e.pointerId,e.clientX,e.clientY);if(e.buttons||amount<.5||e.pointerType==='touch'){hover.hidden=true;return;}const rect=el.getBoundingClientRect(),x=e.clientX-rect.left,y=e.clientY-rect.top,index=findTarget(x,y,12);hover.hidden=index<0;renderer.domElement.style.cursor=index<0?'grab':'pointer';if(index>=0){hover.textContent=atlas.parts[index].name;hover.style.left=`${Math.max(8,Math.min(x+14,el.clientWidth-260))}px`;hover.style.top=`${Math.max(8,Math.min(y+18,el.clientHeight-55))}px`;}};
+  const move=(e:PointerEvent)=>{tap.move(e.pointerId,e.clientX,e.clientY);if(e.buttons||amount<.5||e.pointerType==='touch'){hover.hidden=true;return;}const rect=el.getBoundingClientRect(),x=e.clientX-rect.left,y=e.clientY-rect.top,index=findTarget(x,y,12);hover.hidden=index<0;renderer.domElement.style.cursor=index<0?'grab':'pointer';if(index>=0){hover.textContent=latest.current.partNames?.[atlas.parts[index].id]??atlas.parts[index].name;hover.style.left=`${Math.max(8,Math.min(x+14,el.clientWidth-260))}px`;hover.style.top=`${Math.max(8,Math.min(y+18,el.clientHeight-55))}px`;}};
   const cancel=(e:PointerEvent)=>tap.cancel(e.pointerId);
   const up=(e:PointerEvent)=>{
    const validTap=tap.up(e.pointerId,e.clientX,e.clientY);if(!validTap||!ready)return;const rect=renderer.domElement.getBoundingClientRect();pointer.set((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);raycaster.setFromCamera(pointer,camera);
@@ -337,7 +358,7 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,on
    pickers.forEach((mesh,i)=>{if(!mesh||data[i*4+3]<.5||(hasSolid&&atlas.parts[i].system==='integumentary'))return;worldBox.copy(bounds[i]).translate(mesh.position);if(!raycaster.ray.intersectBox(worldBox,hitPoint))return;const hits=raycaster.intersectObject(mesh,false);
     // Bỏ điểm chạm nằm ở nửa ĐÃ BỊ CẮT: không lọc thì bấm vào khoảng trống của
     // lát cắt vẫn chọn trúng cấu trúc vô hình phía sau.
-    const hit=hits.find(h=>!clipping||clipping.distanceToPoint(h.point)>=0);
+    const hit=hits.find(h=>!clipping||clipping.distanceToPoint(h.point.clone().sub(mesh.position))>=0);
     if(hit&&hit.distance<nearest){nearest=hit.distance;found=i;}});
    if(found<0&&amount>.45)found=findTarget(e.clientX-rect.left,e.clientY-rect.top,e.pointerType==='touch'?24:16);if(found>=0){hover.hidden=true;select.current(atlas.parts[found].id);}
   };
@@ -348,14 +369,18 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,on
    // Hai lần mỗi giây là đủ để bắt đổi mật độ điểm ảnh mà không tốn gì đáng kể;
    // applySize() thoát ngay khi mọi thứ đã khớp.
    if(++sizeTick%30===0)applySize();
-   const changed=lastState?.visible!==s.visible||lastState?.selected!==s.selected||lastState?.isolate!==s.isolate||lastState?.hidden!==s.hidden||lastState?.faded!==s.faded||lastState?.focus!==s.focus;
+   applyClip(s.clip);
+   const changed=lastState?.visible!==s.visible||lastState?.selected!==s.selected||lastState?.isolate!==s.isolate||lastState?.hidden!==s.hidden||lastState?.faded!==s.faded||lastState?.focus!==s.focus||lastState?.clip!==s.clip;
    const moving=Math.abs(amount-s.explode)>.0001;
    if(moving){amount=T.MathUtils.damp(amount,s.explode,8,dt);dirty=true;}
    if(changed||moving||lastExtent<0){
     const visible=new Set(s.visible),selection=new Set(s.selected),hiddenIds=new Set(s.hidden),fadedIds=new Set(s.faded),focusIds=s.focus.length?new Set(s.focus):null;
-    const visibleParts=atlas.parts.filter(p=>focusIds&&!focusIds.has(p.id)?false:s.isolate?selection.has(p.id):focusIds?!hiddenIds.has(p.id):visible.has(p.system)||selection.has(p.id));
-    const nextLayoutKey=visibleParts.map(p=>p.id).join(',')+':'+camera.aspect.toFixed(3);
-    if(nextLayoutKey!==layoutKey){const layout=createExplosionLayout(visibleParts,camera.aspect);packingWidth=layout.width;packingHeight=layout.height;atlas.parts.forEach((p,i)=>{const cell=layout.cells.get(p.id);offsets[i]=cell?new T.Vector3(cell.x,cell.y+(focusIds&&sceneRadius>0?sceneTarget.y:.85),0):centers[i].clone();});layoutKey=nextLayoutKey;if(amount>.05&&!s.isolate)fit(s.view,Math.max(0,(amount-.3)/.7));}
+    const visibleParts=atlas.parts.filter((p,i)=>!hiddenIds.has(p.id)&&(!s.clip.enabled||clipPlane.intersectsBox(bounds[i])||clipPlane.distanceToPoint(centers[i])>=0)&&(focusIds&&!focusIds.has(p.id)?false:s.isolate?selection.has(p.id):focusIds?true:visible.has(p.system)||selection.has(p.id)));
+    const layoutIds=new Set(visibleParts.map(p=>p.id));
+    const clippedParts=visibleParts.map(p=>{if(!s.clip.enabled)return p;const min=[...p.bounds[0]] as [number,number,number],max=[...p.bounds[1]] as [number,number,number],axis=s.clip.axis==='x'?0:s.clip.axis==='y'?1:2,cut=s.clip.keepPositive?-clipPlane.constant:clipPlane.constant;if(s.clip.keepPositive)min[axis]=Math.max(min[axis],cut);else max[axis]=Math.min(max[axis],cut);return {...p,bounds:[min,max] as [[number,number,number],[number,number,number]]};});
+    const retainedCenters=new Map(clippedParts.map(p=>[p.id,new T.Vector3().fromArray(p.bounds[0]).add(new T.Vector3().fromArray(p.bounds[1])).multiplyScalar(.5)]));
+    const nextLayoutKey=visibleParts.map(p=>p.id).join(',')+':'+camera.aspect.toFixed(3)+':'+clipKey;
+    if(nextLayoutKey!==layoutKey){const layout=createExplosionLayout(clippedParts,camera.aspect);packingWidth=layout.width;packingHeight=layout.height;atlas.parts.forEach((p,i)=>{const cell=layout.cells.get(p.id),retained=retainedCenters.get(p.id);offsets[i]=cell&&retained?new T.Vector3(cell.x,cell.y+(focusIds&&sceneRadius>0?sceneTarget.y:.85),0).add(centers[i]).sub(retained):centers[i].clone();});layoutKey=nextLayoutKey;}
 
     // Biên độ tách rời của bản gốc là hằng số 0,48m — tính cho cơ thể cao
     // 1,7m. Áp nguyên vào một scene chuyên đề (quả tim ~9cm) thì các mảnh
@@ -375,63 +400,51 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,on
      // thuộc scene thì hiện, không phụ thuộc hệ của nó (mạch vành nằm ở hệ
      // động mạch nhưng vẫn là một phần của bài học về tim).
      const inScope=focusIds?focusIds.has(p.id):(visible.has(p.system)||selected);
-     const shown=!hiddenIds.has(p.id)&&(s.isolate?selected:inScope);
+     const shown=layoutIds.has(p.id)&&!hiddenIds.has(p.id)&&(s.isolate?selected:inScope);
      data.set([dx,dy,dz,shown?1:0],i*4);selectedData[i*4]=selected?255:0;selectedData[i*4+1]=fadedIds.has(p.id)?255:0;
-     markerPositions.set(data[i*4+3]>.5?[c.x+dx,c.y+dy,c.z+dz]:[10000,10000,10000],i*3);const mesh=pickers[i];if(mesh){mesh.position.set(dx,dy,dz);mesh.updateMatrix();mesh.updateMatrixWorld(true);}
-    });partTexture.needsUpdate=true;selectionTexture.needsUpdate=true;markerGeometry.attributes.position.needsUpdate=true;lastState=s;lastExtent=amount;dirty=true;
+     const mesh=pickers[i];if(mesh){mesh.position.set(dx,dy,dz);mesh.updateMatrix();mesh.updateMatrixWorld(true);}
+    });partTexture.needsUpdate=true;selectionTexture.needsUpdate=true;lastState=s;lastExtent=amount;dirty=true;
    }
    applyTint(s.tint);
    applyClip(s.clip);
    if(s.labels!==lastLabels||s.showLabels!==lastShowLabels){lastLabels=s.labels;lastShowLabels=s.showLabels;dirty=true;}
    if(s.view!==lastView||s.reset!==lastReset){fit(s.view,amount);lastView=s.view;lastReset=s.reset;}
-   if(moving&&!s.isolate)fit(amount>.5?'front':s.view,Math.max(0,(amount-.3)/.7));
+   // Fit the currently rendered bounds below, not the eventual layout of all source meshes.
    // Khung ngắm bám tập cần nhìn: khi cô lập là các mảnh đang chọn, còn ở
    // scene chuyên đề là cả tập `focus` (bản gốc chỉ có nhánh cô lập vì nó
    // luôn dựng toàn thân).
    // Căn lại MỘT LẦN sau khi tải xong: lần chạy đầu tiên các mảnh chưa có dữ
    // liệu nên hộp bao chỉ gói được vài mảnh và khung ngắm lệch hẳn.
    if(ready&&!framedReady){framedReady=true;lastIsolate='';}
-   const frameIds=s.isolate?s.selected:(s.frame.length?s.frame:s.focus);
+   const frameIds=s.isolate?s.selected:(s.frame.length&&amount<=.05?s.frame:s.focus);
    // Chỉ ôm khung theo tập scene khi model còn NGUYÊN KHỐI. Vừa kéo tách rời
    // là nhường cho fit() lo, vì nó căn theo bố cục xếp mảnh (packingWidth/
    // Height) — giữ khung cũ thì các mảnh văng ra ngoài mép màn hình.
-   const framing=s.isolate||(s.focus.length>0&&amount<=.05);
-   // `inspectorOpen` chỉ được tính vào khoá khi ĐANG CÔ LẬP. Ở chế độ xem
-   // thường, bấm chọn một bộ phận mà máy ảnh giật sang một bên là khó chịu —
-   // tấm thông tin chỉ phủ lên chứ không cần đẩy model đi.
-   const isolateKey=framing?frameIds.join(',')+':'+s.reset+':'+(s.isolate?s.inspectorOpen:'')+':'+camera.aspect+':'+s.isolate:'';
+   const framing=true;
+   // Reframe on an explicit view/reset/clip change, never on ordinary wheel zoom.
+   const inspectorRect=s.inspectorOpen?el.parentElement?.querySelector('.detail-sheet')?.getBoundingClientRect():undefined;
+   const inspectorLayout=inspectorRect?`${inspectorRect.top}:${inspectorRect.height}:${inspectorRect.width}`:'';
+   const isolateKey=framing?frameIds.join(',')+':'+s.reset+':'+s.inspectorOpen+':'+camera.aspect+':'+s.isolate+':'+s.view+':'+clipKey+':'+inspectorLayout+':'+s.visible.join(',')+s.hidden.join(','):'';
    if(isolateKey!==lastIsolate||(framing&&moving)){
     if(framing){const box=new T.Box3();const frameSet=new Set(frameIds);// Tập `frame` khai sẵn ôm cả mảnh đang ẩn: bài bộ phận căn khung theo vùng gối
      // (gồm mạch/cơ lớp chưa bật) để khung không nhảy khi bật tắt lớp.
-     const byFrame=!s.isolate&&s.frame.length>0;
-     atlas.parts.forEach((p,i)=>{if(frameSet.has(p.id)&&(byFrame||data[i*4+3]>.5))box.union(bounds[i].clone().translate(new T.Vector3(data[i*4],data[i*4+1],data[i*4+2])));});
-     if(!box.isEmpty()){frameBox.copy(box);const center=box.getCenter(new T.Vector3()),size=box.getSize(new T.Vector3());const w=el.clientWidth,h=el.clientHeight,mobile=w<768,landscape=w>h&&h<=600;let left=20,right=w-20,top=mobile?175:110,bottom=h-170;if(s.bare){left=24;right=w-24;top=24;bottom=h-24;}else if(s.inspectorOpen&&s.isolate){if(landscape){right=w-335;top=100;bottom=h-125;}else if(mobile){const sheet=document.querySelector('.detail-sheet')?.getBoundingClientRect(),header=document.querySelector('.identity')?.getBoundingClientRect();top=(header?.bottom??94)+16;bottom=(sheet?.top??h*.58-139)-16;}else{right=w-370;left=w>1100?285:25;}}else if(s.focus.length&&!mobile&&!landscape){
-    // Trang chuyên đề: cột bài học (~400px) che nửa trái, thanh góc nhìn chiếm mép phải —
-    // căn mô hình vào VÙNG TRỐNG giữa hai thứ đó chứ không phải cả bề ngang màn hình.
-    // bottom chừa thanh "Tách rời" (~170px tính cả khoảng thở): 150 thì phần gần camera
-    // (võng mạc ở bài đường thị giác) lấn xuống sau thanh — đã chụp kiểm.
-    // ĐỐI XỨNG quanh tâm trang: thanh "Tách rời" nằm giữa trang, căn lệch sang vùng trống
-    // bên phải làm mô hình và thanh không thẳng trục, lại nhảy khi kéo tách rời (user báo).
-    {const side=Math.min(420,w*.3);left=side;right=w-side;}top=150;bottom=h-180;
-   }const availableWidth=Math.max(150,right-left),availableHeight=Math.max(40,bottom-top);camera.setViewOffset(w,h,w/2-(left+right)/2,h/2-(top+bottom)/2,w,h);// Nhìn chéo ¾ nên bề ngang trên màn hình ≈ x cộng một phần z, KHÔNG phải max(x, z) như cũ;
-// hệ số lề 1,35 → 1,25 (1,15 thì phối cảnh ¾ đẩy phần gần camera ra ngoài vùng trống).
-const screenW=Math.max(size.x,Math.hypot(size.x,size.z)*.82);
-let distance=Math.max(.07,Math.max(size.y*h/availableHeight,screenW*w/availableWidth/camera.aspect)/(2*Math.tan(T.MathUtils.degToRad(camera.fov/2)))*1.15);controls.maxDistance=Math.max(40,distance*2);controls.target.copy(center);// Hướng nhìn theo nút góc nhìn (T/B/S): trước đây cố định ¾ trước nên bấm "Sau" ở bài chuyên đề không đổi gì.
-// top/bottom nghiêng nhẹ về SAU (z âm) để OrbitControls không kẹt ở cực và phía TRƯỚC cơ thể nằm
-// ở mép TRÊN khung — đúng hình nền sọ nhìn từ trên trong giáo trình (hố sọ trước ở trên).
-const viewDir=(s.view==='top'?new T.Vector3(0,1,-.35):s.view==='bottom'?new T.Vector3(0,-1,-.35):s.view==='back'?new T.Vector3(-.2,.1,-1):s.view==='side'?new T.Vector3(1,.1,.15):s.view==='front'?new T.Vector3(0,.05,1):new T.Vector3(.2,.1,1)).normalize();camera.position.copy(center).addScaledVector(viewDir,distance);
-     // Ước lượng bằng hộp bao phẳng luôn hụt ở góc nhìn ¾: phối cảnh làm phần GẦN camera to ra
-     // (võng mạc bài đường thị giác lấn xuống sau thanh Tách rời dù đã nới lề). Nên chiếu thẳng
-     // 8 góc hộp lên màn hình và chỉnh khoảng cách tới khi mọi góc nằm trong vùng trống.
-     // Chỉ khi canvas có kích thước thật: lúc tab/khung bị ẩn, w=0 → hw âm → distance=NaN →
-      // camera NaN và scene TRỐNG vĩnh viễn (đã dính, bắt bằng log). Công thức cũ không dính vì có Math.max(150,…).
-      if(w>=50&&h>=50&&right>left&&bottom>top){const cx=(left+right)/2,cy=(top+bottom)/2,hw=(right-left)/2,hh=(bottom-top)/2,p=new T.Vector3(),safe=distance;
-      for(let pass=0;pass<8;pass++){camera.updateMatrixWorld();camera.updateProjectionMatrix();let worst=0;
-       for(let c=0;c<8;c++){p.set(c&1?box.max.x:box.min.x,c&2?box.max.y:box.min.y,c&4?box.max.z:box.min.z).project(camera);
-        worst=Math.max(worst,Math.abs((p.x+1)/2*w-cx)/hw,Math.abs((1-p.y)/2*h-cy)/hh);}
-       if(!Number.isFinite(worst)||(worst>.9&&worst<=.97))break;distance*=Math.min(3,Math.max(.4,worst/.94));camera.position.copy(center).addScaledVector(viewDir,distance);}
-       if(!Number.isFinite(distance)){distance=safe;camera.position.copy(center).addScaledVector(viewDir,distance);}}
-     controls.update();dirty=true;if(!s.isolate){sceneDistance=distance;sceneTarget.copy(center);sceneRadius=Math.max(size.x,size.y,size.z)*.5;}}
+     const byFrame=!s.isolate&&s.frame.length>0&&amount<=.05;
+     atlas.parts.forEach((p,i)=>{if((frameSet.size?frameSet.has(p.id):data[i*4+3]>.5)&&(byFrame||data[i*4+3]>.5)){const partBox=bounds[i].clone();if(s.clip.enabled){const axis=s.clip.axis,cut=s.clip.keepPositive?-clipPlane.constant:clipPlane.constant;if(s.clip.keepPositive)partBox.min[axis]=Math.max(partBox.min[axis],cut);else partBox.max[axis]=Math.min(partBox.max[axis],cut);}if(!partBox.isEmpty())box.union(partBox.translate(new T.Vector3(data[i*4],data[i*4+1],data[i*4+2])));}});
+     if(!box.isEmpty()&&el.clientWidth>0&&el.clientHeight>0){frameBox.copy(box);const center=box.getCenter(new T.Vector3()),size=box.getSize(new T.Vector3());
+     const w=el.clientWidth,h=el.clientHeight,mobile=w<768,origin=el.getBoundingClientRect(),root=el.parentElement;
+     const rail=root?.querySelector('.scene-rail,.layers-panel')?.getBoundingClientRect(),sheet=root?.querySelector('.detail-sheet')?.getBoundingClientRect();
+     let left=mobile?20:Math.max(20,rail&&rail.right>origin.left?rail.right-origin.left+16:20),right=mobile?w-20:Math.min(w-90,s.inspectorOpen&&sheet?sheet.left-origin.left-16:w-90),top=mobile?(s.focus.length?220:175):150,bottom=h-180;
+     if(mobile&&s.inspectorOpen&&sheet)bottom=sheet.top-origin.top-16;
+     if(s.bare){left=24;right=w-24;top=24;bottom=h-24;}
+// Solve the distance in camera space after updating the orientation.
+const viewDir=(amount>.8?new T.Vector3(0,0,1):s.view==='top'?new T.Vector3(0,1,-.35):s.view==='bottom'?new T.Vector3(0,-1,-.35):s.view==='back'?new T.Vector3(-.2,.1,-1):s.view==='side'?new T.Vector3(1,.1,.15):s.view==='front'?new T.Vector3(0,.05,1):new T.Vector3(.2,.1,1)).normalize();
+controls.enableDamping=false;controls.update();
+const fitted=frameAnatomyBox(camera,box,viewDir,w,h,{left,right,top,bottom});
+const distance=fitted.distance;
+controls.maxDistance=Math.max(.1,distance*6);controls.minDistance=Math.max(camera.near*2,Math.min(.07,distance*.05));
+// Apply the new orbit pivot after residual damping was cleared.
+controls.target.copy(fitted.center);controls.update();controls.enableDamping=true;
+     controls.update();dirty=true;if(!s.isolate&&amount<=.05){sceneDistance=distance;sceneTarget.copy(center);sceneRadius=Math.max(size.x,size.y,size.z)*.5;}}
     }else if(lastIsolate){camera.clearViewOffset();fit(s.view,amount);}
     lastIsolate=isolateKey;
    }
@@ -439,12 +452,14 @@ const viewDir=(s.view==='top'?new T.Vector3(0,1,-.35):s.view==='bottom'?new T.Ve
    // ngang khung hình, phá cảm giác nền đen liền mạch. Bệ và vòng tiếp đất vẫn
    // giữ để model có chỗ đứng. Phải đặt Ở ĐÂY chứ không ở themeSurfaces vì dòng
    // này chạy mỗi khung hình và sẽ ghi đè.
-   ground.visible=stageOn&&!darkStage;markers.visible=amount>.75;controls.autoRotate=s.rotate&&!s.isolate&&amount<.4;controls.autoRotateSpeed=.65;controls.update();if(controls.autoRotate)dirty=true;
+   ground.visible=stageOn&&!darkStage&&!s.clip.enabled;platform.visible=ring.visible=innerRing.visible=stageOn&&!s.clip.enabled;controls.autoRotate=s.rotate&&!s.isolate&&amount<.4;controls.autoRotateSpeed=.65;controls.update();if(controls.autoRotate)dirty=true;
    if(dirty){renderer.render(scene,camera);drawLabels(s);targets=[];if(amount>.45){const hasSolid=atlas.parts.some((p,i)=>p.system!=='integumentary'&&data[i*4+3]>.5);atlas.parts.forEach((p,i)=>{if(data[i*4+3]<.5||(hasSolid&&p.system==='integumentary'))return;let left=Infinity,right=-Infinity,top=Infinity,bottom=-Infinity;for(let corner=0;corner<8;corner++){projected.set(p.bounds[(corner&1)?1:0][0]+data[i*4],p.bounds[(corner&2)?1:0][1]+data[i*4+1],p.bounds[(corner&4)?1:0][2]+data[i*4+2]).project(camera);const x=(projected.x+1)*el.clientWidth/2,y=(1-projected.y)*el.clientHeight/2;left=Math.min(left,x);right=Math.max(right,x);top=Math.min(top,y);bottom=Math.max(bottom,y);}projected.copy(centers[i]).add(new T.Vector3(data[i*4],data[i*4+1],data[i*4+2])).project(camera);if(projected.z< -1||projected.z>1)return;targets.push({index:i,x:(projected.x+1)*el.clientWidth/2,y:(1-projected.y)*el.clientHeight/2,left,right,top,bottom});});}dirty=false;}
 
   };animate();
   const contextLost=(e:Event)=>{e.preventDefault();fail.current('Thiết bị đã tạm dừng phiên 3D. Tải lại trang để tiếp tục.');};renderer.domElement.addEventListener('webglcontextlost',contextLost);
-  return()=>{disposed=true;abort.abort();cancelAnimationFrame(frame);observer.disconnect();themeWatch.disconnect();removeEventListener('resize',resize);sizeTimers.forEach(clearTimeout);controls.dispose();geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());scene.traverse(o=>{if(o instanceof T.Mesh&&!geometries.includes(o.geometry)){o.geometry.dispose();const ms=Array.isArray(o.material)?o.material:[o.material];ms.forEach(m=>m.dispose());}});env.dispose();partTexture.dispose();selectionTexture.dispose();tintTexture.dispose();markerGeometry.dispose();markerMaterial.dispose();hover.remove();labelLayer.remove();renderer.dispose();renderer.domElement.remove();};
- },[atlas]);
- return <div className="scene" ref={host}/>;
+  return()=>{disposed=true;abort.abort();cancelAnimationFrame(frame);observer.disconnect();themeWatch.disconnect();removeEventListener('resize',resize);sizeTimers.forEach(clearTimeout);controls.dispose();geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());scene.traverse(o=>{if(o instanceof T.Mesh&&!geometries.includes(o.geometry)){o.geometry.dispose();const ms=Array.isArray(o.material)?o.material:[o.material];ms.forEach(m=>m.dispose());}});env.dispose();partTexture.dispose();selectionTexture.dispose();tintTexture.dispose();hover.remove();labelLayer.remove();renderer.dispose();renderer.domElement.remove();};
+ },[SYSTEMS, atlas]);
+ return <ContentSurface scope="src/components/viewer/atlas/AtlasScene.tsx"><div className="scene" ref={host}/></ContentSurface>;
 }
+
+function cmsSourceSYSTEMS() { return SYSTEMS; }

@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Cây động mạch chủ và vòng Willis" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const aortaScene: AtlasSceneDef = {
+export const aortaScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/aorta.ts#aortaScene", {
   "slug": "he-dong-mach-chu",
   "title": {
     "vi": "Cây động mạch chủ và vòng Willis",
@@ -253,4 +255,4 @@ export const aortaScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

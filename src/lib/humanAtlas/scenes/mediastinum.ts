@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Trung thất" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const mediastinumScene: AtlasSceneDef = {
+export const mediastinumScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/mediastinum.ts#mediastinumScene", {
   "slug": "trung-that",
   "title": {
     "vi": "Trung thất",
@@ -209,4 +211,4 @@ export const mediastinumScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

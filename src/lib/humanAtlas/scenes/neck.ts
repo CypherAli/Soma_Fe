@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Giải phẫu Cổ" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const neckScene: AtlasSceneDef = {
+export const neckScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/neck.ts#neckScene", {
   "slug": "giai-phau-co",
   "title": {
     "vi": "Giải phẫu Cổ",
@@ -270,4 +272,4 @@ export const neckScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

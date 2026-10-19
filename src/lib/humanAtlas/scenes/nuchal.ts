@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Vùng gáy và cơ sau cổ" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const nuchalScene: AtlasSceneDef = {
+export const nuchalScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/nuchal.ts#nuchalScene", {
   "slug": "co-vung-gay",
   "title": {
     "vi": "Vùng gáy và cơ sau cổ",
@@ -186,4 +188,4 @@ export const nuchalScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

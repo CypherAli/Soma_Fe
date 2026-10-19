@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Cơ trước cột sống cổ và cơ bậc thang" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const prevertebralScene: AtlasSceneDef = {
+export const prevertebralScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/prevertebral.ts#prevertebralScene", {
   "slug": "he-thinh-giac",
   "title": {
     "vi": "Cơ trước cột sống cổ và cơ bậc thang",
@@ -149,4 +151,4 @@ export const prevertebralScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

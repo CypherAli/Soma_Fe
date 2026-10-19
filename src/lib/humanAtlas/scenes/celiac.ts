@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Thân tạng" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const celiacScene: AtlasSceneDef = {
+export const celiacScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/celiac.ts#celiacScene", {
   "slug": "can-nguc-that-lung",
   "title": {
     "vi": "Thân tạng và các nhánh",
@@ -165,4 +167,4 @@ export const celiacScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

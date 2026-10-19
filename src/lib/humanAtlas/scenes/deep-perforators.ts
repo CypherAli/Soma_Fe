@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Nhánh xuyên sâu và động mạch mạch mạc" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const deepPerforatorsScene: AtlasSceneDef = {
+export const deepPerforatorsScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/deep-perforators.ts#deepPerforatorsScene", {
   "slug": "xoang-tinh-mach-mang-cung",
   "title": {
     "vi": "Nhánh xuyên sâu và động mạch mạch mạc",
@@ -164,4 +166,4 @@ export const deepPerforatorsScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

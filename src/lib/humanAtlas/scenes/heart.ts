@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Giải phẫu Tim" dựng từ bộ atlas BodyParts3D.
  *
@@ -13,7 +15,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const heartScene: AtlasSceneDef = {
+export const heartScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/heart.ts#heartScene", {
   slug: "giai-phau-tim",
   title: { vi: "Giải phẫu Tim", en: "Anatomy of the Heart", zh: "心脏解剖" },
   latin: "Cor",
@@ -353,4 +355,4 @@ export const heartScene: AtlasSceneDef = {
         ]
     }
 ],
-};
+});

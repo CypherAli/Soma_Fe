@@ -1,5 +1,7 @@
 "use client";
 
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import { useState } from "react";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
@@ -47,7 +49,7 @@ export default function VetGroupBrowser({
   const plate = shown ? vetPlateOf(shown) : undefined;
   const info = shown ? species.find((s) => s.key === shown) : undefined;
 
-  return (
+  return <ContentSurface scope="src/components/vet/VetGroupBrowser.tsx">{(
     <div className="vet-group-body">
       <div className="vet-species-grid">
         {species.map((s) => (
@@ -97,5 +99,5 @@ export default function VetGroupBrowser({
         )}
       </figure>
     </div>
-  );
+  )}</ContentSurface>;
 }

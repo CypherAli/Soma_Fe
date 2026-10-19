@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Gian não, nhân nền và hệ viền" dựng từ bộ atlas BodyParts3D.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const limbicScene: AtlasSceneDef = {
+export const limbicScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/limbic.ts#limbicScene", {
   "slug": "gian-nao-he-vien",
   "title": {
     "vi": "Gian não, nhân nền và hệ viền",
@@ -271,4 +273,4 @@ export const limbicScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

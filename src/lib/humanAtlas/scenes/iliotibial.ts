@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Dải chậu chày và vùng đùi ngoài" (bên trái) dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const iliotibialScene: AtlasSceneDef = {
+export const iliotibialScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/iliotibial.ts#iliotibialScene", {
   "slug": "dai-chau-chay",
   "title": {
     "vi": "Dải chậu chày và vùng đùi ngoài",
@@ -203,4 +205,4 @@ export const iliotibialScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

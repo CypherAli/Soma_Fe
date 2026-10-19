@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { SceneModule } from "./types";
 import type { RegionViewKey } from "./regions";
 
@@ -8,7 +10,7 @@ import type { RegionViewKey } from "./regions";
  * dưới; ba scene mạch ở đây tách riêng đường ĐI và đường VỀ của từng chi, vì
  * để chung một model thì cây nọ che kín cây kia.
  */
-export const regionScenes10: Record<string, SceneModule> = {
+export const regionScenes10: Record<string, SceneModule> = bindContentSource("data:src/lib/scenes/regions10.ts#regionScenes10", {
   "co-vung-gay": {
     slug: "co-vung-gay",
     title: { vi: "Vùng gáy và cơ sau cổ", en: "The Nuchal Region & Posterior Neck Muscles", zh: "项区与颈后肌群" },
@@ -198,7 +200,7 @@ export const regionScenes10: Record<string, SceneModule> = {
         note: { vi: "Nhánh nhỏ hơn của động mạch chày sau, nuôi bờ trong gan chân. Vùng da nó nuôi được dùng làm VẠT DA có cuống để che khuyết hổng ở gót — da gan chân dày, chịu tì đè, không thể thay bằng da lấy từ nơi khác.", en: "The smaller terminal branch of the posterior tibial, supplying the medial sole. Its skin territory is used as a pedicled FLAP to cover heel defects — plantar skin is thick and weight-bearing, and cannot be replaced by skin taken from anywhere else.", zh: "胫后动脉较小的终支，供应足底内侧。其皮肤供区可作带蒂皮瓣覆盖足跟缺损——足底皮肤厚韧耐压，无法以他处皮肤替代。" } },
     ],
   },
-};
+});
 
 export const regionViewerConfig10: Record<string, { cats: RegionViewKey[]; faded?: RegionViewKey[] }> = {
   "co-vung-gay": { cats: ["muscle", "artery", "vein", "nerve", "bone"], faded: ["bone"] },

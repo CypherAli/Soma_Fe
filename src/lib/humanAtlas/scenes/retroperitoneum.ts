@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Khoang sau phúc mạc" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const retroperitoneumScene: AtlasSceneDef = {
+export const retroperitoneumScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/retroperitoneum.ts#retroperitoneumScene", {
   "slug": "khoang-sau-phuc-mac",
   "title": {
     "vi": "Khoang sau phúc mạc",
@@ -214,4 +216,4 @@ export const retroperitoneumScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

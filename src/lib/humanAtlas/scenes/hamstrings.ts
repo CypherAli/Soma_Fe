@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Vùng đùi sau" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const hamstringsScene: AtlasSceneDef = {
+export const hamstringsScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/hamstrings.ts#hamstringsScene", {
   "slug": "than-kinh-toa",
   "title": {
     "vi": "Vùng đùi sau: nhóm cơ ụ ngồi–cẳng chân",
@@ -164,4 +166,4 @@ export const hamstringsScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

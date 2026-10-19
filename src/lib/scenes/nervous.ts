@@ -1,7 +1,9 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { SceneModule } from "./types";
 
 /** He than kinh - dot 1: Than nao & 12 doi day than kinh so. */
-export const nervousScenes: Record<string, SceneModule> = {
+export const nervousScenes: Record<string, SceneModule> = bindContentSource("data:src/lib/scenes/nervous.ts#nervousScenes", {
   "than-nao-day-so": {
     slug: "than-nao-day-so",
     title: { vi: "Thân não & 12 Đôi Dây Thần Kinh Sọ", en: "Brainstem & 12 Cranial Nerves", zh: "脑干与12对脑神经" },
@@ -461,4 +463,4 @@ export const nervousScenes: Record<string, SceneModule> = {
       },
     ],
   },
-};
+});

@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Khớp gối" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const kneeJointScene: AtlasSceneDef = {
+export const kneeJointScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/knee-joint.ts#kneeJointScene", {
   "slug": "khop-goi",
   "title": {
     "vi": "Khớp gối: xương và cơ vận động",
@@ -149,4 +151,4 @@ export const kneeJointScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

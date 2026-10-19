@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Mũi và xoang cạnh mũi" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const noseSinusesScene: AtlasSceneDef = {
+export const noseSinusesScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/nose-sinuses.ts#noseSinusesScene", {
   "slug": "mui-xoang",
   "title": {
     "vi": "Mũi ngoài, hốc mũi và các xương chứa xoang",
@@ -169,4 +171,4 @@ export const noseSinusesScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

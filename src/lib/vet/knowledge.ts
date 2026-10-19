@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import { fold } from "@/lib/anatomy/knowledge";
 import { pick, type Loc, type T3 } from "@/lib/homeContent";
 import { largeAnimalFacts } from "./facts/largeAnimals";
@@ -38,7 +40,7 @@ export type SpeciesInfo = {
   vitals: { temp: string; pulse: string; resp: string; lifespan: string };
 };
 
-export const SPECIES: SpeciesInfo[] = [
+export const SPECIES: SpeciesInfo[] = bindContentSource("data:src/lib/vet/knowledge.ts#SPECIES", [
   {
     key: "dog",
     latin: "Canis lupus familiaris",
@@ -111,7 +113,7 @@ export const SPECIES: SpeciesInfo[] = [
     group: "poultry",
     vitals: { temp: "40,5–42,0 °C", pulse: "250–350 /phút", resp: "15–30 /phút", lifespan: "5–8 năm" },
   },
-];
+]);
 
 export const speciesInfo = (key: VetSpeciesKey) =>
   SPECIES.find((s) => s.key === key) ?? SPECIES[0];
@@ -134,7 +136,7 @@ export type VetGroupKey = SpeciesInfo["group"];
  * Thêm nhóm mới thì thêm nhánh vào `SpeciesInfo["group"]` rồi khai ở đây —
  * kiểm thử sẽ báo ngay nếu có nhóm không loài nào thuộc về.
  */
-export const VET_GROUPS: { key: VetGroupKey; label: T3; blurb: T3 }[] = [
+export const VET_GROUPS: { key: VetGroupKey; label: T3; blurb: T3 }[] = bindContentSource("data:src/lib/vet/knowledge.ts#VET_GROUPS", [
   {
     key: "large",
     label: { vi: "Gia súc", en: "Livestock", zh: "家畜" },
@@ -162,12 +164,12 @@ export const VET_GROUPS: { key: VetGroupKey; label: T3; blurb: T3 }[] = [
       zh: "家养小动物——小动物门诊中最常见的患者。",
     },
   },
-];
+]);
 
 /** Các loài thuộc một nhóm, giữ nguyên thứ tự khai trong `SPECIES`. */
 export const speciesOfGroup = (group: VetGroupKey) => SPECIES.filter((s) => s.group === group);
 
-export const VET_SYSTEM_LABEL: Record<VetSystemKey, T3> = {
+export const VET_SYSTEM_LABEL: Record<VetSystemKey, T3> = bindContentSource("data:src/lib/vet/knowledge.ts#VET_SYSTEM_LABEL", {
   skeletal: { vi: "Hệ xương", en: "Skeletal system", zh: "骨骼系统" },
   muscular: { vi: "Hệ cơ", en: "Muscular system", zh: "肌肉系统" },
   digestive: { vi: "Hệ tiêu hoá", en: "Digestive system", zh: "消化系统" },
@@ -178,14 +180,14 @@ export const VET_SYSTEM_LABEL: Record<VetSystemKey, T3> = {
   senses: { vi: "Cơ quan cảm giác", en: "Sense organs", zh: "感觉器官" },
   integument: { vi: "Da và phần phụ", en: "Skin and appendages", zh: "皮肤及其附属结构" },
   lymphoid: { vi: "Hệ bạch huyết", en: "Lymphoid system", zh: "淋巴系统" },
-};
+});
 
 /**
  * Nhãn LỚP GIẢI PHẪU — khác `VET_SYSTEM_LABEL` ở chỗ đây là lớp bóc trên mẫu
  * vật (cắt tới đâu thấy gì), còn hệ là cách sách chia nội dung. Một lớp có thể
  * cắt ngang nhiều hệ: lớp "tạng" của chó gồm cả tiêu hoá lẫn tuần hoàn.
  */
-export const VET_LAYER_LABEL: Record<VetLayerKey, T3> = {
+export const VET_LAYER_LABEL: Record<VetLayerKey, T3> = bindContentSource("data:src/lib/vet/knowledge.ts#VET_LAYER_LABEL", {
   skin: { vi: "Da", en: "Skin", zh: "皮肤" },
   muscle: { vi: "Lớp cơ", en: "Muscle", zh: "肌肉层" },
   viscera: { vi: "Nội tạng", en: "Viscera", zh: "内脏" },
@@ -193,9 +195,9 @@ export const VET_LAYER_LABEL: Record<VetLayerKey, T3> = {
   nerve: { vi: "Thần kinh", en: "Nerves", zh: "神经" },
   senses: { vi: "Giác quan", en: "Sense organs", zh: "感觉器官" },
   skeleton: { vi: "Bộ xương", en: "Skeleton", zh: "骨骼" },
-};
+});
 
-export const VET_REGION_LABEL: Record<VetRegionKey, T3> = {
+export const VET_REGION_LABEL: Record<VetRegionKey, T3> = bindContentSource("data:src/lib/vet/knowledge.ts#VET_REGION_LABEL", {
   head: { vi: "Đầu", en: "Head", zh: "头部" },
   neck: { vi: "Cổ", en: "Neck", zh: "颈部" },
   trunk: { vi: "Thân", en: "Trunk", zh: "躯干" },
@@ -203,7 +205,7 @@ export const VET_REGION_LABEL: Record<VetRegionKey, T3> = {
   hindlimb: { vi: "Chi sau", en: "Hindlimb", zh: "后肢" },
   tail: { vi: "Đuôi và vùng chậu", en: "Tail and pelvic region", zh: "尾与骨盆区" },
   whole: { vi: "Toàn thân", en: "Whole body", zh: "全身" },
-};
+});
 
 let cache: VetFact[] | null = null;
 

@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Bài bộ phận "Lồng ngực — học theo lớp" học theo lớp — nhóm lấy từ thorax.ts (đã kiểm), chỉ thêm lớp.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const partThoraxScene: AtlasSceneDef = {
+export const partThoraxScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/part-thorax.ts#partThoraxScene", {
   "slug": "bo-phan-long-nguc",
   "title": {
     "vi": "Lồng ngực — học theo lớp",
@@ -225,4 +227,4 @@ export const partThoraxScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

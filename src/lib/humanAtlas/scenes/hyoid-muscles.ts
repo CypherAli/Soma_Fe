@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Xương móng và cơ trên–dưới móng" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const hyoidMusclesScene: AtlasSceneDef = {
+export const hyoidMusclesScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/hyoid-muscles.ts#hyoidMusclesScene", {
   "slug": "hach-co",
   "title": {
     "vi": "Xương móng và cơ trên–dưới móng",
@@ -134,4 +136,4 @@ export const hyoidMusclesScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

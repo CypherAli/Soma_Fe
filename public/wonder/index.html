@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cơ thể 3D — điều khiển bằng cử chỉ tay</title>
+  <meta name="description" content="Mô hình cơ thể người 3D điều khiển bằng cử chỉ tay qua webcam: búng, nắm, mở để gọi hạt, tạo hình và bóc tách từng bộ phận.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='22' fill='none' stroke='%2366e0ff' stroke-width='4'/%3E%3Ccircle cx='32' cy='32' r='8' fill='%23ffd166'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css?v=20261008-wrist-rebase">
+</head>
+<body>
+  <canvas id="gl" aria-label="Particle scene"></canvas>
+  <canvas id="overlay" aria-hidden="true"></canvas>
+  <video id="cam" playsinline muted></video>
+
+  <header class="brand">
+    <div class="logo" aria-hidden="true"><span></span></div>
+    <div>
+      <div class="brand-name">Vision AI</div>
+      <div class="brand-sub">búng · nắm · mở — bằng bàn tay của bạn</div>
+    </div>
+  </header>
+
+  <aside id="panel" class="panel glass">
+    <button id="bPanel" class="panel-toggle" aria-expanded="true" aria-controls="panelBody" title="Thu gọn bảng điều khiển">‹</button>
+    <div id="panelBody">
+    <section class="now">
+      <div class="cat" id="cat">Giải phẫu học</div>
+      <h1 id="name">Đang tải mô hình…</h1>
+      <p id="modelTransitionStatus" class="model-quality" role="status" aria-live="polite" hidden></p>
+      <p id="fact" class="fact"></p>
+    </section>
+
+    <nav id="catalog" class="catalog" aria-label="Chọn mô hình">
+      <label for="modelGroup">Vùng giải phẫu</label>
+      <select id="modelGroup"></select>
+      <label for="modelSelect">Mô hình</label>
+      <select id="modelSelect"></select>
+      <button id="splitParts" type="button" disabled>Tách từng cấu trúc</button>
+      <p id="splitHint" class="split-hint">Tách riêng các mảnh nguồn · nắm tay để lắp lại</p>
+      <button id="bNextBlock" type="button" disabled title="Like bằng tay phải">Hệ tiếp · tay phải</button>
+      <p id="blockCycleStatus" class="split-hint" aria-live="polite">Like trái: mô hình tiếp · like phải: hệ tiếp</p>
+      <button id="viewStructures" type="button">Xem danh sách cấu trúc</button>
+      <div id="catTabs" hidden></div><div id="catChips" hidden></div>
+    </nav>
+
+    <div class="glass" style="padding:10px 12px"><label for="renderQuality" style="font-size:12px">Chất lượng hiển thị</label><select id="renderQuality" style="width:100%;margin-top:6px;background:#191c1f;color:#eef1f4;border:1px solid #41474b;border-radius:8px;padding:7px"><option value="auto">Tự động</option><option value="smooth">Mượt</option><option value="detail">Chi tiết</option></select><div id="renderResolution" style="font-size:11px;color:#a9b2bb;margin-top:6px"></div></div>
+    <section class="status">
+      <div class="row">
+        <span class="k">Trạng thái</span><span id="statePill" class="pill" data-state="idle">chờ</span>
+      </div>
+      <div class="row">
+        <span class="k">Bàn tay</span><span id="posePill" class="pill pose">chưa thấy tay</span>
+      </div>
+      <div class="meter">
+        <div class="meter-head"><span class="k">Độ mở bàn tay</span><b id="openPct">0%</b></div>
+        <div class="bar"><i id="openBar"></i></div>
+      </div>
+      <div id="explodeBox" class="meter explode" hidden>
+        <label for="separationMode" class="inspection-label">Cách tách mô hình</label><select id="separationMode" style="width:100%;margin-bottom:10px"><option value="systems">Tách các hệ</option><option value="muscles">Tách từng cơ</option><option value="selected">Tách cấu trúc trong khối</option></select>
+        <label for="selectionScope" class="inspection-label">Phạm vi trỏ/chọn</label><select id="selectionScope" style="width:100%;margin-bottom:10px"><option value="group">Khối giải phẫu</option><option value="part">Từng cấu trúc</option></select>
+        <div class="meter-head"><span id="separationLabel" class="k">Tách toàn mô hình</span><b id="explodePct">0%</b></div>
+        <input id="explodeSlider" type="range" min="0" max="100" value="0" aria-label="Mức tách lớp">
+        <div id="separationHint" class="hint">Mở tay để tách các hệ · nắm tay để lắp lại</div>
+      </div>
+    </section>
+
+    <section>
+      <div class="k">Các lớp giải phẫu</div>
+      <div id="surfaceControls" hidden><label class="inspection-label" for="inspectionView">Chế độ quan sát</label><select id="inspectionView"><option value="all">Tổng quan</option></select><p id="modelQuality" class="model-quality"></p><label><input id="showCover" type="checkbox"> Hiện bề mặt cơ thể</label><label class="inspection-label" for="structureSearch">Tìm cấu trúc</label><input id="structureSearch" type="search" placeholder="Tên Việt, tên gốc hoặc mã FJ" autocomplete="off"><label for="systemFocus" style="display:block;margin-top:12px">Chọn cấu trúc <select id="systemFocus" style="display:block;width:100%;margin-top:6px;background:#222;color:#fff;padding:8px;border:1px solid #555;border-radius:8px"><option value="-1">Tất cả các hệ</option></select></label><p style="color:#a9bdd0;font-size:12px">Chọn chế độ để mở từng hệ; chọn cấu trúc để xem riêng.</p></div>
+      <details class="gesture-help"><summary>Hướng dẫn cử chỉ</summary><ul id="guide" class="guide"></ul></details>
+      <details id="structureListPanel" class="structure-list-panel">
+        <summary>Danh sách cấu trúc <span id="structureCount">0</span></summary>
+        <p>Chọn tên để căn giữa và xem riêng cấu trúc. Ô tìm kiếm phía trên tra cả tên Việt và tên nguồn.</p>
+        <div id="structureList" class="structure-list" role="list" data-lenis-prevent></div>
+      </details>
+    </section>
+
+    <section class="buttons">
+      <button id="bSnap" title="Space">Búng tay</button>
+      <button id="bForm" title="F">Nắm tay</button>
+      <button id="bOpen" title="O">Mở tay</button>
+      <button id="bNext" title="Like tay trái · →">Mô hình tiếp</button>
+    </section>
+    </div>
+  </aside>
+
+  <div id="bigTitle" class="big-title"><div class="t"></div><div class="s"></div></div>
+
+
+  <section id="quiz" class="quiz glass" hidden aria-live="polite">
+    <div class="q"></div><div class="qs"></div><div class="qf"></div>
+    <button id="quizStop" class="x" title="Dừng luyện tập (Q)">✕</button>
+  </section>
+
+  <div class="top-right" data-lenis-prevent>
+    <div id="stats" class="stats glass"></div>
+    <div id="cameraPreview" data-lenis-prevent class="camera-preview glass" aria-label="Camera và quét giải phẫu">
+      <div class="camera-caption"><span id="cameraStatus">Camera đang tắt</span><span class="camera-dot" aria-hidden="true"></span></div>
+      <canvas id="cameraCanvas" aria-label="Camera nhận diện bàn tay"></canvas>
+      <div id="scanFeedback" class="scan-feedback" hidden>
+        <div class="scan-heading"><strong id="scanTitle" role="status"></strong><span id="scanPercent"></span></div>
+        <div id="scanProgress" class="scan-progress" role="progressbar" aria-label="Tiến trình quét" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="scanProgressFill"></i></div>
+        <p id="scanInstruction"></p>
+      </div>
+      <div id="scanResults" data-lenis-prevent aria-label="Kết quả quét" aria-live="polite" hidden></div>
+      <div id="scanGuide" class="scan-guide" hidden><span><b>Một tay:</b> xòe và giữ yên để quét tay.</span><span><b>Hai tay:</b> tạo khung bằng ngón trỏ, nắm lại để chụp.</span></div>
+      <div class="scan-actions"><button id="scanCamera">Bật camera để quét</button><button id="scanCancel" hidden>Hủy quét</button></div>
+      <div id="cameraHint" class="camera-hint">Giữ bàn tay trong khung hình</div>
+    </div>
+    <div class="icons">
+      <button id="bCam" class="icon" data-label-vi="Camera" data-label-en="Camera" data-shortcut="C" title="Camera (C)" aria-label="Camera" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 6l1.5-2h5L16 6h3a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"/><circle cx="12" cy="13" r="4"/><path d="M17.5 9h.01"/></svg>
+      </button>
+      <button id="bLabels" class="icon on" data-label-vi="Chú thích" data-label-en="Part labels" data-shortcut="L" title="Chú thích (L)" aria-label="Chú thích" aria-pressed="true">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 4h7l9 9a2 2 0 0 1 0 3l-4 4a2 2 0 0 1-3 0l-9-9z"/><circle cx="8" cy="8" r="1"/><path d="M12 13l3 3"/></svg>
+      </button>
+      <button id="bRotate" class="icon" data-label-vi="Tự xoay" data-label-en="Auto-rotate" data-shortcut="R" title="Tự xoay (R)" aria-label="Tự xoay" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 8a8.5 8.5 0 0 0-15-2L3 9m0-5v5h5M4 16a8.5 8.5 0 0 0 15 2l2-3m0 5v-5h-5"/><path d="M9 10l3-1.5 3 1.5v4l-3 1.5L9 14zm0 0l3 1.5 3-1.5m-3 1.5v4"/></svg>
+      </button>
+      <button id="bHandRot" class="icon on" data-label-vi="Xoay bằng tay" data-label-en="Hand rotation" data-shortcut="G" title="Xoay bằng tay (G)" aria-label="Xoay bằng tay" aria-pressed="true">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 13V8a1.5 1.5 0 0 1 3 0v5-7a1.5 1.5 0 0 1 3 0v7-5a1.5 1.5 0 0 1 3 0v5-2a1.5 1.5 0 0 1 3 0v5c0 4-2.5 6-6 6-2.5 0-4-1-5.5-3L4 14a1.5 1.5 0 0 1 2.5-1.5L8 14M3 7V3h4M3 3a12 12 0 0 1 17 1"/></svg>
+      </button>
+      <button id="bCut" class="icon" data-label-vi="Mặt cắt" data-label-en="Cross-section" data-shortcut="X" title="Mặt cắt (X)" aria-label="Mặt cắt" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3l9 5-9 5-9-5zm-9 9l9 5 9-5M3 16l9 5 9-5M18 3L6 21"/></svg>
+      </button>
+      <button id="bQuiz" class="icon" data-label-vi="Luyện tập" data-label-en="Quiz" data-shortcut="Q" title="Luyện tập (Q)" aria-label="Luyện tập" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5H5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-3"/><rect x="8" y="2" width="8" height="5" rx="1.5"/><path d="M8 14l3 3 5-6"/></svg>
+      </button>
+      <button id="bVoice" class="icon" data-label-vi="Micro điều khiển" data-label-en="Voice microphone" data-shortcut="M" title="Micro điều khiển (M)" aria-label="Bật micro điều khiển" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="9" y="2" width="6" height="13" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3m-4 0h8"/></svg>
+      </button>
+      <button id="bRec" class="icon" data-label-vi="Ghi hình" data-label-en="Recording" data-shortcut="K" title="Ghi hình (K)" aria-label="Ghi hình" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><circle class="record-dot" cx="12" cy="12" r="3.5"/></svg>
+      </button>
+      <button id="bDemo" class="icon" data-label-vi="Chạy thử" data-label-en="Demo" data-shortcut="D" title="Chạy thử (D)" aria-label="Chạy thử" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4l12 8-12 8z"/></svg>
+      </button>
+      <button id="bHelp" class="icon" data-label-vi="Trợ giúp" data-label-en="Help" data-shortcut="H" title="Trợ giúp (H)" aria-label="Trợ giúp" aria-expanded="false" aria-controls="help">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M9.5 8.5a2.5 2.5 0 0 1 5 0c0 2-2.5 2-2.5 4M12 16h.01"/></svg>
+      </button>
+    </div>
+    <details id="voicePanel" class="voice-panel glass" data-lenis-prevent>
+      <summary>Giọng nói</summary>
+      <label for="voiceLanguage">Ngôn ngữ giọng nói</label>
+      <select id="voiceLanguage"><option value="vi">Tiếng Việt</option><option value="en">Tiếng Anh</option></select>
+      <label for="readDetail">Nội dung đọc</label>
+      <select id="readDetail"><option value="name">Tên</option><option value="description" selected>Tên và mô tả</option><option value="group">Kèm ghi chú nhóm</option></select>
+      <label class="voice-auto"><input id="autoRead" type="checkbox">Tự đọc khi chọn</label>
+      <div class="voice-buttons"><button id="readSelected">Đọc</button><button id="stopReading">Dừng</button></div>
+      <div id="micStatus" role="status">Micro đang tắt</div><div id="speakerStatus" role="status">Loa đang nghỉ</div>
+      <div id="voiceNote" role="status"></div><div id="voiceHeard"></div>
+      <label for="voiceText">Lệnh văn bản</label><input id="voiceText" placeholder="Tách lớp, mở cổ tay…"><button id="voiceSend">Thực hiện</button>
+      <p id="voiceExamples">“Tách lớp”, “mở cổ tay”, “chọn cơ cánh tay-quay”, “quét”, “đọc chú thích”.</p>
+      <p class="voice-privacy">Nhận dạng giọng nói dùng dịch vụ của trình duyệt, có thể cần mạng.</p>
+    </details>
+    <section id="partCard" class="part-card glass" hidden aria-live="polite" data-lenis-prevent>
+      <div class="phead"><i class="swatch"></i><span class="pname"></span><button id="partClose" class="x" title="Đóng (Esc)">✕</button></div>
+      <button id="partSystem" style="margin-top:8px;padding:6px 10px;border:1px solid #3b635c;border-radius:7px;color:#9aeee2;background:#20332f">Xem riêng hệ này</button>
+      <div class="pinfo"></div><div class="pdescription"></div><div class="plearning"></div>
+      <div class="pmodel"></div>
+      <div class="pactions"><button id="partPull">Kéo ra</button><button id="partSpeak">Đọc to</button></div>
+      <div class="phint">Nắm rồi xòe tay để tách phần đã chọn · nắm lại để lắp · Esc để bỏ chọn</div>
+    </section>
+  </div>
+
+  <div id="help" class="help glass" hidden>
+    <h2>Điều khiển mô hình</h2>
+    <table>
+      <tr><td><kbd>Space</kbd></td><td>Búng tay — gọi hạt / làm tan</td></tr>
+      <tr><td><kbd>F</kbd> / <kbd>O</kbd></td><td>Nắm tay (lắp lại) / mở tay (tách lớp)</td></tr>
+      <tr><td><kbd>V</kbd> <kbd>→</kbd> <kbd>←</kbd></td><td>Mô hình tiếp / trước</td></tr>
+      <tr><td><kbd>E</kbd> <kbd>↑</kbd> <kbd>↓</kbd> Cuộn chuột</td><td>Tách / lắp các lớp giải phẫu</td></tr>
+      <tr><td>Xoay cổ tay</td><td>Xoay mô hình trái/phải · <kbd>G</kbd> bật/tắt</td></tr>
+      <tr><td>☝ Trỏ · 🤏 Véo</td><td>Chọn cấu trúc (hoặc bấm chọn) · kéo ra</td></tr>
+      <tr><td>🙌 Hai tay</td><td>Thu phóng (hoặc <kbd>+</kbd> <kbd>-</kbd> <kbd>0</kbd>, Ctrl + cuộn chuột)</td></tr>
+      <tr><td><kbd>X</kbd> <kbd>,</kbd> <kbd>.</kbd></td><td>Mặt cắt (di chuyển tay / chuột)</td></tr>
+      <tr><td><kbd>Q</kbd> <kbd>M</kbd> <kbd>K</kbd> <kbd>I</kbd></td><td>Luyện tập · giọng nói · ghi hình · đọc chú thích</td></tr>
+      <tr><td>Kéo chuột</td><td>Xoay mô hình</td></tr>
+      <tr><td><kbd>R</kbd> <kbd>L</kbd> <kbd>T</kbd></td><td>Tự xoay · chú thích · vệt hạt</td></tr>
+      <tr><td><kbd>C</kbd> <kbd>D</kbd> <kbd>H</kbd></td><td>Camera · minh họa cử chỉ · hướng dẫn này</td></tr>
+    </table>
+  </div>
+
+  <nav class="view-presets" aria-label="Góc nhìn mô hình"><button id="viewFront">Trước</button><button id="viewBack">Sau</button><button id="viewSide">Bên</button><button id="viewReset">Đặt lại</button></nav>
+  <nav id="labelPager" class="label-pager glass" aria-label="Các nhóm chú thích" hidden>
+    <button id="labelsPrevious" type="button" aria-label="Nhóm chú thích trước">←</button>
+    <span id="labelPageStatus" aria-live="polite"></span>
+    <button id="labelsNext" type="button" aria-label="Nhóm chú thích tiếp">→</button>
+  </nav>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <div id="start" class="start">
+    <div class="start-card glass">
+      <svg class="start-mark" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="5" y="14" width="38" height="25" rx="7"/>
+        <circle cx="24" cy="26.5" r="7"/>
+        <circle cx="24" cy="26.5" r="2.5" fill="currentColor" stroke="none"/>
+        <path d="M16 14l2.5-4h11L32 14"/>
+      </svg>
+      <h1>Cơ thể người 3D</h1>
+      <p>Mô hình giải phẫu tương tác gồm não, tim, phổi, mắt, tai, răng, sọ, xương, gan, dạ dày, ruột, tụy và hệ cơ — điều khiển trực tiếp bằng bàn tay trước webcam.</p>
+      <ol class="steps">
+        <li><span class="step-ic">🫰</span><span><b>Búng tay</b> để gọi các hạt, búng lần nữa để làm tan.</span></li>
+        <li><span class="step-ic">✊</span><span><b>Nắm tay</b> để tạo hình cơ quan, <b>mở tay</b> để bóc tách từng lớp.</span></li>
+        <li><span class="step-ic">🔄</span><span><b>Dựng thẳng cổ tay</b> để về góc Trước, <b>nghiêng cổ tay</b> để xoay trái/phải; <b>hai tay</b> để thu phóng toàn cảnh.</span></li>
+        <li><span class="step-ic">☝️</span><span><b>Trỏ và giữ</b> để chọn khối hoặc cấu trúc; <b>xòe/nắm</b> tách từng mảnh của khối đó–lắp lại.</span></li>
+        <li><span class="step-ic">👍</span><span><b>Like tay trái</b>: mô hình tiếp. <b>Like tay phải</b>: hệ tiếp trong mô hình. Hạ ngón cái rồi giơ lại để chuyển tiếp.</span></li>
+      </ol>
+      <div class="start-buttons">
+        <button id="bStartCam" class="primary">Bật camera để bắt đầu</button>
+        <button id="bStartNoCam">Dùng không cần camera</button>
+      </div>
+      <p id="startMsg" class="start-msg"></p>
+    </div>
+  </div>
+
+  <script type="module" src="src/app.js?v=20261013-final-controls"></script>
+</body>
+</html>

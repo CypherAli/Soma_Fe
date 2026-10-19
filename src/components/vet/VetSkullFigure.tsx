@@ -1,5 +1,7 @@
 "use client";
 
+
+import { ContentSurface } from "@/components/content/ContentProvider";
 import dynamic from "next/dynamic";
 
 // Canvas WebGL chỉ chạy client — tắt SSR để không lỗi khi render server.
@@ -24,9 +26,9 @@ const SkullTurntable = dynamic(() => import("@/components/home/SkullTurntable"),
  * (đo 253.450 đỉnh: nửa cạnh 0,433 × 0,500 × 0,459 sau khi chuẩn hoá).
  */
 export default function VetSkullFigure() {
-  return (
+  return <ContentSurface scope="src/components/vet/VetSkullFigure.tsx">{(
     <div className="human-fig human-fig-3d vet-fig-3d" aria-hidden>
       <SkullTurntable url="/models/vet/cat-cranium.glb" margin={1.06} />
     </div>
-  );
+  )}</ContentSurface>;
 }

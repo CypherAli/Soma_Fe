@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Cung động mạch gan tay và mạch bàn tay" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const palmarArchesScene: AtlasSceneDef = {
+export const palmarArchesScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/palmar-arches.ts#palmarArchesScene", {
   "slug": "dam-roi-canh-tay",
   "title": {
     "vi": "Cung động mạch gan tay và mạch bàn tay",
@@ -216,4 +218,4 @@ export const palmarArchesScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

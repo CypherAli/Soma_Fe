@@ -1,3 +1,4 @@
+import { withSkullLandmarks } from "./skullLandmarks";
 /**
  * Danh mục scene chuyên đề đã dựng lại trên atlas BodyParts3D.
  *
@@ -162,6 +163,9 @@ import { partPancreasScene } from "./part-pancreas";
 import { partOrbitScene } from "./part-orbit";
 import { partBladderScene } from "./part-bladder";
 
+/** Old saved links remain usable without listing a duplicate lesson. */
+export const atlasSceneAliases: Record<string,string> = { 'tieu-nao-day-du':'hoi-vo-dai-nao' };
+
 export const atlasScenes: Record<string, AtlasSceneDef> = Object.fromEntries(
   [
     heartScene,
@@ -312,7 +316,7 @@ export const atlasScenes: Record<string, AtlasSceneDef> = Object.fromEntries(
     partPancreasScene,
     partOrbitScene,
     partBladderScene,
-  ].map((s) => [s.slug, s]),
+  ].map((s) => [s.slug, withSkullLandmarks(s)]),
 );
 
 export type { AtlasSceneDef };

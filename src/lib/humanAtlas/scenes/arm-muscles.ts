@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Cơ Cánh tay" (bên trái) dựng từ bộ atlas BodyParts3D.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const armMusclesScene: AtlasSceneDef = {
+export const armMusclesScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/arm-muscles.ts#armMusclesScene", {
   "slug": "co-canh-tay",
   "title": {
     "vi": "Cơ Cánh tay",
@@ -163,4 +165,4 @@ export const armMusclesScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

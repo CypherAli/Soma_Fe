@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Nhóm cơ khép đùi" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const adductorsScene: AtlasSceneDef = {
+export const adductorsScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/adductors.ts#adductorsScene", {
   "slug": "khop-hang-dui",
   "title": {
     "vi": "Nhóm cơ khép đùi (khoang trong)",
@@ -146,4 +148,4 @@ export const adductorsScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

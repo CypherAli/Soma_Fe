@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Sàn miệng và tuyến nước bọt" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const salivaryScene: AtlasSceneDef = {
+export const salivaryScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/salivary.ts#salivaryScene", {
   "slug": "tuyen-nuoc-bot",
   "title": {
     "vi": "Tuyến dưới hàm, dưới lưỡi và sàn miệng",
@@ -151,4 +153,4 @@ export const salivaryScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

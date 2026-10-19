@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { SceneModule } from "./types";
 
 /**
@@ -11,7 +13,7 @@ import type { SceneModule } from "./types";
  * Dây chằng (211 mesh) CỐ Ý không gộp vào scene mô liên kết vì chúng thuộc
  * bộ khớp và đã có trong dữ liệu khớp riêng.
  */
-export const connectiveScenes: Record<string, SceneModule> = {
+export const connectiveScenes: Record<string, SceneModule> = bindContentSource("data:src/lib/scenes/connective.ts#connectiveScenes", {
   "he-mac": {
     slug: "he-mac",
     title: {
@@ -239,4 +241,4 @@ export const connectiveScenes: Record<string, SceneModule> = {
       },
     ],
   },
-};
+});

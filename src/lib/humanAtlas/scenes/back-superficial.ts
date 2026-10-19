@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Vùng lưng — lớp nông" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const backSuperficialScene: AtlasSceneDef = {
+export const backSuperficialScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/back-superficial.ts#backSuperficialScene", {
   "slug": "vung-lung",
   "title": {
     "vi": "Vùng lưng: lớp cơ nông và trung gian",
@@ -203,4 +205,4 @@ export const backSuperficialScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

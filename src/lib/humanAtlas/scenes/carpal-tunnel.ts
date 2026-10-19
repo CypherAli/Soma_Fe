@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Cổ tay và ống cổ tay" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const carpalTunnelScene: AtlasSceneDef = {
+export const carpalTunnelScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/carpal-tunnel.ts#carpalTunnelScene", {
   "slug": "co-tay-ong-co-tay",
   "title": {
     "vi": "Xương cổ tay và ống cổ tay",
@@ -176,4 +178,4 @@ export const carpalTunnelScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

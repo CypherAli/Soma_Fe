@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Động mạch não trước" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const acaScene: AtlasSceneDef = {
+export const acaScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/aca.ts#acaScene", {
   "slug": "tai-day-du",
   "title": {
     "vi": "Động mạch não trước và nhánh vỏ",
@@ -160,4 +162,4 @@ export const acaScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

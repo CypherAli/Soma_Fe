@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Thể chai và các mép liên bán cầu" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const commissuresScene: AtlasSceneDef = {
+export const commissuresScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/commissures.ts#commissuresScene", {
   "slug": "co-mat-than-kinh-vii",
   "title": {
     "vi": "Thể chai, vòm não và các mép liên bán cầu",
@@ -167,4 +169,4 @@ export const commissuresScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Cây động mạch chi trên" (bên trái) dựng từ bộ atlas BodyParts3D.
  *
@@ -6,7 +8,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const armArteriesScene: AtlasSceneDef = {
+export const armArteriesScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/arm-arteries.ts#armArteriesScene", {
   "slug": "dong-mach-chi-tren",
   "title": {
     "vi": "Cây động mạch chi trên",
@@ -253,4 +255,4 @@ export const armArteriesScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

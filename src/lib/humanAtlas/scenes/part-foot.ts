@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Bài bộ phận "Cổ chân–bàn chân" học theo lớp, dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const partFootScene: AtlasSceneDef = {
+export const partFootScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/part-foot.ts#partFootScene", {
   "slug": "bo-phan-co-chan-ban-chan",
   "title": {
     "vi": "Cổ chân và bàn chân — học theo lớp",
@@ -362,4 +364,4 @@ export const partFootScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

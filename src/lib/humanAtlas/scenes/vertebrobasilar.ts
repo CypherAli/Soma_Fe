@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Hệ đốt sống–thân nền và động mạch tiểu não" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const vertebrobasilarScene: AtlasSceneDef = {
+export const vertebrobasilarScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/vertebrobasilar.ts#vertebrobasilarScene", {
   "slug": "goc-cau-tieu-nao",
   "title": {
     "vi": "Hệ đốt sống–thân nền và động mạch tiểu não",
@@ -188,4 +190,4 @@ export const vertebrobasilarScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

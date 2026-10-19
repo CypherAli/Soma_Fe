@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { SceneModule } from "./types";
 
 /**
@@ -10,7 +12,7 @@ import type { SceneModule } from "./types";
  * Vì vậy dự án CHƯA có scene sinh sản nữ — đây là thiếu dữ liệu nguồn, không
  * phải bỏ sót khi dựng.
  */
-export const reproductiveScenes: Record<string, SceneModule> = {
+export const reproductiveScenes: Record<string, SceneModule> = bindContentSource("data:src/lib/scenes/reproductive.ts#reproductiveScenes", {
   "he-sinh-san-nam": {
     slug: "he-sinh-san-nam",
     title: {
@@ -136,4 +138,4 @@ export const reproductiveScenes: Record<string, SceneModule> = {
       },
     ],
   },
-};
+});

@@ -1,7 +1,9 @@
+
+import { bindContentSource } from "@/lib/content/source";
 import type { SceneModule } from "./types";
 
 /** He noi tiet, thi giac, tiet nieu - 3 scene. */
-export const miscScenes: Record<string, SceneModule> = {
+export const miscScenes: Record<string, SceneModule> = bindContentSource("data:src/lib/scenes/misc.ts#miscScenes", {
   "he-noi-tiet": {
     slug: "he-noi-tiet",
     title: { vi: "Hệ nội tiết", en: "Endocrine System", zh: "内分泌系统" },
@@ -631,4 +633,4 @@ export const miscScenes: Record<string, SceneModule> = {
       },
     ],
   },
-};
+});

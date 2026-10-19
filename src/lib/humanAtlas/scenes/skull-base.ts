@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Nền sọ" dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const skullBaseScene: AtlasSceneDef = {
+export const skullBaseScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/skull-base.ts#skullBaseScene", {
   "slug": "so-nen-so",
   "title": {
     "vi": "Nền sọ và các cấu trúc đi qua",
@@ -182,4 +184,4 @@ export const skullBaseScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});

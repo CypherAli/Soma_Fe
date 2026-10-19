@@ -1,3 +1,5 @@
+
+import { bindContentSource } from "@/lib/content/source";
 /**
  * Bài bộ phận "Bàn tay" học theo lớp, dựng từ bộ atlas BodyParts3D.
  * 
@@ -8,7 +10,7 @@
  */
 import type { AtlasSceneDef } from "./types";
 
-export const partHandScene: AtlasSceneDef = {
+export const partHandScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/part-hand.ts#partHandScene", {
   "slug": "bo-phan-ban-tay",
   "title": {
     "vi": "Bàn tay — học theo lớp",
@@ -294,4 +296,4 @@ export const partHandScene: AtlasSceneDef = {
       ]
     }
   ]
-};
+});
