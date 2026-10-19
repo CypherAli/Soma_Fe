@@ -1,0 +1,250 @@
+{
+  "source": "soma_be/prisma/data/lesion-map.ts",
+  "entries": [
+    {
+      "slug": "xo-gan",
+      "mesh": "Liver",
+      "system": "visceral"
+    },
+    {
+      "slug": "viem-gan-b-man",
+      "mesh": "Liver",
+      "system": "visceral"
+    },
+    {
+      "slug": "viem-gan-c",
+      "mesh": "Liver",
+      "system": "visceral"
+    },
+    {
+      "slug": "benh-gan-do-ruou",
+      "mesh": "Liver",
+      "system": "visceral"
+    },
+    {
+      "slug": "ap-xe-gan",
+      "mesh": "Liver",
+      "system": "visceral"
+    },
+    {
+      "slug": "ung-thu-bieu-mo-te-bao-gan",
+      "mesh": "Liver",
+      "system": "visceral"
+    },
+    {
+      "slug": "soi-mat",
+      "mesh": "Gallbladder",
+      "system": "visceral"
+    },
+    {
+      "slug": "loet-da-day-ta-trang",
+      "mesh": "Stomach",
+      "system": "visceral"
+    },
+    {
+      "slug": "xhth-do-loet-da-day-ta-trang",
+      "mesh": "Duodenum",
+      "system": "visceral"
+    },
+    {
+      "slug": "xhth-tang-ap-luc-tinh-mach-cua",
+      "mesh": "Oesophagus.001",
+      "system": "visceral"
+    },
+    {
+      "slug": "viem-ruot-thua-cap",
+      "mesh": "Vermiform appendix",
+      "system": "visceral"
+    },
+    {
+      "slug": "benh-tri",
+      "mesh": "Rectum",
+      "system": "visceral"
+    },
+    {
+      "slug": "viem-tuy-cap",
+      "mesh": "Pancreas",
+      "system": "visceral"
+    },
+    {
+      "slug": "dai-thao-duong",
+      "mesh": "Pancreas",
+      "system": "visceral"
+    },
+    {
+      "slug": "ha-glucose-huyet",
+      "mesh": "Pancreas",
+      "system": "visceral"
+    },
+    {
+      "slug": "nhiem-khuan-tiet-nieu",
+      "mesh": "Urinary bladder",
+      "system": "visceral"
+    },
+    {
+      "slug": "hep-van-hai-la",
+      "mesh": "Posterior leaflet of left atrioventricular valve",
+      "system": "cardiovascular"
+    },
+    {
+      "slug": "benh-gout",
+      "mesh": "First metatarsal bone",
+      "system": "skeletal"
+    },
+    {
+      "slug": "thoat-vi-dia-dem-that-lung",
+      "mesh": "Intervertebral disc L4-L5",
+      "system": "joints"
+    },
+    {
+      "slug": "viem-phoi-cong-dong",
+      "mesh": "Inferior lobe of right lung",
+      "system": "visceral"
+    },
+    {
+      "slug": "viem-phoi-benh-vien",
+      "mesh": "Inferior lobe of right lung",
+      "system": "visceral"
+    },
+    {
+      "slug": "ap-xe-phoi",
+      "mesh": "Inferior lobe of right lung",
+      "system": "visceral"
+    },
+    {
+      "slug": "lao-phoi",
+      "mesh": "Superior lobe of right lung",
+      "system": "visceral"
+    },
+    {
+      "slug": "tran-dich-mang-phoi",
+      "mesh": "Pleura",
+      "system": "visceral"
+    },
+    {
+      "slug": "tran-khi-mang-phoi",
+      "mesh": "Pleura",
+      "system": "visceral"
+    },
+    {
+      "slug": "buou-giap-don-thuan",
+      "mesh": "Thyroid gland",
+      "system": "visceral"
+    },
+    {
+      "slug": "cuong-giap",
+      "mesh": "Thyroid gland",
+      "system": "visceral"
+    },
+    {
+      "slug": "suy-giap",
+      "mesh": "Thyroid gland",
+      "system": "visceral"
+    },
+    {
+      "slug": "hoi-chung-cushing",
+      "mesh": "Suprarenal gland.r",
+      "system": "visceral"
+    },
+    {
+      "slug": "suy-thuong-than-man-tinh",
+      "mesh": "Suprarenal gland.r",
+      "system": "visceral"
+    },
+    {
+      "slug": "cuong-aldosteron",
+      "mesh": "Suprarenal gland.r",
+      "system": "visceral"
+    },
+    {
+      "slug": "u-tuy-thuong-than",
+      "mesh": "Suprarenal gland.r",
+      "system": "visceral"
+    },
+    {
+      "slug": "hoi-chung-sheehan",
+      "mesh": "Adenohypophysis",
+      "system": "visceral"
+    },
+    {
+      "slug": "benh-to-cac-vien-cuc",
+      "mesh": "Adenohypophysis",
+      "system": "visceral"
+    },
+    {
+      "slug": "dai-thao-nhat",
+      "mesh": "Neurohypophysis",
+      "system": "visceral"
+    },
+    {
+      "slug": "viem-cau-than-cap-sau-lien-cau",
+      "mesh": "Kidney.r",
+      "system": "visceral"
+    },
+    {
+      "slug": "hoi-chung-than-hu",
+      "mesh": "Kidney.r",
+      "system": "visceral"
+    },
+    {
+      "slug": "benh-than-iga",
+      "mesh": "Kidney.r",
+      "system": "visceral"
+    },
+    {
+      "slug": "benh-than-da-nang",
+      "mesh": "Kidney.r",
+      "system": "visceral"
+    },
+    {
+      "slug": "ton-thuong-than-cap",
+      "mesh": "Kidney.r",
+      "system": "visceral"
+    },
+    {
+      "slug": "benh-than-man",
+      "mesh": "Kidney.r",
+      "system": "visceral"
+    },
+    {
+      "slug": "soi-tiet-nieu",
+      "mesh": "Ureter.r.001",
+      "system": "visceral"
+    },
+    {
+      "slug": "nhoi-mau-co-tim",
+      "mesh": "Anterior interventricular artery.001",
+      "system": "cardiovascular"
+    },
+    {
+      "slug": "phinh-dong-mach-chu-bung",
+      "mesh": "Abdominal aorta.001",
+      "system": "cardiovascular"
+    },
+    {
+      "slug": "huyet-khoi-tinh-mach-sau",
+      "mesh": "Popliteal vein.r.001",
+      "system": "cardiovascular"
+    },
+    {
+      "slug": "suy-tinh-mach-man-tinh",
+      "mesh": "Great saphenous vein.r.001",
+      "system": "cardiovascular"
+    },
+    {
+      "slug": "hoi-chung-ruot-kich-thich",
+      "mesh": "Sigmoid colon",
+      "system": "visceral"
+    },
+    {
+      "slug": "tao-bon",
+      "mesh": "Descending colon",
+      "system": "visceral"
+    },
+    {
+      "slug": "u-lympho-ac-tinh",
+      "mesh": "Spleen",
+      "system": "lymphoid"
+    }
+  ]
+}

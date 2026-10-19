@@ -12,3 +12,5 @@ Log tạm, biến môi trường thật và kết quả build không nằm trong
 
 HTTP production: 840 trang, 257 tài nguyên và 6 trường hợp 404 đều đạt (0 lỗi).
 API production: 17 tình huống dữ liệu sai định dạng hoặc thiếu xác thực đều bị chặn đúng trạng thái.
+
+Sửa CI độc lập: verify:lesions dùng bản xuất 49 ánh xạ trong scripts/fixtures/lesion-map.json khi không có checkout backend. Nếu có backend, script bắt buộc bản xuất khớp nguồn; làm mới bằng node scripts/verify_lesions.mjs --sync. Đã kiểm tra checkout riêng, nguồn khớp và từ chối bản xuất cũ. list_meshes chỉ chạy CLI khi được gọi trực tiếp.

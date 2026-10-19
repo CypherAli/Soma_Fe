@@ -11,7 +11,8 @@
  *   node scripts/list_meshes.mjs --json > meshes.json
  */
 import { readFileSync, readdirSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
 const DIR = "public/models";
 /** Giống hệt THREE.PropertyBinding.sanitizeNodeName mà GLTFLoader dùng đặt
@@ -30,35 +31,38 @@ export function meshNames(file) {
   return [...names].sort((a, b) => a.localeCompare(b));
 }
 
-const args = process.argv.slice(2);
-const files = readdirSync(DIR).filter((f) => f.endsWith(".glb")).sort();
+// Importing meshNames must not run this CLI with the caller's arguments.
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  const args = process.argv.slice(2);
+  const files = readdirSync(DIR).filter((f) => f.endsWith(".glb")).sort();
 
-if (args[0] === "--json") {
-  const out = {};
-  for (const f of files) {
-    try {
-      out[f.replace(/\.glb$/, "")] = meshNames(join(DIR, f));
-    } catch (e) {
-      out[f.replace(/\.glb$/, "")] = { error: String(e.message) };
+  if (args[0] === "--json") {
+    const out = {};
+    for (const f of files) {
+      try {
+        out[f.replace(/\.glb$/, "")] = meshNames(join(DIR, f));
+      } catch (e) {
+        out[f.replace(/\.glb$/, "")] = { error: String(e.message) };
+      }
     }
-  }
-  writeFileSync("scripts/meshes.json", JSON.stringify(out, null, 1), "utf8");
-  const total = Object.values(out).reduce((s, v) => s + (Array.isArray(v) ? v.length : 0), 0);
-  console.log(`${files.length} model, ${total} mesh -> scripts/meshes.json`);
-} else if (args[0]) {
-  const f = args[0].endsWith(".glb") ? args[0] : `${args[0]}.glb`;
-  const names = meshNames(join(DIR, f));
-  console.log(`${f} — ${names.length} mesh\n`);
-  for (const n of names) {
-    const s = sanitize(n);
-    console.log(`  ${n}${s !== n ? `   [runtime: ${s}]` : ""}`);
-  }
-} else {
-  for (const f of files) {
-    try {
-      console.log(`${String(meshNames(join(DIR, f)).length).padStart(4)}  ${f}`);
-    } catch (e) {
-      console.log(`   !  ${f}  ${e.message}`);
+    writeFileSync("scripts/meshes.json", JSON.stringify(out, null, 1), "utf8");
+    const total = Object.values(out).reduce((s, v) => s + (Array.isArray(v) ? v.length : 0), 0);
+    console.log(`${files.length} model, ${total} mesh -> scripts/meshes.json`);
+  } else if (args[0]) {
+    const f = args[0].endsWith(".glb") ? args[0] : `${args[0]}.glb`;
+    const names = meshNames(join(DIR, f));
+    console.log(`${f} — ${names.length} mesh\n`);
+    for (const n of names) {
+      const s = sanitize(n);
+      console.log(`  ${n}${s !== n ? `   [runtime: ${s}]` : ""}`);
+    }
+  } else {
+    for (const f of files) {
+      try {
+        console.log(`${String(meshNames(join(DIR, f)).length).padStart(4)}  ${f}`);
+      } catch (e) {
+        console.log(`   !  ${f}  ${e.message}`);
+      }
     }
   }
 }
