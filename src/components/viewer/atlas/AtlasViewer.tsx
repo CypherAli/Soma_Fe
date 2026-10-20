@@ -257,8 +257,8 @@ export default function AtlasViewer() {
     setState((s) => ({
       ...s,
       selected: c.elements,
-      isolate: false,
-      isolated: undefined,
+      isolate: true,
+      isolated: c.elements,
       explode: 0,
       rotate: false,
     }));
