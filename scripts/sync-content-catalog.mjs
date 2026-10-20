@@ -190,12 +190,17 @@ if (existsSync(learningFile)) {
   for (const [id, topic] of Object.entries(learning.topics ?? {})) add(`topic:${id}`, displayTitle(topic, id), 'src/lib/humanAtlas/data/learning.generated.json', topic, 'explanations');
 }
 const output = resolve(root, '../soma_be/resources/cms/catalog.json');
+const studySources = {
+  atlas: JSON.parse(readFileSync(resolve(root, 'public/atlas/index.json'), 'utf8')).shots.filter(shot => shot.fileQuiz && shot.hasMarker).map(({ page, hotspotKey }) => ({ page, hotspotKey })),
+  schools: JSON.parse(readFileSync(resolve(root, 'public/kb/schools/index.json'), 'utf8')).schools.map(({ id, file }) => ({ id, file })),
+};
 documents.sort((a, b) => a.id.localeCompare(b.id));
-const contractHash = createHash('sha256').update(JSON.stringify({ documents, meshes, atlasParts: parts })).digest('hex');
-const result = JSON.stringify({ schemaVersion: 2, contractHash, documents, meshes, atlasParts: parts }, null, 2) + '\n';
+const contractHash = createHash('sha256').update(JSON.stringify({ documents, meshes, atlasParts: parts, studySources })).digest('hex');
+const result = JSON.stringify({ schemaVersion: 2, contractHash, documents, meshes, atlasParts: parts, studySources }, null, 2) + '\n';
 const contractPath = resolve(root, 'src/lib/content/contract.generated.json');
 const contract = JSON.stringify({ schemaVersion: 2, contractHash }, null, 2) + '\n';
-if (check) { if (!existsSync(output) || readFileSync(output, 'utf8') !== result) throw new Error('CMS catalog is stale. Run npm run cms:sync.'); }
+const sameGeneratedText = (file, expected) => existsSync(file) && readFileSync(file, 'utf8').replace(/\r\n/g, '\n') === expected;
+if (check) { if (!sameGeneratedText(output, result)) throw new Error('CMS catalog is stale. Run npm run cms:sync.'); }
 else { mkdirSync(dirname(output), { recursive: true }); writeFileSync(output, result); writeFileSync(contractPath, contract); }
-if (check && (!existsSync(contractPath) || readFileSync(contractPath, 'utf8') !== contract)) throw new Error('FE content contract is stale. Run npm run cms:sync.');
+if (check && !sameGeneratedText(contractPath, contract)) throw new Error('FE content contract is stale. Run npm run cms:sync.');
 console.log(JSON.stringify({ documents: documents.length, categories: documents.reduce((counts, doc) => ({ ...counts, [doc.category]: (counts[doc.category] ?? 0) + 1 }), {}), models: Object.keys(meshes).length, atlasParts: parts.length, surfaces }));

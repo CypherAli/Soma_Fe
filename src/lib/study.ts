@@ -26,6 +26,8 @@ export type GradedItem = {
 };
 
 export type AttemptInput = {
+  clientRequestId?: string;
+  answers?: { questionId: string; answerId?: string }[];
   source: QuizSourceKey;
   scope?: string;
   mode?: "practice" | "exam";
@@ -153,7 +155,7 @@ export async function recordAttempt(input: AttemptInput): Promise<void> {
     const res = await fetch(`${API_URL}/study/attempts`, {
       method: "POST",
       headers: { "content-type": "application/json", Authorization: `Bearer ${token}` },
-      body: JSON.stringify(input),
+      body: JSON.stringify({ clientRequestId: input.clientRequestId ?? crypto.randomUUID(), source: input.source, scope: input.scope, mode: input.mode, seconds: input.seconds, answers: input.answers }),
     });
     if (!res.ok) throw new Error(`http ${res.status}`);
   } catch {

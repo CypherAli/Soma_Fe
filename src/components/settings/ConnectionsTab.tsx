@@ -11,7 +11,7 @@ import { settingsContent as S } from "@/lib/settingsContent";
 import {
   PROVIDERS,
   PROVIDER_LABELS,
-  linkUrl,
+  beginProviderLink,
   unlinkProvider,
   type AccountProfile,
   type Provider,
@@ -22,9 +22,7 @@ import { Card, Notice, errorText } from "./parts";
 /**
  * Kết nối Google · GitHub · Facebook.
  *
- * Nút "Liên kết" là một thẻ `<a>` chuyển trang thật, không phải fetch: luồng
- * OAuth phải rời khỏi trang để người dùng đăng nhập ở nhà cung cấp rồi quay về
- * `?linked=<provider>`.
+ * Tạo yêu cầu liên kết qua POST trước khi chuyển sang nhà cung cấp.
  */
 export default function ConnectionsTab({
   locale,
@@ -41,6 +39,7 @@ export default function ConnectionsTab({
   const C = S.connections;
   const params = useSearchParams();
   const [error, setError] = useState<string | null>(null);
+  const [linking, setLinking] = useState<Provider | null>(null);
 
   /** Máy chủ đưa về `?linked=<provider>` sau khi liên kết xong. */
   const justLinked = params.get("linked");
@@ -63,6 +62,18 @@ export default function ConnectionsTab({
       onChange(await unlinkProvider(provider));
     } catch (cause) {
       setError(errorText(cause));
+    }
+  }
+
+  async function link(provider: Provider) {
+    if (linking) return;
+    setError(null);
+    setLinking(provider);
+    try {
+      window.location.assign(await beginProviderLink(provider));
+    } catch (cause) {
+      setError(errorText(cause));
+      setLinking(null);
     }
   }
 
@@ -95,9 +106,9 @@ export default function ConnectionsTab({
                   {pick(C.disconnect, locale)}
                 </button>
               ) : (
-                <a className="st-btn small" href={linkUrl(provider)}>
+                <button type="button" className="st-btn small" disabled={linking !== null} aria-busy={linking === provider} onClick={() => void link(provider)}>
                   {pick(C.connect, locale)}
-                </a>
+                </button>
               )}
             </li>
           );

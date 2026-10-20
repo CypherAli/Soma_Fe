@@ -7,8 +7,9 @@ import contract from './contract.generated.json';
 import { readFile, writeFile, mkdir, rename, unlink } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createHash, randomUUID } from 'node:crypto';
+import { serverApiUrl } from '../serverApi';
 
-const api = process.env.API_INTERNAL_URL ?? process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000/api';
+const api = serverApiUrl();
 const publication = new PublicationCache(contract.contractHash);
 const cacheDir = process.env.CMS_CACHE_DIR ?? resolve(process.cwd(), '.next/cache/site-content');
 const cacheFile = resolve(cacheDir, `${createHash('sha256').update(`${api}:${contract.contractHash}`).digest('hex')}.json`);

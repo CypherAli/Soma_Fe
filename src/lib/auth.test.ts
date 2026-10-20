@@ -10,6 +10,7 @@ import {
 } from "./auth";
 import { listDocs, uploadPdf } from "./personalDocs";
 import { deletePath } from "./study";
+import { beginProviderLink } from "./account";
 
 const browser = new EventTarget();
 const storage = new Map<string, string>();
@@ -47,6 +48,18 @@ afterEach(() => {
 });
 
 describe("auth sessions and requests", () => {
+  it("starts OAuth linking with a bearer POST and never places the session in a URL", async () => {
+    globalThis.fetch = async (input, init) => {
+      assert.ok(String(input).endsWith('/auth/oauth/google/link'));
+      assert.ok(!String(input).includes('session-a'));
+      assert.equal(init?.method, 'POST');
+      assert.equal(new Headers(init?.headers).get('Authorization'), 'Bearer session-a');
+      return Response.json({ url: 'https://accounts.google.com/o/oauth2/v2/auth?state=one-time-state' });
+    };
+    assert.equal(await beginProviderLink('google'), 'https://accounts.google.com/o/oauth2/v2/auth?state=one-time-state');
+    globalThis.fetch = async () => Response.json({ url: 'https://attacker.test/' });
+    await assert.rejects(beginProviderLink('google'));
+  });
   it("uses a tab session when storage writes fail, even if reads still work", () => {
     Object.defineProperty(browser, "localStorage", {
       configurable: true,

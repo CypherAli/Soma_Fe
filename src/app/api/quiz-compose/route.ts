@@ -35,7 +35,7 @@ function normalise(text: string) {
  * nào — không dùng bảng từ khoá chép tay nữa: gõ "gan mật" hay "dạ dày" cũng
  * ra `visceral` vì trong kho có gan và dạ dày thật.
  */
-export function fallbackCompose(text: string) {
+function fallbackCompose(text: string) {
   const value = normalise(text);
   const parts: QuizPart[] = [];
 
