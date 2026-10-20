@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { afterEach, beforeEach, mock, test } from "node:test";
-import { complete } from "./llm";
+import { complete, llmConfig } from "./llm";
 
 const keys = ["AI_API_KEY", "AI_PROVIDER", "AI_BASE_URL", "AI_MODEL"] as const;
 let previous: Partial<Record<typeof keys[number], string>>;
@@ -27,6 +27,14 @@ test("AI completion preserves grounding instructions and includes a timeout sign
     return Response.json({ choices: [{ message: { content: "Open /quiz [1]." } }] });
   });
   assert.equal(await complete({ system: "Only use sources", user: "Source [1]: /quiz" }), "Open /quiz [1].");
+});
+
+test("empty Compose values use the provider defaults", () => {
+  process.env.AI_BASE_URL = '';
+  process.env.AI_MODEL = '';
+  const config = llmConfig();
+  assert.ok(config?.baseUrl.startsWith('https://'));
+  assert.ok(config?.model);
 });
 test("caller cancellation remains active alongside the provider timeout", async () => {
   const controller = new AbortController(); controller.abort();

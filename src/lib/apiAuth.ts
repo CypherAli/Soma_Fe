@@ -1,4 +1,4 @@
-import { API_URL } from "@/lib/auth";
+import { serverApiUrl } from "./serverApi";
 
 /**
  * Xác thực người gọi ở PHÍA MÁY CHỦ cho các route trong `src/app/api`.
@@ -29,7 +29,7 @@ export async function userFromRequest(
   const token = bearerToken(request);
   if (!token) return null;
   try {
-    const res = await fetch(`${API_URL}/auth/me`, {
+    const res = await fetch(`${serverApiUrl()}/auth/me`, {
       headers: { Authorization: `Bearer ${token}` },
       cache: "no-store",
       signal: AbortSignal.timeout(5000),

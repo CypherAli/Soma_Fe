@@ -39,15 +39,15 @@ function guessProvider(baseUrl: string | undefined, explicit: string | undefined
 
 export function llmConfig(): LlmConfig | null {
   // ANTHROPIC_API_KEY vẫn đọc được để không phá cấu hình cũ của ai đang dùng.
-  const apiKey = process.env.AI_API_KEY ?? process.env.ANTHROPIC_API_KEY;
+  const apiKey = process.env.AI_API_KEY || process.env.ANTHROPIC_API_KEY;
   if (!apiKey) return null;
 
   const baseUrl = process.env.AI_BASE_URL;
   const provider = guessProvider(baseUrl, process.env.AI_PROVIDER);
   return {
     provider,
-    baseUrl: (baseUrl ?? DEFAULTS[provider].baseUrl).replace(/\/+$/, ""),
-    model: process.env.AI_MODEL ?? DEFAULTS[provider].model,
+    baseUrl: (baseUrl || DEFAULTS[provider].baseUrl).replace(/\/+$/, ""),
+    model: process.env.AI_MODEL || DEFAULTS[provider].model,
     apiKey,
   };
 }
