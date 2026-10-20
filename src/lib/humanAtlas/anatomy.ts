@@ -213,6 +213,8 @@ export interface SceneState {
   visible: SystemId[];
   selected: string[];
   isolate: boolean;
+  /** Frozen isolation scope; selecting another visible mesh does not reveal the body. */
+  isolated?: string[];
   view: View;
   rotate: boolean;
   reset: number;

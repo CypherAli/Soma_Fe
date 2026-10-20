@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -51,7 +52,9 @@ export default async function LocaleLayout({
       className={`${inter.variable} ${playfair.variable} h-full`}
     >
       <head>
-        <script
+        <Script
+          id="soma-theme"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `try{document.documentElement.dataset.theme=localStorage.getItem("soma3d-theme")||"dark"}catch{document.documentElement.dataset.theme="dark"}`,
           }}

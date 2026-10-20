@@ -148,7 +148,7 @@
 .atlas-studio .search-panel [data-slot=input-group]{margin-top:9px;background:#18253605;width:100%;height:44px}
 .atlas-studio .search-panel input{font-size:14px}
 .atlas-studio .search-note{font-size:12px;line-height:1.6;color:#78838f;margin:14px 0 0}
-.atlas-studio .anatomy-search-results{max-width:min(350px,calc(100vw - 32px));background:#ffffff!important;border:1px solid #18253618!important;color:#26313c!important}
+.atlas-studio .anatomy-search-results{max-width:min(350px,calc(100vw - 32px));background:var(--card);border:1px solid var(--border);color:var(--foreground)}
 .atlas-studio .anatomy-search-results [data-slot=combobox-item]{font-size:14px;min-height:44px;display:flex;gap:10px;align-items:center}
 .atlas-studio .search-result-name{flex:1;text-transform:capitalize}
 .atlas-studio .detail-sheet{top:105px!important;bottom:178px!important;right:95px!important;height:auto!important;width:310px!important;max-width:310px!important;padding:28px 23px;overflow-y:auto;gap:18px!important;border-radius:6px;box-shadow:0 15px 70px #2433440a}
@@ -830,22 +830,22 @@ html[data-theme="dark"] .atlas-studio .scene-exit:hover{background:#ffffff12}
 
 /* Nhãn chỉ dẫn kiểu atlas giáo khoa (AtlasScene vẽ, trang chuyên đề bật).
    Lớp phủ không nhận chuột, chỉ từng nhãn nhận — kéo xoay vẫn đi xuyên qua. */
-.atlas-scene .scene-labels{position:absolute;inset:0;pointer-events:none;z-index:2}
-.atlas-scene .scene-label-lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.atlas-scene .scene-label-lines line{stroke-width:1.2;opacity:.9}
-.atlas-scene .scene-label{
+.atlas-studio .scene-labels{position:absolute;inset:0;pointer-events:none;z-index:2}
+.atlas-studio .scene-label-lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.atlas-studio .scene-label-lines line{stroke-width:1.2;opacity:.9}
+.atlas-studio .scene-label{
   position:absolute;transform:translateY(-50%);pointer-events:auto;
   display:flex;align-items:center;gap:7px;max-width:190px;padding:4px 10px;
   border-radius:8px;border:1px solid rgba(127,127,127,.35);
   background:rgba(12,13,16,.78);backdrop-filter:blur(6px);color:#eef0f2;
   font-size:12px;font-weight:500;line-height:1.25;text-align:left;cursor:pointer;
 }
-:root[data-theme=light] .atlas-scene .scene-label{background:rgba(255,255,255,.88);color:#1d2227}
-.atlas-scene .scene-label[data-side=l]{flex-direction:row-reverse;text-align:right}
-.atlas-scene .scene-label i{width:9px;height:9px;border-radius:50%;flex:none}
-.atlas-scene .scene-label:hover{border-color:currentColor}
-.atlas-scene .scene-label.is-pin{transform:translate(-50%,-50%);min-width:26px;min-height:26px;padding:3px 6px;border-radius:50%;font-size:11px;text-align:center;justify-content:center}
-.atlas-scene .scene-label.is-pin i{display:none}
+:root[data-theme=light] .atlas-studio .scene-label{background:rgba(255,255,255,.88);color:#1d2227}
+.atlas-studio .scene-label[data-side=l]{flex-direction:row-reverse;text-align:right}
+.atlas-studio .scene-label i{width:9px;height:9px;border-radius:50%;flex:none}
+.atlas-studio .scene-label:hover{border-color:currentColor}
+.atlas-studio .scene-label.is-pin{transform:translate(-50%,-50%);min-width:26px;min-height:26px;padding:3px 6px;border-radius:50%;font-size:11px;text-align:center;justify-content:center}
+.atlas-studio .scene-label.is-pin i{display:none}
 /* Chế độ chụp ảnh bìa (?thumb): chỉ còn canvas. */
 .atlas-scene.is-thumb > :not(.scene):not(.vignette){display:none!important}
 body:has(.atlas-scene.is-thumb) .soma-bot-launcher{display:none!important}
@@ -1092,3 +1092,27 @@ html[data-theme="dark"] .atlas-studio .detail-quick button[aria-pressed=true]{
 .anatomy-learning h3 {font-size:17px;margin:0 0 8px}.anatomy-learning h4 {font-size:15px;margin:18px 0 8px}
 .anatomy-learning p {font-size:14px;line-height:1.7;margin:10px 0}.anatomy-learning i,.anatomy-learning details {font-size:13px;color:var(--muted-foreground)}
 .anatomy-learning summary {cursor:pointer;padding:8px 0}.anatomy-learning a {color:var(--primary);font-size:13px}.anatomy-learning article {border-top:1px solid var(--border);margin-top:14px}
+
+/* Match the actual camera viewport rather than the full browser window. */
+.atlas-studio .bottom-dock,
+.atlas-studio.atlas-scene .bottom-dock,
+.atlas-studio:has(.detail-sheet) .bottom-dock,
+.atlas-studio .dock-pill {
+  left:var(--model-center-x,50%);right:auto;transform:translateX(-50%);
+  width:min(460px,calc(var(--model-viewport-width,100vw) - 24px));
+  max-width:none;margin-inline:0;
+}
+.atlas-studio .dock-pill{width:auto;max-width:calc(var(--model-viewport-width,100vw) - 24px)}
+.atlas-studio .bottom-dock .explode-control{flex:1;min-width:0}
+.atlas-studio .bottom-dock .dock-icon{flex:0 0 38px;width:38px;height:38px}
+.atlas-studio .anatomy-search-results{width:100%;max-width:none;overscroll-behavior:contain}
+.atlas-studio .anatomy-search-results button{justify-content:space-between;color:var(--foreground);text-align:left;padding:10px 12px;gap:12px}
+.atlas-studio .anatomy-search-results .search-result-name{flex:1;min-width:0;white-space:normal;overflow-wrap:anywhere}
+.atlas-studio .anatomy-search-results .small-number{flex:none;color:var(--muted-foreground)}
+.atlas-studio .top-actions>[data-slot=button]{background:var(--card);color:var(--foreground);border:1px solid var(--border)}
+.atlas-studio .top-actions>[aria-pressed=true]{background:var(--primary);color:var(--primary-foreground)}
+.atlas-studio .search-panel input{background:var(--secondary);color:var(--foreground);border-color:var(--border)}
+.atlas-studio .search-panel input::placeholder{color:var(--muted-foreground);opacity:1}
+.atlas-studio .anatomy-search-results button:hover{background:var(--accent);color:var(--accent-foreground)}
+.atlas-studio .structure-title,.atlas-studio .search-result-name{text-transform:none}
+.atlas-studio .top-actions .language-select-trigger{color:var(--foreground)}

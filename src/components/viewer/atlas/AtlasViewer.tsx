@@ -21,7 +21,11 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import dynamic from "next/dynamic";
 import { useLocale } from "next-intl";
-import { localizedPartNames, localizedPartName } from "@/lib/humanAtlas/partNames";
+import { localizedPartNames, localizedPartName, localizedConceptName, conceptGroup } from "@/lib/humanAtlas/partNames";
+import { heartScene } from "@/lib/humanAtlas/scenes/heart";
+import { sceneTint } from "@/lib/humanAtlas/scenes/types";
+import { createSceneLabels } from "@/lib/humanAtlas/sceneLabels";
+import { Link } from "@/i18n/navigation";
 import type { Loc } from "@/lib/homeContent";
 import PartLearning from './PartLearning';
 import { partLearning } from '@/lib/humanAtlas/learning';
@@ -205,6 +209,17 @@ export default function AtlasViewer() {
     .map((id) => parts.get(id))
     .filter((p) => !!p);
   const selected = selectedParts[0];
+  const heart = cmsContent.resolve(heartScene);
+  const tint = useMemo(() => sceneTint(heart), [heart]);
+  const labels = useMemo(() => {
+    if (!atlas) return [];
+    const ids = new Set(state.isolate ? state.isolated ?? state.selected : state.selected.length ? state.selected : state.visible.length===1&&state.visible[0]==='cardiac' ? atlas.parts.filter(part=>part.system==='cardiac').map(part=>part.id) : []);
+    const groups = heart.groups.map(group => ({...group,parts:group.parts.filter(id=>ids.has(id))})).filter(group=>group.parts.length);
+    return createSceneLabels({...heart,groups},atlas.parts,loc,{...state,isolate:false});
+  }, [atlas, heart, loc, state]);
+  const chosenTitle = chosen ? chosen.elements.length===1 && selected
+    ? localizedPartName(selected,loc,cmsContent)
+    : localizedConceptName(chosen,loc,cmsContent) : '';
   const system = SYSTEMS.find((s) => s.id === selected?.system);
   // Trừ luôn phần bị ẩn thủ công: bấm "Ẩn" mà con số không đổi thì người dùng
   // tưởng nút không ăn.
@@ -213,7 +228,7 @@ export default function AtlasViewer() {
       (p) =>
         !state.hidden.includes(p.id) &&
         (state.isolate
-          ? state.selected.includes(p.id)
+          ? (state.isolated ?? state.selected).includes(p.id)
           : state.visible.includes(p.system) || state.selected.includes(p.id)),
     ).length ?? 0;
 
@@ -229,12 +244,13 @@ export default function AtlasViewer() {
       .filter(
         (c) =>
           fold(c.name).includes(term) ||
-          c.elements.some(id=>fold([partNames[id]??'',partLearning(id,cmsContent)?.latin??''].join(' ')).includes(term)) ||
+          fold(localizedConceptName(c,loc,cmsContent)).includes(term) ||
+          (c.elements.length===1&&fold([partNames[c.elements[0]]??'',partLearning(c.elements[0],cmsContent)?.latin??''].join(' ')).includes(term)) ||
           c.id.toLowerCase().includes(term),
       )
       .sort((a, b) => a.name.length - b.name.length)
       .slice(0, 80);
-  }, [atlas, query, partNames, cmsContent]);
+  }, [atlas, query, partNames, cmsContent, loc]);
 
   const choose = useCallback((c: Concept) => {
     setChosen(c);
@@ -242,6 +258,8 @@ export default function AtlasViewer() {
       ...s,
       selected: c.elements,
       isolate: false,
+      isolated: undefined,
+      explode: 0,
       rotate: false,
     }));
     setDetails(true);
@@ -257,7 +275,7 @@ export default function AtlasViewer() {
     const p = parts.get(id);
     if (!p) return;
     setChosen({ id: p.conceptId, name: p.name, elements: [id] });
-    setState((s) => ({ ...s, selected: [id], isolate: false, rotate: false }));
+    setState((s) => ({ ...s, selected: [id], isolated: s.isolate ? s.isolated ?? s.selected : undefined, rotate: false }));
     setDetails(true);
     setPanel(null);
   };
@@ -299,7 +317,7 @@ export default function AtlasViewer() {
     state.selected.length > 0 && state.selected.every((id) => state.faded.includes(id));
 
   const caption = state.isolate
-    ? (chosen?localizedPartName({id:chosen.elements[0],name:chosen.name},loc,cmsContent):"CẤU TRÚC ĐANG CHỌN")
+    ? chosenTitle
     : state.explode > 0.95
       ? "KHO CẤU TRÚC GIẢI PHẪU"
       : state.explode > 0.05
@@ -313,10 +331,17 @@ export default function AtlasViewer() {
           atlas={atlas}
           state={{
             ...state,
+            tint,
+            labels,
+            showLabels: state.showLabels ?? true,
             partNames,
             inspectorOpen: details && selectedParts.length > 0,
           }}
           onSelect={choosePart}
+          onLabelPick={(key) => {
+            const label = labels.find(item=>item.key===key);
+            if (label) choosePart(label.ids[0]);
+          }}
           onProgress={(n) => {
             setProgress(n);
             if (n === 100) setError("");
@@ -353,6 +378,9 @@ export default function AtlasViewer() {
           <kbd>/</kbd>
         </button>
         <ThemeToggle />
+        <button type="button" data-slot="button" aria-pressed={state.showLabels ?? true} onClick={()=>setState(s=>({...s,showLabels:!(s.showLabels??true)}))}>
+          {loc==='vi'?'Nhãn':loc==='zh'?'标签':'Labels'}
+        </button>
         <LanguageSwitcher />
         <button
           type="button"
@@ -586,7 +614,7 @@ export default function AtlasViewer() {
                 key={c.id}
                 onClick={() => choose(c)}
               >
-                <span className="search-result-name">{localizedPartName({id:c.elements[0],name:c.name},loc,cmsContent)}</span>
+                <span className="search-result-name">{localizedConceptName(c,loc,cmsContent)}</span>
                 <span className="small-number">{c.elements.length} mảnh</span>
               </button>
             ))}
@@ -655,12 +683,11 @@ export default function AtlasViewer() {
         <button
           type="button"
           data-slot="button"
-          className="mobile-only dock-layers"
+          className="dock-icon"
           onClick={() => openPanel("layers")}
           aria-label="Mở bảng lớp"
         >
           <Layers3 size={20} />
-          <span>Lớp</span>
         </button>
         <div className="explode-control">
           <div className="explode-label">
@@ -696,12 +723,11 @@ export default function AtlasViewer() {
         <button
           type="button"
           data-slot="button"
-          className="dock-reset"
+          className="dock-icon"
           onClick={reset}
           aria-label="Ghép lại và đặt lại"
         >
           <RotateCcw size={18} />
-          <span>Đặt lại</span>
         </button>
       </div>
 
@@ -772,11 +798,12 @@ export default function AtlasViewer() {
             />
             <div className="eyebrow">{system?.name ?? "GIẢI PHẪU"}</div>
             <h2 ref={detailTitle} tabIndex={-1} className="structure-title">
-              {chosen&&localizedPartName({id:chosen.elements[0],name:chosen.name},loc,cmsContent)}
+              {chosenTitle}
             </h2>
           </div>
           <div className="detail-scroll" key={`${chosen?.id}-${state.isolate}`}>
-            {selected&&<PartLearning part={selected} locale={loc} hideIdentity/>}
+            {selectedParts.length===1&&selected&&<PartLearning part={selected} locale={loc} hideIdentity/>}
+            {selectedParts.length>1&&chosen&&conceptGroup(chosen,cmsContent)?.note&&<p className="structure-description">{conceptGroup(chosen,cmsContent)?.note?.[loc]}</p>}
             {selected&&!partLearning(selected.id,cmsContent)?.note&&chosen&&EXPLANATIONS[chosen.name.toLowerCase()]&&loc==='vi'&&<p className="structure-description">
               {chosen && selected
                 ? explanation(chosen.name, selected.system)
@@ -860,7 +887,7 @@ export default function AtlasViewer() {
               data-slot="button"
               className={`primary-action ${state.isolate ? "active" : ""}`}
               onClick={() =>
-                setState((s) => ({ ...s, isolate: !s.isolate, explode: 0 }))
+                setState((s) => ({ ...s, isolate: !s.isolate, isolated: s.isolate ? undefined : s.selected, explode: 0 }))
               }
             >
               <Focus size={18} />
@@ -941,13 +968,13 @@ export default function AtlasViewer() {
             >
               Bài báo công bố nguồn <ArrowUpRight size={14} />
             </a>
-            <a
-              href="/human-atlas/ATTRIBUTION.md"
+            <Link
+              href="/nguon-du-lieu"
               target="_blank"
               rel="noreferrer"
             >
               Ghi công đầy đủ <ArrowUpRight size={14} />
-            </a>
+            </Link>
           </div>
         </aside>
       )}
