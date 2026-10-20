@@ -1,6 +1,5 @@
-import { API_URL, AUTH_CHANGED_EVENT, authRequest } from "@/lib/auth";
+import { AUTH_CHANGED_EVENT, authRequest } from "@/lib/auth";
 import type { Role } from "@/lib/auth";
-import { getToken } from "@/lib/auth";
 
 /**
  * Khu tài khoản gọi các endpoint `/auth/*` của `soma_be`.
@@ -77,15 +76,15 @@ export function unlinkProvider(provider: Provider) {
   }).then((r) => r.user);
 }
 
-/**
- * Địa chỉ bắt đầu luồng liên kết.
- *
- * Token phiên đi trong tham số `link` vì đây là một lần chuyển trang thật sang
- * nhà cung cấp, không phải lời gọi fetch — không có chỗ nào đặt header. Token
- * chỉ sống một lần dùng ở bước tạo `state` phía máy chủ.
- */
-export function linkUrl(provider: Provider) {
-  return `${API_URL}/auth/oauth/${provider}?link=${encodeURIComponent(getToken() ?? "")}`;
+/** Tạo OAuth state bằng Bearer header; URL điều hướng không chứa token phiên. */
+export async function beginProviderLink(provider: Provider) {
+  const { url } = await authRequest<{ url: string }>(`/auth/oauth/${provider}/link`, { method: "POST" });
+  const destination = new URL(url);
+  const hosts: Record<Provider, string> = { google: "accounts.google.com", github: "github.com", facebook: "www.facebook.com" };
+  if (destination.protocol !== "https:" || destination.hostname !== hosts[provider] || destination.username || destination.password) {
+    throw new Error("Địa chỉ đăng nhập của nhà cung cấp không hợp lệ.");
+  }
+  return destination.href;
 }
 
 /** Chữ cái đại diện khi chưa có ảnh: đầu họ + đầu tên ("Trịnh Việt Hoàng" → "TH"). */
