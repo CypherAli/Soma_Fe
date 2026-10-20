@@ -6,6 +6,7 @@ import { useRef, useEffect, useMemo, useState } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls, useGLTF, Center, Bounds } from "@react-three/drei";
 import StudioStage from "./StudioStage";
+import InteractionResolution from "./InteractionResolution";
 import * as THREE from "three";
 import {
   useAnatomyStore,
@@ -580,7 +581,10 @@ function Picker() {
       return null;
     };
 
+    let lastHover = -Infinity;
     const onMove = (e: PointerEvent) => {
+      if (e.buttons || e.pointerType === "touch" || e.timeStamp - lastHover < 50) return;
+      lastHover = e.timeStamp;
       const m = pickAt(e.clientX, e.clientY);
       if (m === hoverRef.current) return;
       if (hoverRef.current && hoverRef.current !== selRef.current)
@@ -720,6 +724,7 @@ export default function ModelScene({
           // Sân khấu sáng đẩy trần dpr lên 2 (đúng như human-atlas): trên nền sáng
           // răng cưa ở viền cơ/mạch lộ rõ hơn hẳn so với nền tối.
           dpr={studio ? [1, 2] : [1, 1.75]}
+          performance={{ min: 0.75 }}
           camera={{
             position: [0, 0, 2.6],
             fov: studio ? 34 : 40,
@@ -798,6 +803,7 @@ export default function ModelScene({
               </group>
             </Center>
           </Bounds>
+          <InteractionResolution />
           <Picker />
           <ClipRig studio={studio} />
           <Hotspots
@@ -813,6 +819,7 @@ export default function ModelScene({
           <OrbitControls
             ref={controls}
             makeDefault
+            regress
             enablePan={false}
             zoomToCursor
             minDistance={0.05}

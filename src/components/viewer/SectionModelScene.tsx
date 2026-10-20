@@ -4,6 +4,7 @@
 import { ContentSurface } from "@/components/content/ContentProvider";
 import { useRef, useEffect, useState } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
+import InteractionResolution from "./InteractionResolution";
 import { OrbitControls, useGLTF, Center, Bounds } from "@react-three/drei";
 import * as THREE from "three";
 import { useAnatomyStore } from "@/store/useAnatomyStore";
@@ -69,7 +70,10 @@ function Picker() {
       }
       return null;
     };
+    let lastHover = -Infinity;
     const onMove = (e: PointerEvent) => {
+      if (e.buttons || e.pointerType === "touch" || e.timeStamp - lastHover < 50) return;
+      lastHover = e.timeStamp;
       const m = pickAt(e.clientX, e.clientY);
       if (m === hoverRef.current) return;
       if (hoverRef.current && hoverRef.current !== selRef.current) paint(hoverRef.current, null, 0);
@@ -189,6 +193,7 @@ export default function SectionModelScene({
     <div ref={boxRef} style={{ width: "100%", height: "100%" }}>
     {boxReady && <Canvas
       dpr={[1, 1.75]}
+      performance={{ min: 0.75 }}
       camera={{ position: [0, 0.95, 1.35], fov: 42, near: 0.01, far: 100 }}
       // Kích thước TƯỜNG MINH cho canvas: thiếu dòng này, R3F đo khung ở
       // lần dựng đầu ra 0 và KHÔNG khởi động lại — canvas nằm nguyên cỡ mặc
@@ -211,10 +216,11 @@ export default function SectionModelScene({
           <SectionModel url={modelUrl} />
         </Center>
       </Bounds>
+      <InteractionResolution />
       <Picker />
       {/* Model cắt đã sẵn hệ xương+nội tạng nên requiredSystems để trống (luôn sẵn sàng). */}
       <Hotspots controlsRef={controls} hotspots={hotspots} requiredSystems={[]} />
-      <OrbitControls ref={controls} makeDefault enablePan={false} minDistance={0.1} maxDistance={8} />
+      <OrbitControls ref={controls} makeDefault regress enablePan={false} minDistance={0.1} maxDistance={8} />
     </Canvas>}
     </div>
   )}</ContentSurface>;
