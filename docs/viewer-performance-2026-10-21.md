@@ -15,7 +15,7 @@
 
 ## Đo trước/sau
 
-Cùng Chrome headless, viewport 1280×720, DPR 1,25, cùng trang cánh tay và 50 lần di chuyển chuột khi kéo. Công cụ đo nằm ở `../docs/measure-viewer.cjs` trong thư mục gốc đồ án; số liệu JSON nằm cùng thư mục đó.
+Cùng Chrome headless, viewport 1280×720, DPR 1,25, cùng trang cánh tay và 50 lần di chuyển chuột khi kéo. Công cụ đo nằm ở `docs/measure-viewer.cjs` trong thư mục gốc đồ án; số liệu JSON nằm cùng thư mục đó.
 
 | Chỉ số | Trước | Sau |
 | --- | ---: | ---: |
@@ -26,6 +26,14 @@ Cùng Chrome headless, viewport 1280×720, DPR 1,25, cùng trang cánh tay và 5
 | Lỗi JavaScript trên trang | 0 | 0 |
 
 Thời gian xử lý chuột giảm khoảng 98%; đây không phải mức tăng FPS tổng thể. Cả hai lượt đo đều gần 60 FPS trong điều kiện thử. Không suy rộng sang mọi mô hình, độ phân giải và mức tải RAM.
+
+## Kiểm chứng bản production
+
+- Build production, TypeScript, lint và verify:scenes đều đạt; 1.310 hotspot khớp node mô hình.
+- HTTP trang cánh tay: 160 ms lần đầu, 39 ms lần kế tiếp trên server kiểm tra cục bộ. Đây là thời gian tải HTML, chưa gồm JS, model và tương tác.
+- Chrome trên production: xử lý chuột trung bình 0,28 ms, khoảng cách khung hình 16,67 ms, không có lỗi JavaScript.
+- Chọn cấu trúc để dừng tự xoay: buffer khôi phục từ 640×664 lên 800×830, đúng DPR ban đầu 1,25.
+- Ảnh `docs/viewer-performance.png` tại thư mục gốc đồ án xác nhận mô hình và bảng thông tin hiển thị. Server/Chrome kiểm tra đã tự đóng; server dev của người dùng vẫn chạy.
 
 ## Chạy khi trình diễn
 
