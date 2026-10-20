@@ -1,0 +1,10 @@
+.attribution-page{max-width:900px;margin:auto;padding:48px 24px 80px;color:var(--ink);font-size:16px;line-height:1.75}
+.attribution-page h1{font-size:clamp(28px,5vw,42px);line-height:1.15;margin:28px 0 20px;font-weight:650}
+.attribution-page h2{font-size:22px;line-height:1.4;margin:40px 0 16px;font-weight:600}
+.attribution-page p,.attribution-page ul{margin:16px 0}
+.attribution-page ul{padding-left:24px;list-style:disc}
+.attribution-page li{margin:8px 0;overflow-wrap:anywhere}
+.attribution-page a{color:var(--blue);text-decoration:underline;text-underline-offset:4px;overflow-wrap:anywhere}
+.attribution-page a:focus-visible{outline:2px solid var(--blue);outline-offset:4px}
+.attribution-page code{background:var(--surf-2);padding:2px 6px;border-radius:4px;overflow-wrap:anywhere}
+.attribution-page .attribution-intro{color:var(--muted-2);border-bottom:1px solid var(--line);padding-bottom:24px}
