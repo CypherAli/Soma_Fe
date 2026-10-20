@@ -17,7 +17,7 @@ import {
   type PersonalBank,
 } from "@/lib/personalDocs";
 import { getToken, AUTH_CHANGED_EVENT } from "@/lib/auth";
-import { isSignedIn, itemKeyOf, recordAttempt, type QuizSourceKey, type StudySession } from "@/lib/study";
+import { isSignedIn, recordAttempt, type QuizSourceKey, type StudySession } from "@/lib/study";
 import { pick, type Loc } from "@/lib/homeContent";
 import { SYSTEM_LABEL } from "@/lib/anatomy/knowledge";
 import { speciesInfo } from "@/lib/vet/knowledge";
@@ -589,15 +589,10 @@ export default function QuizRunner({
       mode,
       score,
       total: items.length,
+      answers: items.map((it, i) => ({ questionId: it.id, answerId: picked[i] })),
       // Đo từ lúc bấm bắt đầu: chế độ ôn tập không có đồng hồ đếm ngược nên
       // lấy hiệu đồng hồ thi là ra 0 giây cho mọi buổi ôn.
       seconds: startedAt.current ? Math.round((Date.now() - startedAt.current) / 1000) : 0,
-      items: items.map((it, i) => ({
-        itemKey: itemKeyOf(source, it.id),
-        source,
-        scope: source === "model" ? system : source === "book" ? activeRegion : source === "school" ? effectiveSchoolId : "all",
-        correct: !!it.options.find((o) => o.id === picked[i])?.correct,
-      })),
     });
     // `picked`/`left` cố ý không nằm trong danh sách phụ thuộc: chúng đã đứng
     // yên khi `done` bật lên, thêm vào chỉ khiến effect chạy lại vô ích.
