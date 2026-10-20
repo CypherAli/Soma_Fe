@@ -123,7 +123,7 @@ export default function AtlasSceneViewer({ scene }: { scene: AtlasSceneDef }) {
    * Nhãn chỉ dẫn: một nhãn cho mỗi nhóm, TRỪ nhóm mốc làm mờ sẵn (xương nền…)
    * — gắn nhãn cho nền chỉ làm rối hình.
    */
-  const labels = useMemo<SceneLabel[]>(()=>createSceneLabels(scene,atlas?.parts??[],loc,state),[scene,atlas,loc,state]);
+  const labels = useMemo<SceneLabel[]>(()=>createSceneLabels(scene,atlas?.parts??[],loc,{...state,selected:state.isolate?state.isolated??state.selected:state.selected}),[scene,atlas,loc,state]);
 
   /**
    * `?thumb` — chế độ chụp ảnh bìa cho thư viện (scripts/atlas/thumb-atlas.mjs):
@@ -180,7 +180,7 @@ export default function AtlasSceneViewer({ scene }: { scene: AtlasSceneDef }) {
   const pickGroup = useCallback((key: string, ids: string[]) => {
     setOpenGroup(key);
     setMobileLessons(false);
-    setState((s) => ({ ...s, selected: ids, isolate: false, rotate: false }));
+    setState((s) => ({ ...s, selected: ids, isolate: false, isolated: undefined, rotate: false }));
   }, []);
 
   /** Bấm thẳng lên mô hình: tra ngược xem mảnh đó thuộc nhóm nào. */
@@ -190,8 +190,8 @@ export default function AtlasSceneViewer({ scene }: { scene: AtlasSceneDef }) {
       setOpenGroup(g?.key ?? null);
       setState((s) => ({
         ...s,
-        selected: g ? g.parts : [id],
-        isolate: false,
+        selected: [id],
+        isolated: s.isolate ? s.isolated ?? s.selected : undefined,
         rotate: false,
       }));
     },
@@ -733,11 +733,11 @@ export default function AtlasSceneViewer({ scene }: { scene: AtlasSceneDef }) {
                 <h3>{pick({vi:"Thành phần mô hình",en:"Model components",zh:"模型组成部分"},loc)}</h3>
                 <p className="context-note">{pick({vi:"Chọn một thành phần để cô lập riêng. Mã mảnh giúp đối chiếu dữ liệu gốc; tên nhóm được dùng khi chưa có tên riêng đã biên tập.",en:"Select a component to isolate it. IDs identify source meshes; a group name is used when an individual term has not been curated.",zh:"选择组成部分以单独隔离。编号对应源网格；尚未编写单独术语时使用分组名称。"},loc)}</p>
                 {members.map((part) => (
-                  <button type="button" key={part.id} aria-pressed={state.isolate && state.selected.length===1 && state.selected[0]===part.id} onClick={()=>setState((s)=>({...s,selected:[part.id],isolate:true,explode:0,rotate:false,hidden:s.hidden.filter(id=>id!==part.id)}))}>
+                  <button type="button" key={part.id} aria-pressed={state.isolate && state.selected.length===1 && state.selected[0]===part.id} onClick={()=>setState((s)=>({...s,selected:[part.id],isolate:true,isolated:[part.id],explode:0,rotate:false,hidden:s.hidden.filter(id=>id!==part.id)}))}>
                     <span><b className="member-tag-number">{partNumbers.get(part.id)}</b> {partNames[part.id]}<small>{part.id}</small></span><ChevronRight size={14}/>
                   </button>
                 ))}
-                {active.parts.length > 1 && <button type="button" onClick={()=>setState((s)=>({...s,selected:active.parts,isolate:true,explode:0,rotate:false,hidden:s.hidden.filter(id=>!active.parts.includes(id))}))}>{pick({vi:"Cô lập cả nhóm",en:"Isolate the whole group",zh:"隔离整个组"},loc)}</button>}
+                {active.parts.length > 1 && <button type="button" onClick={()=>setState((s)=>({...s,selected:active.parts,isolate:true,isolated:active.parts,explode:0,rotate:false,hidden:s.hidden.filter(id=>!active.parts.includes(id))}))}>{pick({vi:"Cô lập cả nhóm",en:"Isolate the whole group",zh:"隔离整个组"},loc)}</button>}
               </div>
             )}
           </div>
@@ -765,7 +765,7 @@ export default function AtlasSceneViewer({ scene }: { scene: AtlasSceneDef }) {
               data-slot="button"
               className={`primary-action ${state.isolate ? "active" : ""}`}
               onClick={() =>
-                setState((s) => ({ ...s, isolate: !s.isolate, explode: 0 }))
+                setState((s) => ({ ...s, isolate: !s.isolate, isolated: s.isolate ? undefined : s.selected, explode: 0 }))
               }
             >
               <Focus size={18} />

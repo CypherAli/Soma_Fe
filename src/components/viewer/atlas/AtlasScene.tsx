@@ -402,7 +402,10 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,on
      // động mạch nhưng vẫn là một phần của bài học về tim).
      const inScope=focusIds?focusIds.has(p.id):(visible.has(p.system)||selected);
      const shown=layoutIds.has(p.id)&&!hiddenIds.has(p.id)&&(s.isolate?isolation.has(p.id):inScope);
-     data.set([dx,dy,dz,shown?1:0],i*4);selectedData[i*4]=selected?255:0;selectedData[i*4+1]=fadedIds.has(p.id)?255:0;
+     // A whole selected organ keeps its teaching colours; highlight only one
+     // inspected mesh within its surrounding anatomy.
+     const highlight=selected&&selection.size===1&&(!s.isolate||isolation.size>1);
+     data.set([dx,dy,dz,shown?1:0],i*4);selectedData[i*4]=highlight?255:0;selectedData[i*4+1]=fadedIds.has(p.id)?255:0;
      const mesh=pickers[i];if(mesh){mesh.position.set(dx,dy,dz);mesh.updateMatrix();mesh.updateMatrixWorld(true);}
     });partTexture.needsUpdate=true;selectionTexture.needsUpdate=true;lastState=s;lastExtent=amount;dirty=true;
    }
