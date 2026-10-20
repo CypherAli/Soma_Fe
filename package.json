@@ -5,8 +5,8 @@
   "scripts": {
     "cms:sync": "node scripts/sync-content-catalog.mjs",
     "verify:cms": "node scripts/sync-content-catalog.mjs --check",
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "node scripts/next-command.mjs dev",
+    "build": "node scripts/next-command.mjs build",
     "start": "next start",
     "lint": "eslint",
     "verify:quiz-bank": "node scripts/verify-quiz-bank.mjs",
@@ -34,13 +34,15 @@
     "test:unit": "node --import ./scripts/ts-resolve.mjs --test \"src/**/*.test.ts\"",
     "test:wonder": "node --import ./scripts/ts-resolve.mjs scripts/test-wondersnap.ts",
     "test:atlas": "node --import ./scripts/ts-resolve.mjs scripts/test-atlas-framing.ts && node --import ./scripts/ts-resolve.mjs scripts/test-atlas-learning.ts && node --import ./scripts/ts-resolve.mjs scripts/test-region-surface.ts && node --import ./scripts/ts-resolve.mjs scripts/test-scene-labels.ts",
-    "test:api-boundary": "node scripts/test-api-boundary.mjs"
+    "test:api-boundary": "node scripts/test-api-boundary.mjs",
+    "postinstall": "node scripts/patch-dependencies.cjs",
+    "test:security": "node scripts/test-dependency-security.cjs"
   },
   "dependencies": {
     "@mediapipe/tasks-vision": "^1.0.1",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.6.1",
-    "next": "16.2.10",
+    "next": "16.4.2",
     "next-intl": "^4.13.2",
     "react": "19.2.4",
     "react-dom": "19.2.4",
@@ -55,7 +57,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.2.10",
+    "eslint-config-next": "16.4.2",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

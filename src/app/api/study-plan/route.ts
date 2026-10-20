@@ -61,7 +61,7 @@ function countOf(token: string): number {
  * Đường lui khi chưa cấu hình khoá AI — và cũng là lưới an toàn cho câu trả
  * lời của AI. Chỉ đọc con số, không đọc kiến thức giải phẫu.
  */
-export function ruleIntent(text: string): PlanIntent {
+function ruleIntent(text: string): PlanIntent {
   const value = normalise(text);
 
   // Quãng học: bắt cụm ĐƠN VỊ đầu tiên đi kèm số, "3 tuần nữa" và "sau 3 tuần"
