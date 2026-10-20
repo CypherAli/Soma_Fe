@@ -8,6 +8,7 @@ import { bindContentSource } from "@/lib/content/source";
 import { ContentSurface } from "@/components/content/ContentProvider";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
+import InteractionResolution from "@/components/viewer/InteractionResolution";
 import { useGLTF, OrbitControls } from "@react-three/drei";
 import { useLocale } from "next-intl";
 import * as THREE from "three";
@@ -339,7 +340,11 @@ function Picker({ hotspots, locale }: { hotspots: SceneHotspot[]; locale: Loc })
       }
       return { obj: namedNode(m) };
     };
+    let lastHover = -Infinity;
     const onMove = (e: PointerEvent) => {
+      // Orbiting needs the main thread; only raycast an idle mouse pointer.
+      if (e.buttons || e.pointerType === "touch" || e.timeStamp - lastHover < 50) return;
+      lastHover = e.timeStamp;
       const m = pickAt(e.clientX, e.clientY);
       setHovered(m ? resolve(m).obj.name : null);
       el.style.cursor = m ? "pointer" : "default";
@@ -424,6 +429,7 @@ export default function ArmViewer({
     <div className="viewer-stage" style={{ position: "relative", width: "100%", height: "100%" }}>
       <Canvas
         dpr={[1, 1.6]}
+        performance={{ min: 0.75 }}
         camera={{ position: [0, 0.1, 2.6], fov: 40, near: 0.01, far: 100 }}
         gl={{ antialias: true, alpha: true, toneMapping: THREE.ACESFilmicToneMapping }}
         style={{ width: "100%", height: "100%", background: "transparent" }}
@@ -433,6 +439,7 @@ export default function ArmViewer({
         <directionalLight position={[3, 5, 4]} intensity={1.2} color="#fff3e2" />
         <directionalLight position={[-4, 2, -3]} intensity={0.5} color="#e7d9c4" />
         <directionalLight position={[0, -3, 2]} intensity={0.3} color="#ffffff" />
+        <InteractionResolution />
         <ArmModel url={url} layers={layers} />
         {/* Không bọc <Center>/<Bounds> nữa: mô hình giữ nguyên toạ độ thật của
             cơ thể (nhờ đó nhãn và mặt cắt vẫn đúng chỗ), còn khung hình do
@@ -444,7 +451,7 @@ export default function ArmViewer({
         {/* Giới hạn zoom tính theo BÁN KÍNH model: mốc cứng 0,3–8 m khiến model
             nhỏ (nhãn cầu 3cm, xương con 4mm) không zoom vào nổi, còn model
             toàn thân 1,7 m thì không lùi ra đủ. */}
-        <OrbitControls makeDefault enablePan
+        <OrbitControls makeDefault regress enablePan
           minDistance={(frame?.radius ?? 0.5) * 0.35}
           maxDistance={(frame?.radius ?? 0.5) * 14}
           autoRotate={!selected} autoRotateSpeed={0.4} />
