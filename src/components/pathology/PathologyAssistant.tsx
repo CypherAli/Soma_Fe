@@ -27,8 +27,6 @@ const copy = bindContentSource("data:src/components/pathology/PathologyAssistant
   vi: {
     diseaseTitle: "Hỏi về bệnh này",
     diseasePlaceholder: "Vd: tiêu chuẩn chẩn đoán? phân biệt với bệnh nào?",
-    summarize: "Tóm tắt bài này",
-    summarizePrompt: "Tóm tắt GỌN bài này trong ≤180 từ, đúng 4 gạch đầu dòng: định nghĩa · triệu chứng chính · chẩn đoán · hướng điều trị. Không chép nguyên văn.",
     symptomTitle: "Tra theo triệu chứng",
     symptomPlaceholder: "Vd: sưng đau khớp ngón chân cái về đêm, sốt nhẹ",
     send: "Hỏi", thinking: "Đang tra giáo trình…",
@@ -41,8 +39,6 @@ const copy = bindContentSource("data:src/components/pathology/PathologyAssistant
   en: {
     diseaseTitle: "Ask about this condition",
     diseasePlaceholder: "E.g. diagnostic criteria? differential diagnosis?",
-    summarize: "Summarise this article",
-    summarizePrompt: "Summarise this article in ≤180 words, exactly 4 bullets: definition · key symptoms · diagnosis · treatment. Do not copy verbatim.",
     symptomTitle: "Search by symptom",
     symptomPlaceholder: "E.g. night-time swelling and pain in the big toe joint",
     send: "Ask", thinking: "Searching the textbook…",
@@ -55,8 +51,6 @@ const copy = bindContentSource("data:src/components/pathology/PathologyAssistant
   zh: {
     diseaseTitle: "询问本病",
     diseasePlaceholder: "例如：诊断标准？与哪些病鉴别？",
-    summarize: "概括本篇",
-    summarizePrompt: "用≤180字概括本篇，正好4条：定义·主要症状·诊断·治疗方向。不要照抄原文。",
     symptomTitle: "按症状检索",
     symptomPlaceholder: "例如：夜间大脚趾关节红肿疼痛，低热",
     send: "提问", thinking: "正在检索教材…",
@@ -169,18 +163,6 @@ export default function PathologyAssistant({
           {busy ? t.thinking : t.send}
         </button>
       </form>
-
-      {mode === "disease" && (
-        <button
-          type="button"
-          className="pth-ai-quick"
-          onClick={() => ask(t.summarizePrompt)}
-          disabled={busy}
-        >
-          <Icon id="i-spark" />
-          {t.summarize}
-        </button>
-      )}
 
       {/* Gợi ý bấm được: ô trống là rào cản lớn nhất — người dùng không biết
           nên gõ gì, và gõ sai kiểu thì kết quả tệ. Bốn ví dụ này cũng ngầm dạy

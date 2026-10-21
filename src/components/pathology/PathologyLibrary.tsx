@@ -35,6 +35,7 @@ const copy = bindContentSource("data:src/components/pathology/PathologyLibrary.t
     hasModel: "Có", noModel: "Chưa có",
     close: "Đóng", view3d: "Mở cấu trúc 3D", source: "Nguồn",
     overview: "Tổng quan", clinical: "Lâm sàng & cận lâm sàng", imaging: "Chẩn đoán hình ảnh",
+    summary: "Tóm tắt bài học", summaryNote: "Bản tóm lược biên soạn sẵn từ hồ sơ bệnh học, kèm nguồn đối chiếu.",
     progression: "Tiến triển & biến chứng", treatment: "Điều trị tham khảo",
     incomplete: "Chưa có phần bệnh học chi tiết. Hồ sơ hiện dẫn thẳng tới đúng trang trong giáo trình để bạn đọc nguyên bản.",
     save: "Lưu", unsave: "Bỏ lưu", related: "Cùng chuyên khoa",
@@ -61,6 +62,7 @@ const copy = bindContentSource("data:src/components/pathology/PathologyLibrary.t
     hasModel: "Yes", noModel: "Not yet",
     close: "Close", view3d: "Open 3D structure", source: "Source",
     overview: "Overview", clinical: "Clinical & laboratory", imaging: "Diagnostic imaging",
+    summary: "Article summary", summaryNote: "Prepared from the condition record, with its source for cross-checking.",
     progression: "Progression & complications", treatment: "Treatment reference",
     incomplete: "The detailed pathology has not been written yet. This record points to the exact textbook page so you can read the original.",
     save: "Save", unsave: "Remove", related: "Same specialty",
@@ -87,6 +89,7 @@ const copy = bindContentSource("data:src/components/pathology/PathologyLibrary.t
     hasModel: "有", noModel: "暂无",
     close: "关闭", view3d: "打开三维结构", source: "来源",
     overview: "概述", clinical: "临床与实验室", imaging: "医学影像",
+    summary: "本篇摘要", summaryNote: "根据疾病档案预先编写，附有来源供核对。",
     progression: "进展与并发症", treatment: "参考治疗",
     incomplete: "详细病理内容尚未撰写。本档案直接指向教材对应页码，便于查阅原文。",
     save: "收藏", unsave: "取消收藏", related: "同一专科",
@@ -634,7 +637,36 @@ export default function PathologyLibrary({ locale }: { locale: Loc }) {
               </button>
             </header>
 
-            {/* Hình GIÁO TRÌNH đứng trước ảnh 3D tự dựng: đây mới là hình đã
+            {(() => {
+              const c = pathologyContent(selected, locale);
+              // These fields are already authored textbook summaries. Preserve
+              // every sentence, including qualifications and contraindications;
+              // do not shorten medical advice by taking its first sentence.
+              const sections = [
+                [t.overview, c?.description],
+                [t.clinical, c?.clinical],
+                [t.imaging, c?.imaging],
+                [t.progression, c?.progression],
+                [t.treatment, c?.treatment],
+              ].filter(([, body]) => body?.trim()) as [string, string][];
+              return <section className="pth-summary" aria-label={t.summary}>
+                <h3 className="pth-summary-title">{t.summary}</h3>
+                <p className="pth-summary-note">{t.summaryNote}</p>
+                {selected.needsReview && <p className="pth-untranslated">{t.pendingReview}</p>}
+                {locale !== "vi" && c?.locale === "vi" && <p className="pth-untranslated">{t.noTranslation}</p>}
+                {c?.machineTranslated === true && <p className="pth-untranslated">{t.machineTranslated}</p>}
+                {sections.length > 0 ? <dl className="pth-summary-points">
+                  {sections.map(([heading, body]) => <div key={heading}>
+                    <dt>{heading}</dt><dd>{body}</dd>
+                  </div>)}
+                </dl> : <p className="pth-incomplete">{t.incomplete}</p>}
+                <p className="pth-summary-source"><strong>{t.source}:</strong> {selected.source}
+                  {selected.sourcePage ? ` · ${t.page} ${selected.sourcePage}` : ""}
+                </p>
+              </section>;
+            })()}
+
+            {/* Hình GIÁO TRÌNH đi kèm bản tóm lược: đây mới là hình đã
                 qua thẩm định chuyên môn. Ảnh 3D chỉ để định vị giải phẫu và
                 được ghi rõ là do dự án tự dựng, tránh người đọc tưởng là hình
                 thật trong sách. */}
@@ -698,41 +730,7 @@ export default function PathologyLibrary({ locale }: { locale: Loc }) {
               </div>
             </dl>
 
-            {(() => {
-              const c = pathologyContent(selected, locale);
-              /* Nội dung bệnh học trong DB mới chỉ có tiếng Việt (106/106).
-                 pathologyContent() tự lùi về tiếng Việt — im lặng thì người
-                 đọc bản tiếng Anh tưởng đây LÀ bản dịch. Nói thẳng ra. */
-              const untranslated = locale !== "vi" && c?.locale === "vi";
-              /* Hai tình huống khác hẳn nhau, không gộp làm một:
-                 - chưa dịch  -> đang đọc nguyên văn tiếng Việt
-                 - dịch máy   -> đúng ngôn ngữ nhưng chưa ai chuyên môn duyệt */
-              const machine = c?.machineTranslated === true;
-              const sections = [
-                [t.overview, c?.description],
-                [t.clinical, c?.clinical],
-                [t.imaging, c?.imaging],
-                [t.progression, c?.progression],
-                [t.treatment, c?.treatment],
-              ].filter(([, body]) => body) as [string, string][];
-              return sections.length > 0 ? (
-                <>
-                  {selected.needsReview&&<p className="pth-untranslated">{t.pendingReview}</p>}
-                  {untranslated && <p className="pth-untranslated">{t.noTranslation}</p>}
-                  {machine && <p className="pth-untranslated">{t.machineTranslated}</p>}
-                  {sections.map(([heading, body]) => (
-                    <section key={heading}>
-                      <h3>{heading}</h3>
-                      <p>{body}</p>
-                    </section>
-                  ))}
-                </>
-              ) : (
-                <p className="pth-incomplete">{t.incomplete}</p>
-              );
-            })()}
-
-            <PathologyAssistant locale={locale} mode="disease" slug={selected.slug} />
+            <PathologyAssistant key={`${selected.slug}:${locale}`} locale={locale} mode="disease" slug={selected.slug} />
 
             <section className="pth-cite">
               <h3>{t.source}</h3>
