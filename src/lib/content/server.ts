@@ -24,7 +24,7 @@ async function persist(snapshot: ContentSnapshot) {
   try { await writeFile(temporary, JSON.stringify(snapshot)); await rename(temporary, cacheFile); }
   finally { await unlink(temporary).catch(() => undefined); }
 }
-const published = () => publication.load(() => fetchSnapshot('/content/published'), async () => JSON.parse(await readFile(cacheFile, 'utf8')), persist, (error) => console.error('[Soma CMS] Giữ bản công khai gần nhất:', error instanceof Error ? error.message : error));
+const published = () => publication.load(() => fetchSnapshot('/content/published'), async () => JSON.parse(await readFile(cacheFile, 'utf8')), persist, (error) => console.warn('[Soma CMS] Giữ bản công khai gần nhất:', error instanceof Error ? error.message : error));
 
 export const loadContent = cache(async () => {
   const token = (await cookies()).get('soma-cms-preview')?.value;
