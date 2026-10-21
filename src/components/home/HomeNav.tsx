@@ -43,7 +43,7 @@ export default function HomeNav({
    */
   const activeHref = menu
     .map((m) => m.href.split("#")[0])
-    .filter((href) => href !== "/" && (pathname === href || pathname.startsWith(`${href}/`)))
+    .filter((href) => href !== "/" && (pathname === href || pathname.startsWith(`${href}/`) || (href === "/giai-phau/tat-ca" && pathname.startsWith("/giai-phau/"))))
     .sort((a, b) => b.length - a.length)[0];
 
   const [megaOpen, setMegaOpen] = useState(false);

@@ -22,12 +22,14 @@ export default function SceneCarousel({
   scenes,
   locale,
   viewAllHref,
+  showArrows = true,
 }: {
   title: string;
   subtitle?: string;
   scenes: CatalogScene[];
   locale: Loc;
   viewAllHref?: string;
+  showArrows?: boolean;
 }) {
   const cmsContent = useContent();
   const C = cmsContent.resolve(cmsSourceC());
@@ -80,7 +82,7 @@ export default function SceneCarousel({
                 {pick(C.sections.viewAll, locale)}
               </Link>
             )}
-            <div className="arrows">
+            {showArrows && <div className="arrows">
               <button
                 type="button"
                 className="arrow"
@@ -99,7 +101,7 @@ export default function SceneCarousel({
               >
                 <Icon id="i-right" />
               </button>
-            </div>
+            </div>}
           </div>
         </div>
 

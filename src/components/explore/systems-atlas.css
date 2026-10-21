@@ -34,7 +34,7 @@
 .sys-card:hover{border-color:var(--sa-accent);transform:translateY(-3px)}
 /* Ảnh tràn hết bề ngang thẻ, thẻ cao theo nội dung — bản đầu ảnh bị thụt vào giữa
    (padding thẻ nút của home.css) và thẻ kéo cao bằng thẻ cao nhất, thừa khoảng trống. */
-.sys-card{padding:0!important;align-self:start}
+.bd .sys-atlas .sys-card{padding:0!important;align-self:start;color:var(--ink-e)}
 .sys-card-media{width:100%;aspect-ratio:1/1;background:#0b0c0e;display:grid;place-items:center;overflow:hidden}
 .sys-card-media img{width:100%;height:100%;object-fit:cover;transition:transform .35s}
 .sys-card:hover .sys-card-media img{transform:scale(1.06)}

@@ -16,6 +16,7 @@ import { pick, type Loc, type T3 } from "./homeContent";
 import { sceneModules, type SceneModule } from "./sceneModules";
 import { regionViewerConfig } from "./scenes/regions";
 import { atlasScenes, atlasSceneAliases } from "./humanAtlas/scenes";
+import { modelSearchScore } from "./modelSearch";
 
 /** Nhóm hệ cơ quan dùng để gom scene trên trang chủ. */
 export type SystemGroupKey =
@@ -58,7 +59,6 @@ export const systemGroups: SystemGroup[] = bindContentSource("data:src/lib/catal
   { key: "visual", slug: "he-thi-giac", label: { vi: "Hệ thị giác", en: "Visual system", zh: "视觉系统" }, icon: "i-eye", accent: "g-eye" },
   { key: "auditory", slug: "he-thinh-giac-nhom", label: { vi: "Hệ thính giác", en: "Auditory system", zh: "听觉系统" }, icon: "i-ear", accent: "g-ear" },
   { key: "reproductive", slug: "he-sinh-san", label: { vi: "Hệ sinh sản", en: "Reproductive system", zh: "生殖系统" }, icon: "i-gyn", accent: "g-repro" },
-  { key: "fascia", slug: "he-mac-nhom", label: { vi: "Hệ mạc", en: "Fascial system", zh: "筋膜系统" }, icon: "i-cell", accent: "g-fascia" },
   { key: "connective", slug: "mo-lien-ket-nhom", label: { vi: "Mô liên kết", en: "Connective tissue", zh: "结缔组织" }, icon: "i-cell", accent: "g-connective" },
 ]);
 
@@ -256,7 +256,9 @@ const thumbnails: Record<string, string> = {
   "gian-nao-he-vien": "/thumbnails/gian-nao-he-vien.jpg",
   "he-mac": "/thumbnails/he-mac.jpg",
   "he-sinh-san-nam": "/thumbnails/he-sinh-san-nam.jpg",
-  "he-thinh-giac": "/thumbnails/he-thinh-giac.jpg",
+  "he-thinh-giac": "/thumbnails/auditory-system.jpg",
+  "co-truoc-cot-song-co": "/thumbnails/co-truoc-cot-song-co.jpg",
+  "dong-mach-nao-truoc": "/thumbnails/dong-mach-nao-truoc.jpg",
   "he-tiet-nieu": "/thumbnails/he-tiet-nieu.jpg",
   "long-nguc": "/thumbnails/long-nguc.jpg",
   "mat-cat-ngang-bung": "/thumbnails/mat-cat-ngang-bung.jpg",
@@ -273,7 +275,7 @@ const thumbnails: Record<string, string> = {
   "giai-phau-dai-vai": "/thumbnails/giai-phau-dai-vai.jpg",
   "so-nen-so": "/thumbnails/so-nen-so.jpg",
   "hoc-mat": "/thumbnails/hoc-mat.jpg",
-  "tai-day-du": "/thumbnails/tai-day-du.jpg",
+  "tai-day-du": "/thumbnails/ear-full.jpg",
   "mui-xoang": "/thumbnails/mui-xoang.jpg",
   "mieng-luoi-rang": "/thumbnails/mieng-luoi-rang.jpg",
   "hau-thanh-quan": "/thumbnails/hau-thanh-quan.jpg",
@@ -468,6 +470,8 @@ export const regionBySlug = new Map(regionGroups.map((g) => [g.slug, g]));
  * vùng — chúng xuất hiện ở "Tất cả mô hình" chứ không thuộc vùng nào.
  */
 const sceneRegion: Record<string, RegionKey> = {
+  "co-truoc-cot-song-co": "head-neck",
+  "dong-mach-nao-truoc": "head-neck",
   // Đầu – mặt – cổ
   "giai-phau-dau": "head-neck", "giai-phau-co": "head-neck", "so-nen-so": "head-neck",
   "giai-phau-so": "head-neck", "hoc-mat": "head-neck", "giai-phau-mat": "head-neck",
@@ -606,9 +610,11 @@ export function searchScenes(query: string, locale: Loc = "vi"): CatalogScene[] 
       .map((g) => g.key),
   );
 
-  return catalogScenes.filter(
-    (scene) => deaccent(scene.searchText).includes(q) || systemHits.has(scene.system),
-  );
+  return catalogScenes
+    .map((scene) => ({ scene, score: Math.max(modelSearchScore(scene, query, locale), systemHits.has(scene.system) ? 10 : 0) }))
+    .filter(({ score }) => score > 0)
+    .sort((a, b) => b.score - a.score)
+    .map(({ scene }) => scene);
 }
 
 /** Số liệu thật hiển thị ở trang chủ — đếm từ dữ liệu, không gõ tay. */

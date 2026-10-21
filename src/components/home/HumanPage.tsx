@@ -78,6 +78,7 @@ export default async function HumanPage({ locale }: { locale: Loc }) {
         subtitle={pick(C.sections.featuredSub, locale)}
         scenes={featured}
         locale={locale}
+        showArrows={false}
       />
 
       <section className="sec" id="he-co-quan">

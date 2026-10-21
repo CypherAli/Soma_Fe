@@ -14,8 +14,8 @@ import { type CategoryData, type ResultCard } from "@/lib/exploreContent";
 import AtlasIcon from "./AtlasIcon";
 import FilterSelect from "./FilterSelect";
 import { catalogScenes } from '@/lib/catalog';
+import { modelSearchScore } from '@/lib/modelSearch';
 const searchByHref=new Map(catalogScenes.map(scene=>[scene.href,scene.searchText]));
-const fold=(value:string)=>value.toLowerCase().normalize('NFD').replace(/\p{M}/gu,'').replace(/đ/g,'d');
 
 const IMG_ICON_FALLBACK: Record<string, string> = {
   "an-heart": "i-heart", "an-skel": "i-bone", "an-muscle": "i-muscle",
@@ -65,15 +65,14 @@ export default function ExploreResults({ data, locale }: { data: CategoryData; l
   const router = useRouter();
 
   const cards = useMemo(() => {
-    const filtered = data.cards.filter((c) => {
-      const matchesFilter = active === "all" || c.filters.includes(active);
-      const haystack=fold([c.title.vi,c.title.en,c.title.zh,searchByHref.get(c.href??'')??''].join(' '));
-      const matchesQuery = fold(query.trim()).split(/\s+/).filter(Boolean).every(term=>haystack.includes(term));
-      return matchesFilter && matchesQuery;
-    });
-    if (sort === "relevance") return filtered; // giữ nguyên thứ tự biên tập
+    const filtered = data.cards
+      .filter((card) => active === "all" || card.filters.includes(active))
+      .map((card) => ({ card, score: modelSearchScore({ title: card.title, searchText: searchByHref.get(card.href ?? "") }, query, locale) }))
+      .filter(({ score }) => score > 0);
+    // Stable sorting preserves editorial order when there is no query.
+    if (sort === "relevance") return filtered.sort((a, b) => b.score - a.score).map(({ card }) => card);
     const dir = sort === "az" ? 1 : -1;
-    return [...filtered].sort(
+    return filtered.map(({ card }) => card).sort(
       (a, b) => dir * pick(a.title, locale).localeCompare(pick(b.title, locale), locale === "zh" ? "zh" : "vi"),
     );
   }, [data.cards, active, query, sort, locale]);
@@ -120,7 +119,9 @@ export default function ExploreResults({ data, locale }: { data: CategoryData; l
       ) : null}
 
       {cards.length === 0 ? (
-        <p className="content-empty">{locale === "vi" ? "Chưa có nội dung ở mục này." : locale === "zh" ? "此分类暂无内容。" : "No content in this category yet."}</p>
+        <p className="content-empty" role="status">{query.trim()
+          ? locale === "vi" ? "Không tìm thấy mô hình phù hợp." : locale === "zh" ? "未找到匹配的模型。" : "No matching models found."
+          : locale === "vi" ? "Chưa có nội dung ở mục này." : locale === "zh" ? "此分类暂无内容。" : "No content in this category yet."}</p>
       ) : (
         <div className="results-grid">
           {cards.map((c, i) => (

@@ -6,7 +6,7 @@
  *     tiếp hợp, nên mốc cốt hoá được dạy trong ghi chú từng xương.
  *   mo-lien-ket — GIỮ chủ đề: gom mọi mô liên kết đặc atlas có.
  *   ĐỔI CHỦ ĐỀ:
- *     he-thinh-giac  → Cơ trước cột sống cổ và cơ bậc thang (atlas chỉ có một lưới tai ngoài)
+ *     co-truoc-cot-song-co → Cơ trước cột sống cổ và cơ bậc thang (bài riêng, giữ mô hình tai Z-Anatomy)
  *     he-mac         → Vòng mạch tuỵ–tá tràng (atlas không có mạc)
  *     tuyen-noi-tiet → Lỗ trên lồng ngực (trùng "he-noi-tiet"; atlas không có tuyến giáp)
  */
@@ -278,9 +278,9 @@ emit({
   file: "prevertebral",
   script: "batch-f",
   exportName: "prevertebralScene",
-  header: 'Scene "Cơ trước cột sống cổ và cơ bậc thang" dựng từ bộ atlas BodyParts3D.\n\nThay bài "Hệ thính giác" cũ: atlas chỉ có một lưới tai ngoài, không có tai giữa, tai trong, dây VIII.',
+  header: 'Scene "Cơ trước cột sống cổ và cơ bậc thang" dựng từ bộ atlas BodyParts3D.\n\nBài cơ cổ độc lập; mô hình tai Z-Anatomy giữ đường dẫn he-thinh-giac.',
   scene: {
-    slug: "he-thinh-giac",
+    slug: "co-truoc-cot-song-co",
     system: "muscular",
     title: { vi: "Cơ trước cột sống cổ và cơ bậc thang", en: "Prevertebral and Scalene Muscles", zh: "椎前肌与斜角肌" },
     latin: "Mm. prevertebrales · Mm. scaleni",

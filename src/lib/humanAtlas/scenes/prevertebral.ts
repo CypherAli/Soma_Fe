@@ -3,7 +3,7 @@ import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Cơ trước cột sống cổ và cơ bậc thang" dựng từ bộ atlas BodyParts3D.
  * 
- * Thay bài "Hệ thính giác" cũ: atlas chỉ có một lưới tai ngoài, không có tai giữa, tai trong, dây VIII.
+ * Bài cơ cổ độc lập; mô hình tai Z-Anatomy giữ đường dẫn he-thinh-giac.
  *
  * SINH TỰ ĐỘNG bằng scripts/atlas/gen-scene-batch-f.mjs — mọi mã FJ đều là
  * mảnh CÓ THẬT trong manifest. Đừng sửa tay file này.
@@ -11,7 +11,7 @@ import { bindContentSource } from "@/lib/content/source";
 import type { AtlasSceneDef } from "./types";
 
 export const prevertebralScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/prevertebral.ts#prevertebralScene", {
-  "slug": "he-thinh-giac",
+  "slug": "co-truoc-cot-song-co",
   "title": {
     "vi": "Cơ trước cột sống cổ và cơ bậc thang",
     "en": "Prevertebral and Scalene Muscles",
