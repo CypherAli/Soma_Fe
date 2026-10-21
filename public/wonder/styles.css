@@ -317,3 +317,15 @@ kbd { font-family: inherit; font-size: 11px; padding: 1px 6px; border: 1px solid
 .label-pager button { width:30px;height:28px;border:1px solid #ffffff18;border-radius:5px;background:#202327;color:#eef1f4; }
 .label-pager button:disabled { opacity:.4; }
 @media(max-width:900px) { .label-pager { bottom:auto;top:98px; } }
+
+/* A single scroll container keeps every utility and the entire selected card reachable. */
+.top-right{box-sizing:border-box;max-height:calc(100dvh - 40px);padding:0 4px 8px;overscroll-behavior:contain;scrollbar-gutter:stable}
+.top-right .icons{grid-template-columns:repeat(5,minmax(0,1fr))}
+.top-right .icons .icon{width:100%;min-width:0}
+.top-right .part-card{max-height:none;overflow:visible;flex:none}
+.part-card .pname{min-width:0;font-size:14px;line-height:1.5;overflow-wrap:anywhere}
+.part-card .phead{align-items:flex-start}
+.part-card .pactions{flex-wrap:wrap}.part-card .pactions button{min-width:72px;line-height:1.5}
+.part-card .pinfo,.part-card .pdescription{overflow-wrap:anywhere}
+.top-right:has(.camera-preview.scanning){padding:0;scrollbar-gutter:auto}
+@media(max-width:900px){.top-right .icons{grid-template-columns:repeat(4,minmax(0,1fr))}}

@@ -151,7 +151,7 @@
 .atlas-studio .anatomy-search-results{max-width:min(350px,calc(100vw - 32px));background:var(--card);border:1px solid var(--border);color:var(--foreground)}
 .atlas-studio .anatomy-search-results [data-slot=combobox-item]{font-size:14px;min-height:44px;display:flex;gap:10px;align-items:center}
 .atlas-studio .search-result-name{flex:1;text-transform:capitalize}
-.atlas-studio .detail-sheet{top:105px!important;bottom:178px!important;right:95px!important;height:auto!important;width:310px!important;max-width:310px!important;padding:28px 23px;overflow-y:auto;gap:18px!important;border-radius:6px;box-shadow:0 15px 70px #2433440a}
+.atlas-studio .detail-sheet{top:105px!important;bottom:98px!important;right:95px!important;height:auto!important;width:310px!important;max-width:310px!important;padding:28px 23px;overflow-y:auto;gap:18px!important;border-radius:6px;box-shadow:0 15px 70px #2433440a}
 .atlas-studio .detail-accent{width:24px;height:2px}
 .atlas-studio .structure-title{font-family:inherit!important;font-size:28px!important;font-weight:400!important;line-height:1.15!important;text-transform:capitalize;letter-spacing:-.6px;margin:0}
 .atlas-studio .structure-description{font-size:15px!important;line-height:1.7;color:#66727f!important}

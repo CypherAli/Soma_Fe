@@ -25,6 +25,7 @@ export default function QuizExamHeader({
   elapsed,
   onBack,
   onToggleSidebar,
+  privateDocument = false,
 }: {
   locale: Loc;
   entry: DrLamEntry;
@@ -37,6 +38,7 @@ export default function QuizExamHeader({
   elapsed: number;
   onBack: () => void;
   onToggleSidebar: () => void;
+  privateDocument?: boolean;
 }) {
   const cmsContent = useContent();
   const drLamCatalog = cmsContent.resolve(cmsSourcedrLamCatalog());
@@ -55,18 +57,18 @@ export default function QuizExamHeader({
           className="dl-course-back"
           onClick={() => onBack()}
           type="button"
-          aria-label={word("Tất cả bộ đề", "All question sets", "全部题库")}
+          aria-label={privateDocument ? word("Về tài liệu của bạn", "Back to your document", "返回您的资料") : word("Tất cả bộ đề", "All question sets", "全部题库")}
         >
           ←
         </button>
         <span>
-          {word("Đại học Y Hà Nội", "Hanoi Medical University", "河内医科大学")}
+          {privateDocument ? word("Tài liệu của bạn", "Your document", "您的资料") : word("Đại học Y Hà Nội", "Hanoi Medical University", "河内医科大学")}
         </span>
-        <small>
+        {!privateDocument && <small>
           {completed.length}/{drLamCatalog.exams.length}{" "}
           {word("đề hoàn thành", "sets completed", "套已完成")}
-        </small>
-        <button
+        </small>}
+        {!privateDocument && <button
           className="dl-menu-toggle"
           onClick={() => onToggleSidebar()}
           aria-expanded={sidebar}
@@ -75,7 +77,7 @@ export default function QuizExamHeader({
         >
           <QuizTopicIcon name="grid" />
           <span>{word("Đổi bộ đề", "Change set", "切换题库")}</span>
-        </button>
+        </button>}
       </div>
       <div className="dl-exam-summary">
         <div className="dl-exam-heading">

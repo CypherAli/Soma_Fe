@@ -16,6 +16,8 @@ import type { T3 } from "@/lib/homeContent";
 // trước máy tính — không có nội tạng, không có mặt cắt, không có thú y.
 
 export type VisionPartKey =
+  | "whole-body"
+  | "upper-body"
   | "head"
   | "face"
   | "eye"
@@ -285,6 +287,20 @@ export const VISION_PARTS: VisionPart[] = bindContentSource("data:src/lib/vision
       zh: "从踝到趾完整取景足部。",
     },
     scenes: ["bo-phan-co-chan-ban-chan", "ban-chan-chi-tiet", "ban-chan", "khop-co-chan", "gan-got-ong-co-chan"],
+  },
+  {
+    key: "whole-body",
+    label: { vi: "Toàn thân", en: "Whole body", zh: "全身" },
+    hint: { vi: "Lùi ra để thấy từ đầu tới hai bàn chân.", en: "Frame the head and both feet.", zh: "后退使头部和双脚进入画面。" },
+    children: ["upper-body", "hip", "thigh", "leg"],
+    scenes: ["toan-than"],
+  },
+  {
+    key: "upper-body",
+    label: { vi: "Nửa thân trên", en: "Upper body", zh: "上半身" },
+    hint: { vi: "Lấy cả hai vai và phần thân vào khung.", en: "Frame both shoulders and the torso.", zh: "使双肩和躯干进入画面。" },
+    children: ["chest", "abdomen", "shoulder"],
+    scenes: ["nua-than-tren"],
   },
 ]);
 

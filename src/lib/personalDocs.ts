@@ -27,6 +27,12 @@ export type PersonalQuestion = {
   stem: string;
   options: Record<string, string>;
   answer: string;
+  answers?: string[];
+  number?: number | null;
+  context?: string | null;
+  images?: string[];
+  explanationImages?: string[];
+  reviewNote?: string | null;
   explanation: string | null;
   page: number | null;
   approved: boolean;
@@ -134,7 +140,7 @@ export async function editQuestion(
   patch: Partial<
     Pick<
       PersonalQuestion,
-      "stem" | "options" | "answer" | "explanation" | "approved"
+      "stem" | "options" | "answer" | "answers" | "explanation" | "approved"
     >
   >,
 ): Promise<PersonalQuestion> {

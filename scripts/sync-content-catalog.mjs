@@ -1,7 +1,7 @@
 /** Rebuild the CMS contract from real FE sources. Never evaluates source code. */
 import ts from 'typescript';
 import { createHash } from 'node:crypto';
-import { readFileSync, writeFileSync, readdirSync, mkdirSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, readdirSync, mkdirSync, existsSync, renameSync } from 'node:fs';
 import { resolve, relative, dirname, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -201,6 +201,13 @@ const contractPath = resolve(root, 'src/lib/content/contract.generated.json');
 const contract = JSON.stringify({ schemaVersion: 2, contractHash }, null, 2) + '\n';
 const sameGeneratedText = (file, expected) => existsSync(file) && readFileSync(file, 'utf8').replace(/\r\n/g, '\n') === expected;
 if (check) { if (!sameGeneratedText(output, result)) throw new Error('CMS catalog is stale. Run npm run cms:sync.'); }
-else { mkdirSync(dirname(output), { recursive: true }); writeFileSync(output, result); writeFileSync(contractPath, contract); }
+else {
+  mkdirSync(dirname(output), { recursive: true });
+  // Backend requests can read the catalog while the dev server is running.
+  const temporary = `${output}.${process.pid}.tmp`;
+  writeFileSync(temporary, result);
+  renameSync(temporary, output);
+  writeFileSync(contractPath, contract);
+}
 if (check && !sameGeneratedText(contractPath, contract)) throw new Error('FE content contract is stale. Run npm run cms:sync.');
 console.log(JSON.stringify({ documents: documents.length, categories: documents.reduce((counts, doc) => ({ ...counts, [doc.category]: (counts[doc.category] ?? 0) + 1 }), {}), models: Object.keys(meshes).length, atlasParts: parts.length, surfaces }));

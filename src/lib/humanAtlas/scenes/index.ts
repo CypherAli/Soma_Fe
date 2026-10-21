@@ -53,7 +53,6 @@ import { lumbarSpineScene } from "./lumbar-spine";
 import { heartFullScene } from "./heart-full";
 import { abdomenSectionScene } from "./abdomen-section";
 import { glutealScene } from "./gluteal";
-import { maleGenitalScene } from "./male-genital";
 import { oesophagusScene } from "./oesophagus";
 import { forearmScene } from "./forearm";
 import { handDetailScene } from "./hand-detail";
@@ -164,7 +163,10 @@ import { partOrbitScene } from "./part-orbit";
 import { partBladderScene } from "./part-bladder";
 
 /** Old saved links remain usable without listing a duplicate lesson. */
-export const atlasSceneAliases: Record<string,string> = { 'tieu-nao-day-du':'hoi-vo-dai-nao' };
+export const atlasSceneAliases: Record<string,string> = {
+  'tieu-nao-day-du': 'hoi-vo-dai-nao',
+  'co-quan-sinh-duc-nam': 'he-sinh-san-nam',
+};
 
 export const atlasScenes: Record<string, AtlasSceneDef> = Object.fromEntries(
   [
@@ -214,7 +216,6 @@ export const atlasScenes: Record<string, AtlasSceneDef> = Object.fromEntries(
     heartFullScene,
     abdomenSectionScene,
     glutealScene,
-    maleGenitalScene,
     oesophagusScene,
     forearmScene,
     handDetailScene,

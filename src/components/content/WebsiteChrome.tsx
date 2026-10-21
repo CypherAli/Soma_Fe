@@ -4,5 +4,5 @@ import type { ReactNode } from 'react';
 
 export default function WebsiteChrome({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  return pathname.endsWith('/bo-model-preview') ? null : children;
+  return pathname.endsWith('/bo-model-preview') || pathname.endsWith('/cu-chi') ? null : children;
 }

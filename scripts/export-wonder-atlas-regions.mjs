@@ -14,7 +14,7 @@ const cache=new Map();
 const sourceZip=process.env.WONDER_OBJ_ZIP;
 const requested=ATLAS_PRESETS.filter(p=>process.argv.slice(2).includes(p.id));
 if(sourceZip&&!requested.length)throw Error('Select explicit source regions');
-const wanted=new Set(atlas.parts.filter(p=>requested.some(s=>(!s.side||!/\bright\b/i.test(p.name))&&(!s.pattern||new RegExp(s.pattern,'i').test(p.name))&&(!s.systems||s.systems.includes(p.system))&&p.bounds[1][1]>=(s.y0??-.1)&&p.bounds[0][1]<=(s.y1??1.9)&&p.bounds[1][0]>=(s.x0??-(s.x??.8))&&p.bounds[0][0]<=(s.x??.8))).map(p=>p.id));
+const wanted=new Set(atlas.parts.filter(p=>requested.some(s=>(!s.partIds||s.partIds.includes(p.id))&&(!s.side||!/\bright\b/i.test(p.name))&&(!s.pattern||new RegExp(s.pattern,'i').test(p.name))&&(!s.systems||s.systems.includes(p.system))&&p.bounds[1][1]>=(s.y0??-.1)&&p.bounds[0][1]<=(s.y1??1.9)&&p.bounds[1][0]>=(s.x0??-(s.x??.8))&&p.bounds[0][0]<=(s.x??.8))).map(p=>p.id));
 const zipBytes=sourceZip?await fs.readFile(sourceZip):null;
 const geometrySourceSha256=zipBytes?createHash('sha256').update(zipBytes).digest('hex'):null;
 const objFiles=sourceZip?unzipSync(zipBytes,{filter:file=>file.name.endsWith('.obj')&&wanted.has(path.basename(file.name,'.obj'))}):null;
@@ -44,6 +44,7 @@ for(const preset of ATLAS_PRESETS){
  const {id,y0=-.1,y1=1.9,x=.8,x0=-x}=preset;
  const groups=new Map(),parts=[];let capLoops=0,unresolvedCuts=0;
  for(const p of atlas.parts){
+  if(preset.partIds&&!preset.partIds.includes(p.id))continue;
   if(preset.side==='left' && /\bright\b/i.test(p.name))continue;
   if(preset.systems&&!preset.systems.includes(p.system))continue;
   if(preset.pattern&&!new RegExp(preset.pattern,'i').test(p.name))continue;
@@ -54,7 +55,7 @@ for(const preset of ATLAS_PRESETS){
   const key=preset.groupByPart?p.id:p.system;
   let g=groups.get(key);if(!g){g={pos:[],norm:[],caps:[],capNorm:[],system:p.system,label:preset.groupByPart?p.name:null,id:p.id};groups.set(key,g);}let count=0;
   const wholeBone=preset.preserveSmallBones&&p.system==='skeletal'&&p.bounds[1][1]-p.bounds[0][1]<.12&&p.bounds[0][0]>=x0&&p.bounds[1][0]<=x;
-  const planes=wholeBone?[]:[[1,y0,1],[1,y1,-1],[0,x0,1],[0,x,-1]];
+  const planes=wholeBone||preset.wholeParts?[]:[[1,y0,1],[1,y1,-1],[0,x0,1],[0,x,-1]];
   const sections=planes.map(()=>[]);
   for(let t=0;t<idx.length;t+=3){let poly=[0,1,2].map(k=>{const i=idx[t+k]*3;return [pos[i],pos[i+1],pos[i+2],norm[i]/32767,norm[i+1]/32767,norm[i+2]/32767];});
    for(const [axis,limit,sign] of planes){if(!poly.length)break;poly=clip(poly,axis,limit,sign);}
@@ -63,7 +64,7 @@ for(const preset of ATLAS_PRESETS){
   }
   let capTriangles=0;
   planes.forEach(([axis,limit,sign],i)=>{const cap=sectionCaps(sections[i],axis,limit,-sign);for(const value of cap.positions)g.caps.push(value);for(const value of cap.normals)g.capNorm.push(value);capTriangles+=cap.positions.length/9;capLoops+=cap.loops;unresolvedCuts+=cap.unresolved;});
-  if(count)parts.push({id:p.id,name:p.name,system:p.system,triangles:count,sourceTriangles:idx.length/3,packedTriangles:p.indexCount/3,complete:wholeBone||(p.bounds[0][1]>=y0&&p.bounds[1][1]<=y1&&p.bounds[0][0]>=x0&&p.bounds[1][0]<=x),capTriangles});
+  if(count)parts.push({id:p.id,name:p.name,system:p.system,triangles:count,sourceTriangles:idx.length/3,packedTriangles:p.indexCount/3,complete:!!preset.wholeParts||wholeBone||(p.bounds[0][1]>=y0&&p.bounds[1][1]<=y1&&p.bounds[0][0]>=x0&&p.bounds[1][0]<=x),capTriangles});
  }
  let start=0;const metadata=[],positions=[],normals=[];
  for(const g of groups.values()){const system=g.system;if(!g.pos.length)continue;const s=SYSTEMS.find(s=>s.id===system);if(!s)throw Error('Unknown atlas system '+system);

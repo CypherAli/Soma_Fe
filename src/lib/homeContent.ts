@@ -41,7 +41,7 @@ export const homeContent = bindContentSource("data:src/lib/homeContent.ts#homeCo
   // Menu chính editorial — 4 mục như mẫu Corpus & Anima
   mainMenu: [
     { label: { vi: "Giải phẫu người", en: "Human anatomy", zh: "人体解剖" }, href: "/nguoi" },
-    { label: { vi: "Hệ cơ quan", en: "Organ systems", zh: "器官系统" }, href: "/giai-phau/theo-he" },
+    { label: { vi: "Hệ cơ quan", en: "Organ systems", zh: "器官系统" }, href: "/giai-phau/tat-ca" },
     { label: { vi: "Quiz", en: "Quiz", zh: "测验" }, href: "/quiz" },
     { label: { vi: "Vision AI", en: "Vision AI", zh: "视觉 AI" }, href: "/cu-chi" },
     { label: { vi: "Bệnh lý", en: "Pathology", zh: "病理" }, href: "/benh-ly" },
@@ -225,9 +225,9 @@ export const homeContent = bindContentSource("data:src/lib/homeContent.ts#homeCo
     },
     groups: [
       { key: "about", heading: { vi: "Giới thiệu", en: "About", zh: "简介" }, links: [
-        { label: { vi: "Về Soma Atlas", en: "About Soma Atlas", zh: "关于 Soma Atlas" }, href: "/" },
-        { label: { vi: "Sứ mệnh & nguồn gốc", en: "Mission & origins", zh: "使命与来源" }, href: "/tai-lieu-y-khoa" },
-        { label: { vi: "Dữ liệu & phương pháp", en: "Data & methodology", zh: "数据与方法" }, href: "/tai-lieu-y-khoa" },
+        { label: { vi: "Về Soma Atlas", en: "About Soma Atlas", zh: "关于 Soma Atlas" }, href: "/gioi-thieu/ve-soma-atlas" },
+        { label: { vi: "Sứ mệnh & nguồn gốc", en: "Mission & origins", zh: "使命与来源" }, href: "/gioi-thieu/su-menh-nguon-goc" },
+        { label: { vi: "Dữ liệu & phương pháp", en: "Data & methodology", zh: "数据与方法" }, href: "/gioi-thieu/du-lieu-phuong-phap" },
       ] },
       { key: "services", heading: { vi: "Dịch vụ", en: "Services", zh: "服务" }, links: [
         { label: { vi: "Atlas giải phẫu 3D", en: "3D anatomy atlas", zh: "3D 解剖图谱" }, href: "/giai-phau/tat-ca" },
@@ -237,23 +237,23 @@ export const homeContent = bindContentSource("data:src/lib/homeContent.ts#homeCo
       { key: "resources", heading: { vi: "Tài nguyên", en: "Resources", zh: "资源" }, links: [
         { label: { vi: "Kho tài liệu y khoa", en: "Medical document library", zh: "医学资料库" }, href: "/tai-lieu-y-khoa" },
         { label: { vi: "Thư viện mô hình", en: "Model library", zh: "模型库" }, href: "/thu-vien" },
-        { label: { vi: "Học liệu Đại học Y Hà Nội", en: "Hanoi Medical University resources", zh: "河内医科大学学习资料" }, href: "https://hmu.edu.vn/", external: true },
-        { label: { vi: "Y học Bộ Y tế", en: "Ministry of Health medicine", zh: "卫生部医学资料" }, href: "https://moh.gov.vn/", external: true },
+        { label: { vi: "Đại học Y Hà Nội", en: "Hanoi Medical University", zh: "河内医科大学" }, href: "https://hmu.edu.vn/", external: true },
+        { label: { vi: "Bộ Y tế", en: "Ministry of Health", zh: "卫生部" }, href: "https://moh.gov.vn/", external: true },
         { label: { vi: "Z-Anatomy", en: "Z-Anatomy", zh: "Z-Anatomy" }, href: "https://www.z-anatomy.com/", external: true },
         { label: { vi: "BodyParts3D (DBCLS)", en: "BodyParts3D (DBCLS)", zh: "BodyParts3D (DBCLS)" }, href: "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/desc.html", external: true },
       ] },
       { key: "support", heading: { vi: "Chăm sóc khách hàng", en: "Customer care", zh: "客户服务" }, links: [
-        { label: { vi: "Trung tâm hỗ trợ", en: "Help center", zh: "帮助中心" }, href: "/tro-ly" },
-        { label: { vi: "Câu hỏi thường gặp", en: "Frequently asked questions", zh: "常见问题" }, href: "/tro-ly" },
-        { label: { vi: "Hướng dẫn sử dụng", en: "User guide", zh: "使用指南" }, href: "/tai-lieu-y-khoa" },
+        { label: { vi: "Trung tâm hỗ trợ", en: "Help center", zh: "帮助中心" }, href: "/ho-tro/trung-tam-ho-tro" },
+        { label: { vi: "Câu hỏi thường gặp", en: "Frequently asked questions", zh: "常见问题" }, href: "/ho-tro/cau-hoi-thuong-gap" },
+        { label: { vi: "Hướng dẫn sử dụng", en: "User guide", zh: "使用指南" }, href: "/ho-tro/huong-dan-su-dung" },
         { label: { vi: "Hotline: 0848 565 650", en: "Hotline: 0848 565 650", zh: "热线：0848 565 650" }, href: "tel:0848565650" },
-        { label: { vi: "Báo lỗi nội dung", en: "Report content issue", zh: "报告内容问题" }, href: "mailto:support@somaatlas.vn" },
+        { label: { vi: "Báo lỗi nội dung", en: "Report content issue", zh: "报告内容问题" }, href: "mailto:trinhviethoangawm@gmail.com" },
       ] },
       { key: "policy", heading: { vi: "Chính sách", en: "Policies", zh: "政策" }, links: [
-        { label: { vi: "Bản quyền & giấy phép", en: "Copyright & licences", zh: "版权与许可" }, href: "https://creativecommons.org/licenses/by-sa/4.0/", external: true },
-        { label: { vi: "Nguồn dữ liệu", en: "Data sources", zh: "数据来源" }, href: "/tai-lieu-y-khoa" },
-        { label: { vi: "Cam kết sử dụng", en: "Usage commitment", zh: "使用承诺" }, href: "/tai-lieu-y-khoa" },
-        { label: { vi: "Bảo vệ tài nguyên", en: "Resource protection", zh: "资源保护" }, href: "/tai-lieu-y-khoa" },
+        { label: { vi: "Bản quyền & giấy phép", en: "Copyright & licences", zh: "版权与许可" }, href: "/chinh-sach/ban-quyen-giay-phep" },
+        { label: { vi: "Nguồn dữ liệu", en: "Data sources", zh: "数据来源" }, href: "/nguon-du-lieu" },
+        { label: { vi: "Cam kết sử dụng", en: "Usage commitment", zh: "使用承诺" }, href: "/chinh-sach/cam-ket-su-dung" },
+        { label: { vi: "Bảo vệ tài nguyên", en: "Resource protection", zh: "资源保护" }, href: "/chinh-sach/bao-ve-tai-nguyen" },
         { label: { vi: "Quy tắc sử dụng", en: "Terms of use", zh: "使用条款" }, href: "/dieu-khoan" },
         { label: { vi: "Chính sách bảo mật", en: "Privacy policy", zh: "隐私政策" }, href: "/chinh-sach" },
       ] },
@@ -264,7 +264,7 @@ export const homeContent = bindContentSource("data:src/lib/homeContent.ts#homeCo
     ],
     socialH: { vi: "Kết nối với chúng tôi", en: "Connect with us", zh: "关注我们" },
     social: [
-      { label: "Facebook", href: "https://www.facebook.com/" },
+      { label: "Facebook", href: "https://www.facebook.com/trinh.hoang.262568?locale=vi_VN" },
       { label: "Instagram", href: "https://www.instagram.com/" },
       { label: "TikTok", href: "https://www.tiktok.com/" },
       { label: "X", href: "https://x.com/" },

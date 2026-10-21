@@ -93,6 +93,7 @@ export async function recognise(
 ): Promise<void> {
   const fromHand = handWrist !== null;
   const posePromise = deps.pose();
+  let emittedPose = false;
 
   const localOf = (p: PoseResult) => {
     if (p.landmarks.length < 33) return null;
@@ -107,6 +108,7 @@ export async function recognise(
       return { guesses: withTiers(arm.guesses, tier), bestIou: 1 };
     }
     const g = guessFromPose(box, p.landmarks, aspect);
+    if (g.bestIou < POSE_CLAIM_IOU) return null;
     const tier: ConfidenceTier =
       g.bestIou >= POSE_TRUST_IOU ? "clear" : g.bestIou >= POSE_CLAIM_IOU ? "maybe" : "unsure";
     return { guesses: withTiers(g.guesses, tier), bestIou: g.bestIou };
@@ -117,6 +119,7 @@ export async function recognise(
   const emitPose = (p: PoseResult): boolean => {
     const l = localOf(p);
     if (!l || l.guesses.length === 0) return false;
+    emittedPose = true;
     deps.emit({
       guesses: l.guesses,
       // Khớp yếu thì gọi đúng tên là phỏng đoán thô, đừng khoác áo "mốc giải phẫu".
@@ -139,7 +142,7 @@ export async function recognise(
     const late = await deps.gpu();
     if (late.rows?.length && !deps.picked()) {
       deps.emit({ guesses: late.rows, source: { kind: "gpu", ms: 0 }, failure: null });
-    } else if (!fromHand) {
+    } else if (!fromHand && !emittedPose && !deps.picked()) {
       deps.emit({ guesses: [], source: null, failure: late.offline ? "offline" : "low" });
     }
     return;
@@ -176,6 +179,7 @@ export async function recognise(
   const raced = await withDeadline(gpuPromise, GPU_BUDGET_MS, deps.wait);
 
   const applyGpu = (answer: GpuAnswer) => {
+    if (deps.picked()) return true;
     if (answer.rows?.length) {
       deps.emit({ guesses: answer.rows, source: { kind: "gpu", ms: 0 }, failure: null });
       return true;

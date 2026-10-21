@@ -32,6 +32,7 @@ import {
 } from "@/lib/anatomy/drLamSession";
 import { quizMatchesQuery, QUIZ_TOPICS, quizExamTitle } from "./quizTopics";
 import "./dr-lam-quiz.css";
+import { personalQuizEntry } from "@/lib/anatomy/personalQuizBank";
 
 type Filter = "all" | "correct" | "wrong" | "skipped";
 const multipleAnswers = (question: DrLamQuestion) =>
@@ -48,10 +49,16 @@ export default function DrLamQuiz({
   locale,
   onOtherSources,
   initialExamId,
+  documentBank,
+  onDocumentBack,
+  onSessionActiveChange,
 }: {
   locale: Loc;
   onOtherSources: () => void;
   initialExamId?: string;
+  documentBank?: DrLamBank;
+  onDocumentBack?: () => void;
+  onSessionActiveChange?: (active: boolean) => void;
 }) {
   const cmsContent = useContent();
   const drLamCatalog = cmsContent.resolve(cmsSourcedrLamCatalog());
@@ -59,9 +66,9 @@ export default function DrLamQuiz({
 
   const word = (vi: string, en: string, zh: string) =>
     locale === "vi" ? vi : locale === "zh" ? zh : en;
-  const [examId, setExamId] = useState(initialExamId ?? "de-thi-thu-9");
-  const [library, setLibrary] = useState(!initialExamId);
-  const [bank, setBank] = useState<DrLamBank | null>(null);
+  const [examId, setExamId] = useState(documentBank?.id ?? initialExamId ?? "de-thi-thu-9");
+  const [library, setLibrary] = useState(!documentBank && !initialExamId);
+  const [bank, setBank] = useState<DrLamBank | null>(documentBank ?? null);
   const [error, setError] = useState("");
   const [reload, setReload] = useState(0);
   const [search, setSearch] = useState("");
@@ -80,18 +87,19 @@ export default function DrLamQuiz({
   const [leavePrompt, setLeavePrompt] = useState<string | null>(null);
   const [elapsed, setElapsed] = useState(0);
   const questionRef = useRef<HTMLElement>(null);
-  const entry = drLamCatalog.exams.find((e) => e.id === examId)!;
+  const entry = useMemo(() => documentBank ? personalQuizEntry(documentBank) : drLamCatalog.exams.find(e => e.id === examId)!, [documentBank, drLamCatalog.exams, examId]);
 
   useEffect(() => {
-    const data = readSaved();
+    const data = documentBank ? { sessions: {}, mistakes: {} } : readSaved();
     const frame = requestAnimationFrame(() => {
       setSaved(data);
       setReady(true);
     });
     return () => cancelAnimationFrame(frame);
-  }, []);
+  }, [documentBank]);
 
   useEffect(() => {
+    if (documentBank) return;
     let active = true;
     loadDrLamBank(entry)
       .then((value) => {
@@ -109,10 +117,10 @@ export default function DrLamQuiz({
     return () => {
       active = false;
     };
-  }, [entry, reload]);
+  }, [entry, reload, documentBank]);
 
   useEffect(() => {
-    if (!ready) return;
+    if (!ready || documentBank) return;
     let frame = 0;
     try {
       localStorage.setItem(DR_LAM_STORAGE_KEY, JSON.stringify(saved));
@@ -120,7 +128,10 @@ export default function DrLamQuiz({
       frame = requestAnimationFrame(() => setStorageError(true));
     }
     return () => cancelAnimationFrame(frame);
-  }, [saved, ready]);
+  }, [saved, ready, documentBank]);
+
+  useEffect(() => { onSessionActiveChange?.(!!session && !session.finishedAt); }, [session, onSessionActiveChange]);
+  useEffect(() => () => onSessionActiveChange?.(false), [onSessionActiveChange]);
 
   useEffect(() => {
     if (!session) return;
@@ -161,7 +172,7 @@ export default function DrLamQuiz({
   const mistakeQuestions =
     loaded?.questions.filter((q) => mistakes.includes(q.id)) ?? [];
   const stored = saved.sessions[examId];
-  const resumable = resumableDrLamSession(loaded, stored);
+  const resumable = documentBank ? null : resumableDrLamSession(loaded, stored);
   const percent = score.total
     ? Math.round((score.correct / score.total) * 100)
     : 0;
@@ -207,13 +218,13 @@ export default function DrLamQuiz({
   }, [session?.mode, finished, remaining, questions.length, finish]);
 
   useEffect(() => {
-    if (!session || finished || !storageError) return;
+    if (!session || finished || (!storageError && !documentBank)) return;
     const warn = (event: BeforeUnloadEvent) => {
       event.preventDefault();
     };
     window.addEventListener("beforeunload", warn);
     return () => window.removeEventListener("beforeunload", warn);
-  }, [session, finished, storageError]);
+  }, [session, finished, storageError, documentBank]);
 
   function start(mode: Session["mode"], pool = loaded?.questions ?? []) {
     if (!pool.length) return;
@@ -323,7 +334,7 @@ export default function DrLamQuiz({
   return <ContentSurface scope="src/components/quiz/DrLamQuiz.tsx">{(
     <section
       className={`dl-quiz${sidebar ? " has-sidebar" : ""}${view === "questions" ? " dl-study" : ""}`}
-      aria-label={word(
+      aria-label={documentBank ? word("Bộ đề từ tài liệu của bạn", "Your document quiz", "您的资料试卷") : word(
         "Bộ đề Đại học Y Hà Nội",
         "Hanoi Medical University question bank",
         "河内医科大学题库",
@@ -334,6 +345,7 @@ export default function DrLamQuiz({
           <QuizExamHeader
             locale={locale}
             entry={entry}
+            privateDocument={!!documentBank}
             showCover={view !== "questions"}
             completed={completed}
             sidebar={sidebar}
@@ -341,7 +353,11 @@ export default function DrLamQuiz({
             score={score}
             percent={percent}
             elapsed={elapsed}
-            onBack={() => setLibrary(true)}
+            onBack={() => {
+              if (documentBank && session && !finished) setLeavePrompt("document");
+              else if (documentBank) onDocumentBack?.();
+              else setLibrary(true);
+            }}
             onToggleSidebar={() => setSidebar(!sidebar)}
           />
 
@@ -504,7 +520,7 @@ export default function DrLamQuiz({
                     )}
                   </label>
                   <p className="dl-save-note">
-                    {word(
+                    {documentBank ? word("Bài làm được giữ trong phiên hiện tại. Tài liệu và các câu đã duyệt nằm trong tài khoản của bạn.", "Your attempt stays in this session. Your document and approved questions remain in your account.", "答题进度保留在当前会话；资料与已审阅题目保存在您的账户中。") : word(
                       "Tiến độ và kho câu sai được lưu trên trình duyệt này.",
                       "Progress and mistakes are saved in this browser.",
                       "进度与错题保存在当前浏览器。",
@@ -989,8 +1005,11 @@ export default function DrLamQuiz({
             </>
           )}
           <footer className="dl-bottom">
-            <button type="button" onClick={onOtherSources}>
-              {word(
+            <button type="button" onClick={() => {
+              if (documentBank && session && !finished) setLeavePrompt("document");
+              else onOtherSources();
+            }}>
+              {documentBank ? word("Về tài liệu của bạn", "Back to your document", "返回您的资料") : word(
                 "Nguồn học khác: mô hình 3D, giáo trình, atlas, tài liệu của bạn",
                 "Other sources: 3D models, textbook, atlas, your documents",
                 "其他来源：3D 模型、教材、图谱、个人资料",
@@ -998,7 +1017,7 @@ export default function DrLamQuiz({
               →
             </button>
             <span>
-              {word(
+              {documentBank ? documentBank.sourceFile : word(
                 "Nguồn: 30 PDF do bạn cung cấp",
                 "Source: your 30 PDFs",
                 "来源：您提供的 30 份 PDF",
@@ -1007,7 +1026,7 @@ export default function DrLamQuiz({
           </footer>
         </main>
 
-        {sidebar && (
+        {sidebar && !documentBank && (
           <aside
             className="dl-catalog"
             id="dl-catalog"
@@ -1121,20 +1140,20 @@ export default function DrLamQuiz({
       )}
       {leavePrompt && (
         <QuizConfirmDialog
-          title={word(
+          title={documentBank ? word("Về tài liệu?", "Return to your document?", "返回资料？") : word(
             "Chuyển sang đề khác?",
             "Switch question sets?",
             "切换题库？",
           )}
-          description={word(
+          description={documentBank ? word("Thoát sẽ kết thúc phiên làm bài hiện tại. Các câu đã nhập vẫn được giữ trong tài khoản.", "Leaving ends this attempt. Your imported questions remain in your account.", "离开将结束当前答题，导入的题目仍保存在账户中。") : word(
             "Bài đang làm đã được lưu. Bạn có thể tiếp tục khi quay lại đề này.",
             "Your attempt is saved. You can resume it when you return.",
             "当前进度已保存，可返回继续答题。",
           )}
           cancelLabel={word("Ở lại", "Stay", "留下")}
-          confirmLabel={word("Chuyển đề", "Switch", "切换")}
+          confirmLabel={documentBank ? word("Thoát bài", "Leave attempt", "退出答题") : word("Chuyển đề", "Switch", "切换")}
           onCancel={() => setLeavePrompt(null)}
-          onConfirm={() => changeExam(leavePrompt)}
+          onConfirm={() => documentBank ? onDocumentBack?.() : changeExam(leavePrompt)}
         />
       )}
     </section>

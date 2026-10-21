@@ -3,7 +3,7 @@ import { bindContentSource } from "@/lib/content/source";
 /**
  * Scene "Động mạch não trước" dựng từ bộ atlas BodyParts3D.
  * 
- * Thay bài "Tai đầy đủ" cũ: atlas chỉ có một lưới tai ngoài, không có tai giữa và tai trong.
+ * Bài động mạch não độc lập; mô hình tai Z-Anatomy giữ đường dẫn tai-day-du.
  *
  * SINH TỰ ĐỘNG bằng scripts/atlas/gen-scene-batch-c.mjs — mọi mã FJ đều là
  * mảnh CÓ THẬT trong manifest. Đừng sửa tay file này.
@@ -11,7 +11,7 @@ import { bindContentSource } from "@/lib/content/source";
 import type { AtlasSceneDef } from "./types";
 
 export const acaScene: AtlasSceneDef = bindContentSource("data:src/lib/humanAtlas/scenes/aca.ts#acaScene", {
-  "slug": "tai-day-du",
+  "slug": "dong-mach-nao-truoc",
   "title": {
     "vi": "Động mạch não trước và nhánh vỏ",
     "en": "The Anterior Cerebral Artery",

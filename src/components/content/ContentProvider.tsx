@@ -1,10 +1,10 @@
 "use client";
 
-import { Children, cloneElement, createContext, isValidElement, useContext, useMemo, type ReactNode } from 'react';
+import { createContext, useContext, useMemo, type ReactNode } from 'react';
 import { createContentResolver, EMPTY_CONTENT, type ContentSnapshot } from '@/lib/content/resolve';
+import { resolveContentSurface } from '@/lib/content/surface';
 
 const ContentContext = createContext(createContentResolver(EMPTY_CONTENT));
-const untouched = new Set(['key', 'ref', 'className', 'id', 'htmlFor', 'name', 'type', 'role', 'method', 'target', 'rel', 'download', 'style', 'dangerouslySetInnerHTML', 'locale', 'lang', 'dir', 'value', 'defaultValue', 'checked', 'token', 'session', 'scope', 'systemId']);
 
 export function ContentProvider({ snapshot, preview, children }: { snapshot: ContentSnapshot; preview: boolean; children: ReactNode }) {
   const resolver = useMemo(() => createContentResolver(snapshot), [snapshot]);
@@ -21,16 +21,5 @@ export function useContent() { return useContext(ContentContext); }
 
 /** Resolves public presentation values through React, before the child renders. */
 export function ContentSurface({ children, scope = '' }: { children: ReactNode; scope?: string }) {
-  const { resolve, copy } = useContent();
-  function visit(node: ReactNode): ReactNode {
-    if (typeof node === 'string') return copy(scope, node);
-    if (!isValidElement<Record<string, unknown>>(node)) return node;
-    const props: Record<string, unknown> = {};
-    for (const [key, value] of Object.entries(node.props)) {
-      if (key === 'children') props.children = Children.map(value as ReactNode, visit);
-      else if (!untouched.has(key) && !key.startsWith('on') && !key.startsWith('data-') && typeof value !== 'function') props[key] = typeof value === 'string' ? copy(scope, value) : resolve(value);
-    }
-    return cloneElement(node, props);
-  }
-  return Children.map(children, visit);
+  return resolveContentSurface(children, scope, useContent());
 }

@@ -10,7 +10,7 @@ import GestureArmScene, {
   type LayerState,
 } from "@/components/gesture/GestureArmScene";
 import { CATS, type CatKey } from "@/lib/anatomy/layers";
-import { DEFAULT_LAYERED_SLUG, type LayeredModel } from "@/lib/anatomy/layeredModels";
+import { type LayeredModel } from "@/lib/anatomy/layeredModels";
 import {
   atlasLayerDefs,
   getControlModel,
@@ -63,7 +63,7 @@ import {
   type FrameMeta,
   type TrackedHand,
 } from "@/lib/gesture/useHandTracking";
-import { scanControlModel, scanControlModelName } from "@/lib/vision/scanControlModel";
+import { DEFAULT_VISION_SLUG, isScanControlModel, scanControlModel, scanControlModelName } from "@/lib/vision/scanControlModel";
 import { ScanOverlay, ScanSidebar, type ScanStage } from "@/components/vision/ScanPanels";
 import {
   CROP_SIZE,
@@ -330,7 +330,7 @@ export default function GestureControlPage({
    * này — cả vòng từ quét tới bóc lớp không rời trang, không đụng chuột.
    */
   const [target, setTarget] = useState<ControlModel>(
-    () => getControlModel(DEFAULT_LAYERED_SLUG)!,
+    () => getControlModel(DEFAULT_VISION_SLUG)!,
   );
   /** Lớp của mô hình ATLAS đang điều khiển (mô hình .glb dùng `layers` bên dưới). */
   const [atlasLayers, setAtlasLayers] = useState<AtlasLayerState>(() =>
@@ -934,6 +934,7 @@ export default function GestureControlPage({
     };
     const receive=(event:MessageEvent)=>{
       const frame=controlFrameRef.current?.contentWindow;if(event.origin!==location.origin||event.source!==frame)return;
+      if(event.data?.type==='soma-control-model'&&isScanControlModel(event.data.id)){controlHandoffRef.current=event.data.id;return;}
       if(event.data?.type==='soma-scan-selected'){stop();return;}
       if(event.data?.type!=='soma-camera-scan')return;
       // A deliberate retry replaces the previous session, including late refinements.
@@ -2539,7 +2540,7 @@ export default function GestureControlPage({
               const child = event.currentTarget.contentWindow as (Window & { wonderSnap?: { enter: (id: string, stream: MediaStream | null) => void } }) | null;
               const stream = cameraStreamRef.current;
               child?.wonderSnap?.enter(controlHandoffRef.current ?? scanControlModel(target.slug, pickedPartRef.current), stream instanceof MediaStream ? stream : null);
-            }} src={`/wonder/index.html?lang=${locale}&region=${scanControlModel(DEFAULT_LAYERED_SLUG)}&autostart=nocamera`} title="Vision AI — điều khiển giải phẫu bằng cử chỉ" className="absolute inset-0 h-full w-full border-0" allow="camera; microphone; fullscreen" />
+            }} src={`/wonder/index.html?lang=${locale}&region=${scanControlModel(DEFAULT_VISION_SLUG)}&autostart=nocamera`} title="Vision AI — điều khiển giải phẫu bằng cử chỉ" className="absolute inset-0 h-full w-full border-0" allow="camera; microphone; fullscreen" />
           ) : (
           <>{scanFrame ? (
             // Khung 3D ĐÚNG TỶ LỆ ô vừa cắt, đặt giữa, kèm chính tấm ảnh đã

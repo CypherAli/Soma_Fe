@@ -6,7 +6,7 @@
  * Hốc mắt chỉ lấy bên TRÁI (bẫy #13: lưới mắt phải lỗi).
  *
  * ĐỔI CHỦ ĐỀ (atlas không có tai, xoang tĩnh mạch, dây VII–VIII, cơ nhai, hạch):
- *   tai-day-du            → Động mạch não trước
+ *   dong-mach-nao-truoc   → Động mạch não trước (bài riêng, giữ mô hình tai Z-Anatomy)
  *   khop-thai-duong-ham   → Động mạch não giữa
  *   ho-duoi-thai-duong    → Động mạch não sau
  *   xoang-tinh-mach-mang-cung → Nhánh xuyên sâu và động mạch mạch mạc
@@ -32,9 +32,9 @@ emit({
   file: "aca",
   script: "batch-c",
   exportName: "acaScene",
-  header: 'Scene "Động mạch não trước" dựng từ bộ atlas BodyParts3D.\n\nThay bài "Tai đầy đủ" cũ: atlas chỉ có một lưới tai ngoài, không có tai giữa và tai trong.',
+  header: 'Scene "Động mạch não trước" dựng từ bộ atlas BodyParts3D.\n\nBài động mạch não độc lập; mô hình tai Z-Anatomy giữ đường dẫn tai-day-du.',
   scene: {
-    slug: "tai-day-du",
+    slug: "dong-mach-nao-truoc",
     system: "cardiovascular",
     title: { vi: "Động mạch não trước và nhánh vỏ", en: "The Anterior Cerebral Artery", zh: "大脑前动脉" },
     latin: "A. cerebri anterior",

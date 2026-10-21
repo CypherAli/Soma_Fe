@@ -1,6 +1,7 @@
 import { Part } from '../lib/sampling.js';
 import { ATLAS_PRESETS } from './atlas-presets.js';
 import { separateSystems } from './separation.js';
+import { sourceGroups,sourceDisplayName } from './source-groups.js';
 import { correctSystem } from './system-corrections.js';
 
 let translatedNames;
@@ -40,11 +41,21 @@ export const GESTURE_MODELS=regions.map(([id,name,fact,displayScale])=>{
         const manifest=await meta.json(),data=new Float32Array(await new Response(raw.body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer());
         let normals=null;
         if(manifest.normals){const response=await fetch(base+'.normals.bin.gz');if(!response.ok)throw Error('Missing atlas normals');normals=new Float32Array(await new Response(response.body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer());if(normals.length!==data.length)throw Error('Invalid atlas normals');}
-        groups=manifest.groups.map(g=>({...g,separateTogether:["hand","wrist","fingers","head","neck","arm","forearm","upper-limb"].includes(id),info:g.info===g.label?'':g.info,color:[1,3,5].map(i=>parseInt(g.color.slice(i,i+2),16)/255),parts:[trianglePart(data.subarray(g.start,g.start+g.count))]}));
-        groups=groups.map(g=>correctSystem(g,manifest.parts));
-        groups=groups.map(g=>({...g,label:names[g.id]||g.label}));
-        separateSystems(groups,data);
-        surface={quality:manifest.quality,partCount:manifest.parts.length,positions:data,normals,groups:groups.map(g=>({system:g.system,id:g.id,capCount:(g.capCount||0)/3,start:g.start/3,count:g.count/3,color:g.color,offset:g.offset,stage:g.stage,cover:g.cover||g.label==='Da'}))};
+        const expanded=sourceGroups(manifest);
+        const baseGroups=manifest.groups.map(g=>correctSystem({...g,separateTogether:['hand','wrist','fingers','head','neck','arm','forearm','upper-limb'].includes(id),color:[1,3,5].map(i=>parseInt(g.color.slice(i,i+2),16)/255)},manifest.parts));
+        // Keep the existing system layout; source parts within a system share it.
+        separateSystems(baseGroups,data);
+        groups=expanded.groups.map(g=>{
+          const parent=baseGroups[g.parentIndex];
+          return correctSystem({...g,separateTogether:true,color:parent.color,offset:parent.offset,stage:parent.stage,
+            info:g.info===g.label?'':g.info,label:sourceDisplayName(g,names),
+            parts:g.ranges.filter(range=>range.count).map(range=>trianglePart(data.subarray(range.start,range.start+range.count)))},manifest.parts);
+        });
+        const overview=expanded.overview.length?baseGroups.filter(parent=>groups.filter(g=>g.parentId===parent.id).every(g=>g.system===parent.system)):[];
+        const surfaceGroup=(g,range,groupIndex)=>({system:g.system,id:g.id,groupIndex,overviewId:overview.some(parent=>parent.id===(g.parentId||g.id))?(g.parentId||g.id):null,capCount:(range.capCount||0)/3,start:range.start/3,count:range.count/3,color:g.color,offset:g.offset,stage:g.stage,cover:g.cover||g.label==='Da'});
+        surface={quality:manifest.quality,partCount:manifest.parts.length,positions:data,normals,
+          groups:groups.flatMap((g,i)=>g.ranges.filter(range=>range.count).map(range=>surfaceGroup(g,range,i))),
+          overviewGroups:overview.map(g=>surfaceGroup(g,g,-1))};
       })().catch(e=>{loading=null;throw e;});
       await loading;
     },surface(){return surface;},release(){groups=null;loading=null;surface=null;},groups(){if(!groups)throw new Error('Region not loaded');return groups;}};

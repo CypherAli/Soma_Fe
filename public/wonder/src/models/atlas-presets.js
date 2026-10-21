@@ -1,3 +1,4 @@
+import { UPPER_LIMB_PART_IDS } from './upper-limb-parts.js';
 // All selections refer to original atlas parts; no procedural anatomy substitutes.
 export const ATLAS_PRESETS = [
  {id:'brain',name:'Human Brain',systems:['nervous','cardiac'],y0:1.54,y1:1.8,x:.13},
@@ -16,7 +17,7 @@ export const ATLAS_PRESETS = [
  {id:'gut',name:'Ruột non & Đại tràng',systems:['digestive'],pattern:'duodenum|jejunum|ileum|colon|cecum|rectum|appendix|taenia'},
  {id:'pancreas',name:'Tụy & Lá lách',pattern:'pancrea|spleen'},
  {id:'muscles',name:'Hệ cơ',systems:['muscular']},
- {id:'upper-limb',name:'Toàn bộ chi trên',groupByPart:true,preserveSmallBones:true,side:'left',y0:.70,y1:1.425,x0:.16,x:.4},
+ {id:'upper-limb',name:'Toàn bộ chi trên',groupByPart:true,preserveSmallBones:true,wholeParts:true,context:'Chi trên bên trái: giữ nguyên các cấu trúc gốc từ đai vai tới đầu ngón tay.',partIds:UPPER_LIMB_PART_IDS,side:'left',y0:.65,y1:1.48,x0:0,x:.4},
  {id:'forearm',name:'Cẳng tay',groupByPart:true,side:'left',y0:.89,y1:1.135,x0:.18,x:.34},
  {id:'wrist',name:'Cổ tay',y0:.70,y1:.965,x0:.19,x:.35,groupByPart:true,preserveSmallBones:true,side:'left',context:'Giữ bàn tay và đầu dưới cẳng tay làm ngữ cảnh cổ tay.'},
  {id:'hand',name:'Bàn tay chi tiết',y0:.70,y1:.94,x0:.19,x:.35,groupByPart:true,preserveSmallBones:true,side:'left'},
