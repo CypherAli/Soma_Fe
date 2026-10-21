@@ -612,6 +612,7 @@ export default function PathologyLibrary({ locale }: { locale: Loc }) {
       {selected && (
         <div className="pth-drawer-back" onClick={() => setSelected(null)}>
           <aside
+            key={`${selected.slug}:${locale}`}
             className="pth-drawer"
             onClick={(e) => e.stopPropagation()}
             data-lenis-prevent

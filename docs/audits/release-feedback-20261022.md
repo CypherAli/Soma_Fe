@@ -4,6 +4,8 @@
 
 Hồ sơ bệnh hiển thị ngay bản tóm lược đã biên soạn trong các trường tổng quan, lâm sàng/cận lâm sàng, hình ảnh, tiến triển và điều trị. Đưa phần này lên trước hình minh họa, dẫn nguồn và số trang ngay trong phần tóm tắt. Bỏ nút gọi AI để tạo lại tóm tắt. Hỏi đáp tùy chọn vẫn hoạt động riêng; đổi bệnh hoặc ngôn ngữ hủy lượt hỏi cũ.
 
+Kiểm tra giao diện thật với Điện giật và Ngạt nước: đủ 5 mục, có nguồn/số trang, không còn nút tạo tóm tắt hay trạng thái chờ AI, không tràn ngang và không có lỗi console. Khi chuyển ở mục Cùng chuyên khoa, cửa sổ hồ sơ được tạo lại để vị trí cuộn về 0 và tóm tắt mới hiển thị từ đầu. Ảnh kiểm chứng được lưu trong `docs/kiem-tra-tom-tat-2026-10-22/` ở workspace cha.
+
 Giữ nguyên toàn bộ câu trong các trường gốc, không lấy riêng câu đầu hay cắt theo số từ vì có thể bỏ mất điều kiện, ngoại lệ hoặc chống chỉ định. Không thêm khuyến cáo điều trị mới, không tự điền các mục thiếu. Giữ thông báo dịch máy, thiếu bản dịch và cờ `needsReview` theo dữ liệu.
 
 API hiện có 106/106 hồ sơ đủ 5 trường tiếng Việt và nguồn dẫn. Đây là kiểm tra độ đầy đủ dữ liệu, không phải chứng nhận nội dung lâm sàng của 106 hồ sơ. Không thay đổi cờ thẩm định trong cơ sở dữ liệu. Nội dung biên soạn vẫn cần đối chiếu giáo trình và chuyên gia y khoa; không suy ra rằng một bản ghi đã được chuyên gia duyệt chỉ từ việc các kiểm thử phần mềm đạt.
