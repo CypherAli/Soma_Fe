@@ -152,10 +152,11 @@ export default function QuizRunner({
   const [idx, setIdx] = useState(0);
   const [picked, setPicked] = useState<Record<number, string>>({});
   const [done, setDone] = useState(false);
+  const [documentActive, setDocumentActive] = useState(false);
   const [exitPrompt, setExitPrompt] = useState(false);
   useEffect(() => {
-    onSessionActiveChange?.(seed !== null && !done);
-  }, [seed, done, onSessionActiveChange]);
+    onSessionActiveChange?.(documentActive || (seed !== null && !done));
+  }, [seed, done, documentActive, onSessionActiveChange]);
   const recordedSeed = useRef<number | null>(null);
   /** Mốc bắt đầu bài, để đo thời lượng THẬT — chế độ ôn tập không có đồng hồ. */
   const startedAt = useRef<number>(0);
@@ -709,7 +710,7 @@ export default function QuizRunner({
           />
         )}
 
-        {tool === "pdf" && <PdfPanel t={t} onBankChanged={() => void reloadPersonal()} />}
+        {tool === "pdf" && <PdfPanel t={t} locale={locale} onBankChanged={() => void reloadPersonal()} onSessionActiveChange={setDocumentActive} />}
 
         {(!embedded || tool === "quick") && <div className="quiz-dashboard-grid">
         <section className="quiz-setup quiz-config-card">

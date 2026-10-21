@@ -27,6 +27,14 @@ Các tiêu đề chung in đậm như **Về bộ răng sữa** được giữ t
 
 Một số PDF có thông báo bản quét thiếu tài nguyên ảnh. Metadata `sourceNote` được giữ để đối chiếu nguồn, không hiển thị thông báo này trên giao diện theo yêu cầu. Chỉ những hình thực sự có trong PDF được trích.
 
+## Mở đề từ PDF tải lên
+
+Mục **PDF & Word của tôi** phân tích trực tiếp tệp tải lên ở backend, lưu câu hỏi và các hình trích được vào tài khoản riêng. Luồng này dùng bộ đọc bố cục PDF, không tra tên file hay chuyển hướng sang bản đề tĩnh. Câu dạng `Câu hỏi N:` có nhãn A–F tách riêng được đọc theo vị trí, màu nhãn/vòng tròn và khung phương án, kể cả khung bị cắt qua trang. Chân trang in từ trình duyệt không đi vào nội dung câu.
+
+Khóa lấy từ nhãn/khoanh tròn màu xanh hoặc dòng đáp án viết rõ trong nguồn. Giữ nhiều khóa và tách riêng hình câu hỏi/hình lời giải. Câu thiếu khóa hoặc có khóa viết mâu thuẫn với khoanh màu được giữ ở trạng thái cần đối chiếu, không tự đoán. Bộ đọc văn bản cũ tiếp tục xử lý dạng đề khác và Word; PDF ảnh chưa có lớp chữ cần OCR trước. Kéo thả và chọn tệp đều nhận PDF/.docx tối đa 50 MB. Máy chủ không lưu lại PDF gốc và không tự gửi tài liệu cho AI.
+
+Sau khi xem câu, bấm **Duyệt các câu hợp lệ & tạo đề** để mở giao diện chung với thư viện: luyện tập, thi thử, danh sách câu, chấm điểm và phóng to hình. Chỉ các câu đã duyệt đi vào bài. Bộ đề và hình lưu theo tài khoản; phiên làm bài cá nhân hiện giữ trong bộ nhớ của tab và cảnh báo trước khi rời bài. Xem `soma_be/docs/personal-pdf-import.md` để cài bộ đọc trên máy chủ.
+
 ## Làm bài và chấm điểm
 
 Ảnh thuộc đề bài (`images`) hiện ngay. Ảnh thuộc phần gợi ý hoặc lời giải của PDF (`explanationImages`) chỉ hiện cùng lời giải: sau khi kiểm tra đáp án trong luyện tập, hoặc sau khi nộp bài trong thi thử. Chọn một phần đáp án ở câu nhiều lựa chọn chưa mở ảnh gợi ý. Ảnh bìa nguồn chỉ hiện ở màn thông tin đề, được ẩn khi làm bài để tránh lộ thông tin trả lời. Danh mục ghi đúng số câu có hình (bao gồm hình trong phần gợi ý).

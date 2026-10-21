@@ -2,7 +2,7 @@
 
 
 import { ContentSurface } from "@/components/content/ContentProvider";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   approveAll,
   askAiForQuestions,
@@ -19,6 +19,10 @@ import { AUTH_CHANGED_EVENT } from "@/lib/auth";
 import { isSignedIn } from "@/lib/study";
 import type { QuizText } from "./quizText";
 import SignInGate from "./SignInGate";
+import type { Loc } from "@/lib/homeContent";
+import { personalKeys, personalQuizBank } from "@/lib/anatomy/personalQuizBank";
+import DrLamQuiz from "./DrLamQuiz";
+import QuizSourceImages from "./QuizSourceImages";
 
 const MAX_BYTES = 50 * 1024 * 1024;
 
@@ -29,12 +33,13 @@ const MAX_BYTES = 50 * 1024 * 1024;
  * mà sai một dấu trong câu giải phẫu là học sai luôn. Vì vậy câu mới bóc nằm ở
  * trạng thái chờ, và chỉ câu đã duyệt mới vào nguồn đề "Đề của tôi".
  */
-export default function PdfPanel({ t, onBankChanged }: { t: QuizText; onBankChanged: () => void }) {
+export default function PdfPanel({ t, locale, onBankChanged, onSessionActiveChange }: { t: QuizText; locale: Loc; onBankChanged: () => void; onSessionActiveChange?: (active: boolean) => void }) {
   const [signedIn, setSignedIn] = useState(false);
   const [docs, setDocs] = useState<PersonalDoc[] | null>(null);
   const [file, setFile] = useState<File | null>(null);
   const [status, setStatus] = useState("");
   const [busy, setBusy] = useState(false);
+  const [playing, setPlaying] = useState(false);
   const [openDoc, setOpenDoc] = useState<string | null>(null);
   /**
    * Tài liệu bộ luật vừa bó tay, kèm văn bản của nó.
@@ -51,6 +56,11 @@ export default function PdfPanel({ t, onBankChanged }: { t: QuizText; onBankChan
     await Promise.resolve();
     if (!isSignedIn()) {
       setSignedIn(false);
+      setDocs(null);
+      setOpenDoc(null);
+      setQuestions(null);
+      setNeedsAi(null);
+      setPlaying(false);
       return;
     }
     setSignedIn(true);
@@ -82,8 +92,14 @@ export default function PdfPanel({ t, onBankChanged }: { t: QuizText; onBankChan
     setFile(null);
     if (inputRef.current) inputRef.current.value = "";
     setBusy(true);
+    setNeedsAi(null);
     setStatus(t.pdfUploading);
     try {
+      if (!isSignedIn()) {
+        setStatus(t.pdfSignInUpload);
+        setFile(target);
+        return;
+      }
       const result = await uploadPdf(target);
       setStatus(result.doc.note ?? t.pdfResult(result.parsed, result.missingAnswer + result.malformed));
       setNeedsAi(!result.parsed && result.text ? { id: result.doc.id, text: result.text } : null);
@@ -91,10 +107,26 @@ export default function PdfPanel({ t, onBankChanged }: { t: QuizText; onBankChan
       if (result.parsed) setOpenDoc(result.doc.id);
     } catch (error) {
       setStatus((error as Error).message);
+      setFile(target);
     } finally {
       setBusy(false);
     }
   };
+
+  function selectFile(target: File | null) {
+    if (busy) return;
+    setNeedsAi(null);
+    setStatus("");
+    if (target && !/\.(pdf|docx)$/i.test(target.name)) {
+      setFile(null);
+      setStatus(t.pdfInvalidType);
+    } else if (target && target.size > MAX_BYTES) {
+      setFile(null);
+      setStatus(t.pdfTooBig);
+    } else {
+      setFile(target);
+    }
+  }
 
   /** Nạp các câu của một tài liệu để duyệt. */
   const loadQuestions = useCallback(async (id: string) => {
@@ -162,9 +194,15 @@ export default function PdfPanel({ t, onBankChanged }: { t: QuizText; onBankChan
     }
   };
 
-  if (!signedIn) return <ContentSurface scope="src/components/quiz/PdfPanel.tsx"><SignInGate t={t} /></ContentSurface>;
+  const activeDoc = docs?.find(d => d.id === openDoc);
+  const bank = useMemo(() => activeDoc && questions ? personalQuizBank(activeDoc, questions) : null, [activeDoc, questions]);
+  if (signedIn && playing && bank?.questions.length) {
+    return <DrLamQuiz key={bank.id} locale={locale} documentBank={bank}
+      onOtherSources={() => setPlaying(false)} onDocumentBack={() => setPlaying(false)}
+      onSessionActiveChange={onSessionActiveChange} />;
+  }
 
-  if (openDoc && questions) {
+  if (signedIn && openDoc && questions) {
     const doc = docs?.find((d) => d.id === openDoc);
     const pending = questions.filter((q) => !q.approved).length;
     return <ContentSurface scope="src/components/quiz/PdfPanel.tsx">{(
@@ -183,35 +221,44 @@ export default function PdfPanel({ t, onBankChanged }: { t: QuizText; onBankChan
               if (r) setStatus(t.pdfApproveResult(r.approved, r.skipped));
               await loadQuestions(openDoc);
               onBankChanged();
-              void refresh();
+              await refresh();
+              if (r?.approved) setPlaying(true);
             }}>
-            {t.pdfApproveAll}
+            {t.pdfApproveAndPlay}
           </button>
+          {!!bank?.questions.length && <button type="button" className="quiz-start" onClick={() => setPlaying(true)}>{t.pdfOpenExam} ({bank.questions.length})</button>}
         </header>
         {status && <p className="quiz-srcnote" role="status">{status}</p>}
 
         <ol className="quiz-pdf-questions">
           {questions.map((q) => (
             <li key={q.id} className={q.approved ? "ok" : ""}>
+              <b>{t.pdfQuestionNumber(q.number ?? questions.indexOf(q) + 1)}</b>
+              {q.context && <p>{q.context}</p>}
+              {q.reviewNote && <p className="quiz-pdf-warning">{q.reviewNote}</p>}
               <textarea defaultValue={q.stem} rows={2} aria-label={t.pdfReview}
                 onBlur={(e) => e.target.value !== q.stem && void patch(q.id, { stem: e.target.value })} />
+              <QuizSourceImages urls={q.images ?? []} title={t.pdfQuestionNumber(q.number ?? 1)} />
               <ul>
                 {Object.entries(q.options).map(([letter, text]) => (
-                  <li key={letter} className={letter === q.answer ? "right" : ""}>
+                  <li key={letter} className={personalKeys(q).includes(letter) ? "right" : ""}>
                     <kbd>{letter}</kbd>
-                    <span>{text}</span>
+                    <textarea defaultValue={text} rows={1} aria-label={`${t.pdfOption} ${letter}`}
+                      onBlur={(event) => event.target.value !== text && void patch(q.id, { options: { ...q.options, [letter]: event.target.value }, approved: false })} />
                   </li>
                 ))}
               </ul>
               <div className="quiz-pdf-row">
-                <label>
-                  <span>{t.pdfAnswerLabel}</span>
-                  <select value={q.answer} onChange={(e) => void patch(q.id, { answer: e.target.value })}>
+                <fieldset>
+                  <legend>{t.pdfAnswerLabel}</legend>
                     {Object.keys(q.options).map((letter) => (
-                      <option key={letter} value={letter}>{letter}</option>
+                      <label key={letter}><input type="checkbox" checked={personalKeys(q).includes(letter)}
+                        onChange={(event) => {
+                          const answers = event.target.checked ? [...personalKeys(q), letter].sort() : personalKeys(q).filter(key => key !== letter);
+                          void patch(q.id, { answers, approved: false });
+                        }} />{letter}</label>
                     ))}
-                  </select>
-                </label>
+                </fieldset>
                 {q.page && <span className="quiz-srcnote">tr.{q.page}</span>}
                 {q.origin === "ai" && <span className="quiz-pdf-aitag">{t.pdfAiTag}</span>}
                 <button type="button" onClick={() => void patch(q.id, { approved: !q.approved })}>
@@ -221,6 +268,10 @@ export default function PdfPanel({ t, onBankChanged }: { t: QuizText; onBankChan
                   {t.pdfRemove}
                 </button>
               </div>
+              {(q.explanation || q.explanationImages?.length) ? <details><summary>{t.pdfExplanation}</summary>
+                <p className="quiz-pdf-explanation">{q.explanation}</p>
+                <QuizSourceImages urls={q.explanationImages ?? []} title={t.pdfExplanation} />
+              </details> : null}
             </li>
           ))}
         </ol>
@@ -238,9 +289,16 @@ export default function PdfPanel({ t, onBankChanged }: { t: QuizText; onBankChan
         <p className="quiz-srcnote">{t.pdfNoteHelp}</p>
       </div>
 
-      <div className="quiz-pdf-drop">
+      <div className="quiz-pdf-drop" aria-busy={busy}
+        onDragOver={(event) => { event.preventDefault(); event.dataTransfer.dropEffect = busy ? "none" : "copy"; }}
+        onDrop={(event) => {
+          event.preventDefault();
+          if (busy) return;
+          if (event.dataTransfer.files.length > 1) { setStatus(t.pdfOneFile); return; }
+          selectFile(event.dataTransfer.files[0] ?? null);
+        }}>
         <input id="personal-pdf" ref={inputRef} type="file" accept="application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf,.docx"
-          onChange={(e) => { setFile(e.target.files?.[0] ?? null); setStatus(""); }} />
+          disabled={busy} onChange={(e) => selectFile(e.target.files?.[0] ?? null)} />
         <label htmlFor="personal-pdf">
           <b>{file ? file.name : t.pdfChoose}</b>
           <span>{file ? sizeLabel(file.size) : t.pdfHint}</span>
@@ -260,12 +318,16 @@ export default function PdfPanel({ t, onBankChanged }: { t: QuizText; onBankChan
           </div>
         )}
 
-        <b className="quiz-progress-h">{t.pdfDocs}</b>
-        {docs && docs.length ? (
+        {!signedIn && <SignInGate t={t} />}
+        {signedIn && <b className="quiz-progress-h">{t.pdfDocs}</b>}
+        {signedIn && (docs && docs.length ? (
           <ul className="quiz-pdf-docs">
             {docs.map((d) => (
               <li key={d.id}>
-                <button type="button" className="quiz-link" onClick={() => setOpenDoc(d.id)}>
+                <button type="button" className="quiz-link" onClick={() => {
+                  if (d.status === "failed") setStatus(d.note ?? t.pdfStatusFailed);
+                  else setOpenDoc(d.id);
+                }}>
                   {d.filename}
                 </button>
                 <span>
@@ -273,6 +335,7 @@ export default function PdfPanel({ t, onBankChanged }: { t: QuizText; onBankChan
                     ? t.pdfStatusFailed
                     : `${t.pdfApprovedCount(d.approvedCount)} · ${t.pdfPending(d.questionCount - d.approvedCount)}`}
                 </span>
+                {d.status === "failed" && <p className="quiz-pdf-failure">{d.note} {t.pdfRetryFile}</p>}
                 <button type="button" className="quiz-danger"
                   onClick={async () => {
                     if (!window.confirm(t.pdfDeleteConfirm)) return;
@@ -291,7 +354,7 @@ export default function PdfPanel({ t, onBankChanged }: { t: QuizText; onBankChan
           </ul>
         ) : (
           <p className="quiz-srcnote">{t.pdfNone}</p>
-        )}
+        ))}
       </div>
     </section>
   )}</ContentSurface>;

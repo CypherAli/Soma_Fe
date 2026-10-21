@@ -13,6 +13,7 @@ for (const entry of drLamCatalog.exams) {
   assert.deepEqual(drLamBankErrors(bank), [], entry.id);
   assert.equal(bank.questions.length, entry.count);
   assert.equal(bank.id, entry.id);
+  assert.equal(bank.sourceHash, entry.sourceHash, `Document upload fingerprint: ${entry.id}`);
   assert.equal(bank.questions.filter(q => q.gradable).length, entry.gradableCount);
   assert.equal(entry.gradableCount, entry.count, `All supplied questions have original marked keys: ${entry.id}`);
   assert.ok(["upper-limb", "lower-limb", "head-neck", "senses", "thorax", "abdomen-pelvis", "nervous", "clinical", "review", "mock"].includes(entry.topic), `Missing topic: ${entry.id}`);

@@ -35,6 +35,7 @@ def build_entry(bank, group):
     return {
         "id": exam_id, "title": bank["title"], "group": group,
         "topic": topic, "file": f"{exam_id}.json",
+        "sourceHash": bank["sourceHash"],
         "count": len(bank["questions"]),
         "gradableCount": sum(q["gradable"] for q in bank["questions"]),
         "imageCount": len(pictures),
