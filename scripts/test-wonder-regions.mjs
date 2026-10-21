@@ -45,13 +45,18 @@ for(const {id,name,sourceLabel} of ATLAS_PRESETS){
   assert.ok(m.surface.positions.every(Number.isFinite));
   assert.equal(m.surface.normals.length,m.surface.positions.length);assert.ok(m.surface.normals.every(Number.isFinite));
   assert.ok(m.surface.groups.every(g=>Number.isInteger(g.start)&&g.count%3===0&&g.start+g.count<=m.surface.positions.length/3));
-  for(const group of m.surface.groups){const anchor=m.labels[group.pick]?.surfaceAnchor;if(!anchor)continue;let found=false;for(let p=group.start*3;p<(group.start+group.count)*3;p+=3){if(anchor.every((v,k)=>v===m.surface.positions[p+k])){found=true;break;}}assert.ok(found,'label anchor belongs to its exact source mesh');}
+  for(const [pick,label] of m.labels.entries()){
+    const anchor=label.surfaceAnchor;if(!anchor)continue;
+    let found=false;
+    for(const group of m.surface.groups.filter(g=>g.pick===pick))for(let p=group.start*3;p<(group.start+group.count)*3;p+=3){if(anchor.every((v,k)=>v===m.surface.positions[p+k])){found=true;break;}}
+    assert.ok(found,'label anchor belongs to one of its exact source ranges');
+  }
   let boxes=m.surface.groups.filter(g=>!g.cover).map(g=>{
     const lo=[Infinity,Infinity],hi=[-Infinity,-Infinity];
     for(let j=g.start*3;j<(g.start+g.count)*3;j+=3)for(let k=0;k<2;k++){const v=m.surface.positions[j+k]+g.offset[k];lo[k]=Math.min(lo[k],v);hi[k]=Math.max(hi[k],v);}
     return {lo,hi,system:g.system};
   });
-  if(['hand','wrist','fingers','head','neck','arm','forearm','upper-limb'].includes(id)){
+  if(m.surface.groups.length>meta.groups.length||['hand','wrist','fingers','head','neck','arm','forearm','upper-limb'].includes(id)){
     // Structures of a system stay together; compare the UNION of each system.
     boxes=[...new Set(boxes.map(b=>b.system))].map(system=>{const members=boxes.filter(b=>b.system===system);return {lo:[0,1].map(k=>Math.min(...members.map(b=>b.lo[k]))),hi:[0,1].map(k=>Math.max(...members.map(b=>b.hi[k])))};});
   }

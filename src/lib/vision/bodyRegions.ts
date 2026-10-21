@@ -57,7 +57,9 @@ export const MIN_VISIBILITY = 0.5;
 type P = { x: number; y: number };
 
 const has = (lm: PoseLm | undefined): lm is PoseLm =>
-  !!lm && (lm.visibility === undefined || lm.visibility >= MIN_VISIBILITY);
+  !!lm && Number.isFinite(lm.x) && Number.isFinite(lm.y) &&
+  lm.x >= 0 && lm.x <= 1 && lm.y >= 0 && lm.y <= 1 &&
+  (lm.visibility === undefined || lm.visibility >= MIN_VISIBILITY);
 
 function bboxOf(points: P[], padX: number, padY: number): Box {
   const xs = points.map((p) => p.x);
@@ -139,6 +141,21 @@ function buildRefs(lm: (PoseLm | undefined)[], scale: number, aspect: number): R
   const shR = lm[POSE.SHOULDER_R];
   const hipL = lm[POSE.HIP_L];
   const hipR = lm[POSE.HIP_R];
+
+  if (has(shL) && has(shR)) {
+    const shoulders = [shL, shR];
+    const hips = [hipL, hipR].filter(has);
+    const top = facePts.length >= 4 ? facePts : shoulders;
+    // A seated webcam often cannot see the hips. Bound the visible torso;
+    // never extend an off-screen predicted hip into a fictitious limb box.
+    const bottom = hips.length === 2 ? hips : shoulders.map(p => ({x:p.x,y:Math.min(1,p.y+k(.95).py)}));
+    const ref = bboxOf([...top,...shoulders,...bottom], k(.12).px, k(.12).py);
+    out.push({part:"upper-body",ref:{x:Math.max(0,ref.x),y:Math.max(0,ref.y),w:Math.min(1,ref.x+ref.w)-Math.max(0,ref.x),h:Math.min(1,ref.y+ref.h)-Math.max(0,ref.y)}});
+    const feet = [lm[POSE.ANKLE_L], lm[POSE.ANKLE_R]];
+    if (facePts.length >= 4 && hips.length === 2 && feet.every(has)) {
+      out.push({part:"whole-body",ref:bboxOf([...facePts,...shoulders,...hips,...feet.filter(has)],k(.18).px,k(.18).py)});
+    }
+  }
 
   // cổ: từ miệng xuống đường nối hai vai
   const mouthL = lm[POSE.MOUTH_L];
@@ -240,7 +257,9 @@ export function guessFromPose(
   const rows = [...best.entries()].filter(([, r]) => r.v > 0.04).sort((a, b) => b[1].v - a[1].v);
   if (rows.length === 0) return { guesses: [], bestIou: 0 };
 
-  const top = rows.slice(0, 3);
+  // A broad torso match must not offer unrelated tiny arm boxes as alternatives.
+  const broad = rows[0][0] === "upper-body" || rows[0][0] === "whole-body";
+  const top = (broad ? rows.filter(([part]) => ["upper-body","whole-body","chest","abdomen"].includes(part)) : rows).slice(0, 3);
   const sum = top.reduce((n, [, r]) => n + r.v, 0);
   return {
     guesses: top.map(([part, r]) => ({ part, score: r.v / sum, ...(r.side ? { side: r.side } : {}) })),

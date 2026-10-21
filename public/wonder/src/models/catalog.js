@@ -94,7 +94,7 @@ export function buildModel(index, n, seed = 0) {
     if (g.showLabel === false || (!surface && gs[gi].count === 0)) return;
     const c = gs[gi].count;
     let centroid=c?gs[gi].sum.map(v=>v/c):[0,0,0];
-    if(!c&&surface){const sg=surface.groups[gi];for(let p=sg.start*3;p<(sg.start+sg.count)*3;p++)centroid[p%3]+=(surface.positions[p]-center[p%3])*scale/sg.count;}
+    if(!c&&surface){const ranges=surface.groups.filter(sg=>(sg.groupIndex??surface.groups.indexOf(sg))===gi),count=ranges.reduce((sum,sg)=>sum+sg.count,0);for(const sg of ranges)for(let p=sg.start*3;p<(sg.start+sg.count)*3;p++)centroid[p%3]+=(surface.positions[p]-center[p%3])*scale/count;}
     labelOf[gi] = labels.length;
     labels.push({ label: g.label, info: g.sourceName || g.info || '', sourceName:g.sourceName||'', sourceId:g.sourceId || g.id, system:g.system, latin:g.latin||'', description:g.description||'', descriptionEn:g.descriptionEn||'', reference:g.reference||'', learningNotes:g.learningNotes||[], color: g.color, count: c, stage: g.stage,
       centroid, offset: g.offset.map((v) => v * scale) });
@@ -105,14 +105,14 @@ export function buildModel(index, n, seed = 0) {
   for (let i = 0; i < n; i++) pick[i] = labelOf[group[i]];
   if(surface){
     for(let i=0;i<surface.positions.length;i++)surface.positions[i]=(surface.positions[i]-center[i%3])*scale;
-    surface.groups.forEach((g,i)=>{
-      g.offset=g.offset.map(v=>v*scale);g.pick=labelOf[i];
+    [...surface.groups,...(surface.overviewGroups||[])].forEach((g,i)=>{
+      g.offset=g.offset.map(v=>v*scale);g.pick=g.groupIndex===-1?-1:labelOf[g.groupIndex??i];
       const lo=[Infinity,Infinity,Infinity],hi=[-Infinity,-Infinity,-Infinity];
       for(let p=g.start*3;p<(g.start+g.count)*3;p+=3)for(let k=0;k<3;k++){lo[k]=Math.min(lo[k],surface.positions[p+k]);hi[k]=Math.max(hi[k],surface.positions[p+k]);}
       g.center=lo.map((v,k)=>(v+hi[k])/2);g.radius=Math.hypot(...hi.map((v,k)=>(v-lo[k])/2));
       g.bounds=[lo,hi];
       const label=labels[g.pick];
-      if(label){let best=Infinity,anchor=null;for(let p=g.start*3;p<(g.start+g.count)*3;p+=3){const distance=[0,1,2].reduce((sum,k)=>sum+(surface.positions[p+k]-label.centroid[k])**2,0);if(distance<best){best=distance;anchor=Array.from(surface.positions.subarray(p,p+3));}}label.surfaceAnchor=anchor;}
+      if(label){let best=label.anchorDistance??Infinity,anchor=label.surfaceAnchor;for(let p=g.start*3;p<(g.start+g.count)*3;p+=3){const distance=[0,1,2].reduce((sum,k)=>sum+(surface.positions[p+k]-label.centroid[k])**2,0);if(distance<best){best=distance;anchor=Array.from(surface.positions.subarray(p,p+3));}}label.surfaceAnchor=anchor;label.anchorDistance=best;}
     });
   }
   return { index, def, n, target, offset, tint, pick, labels, groups: groups.map((g) => g.label), group, fitScale, exCenter, surface, ms: performance.now() - t0 };

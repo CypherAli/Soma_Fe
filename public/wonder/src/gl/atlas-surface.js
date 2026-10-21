@@ -10,7 +10,7 @@ export class AtlasSurface {
   if(!this.ready||!width||!height)return -1;
   this.raycaster??=new T.Raycaster();
   this.raycaster.setFromCamera(new T.Vector2(x/width*2-1,1-y/height*2),this.camera);
-  for(const hit of this.raycaster.intersectObjects(this.meshes.filter(mesh=>mesh.visible),false)){
+  for(const hit of this.raycaster.intersectObjects(this.meshes.filter(mesh=>mesh.userData.pickable??mesh.visible),false)){
    const {g,uniforms}=hit.object.userData;
    if(uniforms.cutOn.value>.5&&hit.point.x>uniforms.cut.value)continue;
    if(g.pick>=0)return g.pick;
@@ -27,13 +27,17 @@ export class AtlasSurface {
   const rim=new T.DirectionalLight(0xe9f0ff,.9);rim.position.set(2,2,-3);this.scene.add(rim);this.meshes=[];this.renderer.resetState();
  }
  setModel(surface){
+  this.surface=surface;
   this.ready=false;const epoch=this.epoch=(this.epoch||0)+1;
   for(const m of this.meshes){m.geometry.dispose();for(const material of [m.material].flat())material.dispose();this.root.remove(m);}this.meshes=[];
   if(!surface)return;
-  for(const g of surface.groups){
-   const geometry=new T.BufferGeometry();geometry.setAttribute('position',new T.BufferAttribute(surface.positions.subarray(g.start*3,(g.start+g.count)*3),3));
-   if(surface.normals)geometry.setAttribute('normal',new T.BufferAttribute(surface.normals.subarray(g.start*3,(g.start+g.count)*3),3));else geometry.computeVertexNormals();
-   geometry.computeBoundingBox();geometry.computeBoundingSphere();
+  const position=new T.BufferAttribute(surface.positions,3),normal=surface.normals?new T.BufferAttribute(surface.normals,3):null;
+  this.hasOverview=!!surface.overviewGroups?.length;
+  for(const g of [...surface.groups,...(surface.overviewGroups||[])]){
+   const overview=g.groupIndex===-1;
+   const geometry=new T.BufferGeometry();geometry.setAttribute('position',position);geometry.setDrawRange(g.start,g.count);
+   if(normal)geometry.setAttribute('normal',normal);else geometry.computeVertexNormals();
+   geometry.boundingBox=new T.Box3(new T.Vector3(...g.bounds[0]),new T.Vector3(...g.bounds[1]));geometry.boundingSphere=new T.Sphere(new T.Vector3(...g.center),g.radius);
    const hex='#'+g.color.map(c=>Math.round(c*255).toString(16).padStart(2,'0')).join('');
    const material=new T.MeshStandardMaterial({color:hex,...(TISSUE_MATERIALS[g.system]||{metalness:0,roughness:.6}),side:T.FrontSide});
    const uniforms={reveal:{value:1},cutOn:{value:0},cut:{value:0}};
@@ -46,9 +50,9 @@ export class AtlasSurface {
    let materials=material;
    if(g.capCount){
     const cutMaterial=material.clone();cutMaterial.color.set('#86776b');cutMaterial.roughness=.9;cutMaterial.onBeforeCompile=material.onBeforeCompile;
-    geometry.addGroup(0,g.count-g.capCount,0);geometry.addGroup(g.count-g.capCount,g.capCount,1);materials=[material,cutMaterial];
+    geometry.addGroup(g.start,g.count-g.capCount,0);geometry.addGroup(g.start+g.count-g.capCount,g.capCount,1);materials=[material,cutMaterial];
    }
-   const mesh=new T.Mesh(geometry,materials);mesh.frustumCulled=false;mesh.userData={g,uniforms};this.root.add(mesh);this.meshes.push(mesh);
+   const mesh=new T.Mesh(geometry,materials);mesh.frustumCulled=false;mesh.userData={g,uniforms,overview,pickable:false};this.root.add(mesh);this.meshes.push(mesh);
   }
   this.renderer.compileAsync(this.scene,this.camera).then(()=>{if(this.epoch===epoch)this.ready=true;}).catch(error=>console.error('Atlas shader compilation failed',error));
   this.renderer.resetState();
@@ -59,8 +63,14 @@ export class AtlasSurface {
   this.camera.matrix.fromArray(d.view).invert();this.camera.updateMatrixWorld(true);
   const r=d.rot;this.root.matrixAutoUpdate=false;this.root.matrix.set(r[0][0],r[0][1],r[0][2],0,r[1][0],r[1][1],r[1][2],0,r[2][0],r[2][1],r[2][2],0,0,0,0,1);
   const e=d.explode,s=e*e*(3-2*e);
-  for(const mesh of this.meshes){const {g,uniforms}=mesh.userData;mesh.visible=inspectionVisible(g,d.inspectionView,d.hiddenSystems)&&(!g.cover||d.showCover)&&(d.systemFocus<0||g.pick===d.systemFocus);
-   if(!mesh.visible)continue;
+  const batch=this.hasOverview&&d.systemFocus<0;
+  const detailedSystems=new Set([...(this.surface.individualSystems||[]),...this.meshes.filter(mesh=>!mesh.userData.overview&&d.selectedPicks?.has(mesh.userData.g.pick)).map(mesh=>mesh.userData.g.system)]);
+  for(const mesh of this.meshes){const {g,uniforms,overview}=mesh.userData;
+   const visible=inspectionVisible(g,d.inspectionView,d.hiddenSystems)&&(!g.cover||d.showCover)&&(d.systemFocus<0||g.pick===d.systemFocus);
+   mesh.userData.pickable=visible&&!overview;
+   mesh.visible=visible&&(overview?batch&&!detailedSystems.has(g.system):!batch||!g.overviewId||detailedSystems.has(g.system));
+   // Invisible detailed meshes still need the current transform for raycasting.
+   if(!visible)continue;
    const local=partTransform(g.pick,d.partLayout,d.partAmount||0);
    mesh.scale.setScalar(d.scale*local.scale);const center=d.inspectionCenter||[0,0,0];
    mesh.position.set(...g.offset.map((v,k)=>(v*s-d.exCenter[k]*e-center[k])*d.scale));

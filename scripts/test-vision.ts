@@ -49,6 +49,7 @@ import {
   type RecogniseUpdate,
 } from "../src/lib/vision/recognise.ts";
 import type { PoseResult } from "../src/lib/vision/poseOnce.ts";
+import { DEFAULT_VISION_SLUG,isScanControlModel,scanControlModel } from "../src/lib/vision/scanControlModel.ts";
 import {
   IMAGE_TO_THREE_ROLL,
   MODEL_UPRIGHT_DEG,
@@ -599,6 +600,17 @@ check("mốc mờ (visibility thấp) bị bỏ qua", (() => {
   const g = guessFromPose(boxAround(mir(0.61), 0.9, 0.12), pose, ASPECT).guesses;
   return g.every((x) => x.part !== "knee");
 })());
+// Regression: a torso filling the webcam is not an upper limb. Predicted hips
+// and knees outside the image must never count as visible anatomical evidence.
+{
+  const pose = seatedPose();
+  for (const i of [POSE.HIP_L,POSE.HIP_R,POSE.KNEE_L,POSE.KNEE_R,POSE.ANKLE_L,POSE.ANKLE_R]) pose[i]={x:.5,y:1.4,visibility:.99};
+  const torso=guessFromPose({x:.22,y:.1,w:.56,h:.9},pose,ASPECT);
+  check("webcam thấy thân trên → thân trên, không gợi ý cánh tay",torso.guesses[0]?.part==="upper-body"&&torso.guesses.every(g=>!["shoulder","upper-arm","forearm","whole-body"].includes(g.part)),JSON.stringify(torso));
+  check("mốc ngoài khung không sinh vùng hông/gối",guessFromPose({x:0,y:0,w:1,h:1},pose,ASPECT).guesses.every(g=>!["hip","knee","whole-body"].includes(g.part)));
+  const full=guessFromPose({x:.28,y:.04,w:.44,h:.96},seatedPose(),ASPECT);
+  check("thấy đầu, hông và cổ chân → có vùng toàn thân",full.guesses[0]?.part==="whole-body",JSON.stringify(full));
+}
 check("không đủ 33 mốc thì không đoán bừa", guessFromPose(boxAround(0.5, 0.5, 0.2), [], ASPECT).guesses.length === 0);
 check("ô ở góc xa mọi mốc thì không trả về gì", guessFromPose({ x: 0.0, y: 0.0, w: 0.04, h: 0.04 }, seatedPose(), ASPECT).guesses.length === 0);
 check("điểm cộng lại bằng 1 (dễ đọc thành phần trăm)", (() => {
@@ -833,6 +845,19 @@ check("và góc luôn quy về (−π, π]", (() => {
 
 console.log("\nBộ điều phối hai tầng");
 {
+  const visible=new Set<number>([POSE.EYE_L,POSE.EYE_R,POSE.ELBOW_L]);
+  const pose=seatedPose().map((p,i)=>visible.has(i)?p:{...p,visibility:0});
+  const box={x:.5,y:.4,w:.5,h:.5};
+  const raw=guessFromPose(box,pose,ASPECT);
+  check("ca thử có mốc khớp yếu thật sự",raw.bestIou>.04&&raw.bestIou<.16,String(raw.bestIou));
+  const result=await runRecognise({pose:{landmarks:pose,ms:30},box,gpu:null});
+  check("khớp yếu không được nâng thành gợi ý cánh tay",result.every(update=>update.guesses.length===0));
+  check("toàn thân và thân trên mở mô hình độc lập",scanControlModel('',"whole-body")==='body'&&scanControlModel('',"upper-body")==='bust');
+  check("Vision khởi động bằng toàn thân, không đóng đinh cẳng tay",DEFAULT_VISION_SLUG==='toan-than'&&scanControlModel(DEFAULT_VISION_SLUG)==='body');
+  check("chỉ nhận mã mô hình điều khiển có thật từ iframe",isScanControlModel('body')&&isScanControlModel('upper-limb')&&!isScanControlModel('not-a-model')&&!isScanControlModel(null));
+  check("đai vai chi trên mở cả chi, cánh tay chỉ mở cánh tay",scanControlModel('dai-vai-chi-tren')==='upper-limb'&&scanControlModel('',"upper-arm")==='arm');
+}
+{
   const u = await runRecognise({ pose: posedOk(), gpu: [{ part: "face", score: 0.9 }] });
   check("mốc trùng khít → dùng mốc và KHÔNG hỏi GPU", u.length === 1 && u[0].source?.kind === "pose", JSON.stringify(u.map((x) => x.source)));
   check("kết quả là khuỷu tay đúng như hình học", u[0].guesses[0]?.part === "elbow");
@@ -958,7 +983,7 @@ for (const p of VISION_PARTS) {
   check(`[${p.key}] có ít nhất một scene gợi ý`, p.scenes.length > 0);
   check(`[${p.key}] không gợi ý trùng scene`, new Set(p.scenes).size === p.scenes.length);
   // Bài bộ phận (bo-phan-*) chỉ có trên atlas — vẫn là trang có thật (/giai-phau/mo-hinh/<slug>).
-  const missing = p.scenes.filter((slug) => !(slug in sceneModules) && !(slug in atlasScenes));
+  const missing = p.scenes.filter((slug) => !(slug in sceneModules) && !(slug in atlasScenes) && !getControlModel(slug));
   check(`[${p.key}] mọi scene gợi ý đều CÓ THẬT`, missing.length === 0, missing.join(", "));
   // LUẬT ĐÃ CHỐT: mô hình gợi ý phải mở NGAY TRONG TRANG Vision AI, không chuyển trang.
   const stuck = p.scenes.filter((slug) => !getControlModel(slug));

@@ -18,6 +18,7 @@ import { RenderQuality } from './lib/render-quality.js';
 import { overviewLabels,layoutLabels,SYSTEM_LABELS } from './lib/label-layout.js';
 import { HandYaw,PartSeparation,inspectionLabelsVisible,selectionFor,selectionKey,singleVisibleGroup,systemBlocks,selectedPull,fitPullDistance,pullEnvelope,partLayout,partTransform } from './logic/inspection-controls.js';
 import { setMuscleSeparation } from './models/muscle-separation.js';
+import { InspectionTransition } from './logic/inspection-transition.js';
 import { ModelTransition } from './logic/model-transition.js';
 import { inspectionFrame } from './logic/inspection-frame.js';
 
@@ -135,7 +136,7 @@ class App {
     this.video = $('cam');
     this.renderer = new Renderer(this.canvas, CFG.n, { preserve: CFG.manual });
     this.ctl = new Controller(CATALOG.length, isMachine);
-    this.transition = new ModelTransition();
+    this.transition = new ModelTransition();this.inspectionTransition=new InspectionTransition();
     this.motionTime = 0;
     this.labelPage = 0;
     this.labelPageCount = 1;
@@ -184,6 +185,7 @@ class App {
     const st=this.ctl.state;
     if(this.model&&this.uploaded>=0){st.index=this.uploaded;st.targetDirty=false;st.go(FORMED,this.t);this.surfaceRevealT=null;}
     else{st.targetDirty=false;st.go(IDLE,this.t);}
+    this.announceModel(st.index);
     this.toast(this.word('Không tải được mô hình. Hãy chọn lại để thử.','Could not load the model. Select it again to retry.'));
     console.error(error);
   }
@@ -216,7 +218,8 @@ class App {
     this.last = t; this.t = t;
     this.motionTime += dt;
     const ctl = this.ctl, st = ctl.state;
-    ctl.suspended = !!this.scanActive || !!this.transition.pending;
+    this.inspectionTransition.tick(this.motionTime);
+    ctl.suspended = !!this.scanActive || !!this.transition.pending || !!this.inspectionTransition.pending;
     const switchTo = this.transition.commit(this.motionTime);
     if(switchTo!==null){
       this.hiddenSystems.clear();this.deselect();this.resetPose();st.select(switchTo,t);
@@ -243,7 +246,7 @@ class App {
       if (action === 'model') { this.selectModel(st.index + 1, true); this.toast('Tay trái · mô hình tiếp'); }
       else this.nextBlock();
     }
-    if(!this.scanActive&&!this.transition.pending)ctl.tick(t);
+    if(!this.scanActive&&!this.transition.pending&&!this.inspectionTransition.pending)ctl.tick(t);
 
     // 2. make sure the current model is on the GPU (built in the worker)
     if (st.targetDirty) {
@@ -268,7 +271,7 @@ class App {
     }
     const vis = ctl.handVisible(t);
     const pointing = !this.scanActive && vis && (ctl.pose === POINT || ctl.rawPose === POINT);
-    const busyHand = this.scanActive || !!this.transition.pending || pointing || ctl.pinch || vis && (ctl.navigationActive||ctl.rawPose===THUMB||ctl.pose===THUMB);
+    const busyHand = this.scanActive || !!this.transition.pending || !!this.inspectionTransition.pending || pointing || ctl.pinch || vis && (ctl.navigationActive||ctl.rawPose===THUMB||ctl.pose===THUMB);
     const twoHands = !busyHand && vis && ctl.secondVisible(t) && formed;
     const visibleBlock = this.sel < 0 && machine && !this.quiz && this.$('separationMode').value !== 'muscles'
       ? singleVisibleGroup(this.model.labels, this.visiblePicks()) : null;
@@ -360,7 +363,7 @@ class App {
       // relative baseline, so releasing a point cannot yank them apart.
       this.partSeparation.set(smooth(.12, .85, ctl.openness));
     }
-    this.updatePicking(t, pointing, formed && machine);
+    this.updatePicking(t, pointing, formed && machine && !this.inspectionTransition.pending);
     this.pullAmt = this.partSeparation.update(ctl.openness, this.sel >= 0 && formed && vis && !!ctl.landmarks && !busyHand && !twoHands && !this.sliderActive, ctl.lastHandT, dt);
     this.pulled = this.partSeparation.target > .01;
     // Anchors and solid meshes must use the same current-frame pull amount.
@@ -375,9 +378,15 @@ class App {
       this.cut.x += (this.cut.target - this.cut.x) * (1 - Math.exp(-dt * 10));
     }
 
+    let simulationFormT=formT;
+    if(this.inspectionTransition.pending){
+      const view=this.inspectionTransition.pending;
+      mode=view.phase==='out'?SIM.sphere:SIM.formed;
+      simulationFormT=view.phase==='in'?this.motionTime-view.time:0;
+    }
     const kick = st.consumeKick() ? 1 : 0;                                // one-frame impulse, read exactly once
     const sel = this.sel >= 0 && formed ? this.sel : -100;
-    if(!formed||this.lastSolidBlend!==1||this.transition.pending)this.renderer.step({ dt, time: t, mode, formT, kick, rot, sphereR: 0.85, explode: this.explode, scale, exCenter, sel, partAmount:this.pullAmt,partScale:this.selection?.layout?.scale??1,pull: [0, 0, this.pullDistance * this.pullAmt] });
+    if(!formed||this.lastSolidBlend!==1||this.transition.pending||this.inspectionTransition.pending)this.renderer.step({ dt, time: t, mode, formT:simulationFormT, kick, rot, sphereR: 0.85, explode: this.explode, scale, exCenter, sel, partAmount:this.pullAmt,partScale:this.selection?.layout?.scale??1,pull: [0, 0, this.pullDistance * this.pullAmt] });
 
     // 8. colour morph + per-part colours once a machine has formed
     const k = 1 - Math.exp(-dt * 4);
@@ -394,6 +403,7 @@ class App {
     if(this.transition.pending?.phase==='out')solidBlend=this.transition.outgoingBlend(this.motionTime);
     else if(solidBlend===1&&this.transition.pending?.phase==='gathering')this.transition.complete();
 
+    solidBlend*=this.inspectionTransition.blend(this.motionTime);
     this.lastSolidBlend=solidBlend;
     this.renderer.draw({
       showCover:this.$('showCover')?.checked,
@@ -460,13 +470,19 @@ class App {
     }
     return systemBlocks(this.model?.labels||[],ids);
   }
+  changeInspection(apply) {
+    if(this.transition.pending||this.scanActive)return;
+    if(this.model?.surface&&this.ctl.state.state===FORMED)this.inspectionTransition.begin(()=>{apply();this.inspectionSignature=null;},this.motionTime);
+    else apply();
+  }
   nextBlock() {
     if(this.quiz){this.toast('Kết thúc luyện tập để chuyển hệ bên trong');return;}
-    if(this.scanActive||this.transition.pending||this.uploaded!==this.ctl.state.index||this.ctl.state.state!==FORMED||!this.model?.surface){this.toast('Chờ mô hình hiện ra để chuyển hệ bên trong');return;}
+    if(this.scanActive||this.transition.pending||this.inspectionTransition.pending||this.uploaded!==this.ctl.state.index||this.ctl.state.state!==FORMED||!this.model?.surface){this.toast('Chờ mô hình hiện ra để chuyển hệ bên trong');return;}
     const blocks=this.modelBlocks();if(!blocks.length)return;
     const current=this.selection?.system||this.$('inspectionView').value.replace(/^system:/,'');
     const index=(blocks.findIndex(block=>block.system===current)+1)%blocks.length,block=blocks[index];
-    this.deselect();this.resetPose();setMuscleSeparation(this.model,false);
+    this.changeInspection(()=>{
+    this.deselect();setMuscleSeparation(this.model,false);
     this.$('inspectionView').value='system:'+block.system;
     if(this.$('inspectionView').value!=='system:'+block.system){
       const profile=availableInspectionViews(this.model.surface.groups).find(view=>view.systems?.length===1&&view.systems[0]===block.system);
@@ -474,6 +490,7 @@ class App {
     }
     this.$('systemFocus').value='-1';this.manualExplode=0;this.explode=0;this.expHist=[];this.pendingBlock=block.pick;
     this.populateFocus();this.toast(`Tay phải · ${SYSTEM_LABELS[block.system]||block.system} · ${index+1}/${blocks.length}`);
+    });
   }
   pickTarget(x,y) {
     const tag=this.labelHits.find(a=>x>=a.x&&x<=a.x+a.w&&y>=a.y&&y<=a.y+a.h);
@@ -902,6 +919,7 @@ class App {
     if(!count){const empty=document.createElement('p');empty.textContent=this.word('Không có cấu trúc khớp tên tìm kiếm.','No matching structures.');list.append(empty);}
     if([...focus.options].some(option=>option.value===previous))focus.value=previous;
     else{focus.value='-1';this.deselect();}
+    this.appliedInspectionView=this.$('inspectionView').value;this.appliedSystemFocus=focus.value;
   }
   updateHud(t, formT) {
     const st = this.ctl.state, def = CATALOG[st.index], $ = this.$, ctl = this.ctl;
@@ -931,11 +949,11 @@ class App {
       $('modelQuality').textContent=quality ? ((quality.context||'')+' '+this.model.surface.partCount+' cấu trúc nguồn. '+(quality.sourceOptimized===false?'Lưới OBJ nguồn, không giản lược thêm. ':'')+(quality.capLoops?'Mặt cắt màu nâu là ranh giới kỹ thuật. ':'')+(quality.unresolvedCuts?'Còn '+quality.unresolvedCuts+' đường biên nguồn hở; không tự lấp. ':'')+'Nguồn không có texture mô thật.').trim() : 'Giữ màu và hình học của dữ liệu nguồn.';
     }
     const pill = $('statePill');
-    const transitionPhase=this.transition.pending?.phase||'steady';
+    const transitionPhase=this.transition.pending?.phase||(this.inspectionTransition.pending?.phase==='out'?'out':this.inspectionTransition.pending?'gathering':'steady');
     pill.dataset.state=st.state;pill.dataset.transition=transitionPhase;
     pill.textContent=transitionPhase==='out'?this.word('Đang tách thành hạt','Dissolving into particles'):transitionPhase==='loading'?this.word('Đang tải mô hình','Loading model'):transitionPhase==='gathering'?this.word('Đang gom mô hình','Assembling model'):(STATE_VI[st.state]??st.state);
     const transitionStatus=$('modelTransitionStatus');transitionStatus.hidden=transitionPhase==='steady';transitionStatus.textContent=transitionStatus.hidden?'':pill.textContent+'…';
-    for(const id of ['bSnap','bForm','bOpen','explodeSlider','systemFocus','inspectionView','separationMode'])$(id).disabled=!!this.transition.pending;
+    for(const id of ['bSnap','bForm','bOpen','explodeSlider','systemFocus','inspectionView','separationMode'])$(id).disabled=!!this.transition.pending||!!this.inspectionTransition.pending;
     $('viewStructures').disabled=!this.model||!!this.transition.pending;
     $('structureSearch').disabled=!!this.transition.pending;
     if(this.structuresBusy!==!!this.transition.pending){this.structuresBusy=!!this.transition.pending;for(const button of $('structureList').querySelectorAll('button'))button.disabled=this.structuresBusy;}
@@ -955,11 +973,11 @@ class App {
     $('separationLabel').textContent=this.selection?.layout?'Tách từng cấu trúc đã chọn':this.sel>=0?'Kéo cấu trúc đã chọn':'Tách toàn mô hình';
     $('separationHint').textContent=this.selection?.layout?'Nắm rồi xòe tay để tách từng mảnh · nắm lại để lắp':this.sel>=0?'Nắm rồi xòe tay để kéo cấu trúc ra · các phần khác giữ nguyên':'Mở tay để tách các hệ · chọn một khối để tách từng cấu trúc';
     const split=$('splitParts'),hasSkull=this.anchors.some(a=>selectionKey(a.L)==='skull'),block=singleVisibleGroup(this.model?.labels||[],this.visiblePicks());
-    split.disabled=!this.model?.surface||!this.anchors.length;
+    split.disabled=!this.model?.surface||!this.anchors.length||!!this.inspectionTransition.pending;
     split.textContent=this.selection?.layout&&this.partSeparation.target>.5?'Lắp lại phần đã chọn':this.selection?.layout&&!this.selection.skull?'Tách '+this.selection.ids.size+' cấu trúc':hasSkull?'Tách xương sọ':block?'Tách '+block.count+' cấu trúc':'Tách từng cấu trúc';
     $('splitHint').textContent=this.selection?.layout?`${this.selection.ids.size} cấu trúc · xòe tay để tách · nắm tay để lắp lại`:block?`${block.count} cấu trúc đang hiện · xòe tay để tách riêng`:'Tách riêng các mảnh nguồn · chọn khối cần tách';
     const blocks=this.modelBlocks(),activeBlock=blocks.findIndex(item=>item.system===this.selection?.system);
-    $('bNextBlock').disabled=st.state!==FORMED||this.uploaded!==st.index||!blocks.length;
+    $('bNextBlock').disabled=!!this.inspectionTransition.pending||!!this.transition.pending||st.state!==FORMED||this.uploaded!==st.index||!blocks.length;
     $('blockCycleStatus').textContent=activeBlock>=0?`${SYSTEM_LABELS[blocks[activeBlock].system]||blocks[activeBlock].system} · ${activeBlock+1}/${blocks.length} hệ`:'Like trái: mô hình tiếp · like phải: hệ tiếp';
     const hot = st.state === IDLE || st.state === DISSOLVE ? 'snap' : st.state === SPHERE ? 'fist' : 'open';
     const gk = `${isM}|${hot}`;
@@ -1008,9 +1026,15 @@ class App {
   }
 
   // ------------------------------------------------------------ input
+  announceModel(index) {
+    this.enteredId=CATALOG[index].id;
+    if(this.bridgeReady&&window.parent!==window)window.parent.postMessage({type:'soma-control-model',id:this.enteredId},location.origin);
+  }
   selectModel(i, autoForm = true) {
+    this.inspectionTransition.cancel();
     const n = CATALOG.length;
     i = ((i % n) + n) % n;
+    this.announceModel(i);
     if(i===this.ctl.state.index&&this.ctl.state.state===FORMED){this.transition.complete();return;}
     this.speaker.stop();
     this.stopDemo();
@@ -1063,11 +1087,11 @@ class App {
       else ctl.keyPose(OPEN, now());
     };
     $('structureSearch').oninput=()=>this.populateFocus();
-    $('showCover').onchange=()=>{this.deselect();this.populateFocus();};
+    $('showCover').onchange=()=>{const next=$('showCover').checked;$('showCover').checked=!next;this.changeInspection(()=>{$('showCover').checked=next;this.deselect();this.populateFocus();});};
     $('selectionScope').onchange=()=>{this.deselect();};
-    $('separationMode').onchange=()=>{const mode=$('separationMode').value;if(mode==='selected'){this.splitSelected();return;}const muscles=mode==='muscles';setMuscleSeparation(this.model,muscles);$('inspectionView').value=muscles?'muscular':'all';$('systemFocus').value='-1';this.deselect();$('separationMode').value=mode;this.manualExplode=muscles?1:0;this.zoomTarget=1;this.populateFocus();};
-    $('systemFocus').onchange=()=>{this.deselect();this.resetPose();const li=Number($('systemFocus').value);if(li>=0)this.selectPart(li,'list');};
-    $('inspectionView').onchange=()=>{this.deselect();this.resetPose();$('systemFocus').value='-1';this.populateFocus();};
+    $('separationMode').onchange=()=>{const mode=$('separationMode').value;if(mode==='selected'){this.splitSelected();return;}this.changeInspection(()=>{const muscles=mode==='muscles';setMuscleSeparation(this.model,muscles);$('inspectionView').value=muscles?'muscular':'all';$('systemFocus').value='-1';this.deselect();$('separationMode').value=mode;this.manualExplode=muscles?1:0;this.populateFocus();});};
+    $('systemFocus').onchange=()=>{const next=$('systemFocus').value;$('systemFocus').value=this.appliedSystemFocus||'-1';this.changeInspection(()=>{this.deselect();$('systemFocus').value=next;const li=Number(next);if(li>=0)this.selectPart(li,'list');this.appliedSystemFocus=next;});};
+    $('inspectionView').onchange=()=>{const next=$('inspectionView').value;$('inspectionView').value=this.appliedInspectionView||'all';this.changeInspection(()=>{$('inspectionView').value=next;this.deselect();$('systemFocus').value='-1';this.populateFocus();});};
     for(const [id,yaw] of [['viewFront',0],['viewBack',Math.PI],['viewSide',Math.PI/2]])$(id).onclick=()=>{this.grab=null;this.handYaw.reset();this.spin=0;this.dragYaw=yaw;this.dragYawTarget=yaw;this.pitch=0;this.autoRotate=false;};
     $('viewReset').onclick=()=>{this.hiddenSystems.clear();this.deselect();this.resetPose();$('systemFocus').value='-1';$('inspectionView').value='all';$('structureSearch').value='';this.populateFocus();};
     $('labelsPrevious').onclick=()=>{this.labelPage=Math.max(0,this.labelPage-1);};
@@ -1086,7 +1110,7 @@ class App {
     $('bRec').onclick = () => this.toggleRecord();
     $('bHelp').onclick = () => { $('help').hidden = !$('help').hidden; };
     $('partClose').onclick = () => this.deselect();
-    $('partSystem').onclick=()=>{const system=this.model?.labels[this.sel]?.system;if(!system)return;const view=availableInspectionViews(this.model.surface?.groups||[]).find(profile=>profile.systems?.length===1&&profile.systems[0]===system);if(!view)return;this.deselect();this.resetPose();$('inspectionView').value=view.id;$('systemFocus').value='-1';this.populateFocus();};
+    $('partSystem').onclick=()=>{const system=this.model?.labels[this.sel]?.system;if(!system)return;const view=availableInspectionViews(this.model.surface?.groups||[]).find(profile=>profile.systems?.length===1&&profile.systems[0]===system);if(!view)return;this.changeInspection(()=>{this.deselect();$('inspectionView').value=view.id;$('systemFocus').value='-1';this.populateFocus();});};
     $('partPull').onclick = () => { if (this.sel >= 0) this.setSeparation(this.partSeparation.target>.5?0:1); };
     $('splitParts').onclick=()=>this.splitSelected();
     $('partSpeak').onclick = () => this.readSelected();
@@ -1211,6 +1235,7 @@ function boot() {
     scanSnapshot:()=>{const source=previewSource(app.video,app.cam?.previewFrame);if(!source||!app.camOn)return null;const width=source.videoWidth||source.width,height=source.videoHeight||source.height;if(!width)return null;const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;canvas.getContext('2d').drawImage(source,0,0,canvas.width,canvas.height);return {canvas,hand:app.ctl.handVisible(app.t)?app.ctl.landmarks:null,second:app.ctl.secondVisible(app.t)?app.ctl.second:null};},
     app, CATALOG, CFG, synth: synthHand,
     enter: (id, stream) => {
+      app.bridgeReady=true;
       hideStart();
       const index=CATALOG.findIndex(model=>model.id===id);
       if(app.enteredId!==id){app.enteredId=id;app.selectModel(index>=0?index:CFG.start,true);}
