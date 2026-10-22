@@ -252,6 +252,9 @@ class App {
     if (st.targetDirty) {
       const m = this.store.get(st.index);
       if (m) {
+        // Reset at upload as well: gesture/demo switches can bypass selectModel,
+        // and input received while loading must not become the new model's pose.
+        if (this.uploaded !== st.index) this.resetPose();
         this.renderer.setModel(m); this.model = {...m,labels:m.labels.map(label=>({...label,labelVi:label.label,label:this.locale==='en'?(label.sourceName||label.info||label.label):label.label}))}; this.uploaded = st.index; this.uploadT = t; st.targetDirty = false;
         this.transition.uploaded(st.index,this.motionTime);
         if(this.transition.pending&&!this.transition.pending.autoForm)this.transition.complete();

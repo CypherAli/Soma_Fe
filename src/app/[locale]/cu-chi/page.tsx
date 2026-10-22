@@ -658,6 +658,8 @@ export default function GestureControlPage({
     scannedLeftRef.current = null;
     setOriented(false);
     tr.zoom = 1;
+    wsZoomBaseRef.current = 1;
+    wsLastZoomRef.current = 1;
     tr.panX = 0;
     tr.panY = 0;
     // Mốc neo cũ vô nghĩa sau khi về vị trí gốc — xoá để lần giơ tay kế tiếp neo
