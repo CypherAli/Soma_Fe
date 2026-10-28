@@ -1,4 +1,7 @@
 import { NextResponse } from "next/server";
+import { reserveAssistantQuestion } from "@/lib/assistantQuota";
+import { isSummaryRequest, preparedPathologySummary, summaryRecordForQuestion } from "@/lib/pathologySummary";
+import { fetchPathologies } from "@/lib/pathologies";
 import type { Loc } from "@/lib/homeContent";
 import { complete, isConfigured } from "@/lib/llm";
 import { retrieveMany, understand, type UnifiedSource } from "@/lib/assistant";
@@ -115,6 +118,18 @@ export async function POST(request: Request) {
   if (isUnsupportedTask(question)) {
     return NextResponse.json({ answer: t.offtopic, sources: [], suggestions: [], engine: "refused" });
   }
+
+  if (isSummaryRequest(question)) {
+    const records = await fetchPathologies();
+    const record = summaryRecordForQuestion(records.items, question);
+    if (record) {
+      const prepared = preparedPathologySummary(record, locale);
+      return NextResponse.json({ answer: prepared.answer, sources: [{ kind: "pathology", id: record.slug, title: locale === "en" ? record.nameEn : locale === "zh" ? record.nameZh : record.nameVi, detail: record.source, href: `/benh-ly?open=${encodeURIComponent(record.slug)}`, meta: record.sourcePage ? String(record.sourcePage) : "" }], suggestions: [], engine: prepared.engine });
+    }
+    return NextResponse.json({ answer: locale === "en" ? "Open a condition article or include its full name to read the prepared summary." : locale === "zh" ? "请打开疾病文章或输入完整名称，阅读已有摘要。" : "Mở một bài bệnh lý hoặc ghi đầy đủ tên bệnh để đọc tóm tắt có sẵn.", sources: [], suggestions: [], engine: "prepared-summary" });
+  }
+  const quotaError = await reserveAssistantQuestion(request, locale);
+  if (quotaError) return quotaError;
 
   const directSystem = isSystemNavigationQuestion(question) && searchSiteFacts(question, locale).some(hit => hit.score >= 2);
   const { intent, queries } = directSystem ? { intent: "lookup", queries: [question] } : await understand(question, request.signal);

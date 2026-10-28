@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import { reserveAssistantQuestion } from "@/lib/assistantQuota";
+import { isSummaryRequest } from "@/lib/pathologySummary";
 import { searchFacts, SYSTEM_LABEL, type AnatomyFact } from "@/lib/anatomy/knowledge";
 import { pick, type Loc } from "@/lib/homeContent";
 import { complete, isConfigured } from "@/lib/llm";
@@ -78,6 +80,10 @@ export async function POST(req: Request) {
     LEAD[locale](sources.length),
     ...sources.map((s) => `• ${s.name}${s.latin ? ` (${s.latin})` : ""} — ${s.note}`),
   ].join("\n\n");
+
+  if (isSummaryRequest(question)) return NextResponse.json({ answer: lookupAnswer, sources, engine: "prepared-summary" });
+  const quotaError = await reserveAssistantQuestion(req, locale);
+  if (quotaError) return quotaError;
 
   if (!isConfigured()) {
     return NextResponse.json({ answer: lookupAnswer, sources, engine: "lookup" });

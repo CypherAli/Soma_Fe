@@ -57,7 +57,7 @@ export function createMicrophone(options: Options, factory = browserRecognition)
     recognition = rec;
     const current = () => active && recognition === rec && !pauses.size;
     rec.lang = options.locale === "vi" ? "vi-VN" : options.locale === "zh" ? "zh-CN" : "en-US";
-    rec.continuous = !!options.continuous; rec.interimResults = !options.continuous; rec.maxAlternatives = 3;
+    rec.continuous = !!options.continuous; rec.interimResults = true; rec.maxAlternatives = 3;
     let delivered = -1;
     rec.onstart = () => { if (current()) { clearTimeout(watchdog); options.onState("listening"); } };
     rec.onresult = event => {
@@ -65,7 +65,12 @@ export function createMicrophone(options: Options, factory = browserRecognition)
       const alternatives = (result: Result) => Array.from({ length: result.length }, (_, i) => result[i]?.transcript?.trim()).filter((text): text is string => !!text);
       if (options.continuous) {
         for (let i = Math.max(event.resultIndex, delivered + 1); i < event.results.length; i++) {
-          const result = event.results[i]; if (!result.isFinal) continue;
+          const result = event.results[i];
+          if (!result.isFinal) {
+            const choices = [...new Set(alternatives(result))];
+            if (choices.length) options.onText(choices[0], choices, false);
+            continue;
+          }
           delivered = i; silentEnds = 0;
           const choices = [...new Set(alternatives(result))];
           if (choices.length) options.onText(choices[0], choices, true);

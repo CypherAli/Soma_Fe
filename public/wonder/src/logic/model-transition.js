@@ -9,6 +9,8 @@ export class ModelTransition {
     this.pending = null;
   }
   begin(index, time, outgoing, autoForm = true) {
+    // Repeated input for a slow asset must not restart dissolve or assembly.
+    if (this.pending?.index === index) return false;
     this.pending = {
       index,
       time,
@@ -16,6 +18,7 @@ export class ModelTransition {
       phase: outgoing ? "out" : "loading",
       uploadedAt: null,
     };
+    return true;
   }
   outgoingBlend(time) {
     return this.pending?.phase === "out"

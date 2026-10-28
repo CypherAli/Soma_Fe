@@ -1,4 +1,5 @@
 "use client";
+import { sourceDisplayLabel } from "./quizTopics";
 
 
 
@@ -1017,7 +1018,7 @@ export default function DrLamQuiz({
               →
             </button>
             <span>
-              {documentBank ? documentBank.sourceFile : word(
+              {documentBank ? sourceDisplayLabel(documentBank.sourceFile) : word(
                 "Nguồn: 30 PDF do bạn cung cấp",
                 "Source: your 30 PDFs",
                 "来源：您提供的 30 份 PDF",

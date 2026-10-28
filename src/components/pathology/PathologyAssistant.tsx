@@ -9,11 +9,17 @@ import { ContentSurface } from "@/components/content/ContentProvider";
 import { useEffect, useRef, useState } from "react";
 import type { Loc } from "@/lib/homeContent";
 import { Icon } from "@/components/home/IconSprite";
+import type { Pathology } from "@/lib/pathologies";
+import { isSummaryRequest, preparedPathologySummary, summaryRecordForQuestion } from "@/lib/pathologySummary";
+import PathologyText from "./PathologyText";
+import { getToken } from "@/lib/auth";
+import { MEMBERSHIP_CHANGED_EVENT } from "@/lib/membership";
 
 /**
  * Hộp hỏi đáp bám giáo trình, dùng chung cho hai chỗ:
  *   mode="disease"  — trong hồ sơ một bệnh, chỉ tra trong bài của bệnh đó
  *   mode="symptoms" — ngoài trang chỉ mục, nhập triệu chứng để tìm BÀI ĐỌC
+ * Yêu cầu tóm tắt dùng ngay dữ liệu bài đã tải, không gửi yêu cầu mạng.
  *
  * Mọi câu trả lời đều kèm danh sách nguồn có số trang. Khi máy chủ không gọi
  * được mô hình (chưa cấu hình AI_API_KEY, hết hạn mức…), route trả về nguyên
@@ -67,12 +73,16 @@ export default function PathologyAssistant({
   mode,
   slug,
   question: external,
+  record,
+  records,
 }: {
   locale: Loc;
   mode: "disease" | "symptoms";
   slug?: string;
   /** Câu hỏi đưa từ ngoài vào (ô tìm kiếm gộp). Đổi giá trị thì tự hỏi lại. */
   question?: string;
+  record?: Pathology;
+  records?: Pathology[];
 }) {
   const cmsContent = useContent();
   const copy = cmsContent.resolve(cmsSourcecopy());
@@ -97,6 +107,16 @@ export default function PathologyAssistant({
   async function ask(text: string) {
     if (!text.trim()) return;
     request.current?.abort();
+    request.current = null;
+    if (isSummaryRequest(text)) {
+      const summaryRecord = record ?? summaryRecordForQuestion(records ?? [], text);
+      const prepared = summaryRecord ? preparedPathologySummary(summaryRecord, locale) : null;
+      setBusy(false);
+      setAnswer(prepared?.answer ?? (locale === "en" ? "Open an article to read its prepared summary." : locale === "zh" ? "请先打开文章，阅读已编写的摘要。" : "Mở một bài bệnh lý để đọc bản tóm tắt có sẵn."));
+      setSources(prepared?.sources ?? []);
+      setEngine("prepared-summary");
+      return;
+    }
     const controller = new AbortController(); request.current = controller;
     setBusy(true);
     setAnswer(null);
@@ -104,19 +124,20 @@ export default function PathologyAssistant({
     try {
       const res = await fetch("/api/pathology-chat", {
         method: "POST",
-        headers: { "content-type": "application/json" },
+        headers: { "content-type": "application/json", ...(getToken() ? { Authorization: `Bearer ${getToken()}` } : {}) },
         body: JSON.stringify({ question: text, mode, slug, locale }),
         signal: controller.signal,
       });
       const data = await res.json();
+      if (data.engine !== "prepared-summary") window.dispatchEvent(new Event(MEMBERSHIP_CHANGED_EVENT));
       if (controller.signal.aborted || request.current !== controller) return;
       if (!res.ok) throw new Error(data?.error ?? "http");
       setAnswer(data.answer);
       setSources(data.sources ?? []);
       setEngine(data.engine ?? null);
-    } catch {
+    } catch (cause) {
       if (controller.signal.aborted || request.current !== controller) return;
-      setAnswer(t.failed);
+      setAnswer(cause instanceof Error && cause.message !== "http" ? cause.message : t.failed);
       setEngine(null);
     } finally {
       if (request.current === controller) { request.current = null; setBusy(false); }
@@ -136,14 +157,18 @@ export default function PathologyAssistant({
   }, [external, mode, slug, locale]);
 
   const note =
-    engine === "lookup-nokey" ? t.lookupNote : engine === "lookup-fallback" ? t.fallbackNote : null;
+    engine === "prepared-summary" ? (locale === "en" ? "Prepared article summary" : locale === "zh" ? "已编写的文章摘要" : "Bản tóm tắt có sẵn trong bài") : engine === "lookup-nokey" ? t.lookupNote : engine === "lookup-fallback" ? t.fallbackNote : null;
 
   return <ContentSurface scope="src/components/pathology/PathologyAssistant.tsx">{(
     <section className="pth-ai">
       <header className="pth-ai-head">
-        <Icon id={mode === "disease" ? "i-spark" : "i-steth"} />
+        <Icon id="i-steth" />
         <h3>{mode === "disease" ? t.diseaseTitle : t.symptomTitle}</h3>
       </header>
+
+      {mode === "disease" && <button className="pth-summary-shortcut" type="button" onClick={() => { setQuestion(locale === "vi" ? "Tóm tắt" : "Summary"); void ask("summary"); }}>
+        {locale === "en" ? "Read prepared summary" : locale === "zh" ? "阅读已有摘要" : "Đọc tóm tắt có sẵn"}
+      </button>}
 
       <form
         className="pth-ai-bar"
@@ -180,9 +205,9 @@ export default function PathologyAssistant({
       {mode === "symptoms" && <p className="pth-ai-warn">{t.symptomWarn}</p>}
 
       {answer && (
-        <div className="pth-ai-out">
+        <div className="pth-ai-out" role="status" aria-live="polite">
           {note && <p className="pth-ai-note">{note}</p>}
-          <p className="pth-ai-answer">{answer}</p>
+          <div className="pth-ai-answer"><PathologyText text={answer} /></div>
           {sources.length > 0 && (
             <details>
               <summary>
@@ -192,9 +217,9 @@ export default function PathologyAssistant({
                 {sources.map((s, i) => (
                   <li key={`${s.slug}-${s.page}-${i}`}>
                     <cite>
-                      {s.book} · {s.page}
+                      {s.book}{s.page ? ` · ${s.page}` : ""}
                     </cite>
-                    <span>{s.excerpt}…</span>
+                    {s.excerpt && <span>{s.excerpt}…</span>}
                   </li>
                 ))}
               </ol>

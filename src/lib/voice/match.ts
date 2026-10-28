@@ -299,3 +299,9 @@ export function wakeQuestion(transcript: string): string | null {
   const skip = norm(transcript).split(" ").length - m[1].split(" ").length;
   return words.slice(skip).join(" ") || m[1];
 }
+
+/** An open, explicitly enabled conversation accepts natural questions. */
+export function conversationQuestion(alternatives: string[], conversationOpen: boolean): string | null {
+  const wake = alternatives.map(wakeQuestion).find(Boolean);
+  return wake || (conversationOpen ? alternatives[0]?.trim() || null : null);
+}

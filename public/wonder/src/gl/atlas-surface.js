@@ -1,7 +1,7 @@
 import * as T from '../../vendor/three.module.js';
 import { TISSUE_MATERIALS, inspectionVisible } from '../models/inspection.js';
 import { RoomEnvironment } from '../../vendor/RoomEnvironment.js';
-import { partTransform } from '../logic/inspection-controls.js';
+import { partTransform, partPageVisible } from '../logic/inspection-controls.js';
 
 // PBR pipeline and room IBL shared with, tissue materials and inspection lighting adapted from /viewer/AtlasScene.
 // Only the pose comes from WonderSnap; there is no second camera/gesture controller.
@@ -66,7 +66,7 @@ export class AtlasSurface {
   const batch=this.hasOverview&&d.systemFocus<0;
   const detailedSystems=new Set([...(this.surface.individualSystems||[]),...this.meshes.filter(mesh=>!mesh.userData.overview&&d.selectedPicks?.has(mesh.userData.g.pick)).map(mesh=>mesh.userData.g.system)]);
   for(const mesh of this.meshes){const {g,uniforms,overview}=mesh.userData;
-   const visible=inspectionVisible(g,d.inspectionView,d.hiddenSystems)&&(!g.cover||d.showCover)&&(d.systemFocus<0||g.pick===d.systemFocus);
+   const visible=inspectionVisible(g,d.inspectionView,d.hiddenSystems)&&(!g.cover||d.showCover)&&(d.systemFocus<0||g.pick===d.systemFocus)&&partPageVisible(g.pick,d.partLayout,d.partAmount||0);
    mesh.userData.pickable=visible&&!overview;
    mesh.visible=visible&&(overview?batch&&!detailedSystems.has(g.system):!batch||!g.overviewId||detailedSystems.has(g.system));
    // Invisible detailed meshes still need the current transform for raycasting.

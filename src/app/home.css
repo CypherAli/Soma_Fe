@@ -898,7 +898,7 @@ html[data-theme="dark"] .bd .pth-shell{
 .bd .pth-cats{flex:1 1 auto; justify-content:space-evenly; min-height:0}
 .bd .pth-side-title{
   margin:0 0 6px; padding:0 12px 16px; border-bottom:1px solid var(--line-e);
-  font:500 21px var(--serif); color:var(--ink-e);
+  font:600 14px var(--sans); color:var(--ink-e);
 }
 .bd .pth-cats{display:flex; flex-direction:column}
 .bd .pth-cat{
@@ -914,10 +914,11 @@ html[data-theme="dark"] .bd .pth-shell{
   font-variant-numeric:tabular-nums; opacity:.62;
 }
 .bd .pth-cat:hover{
-  padding-left:15px; background:color-mix(in srgb,var(--acc) 6%,transparent); color:var(--ink-e);
+  background:color-mix(in srgb,var(--acc) 6%,transparent); color:var(--ink-e);
 }
 .bd .pth-cat.on{
-  background:var(--ink-e); color:var(--paper); font-weight:600; padding-left:15px;
+  background:color-mix(in srgb,var(--ink-e) 6%,transparent); color:var(--ink-e); font-weight:600;
+  box-shadow:inset 2px 0 var(--acc);
 }
 .bd .pth-cat.on .isvg{opacity:1}
 /* Mục 0 kết quả vẫn bấm được (để bỏ bộ lọc khác), chỉ mờ đi cho khỏi hút mắt. */
@@ -926,14 +927,14 @@ html[data-theme="dark"] .bd .pth-shell{
 /* ---- Đầu trang ---- */
 .bd .pth-head{display:flex; flex-direction:column; gap:12px; max-width:62ch}
 .bd .pth-eyebrow{
-  margin:0; color:var(--acc); font:600 11px/1 var(--sans);
-  letter-spacing:.17em; text-transform:uppercase;
+  margin:0; color:var(--sub-e); font:500 12px/1.4 var(--sans);
+  letter-spacing:0; text-transform:none;
 }
 .bd .pth h1{
-  margin:0; font:600 clamp(34px,4vw,52px)/1.06 var(--serif);
+  margin:0; font:600 clamp(28px,3vw,38px)/1.15 var(--sans);
   letter-spacing:-.02em; color:var(--ink-e); text-wrap:balance;
 }
-.bd .pth-lead{margin:0; color:var(--sub-e); font-size:16px; line-height:1.6}
+.bd .pth-lead{margin:0; color:var(--sub-e); font-size:14px; line-height:1.65}
 
 /* ---- Tìm kiếm ---- */
 .bd .pth-tools{display:flex; flex-wrap:wrap; gap:10px}
@@ -1080,15 +1081,15 @@ html[data-theme="dark"] .bd .pth-shell{
 /* ---- Hồ sơ ---- */
 .bd .pth-drawer-back{
   position:fixed; inset:0; z-index:100; display:flex; justify-content:flex-end;
-  background:rgba(20,16,12,.55); backdrop-filter:blur(3px); animation:pth-fade .2s ease;
+  background:rgba(20,16,12,.38); animation:pth-fade .2s ease;
 }
 @keyframes pth-fade{from{opacity:0}}
 .bd .pth-drawer{
-  width:min(560px,100%); height:100%; overflow-y:auto;
+  width:min(680px,100%); height:100%; overflow-y:auto; overscroll-behavior:contain;
   display:flex; flex-direction:column; gap:22px;
   padding:28px 32px 32px; background:var(--paper);
   border-left:1px solid var(--line-e); color:var(--ink-e);
-  box-shadow:-24px 0 64px rgba(20,16,12,.24);
+  box-shadow:-12px 0 36px rgba(20,16,12,.12);
   animation:pth-slide .26s cubic-bezier(.22,1,.36,1);
 }
 @keyframes pth-slide{from{transform:translateX(22px); opacity:.6}}
@@ -1142,8 +1143,8 @@ html[data-theme="dark"] .bd .pth-shell{
 
 .bd .pth-drawer section{display:flex; flex-direction:column; gap:9px}
 .bd .pth-drawer h3{
-  margin:0; font:600 11px var(--sans); letter-spacing:.12em;
-  text-transform:uppercase; color:var(--acc);
+  margin:0; font:600 14px/1.45 var(--sans); letter-spacing:0;
+  text-transform:none; color:var(--ink-e);
 }
 .bd .pth-drawer section p{margin:0; color:var(--sub-e); font-size:14.5px; line-height:1.7}
 .bd .pth-incomplete{
@@ -1964,12 +1965,12 @@ html[data-theme="dark"] .bd.home-motion-root .tc-panel:hover .tc-fig{filter:brig
    ============================================================ */
 .bd .pth-ai{
   display:flex; flex-direction:column; gap:10px;
-  padding:16px 18px; background:var(--paper-2);
-  border:1px solid var(--line-e); border-radius:3px;
+  padding:20px 0; background:transparent;
+  border:0; border-top:1px solid var(--line-e); border-radius:0;
 }
 .bd .pth-ai h3{
-  margin:0; font:600 10.5px var(--sans); letter-spacing:.14em;
-  text-transform:uppercase; color:var(--acc);
+  margin:0; font:600 14px var(--sans); letter-spacing:0;
+  text-transform:none; color:var(--ink-e);
 }
 .bd .pth-ai-bar{display:flex; gap:8px; flex-wrap:wrap}
 .bd .pth-ai-bar input{
@@ -1985,13 +1986,30 @@ html[data-theme="dark"] .bd.home-motion-root .tc-panel:hover .tc-fig{filter:brig
 }
 .bd .pth-ai-bar button:disabled{opacity:.5; cursor:default}
 .bd .pth-summary{padding:20px 0;border-top:1px solid var(--line-e);border-bottom:1px solid var(--line-e)}
-.bd .pth-summary .pth-summary-title{margin:0;color:var(--ink-e);font:600 23px/1.3 var(--serif)}
+.bd .pth-summary .pth-summary-title{margin:0;color:var(--ink-e);font:600 21px/1.3 var(--sans)}
 .bd .pth-summary .pth-summary-note{margin:8px 0 16px;color:var(--sub-e);font:400 13px/1.6 var(--sans)}
 .bd .pth-summary-points{display:flex;flex-direction:column;gap:18px;margin:0}
 .bd .pth-summary-points>div{min-width:0}
-.bd .pth-summary-points dt{margin:0 0 7px;color:var(--acc);font:600 11px/1.5 var(--sans);letter-spacing:.1em;text-transform:uppercase}
-.bd .pth-summary-points dd{margin:0;color:var(--ink-e);font:400 15px/1.8 var(--sans);white-space:pre-line;overflow-wrap:anywhere}
+.bd .pth-summary-points dt{margin:0 0 7px;color:var(--ink-e);font:600 14px/1.5 var(--sans);letter-spacing:0;text-transform:none}
+.bd .pth-summary-points dd{margin:0;color:var(--ink-e);font:400 15px/1.8 var(--sans);overflow-wrap:anywhere}
+.bd .pth-summary-points .pth-text p{color:var(--ink-e)}
+.bd .pth-text{display:grid;gap:10px;overflow-wrap:anywhere;white-space:normal}
+.bd .pth-text p{margin:0;line-height:1.75}
+.bd .pth-text ul{display:grid;gap:7px;margin:0;padding-left:19px;list-style:disc}
+.bd .pth-text li{padding-left:3px;line-height:1.7}
+.bd .pth-summary-shortcut{align-self:flex-start;min-height:34px;padding:5px 0;border:0;border-bottom:1px solid var(--line-e);background:transparent;color:var(--ink-e);font:500 13px var(--sans);cursor:pointer}
+.bd .pth-summary-shortcut:hover{color:var(--acc);border-color:currentColor}
+.bd .pth-ai :is(button,input):focus-visible{outline:2px solid var(--acc);outline-offset:3px}
 .bd .pth-summary .pth-summary-source{margin:18px 0 0;color:var(--sub-e);font:400 12px/1.6 var(--sans);overflow-wrap:anywhere}
+.bd .pth-full-article{margin-top:18px;border-top:1px solid var(--line-e);padding-top:14px}
+.bd .pth-full-article>summary{cursor:pointer;font:600 14px/1.6 var(--sans);color:var(--ink-e)}
+.bd .pth-full-article[open]>.pth-summary-points{margin-top:20px}
+
+.vision-workspace .vision-topbar{height:50px;padding:0 24px;gap:20px;background:#191b1c;color:#ece7de;border-bottom:1px solid #ffffff12;font-family:var(--sans)}
+.vision-workspace .vision-topbar>a{border:0;border-radius:0;padding:4px 16px 4px 0;border-right:1px solid #ffffff20;color:#a9aaa4;font-size:11px;font-weight:400}
+.vision-workspace .vision-topbar h1{color:#ece7de;font-size:13px;font-weight:500;letter-spacing:.01em}
+.vision-workspace .vision-topbar-note{color:#969c97;font-size:11px;letter-spacing:.015em}
+@media(max-width:600px){.vision-workspace .vision-topbar{padding-inline:14px;height:44px;gap:14px}.vision-workspace .vision-topbar-note{display:none}}
 .bd .pth-ai-warn{margin:0; color:var(--sub-e); font:400 11.5px/1.5 var(--sans)}
 .bd .pth-ai-out{display:flex; flex-direction:column; gap:10px; border-top:1px solid var(--line-e); padding-top:12px}
 /* Cảnh báo "đây là nguyên văn, không phải AI viết" phải đọc được ngay, không

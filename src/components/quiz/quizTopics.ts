@@ -15,6 +15,10 @@ export const QUIZ_TOPICS = bindContentSource("data:src/components/quiz/quizTopic
   { id: "mock", label: "Đề thi thử", en: "Mock exams", zh: "模拟试卷", icon: "exam" },
 ] as const);
 
+export function sourceDisplayLabel(value: string): string {
+  return value.replace(/\bdr[.\s]*l[âa]m\b/giu, "").replace(/\s+\.(pdf|docx)\b/gi, ".$1").replace(/[ \t]{2,}/g, " ").trim();
+}
+
 export function quizExamTitle(entry: DrLamEntry): string {
   const titles: Record<string, string> = {
     "cau-hoi-dung-sai-co-than-chung-la-bung": "Đúng / sai · giải phẫu bụng",
@@ -26,7 +30,7 @@ export function quizExamTitle(entry: DrLamEntry): string {
     "dau-mat-co": "Giải phẫu đầu, mặt & cổ",
     "tong-hop-cac-case-lam-sang-quan-trong": "Các ca lâm sàng quan trọng",
   };
-  return titles[entry.id] ?? entry.title;
+  return sourceDisplayLabel(titles[entry.id] ?? entry.title);
 }
 
 export const normalizeQuizSearch = (text: string) => text.toLocaleLowerCase("vi").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d").replace(/[^\p{L}\p{N}]+/gu, " ").trim();

@@ -62,6 +62,27 @@
 .bd .st-form input:focus,.bd .st-inline-form input:focus{outline:none;border-color:var(--acc);box-shadow:0 0 0 3px color-mix(in srgb,var(--acc) 16%,transparent)}
 .bd .st-inline-form{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .bd .st-inline-form input{flex:1;min-width:220px}
+.bd .st-inline-form select{min-width:145px;max-width:100%;min-height:42px;padding:0 36px 0 12px;border:1px solid var(--line-e);border-radius:8px;background:var(--paper);color:var(--ink-e);font:inherit}
+.bd .st-inline-form select:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.bd .st-quota{display:grid;gap:5px;padding-bottom:20px;margin-bottom:20px;border-bottom:1px solid var(--line-e);font-size:14px;line-height:1.6}
+.bd .st-quota p{color:var(--sub-e);font-size:12px}
+.bd .st-plans{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:20px}
+.bd .st-plans>section{display:flex;flex-direction:column;gap:12px;min-width:0}
+.bd .st-plans>section+section{padding-left:24px;border-left:1px solid var(--line-e)}
+.bd .st-plans h3,.bd .st-checkout h3{font:600 17px/1.4 var(--sans);color:var(--ink-e)}
+.bd .st-plans p{color:var(--sub-e);font-size:13px;line-height:1.65}
+.bd .st-plans .st-plan-price{font-size:25px;color:var(--ink-e);font-weight:600}
+.bd .st-plan-price small{font-size:13px;font-weight:400}
+.bd .st-plans button{align-self:flex-start;height:auto;min-height:42px;border-radius:7px;padding:10px 14px}
+.bd .st-checkout{display:grid;gap:16px;margin-top:22px;padding-top:22px;border-top:1px solid var(--line-e)}
+.bd .st-checkout img{display:block;width:min(240px,100%);height:auto;background:#fff;border-radius:8px}
+.bd .st-checkout dl{display:grid;gap:9px;margin:0}
+.bd .st-checkout dl>div{display:grid;grid-template-columns:100px minmax(0,1fr);gap:12px;font-size:13px;line-height:1.6}
+.bd .st-checkout dt{color:var(--sub-e)}
+.bd .st-checkout dd{margin:0;overflow-wrap:anywhere}
+.bd .st-checkout p{font-size:13px;line-height:1.7;color:var(--sub-e)}
+.bd .st-payment-fallback{justify-self:start;font-size:13px;color:var(--sub-e);text-underline-offset:4px}
+@media(max-width:600px){.bd .st-plans{grid-template-columns:1fr}.bd .st-plans>section+section{padding:20px 0 0;border-left:0;border-top:1px solid var(--line-e)}}
 
 /* Hồ sơ. */
 .bd .st-photo{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
@@ -71,6 +92,7 @@
 .bd .st-facts dt{color:var(--sub-e)}
 .bd .st-facts dd{color:var(--ink-e);overflow-wrap:anywhere}
 .bd .st-facts dd em{display:block;margin-top:4px;font-style:normal;font-size:12px;color:var(--sub-e)}
+@media(max-width:600px){.bd .st-facts>div{grid-template-columns:1fr;gap:8px}.bd .st-inline-form input{min-width:0;flex-basis:100%}}
 .bd .st-plan-soon{margin-top:16px;padding:16px 18px;border:1px dashed var(--line-e);border-radius:14px;display:grid;gap:6px}
 .bd .st-plan-soon span{font:500 16px var(--serif);color:var(--ink-e)}
 .bd .st-plan-soon b{justify-self:start;padding:3px 8px;border-radius:6px;background:var(--paper-3);color:var(--sub-e);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
@@ -151,3 +173,54 @@ html[data-theme="dark"] .bd .st-ok{color:#7fc79c}
   .bd .st-skeleton span{animation:none}
   .bd .st-btn,.bd .st-choice,.bd .st-nav a{transition:none}
 }
+
+/* Account workspace: a clear identity area, quiet document rows and a centered payment slip. */
+.bd .st-page{max-width:1240px;padding-top:48px}
+.bd .st-head{padding-bottom:26px;border-bottom:1px solid var(--line-e)}
+.bd .st-head h1{font-size:clamp(36px,4.2vw,54px);line-height:1.1;margin-top:10px}
+.bd .st-eyebrow{letter-spacing:.16em;color:var(--sub-e);font-weight:500}
+.bd .st-body{grid-template-columns:232px minmax(0,1fr);gap:48px;margin-top:32px}
+.bd .st-me{border:0;border-bottom:1px solid var(--line-e);background:none;padding:0 0 22px;border-radius:0;flex-wrap:wrap}
+.bd .st-me-id strong{font-size:15px}.bd .st-me-id span{margin-top:3px;font-size:12px}
+.bd .st-me .plan-badge{margin-left:57px}
+.bd .st-me{display:grid;grid-template-columns:46px minmax(0,1fr);column-gap:12px;row-gap:10px}
+.bd .st-me .plan-badge{grid-column:2;justify-self:start;margin:0}
+.bd .st-nav{gap:5px}.bd .st-nav a{border-radius:5px;padding:11px 10px;border-left:2px solid transparent}
+.bd .st-nav a.is-on{border-left-color:var(--acc);background:var(--paper-2)}
+.bd .st-nav-ico{width:28px;height:28px;border-radius:5px;background:none;color:var(--sub-e)}
+.bd .st-nav a.is-on .st-nav-ico{color:var(--acc)}
+.bd .st-nav a b{font-size:13px}.bd .st-nav a em{font-size:11px;margin-top:2px}
+.bd .st-main{gap:0}
+.bd .st-main>.st-card{border:0;border-top:1px solid var(--line-e);border-radius:0;background:none;padding:28px 0 32px}
+.bd .st-card h2{font:600 18px/1.4 var(--sans);letter-spacing:-.02em}
+.bd .st-identity-grid{display:grid;grid-template-columns:200px minmax(0,1fr);gap:30px;padding:26px;background:var(--paper-2);border:1px solid var(--line-e);border-radius:10px;margin-bottom:28px}
+.bd .st-identity-grid>.st-card{padding:0;background:none;border:0;border-radius:0}
+.bd .st-identity-grid .st-photo{align-items:flex-start;gap:16px}.bd .st-identity-grid .st-photo-actions{flex-basis:100%}
+.bd .st-identity-grid .ava{border-radius:14px}
+.bd .st-btn{border-radius:6px;height:40px;font-size:13px}.bd .st-btn.primary{font-weight:600}
+.bd .st-form input,.bd .st-inline-form input{border-radius:6px}
+.bd .st-identity-grid .st-inline-form input{min-width:0;flex-basis:100%}
+.bd .st-facts{background:none;border:0;border-radius:0;gap:0}
+.bd .st-facts>div{padding:18px 0;background:none;border-bottom:1px solid var(--line-e);grid-template-columns:145px minmax(0,1fr)}
+.bd .st-facts>div:last-child{border-bottom:0}
+.bd .st-test-mode{display:flex;align-items:center;gap:9px;margin-bottom:18px;padding:10px 12px;border-left:2px solid var(--acc);background:var(--paper-2);font-size:12px;color:var(--sub-e)}
+.bd .st-test-mode::before{content:"";width:6px;height:6px;flex:none;border-radius:50%;background:var(--acc)}
+.bd .st-quota{gap:9px;margin-bottom:22px;padding-bottom:22px;font-variant-numeric:tabular-nums}
+.bd .st-usage{appearance:none;width:100%;height:3px;border:0;border-radius:0;background:var(--paper-3);accent-color:var(--acc)}
+.bd .st-usage::-webkit-progress-bar{background:var(--paper-3)}.bd .st-usage::-webkit-progress-value{background:var(--acc)}
+.bd .st-plans{gap:28px}.bd .st-plans>section{gap:9px}.bd .st-plans .st-plan-price{font:500 32px/1.2 var(--sans);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.bd .st-checkout{margin-top:28px;padding:28px clamp(16px,3vw,36px);border:1px solid var(--line-e);border-radius:10px;background:var(--paper-2);gap:20px}
+.bd .st-payment-head{text-align:center;max-width:48ch;justify-self:center;display:grid;gap:9px}
+.bd .st-checkout .st-payment-label{font-size:11px;letter-spacing:.1em;color:var(--acc)}
+.bd .st-checkout h3{font:500 25px/1.3 var(--serif)}
+.bd .st-qr-frame{justify-self:center;margin:0;padding:16px 16px 12px;border-radius:6px;background:#fff;color:#383a3b;box-shadow:0 2px 8px #00000012;width:min(292px,100%)}
+.bd .st-qr-frame img{width:100%;max-width:260px;height:auto;margin:auto;border-radius:0;image-rendering:pixelated}
+.bd .st-qr-frame figcaption{text-align:center;font-size:10px;line-height:1.4;margin-top:12px;letter-spacing:.04em}
+.bd .st-qr-frame.is-test{border-top:3px solid #ac8958}
+.bd .st-checkout dl{width:min(420px,100%);justify-self:center;gap:0;border-top:1px solid var(--line-e)}
+.bd .st-checkout dl>div{padding:10px 0;border-bottom:1px solid var(--line-e);grid-template-columns:100px minmax(0,1fr)}
+.bd .st-checkout dd{text-align:right;font-variant-numeric:tabular-nums}.bd .st-checkout code{font-size:11px}
+.bd .st-checkout>.st-btn{justify-self:center;min-width:210px;justify-content:center}
+.bd .st-checkout>p,.bd .st-checkout>.st-payment-fallback{justify-self:center;text-align:center;max-width:52ch}
+@media(max-width:900px){.bd .st-body{grid-template-columns:1fr;gap:24px}.bd .st-me .plan-badge{margin-left:0}.bd .st-rail{gap:18px}.bd .st-nav a{border-left:0;border-bottom:2px solid transparent}.bd .st-nav a.is-on{border-bottom-color:var(--acc)}}
+@media(max-width:600px){.bd .st-page{padding-top:28px}.bd .st-identity-grid{grid-template-columns:1fr;padding:20px;gap:28px}.bd .st-identity-grid .st-photo{align-items:center}.bd .st-identity-grid .st-photo-actions{flex-basis:auto}.bd .st-facts>div{grid-template-columns:1fr;gap:8px}.bd .st-checkout{padding:24px 14px}.bd .st-checkout h3{font-size:23px}}

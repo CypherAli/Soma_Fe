@@ -34,7 +34,7 @@ let guestAsked = 0;
 
 export const isGuest = () => !getToken();
 
-/** Số câu khách còn được hỏi trong phiên này (đã đăng nhập thì không giới hạn). */
+/** Guest-only UI gate. Signed-in account quotas are enforced by the server. */
 export function guestQuotaLeft(): number {
   if (!isGuest()) return Infinity;
   return Math.max(0, GUEST_LIMIT - guestAsked);

@@ -43,7 +43,7 @@ export function PlanBadge({ plan, locale }: { plan: Plan; locale: Loc }) {
 
   return <ContentSurface scope="src/components/settings/parts.tsx">{(
     <span className={`plan-badge${plan === "pro" ? " pro" : ""}`}>
-      {pick(plan === "pro" ? S.plan.proShort : S.plan.freeShort, locale)}
+      {plan === "pro" ? "Premium" : pick(S.plan.freeShort, locale)}
     </span>
   )}</ContentSurface>;
 }

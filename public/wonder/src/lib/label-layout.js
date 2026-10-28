@@ -29,3 +29,25 @@ export function layoutLabels(items,bounds,obstacles=[],gap=6){
   if(chosen)placed.push(chosen);
  }return placed;
 }
+
+// Two annotation rails keep the separated anatomy clear in the middle.
+export function layoutSideLabels(items,bounds,obstacles=[],gap=6){
+ const placed=[],middle=bounds.x+bounds.w/2;
+ for(const item of [...items].sort((a,b)=>a.py-b.py)){
+  if(![item.px,item.py,item.w,item.h].every(Number.isFinite)||item.w>bounds.w||item.h>bounds.h)continue;
+  const sides=item.px<middle?[0,1]:[1,0];let chosen=null;
+  for(const side of sides){
+   const x=side?bounds.x+bounds.w-item.w:bounds.x;
+   for(let step=0;step<20;step++){
+    const offset=Math.ceil(step/2)*(step%2?1:-1)*(item.h+gap);
+    const y=Math.max(bounds.y,Math.min(bounds.y+bounds.h-item.h,item.py-item.h/2+offset));
+    const rect={x,y,w:item.w,h:item.h};
+    if([...placed,...obstacles].some(other=>intersects(rect,other,gap)))continue;
+    chosen={...item,...rect};break;
+   }
+   if(chosen)break;
+  }
+  if(chosen)placed.push(chosen);
+ }
+ return placed;
+}

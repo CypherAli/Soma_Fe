@@ -17,6 +17,8 @@ export type AccountProfile = {
   email: string;
   role: Role;
   plan: Plan;
+  learningRole: "learner" | "teacher";
+  premiumUntil: string | null;
   avatar: string | null;
   createdAt: string;
   /** Tài khoản đã có mật khẩu chưa (đăng ký bằng OAuth thì chưa). */
@@ -46,7 +48,7 @@ export function getProfile() {
   return authRequest<{ user: AccountProfile }>("/auth/me").then((r) => r.user);
 }
 
-export function updateProfile(patch: { name?: string; avatar?: string | null }) {
+export function updateProfile(patch: { name?: string; avatar?: string | null; learningRole?: "learner" | "teacher" }) {
   return authRequest<{ user: AccountProfile }>("/auth/profile", {
     method: "PATCH",
     body: JSON.stringify(patch),

@@ -11,6 +11,8 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Loc } from "@/lib/homeContent";
 import { isRecord } from "@/lib/requestBody";
+import { getToken } from "@/lib/auth";
+import { MEMBERSHIP_CHANGED_EVENT } from "@/lib/membership";
 import { createMicrophone, microphoneError, matchingSpeechVoice, type MicrophoneSession } from "@/lib/voice/microphone";
 
 /** Nguồn hợp nhất: cấu trúc 3D hoặc trang giáo trình bệnh học. */
@@ -355,15 +357,16 @@ export default function AnatomyChat({ locale }: { locale: Loc }) {
       const res = await fetch("/api/assistant", {
         method: "POST",
         signal: controller.signal,
-        headers: { "content-type": "application/json" },
+        headers: { "content-type": "application/json", ...(getToken() ? { Authorization: `Bearer ${getToken()}` } : {}) },
         body: JSON.stringify({
           question,
           locale,
           history: msgs.slice(-5).map((m) => ({ role: m.role, text: m.text })),
         }),
       });
-      if (!res.ok) throw new Error("assistant unavailable");
       const data = await res.json();
+      if (data.engine !== "prepared-summary") window.dispatchEvent(new Event(MEMBERSHIP_CHANGED_EVENT));
+      if (!res.ok) throw new Error(typeof data.error === "string" ? data.error : t.err);
       await thinkingDelay;
       if (!controller.signal.aborted)
         appendMessage(
@@ -376,10 +379,10 @@ export default function AnatomyChat({ locale }: { locale: Loc }) {
           },
           Date.now(),
         );
-    } catch {
+    } catch (cause) {
       await thinkingDelay;
       if (!controller.signal.aborted)
-        appendMessage({ role: "bot", text: t.err }, Date.now());
+        appendMessage({ role: "bot", text: cause instanceof Error ? cause.message : t.err }, Date.now());
     } finally {
       if (requestRef.current === controller) {
         requestRef.current = null;

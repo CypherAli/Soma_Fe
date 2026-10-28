@@ -8,7 +8,8 @@ import { useRef, useState } from "react";
 import { pick, type Loc } from "@/lib/homeContent";
 import { settingsContent as S } from "@/lib/settingsContent";
 import { fileToAvatar, updateProfile, type AccountProfile } from "@/lib/account";
-import { Avatar, Card, Notice, PlanBadge, errorText, formatDate } from "./parts";
+import { Avatar, Card, Notice, errorText, formatDate } from "./parts";
+import MembershipCard from "./MembershipCard";
 
 /** Hồ sơ: ảnh đại diện, tên hiển thị, các thông tin chỉ đọc và gói tài khoản. */
 export default function ProfileTab({
@@ -25,12 +26,20 @@ export default function ProfileTab({
 
   const P = S.profile;
   const [name, setName] = useState(user.name);
-  const [busy, setBusy] = useState<"name" | "avatar" | null>(null);
+  const [busy, setBusy] = useState<"name" | "avatar" | "role" | null>(null);
+  const [learningRole, setLearningRole] = useState(user.learningRole ?? "learner");
   const [error, setError] = useState<string | null>(null);
   const [ok, setOk] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
   const dirty = name.trim() !== user.name;
+
+  async function saveRole(event: React.FormEvent) {
+    event.preventDefault(); setBusy("role"); setError(null); setOk(null);
+    try { onChange(await updateProfile({ learningRole })); setOk(pick(S.saved, locale)); }
+    catch (cause) { setError(errorText(cause)); }
+    finally { setBusy(null); }
+  }
 
   async function saveName(event: React.FormEvent) {
     event.preventDefault();
@@ -81,6 +90,7 @@ export default function ProfileTab({
 
   return <ContentSurface scope="src/components/settings/ProfileTab.tsx">{(
     <>
+      <div className="st-identity-grid">
       <Card title={pick(P.photo, locale)} note={pick(P.photoNote, locale)}>
         <div className="st-photo">
           <Avatar name={user.name} src={user.avatar} size={92} />
@@ -130,6 +140,7 @@ export default function ProfileTab({
         {ok && <Notice kind="ok">{ok}</Notice>}
       </Card>
 
+      </div>
       <Card>
         <dl className="st-facts">
           <div>
@@ -141,7 +152,13 @@ export default function ProfileTab({
           </div>
           <div>
             <dt>{pick(P.role, locale)}</dt>
-            <dd>{pick(user.role === "user" ? P.roleUser : P.roleStaff, locale)}</dd>
+            <dd><form className="st-inline-form" onSubmit={event => void saveRole(event)}>
+              <select aria-label={pick(P.role, locale)} value={learningRole} onChange={event => setLearningRole(event.target.value as "learner" | "teacher")}>
+                <option value="learner">{pick(P.roleUser, locale)}</option>
+                <option value="teacher">{locale === "vi" ? "Giáo viên" : locale === "en" ? "Teacher" : "教师"}</option>
+              </select>
+              <button className="st-btn small" type="submit" disabled={!!busy || learningRole === (user.learningRole ?? "learner")}>{pick(busy === "role" ? S.saving : S.save, locale)}</button>
+            </form></dd>
           </div>
           <div>
             <dt>{pick(P.joined, locale)}</dt>
@@ -150,21 +167,7 @@ export default function ProfileTab({
         </dl>
       </Card>
 
-      <Card
-        title={pick(S.plan.heading, locale)}
-        aside={<PlanBadge plan={user.plan} locale={locale} />}
-      >
-        <p className="st-note">
-          {pick(user.plan === "pro" ? S.plan.proActive : S.plan.freeBody, locale)}
-        </p>
-        {user.plan === "free" && (
-          <div className="st-plan-soon">
-            <span>{pick(S.plan.pro, locale)}</span>
-            <b>{pick(S.plan.soon, locale)}</b>
-            <p>{pick(S.plan.proBody, locale)}</p>
-          </div>
-        )}
-      </Card>
+      <MembershipCard locale={locale} onChange={onChange} />
     </>
   )}</ContentSurface>;
 }

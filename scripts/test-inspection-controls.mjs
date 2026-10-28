@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import * as T from '../public/wonder/vendor/three.module.js';
 import { AtlasSurface } from '../public/wonder/src/gl/atlas-surface.js';
-import { HandYaw, PartSeparation, inspectionLabelsVisible, selectionFor, singleVisibleGroup, selectedPull, remapSelection,fitPullDistance,pullEnvelope,partLayout,partTransform,particlePartOffsets } from '../public/wonder/src/logic/inspection-controls.js';
+import { HandYaw, PartSeparation, inspectionLabelsVisible, selectionFor, singleVisibleGroup, selectedPull, remapSelection,fitPullDistance,pullEnvelope,partLayout,partTransform,particlePartOffsets,partPageVisible } from '../public/wonder/src/logic/inspection-controls.js';
 import { buildModelAsync,CATALOG } from '../public/wonder/src/models/catalog.js';
 import { overviewLabels } from '../public/wonder/src/lib/label-layout.js';
 import { rotY, matVec } from '../public/wonder/src/lib/vec.js';
@@ -76,6 +76,7 @@ const surface=Object.create(AtlasSurface.prototype);
 surface.renderer={resetState(){},setViewport(){},clearDepth(){},render(){}};
 surface.camera=new T.PerspectiveCamera();surface.camera.matrixAutoUpdate=false;
 surface.root=new T.Group();surface.meshes=[];
+surface.surface={individualSystems:[]};
 for(const index of [pick,labels.findIndex(l=>l.id==='FJ3375'),labels.findIndex(l=>l.id==='FJ3176')]){
   const mesh=new T.Mesh(new T.BoxGeometry(.1,.1,.1),new T.MeshStandardMaterial());
   mesh.userData={g:{pick:index,system:'skeletal',offset:[.3,.2,0]},uniforms:{reveal:{},cutOn:{},cut:{}}};
@@ -136,3 +137,20 @@ for(let i=0;i<head.pick.length;i++)for(let k=0;k<3;k++)close(particleOffsets[i*3
 assert.deepEqual(partTransform(-1,layout,1),{scale:1,offset:[0,0,0]});
 assert.equal(partLayout(head.surface,new Set([headPick])),null,'a single source mesh cannot invent inner bones');
 console.log('PASS '+skull.ids.size+' real skull structures: distinct cells with gaps, uniform geometry scale, exact reassembly, unchanged non-selection and matching GPU attributes');
+
+const paged=new Set();
+for(let page=0;page<Math.ceil(skull.ids.size/20);page++){
+ const current=partLayout(head.surface,skull.ids,{scale:.3,explode:1,exCenter:head.exCenter,radius:.85,page,pageSize:20});
+ assert.ok(current.visible.size<=20);
+ for(const pick of current.visible){assert.ok(!paged.has(pick));paged.add(pick);}
+ for(const pick of skull.ids){assert.equal(partPageVisible(pick,current,1),current.visible.has(pick));assert.equal(partPageVisible(pick,current,0),true);}
+ for(const angle of [0,Math.PI/4,Math.PI/2]){
+  surface.draw({...realDraw,rot:rotY(angle),partLayout:current,partAmount:1});
+  const visible=realMeshes.filter(mesh=>mesh.visible);
+  for(const mesh of visible)assert.ok(current.visible.has(mesh.userData.g.pick));
+  const boxes=visible.map(mesh=>mesh.geometry.boundingBox.clone().applyMatrix4(mesh.matrix));
+  for(let i=0;i<boxes.length;i++)for(let j=0;j<i;j++)assert.ok(!boxes[i].intersectsBox(boxes[j]),'Paged structures must not intersect in the rotating grid');
+ }
+}
+assert.deepEqual(paged,skull.ids,'Every source structure remains reachable across pages');
+console.log('PASS pages of 20: complete source coverage, hidden meshes cannot be picked, cell gaps and stable visibility through yaw, full reassembly');

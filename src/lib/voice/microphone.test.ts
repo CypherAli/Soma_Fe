@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { createMicrophone, microphoneError, matchingSpeechVoice, type Recognition } from "./microphone.ts";
+import { conversationQuestion } from "./match.ts";
 
 class FakeRecognition implements Recognition {
   lang = ""; continuous = false; interimResults = false; maxAlternatives = 0;
@@ -13,6 +14,11 @@ class FakeRecognition implements Recognition {
     this.onresult?.({ resultIndex: 0, results: [{ isFinal: final, length: 1, 0: { transcript: text } }] });
   }
 }
+test("an explicitly open conversation accepts natural questions; minimized listening still requires the wake word", () => {
+  assert.equal(conversationQuestion(["Tim có mấy buồng?"], true), "Tim có mấy buồng?");
+  assert.equal(conversationQuestion(["Tim có mấy buồng?"], false), null);
+  assert.equal(conversationQuestion(["Soma tim có mấy buồng?"], false), "tim có mấy buồng?");
+});
 function setup(continuous = false, locale: "vi" | "en" | "zh" = "vi") {
   const engines: FakeRecognition[] = [], heard: { text: string; final: boolean }[] = [], errors: string[] = [], states: string[] = [];
   const session = createMicrophone({ locale, continuous, onState: value => states.push(value), onError: error => errors.push(error), onText: (text, _alts, final) => heard.push({ text, final }) }, () => {

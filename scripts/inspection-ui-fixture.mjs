@@ -37,16 +37,17 @@ document.getElementById('run').onclick=async()=>{
   await api.advance(.6,api.synth({pose:'fist',angle:.6}));check(app.pullAmt<.05,'Closing reassembles selected block');
   check(app.labelHits.length===0,'A closed hand hides all tags, including the selected skull');
   await api.advance(.5,null);const yaw=app.spin;await api.advance(1/60,api.synth({pose:'open',angle:0}));
-  check(Math.abs(app.spin-yaw)<.2,'Upright reacquisition eases toward front without an instant reset');
-  await api.advance(1,api.synth({pose:'open',angle:0}));check(Math.abs(app.spin)<.002,'Upright hand restores front');
-  await api.advance(1,api.synth({pose:'open',angle:.55}));check(app.spin>.8,'Deliberate twist still turns the view');
+  check(Math.abs(app.spin-yaw)<.2,'Reacquisition keeps the current view without an instant reset');
+  await api.advance(1,api.synth({pose:'open',angle:0}));check(Math.abs(app.spin-yaw)<.002,'A neutral reacquired wrist holds the current view');
+  await api.advance(1,api.synth({pose:'open',angle:.55}));check(app.spin-yaw>.8,'Deliberate twist still turns the view');
+  const beforePoint=api.status().yaw;
   await api.advance(.6,api.synth({pose:'point',angle:.7}));
   await api.advance(1,api.synth({pose:'open',angle:0}));
-  check(Math.abs(app.spin)<.002,'Returning to an upright wrist after pointing restores front without a stale filter offset');
+  check(Math.abs(api.status().yaw-beforePoint)<.002,'Returning after pointing holds the view without a stale filter offset');
   app.$('viewBack').click();await api.advance(.1,null);await api.advance(1,api.synth({pose:'open',angle:0}));
-  check(Math.abs(api.status().yaw)<.002&&app.dragYawTarget===0,'A previous Back preset cannot remain as a second offset under hand control');
+  check(Math.abs(api.status().yaw-Math.PI)<.002&&app.dragYawTarget===0,'A neutral hand preserves the Back preset without adding a second offset');
   await api.advance(.5,api.synth({pose:'open',angle:0,cx:.2,cy:.2}));await api.advance(.5,api.synth({pose:'open',angle:0,cx:.8,cy:.8}));
-  check(Math.abs(api.status().yaw)<.002&&near(app.pitch,0),'Moving an upright hand around the frame cannot rotate or tilt');
+  check(Math.abs(api.status().yaw-Math.PI)<.002&&near(app.pitch,0),'Moving a neutral hand around the frame cannot rotate or tilt');
   app.deselect();await api.advance(.1,null);check(!app.selection&&app.sel<0&&app.pullAmt===0,'Deselect clears local control');
   app.$('selectionScope').value='part';app.$('selectionScope').dispatchEvent(new Event('change'));await api.advance(.2,null);
   const exactTag=app.labelHits.find(label=>label.scope!=='group');check(exactTag,'Precise structure tag is drawn');
@@ -145,9 +146,9 @@ document.getElementById('run').onclick=async()=>{
   await api.advance(.4,api.synth({pose:'fist'}));check(app.labelHits.length===0,'Final closed-hand view is clear of tags');
   api.select(forearm,true);await api.ready();await api.advance(3,null);
   for(let i=0;!app.renderer.atlasSurface?.ready&&i<600;i++)await new Promise(resolve=>requestAnimationFrame(resolve));
-  check(app.renderer.atlasSurface?.ready,'Final forearm solid ready');await api.advance(2,api.synth({pose:'open',angle:0}));
+  check(app.renderer.atlasSurface?.ready,'Final forearm solid ready');app.$('viewFront').click();await api.advance(2,api.synth({pose:'open',angle:0}));
   check(Math.abs(api.status().yaw)<.002,'Reported forearm view is front-facing with an upright hand');
-  result.textContent='PASS · upright wrist = front; preset offset cleared; position does not rotate; no stale filter drift; reassembly hides tags; left/right like routing; forearm 3 structures; skull '+skullCount+'; GPU / CPU parity. Synthetic hands, no physical webcam.';
+  result.textContent='PASS · relative wrist grab; preset preserved; position does not rotate; no stale filter drift; reassembly hides tags; left/right like routing; forearm 3 structures; skull '+skullCount+'; GPU / CPU parity. Synthetic hands, no physical webcam.';
  }catch(error){result.textContent='FAIL · '+error.message;console.error(error);}
 };
 </script></html>`);
