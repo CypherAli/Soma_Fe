@@ -457,9 +457,10 @@ export async function understand(question: string, signal?: AbortSignal): Promis
  */
 export async function retrieveMany(queries: string[], locale: Loc) {
   const best = new Map<string, { rel: number; src: UnifiedSource }>();
-  for (const [i, q] of queries.entries()) {
+  const results = await Promise.all(queries.map(q => retrieve(q, locale)));
+  for (const [i, hits] of results.entries()) {
     const weight = i === 0 ? 1 : 0.85;
-    for (const { rel, src } of await retrieve(q, locale)) {
+    for (const { rel, src } of hits) {
       const score = rel * weight;
       const prev = best.get(src.id);
       if (!prev || score > prev.rel) best.set(src.id, { rel: score, src });
@@ -471,4 +472,25 @@ export async function retrieveMany(queries: string[], locale: Loc) {
     .sort((a, b) => b.rel - a.rel)
     .slice(0, 8)
     .map((x) => x.src);
+}
+
+/** A clear named lookup already has grounded sources; ambiguous speech still gets rewriting. */
+export async function retrieveForQuestion(question: string, locale: Loc, signal?: AbortSignal) {
+  const direct = await retrieve(question, locale);
+  const q = fold(question);
+  const lookup = /\b(la gi|o dau|nam o|gom|bao nhieu|may|chuc nang|cau tao|chi phoi|what|where|how many|function|structure|supply|define)\b|什么|哪里|多少|功能/.test(q);
+  const otherTask = /\b(viet|write|compose|translate|dich|hat|sing|poem|code|weather)\b/.test(q);
+  const precise = direct.some(({ rel, src }) =>
+    (src.kind === 'overview' && rel >= 3) ||
+    (src.kind === 'site' && rel >= 2 && isSystemNavigationQuestion(question)) ||
+    ((src.kind === 'anatomy' || src.kind === 'vet') && rel >= 2 && fold(src.title).length >= 3 && containsName(q, fold(src.title)))
+  );
+  if (!otherTask && (lookup || isSystemNavigationQuestion(question)) && precise)
+    return { intent: 'lookup' as Intent, sources: direct.slice(0, 8).map(hit => hit.src), path: 'direct' as const };
+  const understood = await understand(question, signal);
+  return {
+    intent: understood.intent,
+    sources: understood.intent === 'offtopic' ? [] : await retrieveMany(understood.queries, locale),
+    path: 'rewritten' as const,
+  };
 }

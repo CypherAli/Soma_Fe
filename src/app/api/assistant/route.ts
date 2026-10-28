@@ -4,10 +4,10 @@ import { isSummaryRequest, preparedPathologySummary, summaryRecordForQuestion } 
 import { fetchPathologies } from "@/lib/pathologies";
 import type { Loc } from "@/lib/homeContent";
 import { complete, isConfigured } from "@/lib/llm";
-import { retrieveMany, understand, type UnifiedSource } from "@/lib/assistant";
+import { retrieveForQuestion, type UnifiedSource } from "@/lib/assistant";
 import { searchSiteFacts } from "@/lib/site/siteKnowledge";
 import { isRecord, readJsonObject, readString } from "@/lib/requestBody";
-import { hasValidCitations, isSystemNavigationQuestion, isUnsupportedTask } from "@/lib/site/grounding";
+import { hasValidCitations, isUnsupportedTask } from "@/lib/site/grounding";
 
 /**
  * TRỢ LÝ SOMA — một cửa cho cả site.
@@ -131,8 +131,7 @@ export async function POST(request: Request) {
   const quotaError = await reserveAssistantQuestion(request, locale);
   if (quotaError) return quotaError;
 
-  const directSystem = isSystemNavigationQuestion(question) && searchSiteFacts(question, locale).some(hit => hit.score >= 2);
-  const { intent, queries } = directSystem ? { intent: "lookup", queries: [question] } : await understand(question, request.signal);
+  const { intent, sources } = await retrieveForQuestion(question, locale, request.signal);
   /* Lưới an toàn cho phép phân loại lạc đề.
      Câu hỏi về chính trang web hay bị gắn nhãn "offtopic" vì trong câu không
      có lấy một từ y khoa nào — đo thật: "怎么进入测验" (bốn chữ, nghĩa là "vào
@@ -143,7 +142,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ answer: t.offtopic, sources: [], suggestions: [], engine: "refused" });
   }
 
-  const sources = await retrieveMany(queries, locale);
   if (sources.length === 0) {
     return NextResponse.json({ answer: t.empty, sources: [], suggestions: [], engine: "empty" });
   }
@@ -168,11 +166,11 @@ export async function POST(request: Request) {
       .join("\n");
 
     const raw = await complete({
-      system: ANSWER_SYSTEM,
+      system: ANSWER_SYSTEM + (body.voice === true ? '\nNgười dùng đang trò chuyện bằng giọng nói. Trả lời trực tiếp trong 2–4 câu ngắn, giữ dẫn nguồn [n]. Chỉ diễn giải dài khi được yêu cầu rõ.' : ''),
       user:
         (history ? `HỘI THOẠI TRƯỚC ĐÓ:\n${history}\n\n` : "") +
         `TƯ LIỆU:\n\n${contextOf(sources)}\n\n---\n\nCÂU HỎI: ${question}`,
-      maxTokens: 900,
+      maxTokens: body.voice === true ? 550 : 900,
       signal: request.signal,
     });
 

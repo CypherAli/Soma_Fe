@@ -89,7 +89,6 @@ function readSessions(): ChatSession[] {
     return [];
   }
 }
-const MIN_THINKING_MS = 1400;
 
 const TXT = bindContentSource("data:src/components/chat/AnatomyChat.tsx#TXT", {
   vi: {
@@ -350,9 +349,6 @@ export default function AnatomyChat({ locale }: { locale: Loc }) {
     setQ("");
     appendMessage({ role: "user", text: question }, Date.now());
     setBusy(true);
-    const thinkingDelay = new Promise<void>((resolve) =>
-      setTimeout(resolve, MIN_THINKING_MS),
-    );
     try {
       const res = await fetch("/api/assistant", {
         method: "POST",
@@ -367,7 +363,6 @@ export default function AnatomyChat({ locale }: { locale: Loc }) {
       const data = await res.json();
       if (data.engine !== "prepared-summary") window.dispatchEvent(new Event(MEMBERSHIP_CHANGED_EVENT));
       if (!res.ok) throw new Error(typeof data.error === "string" ? data.error : t.err);
-      await thinkingDelay;
       if (!controller.signal.aborted)
         appendMessage(
           {
@@ -380,7 +375,6 @@ export default function AnatomyChat({ locale }: { locale: Loc }) {
           Date.now(),
         );
     } catch (cause) {
-      await thinkingDelay;
       if (!controller.signal.aborted)
         appendMessage({ role: "bot", text: cause instanceof Error ? cause.message : t.err }, Date.now());
     } finally {
@@ -398,7 +392,7 @@ export default function AnatomyChat({ locale }: { locale: Loc }) {
     window.speechSynthesis?.cancel(); setSpeaking(null);
     setVoiceError("");
     const session = createMicrophone({
-      locale,
+      locale, utterance: true,
       onState: state => setListening(state === "starting" || state === "listening"),
       onError: error => setVoiceError(microphoneError(locale, error)),
       onText: text => setQ(text),

@@ -341,6 +341,7 @@ export default function FloatingSomaBot() {
           locale,
           // Vài lượt gần nhất để hỏi tiếp kiểu "nó nằm ở đâu" là hiểu.
           history: next.slice(-5).map((m) => ({ role: m.role, text: m.text })),
+          voice: Boolean(opts?.voice),
         }),
         signal: controller.signal,
       });
@@ -378,7 +379,7 @@ export default function FloatingSomaBot() {
     stopBotSpeech();
     setVoiceNote("");
     const session = createMicrophone({
-      locale,
+      locale, utterance: true,
       onState: state => setListening(state === "starting" || state === "listening"),
       onError: error => setVoiceNote(microphoneError(locale, error)),
       onText: (text, alts, final) => {
@@ -495,7 +496,7 @@ export default function FloatingSomaBot() {
     stopBotSpeech();
     setVoiceNote("");
     const session = createMicrophone({
-      locale, continuous: true,
+      locale, continuous: true, utterance: true,
       onState: state => {
         const active = state === "starting" || state === "listening" || state === "paused";
         handsFreeRef.current = active; setHandsFree(active);
@@ -584,8 +585,8 @@ export default function FloatingSomaBot() {
         </div>}
       </div>
 
-      <form onSubmit={(event) => { event.preventDefault(); void ask(); }}>
-        <textarea rows={1} value={question} onChange={(event) => setQuestion(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter" && !event.shiftKey) { event.preventDefault(); void ask(); } }} placeholder={gated ? t.guestGateTitle : t.placeholder} aria-label={t.placeholder} disabled={gated} />
+      <form onSubmit={(event) => { event.preventDefault(); void ask(undefined, { voice: listening || handsFree }); }}>
+        <textarea rows={1} value={question} onChange={(event) => setQuestion(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter" && !event.shiftKey) { event.preventDefault(); void ask(undefined, { voice: listening || handsFree }); } }} placeholder={gated ? t.guestGateTitle : t.placeholder} aria-label={t.placeholder} disabled={gated} />
         <button className={`soma-bot-mic${listening ? " is-listening" : ""}`} type="button" onClick={toggleListening} disabled={busy || gated} aria-label={listening ? t.stopMic : t.mic} title={listening ? t.stopMic : t.mic}><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6.5 11.5a5.5 5.5 0 0 0 11 0M12 17v4m-3 0h6"/></svg></button>
         <button type="submit" disabled={!question.trim() || busy || gated} aria-label={t.send}>↑</button>
       </form>
