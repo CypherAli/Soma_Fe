@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
-import { articlePassages, citation, search, type Hit } from "@/lib/pathologyRetrieval";
+import { citation, search, type Hit } from "@/lib/pathologyRetrieval";
+import { fetchPathologies } from "@/lib/pathologies";
+import { isSummaryRequest, preparedPathologySummary, summaryRecordForQuestion } from "@/lib/pathologySummary";
+import { reserveAssistantQuestion } from "@/lib/assistantQuota";
 import { complete, isConfigured } from "@/lib/llm";
 import { readJsonObject, readString } from "@/lib/requestBody";
 import type { Loc } from "@/lib/homeContent";
@@ -7,7 +10,8 @@ import type { Loc } from "@/lib/homeContent";
 /**
  * TRỢ LÝ BỆNH LÝ — hai tầng, giống trợ lý giải phẫu ở /api/chat.
  *
- * Tầng 1 (luôn chạy, không cần khoá): tra 2883 đoạn giáo trình đã tách theo
+ * Tóm tắt luôn trả nội dung biên soạn sẵn, trước cả hai tầng dưới.
+ * Tầng 1 (câu hỏi khác, không cần khoá): tra 2883 đoạn giáo trình đã tách theo
  * bệnh, trả về NGUYÊN VĂN kèm tên sách và số trang. Không sinh chữ nên không
  * bịa được.
  * Tầng 2 (chỉ khi có AI_API_KEY): đưa đúng những đoạn đó cho mô hình viết lại.
@@ -88,11 +92,23 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "câu hỏi quá dài" }, { status: 400 });
   }
 
-  const isSummary = /tóm tắt|summari[sz]|概括|概要/.test(question.toLowerCase());
+  // This guard must precede retrieval and complete(), even with a configured AI key.
+  if (isSummaryRequest(question)) {
+    const records = await fetchPathologies();
+    const record = slug ? records.items.find(record => record.slug === slug) : summaryRecordForQuestion(records.items, question);
+    if (record) return NextResponse.json(preparedPathologySummary(record, locale));
+    return NextResponse.json({
+      answer: locale === "en" ? "Open a condition record to read its prepared summary." : locale === "zh" ? "请打开疾病档案，阅读已有摘要。" : "Chọn một bài bệnh lý để đọc bản tóm tắt có sẵn.",
+      sources: [], engine: "prepared-summary",
+    });
+  }
 
-  const hits = isSummary && mode === "disease" ? await articlePassages(slug, 4) : await search(question, {
+  const quotaError = await reserveAssistantQuestion(request, locale);
+  if (quotaError) return quotaError;
+
+  const hits = await search(question, {
     slug: mode === "disease" ? slug : undefined,
-    limit: isSummary ? 4 : mode === "symptoms" ? 8 : 6,
+    limit: mode === "symptoms" ? 8 : 6,
   });
 
   // Nguồn trả về cho giao diện: đoạn ngắn thôi. KHÔNG trả nguyên chunk 1200 ký
@@ -118,16 +134,10 @@ export async function POST(request: Request) {
       .map((h, i) => `[${i + 1}] ${citation(h)}\n${h.text}`)
       .join("\n\n");
 
-    // Tóm tắt phải NGẮN hơn hẳn bản chính: ép khung 4 gạch đầu dòng,
-    // tối đa ~180 từ, cấm chép nguyên văn — không thì ra bản "tóm tắt"
-    // dài ngang bài gốc như hiện tại.
-    const summaryRule = isSummary
-      ? " Yêu cầu đặc biệt cho TÓM TẮT: trả lời tối đa 4 gạch đầu dòng (định nghĩa · triệu chứng chính · chẩn đoán · điều trị), tổng cộng không quá 180 từ, diễn đạt lại gọn bằng chữ của bạn, tuyệt đối không chép nguyên văn đoạn dài."
-      : "";
     const text = await complete({
-      system: SYSTEM[mode] + summaryRule + ` Trả lời bằng ${locale === "vi" ? "tiếng Việt" : locale === "en" ? "English" : "简体中文"}.`,
+      system: SYSTEM[mode] + ` Trả lời bằng ${locale === "vi" ? "tiếng Việt" : locale === "en" ? "English" : "简体中文"}.`,
       user: `TƯ LIỆU:\n\n${context}\n\n---\n\nCÂU HỎI: ${question}`,
-      maxTokens: isSummary ? 400 : 900,
+      maxTokens: 900,
     });
     const references = [...text.matchAll(/\[(\d+)\]/g)].map(match => Number(match[1]));
     if (!references.length || references.some(index => index < 1 || index > sources.length)) throw new Error("Invalid citations");

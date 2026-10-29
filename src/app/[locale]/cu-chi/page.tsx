@@ -2404,6 +2404,8 @@ export default function GestureControlPage({
     ];
     return [
       ...fixed.map(([id,phrases,text])=>({id:'vision-'+id,phrases,run:()=>send(text)})),
+      {id:'vision-explode-model',phrases:['tách giải phẫu {x}','tách mô hình {x}','tách lớp {x}','tách rời {x}','explode {x}','separate {x}'],run:(arg:string)=>send('tách giải phẫu '+arg)},
+      {id:'vision-rotate-degrees',phrases:['xoay {x} độ','xoay {x} do','quay {x} độ','rotate {x} degrees','rotate {x} degree','turn {x} degrees'],run:(arg:string)=>send('xoay '+arg+' độ')},
       {id:'vision-open',phrases:['mở mô hình {x}','mở {x}','open model {x}','open {x}'],run:(arg:string)=>send('open model '+arg)},
       {id:'vision-pick',phrases:['chọn cấu trúc {x}','chọn {x}','select {x}','pick {x}'],run:(arg:string)=>send('select '+arg)},
       {id:'vision-layer-on',phrases:['bật lớp {x}','hiện lớp {x}','show layer {x}'],run:(arg:string)=>send('show layer '+arg)},
@@ -2467,7 +2469,7 @@ export default function GestureControlPage({
 
   return <ContentSurface scope="src/app/[locale]/cu-chi/page.tsx">{(
     <div className="vision-workspace bd flex h-[100dvh] flex-col bg-[var(--surf-3)]">
-      <header className="flex h-9 shrink-0 items-center gap-2 bg-[var(--surf)] px-3">
+      <header className="vision-topbar flex shrink-0 items-center gap-2">
         <a
           href={`/${locale}`}
           className="rounded-md border border-[var(--line)] px-2 py-0.5 text-xs font-semibold text-[var(--body-fg)] hover:bg-[var(--surf-2)]"
@@ -2478,30 +2480,9 @@ export default function GestureControlPage({
         <h1 className="truncate text-xs font-semibold text-[var(--ink)]">
           Vision AI
         </h1>
-        <div className="flex rounded-md border border-[var(--line)] p-0.5">
-          {(["control"] as const).map((m) => (
-            <button
-              key={m}
-              onClick={() => switchMode(m)}
-              className={`rounded px-2 py-0.5 text-xs font-semibold transition ${
-                viewMode === m
-                  ? "bg-[var(--ink)] text-[var(--surf)]"
-                  : "text-[var(--body-fg)] hover:bg-[var(--surf-2)]"
-              }`}
-            >
-              {tv.tabControl}
-            </button>
-          ))}
-        </div>
-        {viewMode === "control" && (
-          <>
-            <span className="hidden max-w-[14rem] truncate rounded-full bg-[var(--surf-2)] px-2 py-0.5 text-xs font-semibold text-[var(--ink)] md:inline">
-              Vision AI
-            </span>
-          </>
-        )}
+        <span className="vision-topbar-note">{locale === "en" ? "Anatomy studio" : locale === "zh" ? "解剖工作室" : "Không gian học giải phẫu"}</span>
         <div className="ml-auto flex items-center gap-2">
-          {showDebug && (
+          {showDebug && viewMode !== "control" && (
             <span className="text-xs text-[var(--muted)]">
               {t.detectFps}{" "}
               <b style={{ color: fps >= 20 ? "#0f8a7c" : fps >= 12 ? "#a9701a" : "#c0453b" }}>{fps}</b>

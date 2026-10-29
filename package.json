@@ -32,6 +32,7 @@
     "test:voice": "node --import ./scripts/ts-resolve.mjs scripts/test-voice.ts",
     "test:vision-voice": "node scripts/test-wonder-voice.mjs",
     "test:unit": "node --import ./scripts/ts-resolve.mjs --test \"src/**/*.test.ts\"",
+    "test:assistant": "node --import ./scripts/ts-resolve.mjs scripts/test-assistant-quota.mjs && node --import ./scripts/ts-resolve.mjs scripts/test-assistant-latency.mjs",
     "test:wonder": "node --import ./scripts/ts-resolve.mjs scripts/test-wondersnap.ts",
     "test:atlas": "node --import ./scripts/ts-resolve.mjs scripts/test-atlas-framing.ts && node --import ./scripts/ts-resolve.mjs scripts/test-atlas-learning.ts && node --import ./scripts/ts-resolve.mjs scripts/test-region-surface.ts && node --import ./scripts/ts-resolve.mjs scripts/test-scene-labels.ts",
     "test:api-boundary": "node scripts/test-api-boundary.mjs",

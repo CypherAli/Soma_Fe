@@ -111,7 +111,7 @@ export function systemBlocks(labels, visible) {
 // Pack actual source structures, not their system IDs. Small teeth get small
 // cells; every bone keeps its source geometry and its relative vertex positions.
 // This layout is built once on selection, not in the animation loop.
-export function partLayout(surface, ids, { scale = 1, explode = 0, exCenter = [0,0,0], inspectionCenter = [0,0,0], radius = .85 } = {}) {
+export function partLayout(surface, ids, { scale = 1, explode = 0, exCenter = [0,0,0], inspectionCenter = [0,0,0], radius = .85, page = 0, pageSize = Infinity } = {}) {
   const boxes=new Map();
   if(!surface||ids.size<2)return null;
   for(const g of surface.groups){
@@ -122,9 +122,15 @@ export function partLayout(surface, ids, { scale = 1, explode = 0, exCenter = [0
       box.lo[k]=Math.min(box.lo[k],surface.positions[p+k]);box.hi[k]=Math.max(box.hi[k],surface.positions[p+k]);
     }
   }
-  const items=[...boxes.values()];if(items.length<2)return null;
-  const gap=Math.max(...items.map(b=>Math.max(b.hi[0]-b.lo[0],b.hi[1]-b.lo[1])))*.09;
-  for(const b of items){b.center=b.lo.map((v,k)=>(v+b.hi[k])/2);b.w=b.hi[0]-b.lo[0]+gap;b.h=b.hi[1]-b.lo[1]+gap;}
+  const volume=box=>box.hi.reduce((value,high,k)=>value*Math.max(1e-6,high-box.lo[k]),1);
+  const all=[...boxes.values()].sort((a,b)=>volume(b)-volume(a)||a.pick-b.pick);if(all.length<2)return null;
+  pageSize=Math.max(1,Math.floor(pageSize));
+  const pageCount=Number.isFinite(pageSize)?Math.ceil(all.length/pageSize):1;
+  page=Math.max(0,Math.min(pageCount-1,page));
+  const items=Number.isFinite(pageSize)?all.slice(page*pageSize,(page+1)*pageSize):all;
+  // Account for depth as well as width: meshes must stay apart when rotated.
+  const gap=Math.max(...items.map(b=>Math.max(...b.hi.map((v,k)=>v-b.lo[k]))))*.22;
+  for(const b of items){b.center=b.lo.map((v,k)=>(v+b.hi[k])/2);b.w=Math.hypot(b.hi[0]-b.lo[0],b.hi[2]-b.lo[2])+gap;b.h=b.hi[1]-b.lo[1]+gap;}
   items.sort((a,b)=>b.h-a.h||a.pick-b.pick);
   const rowWidth=Math.max(Math.max(...items.map(b=>b.w)),Math.sqrt(items.reduce((sum,b)=>sum+b.w*b.h,0)*1.45));
   const rows=[];
@@ -145,12 +151,15 @@ export function partLayout(surface, ids, { scale = 1, explode = 0, exCenter = [0
     const original=b.center.map((v,k)=>(v+b.offset[k]*s-exCenter[k]*explode-inspectionCenter[k])*scale);
     offsets.set(b.pick,b.target.map((v,k)=>v*absoluteScale-original[k]*localScale));
   }
-  return {offsets,scale:localScale,width:width*absoluteScale,height:height*absoluteScale,gap:gap*absoluteScale};
+  return {offsets,scale:localScale,width:width*absoluteScale,height:height*absoluteScale,gap:gap*absoluteScale,visible:new Set(items.map(b=>b.pick)),allPicks:new Set(all.map(b=>b.pick)),page,pageCount,total:all.length,pageSize};
 }
 export function partTransform(pick,layout,amount){
   const offset=layout?.offsets.get(pick);if(!offset)return {scale:1,offset:[0,0,0]};
   const e=clamp(amount),s=e*e*(3-2*e);
   return {scale:1+(layout.scale-1)*s,offset:offset.map(v=>v*s)};
+}
+export function partPageVisible(pick,layout,amount){
+  return !layout || amount < .15 || !layout.allPicks?.has(pick) || layout.visible.has(pick);
 }
 export function particlePartOffsets(original,layout){
   const data=new Float32Array(original.length*3);

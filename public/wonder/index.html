@@ -6,7 +6,7 @@
   <title>Cơ thể 3D — điều khiển bằng cử chỉ tay</title>
   <meta name="description" content="Mô hình cơ thể người 3D điều khiển bằng cử chỉ tay qua webcam: búng, nắm, mở để gọi hạt, tạo hình và bóc tách từng bộ phận.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='22' fill='none' stroke='%2366e0ff' stroke-width='4'/%3E%3Ccircle cx='32' cy='32' r='8' fill='%23ffd166'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="styles.css?v=20261008-wrist-rebase">
+  <link rel="stylesheet" href="styles.css?v=20261026-studio">
 </head>
 <body>
   <canvas id="gl" aria-label="Particle scene"></canvas>
@@ -16,8 +16,8 @@
   <header class="brand">
     <div class="logo" aria-hidden="true"><span></span></div>
     <div>
-      <div class="brand-name">Vision AI</div>
-      <div class="brand-sub">búng · nắm · mở — bằng bàn tay của bạn</div>
+      <div class="brand-name">Atlas tương tác</div>
+      <div class="brand-sub">Kéo để xoay · Cuộn để thu phóng · Hai tay để điều khiển</div>
     </div>
   </header>
 
@@ -141,7 +141,7 @@
       </button>
     </div>
     <details id="voicePanel" class="voice-panel glass" data-lenis-prevent>
-      <summary>Giọng nói</summary>
+      <summary>Điều khiển giọng nói</summary>
       <label for="voiceLanguage">Ngôn ngữ giọng nói</label>
       <select id="voiceLanguage"><option value="vi">Tiếng Việt</option><option value="en">Tiếng Anh</option></select>
       <label for="readDetail">Nội dung đọc</label>
@@ -170,10 +170,10 @@
       <tr><td><kbd>Space</kbd></td><td>Búng tay — gọi hạt / làm tan</td></tr>
       <tr><td><kbd>F</kbd> / <kbd>O</kbd></td><td>Nắm tay (lắp lại) / mở tay (tách lớp)</td></tr>
       <tr><td><kbd>V</kbd> <kbd>→</kbd> <kbd>←</kbd></td><td>Mô hình tiếp / trước</td></tr>
-      <tr><td><kbd>E</kbd> <kbd>↑</kbd> <kbd>↓</kbd> Cuộn chuột</td><td>Tách / lắp các lớp giải phẫu</td></tr>
+      <tr><td><kbd>E</kbd> <kbd>↑</kbd> <kbd>↓</kbd> Shift + cuộn</td><td>Tách / lắp các lớp giải phẫu</td></tr>
       <tr><td>Xoay cổ tay</td><td>Xoay mô hình trái/phải · <kbd>G</kbd> bật/tắt</td></tr>
       <tr><td>☝ Trỏ · 🤏 Véo</td><td>Chọn cấu trúc (hoặc bấm chọn) · kéo ra</td></tr>
-      <tr><td>🙌 Hai tay</td><td>Thu phóng (hoặc <kbd>+</kbd> <kbd>-</kbd> <kbd>0</kbd>, Ctrl + cuộn chuột)</td></tr>
+      <tr><td>🙌 Hai tay · cuộn chuột</td><td>Thu phóng (hoặc <kbd>+</kbd> <kbd>-</kbd> <kbd>0</kbd>)</td></tr>
       <tr><td><kbd>X</kbd> <kbd>,</kbd> <kbd>.</kbd></td><td>Mặt cắt (di chuyển tay / chuột)</td></tr>
       <tr><td><kbd>Q</kbd> <kbd>M</kbd> <kbd>K</kbd> <kbd>I</kbd></td><td>Luyện tập · giọng nói · ghi hình · đọc chú thích</td></tr>
       <tr><td>Kéo chuột</td><td>Xoay mô hình</td></tr>
@@ -183,6 +183,11 @@
   </div>
 
   <nav class="view-presets" aria-label="Góc nhìn mô hình"><button id="viewFront">Trước</button><button id="viewBack">Sau</button><button id="viewSide">Bên</button><button id="viewReset">Đặt lại</button></nav>
+  <nav id="structurePager" class="structure-pager glass" aria-label="Các nhóm cấu trúc" hidden>
+    <button id="structuresPrevious" type="button" aria-label="Nhóm cấu trúc trước">←</button>
+    <span id="structurePageStatus" aria-live="polite"></span>
+    <button id="structuresNext" type="button" aria-label="Nhóm cấu trúc tiếp">→</button>
+  </nav>
   <nav id="labelPager" class="label-pager glass" aria-label="Các nhóm chú thích" hidden>
     <button id="labelsPrevious" type="button" aria-label="Nhóm chú thích trước">←</button>
     <span id="labelPageStatus" aria-live="polite"></span>
@@ -203,7 +208,7 @@
       <ol class="steps">
         <li><span class="step-ic">🫰</span><span><b>Búng tay</b> để gọi các hạt, búng lần nữa để làm tan.</span></li>
         <li><span class="step-ic">✊</span><span><b>Nắm tay</b> để tạo hình cơ quan, <b>mở tay</b> để bóc tách từng lớp.</span></li>
-        <li><span class="step-ic">🔄</span><span><b>Dựng thẳng cổ tay</b> để về góc Trước, <b>nghiêng cổ tay</b> để xoay trái/phải; <b>hai tay</b> để thu phóng toàn cảnh.</span></li>
+        <li><span class="step-ic">🔄</span><span><b>Nghiêng cổ tay</b> để xoay ngang, <b>nâng / hạ bàn tay</b> để xem trên / dưới. Hai tay dang ra / chụm vào để thu phóng. Có thể <b>kéo chuột để xoay, cuộn để thu phóng</b>.</span></li>
         <li><span class="step-ic">☝️</span><span><b>Trỏ và giữ</b> để chọn khối hoặc cấu trúc; <b>xòe/nắm</b> tách từng mảnh của khối đó–lắp lại.</span></li>
         <li><span class="step-ic">👍</span><span><b>Like tay trái</b>: mô hình tiếp. <b>Like tay phải</b>: hệ tiếp trong mô hình. Hạ ngón cái rồi giơ lại để chuyển tiếp.</span></li>
       </ol>
@@ -215,6 +220,6 @@
     </div>
   </div>
 
-  <script type="module" src="src/app.js?v=20261013-final-controls"></script>
+  <script type="module" src="src/app.js?v=20261026-navigation"></script>
 </body>
 </html>

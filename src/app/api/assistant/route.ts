@@ -1,10 +1,13 @@
 import { NextResponse } from "next/server";
+import { reserveAssistantQuestion } from "@/lib/assistantQuota";
+import { isSummaryRequest, preparedPathologySummary, summaryRecordForQuestion } from "@/lib/pathologySummary";
+import { fetchPathologies } from "@/lib/pathologies";
 import type { Loc } from "@/lib/homeContent";
 import { complete, isConfigured } from "@/lib/llm";
-import { retrieveMany, understand, type UnifiedSource } from "@/lib/assistant";
+import { retrieveForQuestion, type UnifiedSource } from "@/lib/assistant";
 import { searchSiteFacts } from "@/lib/site/siteKnowledge";
 import { isRecord, readJsonObject, readString } from "@/lib/requestBody";
-import { hasValidCitations, isSystemNavigationQuestion, isUnsupportedTask } from "@/lib/site/grounding";
+import { hasValidCitations, isUnsupportedTask } from "@/lib/site/grounding";
 
 /**
  * TRỢ LÝ SOMA — một cửa cho cả site.
@@ -116,8 +119,19 @@ export async function POST(request: Request) {
     return NextResponse.json({ answer: t.offtopic, sources: [], suggestions: [], engine: "refused" });
   }
 
-  const directSystem = isSystemNavigationQuestion(question) && searchSiteFacts(question, locale).some(hit => hit.score >= 2);
-  const { intent, queries } = directSystem ? { intent: "lookup", queries: [question] } : await understand(question, request.signal);
+  if (isSummaryRequest(question)) {
+    const records = await fetchPathologies();
+    const record = summaryRecordForQuestion(records.items, question);
+    if (record) {
+      const prepared = preparedPathologySummary(record, locale);
+      return NextResponse.json({ answer: prepared.answer, sources: [{ kind: "pathology", id: record.slug, title: locale === "en" ? record.nameEn : locale === "zh" ? record.nameZh : record.nameVi, detail: record.source, href: `/benh-ly?open=${encodeURIComponent(record.slug)}`, meta: record.sourcePage ? String(record.sourcePage) : "" }], suggestions: [], engine: prepared.engine });
+    }
+    return NextResponse.json({ answer: locale === "en" ? "Open a condition article or include its full name to read the prepared summary." : locale === "zh" ? "请打开疾病文章或输入完整名称，阅读已有摘要。" : "Mở một bài bệnh lý hoặc ghi đầy đủ tên bệnh để đọc tóm tắt có sẵn.", sources: [], suggestions: [], engine: "prepared-summary" });
+  }
+  const quotaError = await reserveAssistantQuestion(request, locale);
+  if (quotaError) return quotaError;
+
+  const { intent, sources } = await retrieveForQuestion(question, locale, request.signal);
   /* Lưới an toàn cho phép phân loại lạc đề.
      Câu hỏi về chính trang web hay bị gắn nhãn "offtopic" vì trong câu không
      có lấy một từ y khoa nào — đo thật: "怎么进入测验" (bốn chữ, nghĩa là "vào
@@ -128,7 +142,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ answer: t.offtopic, sources: [], suggestions: [], engine: "refused" });
   }
 
-  const sources = await retrieveMany(queries, locale);
   if (sources.length === 0) {
     return NextResponse.json({ answer: t.empty, sources: [], suggestions: [], engine: "empty" });
   }
@@ -153,11 +166,11 @@ export async function POST(request: Request) {
       .join("\n");
 
     const raw = await complete({
-      system: ANSWER_SYSTEM,
+      system: ANSWER_SYSTEM + (body.voice === true ? '\nNgười dùng đang trò chuyện bằng giọng nói. Trả lời trực tiếp trong 2–4 câu ngắn, giữ dẫn nguồn [n]. Chỉ diễn giải dài khi được yêu cầu rõ.' : ''),
       user:
         (history ? `HỘI THOẠI TRƯỚC ĐÓ:\n${history}\n\n` : "") +
         `TƯ LIỆU:\n\n${contextOf(sources)}\n\n---\n\nCÂU HỎI: ${question}`,
-      maxTokens: 900,
+      maxTokens: body.voice === true ? 550 : 900,
       signal: request.signal,
     });
 

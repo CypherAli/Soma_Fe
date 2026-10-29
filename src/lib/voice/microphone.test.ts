@@ -1,21 +1,30 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { createMicrophone, microphoneError, matchingSpeechVoice, type Recognition } from "./microphone.ts";
+import { conversationQuestion } from "./match.ts";
 
 class FakeRecognition implements Recognition {
   lang = ""; continuous = false; interimResults = false; maxAlternatives = 0;
   onstart: Recognition["onstart"] = null; onend: Recognition["onend"] = null;
   onerror: Recognition["onerror"] = null; onresult: Recognition["onresult"] = null;
+  onspeechstart: Recognition["onspeechstart"] = null; onspeechend: Recognition["onspeechend"] = null;
+  stops = 0;
   aborts = 0;
   start() { this.onstart?.(); }
   abort() { this.aborts++; this.onend?.(); }
+  stop() { this.stops++; }
   result(text: string, final: boolean) {
     this.onresult?.({ resultIndex: 0, results: [{ isFinal: final, length: 1, 0: { transcript: text } }] });
   }
 }
-function setup(continuous = false, locale: "vi" | "en" | "zh" = "vi") {
+test("an explicitly open conversation accepts natural questions; minimized listening still requires the wake word", () => {
+  assert.equal(conversationQuestion(["Tim có mấy buồng?"], true), "Tim có mấy buồng?");
+  assert.equal(conversationQuestion(["Tim có mấy buồng?"], false), null);
+  assert.equal(conversationQuestion(["Soma tim có mấy buồng?"], false), "tim có mấy buồng?");
+});
+function setup(continuous = false, locale: "vi" | "en" | "zh" = "vi", utterance = false) {
   const engines: FakeRecognition[] = [], heard: { text: string; final: boolean }[] = [], errors: string[] = [], states: string[] = [];
-  const session = createMicrophone({ locale, continuous, onState: value => states.push(value), onError: error => errors.push(error), onText: (text, _alts, final) => heard.push({ text, final }) }, () => {
+  const session = createMicrophone({ locale, continuous, utterance, onState: value => states.push(value), onError: error => errors.push(error), onText: (text, _alts, final) => heard.push({ text, final }) }, () => {
     const rec = new FakeRecognition(); engines.push(rec); return rec;
   });
   return { session, engines, heard, errors, states };
@@ -26,6 +35,38 @@ test("microphone uses the selected locale and actual onstart status", () => {
     assert.equal(engines[0].lang, lang); assert.equal(engines[0].maxAlternatives, 3);
     assert.deepEqual(states, ["off", "starting", "listening"]); session.stop();
   }
+});
+test("conversational turns combine Vietnamese and English final fragments into one question", t => {
+  t.mock.timers.enable({ apis: ["setTimeout"] });
+  for (const [locale, chunks] of [["vi", ["Tim có", "mấy buồng?"]], ["en", ["How many chambers", "does the heart have?"]]] as const) {
+    const { session, engines, heard } = setup(true, locale, true); session.start();
+    engines[0].result(chunks[0], true); t.mock.timers.tick(300);
+    engines[0].onresult?.({ resultIndex: 1, results: chunks.map(text => ({ isFinal: true, length: 1, 0: { transcript: text } })) });
+    t.mock.timers.tick(699); assert.equal(heard.filter(item => item.final).length, 0);
+    t.mock.timers.tick(1); assert.deepEqual(heard.filter(item => item.final), [{ text: chunks.join(" "), final: true }]); session.stop();
+  }
+});
+test("unconfirmed continuation blocks sending an incomplete conversational question", t => {
+  t.mock.timers.enable({ apis: ["setTimeout"] });
+  const { session, engines, heard } = setup(true, "vi", true); session.start();
+  engines[0].result("Tim có", true);
+  engines[0].onresult?.({ resultIndex: 1, results: [{ isFinal: true, length: 1, 0: { transcript: "Tim có" } }, { isFinal: false, length: 1, 0: { transcript: "mấy" } }] });
+  t.mock.timers.tick(5000); assert.equal(heard.filter(item => item.final).length, 0);
+  session.stop(); t.mock.timers.tick(5000); assert.equal(heard.filter(item => item.final).length, 0);
+});
+test("speech-end asks the engine to finalize promptly, while resumed speech cancels early cutoff", t => {
+  t.mock.timers.enable({ apis: ["setTimeout"] });
+  const { session, engines, heard } = setup(true, "vi", true); session.start();
+  engines[0].result("Tim có", false); engines[0].onspeechend?.(); t.mock.timers.tick(600);
+  engines[0].onspeechstart?.(); t.mock.timers.tick(1000); assert.equal(engines[0].stops, 0);
+  engines[0].onspeechend?.(); t.mock.timers.tick(650); assert.equal(engines[0].stops, 1);
+  assert.equal(heard.filter(item => item.final).length, 0); session.stop();
+});
+test("one-shot cumulative results never duplicate previous words, even after natural end", t => {
+  t.mock.timers.enable({ apis: ["setTimeout"] });
+  const { session, engines, heard } = setup(false, "vi", true); session.start();
+  engines[0].result("Tim có mấy buồng?", true); engines[0].result("Tim có mấy buồng?", true); engines[0].onend?.();
+  t.mock.timers.tick(700); assert.deepEqual(heard.filter(item => item.final), [{ text: "Tim có mấy buồng?", final: true }]); session.stop();
 });
 test("only a final result is eligible for automatic submission, and it is delivered once", () => {
   const { session, engines, heard } = setup(); session.start();

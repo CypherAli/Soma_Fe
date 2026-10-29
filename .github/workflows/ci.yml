@@ -13,8 +13,10 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run lint
+      - run: npm audit --audit-level=moderate
       - run: npx tsc --noEmit
       - run: npm run test:unit
+      - run: npm run test:assistant
       - run: npm run verify:quiz-bank
       - run: npm run verify:scenes
       - run: npm run verify:models

@@ -21,6 +21,8 @@ import { pathologyFigures } from "@/lib/pathologyFigures.generated";
 import { getScene } from "@/lib/catalog";
 import { pathologySceneHref, pathologySceneNote } from "@/lib/pathologyScene";
 import PathologyAssistant from "./PathologyAssistant";
+import PathologyText from "./PathologyText";
+import { preparedPathologySummary } from "@/lib/pathologySummary";
 
 const copy = bindContentSource("data:src/components/pathology/PathologyLibrary.tsx#copy", {
   vi: {
@@ -519,7 +521,7 @@ export default function PathologyLibrary({ locale }: { locale: Loc }) {
       </div>
 
       {symptomQuery && (
-        <PathologyAssistant locale={locale} mode="symptoms" question={symptomQuery} />
+        <PathologyAssistant locale={locale} mode="symptoms" question={symptomQuery} records={items} />
       )}
 
       {!loading && !error && (
@@ -640,16 +642,14 @@ export default function PathologyLibrary({ locale }: { locale: Loc }) {
 
             {(() => {
               const c = pathologyContent(selected, locale);
-              // These fields are already authored textbook summaries. Preserve
-              // every sentence, including qualifications and contraindications;
-              // do not shorten medical advice by taking its first sentence.
-              const sections = [
+              const fullSections = [
                 [t.overview, c?.description],
                 [t.clinical, c?.clinical],
                 [t.imaging, c?.imaging],
                 [t.progression, c?.progression],
                 [t.treatment, c?.treatment],
               ].filter(([, body]) => body?.trim()) as [string, string][];
+              const sections = preparedPathologySummary(selected, locale).sections;
               return <section className="pth-summary" aria-label={t.summary}>
                 <h3 className="pth-summary-title">{t.summary}</h3>
                 <p className="pth-summary-note">{t.summaryNote}</p>
@@ -657,13 +657,17 @@ export default function PathologyLibrary({ locale }: { locale: Loc }) {
                 {locale !== "vi" && c?.locale === "vi" && <p className="pth-untranslated">{t.noTranslation}</p>}
                 {c?.machineTranslated === true && <p className="pth-untranslated">{t.machineTranslated}</p>}
                 {sections.length > 0 ? <dl className="pth-summary-points">
-                  {sections.map(([heading, body]) => <div key={heading}>
-                    <dt>{heading}</dt><dd>{body}</dd>
+                  {sections.map(({heading, body}) => <div key={heading}>
+                    <dt>{heading}</dt><dd><PathologyText text={body} /></dd>
                   </div>)}
                 </dl> : <p className="pth-incomplete">{t.incomplete}</p>}
                 <p className="pth-summary-source"><strong>{t.source}:</strong> {selected.source}
                   {selected.sourcePage ? ` · ${t.page} ${selected.sourcePage}` : ""}
                 </p>
+                {fullSections.length > 0 && <details className="pth-full-article">
+                  <summary>{locale === "en" ? "Read full article" : locale === "zh" ? "阅读全文" : "Đọc nội dung đầy đủ"}</summary>
+                  <dl className="pth-summary-points">{fullSections.map(([heading, body]) => <div key={heading}><dt>{heading}</dt><dd><PathologyText text={body} /></dd></div>)}</dl>
+                </details>}
               </section>;
             })()}
 
@@ -731,7 +735,7 @@ export default function PathologyLibrary({ locale }: { locale: Loc }) {
               </div>
             </dl>
 
-            <PathologyAssistant key={`${selected.slug}:${locale}`} locale={locale} mode="disease" slug={selected.slug} />
+            <PathologyAssistant key={`${selected.slug}:${locale}`} locale={locale} mode="disease" slug={selected.slug} record={selected} />
 
             <section className="pth-cite">
               <h3>{t.source}</h3>

@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useLocale } from "next-intl";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
-import { matchCommand, wakeQuestion, type VoiceResult } from "@/lib/voice/match";
+import { matchCommand, conversationQuestion, type VoiceResult } from "@/lib/voice/match";
 import { pageVoiceActions } from "@/lib/voice/registry";
 import { buildGlobalActions } from "@/lib/voice/globalCommands";
 import { createMicrophone, microphoneError, type MicrophoneSession } from "@/lib/voice/microphone";
@@ -20,7 +20,8 @@ import {
   loadMemory,
   saveMemory,
 } from "@/lib/chatMemory";
-import { AUTH_CHANGED_EVENT } from "@/lib/auth";
+import { AUTH_CHANGED_EVENT, getToken } from "@/lib/auth";
+import { MEMBERSHIP_CHANGED_EVENT } from "@/lib/membership";
 import AnswerText, { plainText } from "@/components/chat/AnswerText";
 
 /** Nguồn hợp nhất từ /api/assistant: cấu trúc 3D hoặc trang giáo trình bệnh học. */
@@ -52,11 +53,11 @@ const COPY = {
     suggestions: ["Tim có những buồng nào?", "Gan nằm ở đâu?", "Dây thần kinh giữa chi phối gì?"],
     voiceMissing: "Máy này chưa cài giọng đọc tiếng Việt nên mình chưa đọc được.",
     hide: "Ẩn trợ lý", show: "Hiện lại Soma Bot",
-    handsFree: "Nghe liên tục", handsFreeOn: "Đang nghe liên tục — nói lệnh, hoặc “Soma …” để hỏi", handsFreeOff: "Tắt nghe liên tục",
+    handsFree: "Trò chuyện bằng giọng nói", handsFreeOn: "Đang nghe — hỏi trực tiếp khi mở chat; gọi “Soma…” khi thu nhỏ", handsFreeOff: "Dừng trò chuyện giọng nói",
     done: "Xong.", cmdFail: "Không thực hiện được lệnh này.",
     notUnderstood: (x: string) => `Chưa hiểu lệnh “${x}”. Nói “trợ giúp” để nghe các lệnh.`,
     guestGateTitle: "Hết lượt hỏi của chế độ khách",
-    guestGateBody: `Khách chỉ hỏi được ${GUEST_LIMIT} câu mỗi phiên và hội thoại không được lưu lại. Đăng nhập để hỏi không giới hạn và giữ lại mạch hội thoại trên mọi thiết bị.`,
+    guestGateBody: "Đăng nhập để lưu hội thoại và dùng 10 câu hỏi/tháng ở gói Thường hoặc 30 câu/tháng ở gói Premium.",
     guestGateCta: "Đăng nhập / Tạo tài khoản",
   },
   en: {
@@ -65,11 +66,11 @@ const COPY = {
     suggestions: ["What are the chambers of the heart?", "Where is the liver?", "What does the median nerve supply?"],
     voiceMissing: "This device has no English text-to-speech voice installed.",
     hide: "Hide assistant", show: "Show Soma Bot again",
-    handsFree: "Hands-free", handsFreeOn: "Listening hands-free — say a command, or “Soma …” to ask", handsFreeOff: "Stop hands-free",
+    handsFree: "Voice conversation", handsFreeOn: "Listening — ask directly in chat; say “Soma…” when minimized", handsFreeOff: "Stop voice conversation",
     done: "Done.", cmdFail: "That command could not be carried out.",
     notUnderstood: (x: string) => `I didn't catch the command “${x}”. Say “help” to hear the commands.`,
     guestGateTitle: "Guest questions used up",
-    guestGateBody: `Guests get ${GUEST_LIMIT} questions per session and the conversation is never saved. Sign in to ask without limits and keep your conversation on any device.`,
+    guestGateBody: "Sign in to save your conversations and use 10 questions/month on Standard or 30/month on Premium.",
     guestGateCta: "Sign in / Create account",
   },
   zh: {
@@ -82,7 +83,7 @@ const COPY = {
     done: "完成。", cmdFail: "无法执行该指令。",
     notUnderstood: (x: string) => `没有听懂指令“${x}”。说“帮助”可听取指令列表。`,
     guestGateTitle: "访客提问次数已用完",
-    guestGateBody: `访客每次会话只能提问 ${GUEST_LIMIT} 次，且对话不会保存。登录后可无限提问，并在任何设备上保留对话。`,
+    guestGateBody: "登录以保存会话，普通套餐每月10次提问，Premium每月30次。",
     guestGateCta: "登录／注册",
   },
 } as const;
@@ -316,7 +317,10 @@ export default function FloatingSomaBot() {
       syncQuota();
       return;
     }
-    stopBotMicrophones();
+    if (opts?.voice && handsFreeRef.current) {
+      recognitionRef.current?.stop(); setListening(false);
+      handsFreeRecRef.current?.pause("request");
+    } else stopBotMicrophones();
     stopBotSpeech();
     const controller = new AbortController();
     answerRequestRef.current = controller; memoryGenerationRef.current++;
@@ -331,17 +335,19 @@ export default function FloatingSomaBot() {
     try {
       const response = await fetch("/api/assistant", {
         method: "POST",
-        headers: { "content-type": "application/json" },
+        headers: { "content-type": "application/json", ...(getToken() ? { Authorization: `Bearer ${getToken()}` } : {}) },
         body: JSON.stringify({
           question: value,
           locale,
           // Vài lượt gần nhất để hỏi tiếp kiểu "nó nằm ở đâu" là hiểu.
           history: next.slice(-5).map((m) => ({ role: m.role, text: m.text })),
+          voice: Boolean(opts?.voice),
         }),
         signal: controller.signal,
       });
-      if (!response.ok) throw new Error("assistant unavailable");
       const data = await response.json();
+      if (data.engine !== "prepared-summary") window.dispatchEvent(new Event(MEMBERSHIP_CHANGED_EVENT));
+      if (!response.ok) throw new Error(typeof data.error === "string" ? data.error : t.error);
       if (controller.signal.aborted || answerRequestRef.current !== controller) return;
       const complete = [...next, { role: "bot", text: data.answer ?? t.error, sources: data.sources, engine: data.engine, suggestions: data.suggestions } satisfies Message].slice(-12);
       setMessages(complete);
@@ -349,12 +355,13 @@ export default function FloatingSomaBot() {
       setAnswered(true);
       if (answerTimerRef.current) clearTimeout(answerTimerRef.current);
       answerTimerRef.current = setTimeout(() => setAnswered(false), 2400);
-    } catch {
+      if (opts?.voice) await speakMessage(plainText(data.answer ?? t.error), complete.length - 1);
+    } catch (cause) {
       if (controller.signal.aborted || answerRequestRef.current !== controller) return;
-      const complete = [...next, { role: "bot", text: t.error } satisfies Message].slice(-12);
+      const complete = [...next, { role: "bot", text: cause instanceof Error ? cause.message : t.error } satisfies Message].slice(-12);
       setMessages(complete);
       saveMemory(complete.map((m) => ({ role: m.role, text: m.text })));
-    } finally { if (answerRequestRef.current === controller) { answerRequestRef.current = null; setBusy(false); } }
+    } finally { if (answerRequestRef.current === controller) { answerRequestRef.current = null; setBusy(false); handsFreeRecRef.current?.resume("request"); } }
   }
 
   function clear() {
@@ -372,7 +379,7 @@ export default function FloatingSomaBot() {
     stopBotSpeech();
     setVoiceNote("");
     const session = createMicrophone({
-      locale,
+      locale, utterance: true,
       onState: state => setListening(state === "starting" || state === "listening"),
       onError: error => setVoiceNote(microphoneError(locale, error)),
       onText: (text, alts, final) => {
@@ -471,9 +478,7 @@ export default function FloatingSomaBot() {
     if (!text || speakingRef.current) return;
     const cmd = await runCommand(alts);
     if (cmd) return reportCommand(text, cmd, true);
-    // Hỏi trợ lý phải GỌI TÊN: nghe liên tục mà câu nào cũng gửi đi thì mọi câu
-    // nói chuyện trong phòng đều thành câu hỏi, tốn lượt và làm rối hội thoại.
-    const q = alts.map(wakeQuestion).find(Boolean);
+    const q = conversationQuestion(alts, open);
     if (q) {
       setOpen(true);
       return void askRef.current(q, { voice: true });
@@ -491,13 +496,13 @@ export default function FloatingSomaBot() {
     stopBotSpeech();
     setVoiceNote("");
     const session = createMicrophone({
-      locale, continuous: true,
+      locale, continuous: true, utterance: true,
       onState: state => {
         const active = state === "starting" || state === "listening" || state === "paused";
         handsFreeRef.current = active; setHandsFree(active);
       },
       onError: error => setVoiceNote(microphoneError(locale, error)),
-      onText: (_text, alts) => { void handsFreeHandlerRef.current(alts); },
+      onText: (text, alts, final) => { setQuestion(text); if (final) void handsFreeHandlerRef.current(alts); },
     });
     handsFreeRecRef.current = session; session.start();
   }
@@ -567,7 +572,7 @@ export default function FloatingSomaBot() {
       <div className="soma-bot-log" ref={logRef} data-lenis-prevent>
         {messages.length === 0 && <div className="soma-bot-welcome"><p>{t.hello}</p><div>{suggestions.map((item) => <button key={item} onClick={() => void ask(item)}>{item}<span>→</span></button>)}</div></div>}
         {messages.map((message, index) => <article key={`${message.role}-${index}`} className={message.role}>
-          {message.role === "bot" && <div className="soma-bot-message-tools"><small>{message.engine?.startsWith("claude") ? "AI + Soma Library" : "Soma Library"}</small><button type="button" className={speakingIndex === index ? "is-speaking" : ""} onClick={() => void speakMessage(plainText(message.text), index)} aria-label={speakingIndex === index ? t.stopRead : t.read} title={speakingIndex === index ? t.stopRead : t.read}>{speakingIndex === index ? "■" : "◖))"}</button></div>}
+          {message.role === "bot" && <div className="soma-bot-message-tools"><small>{message.engine === "ai" || message.engine?.startsWith("claude") ? "AI + Soma Library" : "Soma Library"}</small><button type="button" className={speakingIndex === index ? "is-speaking" : ""} onClick={() => void speakMessage(plainText(message.text), index)} aria-label={speakingIndex === index ? t.stopRead : t.read} title={speakingIndex === index ? t.stopRead : t.read}>{speakingIndex === index ? "■" : "◖))"}</button></div>}
           {message.role === "bot" ? <AnswerText text={message.text} /> : <p>{message.text}</p>}
           {!!message.sources?.length && <div className="soma-bot-sources"><b>{t.source}</b>{message.sources.slice(0, 3).map((source) => <Link key={source.id} href={source.href} onClick={closeBot}><span>{source.title}{source.meta ? <i>{source.meta}</i> : null}</span><em>{source.kind === "pathology" ? t.read2 : source.kind === "overview" ? t.learn : source.kind === "site" ? t.goPage : t.view} →</em></Link>)}</div>}
           {!!message.suggestions?.length && <div className="soma-bot-next">{message.suggestions.map((sug) => <button key={sug} type="button" onClick={() => void ask(sug)}>{sug}</button>)}</div>}
@@ -580,12 +585,12 @@ export default function FloatingSomaBot() {
         </div>}
       </div>
 
-      <form onSubmit={(event) => { event.preventDefault(); void ask(); }}>
-        <textarea rows={1} value={question} onChange={(event) => setQuestion(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter" && !event.shiftKey) { event.preventDefault(); void ask(); } }} placeholder={gated ? t.guestGateTitle : t.placeholder} aria-label={t.placeholder} disabled={gated} />
+      <form onSubmit={(event) => { event.preventDefault(); void ask(undefined, { voice: listening || handsFree }); }}>
+        <textarea rows={1} value={question} onChange={(event) => setQuestion(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter" && !event.shiftKey) { event.preventDefault(); void ask(undefined, { voice: listening || handsFree }); } }} placeholder={gated ? t.guestGateTitle : t.placeholder} aria-label={t.placeholder} disabled={gated} />
         <button className={`soma-bot-mic${listening ? " is-listening" : ""}`} type="button" onClick={toggleListening} disabled={busy || gated} aria-label={listening ? t.stopMic : t.mic} title={listening ? t.stopMic : t.mic}><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6.5 11.5a5.5 5.5 0 0 0 11 0M12 17v4m-3 0h6"/></svg></button>
         <button type="submit" disabled={!question.trim() || busy || gated} aria-label={t.send}>↑</button>
       </form>
-      {(listening || voiceNote || handsFree) && <div className={`soma-bot-voice-note${listening || handsFree ? " is-listening" : ""}`} role="status"><i />{listening ? t.listening : handsFree ? t.handsFreeOn : voiceNote}</div>}
+      {(listening || voiceNote || handsFree) && <div className={`soma-bot-voice-note${listening || handsFree ? " is-listening" : ""}`} role="status"><i />{voiceNote || (listening ? t.listening : t.handsFreeOn)}</div>}
       <button type="button" onClick={toggleHandsFree} aria-pressed={handsFree} disabled={gated && !handsFree} style={{ margin: "0 12px 8px", padding: "6px 10px", borderRadius: 999, border: "1px solid var(--line)", background: handsFree ? "rgba(15,138,124,.14)" : "transparent", color: "var(--ink)", fontSize: 12, cursor: "pointer" }}>
         {handsFree ? `■ ${t.handsFreeOff}` : `◉ ${t.handsFree}`}
       </button>

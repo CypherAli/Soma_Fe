@@ -15,12 +15,14 @@ import { availableInspectionViews, inspectionVisible } from './models/inspection
 import { previewTransform,previewPoint,previewSource } from './lib/preview-projection.js';
 import { ScanPanel } from './lib/scan-panel.js';
 import { RenderQuality } from './lib/render-quality.js';
-import { overviewLabels,layoutLabels,SYSTEM_LABELS } from './lib/label-layout.js';
-import { HandYaw,PartSeparation,inspectionLabelsVisible,selectionFor,selectionKey,singleVisibleGroup,systemBlocks,selectedPull,fitPullDistance,pullEnvelope,partLayout,partTransform } from './logic/inspection-controls.js';
+import { overviewLabels,layoutLabels,layoutSideLabels,SYSTEM_LABELS } from './lib/label-layout.js';
+import { HandYaw,PartSeparation,inspectionLabelsVisible,selectionFor,selectionKey,singleVisibleGroup,systemBlocks,selectedPull,fitPullDistance,pullEnvelope,partLayout,partTransform,partPageVisible } from './logic/inspection-controls.js';
 import { setMuscleSeparation } from './models/muscle-separation.js';
 import { InspectionTransition } from './logic/inspection-transition.js';
 import { ModelTransition } from './logic/model-transition.js';
+import { nextModelIndex } from './logic/model-navigation.js';
 import { inspectionFrame } from './logic/inspection-frame.js';
+import { HandZoom, HandTilt, twoHandZoomActive, wheelZoom } from './logic/view-navigation.js';
 
 const qs = new URLSearchParams(location.search);
 const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
@@ -149,14 +151,15 @@ class App {
     this.explode = 0; this.manualExplode = 0; this.tintMix = 0; this.scale = 1;
     this.spin = 0; this.pitch = 0; this.grab = null; this.handRotate = true; this.handRotating = false;
     this.dragYaw = 0; this.dragYawTarget=0; this.autoRotate = !CATALOG[CFG.start].surface; this.labelsOn = true; this.trails = CFG.trails;
-    this.zoom = 1; this.zoomTarget = 1; this.zoomGrab = null;
+    this.zoom = 1; this.zoomTarget = 1; this.zoomGrab = null; this.handZoom = new HandZoom(); this.handTilt = new HandTilt();
+    this.pointerDragging = false; this.manualViewUntil = 0;
     this.pulse = 1; this.flow = 0; this.expHist = []; this.wasBusy = false;
-    this.sel = -1; this.selection = null; this.partSeparation = new PartSeparation(); this.handYaw = new HandYaw({upright:true});
+    this.sel = -1; this.selection = null; this.partSeparation = new PartSeparation(); this.handYaw = new HandYaw();
     this.pulled = false; this.pullAmt = 0; this.hover = { li: -1, t0: 0 }; this.anchors = []; this.labelHits = []; this.pointer = null; this.lostT = 0;
     this.quiz = null;
     this.cut = { on: false, x: 0.35, target: 0.35 };
     this.voiceLanguage=qs.get('lang')==='en'?'en':'vi';this.voiceOn=false;this.autoRead=false;this.spoken=[];this.lastHeard='';this.hiddenSystems=new Set();
-    this.voice=new Voice(text=>this.voiceCommand(text),{language:this.voiceLanguage,onState:state=>{this.voiceOn=['starting','listening','paused'].includes(state);this.voiceState=state;this.updateVoiceUI();},onError:error=>this.voiceError(error)});
+    this.voice=new Voice(text=>{const before=this.speaker?.serial;const done=this.voiceCommand(text);if(done.length&&this.speaker?.serial===before)void this.speaker.speak(commandFeedback(done,CATALOG,this.model?.labels,this.voiceLanguage),{language:this.voiceLanguage});},{language:this.voiceLanguage,onState:state=>{this.voiceOn=['starting','listening','paused'].includes(state);this.voiceState=state;this.updateVoiceUI();},onError:error=>this.voiceError(error)});
     this.speaker=new Speaker({voice:this.voice,onState:state=>{this.speakerState=state;this.updateVoiceUI();},onError:error=>this.voiceError(error)});
     this.recorder = new Recorder(this.canvas, this.overlay); this.lastRecording = null;
     this.t = 0; this.last = null; this.frames = 0; this.fps = 0; this._fpsN = 0; this._fpsT = 0;
@@ -178,8 +181,9 @@ class App {
     const name=this.locale==='vi'&&/[\u00C0-\u1EF9]/.test(def.name)?def.name:readingText(null,def,this.locale,'name').text;
     return name.charAt(0).toUpperCase()+name.slice(1);
   }
-  prefetch() { const next=(this.ctl.state.index+1)%CATALOG.length;if(!['body','bust','thorax','muscles','head'].includes(CATALOG[next].id))this.store.request(next).catch(()=>{}); }
+  prefetch() { const next=nextModelIndex(CATALOG,this.ctl.state.index);if(!['body','bust','thorax','muscles','head'].includes(CATALOG[next].id))this.store.request(next).catch(()=>{}); }
   modelError(index,error) {
+    if(this.pendingVoiceActions?.index===index)this.pendingVoiceActions=null;
     if(this.transition.pending?.index!==index&&this.ctl.state.index!==index)return;
     this.transition.complete();this.ctl.suspended=!!this.scanActive;
     const st=this.ctl.state;
@@ -191,6 +195,8 @@ class App {
   }
   resetPose() {
     this.zoom=this.zoomTarget=1;this.zoomGrab=null;
+    this.handZoom.reset();
+    this.handTilt.reset();
     this.spin=this.pitch=this.dragYaw=this.dragYawTarget=0;this.grab=null;
     this.autoRotate=false;this.handRotating=false;this.handYaw.reset();
     this.manualExplode=this.explode=0;this.expHist=[];this.wasBusy=false;
@@ -243,7 +249,7 @@ class App {
     }
     for (const action of ctl.navigation.splice(0)) {
       if (this.scanActive) continue;
-      if (action === 'model') { this.selectModel(st.index + 1, true); this.toast('Tay trái · mô hình tiếp'); }
+      if (action === 'model') { this.cycleModel(1); this.toast('Tay trái · mô hình tiếp'); }
       else this.nextBlock();
     }
     if(!this.scanActive&&!this.transition.pending&&!this.inspectionTransition.pending)ctl.tick(t);
@@ -266,6 +272,10 @@ class App {
     const ready = this.uploaded === st.index && !st.targetDirty;
     const machine = ready && isMachine(st.index);
     const formed = st.state === FORMED && ready;
+    if(formed&&!this.transition.pending&&this.pendingVoiceActions?.index===st.index){
+      const pending=this.pendingVoiceActions;this.pendingVoiceActions=null;
+      for(const action of pending.actions)this.applyModelVoiceAction(action);
+    }
     let mode = st.simMode(), formT = st.formT(t);
     if (st.state === FORMED && !ready) mode = SIM.sphere;                 // hold the swirl until the model is uploaded
     if(formed){
@@ -275,7 +285,8 @@ class App {
     const vis = ctl.handVisible(t);
     const pointing = !this.scanActive && vis && (ctl.pose === POINT || ctl.rawPose === POINT);
     const busyHand = this.scanActive || !!this.transition.pending || !!this.inspectionTransition.pending || pointing || ctl.pinch || vis && (ctl.navigationActive||ctl.rawPose===THUMB||ctl.pose===THUMB);
-    const twoHands = !busyHand && vis && ctl.secondVisible(t) && formed;
+    const manualView = this.pointerDragging || t < this.manualViewUntil;
+    const twoHands = twoHandZoomActive({manual:manualView,blocked:this.scanActive||!!this.transition.pending||!!this.inspectionTransition.pending,visible:vis,second:ctl.secondVisible(t),formed,navigation:ctl.navigationActive});
     const visibleBlock = this.sel < 0 && machine && !this.quiz && this.$('separationMode').value !== 'muscles'
       ? singleVisibleGroup(this.model.labels, this.visiblePicks()) : null;
 
@@ -283,7 +294,7 @@ class App {
     let target = 0;
     if (formed && machine) {
       // only a hand in THIS frame steers it (a hand that just left keeps its last openness for a while)
-      if (this.sel < 0 && !visibleBlock && vis && ctl.landmarks && !busyHand && !twoHands && !this.sliderActive) { target = smooth(0.12, 0.85, ctl.openness); this.manualExplode = target; }
+      if (this.sel < 0 && !visibleBlock && vis && ctl.landmarks && !busyHand && !twoHands && !manualView && !this.sliderActive) { target = smooth(0.12, 0.85, ctl.openness); this.manualExplode = target; }
       else target = this.manualExplode;
       // curling the fingers into a point / pinch briefly reads as "closing": restore the openest recent value
       this.expHist.push([t, target]);
@@ -297,21 +308,20 @@ class App {
     // 4. zoom: two hands apart = bigger, together = smaller (relative to where they started)
     if (twoHands) {
       const a = ctl.landmarks[9], b = ctl.second[9], spread = Math.hypot((a[0] - b[0]) * ctl.aspect, a[1] - b[1]);
-      if (!this.zoomGrab) this.zoomGrab = { spread: Math.max(spread, 0.02), zoom: this.zoomTarget };
-      this.zoomTarget = clamp((this.zoomGrab.zoom * spread) / this.zoomGrab.spread, 0.5, 2.6);
-    } else this.zoomGrab = null;
-    this.zoom += (this.zoomTarget - this.zoom) * (1 - Math.exp(-dt * 8));
+      this.zoomTarget = this.handZoom.update(spread, ctl.lastHandT, this.zoomTarget);
+    } else { this.zoomGrab = null; this.handZoom.pause(t); }
+    if(manualView)this.handZoom.reset();
+    this.zoom *= Math.exp(Math.log(this.zoomTarget / this.zoom) * (1 - Math.exp(-dt * 12)));
 
-    // 5. Hand rotation is yaw only. Vertical palm motion never tilts the model.
+    // 5. Restore WonderSnap's relative wrist yaw and vertical palm tilt.
     const def = CATALOG[st.index];
-    const handRot = this.handRotate && formed && vis && !!ctl.landmarks && !busyHand && !twoHands;
+    const handRot = !manualView && this.handRotate && formed && vis && !!ctl.landmarks && !busyHand && !twoHands;
     const transientRot = this.handRotate && formed && vis && !this.transition.pending && !this.scanActive && !twoHands && ctl.pose !== POINT && ctl.rawPose!==THUMB && !ctl.pinch && !ctl.navigationActive;
     if (handRot && !this.handYaw.anchor) ctl.rebaseRoll();
-    // Hand yaw is measured in world view, so a previous mouse/preset yaw must
-    // not remain as a second offset when the upright hand takes control.
-    const nextYaw = this.handYaw.update(this.spin + this.dragYaw, ctl.roll, handRot, dt, transientRot);
+    // Grab relative to the current view; a resting wrist never undoes a drag.
+    const nextYaw = this.handYaw.update(this.spin + this.dragYaw, ctl.roll, handRot, dt, !manualView && transientRot);
     if (handRot) { this.spin = nextYaw; this.dragYaw = 0; this.dragYawTarget = 0; }
-    this.pitch = 0;
+    this.pitch = this.handTilt.update(this.pitch, ctl.handY, handRot, dt);
     if (!handRot && !(vis && (busyHand || twoHands)) && this.autoRotate && this.sel < 0) this.spin += dt * .35 * (1 - this.explode);
     this.handRotating = handRot;
     this.dragYaw += ((this.dragYawTarget??this.dragYaw)-this.dragYaw)*(1-Math.exp(-dt*14));
@@ -366,8 +376,9 @@ class App {
       // relative baseline, so releasing a point cannot yank them apart.
       this.partSeparation.set(smooth(.12, .85, ctl.openness));
     }
-    this.updatePicking(t, pointing, formed && machine && !this.inspectionTransition.pending);
-    this.pullAmt = this.partSeparation.update(ctl.openness, this.sel >= 0 && formed && vis && !!ctl.landmarks && !busyHand && !twoHands && !this.sliderActive, ctl.lastHandT, dt);
+    if (twoHands) ctl.pinchStart = false;
+    this.updatePicking(t, pointing && !twoHands, formed && machine && !this.inspectionTransition.pending && !twoHands);
+    this.pullAmt = this.partSeparation.update(ctl.openness, this.sel >= 0 && formed && vis && !!ctl.landmarks && !busyHand && !twoHands && !manualView && !this.sliderActive, ctl.lastHandT, dt);
     this.pulled = this.partSeparation.target > .01;
     // Anchors and solid meshes must use the same current-frame pull amount.
     this.computeAnchors(formed && machine && m && !this.transition.pending, rot, exCenter, scale);
@@ -439,6 +450,7 @@ class App {
     }
     const showCover=this.$('showCover').checked,view=this.$('inspectionView').value,focus=Number(this.$('systemFocus').value);
     this.model.labels.forEach((L, li) => {
+      if(!partPageVisible(li,this.selection?.layout,this.pullAmt))return;
       if(this.coverPicks.has(li)&&!showCover)return;
       const group=this.anchorGroups.get(li);
       if(group&&!inspectionVisible(group,view,this.hiddenSystems))return;
@@ -529,15 +541,25 @@ class App {
     if(this.$('separationMode').value==='selected')this.$('separationMode').value=this.separationBeforeSelection||'systems';
     this.sel = li; this.selection=selectionFor(this.model.labels,li,scope,this.visiblePicks()); this.partSeparation.select(); this.pullAmt=0; this.pulled = false;
     this.selection.envelope=pullEnvelope(this.model.surface,this.selection.ids);
-    const height=this.overlay.height/CFG.dpr,width=this.overlay.width/CFG.dpr;
-    const radius=this.dist/this.zoom*Math.sin(deg(20))*Math.max(.2,Math.min(width<=600?.35:.75,(height-200)/height,width/height*.55))*.94;
-    this.selection.layout=partLayout(this.model.surface,this.selection.ids,{scale:this.drawScale||1,explode:this.explode,exCenter:this.model.exCenter,inspectionCenter:this.inspectionCenter,radius});
+    this.layoutSelection(0);
     if(this.selection.layout){this.separationBeforeSelection=this.$('separationMode').value;this.$('separationMode').value='selected';}
-    this.manualExplode=this.explode;this.expHist=[];this.handYaw.reset();this.autoRotate=false;
+    this.manualExplode=this.explode;this.expHist=[];this.handYaw.reset();this.handTilt.reset();this.autoRotate=false;
     this.renderer.setSelection(this.selection.ids,li,this.selection.layout);
     const L = this.selectionLabel();
     if(this.autoRead&&source!=='voice-external'&&source!=='gesture')this.readSelected();
     this.toast(`☝ ${L.label}`);
+  }
+  layoutSelection(page=0) {
+    if(!this.selection)return;
+    const height=this.overlay.height/CFG.dpr,width=this.overlay.width/CFG.dpr;
+    const radius=this.dist/this.zoom*Math.sin(deg(20))*Math.max(.2,Math.min(width<=600?.35:.75,(height-200)/height,width/height*.55))*.94;
+    this.selection.layout=partLayout(this.model.surface,this.selection.ids,{scale:this.drawScale||1,explode:this.explode,exCenter:this.model.exCenter,inspectionCenter:this.inspectionCenter,radius,page,pageSize:20});
+  }
+  changeStructurePage(step) {
+    if(!this.selection?.layout)return;
+    this.layoutSelection(this.selection.layout.page+step);this.labelPage=0;
+    this.renderer.setSelection(this.selection.ids,this.sel,this.selection.layout);
+    this.manualViewUntil=this.t+.8;
   }
   selectionLabel() {
     const L=this.model?.labels[this.sel];if(!L||!this.selection||this.selection.ids.size<=1)return L;
@@ -561,7 +583,7 @@ class App {
     }
     this.setSeparation(this.partSeparation.target>.5?0:1);
   }
-  deselect() { this.pendingBlock=null;if(this.$('separationMode').value==='selected')this.$('separationMode').value=this.separationBeforeSelection||'systems';this.separationBeforeSelection=null;this.sel = -1; this.selection=null;this.partSeparation.clear();this.pullAmt=0;this.pulled = false;this.handYaw.reset();this.hover={li:-1,t0:this.t||0};this.pointSample=null;this.labelHits=[];this.renderer?.setSelection(null,-1); }
+  deselect() { this.pendingBlock=null;if(this.$('separationMode').value==='selected')this.$('separationMode').value=this.separationBeforeSelection||'systems';this.separationBeforeSelection=null;this.sel = -1; this.selection=null;this.partSeparation.clear();this.pullAmt=0;this.pulled = false;this.handYaw.reset();this.handTilt.reset();this.hover={li:-1,t0:this.t||0};this.pointSample=null;this.labelHits=[];this.renderer?.setSelection(null,-1); }
   say(text) { this.spoken.push(text); if (this.autoRead) void this.speaker.speak(text,{language:this.voiceLanguage}); }
 
   // ------------------------------------------------------------ quiz: "find the hippocampus"
@@ -613,17 +635,41 @@ class App {
   }
 
   // ------------------------------------------------------------ voice
+  applyModelVoiceAction(action) {
+    this.manualViewUntil=this.t+.8;
+    this.autoRotate=false;this.$('bRotate').classList.remove('on');
+    this.handYaw.reset();this.handTilt.reset();
+    if(action.type==='rotateDegrees'){
+      const yaw=this.spin+this.dragYaw+deg(action.degrees);
+      this.spin=0;this.dragYaw=this.dragYawTarget=yaw;
+    }else{
+      if(action.modelId)this.deselect();
+      this.setSeparation(action.type==='explode'?1:0);
+    }
+  }
   voiceCommand(text,options={}) {
     this.lastHeard = text;
     const acts = parseCommand(text, CATALOG, this.model && isMachine(this.uploaded) && this.uploaded === this.ctl.state.index ? this.model.labels : []);
     const st = this.ctl.state, done = [];
     for (const a of acts) {
+      if(['explode','assemble','rotateDegrees'].includes(a.type)){
+        const index=a.modelId?CATALOG.findIndex(model=>model.id===a.modelId):(this.transition.pending?.index??st.index);
+        if(index<0)continue;
+        if(this.uploaded!==index||st.index!==index||st.state!==FORMED||this.transition.pending){
+          const previous=this.pendingVoiceActions?.index===index?this.pendingVoiceActions.actions:[];
+          this.selectModel(index);
+          this.pendingVoiceActions={index,actions:[...previous,a].slice(-10)};
+          done.push('preparing');
+        }else{
+          this.applyModelVoiceAction(a);
+          done.push(a.type==='rotateDegrees'?`rotateDegrees:${a.degrees}`:a.type);
+        }
+        continue;
+      }
       if (a.type === 'model') { const index=CATALOG.findIndex(d=>d.id===a.id);if(index<0)continue;this.selectModel(index);done.push(a.name); }
       else if (a.type === 'part') { const L=this.model?.labels[a.index];if(!L)continue;this.hiddenSystems.delete(L.system);this.$('inspectionView').value='all';if(this.model.surface?.groups.some(g=>g.pick===a.index&&g.cover))this.$('showCover').checked=true;this.populateFocus();this.selectPart(a.index,options.external?'voice-external':'voice');done.push(L.label); }
-      else if (a.type === 'explode') { this.setSeparation(1); done.push('explode'); }
-      else if (a.type === 'assemble') { this.setSeparation(0);this.ctl.keyPose(FIST,this.t);done.push('assemble'); }
-      else if (a.type === 'next') { this.selectModel(st.index + 1); done.push('next'); }
-      else if (a.type === 'prev') { this.selectModel(st.index - 1); done.push('previous'); }
+      else if (a.type === 'next') { this.cycleModel(1); done.push('next'); }
+      else if (a.type === 'prev') { this.cycleModel(-1); done.push('previous'); }
       else if (a.type === 'snap') { if (st.state === IDLE) this.ctl.keySnap(this.t); done.push('snap'); }
       else if (a.type === 'dissolve') { if (st.state !== IDLE) this.ctl.keySnap(this.t); done.push('dissolve'); }
       else if (a.type === 'quiz') { this.startQuiz(); done.push('quiz'); }
@@ -787,13 +833,13 @@ class App {
     const panel=this.$('panel').getBoundingClientRect(),tools=document.querySelector('.top-right').getBoundingClientRect();
     const desktop=window.innerWidth>900,left=desktop?(panel.right+14)*dpr:12*dpr,right=desktop?(tools.left-14)*dpr:W-12*dpr;
     const bounds={x:left,y:80*dpr,w:Math.max(0,right-left),h:Math.max(0,H-160*dpr)};
-    const obstacles=[this.$('panel'),document.querySelector('.top-right'),this.$('partCard'),document.querySelector('.view-presets'),this.$('labelPager'),this.$('quiz')].filter(el=>el&&!el.hidden).map(el=>{const r=el.getBoundingClientRect();return {x:r.x*dpr,y:r.y*dpr,w:r.width*dpr,h:r.height*dpr};});
+    const obstacles=[this.$('panel'),document.querySelector('.top-right'),this.$('partCard'),document.querySelector('.view-presets'),this.$('labelPager'),this.$('structurePager'),this.$('quiz')].filter(el=>el&&!el.hidden).map(el=>{const r=el.getBoundingClientRect();return {x:r.x*dpr,y:r.y*dpr,w:r.width*dpr,h:r.height*dpr};});
     const font=`600 ${12*dpr}px ui-sans-serif,system-ui`;g.font=font;
-    const pageSize=12;this.labelPageCount=Math.max(1,Math.ceil(candidates.length/pageSize));this.labelPage=Math.min(this.labelPage,this.labelPageCount-1);
+    const pageSize=6;this.labelPageCount=Math.max(1,Math.ceil(candidates.length/pageSize));this.labelPage=Math.min(this.labelPage,this.labelPageCount-1);
     const page=candidates.slice(this.labelPage*pageSize,(this.labelPage+1)*pageSize);
     const selected=candidates.find(item=>item.li===this.sel&&this.selection?.ids.size===1);
     if(selected&&!page.includes(selected))page.unshift(selected);
-    const width=Math.min(280*dpr,bounds.w),items=page.map(it=>{
+    const width=Math.min(210*dpr,bounds.w*.38),items=page.map(it=>{
       let title=it.L.label;
       while(title.length&&g.measureText(title).width+20*dpr>width)title=title.slice(0,-1);
       if(title!==it.L.label)title=title.slice(0,-1)+'…';
@@ -801,7 +847,8 @@ class App {
     });
     const alpha=showAll?smooth(.15,.45,this.explode)*smooth(.6,1.4,formT):1;
     g.textAlign='center';g.textBaseline='middle';
-    for(const it of layoutLabels(items,bounds,obstacles,7*dpr)){
+    const place=this.selection?.layout&&this.pullAmt>.15?layoutSideLabels:layoutLabels;
+    for(const it of place(items,bounds,obstacles,9*dpr)){
       const selected=it.scope==='group'?it.key===this.selection?.key:it.li===this.sel;g.globalAlpha=selected?1:alpha;
       g.strokeStyle=rgbCss(it.L.color);g.lineWidth=dpr;g.beginPath();g.moveTo(it.px,it.py);g.lineTo(Math.max(it.x,Math.min(it.x+it.w,it.px)),Math.max(it.y,Math.min(it.y+it.h,it.py)));g.stroke();g.fillStyle=rgbCss(it.L.color);g.beginPath();g.arc(it.px,it.py,2.5*dpr,0,Math.PI*2);g.fill();
       g.fillStyle='rgba(20,24,28,.95)';g.fillRect(it.x,it.y,it.w,it.h);
@@ -963,6 +1010,12 @@ class App {
     $('labelPager').hidden=this.labelPageCount<=1||!this.labelsOn||!this.labelHits.length||!!this.transition.pending;
     $('labelPageStatus').textContent=this.word(`Nhóm nhãn ${this.labelPage+1}/${this.labelPageCount}`,`Label group ${this.labelPage+1}/${this.labelPageCount}`);
     $('labelsPrevious').disabled=this.labelPage===0;$('labelsNext').disabled=this.labelPage>=this.labelPageCount-1;
+    const parts=this.selection?.layout;
+    $('structurePager').hidden=!parts||parts.pageCount<=1||this.pullAmt<.15||!!this.transition.pending;
+    if(parts){
+      $('structurePageStatus').textContent=this.word(`Cấu trúc ${parts.page*parts.pageSize+1}–${Math.min(parts.total,(parts.page+1)*parts.pageSize)} / ${parts.total}`,`Structures ${parts.page*parts.pageSize+1}–${Math.min(parts.total,(parts.page+1)*parts.pageSize)} / ${parts.total}`);
+      $('structuresPrevious').disabled=parts.page===0;$('structuresNext').disabled=parts.page>=parts.pageCount-1;
+    }
     const vis = ctl.handVisible(t), pose = vis ? (ctl.pinch ? 'pinch' : ctl.pose) : NONE;
     const [emo, label] = pose === 'pinch' ? ['🤏', 'Đang véo'] : POSE_UI[pose] || POSE_UI.other;
     const side=ctl.landmarks?.handedness;
@@ -1034,9 +1087,11 @@ class App {
     if(this.bridgeReady&&window.parent!==window)window.parent.postMessage({type:'soma-control-model',id:this.enteredId},location.origin);
   }
   selectModel(i, autoForm = true) {
-    this.inspectionTransition.cancel();
     const n = CATALOG.length;
     i = ((i % n) + n) % n;
+    this.pendingVoiceActions=null;
+    if(this.transition.pending?.index===i)return;
+    this.inspectionTransition.cancel();
     this.announceModel(i);
     if(i===this.ctl.state.index&&this.ctl.state.state===FORMED){this.transition.complete();return;}
     this.speaker.stop();
@@ -1046,8 +1101,14 @@ class App {
     this.store.request(i).catch(error=>this.modelError(i,error));
   }
 
+  cycleModel(step) {
+    this.selectModel(nextModelIndex(CATALOG,this.ctl.state.index,step,this.transition.pending));
+  }
+
   bindInput() {
     const $ = this.$, ctl = this.ctl;
+    $('structuresPrevious').onclick=()=>this.changeStructurePage(-1);
+    $('structuresNext').onclick=()=>this.changeStructurePage(1);
     const now = () => this.t;
     addEventListener('keydown', (e) => {
       if (e.target instanceof HTMLSelectElement || e.target instanceof HTMLTextAreaElement || (e.target instanceof HTMLInputElement && e.target.type !== 'range')) return;
@@ -1057,9 +1118,9 @@ class App {
       if (k === ' ') { e.preventDefault(); ctl.keySnap(now()); }
       else if (k === 'f') ctl.keyPose(FIST, now());
       else if (k === 'o') ctl.keyPose(OPEN, now());
-      else if (k === 'v') this.selectModel(st.index + 1);
-      else if (k === 'arrowright' || k === 'n') this.selectModel(st.index + 1);
-      else if (k === 'arrowleft' || k === 'p') this.selectModel(st.index - 1);
+      else if (k === 'v') { if(!e.repeat)this.cycleModel(1); }
+      else if (k === 'arrowright' || k === 'n') { e.preventDefault();if(!e.repeat)this.cycleModel(1); }
+      else if (k === 'arrowleft' || k === 'p') { e.preventDefault();if(!e.repeat)this.cycleModel(-1); }
       else if (k === 'e') this.setSeparation((this.sel>=0?this.partSeparation.target:this.manualExplode)>.5?0:1);
       else if (k === 'arrowup' || k === ']') { e.preventDefault(); this.setSeparation(clamp((this.sel>=0?this.partSeparation.target:this.manualExplode)+.1,0,1)); }
       else if (k === 'arrowdown' || k === '[') { e.preventDefault(); this.setSeparation(clamp((this.sel>=0?this.partSeparation.target:this.manualExplode)-.1,0,1)); }
@@ -1095,12 +1156,12 @@ class App {
     $('separationMode').onchange=()=>{const mode=$('separationMode').value;if(mode==='selected'){this.splitSelected();return;}this.changeInspection(()=>{const muscles=mode==='muscles';setMuscleSeparation(this.model,muscles);$('inspectionView').value=muscles?'muscular':'all';$('systemFocus').value='-1';this.deselect();$('separationMode').value=mode;this.manualExplode=muscles?1:0;this.populateFocus();});};
     $('systemFocus').onchange=()=>{const next=$('systemFocus').value;$('systemFocus').value=this.appliedSystemFocus||'-1';this.changeInspection(()=>{this.deselect();$('systemFocus').value=next;const li=Number(next);if(li>=0)this.selectPart(li,'list');this.appliedSystemFocus=next;});};
     $('inspectionView').onchange=()=>{const next=$('inspectionView').value;$('inspectionView').value=this.appliedInspectionView||'all';this.changeInspection(()=>{$('inspectionView').value=next;this.deselect();$('systemFocus').value='-1';this.populateFocus();});};
-    for(const [id,yaw] of [['viewFront',0],['viewBack',Math.PI],['viewSide',Math.PI/2]])$(id).onclick=()=>{this.grab=null;this.handYaw.reset();this.spin=0;this.dragYaw=yaw;this.dragYawTarget=yaw;this.pitch=0;this.autoRotate=false;};
+    for(const [id,yaw] of [['viewFront',0],['viewBack',Math.PI],['viewSide',Math.PI/2]])$(id).onclick=()=>{this.grab=null;this.handYaw.reset();this.handTilt.reset();this.spin=0;this.dragYaw=yaw;this.dragYawTarget=yaw;this.pitch=0;this.autoRotate=false;};
     $('viewReset').onclick=()=>{this.hiddenSystems.clear();this.deselect();this.resetPose();$('systemFocus').value='-1';$('inspectionView').value='all';$('structureSearch').value='';this.populateFocus();};
     $('labelsPrevious').onclick=()=>{this.labelPage=Math.max(0,this.labelPage-1);};
     $('labelsNext').onclick=()=>{this.labelPage=Math.min(this.labelPageCount-1,this.labelPage+1);};
     $('viewStructures').onclick=()=>{$('structureListPanel').open=true;$('structureListPanel').scrollIntoView({block:'nearest',behavior:'smooth'});};
-    $('bNext').onclick = () => this.selectModel(ctl.state.index + 1,true);
+    $('bNext').onclick = () => this.cycleModel(1);
     $('bNextBlock').onclick = () => this.nextBlock();
     $('bLabels').onclick = () => this.toggle('labelsOn', 'bLabels');
     $('bRotate').onclick = () => this.toggle('autoRotate', 'bRotate');
@@ -1130,14 +1191,15 @@ class App {
     slider.addEventListener('change', () => { this.sliderActive = false; });
     this.canvas.addEventListener('wheel', (e) => {
       e.preventDefault();
-      if (e.ctrlKey || !isMachine(ctl.state.index)) this.zoomTarget = clamp(this.zoomTarget * (e.deltaY < 0 ? 1.1 : 1 / 1.1), 0.5, 2.6);
-      else this.setSeparation(clamp((this.sel>=0?this.partSeparation.target:this.manualExplode)-Math.sign(e.deltaY)*.08,0,1));
+      this.manualViewUntil=this.t+.8;this.handYaw.reset();
+      if(e.shiftKey&&isMachine(ctl.state.index))this.setSeparation(clamp((this.sel>=0?this.partSeparation.target:this.manualExplode)-e.deltaY*.001,0,1));
+      else this.zoomTarget=wheelZoom(this.zoomTarget,e.deltaY,e.deltaMode,this.canvas.clientHeight);
     }, { passive: false });
     let drag = null;
     const px = (e) => [e.clientX * CFG.dpr, e.clientY * CFG.dpr];
-    this.canvas.addEventListener('pointerdown', (e) => { drag = { x: e.clientX, y: e.clientY, yaw: this.dragYawTarget??this.dragYaw, moved: false }; this.canvas.setPointerCapture(e.pointerId); });
+    this.canvas.addEventListener('pointerdown', (e) => { if(e.button!==0)return;this.pointerDragging=true;this.autoRotate=false;this.handYaw.reset();this.handTilt.reset();drag = { x: e.clientX, y: e.clientY, yaw: this.dragYawTarget??this.dragYaw, pitch:this.pitch, moved: false }; this.canvas.setPointerCapture(e.pointerId); });
     this.canvas.addEventListener('pointermove', (e) => {
-      if (drag) { if (Math.abs(e.clientX - drag.x) > 4) drag.moved = true; this.dragYawTarget = drag.yaw + (e.clientX - drag.x) * 0.008; }
+      if (drag) { if (Math.hypot(e.clientX-drag.x,e.clientY-drag.y)>4) drag.moved = true; this.dragYawTarget = drag.yaw + (e.clientX - drag.x) * Math.PI*2/Math.max(400,this.canvas.clientWidth*.65); this.pitch = clamp(drag.pitch + (e.clientY-drag.y)*Math.PI/Math.max(400,this.canvas.clientHeight),-.75,.75); }
       else if (this.cut.on && !this.ctl.handVisible(this.t)) {
         const c0 = project(this.projView, [0, 0, 0]), rr = this.globeRadiusPx();
         this.cut.target = clamp((px(e)[0] - (c0[0] * 0.5 + 0.5) * this.overlay.width) / rr, -1.25, 1.25);
@@ -1150,7 +1212,11 @@ class App {
         if (li >= 0) this.selectPart(li, 'click',scope); else if (!this.quiz) this.deselect();
       }
       drag = null;
+      this.pointerDragging=false;this.manualViewUntil=this.t+.8;this.handYaw.reset();
     });
+    const release=()=>{drag=null;this.pointerDragging=false;this.manualViewUntil=this.t+.8;this.handYaw.reset();};
+    this.canvas.addEventListener('pointercancel',release);
+    this.canvas.addEventListener('lostpointercapture',release);
   }
 
   updateToolbar() {

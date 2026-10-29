@@ -5,6 +5,9 @@ type Result = { isFinal: boolean; length: number; [index: number]: { transcript:
 export type Recognition = {
   lang: string; continuous: boolean; interimResults: boolean; maxAlternatives: number;
   start(): void; abort(): void;
+  stop?(): void;
+  onspeechstart?: (() => void) | null;
+  onspeechend?: (() => void) | null;
   onstart: (() => void) | null;
   onresult: ((event: { resultIndex: number; results: ArrayLike<Result> }) => void) | null;
   onerror: ((event: { error: string }) => void) | null;
@@ -14,6 +17,8 @@ export type MicrophoneSession = ReturnType<typeof createMicrophone>;
 type Options = {
   locale: Loc;
   continuous?: boolean;
+  /** Group browser result fragments into one conversational turn. */
+  utterance?: boolean;
   onState(state: MicrophoneState): void;
   onText(text: string, alternatives: string[], final: boolean): void;
   onError(error: string): void;
@@ -34,19 +39,47 @@ export function createMicrophone(options: Options, factory = browserRecognition)
   let restart: ReturnType<typeof setTimeout> | undefined;
   let watchdog: ReturnType<typeof setTimeout> | undefined;
   let silentEnds = 0;
+  let turnTimer: ReturnType<typeof setTimeout> | undefined;
+  let endTimer: ReturnType<typeof setTimeout> | undefined;
+  let fragments: string[] = [], lastAlternatives: string[] = [], interim = "";
   const pauses = new Set<string>();
+  function discardTurn() {
+    clearTimeout(turnTimer); clearTimeout(endTimer);
+    fragments = []; lastAlternatives = []; interim = "";
+  }
+  function flushTurn() {
+    if (!active || pauses.size || interim || !fragments.length) return;
+    const prefix = fragments.slice(0, -1).join(" ");
+    const text = fragments.join(" ");
+    const alternatives = [...new Set([text, ...lastAlternatives.map(value => [prefix, value].filter(Boolean).join(" "))])];
+    discardTurn();
+    if (!options.continuous) { active = false; release(); options.onState("off"); }
+    options.onText(text, alternatives, true);
+  }
+  function emit(text: string, alternatives: string[], final: boolean) {
+    if (!options.utterance) { options.onText(text, alternatives, final); return; }
+    clearTimeout(turnTimer);
+    if (final) { if (options.continuous) fragments.push(text); else fragments = [text]; lastAlternatives = alternatives; interim = ""; }
+    else { if (!options.continuous) fragments = []; interim = text; }
+    const preview = [...fragments, interim].filter(Boolean).join(" ");
+    options.onText(preview, [preview], false);
+    // New speech/interim cancels the timer; unconfirmed text is never auto-sent.
+    if (final) turnTimer = setTimeout(flushTurn, 700);
+  }
   function release() {
     clearTimeout(restart); clearTimeout(watchdog);
+    clearTimeout(endTimer);
     const previous = recognition; recognition = null;
     if (!previous) return;
     previous.onstart = previous.onend = previous.onresult = previous.onerror = null;
+    previous.onspeechstart = previous.onspeechend = null;
     try { previous.abort(); } catch { /* Already released by the browser. */ }
   }
   function stop() {
-    active = false; pauses.clear(); release(); options.onState("off");
+    active = false; pauses.clear(); discardTurn(); release(); options.onState("off");
   }
   function fail(error: string) {
-    active = false; release(); options.onState("error"); options.onError(error);
+    active = false; discardTurn(); release(); options.onState("error"); options.onError(error);
   }
   function begin() {
     if (!active || pauses.size) return;
@@ -57,18 +90,30 @@ export function createMicrophone(options: Options, factory = browserRecognition)
     recognition = rec;
     const current = () => active && recognition === rec && !pauses.size;
     rec.lang = options.locale === "vi" ? "vi-VN" : options.locale === "zh" ? "zh-CN" : "en-US";
-    rec.continuous = !!options.continuous; rec.interimResults = !options.continuous; rec.maxAlternatives = 3;
+    rec.continuous = !!options.continuous; rec.interimResults = true; rec.maxAlternatives = 3;
     let delivered = -1;
     rec.onstart = () => { if (current()) { clearTimeout(watchdog); options.onState("listening"); } };
+    rec.onspeechstart = () => { if (current()) { clearTimeout(endTimer); clearTimeout(turnTimer); } };
+    rec.onspeechend = () => {
+      if (!options.utterance || !current() || !rec.stop) return;
+      clearTimeout(endTimer);
+      // Request a final result instead of waiting for the service's long idle timeout.
+      endTimer = setTimeout(() => { if (current()) { try { rec.stop?.(); } catch { /* Already ended. */ } } }, 650);
+    };
     rec.onresult = event => {
       if (!current()) return;
       const alternatives = (result: Result) => Array.from({ length: result.length }, (_, i) => result[i]?.transcript?.trim()).filter((text): text is string => !!text);
       if (options.continuous) {
         for (let i = Math.max(event.resultIndex, delivered + 1); i < event.results.length; i++) {
-          const result = event.results[i]; if (!result.isFinal) continue;
+          const result = event.results[i];
+          if (!result.isFinal) {
+            const choices = [...new Set(alternatives(result))];
+            if (choices.length) emit(choices[0], choices, false);
+            continue;
+          }
           delivered = i; silentEnds = 0;
           const choices = [...new Set(alternatives(result))];
-          if (choices.length) options.onText(choices[0], choices, true);
+          if (choices.length) emit(choices[0], choices, true);
           if (!current()) return;
         }
       } else {
@@ -79,8 +124,8 @@ export function createMicrophone(options: Options, factory = browserRecognition)
         const choices = results.length === 1 ? [...new Set(alternatives(results[0]))] : [text];
         // Detach before delivering a final result: stopping/starting another mic
         // inside onText must not let an old onend clear the new microphone.
-        if (final) { active = false; release(); options.onState("off"); }
-        options.onText(text, choices, final);
+        if (final && !options.utterance) { active = false; release(); options.onState("off"); }
+        emit(text, choices, final);
       }
     };
     rec.onerror = event => {
@@ -92,7 +137,13 @@ export function createMicrophone(options: Options, factory = browserRecognition)
     rec.onend = () => {
       if (!current()) return;
       recognition = null; clearTimeout(watchdog);
-      if (!options.continuous) { active = false; options.onState("off"); return; }
+      if (options.utterance && fragments.length && !interim) {
+        clearTimeout(turnTimer); turnTimer = setTimeout(flushTurn, 350);
+      }
+      if (!options.continuous) {
+        if (options.utterance && fragments.length && !interim) return;
+        active = false; discardTurn(); options.onState("off"); return;
+      }
       // A service ending repeatedly without audio must not spin at 4 starts/sec.
       silentEnds++; options.onState("starting");
       restart = setTimeout(begin, Math.min(5000, 350 * silentEnds));
@@ -104,7 +155,7 @@ export function createMicrophone(options: Options, factory = browserRecognition)
   return {
     start() { stop(); active = true; silentEnds = 0; begin(); },
     stop,
-    pause(reason = "speech") { pauses.add(reason); if (active) { release(); options.onState("paused"); } },
+    pause(reason = "speech") { pauses.add(reason); discardTurn(); if (active) { release(); options.onState("paused"); } },
     resume(reason = "speech") {
       if (!pauses.delete(reason) || !active || pauses.size) return;
       clearTimeout(restart); restart = setTimeout(begin, 350);

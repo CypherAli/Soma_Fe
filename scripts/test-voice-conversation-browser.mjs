@@ -1,0 +1,82 @@
+import assert from 'node:assert/strict';
+import { createRequire } from 'node:module';
+import { homedir } from 'node:os';
+import { join } from 'node:path';
+const require=createRequire(import.meta.url);
+const {chromium}=require(join(homedir(),'.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright'));
+const browser=await chromium.launch({headless:true,executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe'});
+const base=process.env.SOMA_WEB_URL || 'http://127.0.0.1:3000';
+let debugPage;
+try{
+ const page=await browser.newPage({viewport:{width:1280,height:900},reducedMotion:'reduce'});
+ debugPage=page;page.setDefaultTimeout(15000);page.setDefaultNavigationTimeout(90000);
+ await page.addInitScript(()=>{
+  const qa=window.__speechQA={engines:[],spoken:[],voices:[{lang:'vi-VN',name:'QA Vietnamese'}],utterance:null};
+  class Recognition{
+   constructor(){qa.engines.push(this);}
+   start(){this.onstart?.();}abort(){this.aborted=true;this.onend?.();}
+  }
+  window.SpeechRecognition=Recognition;window.webkitSpeechRecognition=Recognition;
+  window.SpeechSynthesisUtterance=class{constructor(text){this.text=text;}};
+  const synth=new EventTarget();synth.getVoices=()=>qa.voices;
+  synth.cancel=()=>{qa.utterance?.onend?.();qa.utterance=null;};
+  synth.speak=u=>{qa.utterance=u;qa.spoken.push(u.text);u.onstart?.();};
+  Object.defineProperty(window,'speechSynthesis',{configurable:true,value:synth});
+  qa.emit=(text,final=true)=>qa.engines.at(-1)?.onresult?.({resultIndex:0,results:[{isFinal:final,length:1,0:{transcript:text}}]});
+  qa.parts=texts=>{ const rec=qa.engines.at(-1); texts.forEach((_,index)=>rec?.onresult?.({resultIndex:index,results:texts.slice(0,index+1).map(transcript=>({isFinal:true,length:1,0:{transcript}}))})); };
+  qa.finish=()=>{const u=qa.utterance;qa.utterance=null;u?.onend?.();};
+ });
+ let calls=0; const questions=[];
+ await page.route('**/api/assistant',route=>{calls++;const body=route.request().postDataJSON();questions.push(body);return route.fulfill({json:{answer:body.locale==='en'?'The heart has four chambers.':calls===1?'Tim có bốn buồng.':'Gan nằm chủ yếu ở phần trên bên phải ổ bụng.',sources:[],suggestions:[],engine:'ai'}});});
+ await page.goto(base+'/vi/thu-vien',{timeout:90000});
+ await page.getByRole('button',{name:'Hỏi Soma Bot',exact:true}).click({force:true});
+ console.log('Opened chatbot');
+ const chat=page.locator('.soma-bot');
+ await chat.getByRole('button',{name:/Trò chuyện bằng giọng nói/}).click();
+ await page.waitForFunction(()=>window.__speechQA.engines.length===1);
+ console.log('Continuous microphone ready');
+ await page.evaluate(()=>window.__speechQA.emit('Tim có',false));
+ assert.equal(calls,0,'Interim speech must not consume a question');
+ await page.evaluate(()=>window.__speechQA.parts(['Tim có','mấy buồng?']));
+ console.log('Question sent',calls);
+ await page.waitForFunction(()=>window.__speechQA.spoken.length===1);
+ assert.equal(calls,1,'Natural questions need no wake word while chat is open');
+ assert.equal(questions[0].question,'Tim có mấy buồng?','Final fragments must become one whole sentence');
+ assert.equal(questions[0].voice,true,'Voice answers use the shorter spoken response path');
+ assert.ok(await page.evaluate(()=>window.__speechQA.engines[0].aborted),'Microphone pauses before speaking');
+ await page.evaluate(()=>window.__speechQA.emit('echo of the answer'));
+ assert.equal(calls,1,'Speaker output cannot become a new question');
+ await page.evaluate(()=>window.__speechQA.finish());
+ await page.waitForFunction(()=>window.__speechQA.engines.length===2);
+ await page.evaluate(()=>window.__speechQA.emit('Gan ở đâu?'));
+ await page.waitForFunction(()=>window.__speechQA.spoken.length===2);
+ assert.equal(calls,2,'Conversation resumes automatically after the answer');
+ assert.ok(await chat.getByText('AI + Soma Library',{exact:true}).count()>0);
+ await page.evaluate(()=>{window.__speechQA.finish();window.__speechQA.voices=[{lang:'en-US',name:'QA English'}];});
+ await page.waitForFunction(()=>window.__speechQA.engines.length===3);
+ await chat.getByRole('button',{name:'Đọc câu trả lời',exact:true}).first().click();
+ await chat.getByText('Máy này chưa cài giọng đọc tiếng Việt nên mình chưa đọc được.',{exact:true}).waitFor();
+ assert.equal(await page.evaluate(()=>window.__speechQA.spoken.length),2,'No wrong-language speech fallback');
+ await chat.getByRole('button',{name:/Dừng trò chuyện giọng nói/}).click();
+ await page.goto(base+'/en/thu-vien');
+ await page.evaluate(()=>{window.__speechQA.voices=[{lang:'en-US',name:'QA English'}];});
+ await page.getByRole('button',{name:'Ask Soma Bot',exact:true}).click({force:true});
+ await chat.getByRole('button',{name:/Voice conversation/}).click();
+ await page.waitForFunction(()=>window.__speechQA.engines.length===1);
+ assert.equal(await page.evaluate(()=>window.__speechQA.engines[0].lang),'en-US');
+ await page.evaluate(()=>window.__speechQA.parts(['How many chambers','does the heart have?']));
+ await page.waitForFunction(()=>window.__speechQA.spoken.length===1);
+ assert.equal(questions.at(-1).question,'How many chambers does the heart have?');
+ assert.equal(questions.at(-1).locale,'en');
+ assert.equal(questions.at(-1).voice,true);
+ await page.evaluate(()=>window.__speechQA.finish());
+ await page.waitForFunction(()=>window.__speechQA.engines.length===2);
+ const beforeManual=calls;
+ await page.evaluate(()=>window.__speechQA.emit('Where is the heart?',false));
+ assert.equal(calls,beforeManual,'Partial speech alone cannot send a question');
+ await chat.getByRole('button',{name:'Send',exact:true}).click();
+ await page.waitForFunction(()=>window.__speechQA.spoken.length===2);
+ assert.equal(calls,beforeManual+1,'Explicit Send can finalize the visible transcript immediately');
+ assert.equal(questions.at(-1).voice,true);
+ console.log('PASS VI/EN voice: fragmented natural sentence → one request → spoken answer → listening again; explicit immediate Send, echo suppression and missing-voice error; no paid provider calls.');
+}catch(error){if(debugPage){console.log((await debugPage.locator('.soma-bot').innerText()).slice(-2200));console.log(await debugPage.evaluate(()=>({engines:window.__speechQA?.engines.length,spoken:window.__speechQA?.spoken})));}throw error;}finally{await browser.close();}

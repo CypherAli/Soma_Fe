@@ -31,7 +31,8 @@ export function trianglePart(vertices) {
 const regions=ATLAS_PRESETS.map(p=>[p.id,p.name,p.name+' · '+(p.sourceLabel?'Mô hình giải phẫu 3D':'BodyParts3D'),['hand','wrist','fingers','head','neck'].includes(p.id) ? 1.05 : p.groupByPart ? .9 : .95]);
 export const GESTURE_MODELS=regions.map(([id,name,fact,displayScale])=>{
   let groups=null,loading=null,surface=null;
-  return {id,name,fact,color:[.9,.5,.4],tilt:0,pointScale:.7,gainScale:1,hideTitle:true,displayScale,
+  const detailOf=ATLAS_PRESETS.find(p=>p.id===id)?.detailOf;
+  return {id,name,fact,detailOf,color:[.9,.5,.4],tilt:0,pointScale:.7,gainScale:1,hideTitle:true,displayScale,
     async load(){
       if(groups)return;
       if(!loading)loading=(async()=>{

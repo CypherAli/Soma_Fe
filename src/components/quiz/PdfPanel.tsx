@@ -1,4 +1,5 @@
 "use client";
+import { sourceDisplayLabel } from "./quizTopics";
 
 
 import { ContentSurface } from "@/components/content/ContentProvider";
@@ -211,7 +212,7 @@ export default function PdfPanel({ t, locale, onBankChanged, onSessionActiveChan
           <button type="button" className="quiz-link" onClick={() => { setOpenDoc(null); setQuestions(null); }}>
             {t.pdfBack}
           </button>
-          <h2>{doc?.filename}</h2>
+          <h2>{doc?.filename ? sourceDisplayLabel(doc.filename) : ""}</h2>
           <p>
             {t.pdfApprovedCount(questions.length - pending)} · {t.pdfPending(pending)}
           </p>
@@ -328,7 +329,7 @@ export default function PdfPanel({ t, locale, onBankChanged, onSessionActiveChan
                   if (d.status === "failed") setStatus(d.note ?? t.pdfStatusFailed);
                   else setOpenDoc(d.id);
                 }}>
-                  {d.filename}
+                  {sourceDisplayLabel(d.filename)}
                 </button>
                 <span>
                   {d.status === "failed"

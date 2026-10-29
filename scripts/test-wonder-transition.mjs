@@ -64,3 +64,13 @@ assert.equal(
 console.log(
   "PASS outgoing dissolve, cold-load timing, stale results, latest selection, one-shot assembly and manual mode",
 );
+
+const repeated = new ModelTransition();
+assert.equal(repeated.begin(4, 0, true), true);
+assert.equal(repeated.begin(4, 0.5, true), false);
+assert.equal(repeated.commit(0.7), 4, 'Repeated selection keeps the original dissolve deadline');
+assert.equal(repeated.begin(4, 2, false), false);
+repeated.uploaded(4, 3);
+assert.equal(repeated.begin(4, 3.5, true), false);
+assert.equal(repeated.shouldForm(3.8), true, 'Repeated selection cannot restart a slow load or assembly');
+console.log('PASS duplicate selections preserve outgoing, loading and gathering progress');
