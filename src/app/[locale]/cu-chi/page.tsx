@@ -2404,6 +2404,8 @@ export default function GestureControlPage({
     ];
     return [
       ...fixed.map(([id,phrases,text])=>({id:'vision-'+id,phrases,run:()=>send(text)})),
+      {id:'vision-explode-model',phrases:['tách giải phẫu {x}','tách mô hình {x}','tách lớp {x}','tách rời {x}','explode {x}','separate {x}'],run:(arg:string)=>send('tách giải phẫu '+arg)},
+      {id:'vision-rotate-degrees',phrases:['xoay {x} độ','xoay {x} do','quay {x} độ','rotate {x} degrees','rotate {x} degree','turn {x} degrees'],run:(arg:string)=>send('xoay '+arg+' độ')},
       {id:'vision-open',phrases:['mở mô hình {x}','mở {x}','open model {x}','open {x}'],run:(arg:string)=>send('open model '+arg)},
       {id:'vision-pick',phrases:['chọn cấu trúc {x}','chọn {x}','select {x}','pick {x}'],run:(arg:string)=>send('select '+arg)},
       {id:'vision-layer-on',phrases:['bật lớp {x}','hiện lớp {x}','show layer {x}'],run:(arg:string)=>send('show layer '+arg)},

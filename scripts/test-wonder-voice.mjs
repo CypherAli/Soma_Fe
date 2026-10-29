@@ -15,6 +15,12 @@ for(const [vi,en,type] of [['tách lớp','explode','explode'],['phóng to','zoo
 }
 for(const phrase of ['không xoay','đừng xoay','do not rotate','stop rotating'])same(command(phrase),[{type:'rotate',value:false}],phrase);
 same(command('xoay'),[{type:'rotate',value:true}]);
+for(const phrase of ['tách giải phẫu tim','tach giai phau tim','tách mô hình tim','explode heart'])same(command(phrase),[{type:'explode',modelId:'heart'}],phrase);
+for(const phrase of ['xoay mô hình tim 30 độ','xoay mô hình tim ba mươi độ','rotate heart 30 degrees','Soma ơi xoay tim 30 độ giúp mình'])same(command(phrase),[{type:'rotateDegrees',degrees:30,modelId:'heart'}],phrase);
+same(command('xoay tim sang trái 90 độ'),[{type:'rotateDegrees',degrees:-90,modelId:'heart'}]);
+same(command('xoay 30 độ'),[{type:'rotateDegrees',degrees:30}]);
+for(const phrase of ['không tách giải phẫu tim','đừng xoay tim 30 độ','xoay tim 361 độ','xoay tim -30 độ','xoay tim 30.5 độ','xoay tim 0 độ','xoay tàu vũ trụ 30 độ','tách giải phẫu cơ quan không có'])same(command(phrase),[],phrase);
+same(commandFeedback(['rotateDegrees:-30'],CATALOG,labels,'vi'),'Đã xoay trái 30 độ');
 for(const phrase of ['không phóng to','do not open wrist','why does it rotate','animal cell','car','airplane','left','co'])same(command(phrase),[],phrase);
 same(command('mở cổ')[0]?.id,'neck');same(command('mở cơ')[0]?.id,'muscles');
 for(const model of CATALOG)for(const alias of MODEL_NAMES[model.id]||[])same(parseCommand('open model '+alias,CATALOG)[0]?.id,model.id,model.id+' / '+alias);

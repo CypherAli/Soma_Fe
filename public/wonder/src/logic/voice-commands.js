@@ -1,3 +1,4 @@
+import { modelVoiceCommand } from './model-voice-commands.js';
 // Exact bilingual intents. Anatomy targets are resolved only from the current catalog.
 export const MODEL_NAMES = {
   brain:['não','brain','human brain'], heart:['tim','heart','human heart'], kidney:['thận','kidney','kidneys'],
@@ -74,6 +75,8 @@ export function parseCommand(text,catalog,labels=[]){
     ['showAll',['hien tat ca','xem tat ca','show all','show all layers']],
   ];
   for(const [type,phrases] of rules)if(phrases.includes(t))return [{type,...(type==='rotate'?{value:true}:{})}];
+  const manipulation=modelVoiceCommand(raw,catalog,normalizeVoice,resolveVoiceTarget);
+  if(manipulation)return [manipulation];
   if(/\b(khong|dung|do not|dont|don t|never)\b/.test(t))return [];
   const layer=t.match(/^(bat lop|hien lop|tat lop|an lop|xem he|chi xem|show layer|hide layer|show system|show only) (.+)$/);
   if(layer){const systems=resolveVoiceSystems(layer[2]);return systems.length?[{type:layer[1].startsWith('tat')||layer[1].startsWith('an')||layer[1].startsWith('hide')?'layerOff':layer[1].includes('only')||layer[1].startsWith('xem')||layer[1].startsWith('chi')?'layerOnly':'layerOn',systems}]:[];}
@@ -96,6 +99,8 @@ export function readingText(label,model,language='vi',detail='description'){
 const CONFIRMATIONS={explode:['Đã tách lớp','Layers separated'],assemble:['Đã lắp lại','Assembled'],next:['Mô hình tiếp theo','Next model'],previous:['Mô hình trước','Previous model'],snap:['Đã hiện mô hình','Model shown'],dissolve:['Đã ẩn mô hình','Model hidden'],quiz:['Bắt đầu kiểm tra','Quiz started'],'stop quiz':['Đã dừng kiểm tra','Quiz stopped'],cut:['Đã bật mặt cắt','Cross section on'],'cut off':['Đã tắt mặt cắt','Cross section off'],'zoom in':['Đã phóng to','Zoomed in'],'zoom out':['Đã thu nhỏ','Zoomed out'],rotate:['Đã bật tự xoay','Auto rotation on'],'stop rotation':['Đã dừng tự xoay','Auto rotation off'],record:['Đang ghi hình','Recording requested'],'stop recording':['Đã dừng ghi hình','Recording stopped'],'stop reading':['Đã dừng đọc','Reading stopped'],'microphone off':['Đã tắt micro','Microphone off'],'camera on':['Đang mở camera','Starting camera'],'camera off':['Đã tắt camera','Camera off'],scan:['Đang quét','Scanning'],'cancel scan':['Đã hủy quét','Scan cancelled'],front:['Góc trước','Front view'],back:['Góc sau','Back view'],side:['Góc bên','Side view'],reset:['Đã đặt lại góc nhìn','View reset'],labelsOn:['Đã bật chú thích','Labels on'],labelsOff:['Đã tắt chú thích','Labels off'],clear:['Đã bỏ chọn','Selection cleared'],pull:['Đã kéo cấu trúc ra','Structure pulled out'],putBack:['Đã đặt cấu trúc vào','Structure put back'],muscleSplit:['Đã tách từng cơ','Muscles separated'],systemSplit:['Đã tách các hệ','Systems separated'],showAll:['Đã hiện tất cả các hệ','All systems shown'],layerOn:['Đã hiện hệ được chọn','Selected systems shown'],layerOff:['Đã ẩn hệ được chọn','Selected systems hidden'],layerOnly:['Chỉ hiện hệ được chọn','Showing only selected systems'],describe:['Đọc cấu trúc được chọn','Reading selected structure']};
 export function commandFeedback(done,catalog,labels,language='vi'){
   return done.map(item=>{
+    if(item==='preparing')return language==='en'?'Loading the model before applying the command':'Đang tải mô hình để thực hiện lệnh';
+    if(item.startsWith('rotateDegrees:')){const degrees=Number(item.split(':')[1]);return language==='en'?`Rotated ${Math.abs(degrees)} degrees ${degrees<0?'left':'right'}`:`Đã xoay ${degrees<0?'trái':'phải'} ${Math.abs(degrees)} độ`;}
     if(CONFIRMATIONS[item])return CONFIRMATIONS[item][language==='en'?1:0];
     const part=labels?.find(label=>label.label===item);if(part)return readingText(part,null,language,'name').text;
     const model=catalog.find(model=>model.name===item);return model?readingText(null,model,language,'name').text:item;

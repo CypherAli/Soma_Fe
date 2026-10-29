@@ -183,6 +183,7 @@ class App {
   }
   prefetch() { const next=nextModelIndex(CATALOG,this.ctl.state.index);if(!['body','bust','thorax','muscles','head'].includes(CATALOG[next].id))this.store.request(next).catch(()=>{}); }
   modelError(index,error) {
+    if(this.pendingVoiceActions?.index===index)this.pendingVoiceActions=null;
     if(this.transition.pending?.index!==index&&this.ctl.state.index!==index)return;
     this.transition.complete();this.ctl.suspended=!!this.scanActive;
     const st=this.ctl.state;
@@ -271,6 +272,10 @@ class App {
     const ready = this.uploaded === st.index && !st.targetDirty;
     const machine = ready && isMachine(st.index);
     const formed = st.state === FORMED && ready;
+    if(formed&&!this.transition.pending&&this.pendingVoiceActions?.index===st.index){
+      const pending=this.pendingVoiceActions;this.pendingVoiceActions=null;
+      for(const action of pending.actions)this.applyModelVoiceAction(action);
+    }
     let mode = st.simMode(), formT = st.formT(t);
     if (st.state === FORMED && !ready) mode = SIM.sphere;                 // hold the swirl until the model is uploaded
     if(formed){
@@ -630,15 +635,39 @@ class App {
   }
 
   // ------------------------------------------------------------ voice
+  applyModelVoiceAction(action) {
+    this.manualViewUntil=this.t+.8;
+    this.autoRotate=false;this.$('bRotate').classList.remove('on');
+    this.handYaw.reset();this.handTilt.reset();
+    if(action.type==='rotateDegrees'){
+      const yaw=this.spin+this.dragYaw+deg(action.degrees);
+      this.spin=0;this.dragYaw=this.dragYawTarget=yaw;
+    }else{
+      if(action.modelId)this.deselect();
+      this.setSeparation(action.type==='explode'?1:0);
+    }
+  }
   voiceCommand(text,options={}) {
     this.lastHeard = text;
     const acts = parseCommand(text, CATALOG, this.model && isMachine(this.uploaded) && this.uploaded === this.ctl.state.index ? this.model.labels : []);
     const st = this.ctl.state, done = [];
     for (const a of acts) {
+      if(['explode','assemble','rotateDegrees'].includes(a.type)){
+        const index=a.modelId?CATALOG.findIndex(model=>model.id===a.modelId):(this.transition.pending?.index??st.index);
+        if(index<0)continue;
+        if(this.uploaded!==index||st.index!==index||st.state!==FORMED||this.transition.pending){
+          const previous=this.pendingVoiceActions?.index===index?this.pendingVoiceActions.actions:[];
+          this.selectModel(index);
+          this.pendingVoiceActions={index,actions:[...previous,a].slice(-10)};
+          done.push('preparing');
+        }else{
+          this.applyModelVoiceAction(a);
+          done.push(a.type==='rotateDegrees'?`rotateDegrees:${a.degrees}`:a.type);
+        }
+        continue;
+      }
       if (a.type === 'model') { const index=CATALOG.findIndex(d=>d.id===a.id);if(index<0)continue;this.selectModel(index);done.push(a.name); }
       else if (a.type === 'part') { const L=this.model?.labels[a.index];if(!L)continue;this.hiddenSystems.delete(L.system);this.$('inspectionView').value='all';if(this.model.surface?.groups.some(g=>g.pick===a.index&&g.cover))this.$('showCover').checked=true;this.populateFocus();this.selectPart(a.index,options.external?'voice-external':'voice');done.push(L.label); }
-      else if (a.type === 'explode') { this.setSeparation(1); done.push('explode'); }
-      else if (a.type === 'assemble') { this.setSeparation(0);this.ctl.keyPose(FIST,this.t);done.push('assemble'); }
       else if (a.type === 'next') { this.cycleModel(1); done.push('next'); }
       else if (a.type === 'prev') { this.cycleModel(-1); done.push('previous'); }
       else if (a.type === 'snap') { if (st.state === IDLE) this.ctl.keySnap(this.t); done.push('snap'); }
@@ -1060,6 +1089,7 @@ class App {
   selectModel(i, autoForm = true) {
     const n = CATALOG.length;
     i = ((i % n) + n) % n;
+    this.pendingVoiceActions=null;
     if(this.transition.pending?.index===i)return;
     this.inspectionTransition.cancel();
     this.announceModel(i);

@@ -38,6 +38,30 @@ try {
     await api.advance(3.5,null);
     const initial=api.status();
 
+    const rotated=api.command('xoay mô hình tim 30 độ','vi');
+    await api.advance(.5,null);
+    const rotation=api.status();
+    api.voice('tách giải phẫu tim');
+    await api.advance(2,null);
+    const exploded=api.status();
+    api.voice('lắp lại');
+    await api.advance(2,null);
+    const assembled=api.status();
+    api.select(index('lungs'),true);
+    await api.advance(1,null);
+    api.voice('xoay mô hình tim ba mươi độ');
+    await api.advance(4,null);
+    const queuedRotation=api.status();
+    api.voice('tách giải phẫu cổ tay');
+    await api.advance(4,null);
+    const queuedExplode=api.status();
+    api.voice('xoay tim 90 độ');
+    api.select(index('kidney'),true);
+    await api.advance(4,null);
+    const cancelled=api.status();
+    api.select(index('heart'),true);
+    await api.advance(4,null);
+
     document.getElementById('bNext').click();
     const first=api.CATALOG[app.transition.pending.index].id;
     document.getElementById('bNext').click();
@@ -61,9 +85,21 @@ try {
     dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',repeat:true}));
     const keyboardKeptTarget=app.transition.pending.index===keyboardFirst;
     await api.advance(3.5,null);
-    return {initial,first,second,duplicateKeptTime,finished,detail,keyboardKeptTarget,keyboard:api.status(),pending:app.transition.pending};
+    return {initial,rotated,rotation,exploded,assembled,queuedRotation,queuedExplode,cancelled,first,second,duplicateKeptTime,finished,detail,keyboardKeptTarget,keyboard:api.status(),pending:app.transition.pending};
   });
   assert.equal(result.initial.state,'formed');
+  assert.equal(result.rotated.ok,true);
+  assert.match(result.rotated.say,/30/);
+  assert.ok(Math.abs(result.rotation.yaw-Math.PI/6)<1e-8,'Named command rotates exactly 30 degrees');
+  assert.ok(result.exploded.explode>.99||result.exploded.pullAmt>.99,'Named command separates the model or its single anatomical group');
+  assert.ok(result.assembled.explode<.01);
+  assert.ok(result.assembled.pullAmt<.01);
+  assert.equal(result.queuedRotation.name,'Human Heart');
+  assert.ok(Math.abs(result.queuedRotation.yaw-Math.PI/6)<1e-8,'Queued rotation survives model loading/reset');
+  assert.equal(result.queuedExplode.name,'Cổ tay');
+  assert.ok(result.queuedExplode.explode>.99||result.queuedExplode.pullAmt>.99,'Cold model loading preserves the requested separation');
+  assert.equal(result.cancelled.name,'Kidney');
+  assert.ok(Math.abs(result.cancelled.yaw)<1e-8,'Selecting another model cancels stale voice commands');
   assert.equal(result.first,'kidney');
   assert.equal(result.second,'lungs','Rapid clicks advance from the requested target');
   assert.equal(result.duplicateKeptTime,true);
@@ -78,7 +114,7 @@ try {
   assert.equal(result.pending,null);
   assert.equal(result.keyboard.modelErrors,0);
   assert.deepEqual(errors,[]);
-  console.log('PASS browser: rapid next, duplicate in-flight selection, assembly, direct finger selection and held-key suppression');
+  console.log('PASS browser: named voice actions, exact degree rotation, cold-load commands, cancellation, rapid next, assembly and held-key suppression');
 } finally {
   await browser?.close();
   await new Promise(done=>server.close(done));
