@@ -49,6 +49,7 @@ function withMessages(
   state: ChatState,
   msgs: Msg[],
   updatedAt: number,
+  fallbackTitle: string,
 ): ChatState {
   const sessions = state.sessions.filter((session) => session.id !== state.sid);
   if (msgs.length) {
@@ -56,7 +57,7 @@ function withMessages(
       id: state.sid,
       title:
         msgs.find((message) => message.role === "user")?.text.slice(0, 42) ??
-        "Phiên học",
+        fallbackTitle,
       updatedAt,
       msgs,
     });
@@ -113,6 +114,22 @@ const TXT = bindContentSource("data:src/components/chat/AnatomyChat.tsx#TXT", {
     history: "Phiên học hiện tại",
     empty: "Bắt đầu bằng một câu hỏi hoặc chọn gợi ý bên dưới.",
     clear: "Xóa phiên",
+    statusLabel: "Trạng thái",
+    statusReady: "Sẵn sàng",
+    sourceLabel: "Nguồn",
+    sourceValue: "Atlas Soma 3D",
+    modeLabel: "Chế độ",
+    modeValue: "Học tập",
+    sidebarMeta: "Atlas · Thuật ngữ · Mô hình 3D",
+    historyTitle: "Lịch sử trò chuyện",
+    historyNew: "+ Mới",
+    historyEmpty: "Chưa có phiên nào. Mỗi cuộc trò chuyện sẽ tự lưu ở đây.",
+    deleteSession: "Xóa phiên",
+    sessionFallback: "Phiên học",
+    messageCount: "{n} tin · {date}",
+    savedAuto: "{n} tin · đã lưu tự động",
+    newSession: "Phiên mới",
+    readyShort: "SẴN SÀNG",
     capabilities: "Soma có thể giúp gì?",
     cap1: "Giải thích cấu trúc",
     cap2: "Đối chiếu thuật ngữ",
@@ -147,6 +164,22 @@ const TXT = bindContentSource("data:src/components/chat/AnatomyChat.tsx#TXT", {
     history: "Current study session",
     empty: "Start with a question or choose a prompt below.",
     clear: "Clear session",
+    statusLabel: "Status",
+    statusReady: "Ready",
+    sourceLabel: "Source",
+    sourceValue: "Soma 3D Atlas",
+    modeLabel: "Mode",
+    modeValue: "Study",
+    sidebarMeta: "Atlas · Terminology · 3D models",
+    historyTitle: "Chat history",
+    historyNew: "+ New",
+    historyEmpty: "No sessions yet. Each conversation is saved here automatically.",
+    deleteSession: "Delete session",
+    sessionFallback: "Study session",
+    messageCount: "{n} messages · {date}",
+    savedAuto: "{n} messages · saved automatically",
+    newSession: "New session",
+    readyShort: "READY",
     capabilities: "What can Soma do?",
     cap1: "Explain structures",
     cap2: "Compare terminology",
@@ -180,6 +213,22 @@ const TXT = bindContentSource("data:src/components/chat/AnatomyChat.tsx#TXT", {
     history: "当前学习会话",
     empty: "输入问题或选择下方建议。",
     clear: "清除会话",
+    statusLabel: "状态",
+    statusReady: "就绪",
+    sourceLabel: "来源",
+    sourceValue: "Soma 3D 图谱",
+    modeLabel: "模式",
+    modeValue: "学习",
+    sidebarMeta: "Atlas · 术语 · 三维模型",
+    historyTitle: "对话历史",
+    historyNew: "+ 新建",
+    historyEmpty: "尚无会话。每次对话都会自动保存在这里。",
+    deleteSession: "删除会话",
+    sessionFallback: "学习会话",
+    messageCount: "{n} 条消息 · {date}",
+    savedAuto: "{n} 条消息 · 已自动保存",
+    newSession: "新会话",
+    readyShort: "就绪",
     capabilities: "Soma 能做什么？",
     cap1: "解释结构",
     cap2: "对照术语",
@@ -312,11 +361,19 @@ export default function AnatomyChat({ locale }: { locale: Loc }) {
     setSpeaking(null);
   }
 
-  const appendMessage = useCallback((message: Msg, updatedAt: number) => {
-    setChat((state) =>
-      withMessages(state, [...state.msgs, message], updatedAt),
-    );
-  }, []);
+  const appendMessage = useCallback(
+    (message: Msg, updatedAt: number) => {
+      setChat((state) =>
+        withMessages(
+          state,
+          [...state.msgs, message],
+          updatedAt,
+          t.sessionFallback,
+        ),
+      );
+    },
+    [t.sessionFallback],
+  );
 
   function newSession() {
     cancelReply();
@@ -440,19 +497,19 @@ export default function AnatomyChat({ locale }: { locale: Loc }) {
         </div>
         <dl className="assistant-system-status">
           <div>
-            <dt>Trạng thái</dt>
+            <dt>{t.statusLabel}</dt>
             <dd>
               <i />
-              Sẵn sàng
+              {t.statusReady}
             </dd>
           </div>
           <div>
-            <dt>Nguồn</dt>
-            <dd>Atlas Soma 3D</dd>
+            <dt>{t.sourceLabel}</dt>
+            <dd>{t.sourceValue}</dd>
           </div>
           <div>
-            <dt>Chế độ</dt>
-            <dd>Học tập</dd>
+            <dt>{t.modeLabel}</dt>
+            <dd>{t.modeValue}</dd>
           </div>
         </dl>
       </section>
@@ -463,7 +520,7 @@ export default function AnatomyChat({ locale }: { locale: Loc }) {
             <span>01</span>
             <div>
               <b>{t.capabilities}</b>
-              <small>Atlas · Thuật ngữ · Mô hình 3D</small>
+              <small>{t.sidebarMeta}</small>
             </div>
           </header>
           <ul>
@@ -490,15 +547,13 @@ export default function AnatomyChat({ locale }: { locale: Loc }) {
           </div>
           <div className="assistant-history">
             <div className="assistant-history-head">
-              <b>Lịch sử trò chuyện</b>
+              <b>{t.historyTitle}</b>
               <button type="button" onClick={newSession}>
-                + Mới
+                {t.historyNew}
               </button>
             </div>
             {!sessions.length && (
-              <p className="assistant-history-empty">
-                Chưa có phiên nào. Mỗi cuộc trò chuyện sẽ tự lưu ở đây.
-              </p>
+              <p className="assistant-history-empty">{t.historyEmpty}</p>
             )}
             <ul>
               {sessions.map((s) => (
@@ -511,20 +566,24 @@ export default function AnatomyChat({ locale }: { locale: Loc }) {
                   >
                     <b>{s.title}</b>
                     <small>
-                      {s.msgs.length} tin ·{" "}
-                      {new Date(s.updatedAt).toLocaleDateString(
-                        locale === "zh"
-                          ? "zh-CN"
-                          : locale === "en"
-                            ? "en-US"
-                            : "vi-VN",
-                      )}
+                      {t.messageCount
+                        .replace("{n}", String(s.msgs.length))
+                        .replace(
+                          "{date}",
+                          new Date(s.updatedAt).toLocaleDateString(
+                            locale === "zh"
+                              ? "zh-CN"
+                              : locale === "en"
+                                ? "en-US"
+                                : "vi-VN",
+                          ),
+                        )}
                     </small>
                   </button>
                   <button
                     type="button"
                     className="h-del"
-                    aria-label="Xóa phiên"
+                    aria-label={t.deleteSession}
                     onClick={() => deleteSession(s.id)}
                   >
                     ×
@@ -542,16 +601,18 @@ export default function AnatomyChat({ locale }: { locale: Loc }) {
               <span>{t.history}</span>
               <b>
                 {msgs.length
-                  ? `${msgs.length} messages · đã lưu tự động`
-                  : "READY"}
+                  ? t.savedAuto.replace("{n}", String(msgs.length))
+                  : t.readyShort}
               </b>
             </div>
             <div className="assistant-head-actions">
-              <button onClick={newSession}>Phiên mới</button>
+              <button onClick={newSession}>{t.newSession}</button>
               <button
                 onClick={() => {
                   cancelReply();
-                  setChat((state) => withMessages(state, [], Date.now()));
+                  setChat((state) =>
+                    withMessages(state, [], Date.now(), t.sessionFallback),
+                  );
                 }}
                 disabled={!msgs.length}
               >
