@@ -51,6 +51,14 @@
     "three": "^0.185.1",
     "zustand": "^5.0.14"
   },
+  "overrides": {
+    "@donmccurdy/caporal": {
+      "glob": "^14.0.4"
+    },
+    "@typescript-eslint/typescript-estree": {
+      "minimatch": "^11.0.8"
+    }
+  },
   "devDependencies": {
     "@gltf-transform/cli": "^4.5.0",
     "@tailwindcss/postcss": "^4",
