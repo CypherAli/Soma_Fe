@@ -3,7 +3,8 @@ FROM node:24-alpine AS deps
 WORKDIR /app
 COPY package.json package-lock.json ./
 COPY scripts/patch-dependencies.cjs ./scripts/patch-dependencies.cjs
-RUN npm ci
+RUN --mount=type=cache,target=/root/.npm \
+    npm ci --fetch-retries=5 --fetch-retry-mintimeout=20000 --fetch-retry-maxtimeout=120000
 
 FROM node:24-alpine AS build
 WORKDIR /app
