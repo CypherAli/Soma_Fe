@@ -7,6 +7,7 @@ import { Link, useRouter } from "@/i18n/navigation";
 import { pick, type Loc } from "@/lib/homeContent";
 import { searchHref, searchWeb, type WebSearchItem } from "@/lib/site/siteSearch";
 import AnswerText from "@/components/chat/AnswerText";
+import { getToken } from "@/lib/auth";
 
 type Source = { id: string; title: string; detail: string; href: string; meta?: string };
 type Answer = { answer: string; sources: Source[]; engine: string };
@@ -61,17 +62,33 @@ export default function SiteSearchResults({ locale, initialQuery }: { locale: Lo
     request.current?.abort();
     const controller = new AbortController(), current = ++generation.current;
     request.current = controller; setBusy(true); setError(""); setAnswer(null);
+    // Câu trả lời được tính theo hạn mức tài khoản, nên route từ chối lời gọi
+    // không kèm token phiên (401). Thiếu header này thì đăng nhập vẫn bị chặn.
+    const token = getToken();
+    const unavailable = text("Chưa nhận được câu trả lời. Bạn vẫn có thể mở các nguồn bên dưới hoặc thử lại.", "No answer yet. You can still open the sources below or try again.", "暂未收到回答，仍可打开下方来源或重试。");
     try {
       const response = await fetch("/api/assistant", {
-        method: "POST", headers: { "Content-Type": "application/json" },
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
         body: JSON.stringify({ question, locale }), signal: controller.signal,
       });
-      if (!response.ok) throw new Error("Request failed");
-      const result = readAnswer(await response.json());
-      if (generation.current === current) setAnswer(result);
-    } catch {
+      const payload: unknown = await response.json().catch(() => null);
+      // Thông báo của route đã đa ngữ và nói rõ phải làm gì (đăng nhập, hết
+      // lượt tháng, dịch vụ tài khoản lỗi); hiện nguyên văn thay vì câu chung.
+      if (!response.ok) {
+        const message = payload && typeof payload === "object" && typeof (payload as { error?: unknown }).error === "string"
+          ? (payload as { error: string }).error : unavailable;
+        throw new Error(message);
+      }
+      let result: Answer;
+      try { result = readAnswer(payload); } catch { throw new Error(unavailable); }
+      if (generation.current === current) { setAnswer(result); setError(""); }
+    } catch (cause) {
       if (!controller.signal.aborted && generation.current === current) {
-        setError(text("Chưa nhận được câu trả lời. Bạn vẫn có thể mở các nguồn bên dưới hoặc thử lại.", "No answer yet. You can still open the sources below or try again.", "暂未收到回答，仍可打开下方来源或重试。"));
+        setError(cause instanceof Error && cause.message ? cause.message : unavailable);
       }
     } finally {
       if (generation.current === current) setBusy(false);
