@@ -20,6 +20,7 @@ import {
   type ControlModel,
 } from "@/lib/anatomy/controlModels";
 import GestureAtlasScene from "@/components/gesture/GestureAtlasScene";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { SYSTEMS } from "@/lib/humanAtlas/anatomy";
 import { pick, type Loc } from "@/lib/homeContent";
 import { LM, type Landmark } from "@/lib/gesture/handModel";
@@ -2482,6 +2483,7 @@ export default function GestureControlPage({
         </h1>
         <span className="vision-topbar-note">{locale === "en" ? "Anatomy studio" : locale === "zh" ? "解剖工作室" : "Không gian học giải phẫu"}</span>
         <div className="ml-auto flex items-center gap-2">
+          <LanguageSwitcher />
           {showDebug && viewMode !== "control" && (
             <span className="text-xs text-[var(--muted)]">
               {t.detectFps}{" "}
@@ -2523,7 +2525,7 @@ export default function GestureControlPage({
               const child = event.currentTarget.contentWindow as (Window & { wonderSnap?: { enter: (id: string, stream: MediaStream | null) => void } }) | null;
               const stream = cameraStreamRef.current;
               child?.wonderSnap?.enter(controlHandoffRef.current ?? scanControlModel(target.slug, pickedPartRef.current), stream instanceof MediaStream ? stream : null);
-            }} src={`/wonder/index.html?lang=${locale}&region=${scanControlModel(DEFAULT_VISION_SLUG)}&autostart=nocamera`} title="Vision AI — điều khiển giải phẫu bằng cử chỉ" className="absolute inset-0 h-full w-full border-0" allow="camera; microphone; fullscreen" />
+            }} src={`/wonder/index.html?lang=${locale}&region=${scanControlModel(DEFAULT_VISION_SLUG)}&autostart=nocamera`} title={locale === "en" ? "Vision AI — anatomy controlled by gesture" : locale === "zh" ? "Vision AI — 手势控制解剖" : "Vision AI — điều khiển giải phẫu bằng cử chỉ"} className="absolute inset-0 h-full w-full border-0" allow="camera; microphone; fullscreen" />
           ) : (
           <>{scanFrame ? (
             // Khung 3D ĐÚNG TỶ LỆ ô vừa cắt, đặt giữa, kèm chính tấm ảnh đã

@@ -2,9 +2,9 @@ import { selectionKey } from '../logic/inspection-controls.js';
 export const SYSTEM_LABELS={skeletal:'Hệ xương',muscular:'Hệ cơ',arterial:'Động mạch',venous:'Tĩnh mạch',nervous:'Hệ thần kinh',sensory:'Cơ quan giác quan',connective:'Mô liên kết',digestive:'Hệ tiêu hóa',respiratory:'Hệ hô hấp',urinary:'Hệ tiết niệu',reproductive:'Hệ sinh dục',lymphatic:'Hệ bạch huyết',endocrine:'Hệ nội tiết',integumentary:'Bề mặt cơ thể',cardiac:'Tim'};
 
 // Keep exact picking anchors untouched. Overview tags summarize each visible system.
-export function overviewLabels(anchors,selected=-1,selection=null){
+export function overviewLabels(anchors,selected=-1,selection=null,labelFor=null){
  const systems=new Map();
- for(const a of anchors){const key=selectionKey(a.L);let bucket=systems.get(key);if(!bucket){bucket={...a,key,scope:'group',L:{...a.L,label:key==='skull'?'Khối hộp sọ':SYSTEM_LABELS[a.L.system]||a.L.label},size:0,px:0,py:0};systems.set(key,bucket);}bucket.size++;bucket.px+=a.px;bucket.py+=a.py;}
+ for(const a of anchors){const key=selectionKey(a.L);let bucket=systems.get(key);if(!bucket){bucket={...a,key,scope:'group',L:{...a.L,label:labelFor?labelFor(key,a.L):(key==='skull'?'Khối hộp sọ':SYSTEM_LABELS[a.L.system]||a.L.label)},size:0,px:0,py:0};systems.set(key,bucket);}bucket.size++;bucket.px+=a.px;bucket.py+=a.py;}
  const result=[...systems.values()].map(a=>({...a,px:a.px/a.size,py:a.py/a.size,L:{...a.L,label:a.L.label+' · '+a.size}}));
  if(selection?.ids.size>1)return result.sort((a,b)=>(b.key===selection.key)-(a.key===selection.key));
  const exact=anchors.find(a=>a.li===selected);

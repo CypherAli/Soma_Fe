@@ -6,7 +6,7 @@
   <title>Cơ thể 3D — điều khiển bằng cử chỉ tay</title>
   <meta name="description" content="Mô hình cơ thể người 3D điều khiển bằng cử chỉ tay qua webcam: búng, nắm, mở để gọi hạt, tạo hình và bóc tách từng bộ phận.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='22' fill='none' stroke='%2366e0ff' stroke-width='4'/%3E%3Ccircle cx='32' cy='32' r='8' fill='%23ffd166'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="styles.css?v=20261026-studio">
+  <link rel="stylesheet" href="styles.css?v=20261115-d">
 </head>
 <body>
   <canvas id="gl" aria-label="Particle scene"></canvas>
@@ -47,18 +47,18 @@
     <div class="glass" style="padding:10px 12px"><label for="renderQuality" style="font-size:12px">Chất lượng hiển thị</label><select id="renderQuality" style="width:100%;margin-top:6px;background:#191c1f;color:#eef1f4;border:1px solid #41474b;border-radius:8px;padding:7px"><option value="auto">Tự động</option><option value="smooth">Mượt</option><option value="detail">Chi tiết</option></select><div id="renderResolution" style="font-size:11px;color:#a9b2bb;margin-top:6px"></div></div>
     <section class="status">
       <div class="row">
-        <span class="k">Trạng thái</span><span id="statePill" class="pill" data-state="idle">chờ</span>
+        <span class="k" id="stateKey">Trạng thái</span><span id="statePill" class="pill" data-state="idle">chờ</span>
       </div>
       <div class="row">
-        <span class="k">Bàn tay</span><span id="posePill" class="pill pose">chưa thấy tay</span>
+        <span class="k" id="poseKey">Bàn tay</span><span id="posePill" class="pill pose">chưa thấy tay</span>
       </div>
       <div class="meter">
-        <div class="meter-head"><span class="k">Độ mở bàn tay</span><b id="openPct">0%</b></div>
+        <div class="meter-head"><span class="k" id="openKey">Độ mở bàn tay</span><b id="openPct">0%</b></div>
         <div class="bar"><i id="openBar"></i></div>
       </div>
       <div id="explodeBox" class="meter explode" hidden>
         <label for="separationMode" class="inspection-label">Cách tách mô hình</label><select id="separationMode" style="width:100%;margin-bottom:10px"><option value="systems">Tách các hệ</option><option value="muscles">Tách từng cơ</option><option value="selected">Tách cấu trúc trong khối</option></select>
-        <label for="selectionScope" class="inspection-label">Phạm vi trỏ/chọn</label><select id="selectionScope" style="width:100%;margin-bottom:10px"><option value="group">Khối giải phẫu</option><option value="part">Từng cấu trúc</option></select>
+        <label for="selectionScope" class="inspection-label">Phạm vi trỏ/chọn</label><select id="selectionScope" style="width:100%;margin-bottom:10px"><option value="group">Khối giải phẫu</option><option value="part" selected>Từng cấu trúc</option></select>
         <div class="meter-head"><span id="separationLabel" class="k">Tách toàn mô hình</span><b id="explodePct">0%</b></div>
         <input id="explodeSlider" type="range" min="0" max="100" value="0" aria-label="Mức tách lớp">
         <div id="separationHint" class="hint">Mở tay để tách các hệ · nắm tay để lắp lại</div>
@@ -66,12 +66,12 @@
     </section>
 
     <section>
-      <div class="k">Các lớp giải phẫu</div>
-      <div id="surfaceControls" hidden><label class="inspection-label" for="inspectionView">Chế độ quan sát</label><select id="inspectionView"><option value="all">Tổng quan</option></select><p id="modelQuality" class="model-quality"></p><label><input id="showCover" type="checkbox"> Hiện bề mặt cơ thể</label><label class="inspection-label" for="structureSearch">Tìm cấu trúc</label><input id="structureSearch" type="search" placeholder="Tên Việt, tên gốc hoặc mã FJ" autocomplete="off"><label for="systemFocus" style="display:block;margin-top:12px">Chọn cấu trúc <select id="systemFocus" style="display:block;width:100%;margin-top:6px;background:#222;color:#fff;padding:8px;border:1px solid #555;border-radius:8px"><option value="-1">Tất cả các hệ</option></select></label><p style="color:#a9bdd0;font-size:12px">Chọn chế độ để mở từng hệ; chọn cấu trúc để xem riêng.</p></div>
+      <div class="k" id="layersTitle">Các lớp giải phẫu</div>
+      <div id="surfaceControls" hidden><label class="inspection-label" for="inspectionView">Chế độ quan sát</label><select id="inspectionView"><option value="all">Tổng quan</option></select><p id="modelQuality" class="model-quality"></p><label id="showCoverLabel"><input id="showCover" type="checkbox"> Hiện bề mặt cơ thể</label><label class="inspection-label" for="structureSearch">Tìm cấu trúc</label><input id="structureSearch" type="search" placeholder="Tên Việt, tên gốc hoặc mã FJ" autocomplete="off"><label for="systemFocus" style="display:block;margin-top:12px">Chọn cấu trúc <select id="systemFocus" style="display:block;width:100%;margin-top:6px;background:#222;color:#fff;padding:8px;border:1px solid #555;border-radius:8px"><option value="-1">Tất cả các hệ</option></select></label><p id="layersHint" style="color:#a9bdd0;font-size:12px">Chọn chế độ để mở từng hệ; chọn cấu trúc để xem riêng.</p></div>
       <details class="gesture-help"><summary>Hướng dẫn cử chỉ</summary><ul id="guide" class="guide"></ul></details>
       <details id="structureListPanel" class="structure-list-panel">
         <summary>Danh sách cấu trúc <span id="structureCount">0</span></summary>
-        <p>Chọn tên để căn giữa và xem riêng cấu trúc. Ô tìm kiếm phía trên tra cả tên Việt và tên nguồn.</p>
+        <p id="structureListHint">Chọn tên để căn giữa và xem riêng cấu trúc. Ô tìm kiếm phía trên tra cả tên Việt và tên nguồn.</p>
         <div id="structureList" class="structure-list" role="list" data-lenis-prevent></div>
       </details>
     </section>
@@ -146,7 +146,7 @@
       <select id="voiceLanguage"><option value="vi">Tiếng Việt</option><option value="en">Tiếng Anh</option></select>
       <label for="readDetail">Nội dung đọc</label>
       <select id="readDetail"><option value="name">Tên</option><option value="description" selected>Tên và mô tả</option><option value="group">Kèm ghi chú nhóm</option></select>
-      <label class="voice-auto"><input id="autoRead" type="checkbox">Tự đọc khi chọn</label>
+      <label class="voice-auto" id="autoReadLabel"><input id="autoRead" type="checkbox">Tự đọc khi chọn</label>
       <div class="voice-buttons"><button id="readSelected">Đọc</button><button id="stopReading">Dừng</button></div>
       <div id="micStatus" role="status">Micro đang tắt</div><div id="speakerStatus" role="status">Loa đang nghỉ</div>
       <div id="voiceNote" role="status"></div><div id="voiceHeard"></div>
@@ -220,6 +220,6 @@
     </div>
   </div>
 
-  <script type="module" src="src/app.js?v=20261026-navigation"></script>
+  <script type="module" src="src/app.js?v=20261115-d"></script>
 </body>
 </html>

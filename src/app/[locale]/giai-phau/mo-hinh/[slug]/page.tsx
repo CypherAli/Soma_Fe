@@ -39,7 +39,7 @@ export default async function SceneModulePage({
    */
   const content = await getContent();
   const atlasScene = content.resolve(atlasScenes[atlasSceneAliases[slug]??slug]);
-  if (atlasScene?.replacement?.modelFile) return <ContentSurface scope="src/app/[locale]/giai-phau/mo-hinh/[slug]/page.tsx"><SceneDetailPage module={{ slug: atlasScene.slug, title: atlasScene.title, description: atlasScene.intro, visibleSystems: ['skeletal'], modelFile: atlasScene.replacement.modelFile, hotspots: atlasScene.replacement.hotspots }} locale={loc} backHref="/giai-phau/lat-cat" /></ContentSurface>;
+  if (atlasScene?.replacement?.modelFile) return <ContentSurface scope="src/app/[locale]/giai-phau/mo-hinh/[slug]/page.tsx"><SceneDetailPage module={{ slug: atlasScene.slug, title: atlasScene.title, description: atlasScene.intro, visibleSystems: ['skeletal'], modelFile: atlasScene.replacement.modelFile, hotspots: atlasScene.replacement.hotspots }} locale={loc} backHref="/giai-phau/tat-ca" /></ContentSurface>;
   // Bọc `.bd`: TOÀN BỘ home.css nằm dưới bộ chọn đó (`.bd .brand-signature`,
   // `.bd .language-globe`…). Thiếu lớp bọc thì logo, nút sáng/tối và bộ đổi
   // ngôn ngữ mất sạch tạo hình — quả cầu phình ra 92px. Trang /viewer đã bọc
@@ -54,5 +54,5 @@ export default async function SceneModulePage({
   const sceneModule = content.resolve(getSceneModule(slug));
   if (!sceneModule) notFound();
 
-  return <ContentSurface scope="src/app/[locale]/giai-phau/mo-hinh/[slug]/page.tsx"><SceneDetailPage module={sceneModule} locale={loc} backHref="/giai-phau/lat-cat" /></ContentSurface>;
+  return <ContentSurface scope="src/app/[locale]/giai-phau/mo-hinh/[slug]/page.tsx"><SceneDetailPage module={sceneModule} locale={loc} backHref="/giai-phau/tat-ca" /></ContentSurface>;
 }

@@ -16,6 +16,7 @@ import { previewTransform,previewPoint,previewSource } from './lib/preview-proje
 import { ScanPanel } from './lib/scan-panel.js';
 import { RenderQuality } from './lib/render-quality.js';
 import { overviewLabels,layoutLabels,layoutSideLabels,SYSTEM_LABELS } from './lib/label-layout.js';
+import { applyStatic } from './lib/ui-text.js';
 import { HandYaw,PartSeparation,inspectionLabelsVisible,selectionFor,selectionKey,singleVisibleGroup,systemBlocks,selectedPull,fitPullDistance,pullEnvelope,partLayout,partTransform,partPageVisible } from './logic/inspection-controls.js';
 import { setMuscleSeparation } from './models/muscle-separation.js';
 import { InspectionTransition } from './logic/inspection-transition.js';
@@ -46,6 +47,11 @@ const HAND_EDGES = [[0, 1], [1, 2], [2, 3], [3, 4], [0, 5], [5, 6], [6, 7], [7, 
   [9, 13], [13, 14], [14, 15], [15, 16], [13, 17], [17, 18], [18, 19], [19, 20], [0, 17]];
 const POSE_UI = { [OPEN]: ['✋', 'Mở tay'], [FIST]: ['✊', 'Nắm tay'], [PEACE]: ['✌', 'Peace'], [POINT]: ['☝', 'Đang chỉ'], [THUMB]: ['👍', 'Ngón cái'], other: ['🤚', 'Đang cử động'], [NONE]: ['·', 'Chưa thấy tay'] };
 const STATE_VI = { idle: 'Chờ', sphere: 'Gọi hạt', formed: 'Tạo hình', dissolve: 'Làm tan' };
+const STATE_EN = { idle: 'Idle', sphere: 'Summoning', formed: 'Formed', dissolve: 'Dissolving' };
+const POSE_EN = { [OPEN]: 'Open hand', [FIST]: 'Fist', [PEACE]: 'Peace', [POINT]: 'Pointing', [THUMB]: 'Thumb up', other: 'Moving', [NONE]: 'No hand' };
+const GROUP_EN = { 'Toàn thân': 'Whole body', 'Đầu và cổ': 'Head and neck', 'Thân trên': 'Upper body', 'Chi trên': 'Upper limb', 'Nội tạng': 'Internal organs' };
+const INSPECTION_EN = { all: 'Overview', structure: 'Muscle · bone · connective tissue', skeletal: 'Bones and joints', muscular: 'Muscular system', connective: 'Connective tissue', vessels: 'Blood vessels', nerves: 'Nerves and senses' };
+const SYSTEM_EN = { skeletal: 'Skeletal system', muscular: 'Muscular system', arterial: 'Arteries', venous: 'Veins', nervous: 'Nervous system', sensory: 'Sensory organs', connective: 'Connective tissue', digestive: 'Digestive system', respiratory: 'Respiratory system', urinary: 'Urinary system', reproductive: 'Reproductive system', lymphatic: 'Lymphatic system', endocrine: 'Endocrine system', integumentary: 'Body surface', cardiac: 'Heart' };
 const POSE_COLOR = { [OPEN]: '#66e0ff', [FIST]: '#ffd166', [PEACE]: '#ff6bd6', [POINT]: '#7dff9b', [THUMB]: '#ffb347', other: '#e8f1ff', [NONE]: '#e8f1ff' };
 const rgbCss = (c, a = 1) => `rgba(${Math.round(c[0] * 255)}, ${Math.round(c[1] * 255)}, ${Math.round(c[2] * 255)}, ${a})`;
 function modelGroup(d){
@@ -142,7 +148,10 @@ class App {
     this.motionTime = 0;
     this.labelPage = 0;
     this.labelPageCount = 1;
-    this.locale = qs.get('lang') === 'en' ? 'en' : 'vi';
+    // Giao diện có hai bản vi/en; trang tiếng Trung dùng bản tiếng Anh thay vì lọt về tiếng Việt.
+    const requested = qs.get('lang');
+    this.locale = requested && requested !== 'vi' ? 'en' : 'vi';
+    applyStatic(this.locale);
     this.ctl.state.index = CFG.start;
     this.store = new ModelStore(CFG.n);
     this.model = null; this.uploaded = -1; this.uploadT = 0;
@@ -177,6 +186,12 @@ class App {
   }
 
   word(vi,en) { return this.locale === 'en' ? en : vi; }
+  groupLabel(name) { return this.locale === 'en' ? (GROUP_EN[name] || name) : name; }
+  systemLabel(key) { return this.locale === 'en' ? (SYSTEM_EN[key] || SYSTEM_LABELS[key] || key) : (SYSTEM_LABELS[key] || key); }
+  viewLabel(profile) { return this.locale === 'en' ? (INSPECTION_EN[profile.id] || profile.name) : profile.name; }
+  groupName(key, L) { return key === 'skull' ? this.word('Khối hộp sọ', 'Skull block') : (this.systemLabel(L.system) || L.label); }
+  poseLabel(pose) { const row = POSE_UI[pose] || POSE_UI.other; return [row[0], this.word(row[1], POSE_EN[pose] || POSE_EN.other)]; }
+  stateLabel(state) { return this.word(STATE_VI[state] || state, STATE_EN[state] || state); }
   modelName(def) {
     const name=this.locale==='vi'&&/[\u00C0-\u1EF9]/.test(def.name)?def.name:readingText(null,def,this.locale,'name').text;
     return name.charAt(0).toUpperCase()+name.slice(1);
@@ -249,7 +264,7 @@ class App {
     }
     for (const action of ctl.navigation.splice(0)) {
       if (this.scanActive) continue;
-      if (action === 'model') { this.cycleModel(1); this.toast('Tay trái · mô hình tiếp'); }
+      if (action === 'model') { this.cycleModel(1); this.toast(this.word('Tay trái · mô hình tiếp','Left thumb · next model')); }
       else this.nextBlock();
     }
     if(!this.scanActive&&!this.transition.pending&&!this.inspectionTransition.pending)ctl.tick(t);
@@ -491,8 +506,8 @@ class App {
     else apply();
   }
   nextBlock() {
-    if(this.quiz){this.toast('Kết thúc luyện tập để chuyển hệ bên trong');return;}
-    if(this.scanActive||this.transition.pending||this.inspectionTransition.pending||this.uploaded!==this.ctl.state.index||this.ctl.state.state!==FORMED||!this.model?.surface){this.toast('Chờ mô hình hiện ra để chuyển hệ bên trong');return;}
+    if(this.quiz){this.toast(this.word('Kết thúc luyện tập để chuyển hệ bên trong','Finish the quiz to switch systems'));return;}
+    if(this.scanActive||this.transition.pending||this.inspectionTransition.pending||this.uploaded!==this.ctl.state.index||this.ctl.state.state!==FORMED||!this.model?.surface){this.toast(this.word('Chờ mô hình hiện ra để chuyển hệ bên trong','Wait for the model to appear before switching systems'));return;}
     const blocks=this.modelBlocks();if(!blocks.length)return;
     const current=this.selection?.system||this.$('inspectionView').value.replace(/^system:/,'');
     const index=(blocks.findIndex(block=>block.system===current)+1)%blocks.length,block=blocks[index];
@@ -504,7 +519,7 @@ class App {
       this.$('inspectionView').value=profile?.id||'all';
     }
     this.$('systemFocus').value='-1';this.manualExplode=0;this.explode=0;this.expHist=[];this.pendingBlock=block.pick;
-    this.populateFocus();this.toast(`Tay phải · ${SYSTEM_LABELS[block.system]||block.system} · ${index+1}/${blocks.length}`);
+    this.populateFocus();this.toast(this.word(`Tay phải · ${this.systemLabel(block.system)} · ${index+1}/${blocks.length}`,`Right thumb · ${this.systemLabel(block.system)} · ${index+1}/${blocks.length}`));
     });
   }
   pickTarget(x,y) {
@@ -532,7 +547,7 @@ class App {
     } else {this.hover = { li: -1, t0: t };this.pointSample=null;}
     if (ctl.pinchStart) {
       ctl.pinchStart = false;
-      if (this.sel >= 0) { this.setSeparation(this.partSeparation.target>.5?0:1); this.toast(this.pulled ? 'Đã kéo phần được chọn ra' : 'Đã lắp phần được chọn lại'); }
+      if (this.sel >= 0) { this.setSeparation(this.partSeparation.target>.5?0:1); this.toast(this.pulled ? this.word('Đã kéo phần được chọn ra','Pulled the selection out') : this.word('Đã lắp phần được chọn lại','Put the selection back')); }
     }
   }
   selectPart(li, source = 'click',scope='part') {
@@ -553,7 +568,9 @@ class App {
     if(!this.selection)return;
     const height=this.overlay.height/CFG.dpr,width=this.overlay.width/CFG.dpr;
     const radius=this.dist/this.zoom*Math.sin(deg(20))*Math.max(.2,Math.min(width<=600?.35:.75,(height-200)/height,width/height*.55))*.94;
-    this.selection.layout=partLayout(this.model.surface,this.selection.ids,{scale:this.drawScale||1,explode:this.explode,exCenter:this.model.exCenter,inspectionCenter:this.inspectionCenter,radius,page,pageSize:20});
+    // Một trang duy nhất: tách cả khối thì thấy đủ mọi mảnh, không còn cảnh 20 mảnh
+    // bay ra còn 228 mảnh biến mất (nhìn như "không phải nguyên bộ").
+    this.selection.layout=partLayout(this.model.surface,this.selection.ids,{scale:this.drawScale||1,explode:this.explode,exCenter:this.model.exCenter,inspectionCenter:this.inspectionCenter,radius,page,pageSize:Math.max(1,this.selection.ids.size)});
   }
   changeStructurePage(step) {
     if(!this.selection?.layout)return;
@@ -563,8 +580,8 @@ class App {
   }
   selectionLabel() {
     const L=this.model?.labels[this.sel];if(!L||!this.selection||this.selection.ids.size<=1)return L;
-    const name=this.selection.skull?'Khối hộp sọ':SYSTEM_LABELS[this.selection.system]||L.label;
-    return {...L,label:name,labelVi:name,info:this.selection.skull?'Gồm xương sọ, hàm và răng nguồn':'Nhóm giải phẫu',sourceName:this.selection.skull?'Skull':name,sourceId:'',latin:'',description:'Đang chọn cả khối gồm '+this.selection.ids.size+' cấu trúc nguồn. Nắm rồi xòe tay để tách từng cấu trúc bên trong; nắm lại để lắp về đúng vị trí. Các hệ khác giữ nguyên.',descriptionEn:'Selected group: '+this.selection.ids.size+' source structures. Close then open your hand to separate its individual structures; close to reassemble. Other systems stay fixed.',learningNotes:[]};
+    const name=this.selection.skull?this.word('Khối hộp sọ','Skull block'):this.systemLabel(this.selection.system)||L.label;
+    return {...L,label:name,labelVi:name,info:this.selection.skull?this.word('Gồm xương sọ, hàm và răng nguồn','Skull bones, jaw and source teeth'):this.word('Nhóm giải phẫu','Anatomical group'),sourceName:this.selection.skull?'Skull':name,sourceId:'',latin:'',description:this.word('Đang chọn cả khối gồm '+this.selection.ids.size+' cấu trúc nguồn. Nắm rồi xòe tay để tách từng cấu trúc bên trong; nắm lại để lắp về đúng vị trí. Các hệ khác giữ nguyên.','Selected group of '+this.selection.ids.size+' source structures. Make a fist then open your hand to separate its individual structures; make a fist again to reassemble. Other systems stay fixed.'),descriptionEn:'Selected group: '+this.selection.ids.size+' source structures. Close then open your hand to separate its individual structures; close to reassemble. Other systems stay fixed.',learningNotes:[]};
   }
   setSeparation(value) {
     if(this.sel<0&&this.model?.surface&&!this.quiz&&this.$('separationMode').value!=='muscles'){
@@ -827,7 +844,7 @@ class App {
     let candidates=this.anchors.filter(a=>showAll||a.li===this.sel||this.selection?.ids.has(a.li)).sort((a,b)=>(b.li===this.sel)-(a.li===this.sel)||b.L.count-a.L.count);
     if(this.model?.surface&&(this.explode>.65||this.selection?.ids.size>1)&&this.$('separationMode').value!=='muscles'&&this.$('selectionScope').value==='group'){
       const localSplit=this.selection?.layout&&this.pullAmt>.12;
-      const overview=overviewLabels(localSplit?candidates.filter(a=>!this.selection.ids.has(a.li)):candidates,this.sel,this.selection);
+      const overview=overviewLabels(localSplit?candidates.filter(a=>!this.selection.ids.has(a.li)):candidates,this.sel,this.selection,(key,L)=>this.groupName(key,L));
       candidates=localSplit?[...candidates.filter(a=>this.selection.ids.has(a.li)),...overview]:overview;
     }
     const panel=this.$('panel').getBoundingClientRect(),tools=document.querySelector('.top-right').getBoundingClientRect();
@@ -868,8 +885,8 @@ class App {
     const targetWidth=this.scanActive?640:320,targetHeight=Math.round(targetWidth/(this.scanActive?this.videoAspect():16/9));if(canvas.width!==targetWidth||canvas.height!==targetHeight){canvas.width=targetWidth;canvas.height=targetHeight;canvas.style.aspectRatio=targetWidth+" / "+targetHeight;}
     const W=canvas.width,H=canvas.height;ctx.fillStyle='#202327';ctx.fillRect(0,0,W,H);
     const active=this.hasVideo&&this.camOn;
-    if(this.previewLive!==active){this.previewLive=active;this.$('cameraPreview').classList.toggle('live',active);this.$('cameraStatus').textContent=active?'Camera điều khiển':'Camera đang tắt';this.scanPanel?.camera(active);}
-    if(!active){ctx.fillStyle='#a7acb4';ctx.font='14px system-ui';ctx.textAlign='center';ctx.fillText('Bật camera để dùng cử chỉ',W/2,H/2);return;}
+    if(this.previewLive!==active){this.previewLive=active;this.$('cameraPreview').classList.toggle('live',active);this.$('cameraStatus').textContent=active?this.word('Camera điều khiển','Camera live'):this.word('Camera đang tắt','Camera off');this.scanPanel?.camera(active);}
+    if(!active){ctx.fillStyle='#a7acb4';ctx.font='14px system-ui';ctx.textAlign='center';ctx.fillText(this.word('Bật camera để dùng cử chỉ','Start the camera to control by gesture'),W/2,H/2);return;}
     const video=previewSource(this.video,this.cam?.previewFrame);if(!video)return;
     const sourceWidth=video.videoWidth||video.width,sourceHeight=video.videoHeight||video.height,transform=previewTransform(sourceWidth,sourceHeight,W,H),{w:vw,h:vh,dx,dy}=transform;
     ctx.save();ctx.translate(W,0);ctx.scale(-1,1);ctx.drawImage(video,dx,dy,vw,vh);ctx.restore();
@@ -897,13 +914,13 @@ class App {
     const tabs = this.$('catTabs'), chips = this.$('catChips');
     this.tabs = {}; this.chips = [];
     const group=this.$('modelGroup');
-    for(const category of CATEGORIES){const option=document.createElement('option');option.value=category;option.textContent=category;group.appendChild(option);}
+    for(const category of CATEGORIES){const option=document.createElement('option');option.value=category;option.textContent=this.groupLabel(category);group.appendChild(option);}
     group.addEventListener('change',()=>this.showCategory(group.value));
     this.$('modelSelect').addEventListener('change',()=>this.selectModel(Number(this.$('modelSelect').value)));
     this.$('bPanel').addEventListener('click',()=>{const collapsed=this.$('panel').classList.toggle('collapsed');this.$('bPanel').setAttribute('aria-expanded',String(!collapsed));this.$('bPanel').textContent=collapsed?'›':'‹';});
     for (const c of CATEGORIES) {
       const b = document.createElement('button');
-      b.className = 'tab'; b.textContent = `${c} · ${CATALOG.filter((d) => modelGroup(d) === c).length}`; b.dataset.cat = c;
+      b.className = 'tab'; b.textContent = `${this.groupLabel(c)} · ${CATALOG.filter((d) => modelGroup(d) === c).length}`; b.dataset.cat = c;
       b.addEventListener('click', () => this.showCategory(c));
       tabs.appendChild(b); this.tabs[c] = b;
     }
@@ -928,14 +945,14 @@ class App {
 
   guideItems(machine) {
     return [
-      ['snap', '🫰', '<b>Búng tay</b> — gọi hạt, làm tan'],
-      ['fist', '✊', machine ? '<b>Nắm tay</b> — lắp lại' : '<b>Nắm tay</b> — tạo hình'],
-      ['open', '✋', machine ? '<b>Mở tay chậm</b> — bóc tách, xem bên trong' : '<b>Mở tay</b> — chuyển mẫu tiếp'],
-      ['twist', '🔄', '<b>Xoay cổ tay</b> — chỉ xoay trái/phải'],
-      ...(machine ? [['point', '☝', '<b>Trỏ và giữ</b> để chọn · <b>xòe/nắm</b> chỉ kéo phần đã chọn ra–lắp lại · Esc để bỏ chọn']] : []),
-      ['zoom', '🙌', '<b>Hai tay</b> dang ra, chụm vào — thu phóng'],
-      ['like', '👍', '<b>Like tay trái</b> — mô hình tiếp · <b>tay phải</b> — hệ tiếp trong mô hình. Hạ ngón cái rồi giơ lại.'],
-      ['peace', '✌', '<b>Peace</b> — tính năng sau'],
+      ['snap', '🫰', this.word('<b>Búng tay</b> — gọi hạt, làm tan','<b>Snap</b> — summon the particles, dissolve them')],
+      ['fist', '✊', machine ? this.word('<b>Nắm tay</b> — lắp lại','<b>Fist</b> — reassemble') : this.word('<b>Nắm tay</b> — tạo hình','<b>Fist</b> — form the model')],
+      ['open', '✋', machine ? this.word('<b>Mở tay chậm</b> — bóc tách, xem bên trong','<b>Open slowly</b> — separate the layers, look inside') : this.word('<b>Mở tay</b> — chuyển mẫu tiếp','<b>Open</b> — next sample')],
+      ['twist', '🔄', this.word('<b>Xoay cổ tay</b> — chỉ xoay trái/phải','<b>Twist your wrist</b> — turn left/right only')],
+      ...(machine ? [['point', '☝', this.word('<b>Trỏ và giữ</b> để chọn · <b>xòe/nắm</b> chỉ kéo phần đã chọn ra–lắp lại · Esc để bỏ chọn','<b>Point and hold</b> to select · <b>open/fist</b> pulls the selection out and back · Esc clears')]] : []),
+      ['zoom', '🙌', this.word('<b>Hai tay</b> dang ra, chụm vào — thu phóng','<b>Both hands</b> apart to zoom in, together to zoom out')],
+      ['like', '👍', this.word('<b>Like tay trái</b> — mô hình tiếp · <b>tay phải</b> — hệ tiếp trong mô hình. Hạ ngón cái rồi giơ lại.','<b>Left thumb</b> — next model · <b>right thumb</b> — next system in the model. Lower the thumb then raise it again.')],
+      ['peace', '✌', this.word('<b>Peace</b> — tính năng sau','<b>Peace</b> — coming later')],
     ];
   }
 
@@ -950,7 +967,7 @@ class App {
     const list=this.$('structureList');list.replaceChildren();
     const ids=this.visiblePicks(true);let count=0;this.labelPage=0;
     const query=this.$('structureSearch').value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/đ/g,'d').trim();
-    const all=document.createElement('option');all.value='-1';all.textContent='Tất cả cấu trúc';focus.appendChild(all);
+    const all=document.createElement('option');all.value='-1';all.textContent=this.word('Tất cả cấu trúc','All structures');focus.appendChild(all);
     this.model?.labels.forEach((label,i)=>{
       if(this.model.surface&&!ids.has(i))return;
       const text=[label.label,label.sourceName,label.info,label.sourceId,label.latin].join(' ').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/đ/g,'d');
@@ -981,7 +998,7 @@ class App {
       $('bigTitle').querySelector('.t').textContent = this.modelName(def); $('bigTitle').querySelector('.s').textContent = def.fact || '';
       $('explodeBox').hidden = !isM;
       $('surfaceControls').hidden = !def.surface;
-      $('systemFocus').innerHTML='<option value="-1">Tất cả các hệ</option>';
+      $('systemFocus').innerHTML=`<option value="-1">${this.word('Tất cả các hệ','All systems')}</option>`;
       this.chips.forEach((c, i) => c.classList.toggle('active', i === st.index));
       if (this.activeCat !== modelGroup(def)) this.showCategory(modelGroup(def));
       $('modelSelect').value=String(st.index);
@@ -989,19 +1006,20 @@ class App {
     }
     if(this.uploaded===st.index&&this.focusModel!==this.model){
       this.focusModel=this.model;
-      const focus=$('systemFocus');focus.innerHTML='<option value="-1">Tất cả các hệ</option>';
-      focus.options[0].textContent='Tất cả cấu trúc';
+      const focus=$('systemFocus');focus.innerHTML=`<option value="-1">${this.word('Tất cả các hệ','All systems')}</option>`;
+      focus.options[0].textContent=this.word('Tất cả cấu trúc','All structures');
       this.model.labels.forEach((label,i)=>{const option=document.createElement('option');option.value=i;option.textContent=label.label;focus.appendChild(option);});
       const views=$('inspectionView');views.replaceChildren();
-      for(const profile of availableInspectionViews(this.model.surface?.groups||[])){const option=document.createElement('option');option.value=profile.id;option.textContent=profile.name;views.appendChild(option);}
+      for(const profile of availableInspectionViews(this.model.surface?.groups||[])){const option=document.createElement('option');option.value=profile.id;option.textContent=this.viewLabel(profile);views.appendChild(option);}
       views.value='all';$('separationMode').value='systems';$('separationMode').options[1].disabled=!this.model.surface?.groups.some(g=>g.system==='muscular');$('structureSearch').value='';this.populateFocus();
       const quality=this.model.surface?.quality;
-      $('modelQuality').textContent=quality ? ((quality.context||'')+' '+this.model.surface.partCount+' cấu trúc nguồn. '+(quality.sourceOptimized===false?'Lưới OBJ nguồn, không giản lược thêm. ':'')+(quality.capLoops?'Mặt cắt màu nâu là ranh giới kỹ thuật. ':'')+(quality.unresolvedCuts?'Còn '+quality.unresolvedCuts+' đường biên nguồn hở; không tự lấp. ':'')+'Nguồn không có texture mô thật.').trim() : 'Giữ màu và hình học của dữ liệu nguồn.';
+      const qualityText=quality ? ((quality.context||'')+' '+this.model.surface.partCount+this.word(' cấu trúc nguồn. ',' source structures. ')+(quality.sourceOptimized===false?this.word('Lưới OBJ nguồn, không giản lược thêm. ','Raw OBJ mesh, no extra decimation. '):'')+(quality.capLoops?this.word('Mặt cắt màu nâu là ranh giới kỹ thuật. ','Brown cut faces mark technical boundaries. '):'')+(quality.unresolvedCuts?this.word('Còn '+quality.unresolvedCuts+' đường biên nguồn hở; không tự lấp. ','Open source boundaries remain: '+quality.unresolvedCuts+'; they are not filled in. '):'')+this.word('Nguồn không có texture mô thật.','The source has no real tissue textures.')).trim() : this.word('Giữ màu và hình học của dữ liệu nguồn.','Keeps the colours and geometry of the source data.');
+    $('modelQuality').textContent=qualityText;
     }
     const pill = $('statePill');
     const transitionPhase=this.transition.pending?.phase||(this.inspectionTransition.pending?.phase==='out'?'out':this.inspectionTransition.pending?'gathering':'steady');
     pill.dataset.state=st.state;pill.dataset.transition=transitionPhase;
-    pill.textContent=transitionPhase==='out'?this.word('Đang tách thành hạt','Dissolving into particles'):transitionPhase==='loading'?this.word('Đang tải mô hình','Loading model'):transitionPhase==='gathering'?this.word('Đang gom mô hình','Assembling model'):(STATE_VI[st.state]??st.state);
+    pill.textContent=transitionPhase==='out'?this.word('Đang tách thành hạt','Dissolving into particles'):transitionPhase==='loading'?this.word('Đang tải mô hình','Loading model'):transitionPhase==='gathering'?this.word('Đang gom mô hình','Assembling model'):this.stateLabel(st.state);
     const transitionStatus=$('modelTransitionStatus');transitionStatus.hidden=transitionPhase==='steady';transitionStatus.textContent=transitionStatus.hidden?'':pill.textContent+'…';
     for(const id of ['bSnap','bForm','bOpen','explodeSlider','systemFocus','inspectionView','separationMode'])$(id).disabled=!!this.transition.pending||!!this.inspectionTransition.pending;
     $('viewStructures').disabled=!this.model||!!this.transition.pending;
@@ -1017,24 +1035,25 @@ class App {
       $('structuresPrevious').disabled=parts.page===0;$('structuresNext').disabled=parts.page>=parts.pageCount-1;
     }
     const vis = ctl.handVisible(t), pose = vis ? (ctl.pinch ? 'pinch' : ctl.pose) : NONE;
-    const [emo, label] = pose === 'pinch' ? ['🤏', 'Đang véo'] : POSE_UI[pose] || POSE_UI.other;
+    const [emo, label] = pose === 'pinch' ? ['🤏', this.word('Đang véo','Pinching')] : this.poseLabel(pose);
     const side=ctl.landmarks?.handedness;
-    const pt = pose===THUMB?`👍 ${side==='left'?'Tay trái · mô hình tiếp':side==='right'?'Tay phải · hệ tiếp':'Chưa rõ tay trái/phải'}`:`${emo} ${label}${ctl.secondVisible(t) ? ' + 🖐' : ''}`;
+    const pt = pose===THUMB?`👍 ${side==='left'?this.word('Tay trái · mô hình tiếp','Left hand · next model'):side==='right'?this.word('Tay phải · hệ tiếp','Right hand · next system'):this.word('Chưa rõ tay trái/phải','Left/right hand unknown')}`:`${emo} ${label}${ctl.secondVisible(t) ? ' + 🖐' : ''}`;
     if ($('posePill').textContent !== pt) $('posePill').textContent = pt;
     const op = vis ? ctl.openness : 0;
     $('openBar').style.width = `${Math.round(op * 100)}%`; $('openPct').textContent = `${Math.round(op * 100)}%`;
     const separation=this.sel>=0?this.pullAmt:this.explode;
     $('explodePct').textContent = `${Math.round(separation * 100)}%`;
     if (!this.sliderActive) $('explodeSlider').value = Math.round(separation * 100);
-    $('separationLabel').textContent=this.selection?.layout?'Tách từng cấu trúc đã chọn':this.sel>=0?'Kéo cấu trúc đã chọn':'Tách toàn mô hình';
-    $('separationHint').textContent=this.selection?.layout?'Nắm rồi xòe tay để tách từng mảnh · nắm lại để lắp':this.sel>=0?'Nắm rồi xòe tay để kéo cấu trúc ra · các phần khác giữ nguyên':'Mở tay để tách các hệ · chọn một khối để tách từng cấu trúc';
+    $('separationLabel').textContent=this.selection?.layout?this.word('Tách từng cấu trúc đã chọn','Separate the selected structures'):this.sel>=0?this.word('Kéo cấu trúc đã chọn','Pull the selected structure'):this.word('Tách toàn mô hình','Explode the whole model');
+    $('separationHint').textContent=this.selection?.layout?this.word('Nắm rồi xòe tay để tách từng mảnh · nắm lại để lắp','Fist then open your hand to separate the pieces · fist again to reassemble'):this.sel>=0?this.word('Nắm rồi xòe tay để kéo cấu trúc ra · các phần khác giữ nguyên','Fist then open your hand to pull the structure out · everything else stays put'):this.word('Mở tay để tách các hệ · chọn một khối để tách từng cấu trúc','Open your hand to separate the systems · select a block to separate its structures');
     const split=$('splitParts'),hasSkull=this.anchors.some(a=>selectionKey(a.L)==='skull'),block=singleVisibleGroup(this.model?.labels||[],this.visiblePicks());
     split.disabled=!this.model?.surface||!this.anchors.length||!!this.inspectionTransition.pending;
-    split.textContent=this.selection?.layout&&this.partSeparation.target>.5?'Lắp lại phần đã chọn':this.selection?.layout&&!this.selection.skull?'Tách '+this.selection.ids.size+' cấu trúc':hasSkull?'Tách xương sọ':block?'Tách '+block.count+' cấu trúc':'Tách từng cấu trúc';
-    $('splitHint').textContent=this.selection?.layout?`${this.selection.ids.size} cấu trúc · xòe tay để tách · nắm tay để lắp lại`:block?`${block.count} cấu trúc đang hiện · xòe tay để tách riêng`:'Tách riêng các mảnh nguồn · chọn khối cần tách';
+    const onePart=this.selection&&this.selection.ids.size===1?this.systemLabel(this.selection.system)||'':'';
+    split.textContent=this.selection?.layout&&this.partSeparation.target>.5?this.word('Lắp lại phần đã chọn','Reassemble the selection'):this.selection?.layout&&!this.selection.skull?this.word('Tách '+this.selection.ids.size+' cấu trúc','Split '+this.selection.ids.size+' structures'):onePart?this.word('Tách cả khối '+onePart,'Split the whole '+onePart+' block'):hasSkull?this.word('Tách xương sọ','Split the skull'):block?this.word('Tách '+block.count+' cấu trúc','Split '+block.count+' structures'):this.word('Tách từng cấu trúc','Split into structures');
+    $('splitHint').textContent=this.selection?.layout?this.word(`${this.selection.ids.size} cấu trúc · xòe tay để tách · nắm tay để lắp lại`,`${this.selection.ids.size} structures · open your hand to split · fist to reassemble`):onePart?this.word('Tách toàn bộ khối đang chứa cấu trúc này','Splits the whole block that contains this structure'):block?this.word(`${block.count} cấu trúc đang hiện · xòe tay để tách riêng`,`${block.count} structures visible · open your hand to separate them`):this.word('Tách riêng các mảnh nguồn · chọn khối cần tách','Separate the source pieces · pick the block to split');
     const blocks=this.modelBlocks(),activeBlock=blocks.findIndex(item=>item.system===this.selection?.system);
     $('bNextBlock').disabled=!!this.inspectionTransition.pending||!!this.transition.pending||st.state!==FORMED||this.uploaded!==st.index||!blocks.length;
-    $('blockCycleStatus').textContent=activeBlock>=0?`${SYSTEM_LABELS[blocks[activeBlock].system]||blocks[activeBlock].system} · ${activeBlock+1}/${blocks.length} hệ`:'Like trái: mô hình tiếp · like phải: hệ tiếp';
+    $('blockCycleStatus').textContent=activeBlock>=0?this.word(`${this.systemLabel(blocks[activeBlock].system)} · ${activeBlock+1}/${blocks.length} hệ`,`${this.systemLabel(blocks[activeBlock].system)} · system ${activeBlock+1}/${blocks.length}`):this.word('Like trái: mô hình tiếp · like phải: hệ tiếp','Left thumb: next model · right thumb: next system');
     const hot = st.state === IDLE || st.state === DISSOLVE ? 'snap' : st.state === SPHERE ? 'fist' : 'open';
     const gk = `${isM}|${hot}`;
     if (this.guideKey !== gk) {
@@ -1052,11 +1071,11 @@ class App {
       card.querySelector('.pinfo').textContent = [L.sourceId&&L.sourceName?this.word('Tên nguồn (Anh): ','Source name: ')+L.sourceName:L.info,L.latin?'Latin: '+L.latin:''].filter(Boolean).join(' · ');
       const description=card.querySelector('.pdescription');description.textContent=L.description;description.hidden=!L.description;
       const learning=card.querySelector('.plearning');learning.replaceChildren();
-      for(const topic of L.learningNotes||[]){const details=document.createElement('details'),summary=document.createElement('summary'),text=document.createElement('p');summary.textContent='Nhóm giải phẫu: '+topic.name;text.textContent=topic.description;details.append(summary,text);learning.appendChild(details);}
-      card.querySelector('.pmodel').textContent = `${this.modelName(def)} · ${this.selection?.ids.size>1?this.selection.ids.size+' cấu trúc được chọn':L.sourceId || ('cấu trúc '+(this.sel+1))}`;
+      for(const topic of L.learningNotes||[]){const details=document.createElement('details'),summary=document.createElement('summary'),text=document.createElement('p');summary.textContent=this.word('Nhóm giải phẫu: ','Anatomical group: ')+topic.name;text.textContent=topic.description;details.append(summary,text);learning.appendChild(details);}
+      card.querySelector('.pmodel').textContent = `${this.modelName(def)} · ${this.selection?.ids.size>1?this.word(this.selection.ids.size+' cấu trúc được chọn',this.selection.ids.size+' structures selected'):L.sourceId || this.word('cấu trúc '+(this.sel+1),'structure '+(this.sel+1))}`;
     }
     card.classList.toggle('pulled', this.pulled);
-    $('partPull').textContent=this.partSeparation.target>.5?'Lắp lại':this.selection?.layout?'Tách từng cấu trúc':'Kéo ra';
+    $('partPull').textContent=this.partSeparation.target>.5?this.word('Lắp lại','Reassemble'):this.selection?.layout?this.word('Tách từng cấu trúc','Split into structures'):this.word('Kéo ra','Pull out');
     // quiz banner
     const qb = $('quiz'), q = this.quiz;
     qb.hidden = !q;
@@ -1070,7 +1089,7 @@ class App {
     }
     const modelStats=this.lastSolidBlend===1 ? this.word('mô hình 3D đặc','solid 3D model') : `<b>${(CFG.n / 1000).toFixed(0)}k</b> ${this.word('hạt','particles')}`;
     $('stats').innerHTML = `<div><b>${this.fps.toFixed(0)}</b> fps · ${modelStats}</div><div>${this.cam?.running?`Camera <b>${this.cam.fps.toFixed(0)}</b> fps · ${this.cam.delegate}`:this.word('Camera đang tắt','Camera off')}</div><div>${this.cam?.running?`${this.word('Nhận diện','Detection')} <b>${this.cam.detectMs.toFixed(0)}</b> ms`:this.word('Nhận diện —','Detection —')}</div><div>${this.word('Phóng đại','Zoom')} <b>${this.zoom.toFixed(2)}×</b>${this.recorder.on?' · '+this.word('Đang ghi','Recording'):''}${this.voiceOn?' · Micro':''}</div>`;
-    $('renderResolution').textContent=`Độ phân giải ${CFG.dpr.toFixed(2)}× · giữ nguyên chi tiết giải phẫu`;
+    $('renderResolution').textContent=this.word(`Độ phân giải ${CFG.dpr.toFixed(2)}× · giữ nguyên chi tiết giải phẫu`,`Resolution ${CFG.dpr.toFixed(2)}× · anatomical detail preserved`);
     for (const e of st.events.splice(0)) {
       const name = this.modelName(CATALOG[st.index]);
       if (e === 'snap') this.toast(this.word('🫰 Đã gọi hạt','🫰 Particles summoned'));
@@ -1365,7 +1384,7 @@ function boot() {
           // Retrying after cancel reuses a pending permission/start request.
           cameraOpening ||= app.startCamera().finally(()=>{cameraOpening=null;});
           if(!(await cameraOpening)){
-            if(request===startGeneration)app.scanPanel.result({error:'Không mở được camera. Kiểm tra quyền camera và thiết bị rồi thử lại.'},CATALOG);
+            if(request===startGeneration)app.scanPanel.result({error:app.word('Không mở được camera. Kiểm tra quyền camera và thiết bị rồi thử lại.','Could not open the camera. Check the camera permission and the device, then try again.')},CATALOG);
             return;
           }
         }
@@ -1374,6 +1393,7 @@ function boot() {
       }finally{if(request===startGeneration)starting=false;}
     };
     app.scanPanel=new ScanPanel(document.getElementById('cameraPreview'),{
+      word:(vi,en)=>app.word(vi,en),
       onStart:scan,
       onCancel:()=>{startGeneration++;starting=false;window.wonderSnap.scanUI(false);window.parent.postMessage({type:'soma-scan-selected'},location.origin);},
       onSelect:id=>{startGeneration++;window.wonderSnap.scanUI(false);app.selectModel(CATALOG.findIndex(model=>model.id===id),true);window.parent.postMessage({type:'soma-scan-selected'},location.origin);},

@@ -355,7 +355,7 @@ kbd { font-family: inherit; font-size: 11px; padding: 1px 6px; border: 1px solid
 /* Soma studio: fixed instrument rails and an open anatomical stage. */
 :root{--panel:#202223;--panel-edge:#ffffff16;--text:#edeae3;--muted:#a7aaa7;--accent:#c7a078;--accent-ink:#272219;--good:#9cb9a5;--warn:#ca947b}
 body::before{border:0!important;border-radius:0!important}
-.brand{top:0;left:0;right:0;height:66px;align-items:center;padding:0 24px;background:#191b1c;border-bottom:1px solid var(--panel-edge);z-index:4}
+.brand{top:0;left:0;right:0;height:66px;align-items:center;padding:0 24px;background:#191b1c;z-index:4}
 .brand-name{font:500 19px/1.2 Georgia,serif;letter-spacing:-.025em;color:var(--text)}
 .brand-sub{margin-top:5px;font-size:11px;color:var(--muted)}
 .panel{top:86px;bottom:20px;left:20px;width:260px;padding:20px 18px;border:1px solid var(--panel-edge);border-radius:8px;background:#202223;box-shadow:none;scrollbar-gutter:stable}
@@ -397,3 +397,16 @@ button,select,summary{transition:background .18s,border-color .18s,color .18s}
 @media(max-width:900px){.brand{height:58px;padding-inline:16px}.panel{top:74px;left:12px;width:230px;bottom:14px}.top-right{top:74px;right:12px;width:196px;max-height:calc(100dvh - 88px)}.structure-pager{top:auto;bottom:112px}.label-pager{top:auto;bottom:67px}.view-presets button{padding:8px 11px}}
 @media(max-width:600px){.brand{height:48px;padding-inline:12px}.brand-name{font-size:16px}.panel{top:60px;left:10px;width:190px;max-height:44dvh;bottom:auto;padding:16px 12px}.panel .now h1{font-size:19px}.panel.collapsed{top:60px}.top-right{top:60px;right:10px;width:146px;max-height:calc(100dvh - 120px)}.stats{font-size:9px}.top-right .icons{grid-template-columns:repeat(4,minmax(0,1fr))}.icons .icon{height:31px}.view-presets{bottom:12px}.view-presets button{padding:8px 10px;font-size:10px}.structure-pager{bottom:100px;left:50%;transform:translateX(-50%);white-space:nowrap}.label-pager{bottom:57px}}
 @media(prefers-reduced-motion:reduce){button,select,summary{transition:none}}
+
+/* Thẻ thông tin cấu trúc là một tấm NỔI bên trái cột phải.
+   Trước đây nó là con cuối của cột cuộn nên rơi xuống dưới camera — không thấy;
+   đẩy lên đầu cột thì lại đẩy camera xuống. Nổi hẳn ra ngoài luồng: camera và
+   các nút giữ nguyên chỗ, thông tin vẫn hiện ngay cạnh mô hình. */
+.top-right .part-card{
+  position:fixed;top:90px;right:264px;bottom:auto;left:auto;
+  width:300px;max-height:calc(100dvh - 130px);overflow:auto;
+  transform:none;order:0;z-index:6;
+}
+@media(max-width:1200px){.top-right .part-card{right:262px;width:264px}}
+@media(max-width:900px){.top-right .part-card{right:220px;width:240px;top:70px;max-height:calc(100dvh - 100px)}}
+@media(max-width:720px){.top-right .part-card{left:12px;right:12px;width:auto;top:auto;bottom:156px;max-height:32dvh}}

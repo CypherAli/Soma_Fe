@@ -17,10 +17,14 @@ export class HandYaw {
     const delta = this.upright ? roll : roll - this.anchor.roll;
     // WonderSnap's original relative wrist grab, gain and render-time damping.
     const angle = Math.atan2(Math.sin(delta), Math.cos(delta));
-    // In the agreed upright mode, vertical wrist = front. Retain WonderSnap's
-    // twist gain/damping, with a 5-degree neutral band to reject resting noise.
-    const neutral = this.upright ? Math.sign(angle) * Math.max(0, Math.abs(angle) - Math.PI / 36) : angle;
-    const target = (this.upright ? 0 : this.anchor.yaw) + 2.2 * neutral;
+    // A hand held straight at the camera is never perfectly level: wrist, forearm
+    // and camera offset give 10-20 degrees of apparent roll. With the old 5-degree
+    // band and 2.2x gain that tilted the model 30-45 degrees while the hand looked
+    // front-on. Widen the neutral band and keep the turn proportional instead.
+    const dead = Math.PI / 15;                                   // 12 degrees
+    const neutral = Math.sign(angle) * Math.max(0, Math.abs(angle) - dead);
+    const gain = this.upright ? 2.2 : 1.6;
+    const target = (this.upright ? 0 : this.anchor.yaw) + gain * neutral;
     return yaw + (target - yaw) * (1 - Math.exp(-Math.max(0, dt) * 9));
   }
 }
@@ -75,8 +79,11 @@ export function selectionFor(labels, pick, scope = 'part', visible = null) {
   const label = labels[pick];
   if (!label) return null;
   const key = scope === 'system' ? 'system:' + label.system : scope === 'group' ? selectionKey(label) : 'part:' + pick;
+  // Khối "hệ xương" phải là CẢ bộ xương: hộp sọ vẫn tách riêng khi bấm thẳng vào
+  // một xương sọ, nhưng khi tách cả hệ thì sọ đi cùng — trước đây sọ bị bỏ lại
+  // nên "tách bộ xương" trông như thiếu mất một phần.
   const ids = scope !== 'part'
-    ? labels.flatMap((item, index) => (scope==='system'?item.system===label.system:selectionKey(item)===key) && (!visible || visible.has(index)) ? [index] : [])
+    ? labels.flatMap((item, index) => (scope==='system'?item.system===label.system:(selectionKey(item)===key || (key==='system:skeletal' && item.system==='skeletal'))) && (!visible || visible.has(index)) ? [index] : [])
     : [pick];
   return { key, ids: new Set(ids), pick, system: label.system, skull: key === 'skull' };
 }

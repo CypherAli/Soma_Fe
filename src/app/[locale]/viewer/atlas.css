@@ -93,7 +93,11 @@
 .atlas-studio .scene canvas{display:block;width:100%;height:100%;touch-action:none}
 .atlas-studio .vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 51% 43%,transparent 35%,#83919e0f 100%)}
 .atlas-studio .glass{background:#ffffffeb;border:1px solid #25384a17;box-shadow:0 16px 48px #2433440a;backdrop-filter:blur(20px)}
-.atlas-studio .identity{position:absolute;left:32px;top:29px;pointer-events:none}
+/* Cột dọc, canh trái: nút thoát luôn thẳng hàng với con dấu và tiêu đề.
+   Trước đây khối này là block nên nút vừa chèn vào nằm cùng dòng với logo và
+   lệch hẳn ra ngoài mép trái của tiêu đề. */
+.atlas-studio .identity{position:absolute;left:32px;top:29px;pointer-events:none;display:flex;flex-direction:column;align-items:flex-start}
+.atlas-studio .identity .scene-exit{height:34px;padding:0 12px 0 8px;font-size:12.5px;margin-bottom:12px}
 .atlas-studio .eyebrow{font-size:12px;letter-spacing:.19em;color:#737d89;display:flex;align-items:center;gap:8px}
 .atlas-studio .status-dot{height:5px;width:5px;background:#458a85;border-radius:50%;box-shadow:0 0 12px #458a8526}
 .atlas-studio h1{font-family:inherit;font-weight:400;line-height:1.1;font-size:38px;letter-spacing:-1.4px;margin:10px 0 9px}
@@ -682,8 +686,11 @@ html[data-theme="dark"] .atlas-studio .top-actions .theme-toggle{background:#141
 .atlas-studio.atlas-scene .scene{top:62px}
 /* Nút thoát bên trái, nhận diện CĂN GIỮA, điều khiển bên phải — bố cục header
    quen thuộc, không để logo dính vào nút thoát thành một cụm lệch. */
+/* Con dấu đứng NGAY CẠNH nút thoát, không căn giữa thanh: mắt đọc
+   "Quay lại thư viện" rồi thấy luôn thương hiệu, không phải quét sang giữa
+   màn hình. Các nút theme/ngôn ngữ vẫn bị đẩy sang phải bằng margin-left:auto. */
 .atlas-studio .scene-bar .brand-signature{
-  position:absolute;left:50%;transform:translateX(-50%);
+  position:static;transform:none;
   margin-bottom:0;pointer-events:auto;
 }
 .atlas-studio .scene-bar .brand-signature-emblem img{width:30px;height:30px}

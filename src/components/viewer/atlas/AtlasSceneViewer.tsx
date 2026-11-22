@@ -365,7 +365,7 @@ export default function AtlasSceneViewer({ scene }: { scene: AtlasSceneDef }) {
           chỉ có một dòng chữ nhỏ lẫn trong lớp nổi. */}
       <header className="scene-bar">
         <Link
-          href="/giai-phau/lat-cat"
+          href="/giai-phau/tat-ca"
           className="scene-exit"
           aria-label={t("backToLibrary")}
         >
