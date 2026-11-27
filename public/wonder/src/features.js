@@ -1,4 +1,4 @@
-export { parseCommand, MODEL_NAMES, normalizeVoice, readingText, resolveVoiceSystems, commandFeedback } from './logic/voice-commands.js';
+export { parseCommand, matchSpokenCommand, MODEL_NAMES, normalizeVoice, readingText, resolveVoiceSystems, commandFeedback } from './logic/voice-commands.js';
 export { Voice, Speaker, speak } from './logic/speech.js';
 
 /** Records the particle canvas + overlay (labels, hand skeleton) into a WebM video. */

@@ -1,5 +1,5 @@
 // WonderSnap (browser): snap -> particle burst, fist -> form a model, open hand -> next wonder or EXPLODED VIEW
-// (hand openness = how far apart the parts fly), twist = rotate, left 👍 = next model, right 👍 = next system, ☝ = pick, pinch = pull
+// (hand openness = how far apart the parts fly), twist = rotate, left 👍 = next model, right 👍 = next system, = pick, pinch = pull
 // out, two hands = zoom, snap = dissolve. Plus quiz, voice, cut-away, recording, beating heart / breathing lungs.
 // MediaPipe (hands) + WebGL2 (GPU particles via transform feedback) + procedural models.
 import { CATALOG, isMachine, buildModelAsync } from './models/catalog.js';
@@ -10,7 +10,7 @@ import { Renderer, perspective, mul4, translate4, rotY4, project } from './gl/re
 import { HandCamera } from './hands.js';
 import { hand as synthHand } from './logic/synth.js';
 import { rotX, rotY, matMul, matVec, deg } from './lib/vec.js';
-import { parseCommand, commandFeedback, readingText, Voice, Speaker, Recorder } from './features.js';
+import { matchSpokenCommand, commandFeedback, readingText, Voice, Speaker, Recorder } from './features.js';
 import { availableInspectionViews, inspectionVisible } from './models/inspection.js';
 import { previewTransform,previewPoint,previewSource } from './lib/preview-projection.js';
 import { ScanPanel } from './lib/scan-panel.js';
@@ -166,9 +166,23 @@ class App {
     this.sel = -1; this.selection = null; this.partSeparation = new PartSeparation(); this.handYaw = new HandYaw();
     this.pulled = false; this.pullAmt = 0; this.hover = { li: -1, t0: 0 }; this.anchors = []; this.labelHits = []; this.pointer = null; this.lostT = 0;
     this.quiz = null;
-    this.cut = { on: false, x: 0.35, target: 0.35 };
+    this.cut = { on: false, x: 0, target: 0, plane: null };
     this.voiceLanguage=qs.get('lang')==='en'?'en':'vi';this.voiceOn=false;this.autoRead=false;this.spoken=[];this.lastHeard='';this.hiddenSystems=new Set();
-    this.voice=new Voice(text=>{const before=this.speaker?.serial;const done=this.voiceCommand(text);if(done.length&&this.speaker?.serial===before)void this.speaker.speak(commandFeedback(done,CATALOG,this.model?.labels,this.voiceLanguage),{language:this.voiceLanguage});},{language:this.voiceLanguage,onState:state=>{this.voiceOn=['starting','listening','paused'].includes(state);this.voiceState=state;this.updateVoiceUI();},onError:error=>this.voiceError(error)});
+    this.voice = new Voice((text, alternatives) => {
+      const before = this.speaker.serial;
+      const done = this.voiceCommand(text, { alternatives });
+      if (done.length && this.speaker.serial === before) {
+        void this.speaker.speak(commandFeedback(done, CATALOG, this.model?.labels, this.voiceLanguage), { language: this.voiceLanguage });
+      }
+    }, {
+      language: this.voiceLanguage,
+      onState: state => {
+        this.voiceOn = ['starting', 'listening', 'paused'].includes(state);
+        this.voiceState = state;
+        this.updateVoiceUI();
+      },
+      onError: error => this.voiceError(error),
+    });
     this.speaker=new Speaker({voice:this.voice,onState:state=>{this.speakerState=state;this.updateVoiceUI();},onError:error=>this.voiceError(error)});
     this.recorder = new Recorder(this.canvas, this.overlay); this.lastRecording = null;
     this.t = 0; this.last = null; this.frames = 0; this.fps = 0; this._fpsN = 0; this._fpsT = 0;
@@ -216,7 +230,7 @@ class App {
     this.autoRotate=false;this.handRotating=false;this.handYaw.reset();
     this.manualExplode=this.explode=0;this.expHist=[];this.wasBusy=false;
     this.inspectionCenter=[0,0,0];this.inspectionSignature=null;this.inspectionFit=null;
-    this.cut.on=false;this.cut.x=this.cut.target=.35;this.labelPage=0;
+    this.setCut(false);this.labelPage=0;
   }
 
   resize() {
@@ -402,9 +416,16 @@ class App {
       if (vis && !busyHand && ctl.landmarks) {
         const c0 = project(this.projView, [0, 0, 0]), rr = this.globeRadiusPx();
         const px = this.toScreen([ctl.handX, ctl.handY])[0], cx = (c0[0] * 0.5 + 0.5) * this.overlay.width;
-        this.cut.target = clamp((px - cx) / rr, -1.25, 1.25);
+        if (rr > 0) this.cut.target = clamp((px - cx) / rr, -1, 1);
       }
       this.cut.x += (this.cut.target - this.cut.x) * (1 - Math.exp(-dt * 10));
+      let left = Infinity, right = -Infinity;
+      for (const { worldX } of this.anchors) {
+        left = Math.min(left, worldX);
+        right = Math.max(right, worldX);
+      }
+      this.cut.plane = left <= right ? left + (right - left) * (.5 + this.cut.x * .35) : null;
+      if (this.cut.plane !== null) this.anchors = this.anchors.filter(anchor => anchor.worldX <= this.cut.plane);
     }
 
     let simulationFormT=formT;
@@ -444,7 +465,7 @@ class App {
       solidBlend,projection:this.proj,view:translate4(this.offX*(1-.45*this.explode),this.offY,-this.dist/this.zoom),rot,explode:this.explode,scale,exCenter,pull:[0,0,this.pullDistance*this.pullAmt],
       projView: this.projView, globeMvp: mul4(this.projView, rotY4(0.1 * t)), color: this.color, tintMix: this.tintMix,
       alpha, trails: this.trails, trailLen: 0.06, pointPx: this.canvas.height * 0.012 * Math.sqrt(this.zoom) * (def.pointScale || 1), gain: this.gain * (def.gainScale || 1),
-      video: { has: false, dim: 0.65 }, sel, cutOn: this.cut.on && formed, cut: this.cut.x, flow: this.flow, time: t,
+      video: { has: false, dim: 0.65 }, sel, cutOn: this.cut.on && formed && this.cut.plane !== null, cut: this.cut.plane, flow: this.flow, time: t,
     });
     this.drawOverlay(t, machine, formT, pointing);
     this.recorder.frame();
@@ -476,7 +497,7 @@ class App {
       const w = matVec(rot, q.map((v,k)=>v*local.scale+local.offset[k]));
       w[2] += selectedPull(li,this.selection,this.pullAmt,this.pullDistance)[2];
       const [nx, ny] = project(P, w);
-      this.anchors.push({ li, L, px: (nx * 0.5 + 0.5) * W, py: (0.5 - ny * 0.5) * H });
+      this.anchors.push({ li, L, worldX: w[0], px: (nx * 0.5 + 0.5) * W, py: (0.5 - ny * 0.5) * H });
     });
   }
   nearestAnchor(x, y, maxPx) {
@@ -562,7 +583,7 @@ class App {
     this.renderer.setSelection(this.selection.ids,li,this.selection.layout);
     const L = this.selectionLabel();
     if(this.autoRead&&source!=='voice-external'&&source!=='gesture')this.readSelected();
-    this.toast(`☝ ${L.label}`);
+    this.toast(`${L.label}`);
   }
   layoutSelection(page=0) {
     if(!this.selection)return;
@@ -607,19 +628,38 @@ class App {
   startQuiz() {
     this.$('systemFocus').value='-1';
     const st = this.ctl.state;
-    if (!isMachine(st.index)) this.selectModel(CATALOG.findIndex((d) => d.name === 'Human Brain'));
-    else if (st.state !== FORMED) this.selectModel(st.index);
-    this.quiz = { pending: true, total: QUIZ_LEN, asked: 0, score: 0, target: -1, phase: 'wait', nextAt: 0, done: false, feedback: '', seed: this.frames };
+    const requestedIndex = this.transition.pending?.index ?? st.index;
+    const modelIndex = isMachine(requestedIndex) ? requestedIndex : CATALOG.findIndex(model => model.id === 'brain');
+    if (this.transition.pending?.index !== modelIndex && (modelIndex !== st.index || st.state !== FORMED)) this.selectModel(modelIndex);
+    this.setCut(false);
+    this.quiz = { modelIndex, previousExplode: modelIndex === st.index ? this.manualExplode : 0, pending: true, total: QUIZ_LEN, asked: 0, score: 0, target: -1, phase: 'wait', nextAt: 0, done: false, feedback: '', seed: this.frames };
     this.manualExplode = 1;
-    this.toast(this.word('🎓 Luyện tập: chỉ vào cấu trúc được gọi tên','🎓 Quiz: point at the named structure'));
+    this.toast(this.word('Luyện tập: chỉ vào cấu trúc được gọi tên','Quiz: point at the named structure'));
   }
-  stopQuiz() { this.quiz = null; this.deselect(); }
+  stopQuiz() {
+    if (!this.quiz) return;
+    this.manualExplode = this.quiz.previousExplode;
+    this.quiz = null;
+    this.deselect();
+  }
   updateQuiz(t, ready) {
     const q = this.quiz;
-    if (!q || !ready) return;
+    if (!q || !ready || this.uploaded !== q.modelIndex || this.transition.pending) return;
     if (q.pending) {
       q.pending = false;
-      const n = this.model.labels.length, order = [...Array(n).keys()].filter(i=>!this.model.surface?.groups.some(g=>g.pick===i&&g.cover)||this.$('showCover').checked);
+      const visible = new Map();
+      for (const { li, L } of this.anchors) {
+        if (this.locale === 'vi' && L.label.startsWith('Cấu trúc ')) continue;
+        const label = L.label.trim().toLowerCase();
+        visible.set(label, visible.has(label) ? -1 : li);
+      }
+      const order = [...visible.values()].filter(index => index >= 0);
+      if (!order.length) {
+        this.stopQuiz();
+        this.toast(this.word('Chế độ xem này chưa có cấu trúc phù hợp để luyện tập.','This view has no structures suitable for a quiz.'));
+        return;
+      }
+      q.total = Math.min(q.total, order.length);
       let s = (q.seed * 2654435761) >>> 0;
       for (let i = order.length - 1; i > 0; i--) { s = (s * 1664525 + 1013904223) >>> 0; const j = s % (i + 1); [order[i], order[j]] = [order[j], order[i]]; }
       q.order = order; this.manualExplode = 1; this.nextQuestion();
@@ -632,7 +672,7 @@ class App {
     this.deselect();
     if (q.asked >= q.total) {
       q.done = true; q.phase = 'done'; q.nextAt = this.t;
-      q.feedback = this.word(`🏆 Điểm ${q.score} / ${q.total}`,`🏆 Score ${q.score} / ${q.total}`);
+      q.feedback = this.word(`Điểm ${q.score} / ${q.total}`,`Score ${q.score} / ${q.total}`);
       this.say(this.voiceLanguage==='en'?`Quiz finished. You scored ${q.score} out of ${q.total}.`:`Kết thúc kiểm tra. Bạn đạt ${q.score} trên ${q.total} điểm.`);
       return;
     }
@@ -644,8 +684,8 @@ class App {
     const q = this.quiz, L = this.model.labels;
     const ok = li === q.target;
     if (ok) q.score++;
-    q.phase = 'feedback'; q.nextAt = this.t + 1.8;
-    q.feedback = ok ? this.word(`✅ Đúng! ${L[li].label}`,`✅ Correct! ${L[li].label}`) : this.word(`❌ Bạn chọn ${L[li].label}. Đáp án: ${L[q.target].label}.`,`❌ That's the ${L[li].label}. Here is the ${L[q.target].label}.`);
+    q.phase = 'feedback'; q.correct = ok; q.nextAt = this.t + 1.8;
+    q.feedback = ok ? this.word(`Đúng! ${L[li].label}`,`Correct! ${L[li].label}`) : this.word(`Bạn chọn ${L[li].label}. Đáp án: ${L[q.target].label}.`,`That's the ${L[li].label}. Here is the ${L[q.target].label}.`);
     this.selectPart(q.target,'quiz');                                  // reveal the right answer
     const name=readingText(L[li],null,this.voiceLanguage,'name').text;
     this.say(this.voiceLanguage==='en'?(ok?`Correct! ${name}`:`No, that's the ${name}.`):(ok?`Đúng! ${name}`:`Chưa đúng. Đây là ${name}.`));
@@ -665,8 +705,10 @@ class App {
     }
   }
   voiceCommand(text,options={}) {
-    this.lastHeard = text;
-    const acts = parseCommand(text, CATALOG, this.model && isMachine(this.uploaded) && this.uploaded === this.ctl.state.index ? this.model.labels : []);
+    const labels = this.model && isMachine(this.uploaded) && this.uploaded === this.ctl.state.index ? this.model.labels : [];
+    const { text: recognized, actions: acts } = matchSpokenCommand(text, options.alternatives ?? [], CATALOG, labels);
+    this.lastHeard = recognized;
+    if (acts.length) this.$('voiceNote').textContent = '';
     const st = this.ctl.state, done = [];
     for (const a of acts) {
       if(['explode','assemble','rotateDegrees'].includes(a.type)){
@@ -691,7 +733,7 @@ class App {
       else if (a.type === 'dissolve') { if (st.state !== IDLE) this.ctl.keySnap(this.t); done.push('dissolve'); }
       else if (a.type === 'quiz') { this.startQuiz(); done.push('quiz'); }
       else if (a.type === 'stopQuiz') { this.stopQuiz(); done.push('stop quiz'); }
-      else if (a.type === 'cut') { this.cut.on=true;this.$('bCut').classList.add('on');done.push('cut'); }
+      else if (a.type === 'cut') { this.setCut(true);done.push('cut'); }
       else if (a.type === 'zoomIn') { this.zoomTarget = clamp(this.zoomTarget * 1.3, 0.5, 2.6); done.push('zoom in'); }
       else if (a.type === 'zoomOut') { this.zoomTarget = clamp(this.zoomTarget / 1.3, 0.5, 2.6); done.push('zoom out'); }
       else if (a.type === 'rotate') { this.autoRotate=a.value;this.$('bRotate').classList.toggle('on',a.value);done.push(a.value?'rotate':'stop rotation'); }
@@ -701,13 +743,13 @@ class App {
         if(!options.external)this.readSelected();done.push('describe');
       }
       else if(a.type==='stopRead'){this.speaker.stop();done.push('stop reading');}
-      else if(a.type==='micOff'){this.voice.stop();done.push('microphone off');}
+      else if(a.type==='micOff'){this.voice.stop();this.speaker.stop();done.push('microphone off');}
       else if(a.type==='cameraOn'){if(!this.camOn)void this.startCamera();done.push('camera on');}
       else if(a.type==='cameraOff'){if(this.camOn)this.stopCamera();done.push('camera off');}
       else if(a.type==='scan'){if(!this.camOn){this.toast(this.voiceLanguage==='en'?'Turn on the camera before scanning':'Bật camera trước khi quét');continue;}this.$('scanCamera').click();done.push('scan');}
       else if(a.type==='scanCancel'){this.$('scanCancel').click();done.push('cancel scan');}
       else if(['front','back','side','reset'].includes(a.type)){this.$({front:'viewFront',back:'viewBack',side:'viewSide',reset:'viewReset'}[a.type]).click();done.push(a.type);}
-      else if(a.type==='cutOff'){this.cut.on=false;this.$('bCut').classList.remove('on');done.push('cut off');}
+      else if(a.type==='cutOff'){this.setCut(false);done.push('cut off');}
       else if(a.type==='labelsOn'||a.type==='labelsOff'){this.labelsOn=a.type==='labelsOn';this.$('bLabels').classList.toggle('on',this.labelsOn);done.push(a.type);}
       else if(a.type==='clear'){this.deselect();done.push('clear');}
       else if(a.type==='pull'||a.type==='putBack'){if(this.sel<0)continue;this.setSeparation(a.type==='pull'?1:0);done.push(a.type);}
@@ -722,13 +764,20 @@ class App {
         this.populateFocus();done.push(a.type);
       }
     }
-    this.$('voiceHeard').textContent='“'+text+'”';
-    this.toast(`🎤 “${text}”${done.length ? ' → ' + commandFeedback(done,CATALOG,this.model?.labels,this.locale) : this.word(' · Chưa khớp lệnh hoặc cấu trúc duy nhất',' · No matching command or unique structure')}`);
+    this.$('voiceHeard').textContent='“'+recognized+'”';
+    this.toast(`“${recognized}”${done.length ? ' · ' + commandFeedback(done,CATALOG,this.model?.labels,this.locale) : this.word(' · Chưa khớp lệnh hoặc cấu trúc duy nhất',' · No matching command or unique structure')}`);
     return done;
   }
   toggleVoice() {
     if(this.voice.on)this.voice.stop();
-    else{this.$('voicePanel').open=true;this.speaker.stop();this.$('voiceNote').textContent='';if(window.parent!==window)window.parent.postMessage({type:'soma-voice-owner',owner:'vision'},location.origin);this.voice.start(this.voiceLanguage);}
+    else{
+      this.$('voicePanel').open=true;
+      this.$('micStatus').scrollIntoView({block:'nearest'});
+      this.speaker.stop();
+      this.$('voiceNote').textContent='';
+      if(window.parent!==window)window.parent.postMessage({type:'soma-voice-owner',owner:'vision'},location.origin);
+      this.voice.start(this.voiceLanguage);
+    }
   }
   updateVoiceUI(){
     const en=this.locale==='en',language=this.voiceLanguage==='en'?this.word('tiếng Anh','English'):this.word('tiếng Việt','Vietnamese'),states=en?{off:'Microphone off',starting:'Starting microphone…',listening:'Listening · '+language,paused:'Microphone paused while reading',error:'Microphone error',unsupported:'Speech recognition unavailable'}:{off:'Micro đang tắt',starting:'Đang mở micro…',listening:'Đang nghe · '+language,paused:'Tạm ngừng nghe khi loa đọc',error:'Micro gặp lỗi',unsupported:'Trình duyệt chưa hỗ trợ nhận dạng'};
@@ -748,10 +797,21 @@ class App {
   }
 
   // ------------------------------------------------------------ cut-away + recording
-  toggleCut() { this.cut.on = !this.cut.on; this.$('bCut').classList.toggle('on', this.cut.on); this.toast(this.cut.on ? this.word('✂ Mặt cắt: di chuyển tay hoặc chuột sang trái/phải','✂ Cut-away: move your hand or mouse left/right') : this.word('✂ Đã tắt mặt cắt','✂ Cut-away off')); }
+  setCut(on) {
+    if (!on || !this.cut.on) {
+      this.cut.x = this.cut.target = 0;
+      this.cut.plane = null;
+    }
+    this.cut.on = on;
+    this.$('bCut').classList.toggle('on', on);
+  }
+  toggleCut() {
+    this.setCut(!this.cut.on);
+    this.toast(this.cut.on ? this.word('Mặt cắt: di chuyển tay hoặc chuột sang trái/phải','Cross-section: move your hand or mouse left/right') : this.word('Đã tắt mặt cắt','Cross-section off'));
+  }
   async toggleRecord() {
     if (!Recorder.supported()) { this.toast(this.word('Trình duyệt này không hỗ trợ ghi hình','Recording is not supported in this browser')); return; }
-    if (!this.recorder.on) { this.recorder.start(); this.$('bRec').classList.add('on'); this.toast(this.word('⏺ Đang ghi hình…','⏺ Recording…')); return; }
+    if (!this.recorder.on) { this.recorder.start(); this.$('bRec').classList.add('on'); this.toast(this.word('Đang ghi hình…','Recording…')); return; }
     const blob = await this.recorder.stop();
     this.$('bRec').classList.remove('on');
     if (!blob) return;
@@ -761,7 +821,7 @@ class App {
     a.download = `wondersnap-${new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19)}.webm`;
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(a.href), 10000);
-    this.toast(this.word(`💾 Đã lưu video ${(blob.size / 1e6).toFixed(1)} MB`,`💾 Saved ${(blob.size / 1e6).toFixed(1)} MB video`));
+    this.toast(this.word(`Đã lưu video ${(blob.size / 1e6).toFixed(1)} MB`,`Saved ${(blob.size / 1e6).toFixed(1)} MB video`));
   }
 
   // ------------------------------------------------------------ overlay: hands, pointer, labels
@@ -825,13 +885,14 @@ class App {
       }
       g.globalAlpha = 1;
     }
-    if (this.cut.on && ctl.state.state === FORMED) {                    // cut plane marker
+    if (this.cut.on && this.cut.plane !== null && ctl.state.state === FORMED) {
       const c0 = project(this.projView, [0, 0, 0]), rr = this.globeRadiusPx();
-      const x = (c0[0] * 0.5 + 0.5) * W + this.cut.x * rr, cy = (0.5 - c0[1] * 0.5) * H;
+      const [nx] = project(this.projView, [this.cut.plane, 0, 0]);
+      const x = (nx * 0.5 + 0.5) * W, cy = (0.5 - c0[1] * 0.5) * H;
       g.strokeStyle = '#ffffff'; g.globalAlpha = 0.5; g.setLineDash([8 * dpr, 6 * dpr]); g.lineWidth = 1.5 * dpr;
       g.beginPath(); g.moveTo(x, cy - rr * 1.1); g.lineTo(x, cy + rr * 1.1); g.stroke(); g.setLineDash([]);
       g.globalAlpha = 0.9; g.fillStyle = '#fff'; g.font = `600 ${12 * dpr}px ui-sans-serif, system-ui, sans-serif`; g.textAlign = 'center';
-      g.fillText(this.word('✂ Mặt cắt','✂ Cross-section'), x, cy - rr * 1.1 - 8 * dpr); g.globalAlpha = 1;
+      g.fillText(this.word('Mặt cắt','Cross-section'), x, Math.max(22 * dpr, cy - rr * 1.1 - 8 * dpr)); g.globalAlpha = 1;
     }
     if (!this.anchors.length) return;
     if (!inspectionLabelsVisible({
@@ -951,7 +1012,7 @@ class App {
       ['twist', '🔄', this.word('<b>Xoay cổ tay</b> — chỉ xoay trái/phải','<b>Twist your wrist</b> — turn left/right only')],
       ...(machine ? [['point', '☝', this.word('<b>Trỏ và giữ</b> để chọn · <b>xòe/nắm</b> chỉ kéo phần đã chọn ra–lắp lại · Esc để bỏ chọn','<b>Point and hold</b> to select · <b>open/fist</b> pulls the selection out and back · Esc clears')]] : []),
       ['zoom', '🙌', this.word('<b>Hai tay</b> dang ra, chụm vào — thu phóng','<b>Both hands</b> apart to zoom in, together to zoom out')],
-      ['like', '👍', this.word('<b>Like tay trái</b> — mô hình tiếp · <b>tay phải</b> — hệ tiếp trong mô hình. Hạ ngón cái rồi giơ lại.','<b>Left thumb</b> — next model · <b>right thumb</b> — next system in the model. Lower the thumb then raise it again.')],
+      ['like', '👍', this.word('<b>Giơ ngón cái tay trái</b> — mô hình tiếp · <b>tay phải</b> — hệ tiếp trong mô hình. Hạ ngón cái rồi giơ lại.','<b>Left thumb</b> — next model · <b>right thumb</b> — next system in the model. Lower the thumb then raise it again.')],
       ['peace', '✌', this.word('<b>Peace</b> — tính năng sau','<b>Peace</b> — coming later')],
     ];
   }
@@ -1053,7 +1114,7 @@ class App {
     $('splitHint').textContent=this.selection?.layout?this.word(`${this.selection.ids.size} cấu trúc · xòe tay để tách · nắm tay để lắp lại`,`${this.selection.ids.size} structures · open your hand to split · fist to reassemble`):onePart?this.word('Tách toàn bộ khối đang chứa cấu trúc này','Splits the whole block that contains this structure'):block?this.word(`${block.count} cấu trúc đang hiện · xòe tay để tách riêng`,`${block.count} structures visible · open your hand to separate them`):this.word('Tách riêng các mảnh nguồn · chọn khối cần tách','Separate the source pieces · pick the block to split');
     const blocks=this.modelBlocks(),activeBlock=blocks.findIndex(item=>item.system===this.selection?.system);
     $('bNextBlock').disabled=!!this.inspectionTransition.pending||!!this.transition.pending||st.state!==FORMED||this.uploaded!==st.index||!blocks.length;
-    $('blockCycleStatus').textContent=activeBlock>=0?this.word(`${this.systemLabel(blocks[activeBlock].system)} · ${activeBlock+1}/${blocks.length} hệ`,`${this.systemLabel(blocks[activeBlock].system)} · system ${activeBlock+1}/${blocks.length}`):this.word('Like trái: mô hình tiếp · like phải: hệ tiếp','Left thumb: next model · right thumb: next system');
+    $('blockCycleStatus').textContent=activeBlock>=0?this.word(`${this.systemLabel(blocks[activeBlock].system)} · ${activeBlock+1}/${blocks.length} hệ`,`${this.systemLabel(blocks[activeBlock].system)} · system ${activeBlock+1}/${blocks.length}`):this.word('Giơ ngón cái trái để chuyển mô hình, ngón cái phải để chuyển hệ','Left thumb: next model · right thumb: next system');
     const hot = st.state === IDLE || st.state === DISSOLVE ? 'snap' : st.state === SPHERE ? 'fist' : 'open';
     const gk = `${isM}|${hot}`;
     if (this.guideKey !== gk) {
@@ -1068,7 +1129,11 @@ class App {
       card.dataset.key = `${st.index}:${this.selection?.key}:${this.sel}`;
       card.querySelector('.swatch').style.background = rgbCss(L.color);
       card.querySelector('.pname').textContent = L.label;
-      card.querySelector('.pinfo').textContent = [L.sourceId&&L.sourceName?this.word('Tên nguồn (Anh): ','Source name: ')+L.sourceName:L.info,L.latin?'Latin: '+L.latin:''].filter(Boolean).join(' · ');
+      const info = card.querySelector('.pinfo');
+      info.textContent = this.locale === 'vi'
+        ? (L.sourceId ? '' : L.info)
+        : [L.sourceId && L.sourceName ? 'Source name: ' + L.sourceName : L.info, L.latin ? 'Latin: ' + L.latin : ''].filter(Boolean).join(' · ');
+      info.hidden = !info.textContent;
       const description=card.querySelector('.pdescription');description.textContent=L.description;description.hidden=!L.description;
       const learning=card.querySelector('.plearning');learning.replaceChildren();
       for(const topic of L.learningNotes||[]){const details=document.createElement('details'),summary=document.createElement('summary'),text=document.createElement('p');summary.textContent=this.word('Nhóm giải phẫu: ','Anatomical group: ')+topic.name;text.textContent=topic.description;details.append(summary,text);learning.appendChild(details);}
@@ -1081,22 +1146,22 @@ class App {
     qb.hidden = !q;
     if (q) {
       const target = q.target >= 0 && this.model?.labels[q.target];
-      qb.querySelector('.q').textContent = q.done ? this.word('🎓 Đã hoàn thành','🎓 Quiz finished') : target ? this.word(`🎓 Tìm: ${target.label}`,`🎓 Find: ${target.label}`) : this.word('🎓 Chuẩn bị…','🎓 Get ready…');
+      qb.querySelector('.q').textContent = q.done ? this.word('Đã hoàn thành','Quiz finished') : target ? this.word(`Tìm: ${target.label}`,`Find: ${target.label}`) : this.word('Chuẩn bị…','Get ready…');
       qb.querySelector('.qs').textContent = this.word(`Câu ${Math.max(q.asked, 1)} / ${q.total} · điểm ${q.score}`,`Question ${Math.max(q.asked, 1)} / ${q.total} · score ${q.score}`);
       qb.querySelector('.qf').textContent = q.feedback || this.word('Chỉ một ngón tay vào cấu trúc (hoặc bấm chọn)','Point at the structure (or click it)');
-      qb.classList.toggle('good', q.feedback.startsWith('✅') || q.done);
-      qb.classList.toggle('bad', q.feedback.startsWith('❌'));
+      qb.classList.toggle('good', q.done || (q.phase === 'feedback' && q.correct));
+      qb.classList.toggle('bad', q.phase === 'feedback' && !q.correct);
     }
     const modelStats=this.lastSolidBlend===1 ? this.word('mô hình 3D đặc','solid 3D model') : `<b>${(CFG.n / 1000).toFixed(0)}k</b> ${this.word('hạt','particles')}`;
     $('stats').innerHTML = `<div><b>${this.fps.toFixed(0)}</b> fps · ${modelStats}</div><div>${this.cam?.running?`Camera <b>${this.cam.fps.toFixed(0)}</b> fps · ${this.cam.delegate}`:this.word('Camera đang tắt','Camera off')}</div><div>${this.cam?.running?`${this.word('Nhận diện','Detection')} <b>${this.cam.detectMs.toFixed(0)}</b> ms`:this.word('Nhận diện —','Detection —')}</div><div>${this.word('Phóng đại','Zoom')} <b>${this.zoom.toFixed(2)}×</b>${this.recorder.on?' · '+this.word('Đang ghi','Recording'):''}${this.voiceOn?' · Micro':''}</div>`;
     $('renderResolution').textContent=this.word(`Độ phân giải ${CFG.dpr.toFixed(2)}× · giữ nguyên chi tiết giải phẫu`,`Resolution ${CFG.dpr.toFixed(2)}× · anatomical detail preserved`);
     for (const e of st.events.splice(0)) {
       const name = this.modelName(CATALOG[st.index]);
-      if (e === 'snap') this.toast(this.word('🫰 Đã gọi hạt','🫰 Particles summoned'));
-      else if (e === 'form') this.toast(this.word(`✊ Đang tạo hình: ${name}`,`✊ Assembling: ${name}`));
-      else if (e === 'next') this.toast(this.word(`✌ Mô hình tiếp: ${name}`,`✌ Next: ${name}`));
+      if (e === 'snap') this.toast(this.word('Đã gọi hạt','Particles summoned'));
+      else if (e === 'form') this.toast(this.word(`Đang tạo hình: ${name}`,`Assembling: ${name}`));
+      else if (e === 'next') this.toast(this.word(`Mô hình tiếp: ${name}`,`Next: ${name}`));
       else if (e === 'select') this.toast(`→ ${name}`);
-      else if (e === 'dissolve') this.toast(this.word('💥 Đã làm tan mô hình','💥 Dissolved'));
+      else if (e === 'dissolve') this.toast(this.word('Đã làm tan mô hình','Dissolved'));
     }
   }
 
@@ -1108,6 +1173,7 @@ class App {
   selectModel(i, autoForm = true) {
     const n = CATALOG.length;
     i = ((i % n) + n) % n;
+    if (this.quiz && this.quiz.modelIndex !== i) this.stopQuiz();
     this.pendingVoiceActions=null;
     if(this.transition.pending?.index===i)return;
     this.inspectionTransition.cancel();
@@ -1124,6 +1190,12 @@ class App {
     this.selectModel(nextModelIndex(CATALOG,this.ctl.state.index,step,this.transition.pending));
   }
 
+  toggleHelp(open = this.$('help').hidden) {
+    this.$('help').hidden = !open;
+    this.$('bHelp').setAttribute('aria-expanded', String(open));
+    this.$(open ? 'helpClose' : 'bHelp').focus({ preventScroll: true });
+  }
+
   bindInput() {
     const $ = this.$, ctl = this.ctl;
     $('structuresPrevious').onclick=()=>this.changeStructurePage(-1);
@@ -1132,6 +1204,8 @@ class App {
     addEventListener('keydown', (e) => {
       if (e.target instanceof HTMLSelectElement || e.target instanceof HTMLTextAreaElement || (e.target instanceof HTMLInputElement && e.target.type !== 'range')) return;
       const k = e.key.toLowerCase(), st = ctl.state;
+      if (k === ' ' && e.target instanceof Element && e.target.closest('button, summary, a')) return;
+      if (k === 'escape' && !$('help').hidden) { this.toggleHelp(false); return; }
       if(this.transition.pending&&[' ','f','o','e','arrowup','arrowdown'].includes(k)){e.preventDefault();return;}
       if (k !== 'd') this.stopDemo();
       if (k === ' ') { e.preventDefault(); ctl.keySnap(now()); }
@@ -1147,20 +1221,20 @@ class App {
       else if (k === '-' || k === '_') this.zoomTarget = clamp(this.zoomTarget / 1.15, 0.5, 2.6);
       else if (k === '0') this.zoomTarget = 1;
       else if (k === 'x') this.toggleCut();
-      else if (k === ',') this.cut.target = clamp(this.cut.target - 0.1, -1.25, 1.25);
-      else if (k === '.') this.cut.target = clamp(this.cut.target + 0.1, -1.25, 1.25);
+      else if (k === ',' && this.cut.on) this.cut.target = clamp(this.cut.target - 0.1, -1, 1);
+      else if (k === '.' && this.cut.on) this.cut.target = clamp(this.cut.target + 0.1, -1, 1);
       else if (k === 'q') { if (this.quiz) this.stopQuiz(); else this.startQuiz(); }
       else if (k === 'm') this.toggleVoice();
       else if (k === 'k') this.toggleRecord();
       else if (k === 'i') this.voiceCommand('what is this');
       else if (k === 'escape') { if (this.quiz) this.stopQuiz(); this.deselect(); }
       else if (k === 'r') this.toggle('autoRotate', 'bRotate');
-      else if (k === 'g') { this.toggle('handRotate', 'bHandRot'); this.toast(this.word(`🔄 Xoay theo tay: ${this.handRotate ? 'bật' : 'tắt'}`,`🔄 Hand rotation ${this.handRotate ? 'on' : 'off'}`)); }
+      else if (k === 'g') { this.toggle('handRotate', 'bHandRot'); this.toast(this.word(`Xoay theo tay: ${this.handRotate ? 'bật' : 'tắt'}`,`Hand rotation ${this.handRotate ? 'on' : 'off'}`)); }
       else if (k === 'l') this.toggle('labelsOn', 'bLabels');
       else if (k === 't') this.trails = !this.trails;
       else if (k === 'c') this.toggleCamera();
       else if (k === 'd') this.toggleDemo();
-      else if (k === 'h' || k === '?') $('help').hidden = !$('help').hidden;
+      else if ((k === 'h' || k === '?') && !e.repeat) this.toggleHelp();
     });
     $('bSnap').onclick = () => { this.stopDemo(); ctl.keySnap(now()); };
     $('bForm').onclick = () => { this.stopDemo(); ctl.keyPose(FIST, now()); };
@@ -1191,7 +1265,8 @@ class App {
     $('bQuiz').onclick = () => { if (this.quiz) this.stopQuiz(); else this.startQuiz(); };
     $('bVoice').onclick = () => this.toggleVoice();
     $('bRec').onclick = () => this.toggleRecord();
-    $('bHelp').onclick = () => { $('help').hidden = !$('help').hidden; };
+    $('bHelp').onclick = () => this.toggleHelp();
+    $('helpClose').onclick = () => this.toggleHelp(false);
     $('partClose').onclick = () => this.deselect();
     $('partSystem').onclick=()=>{const system=this.model?.labels[this.sel]?.system;if(!system)return;const view=availableInspectionViews(this.model.surface?.groups||[]).find(profile=>profile.systems?.length===1&&profile.systems[0]===system);if(!view)return;this.changeInspection(()=>{this.deselect();$('inspectionView').value=view.id;$('systemFocus').value='-1';this.populateFocus();});};
     $('partPull').onclick = () => { if (this.sel >= 0) this.setSeparation(this.partSeparation.target>.5?0:1); };
@@ -1199,7 +1274,16 @@ class App {
     $('partSpeak').onclick = () => this.readSelected();
     $('voiceLanguage').value=this.voiceLanguage;
     document.documentElement.lang=this.locale;
-    $('voiceLanguage').onchange=()=>{this.speaker.stop();this.voiceLanguage=$('voiceLanguage').value;this.voice.setLanguage(this.voiceLanguage);$('voiceNote').textContent='';$('voiceExamples').textContent=this.voiceLanguage==='en'?'“Explode”, “open wrist”, “select left brachioradialis”, “scan”, “read description”.':'“Tách lớp”, “mở cổ tay”, “chọn cơ cánh tay-quay”, “quét”, “đọc chú thích”.';this.updateVoiceUI();};
+    $('voiceLanguage').onchange=()=>{
+      this.speaker.stop();
+      this.voiceLanguage=$('voiceLanguage').value;
+      this.voice.setLanguage(this.voiceLanguage);
+      $('voiceNote').textContent='';
+      $('voiceExamples').textContent=this.voiceLanguage==='en'
+        ?'“Rotate the model”, “open wrist”, “explode”, “read description”, “stop listening”.'
+        :'“Xoay mô hình”, “chuyển qua phần đầu”, “tách lớp”, “đọc chú thích”, “tắt micro”.';
+      this.updateVoiceUI();
+    };
     $('voiceLanguage').onchange();
     $('autoRead').onchange=()=>{this.autoRead=$('autoRead').checked;if(!this.autoRead)this.speaker.stop();};
     $('readSelected').onclick=()=>this.readSelected();$('stopReading').onclick=()=>this.speaker.stop();this.updateVoiceUI();
@@ -1221,7 +1305,7 @@ class App {
       if (drag) { if (Math.hypot(e.clientX-drag.x,e.clientY-drag.y)>4) drag.moved = true; this.dragYawTarget = drag.yaw + (e.clientX - drag.x) * Math.PI*2/Math.max(400,this.canvas.clientWidth*.65); this.pitch = clamp(drag.pitch + (e.clientY-drag.y)*Math.PI/Math.max(400,this.canvas.clientHeight),-.75,.75); }
       else if (this.cut.on && !this.ctl.handVisible(this.t)) {
         const c0 = project(this.projView, [0, 0, 0]), rr = this.globeRadiusPx();
-        this.cut.target = clamp((px(e)[0] - (c0[0] * 0.5 + 0.5) * this.overlay.width) / rr, -1.25, 1.25);
+        if (rr > 0) this.cut.target = clamp((px(e)[0] - (c0[0] * 0.5 + 0.5) * this.overlay.width) / rr, -1, 1);
       }
     });
     this.canvas.addEventListener('pointerup', (e) => {
@@ -1263,7 +1347,7 @@ class App {
       this.cam = this.cam || new HandCamera(this.video);
       await this.cam.start((s) => { msg.textContent = s; if (s) this.toast(s); }, sharedStream);
       this.camOn = true; this.$('bCam').classList.add('on');
-      this.toast(this.word('📷 Đã bật camera — búng tay để gọi hạt!','📷 Camera on — snap your fingers!'));
+      this.toast(this.word('Đã bật camera — búng tay để gọi hạt!','Camera on — snap your fingers!'));
       return true;
     } catch (e) {
       console.error(e);
@@ -1277,7 +1361,7 @@ class App {
   stopCamera() { this.cam?.stop(); this.cam = null; this.camOn = false; this.hasVideo = false; this.$('bCam').classList.remove('on'); this.toast(this.word('Đã tắt camera','Camera off')); }
   toggleCamera() { if (this.camOn) this.stopCamera(); else this.startCamera(); }
 
-  toggleDemo() { if (this.demo) this.stopDemo(); else { this.demo = new Demo(this); this.$('bDemo').classList.add('on'); this.toast(this.word('▶ Minh họa cử chỉ tự động','▶ Demo — synthetic hand')); } }
+  toggleDemo() { if (this.demo) this.stopDemo(); else { this.demo = new Demo(this); this.$('bDemo').classList.add('on'); this.toast(this.word('Minh họa cử chỉ tự động','Demo — synthetic hand')); } }
   stopDemo() { if (!this.demo) return; this.demo = null; this.demoHand = undefined; this.$('bDemo').classList.remove('on'); this.ctl.onHands([], this.t); }
 
   // ------------------------------------------------------------ deterministic stepping (tests)

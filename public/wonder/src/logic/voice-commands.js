@@ -11,7 +11,7 @@ export const MODEL_NAMES = {
   forearm:['cẳng tay','forearm'], wrist:['cổ tay','wrist'], hand:['bàn tay','bàn tay chi tiết','hand'],
   fingers:['ngón tay','các ngón tay','fingers'], thumb:['ngón cái','thumb'], 'index-finger':['ngón trỏ','index finger'],
   'middle-finger':['ngón giữa','middle finger'], 'ring-finger':['ngón áp út','ring finger'], 'little-finger':['ngón út','little finger','pinky'],
-  head:['đầu','đầu đầy đủ','head'], neck:['cổ','neck'], thorax:['thân trên','ngực','thorax','upper torso'],
+  head:['đầu','phần đầu','vùng đầu','đầu đầy đủ','head'], neck:['cổ','phần cổ','vùng cổ','neck'], thorax:['thân trên','ngực','thorax','upper torso'],
   bust:['đầu cổ thân trên','đầu và cổ và thân trên','bust','head neck and upper torso'],
 };
 export const MODEL_EN={brain:'Human brain',heart:'Human heart',kidney:'Kidney',lungs:'Lungs',eye:'Human eye',ear:'Human ear',tooth:'Molar tooth',skull:'Skull',skeleton:'Skeleton',body:'Human body',arm:'Upper arm',liver:'Liver and gallbladder',stomach:'Stomach',gut:'Small and large intestines',pancreas:'Pancreas and spleen',muscles:'Muscular system','upper-limb':'Upper limb',forearm:'Forearm',wrist:'Wrist',hand:'Detailed hand',fingers:'Fingers',thumb:'Thumb','index-finger':'Index finger','middle-finger':'Middle finger','ring-finger':'Ring finger','little-finger':'Little finger',head:'Full head',neck:'Neck',thorax:'Upper torso',bust:'Head, neck and upper torso'};
@@ -50,13 +50,23 @@ export function resolveVoiceSystems(query){
 export function parseCommand(text,catalog,labels=[]){
   const raw=String(text||'').trim().replace(/^(soma\s*(ơi|oi)?\s*|please\s+)/i,'').replace(/\s+(giúp mình|giup minh|please|nhé|nhe)$/i,'').trim();
   const t=normalizeVoice(raw);if(!t)return [];
-  if(['dung xoay','ngung xoay','tat xoay','khong xoay','do not rotate','stop rotating','stop rotation'].includes(t))return [{type:'rotate',value:false}];
+  if(['dung xoay','ngung xoay','dung xoay mo hinh','tat xoay','khong xoay','do not rotate','stop rotating','stop rotation'].includes(t))return [{type:'rotate',value:false}];
+  const direction = t.match(/^(?:xoay|quay)(?: mo hinh)? (?:sang |qua )?(trai|phai)$/);
+  if (direction) return [{ type: 'rotateDegrees', degrees: direction[1] === 'trai' ? -45 : 45 }];
+  const navigation = t.match(/^(?:chuyen (?:sang|qua|den)|qua|sang|den|xem) (.+)$/);
+  if (navigation) {
+    const words = raw.split(/\s+/);
+    const target = words.slice(words.length - navigation[1].split(' ').length).join(' ')
+      .replace(/^(?:mô hình|mo hinh|phần|phan|vùng|vung)\s+/i, '');
+    const model = resolveVoiceTarget(target, catalog, [], true);
+    return model ? [model] : [];
+  }
   const rules=[
     ['stopQuiz',['dung kiem tra','ket thuc kiem tra','stop quiz','end quiz','quit quiz']],
     ['quiz',['kiem tra','do vui','quiz','test me']],
     ['stopRead',['dung doc','tat loa','stop reading','stop speaking','mute']],
     ['describe',['doc','doc chu thich','doc mo ta','giai thich','thuyet minh','day la gi','read','read description','describe','explain','what is this','what is that','tell me']],
-    ['micOff',['tat micro','dung nghe','stop listening','microphone off']],
+    ['micOff',['tat micro','tat mic','dung nghe','ngung nghe','dung tro chuyen giong noi','tat dieu khien giong noi','stop listening','stop voice conversation','turn off the microphone','microphone off']],
     ['scanCancel',['huy quet','cancel scan']],['scan',['quet','quet lai','quet bo phan','scan','scan again','scan body part']],
     ['cameraOn',['bat camera','camera on','turn on camera']],['cameraOff',['tat camera','camera off','turn off camera']],
     ['explode',['tach lop','tach roi','tach','bung','mo','explode','open','apart','expand']],
@@ -67,7 +77,7 @@ export function parseCommand(text,catalog,labels=[]){
     ['zoomIn',['phong to','to hon','zoom in','bigger','closer']],['zoomOut',['thu nho','nho hon','zoom out','smaller']],
     ['reset',['dat lai','dat lai goc nhin','reset','reset view']],['front',['phia truoc','mat truoc','front','front view']],
     ['back',['phia sau','mat sau','back view']],['side',['nhin ben','ben','side','side view']],
-    ['rotate',['xoay','bat xoay','rotate','spin','start rotating']],
+    ['rotate',['xoay','bat xoay','xoay mo hinh','quay mo hinh','xoay tron','xoay tron mo hinh','xoay tron xoay mo hinh','rotate','rotate the model','spin','start rotating']],
     ['record',['ghi hinh','bat ghi hinh','record','start recording']],['stopRecord',['dung ghi hinh','tat ghi hinh','stop recording']],
     ['cut',['mat cat','bat mat cat','cut','slice','cross section']],['cutOff',['tat mat cat','turn off cross section']],
     ['labelsOn',['bat chu thich','hien chu thich','show labels']],['labelsOff',['tat chu thich','an chu thich','hide labels']],
@@ -94,6 +104,18 @@ export function readingText(label,model,language='vi',detail='description'){
   const description=language==='en'?label.descriptionEn:label.description;
   const notes=detail==='group'?(label.learningNotes||[]).map(note=>language==='en'?note.descriptionEn:note.description).filter(Boolean):[];
   return {text:[name,description,...notes.map(note=>(language==='en'?'Anatomical group. ':'Ghi chú nhóm giải phẫu. ')+note)].filter(Boolean).join('. '),missing:!description&&notes.length===0};
+}
+
+export function matchSpokenCommand(text, alternatives, catalog, labels) {
+  const actions = parseCommand(text, catalog, labels);
+  if (actions.length || /\b(khong|dung|do not|dont|don t|never)\b/.test(normalizeVoice(text))) {
+    return { text, actions };
+  }
+  for (const candidate of alternatives) {
+    const matches = parseCommand(candidate, catalog, labels);
+    if (matches.length) return { text: candidate, actions: matches };
+  }
+  return { text, actions };
 }
 
 const CONFIRMATIONS={explode:['Đã tách lớp','Layers separated'],assemble:['Đã lắp lại','Assembled'],next:['Mô hình tiếp theo','Next model'],previous:['Mô hình trước','Previous model'],snap:['Đã hiện mô hình','Model shown'],dissolve:['Đã ẩn mô hình','Model hidden'],quiz:['Bắt đầu kiểm tra','Quiz started'],'stop quiz':['Đã dừng kiểm tra','Quiz stopped'],cut:['Đã bật mặt cắt','Cross section on'],'cut off':['Đã tắt mặt cắt','Cross section off'],'zoom in':['Đã phóng to','Zoomed in'],'zoom out':['Đã thu nhỏ','Zoomed out'],rotate:['Đã bật tự xoay','Auto rotation on'],'stop rotation':['Đã dừng tự xoay','Auto rotation off'],record:['Đang ghi hình','Recording requested'],'stop recording':['Đã dừng ghi hình','Recording stopped'],'stop reading':['Đã dừng đọc','Reading stopped'],'microphone off':['Đã tắt micro','Microphone off'],'camera on':['Đang mở camera','Starting camera'],'camera off':['Đã tắt camera','Camera off'],scan:['Đang quét','Scanning'],'cancel scan':['Đã hủy quét','Scan cancelled'],front:['Góc trước','Front view'],back:['Góc sau','Back view'],side:['Góc bên','Side view'],reset:['Đã đặt lại góc nhìn','View reset'],labelsOn:['Đã bật chú thích','Labels on'],labelsOff:['Đã tắt chú thích','Labels off'],clear:['Đã bỏ chọn','Selection cleared'],pull:['Đã kéo cấu trúc ra','Structure pulled out'],putBack:['Đã đặt cấu trúc vào','Structure put back'],muscleSplit:['Đã tách từng cơ','Muscles separated'],systemSplit:['Đã tách các hệ','Systems separated'],showAll:['Đã hiện tất cả các hệ','All systems shown'],layerOn:['Đã hiện hệ được chọn','Selected systems shown'],layerOff:['Đã ẩn hệ được chọn','Selected systems hidden'],layerOnly:['Chỉ hiện hệ được chọn','Showing only selected systems'],describe:['Đọc cấu trúc được chọn','Reading selected structure']};

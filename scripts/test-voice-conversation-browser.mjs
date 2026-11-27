@@ -55,9 +55,13 @@ try{
  await page.evaluate(()=>{window.__speechQA.finish();window.__speechQA.voices=[{lang:'en-US',name:'QA English'}];});
  await page.waitForFunction(()=>window.__speechQA.engines.length===3);
  await chat.getByRole('button',{name:'Đọc câu trả lời',exact:true}).first().click();
- await chat.getByText('Máy này chưa cài giọng đọc tiếng Việt nên mình chưa đọc được.',{exact:true}).waitFor();
+ await chat.getByText('Trình duyệt chưa có giọng đọc tiếng Việt.',{exact:false}).waitFor();
  assert.equal(await page.evaluate(()=>window.__speechQA.spoken.length),2,'No wrong-language speech fallback');
- await chat.getByRole('button',{name:/Dừng trò chuyện giọng nói/}).click();
+ await page.evaluate(()=>window.__speechQA.emit('Dừng trò chuyện giọng nói'));
+ await chat.getByRole('button',{name:/Trò chuyện bằng giọng nói/}).waitFor();
+ await chat.getByText('Đã tắt micro.',{exact:true}).first().waitFor();
+ assert.equal(calls,2,'Stopping the microphone by voice must not query the assistant');
+ assert.ok(await page.evaluate(()=>window.__speechQA.engines.at(-1).aborted),'The stop command releases the microphone');
  await page.goto(base+'/en/thu-vien');
  await page.evaluate(()=>{window.__speechQA.voices=[{lang:'en-US',name:'QA English'}];});
  await page.getByRole('button',{name:'Ask Soma Bot',exact:true}).click({force:true});

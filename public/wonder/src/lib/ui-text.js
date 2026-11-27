@@ -17,8 +17,8 @@ export const STATIC = [
   ['#splitParts', T('Tách từng cấu trúc', 'Split into structures')],
   ['#splitHint', T('Tách riêng các mảnh nguồn · nắm tay để lắp lại', 'Separate source pieces · make a fist to reassemble')],
   ['#bNextBlock', T('Hệ tiếp · tay phải', 'Next system · right thumb')],
-  ['#bNextBlock', T('Like bằng tay phải', 'Right thumb up'), 'title'],
-  ['#blockCycleStatus', T('Like trái: mô hình tiếp · like phải: hệ tiếp', 'Left thumb: next model · right thumb: next system')],
+  ['#bNextBlock', T('Giơ ngón cái tay phải', 'Right thumb up'), 'title'],
+  ['#blockCycleStatus', T('Giơ ngón cái trái để chuyển mô hình, ngón cái phải để chuyển hệ', 'Left thumb: next model · right thumb: next system')],
   ['#viewStructures', T('Xem danh sách cấu trúc', 'Browse structures')],
   ['label[for="renderQuality"]', T('Chất lượng hiển thị', 'Render quality')],
   ['#stateKey', T('Trạng thái', 'State')],
@@ -73,6 +73,18 @@ export const STATIC = [
   ['#partSpeak', T('Đọc to', 'Read aloud')],
   ['#partCard .phint', T('Nắm rồi xòe tay để tách phần đã chọn · nắm lại để lắp · Esc để bỏ chọn', 'Fist then open your hand to separate the selection · fist again to reassemble · Esc to clear')],
   ['#help h2', T('Điều khiển mô hình', 'Model controls')],
+  ['#helpClose', T('Đóng hướng dẫn', 'Close help'), 'aria-label'],
+  ['#helpClose', T('Đóng hướng dẫn', 'Close help'), 'title'],
+  ['#bCam', T('Camera', 'Camera')],
+  ['#bLabels', T('Chú thích', 'Labels')],
+  ['#bRotate', T('Tự xoay', 'Auto-rotate')],
+  ['#bHandRot', T('Xoay tay', 'Hand rotation')],
+  ['#bCut', T('Mặt cắt', 'Cross-section')],
+  ['#bQuiz', T('Luyện tập', 'Quiz')],
+  ['#bVoice', T('Micro', 'Microphone')],
+  ['#bRec', T('Ghi hình', 'Record')],
+  ['#bDemo', T('Chạy thử', 'Demo')],
+  ['#bHelp', T('Trợ giúp', 'Help')],
   ['#viewFront', T('Trước', 'Front')],
   ['#viewBack', T('Sau', 'Back')],
   ['#viewSide', T('Bên', 'Side')],
@@ -102,11 +114,11 @@ const OPTIONS = {
 
 /** Năm bước ở màn hình bắt đầu. */
 const START_STEPS = [
-  ['🫰', T('<b>Búng tay</b> để gọi các hạt, búng lần nữa để làm tan.', '<b>Snap</b> to summon the particles, snap again to dissolve them.')],
-  ['✊', T('<b>Nắm tay</b> để tạo hình cơ quan, <b>mở tay</b> để bóc tách từng lớp.', '<b>Fist</b> to form the organ, <b>open</b> your hand to peel the layers apart.')],
-  ['🔄', T('<b>Nghiêng cổ tay</b> để xoay ngang, <b>nâng / hạ bàn tay</b> để xem trên / dưới. Hai tay dang ra / chụm vào để thu phóng. Có thể <b>kéo chuột để xoay, cuộn để thu phóng</b>.', '<b>Twist your wrist</b> to turn the model, <b>raise / lower your hand</b> to tilt it. Pull both hands apart or together to zoom. You can also <b>drag with the mouse to orbit and scroll to zoom</b>.')],
-  ['☝️', T('<b>Trỏ và giữ</b> để chọn khối hoặc cấu trúc; <b>xòe/nắm</b> tách từng mảnh của khối đó–lắp lại.', '<b>Point and hold</b> to select a block or structure; <b>open/fist</b> to separate its pieces and reassemble them.')],
-  ['👍', T('<b>Like tay trái</b>: mô hình tiếp. <b>Like tay phải</b>: hệ tiếp trong mô hình. Hạ ngón cái rồi giơ lại để chuyển tiếp.', '<b>Left thumb up</b>: next model. <b>Right thumb up</b>: next system in the model. Lower your thumb and raise it again to take the next step.')],
+  T('<b>Búng tay</b> để gọi các hạt, búng lần nữa để làm tan.', '<b>Snap</b> to summon the particles, snap again to dissolve them.'),
+  T('<b>Nắm tay</b> để tạo hình cơ quan, <b>mở tay</b> để bóc tách từng lớp.', '<b>Fist</b> to form the organ, <b>open</b> your hand to peel the layers apart.'),
+  T('<b>Nghiêng cổ tay</b> để xoay ngang, <b>nâng / hạ bàn tay</b> để xem trên / dưới. Hai tay dang ra / chụm vào để thu phóng. Có thể <b>kéo chuột để xoay, cuộn để thu phóng</b>.', '<b>Twist your wrist</b> to turn the model, <b>raise / lower your hand</b> to tilt it. Pull both hands apart or together to zoom. You can also <b>drag with the mouse to orbit and scroll to zoom</b>.'),
+  T('<b>Trỏ và giữ</b> để chọn khối hoặc cấu trúc; <b>xòe/nắm</b> tách từng mảnh của khối đó–lắp lại.', '<b>Point and hold</b> to select a block or structure; <b>open/fist</b> to separate its pieces and reassemble them.'),
+  T('<b>Giơ ngón cái tay trái</b>: mô hình tiếp. <b>Giơ ngón cái tay phải</b>: hệ tiếp trong mô hình. Hạ ngón cái rồi giơ lại để chuyển tiếp.', '<b>Left thumb up</b>: next model. <b>Right thumb up</b>: next system in the model. Lower your thumb and raise it again to take the next step.'),
 ];
 
 /** Bảng phím tắt trong hộp trợ giúp. */
@@ -115,12 +127,12 @@ const HELP_ROWS = [
   ['<kbd>F</kbd> / <kbd>O</kbd>', T('Nắm tay (lắp lại) / mở tay (tách lớp)', 'Fist (reassemble) / open (explode)')],
   ['<kbd>V</kbd> <kbd>→</kbd> <kbd>←</kbd>', T('Mô hình tiếp / trước', 'Next / previous model')],
   ['<kbd>E</kbd> <kbd>↑</kbd> <kbd>↓</kbd> Shift + cuộn', T('Tách / lắp các lớp giải phẫu', 'Explode / reassemble the anatomy layers')],
-  ['Xoay cổ tay', T('Xoay mô hình trái/phải · <kbd>G</kbd> bật/tắt', 'Turn the model left/right · <kbd>G</kbd> toggles hand rotation')],
-  ['☝ Trỏ · 🤏 Véo', T('Chọn cấu trúc (hoặc bấm chọn) · kéo ra', 'Select a structure (or click it) · pull it out')],
-  ['🙌 Hai tay · cuộn chuột', T('Thu phóng (hoặc <kbd>+</kbd> <kbd>-</kbd> <kbd>0</kbd>)', 'Zoom (or <kbd>+</kbd> <kbd>-</kbd> <kbd>0</kbd>)')],
+  T('Xoay cổ tay','Twist wrist'), T('Xoay mô hình trái/phải · <kbd>G</kbd> bật/tắt', 'Turn the model left/right · <kbd>G</kbd> toggles hand rotation'),
+  T('Trỏ · Véo','Point · pinch'), T('Chọn cấu trúc (hoặc bấm chọn) · kéo ra', 'Select a structure (or click it) · pull it out'),
+  T('Hai tay · cuộn chuột','Two hands · scroll'), T('Thu phóng (hoặc <kbd>+</kbd> <kbd>-</kbd> <kbd>0</kbd>)', 'Zoom (or <kbd>+</kbd> <kbd>-</kbd> <kbd>0</kbd>)'),
   ['<kbd>X</kbd> <kbd>,</kbd> <kbd>.</kbd>', T('Mặt cắt (di chuyển tay / chuột)', 'Cross-section (move your hand / the mouse)')],
   ['<kbd>Q</kbd> <kbd>M</kbd> <kbd>K</kbd> <kbd>I</kbd>', T('Luyện tập · giọng nói · ghi hình · đọc chú thích', 'Quiz · voice · recording · read the description')],
-  ['Kéo chuột', T('Xoay mô hình', 'Orbit the model')],
+  T('Kéo chuột','Drag'), T('Xoay mô hình', 'Orbit the model'),
   ['<kbd>R</kbd> <kbd>L</kbd> <kbd>T</kbd>', T('Tự xoay · chú thích · vệt hạt', 'Auto-rotate · labels · particle trails')],
   ['<kbd>C</kbd> <kbd>D</kbd> <kbd>H</kbd>', T('Camera · minh họa cử chỉ · hướng dẫn này', 'Camera · gesture demo · this help')],
 ];
@@ -158,13 +170,13 @@ export function applyStatic(locale) {
   }
   const steps = root.querySelector('.start-card .steps');
   if (steps) {
-    steps.innerHTML = START_STEPS.map(([icon, pair]) =>
-      `<li><span class="step-ic">${icon}</span><span>${at(locale, pair)}</span></li>`).join('');
+    steps.innerHTML = START_STEPS.map(pair =>
+      `<li><span>${at(locale, pair)}</span></li>`).join('');
   }
   const help = root.querySelector('#help table');
   if (help) {
     help.innerHTML = HELP_ROWS.map(([keys, pair]) =>
-      `<tr><td>${keys}</td><td>${at(locale, pair)}</td></tr>`).join('');
+      `<tr><td>${Array.isArray(keys) ? at(locale, keys) : keys}</td><td>${at(locale, pair)}</td></tr>`).join('');
   }
   const guide = root.getElementById('scanGuide');
   if (guide) {

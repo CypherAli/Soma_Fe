@@ -1,9 +1,9 @@
 // The exporter concatenates source surfaces within each system, followed by
 // that system's technical cut faces. Recover both ranges without re-meshing.
 export function sourceDisplayName(group,names){
-  const translated=names[group.id];
-  // A lesson/group placeholder is not the name of this individual structure.
-  return translated&&!/^Cấu trúc\b|[·—]\s*FJ\d/u.test(translated)?translated:group.label;
+  if (names[group.id]) return names[group.id];
+  if (group.sourceName && group.sourceName === group.label) return `Cấu trúc ${group.sourceId || group.id}`;
+  return group.label;
 }
 export function sourceGroups(manifest) {
   const groups = [], overview = [];

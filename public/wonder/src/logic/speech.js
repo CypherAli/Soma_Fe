@@ -11,8 +11,15 @@ export class Voice {
     rec.continuous=true;rec.interimResults=false;rec.maxAlternatives=3;rec.lang=language==='en'?'en-US':'vi-VN';
     rec.onstart=()=>{if(this.rec===rec&&this.on){clearTimeout(this.startTimer);this.onState(this.pauses.size?'paused':'listening');}};
     rec.onresult=e=>{
-      if(this.rec!==rec||!this.on||this.pauses.size)return;
-      for(let i=e.resultIndex??0;i<e.results.length;i++){const r=e.results[i];if(r.isFinal===false)continue;this.last=r[0].transcript;this.onText(this.last);}
+      for (let i = e.resultIndex ?? 0; i < e.results.length; i++) {
+        if (this.rec !== rec || !this.on || this.pauses.size) return;
+        const result = e.results[i];
+        if (result.isFinal === false) continue;
+        const [text, ...alternatives] = Array.from(result, entry => entry.transcript.trim()).filter(Boolean);
+        if (!text) continue;
+        this.last = text;
+        this.onText(text, alternatives);
+      }
     };
     rec.onerror=e=>{if(this.rec!==rec||!this.on)return;if(e.error==='aborted')return;
       if(e.error==='no-speech')return;
@@ -39,20 +46,38 @@ export class Voice {
 export class Speaker {
   constructor({voice=null,onState=()=>{},onError=()=>{}}={}){this.voice=voice;this.onState=onState;this.onError=onError;this.serial=0;this.finish=null;this.waitCancel=null;}
   stop(){this.serial++;this.waitCancel?.();this.waitCancel=null;if(this.finish)globalThis.window?.speechSynthesis?.cancel();this.finish?.();this.finish=null;this.voice?.resume('speech');this.onState('off');}
-  async voices(){
-    const synth=window.speechSynthesis,ready=synth.getVoices();if(ready.length)return ready;
-    return new Promise(resolve=>{
-      let timer;const done=()=>{clearTimeout(timer);synth.removeEventListener('voiceschanged',done);this.waitCancel=null;resolve(synth.getVoices());};
-      synth.addEventListener('voiceschanged',done);timer=setTimeout(done,1500);this.waitCancel=done;
+  async waitForVoice(language) {
+    const synth = window.speechSynthesis;
+    const locale = language === 'en' ? 'en-us' : 'vi-vn';
+    const findVoice = () => {
+      const voices = synth.getVoices();
+      const code = voice => voice.lang.toLowerCase().replace('_', '-');
+      return voices.find(voice => code(voice) === locale)
+        ?? voices.find(voice => code(voice).split('-')[0] === language);
+    };
+    const ready = findVoice();
+    if (ready) return ready;
+    return new Promise(resolve => {
+      const finish = voice => {
+        clearTimeout(timer);
+        synth.removeEventListener('voiceschanged', checkVoices);
+        this.waitCancel = null;
+        resolve(voice);
+      };
+      const checkVoices = () => {
+        const voice = findVoice();
+        if (voice) finish(voice);
+      };
+      const timer = setTimeout(() => finish(findVoice()), 1500);
+      this.waitCancel = () => finish(undefined);
+      synth.addEventListener('voiceschanged', checkVoices);
     });
   }
   async speak(text,{language='vi'}={}){
     this.stop();const serial=this.serial;
     if(!globalThis.window?.speechSynthesis||typeof SpeechSynthesisUtterance==='undefined'){this.onError('unsupported');return false;}
-    this.onState('loading');const voices=await this.voices();if(serial!==this.serial)return false;
-    const lang=language==='en'?'en-US':'vi-VN',prefix=lang.slice(0,2);
-    const selected=voices.find(v=>v.lang.replace('_','-').toLowerCase()===lang.toLowerCase())||voices.find(v=>v.lang.toLowerCase().startsWith(prefix));
-    if(!selected){this.onState('off');this.onError('missing-'+prefix);return false;}
+    this.onState('loading');const selected=await this.waitForVoice(language);if(serial!==this.serial)return false;
+    if(!selected){this.onState('off');this.onError('missing-'+language);return false;}
     const utterance=new SpeechSynthesisUtterance(text);utterance.lang=selected.lang;utterance.voice=selected;utterance.rate=language==='vi'?.94:1;utterance.pitch=1;
     this.voice?.pause('speech');this.onState('speaking');
     let done=false;const finish=()=>{if(done)return;done=true;if(serial!==this.serial)return;this.finish=null;this.voice?.resume('speech');this.onState('off');};

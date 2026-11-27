@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { CATALOG } from '../public/wonder/src/models/catalog.js';
-import { parseCommand, readingText, MODEL_NAMES, commandFeedback } from '../public/wonder/src/features.js';
+import { parseCommand, matchSpokenCommand, readingText, MODEL_NAMES, commandFeedback } from '../public/wonder/src/features.js';
 import { Voice, Speaker } from '../public/wonder/src/logic/speech.js';
 import { inspectionVisible } from '../public/wonder/src/models/inspection.js';
 
@@ -14,7 +14,19 @@ for(const [vi,en,type] of [['tách lớp','explode','explode'],['phóng to','zoo
   for(const phrase of [vi,en,vi.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d')])same(command(phrase),[{type}],phrase);
 }
 for(const phrase of ['không xoay','đừng xoay','do not rotate','stop rotating'])same(command(phrase),[{type:'rotate',value:false}],phrase);
+for(const phrase of ['Dừng trò chuyện giọng nói','Soma ơi, tắt micro nhé','ngừng nghe','Stop voice conversation']){
+  same(command(phrase),[{type:'micOff'}],phrase);
+}
+same(matchSpokenCommand('mô cổ tai',['mở cổ tay'],CATALOG,labels).actions,command('mở cổ tay'));
+same(matchSpokenCommand('phóng to',['thu nhỏ'],CATALOG,labels).actions,[{type:'zoomIn'}]);
+same(matchSpokenCommand('đừng phóng to',['phóng to'],CATALOG,labels).actions,[]);
 same(command('xoay'),[{type:'rotate',value:true}]);
+for(const phrase of ['xoay mô hình','xoay tròn xoay mô hình'])same(command(phrase),[{type:'rotate',value:true}],phrase);
+same(command('xoay mô hình sang trái'),[{type:'rotateDegrees',degrees:-45}]);
+for(const phrase of ['chuyển qua phần đầu','chuyển sang vùng đầu','Soma ơi, qua phần đầu nhé','chuyen qua phan dau']){
+  same(command(phrase)[0]?.id,'head',phrase);
+}
+same(command('đừng chuyển qua phần đầu'),[]);
 for(const phrase of ['tách giải phẫu tim','tach giai phau tim','tách mô hình tim','explode heart'])same(command(phrase),[{type:'explode',modelId:'heart'}],phrase);
 for(const phrase of ['xoay mô hình tim 30 độ','xoay mô hình tim ba mươi độ','rotate heart 30 degrees','Soma ơi xoay tim 30 độ giúp mình'])same(command(phrase),[{type:'rotateDegrees',degrees:30,modelId:'heart'}],phrase);
 same(command('xoay tim sang trái 90 độ'),[{type:'rotateDegrees',degrees:-90,modelId:'heart'}]);
@@ -53,6 +65,14 @@ class Recognition {
 }
 const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 globalThis.window={SpeechRecognition:Recognition};
+const alternativesHeard=[];
+const alternativesVoice=new Voice((...result)=>{alternativesHeard.push(result);alternativesVoice.stop();});
+alternativesVoice.start();
+alternativesVoice.rec.onresult({resultIndex:0,results:[
+  Object.assign([{transcript:'mô cổ tai'},{transcript:'mở cổ tay'}],{isFinal:true}),
+  Object.assign([{transcript:'phóng to'}],{isFinal:true}),
+]});
+same(alternativesHeard,[['mô cổ tai',['mở cổ tay']]],'Pass alternatives and discard later results after stop');
 const states=[],heard=[],errors=[];
 const voice=new Voice(text=>heard.push(text),{onState:s=>states.push(s),onError:e=>errors.push(e)});
 same(voice.start('vi'),true);let rec=voice.rec;same(rec.lang,'vi-VN');same(rec.maxAlternatives,3);
@@ -82,8 +102,10 @@ const synth=new Synthesis();window.speechSynthesis=synth;
 const speakerErrors=[];const speaker=new Speaker({voice,onError:error=>speakerErrors.push(error)});
 synth.available=[{lang:'en-US',name:'English'}];
 same(await speaker.speak('Tên cơ',{language:'vi'}),false);same(speakerErrors.at(-1),'missing-vi');same(synth.spoken.length,0);
+const delayedVietnamese=speaker.speak('Tên cơ',{language:'vi'});
+synth.dispatchEvent(new Event('voiceschanged'));
 synth.available.push({lang:'vi_VN',name:'Vietnamese'});
-voice.start('vi');same(await speaker.speak('Tên cơ',{language:'vi'}),true);
+voice.start('vi');synth.dispatchEvent(new Event('voiceschanged'));same(await delayedVietnamese,true);
 same(synth.spoken.at(-1).lang,'vi_VN');same(voice.pauses.has('speech'),true);
 const spoken=synth.spoken.at(-1);spoken.onend();await sleep(380);same(voice.pauses.size,0);same(voice.rec.starts,2);
 same(await speaker.speak('English name',{language:'en'}),true);same(synth.spoken.at(-1).voice.name,'English');

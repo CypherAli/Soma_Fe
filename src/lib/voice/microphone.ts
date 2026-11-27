@@ -180,11 +180,20 @@ export function microphoneError(locale: Loc, error: string): string {
 export async function matchingSpeechVoice(locale: Loc): Promise<SpeechSynthesisVoice | null> {
   if (typeof window === "undefined" || !window.speechSynthesis) return null;
   const synth = window.speechSynthesis;
-  let voices = synth.getVoices();
-  if (!voices.length) voices = await new Promise(resolve => {
-    const done = () => { clearTimeout(timer); synth.removeEventListener("voiceschanged", done); resolve(synth.getVoices()); };
-    const timer = setTimeout(done, 1200); synth.addEventListener("voiceschanged", done);
+  const findVoice = () => synth.getVoices().find(voice => {
+    const language = voice.lang.toLowerCase().split(/[-_]/)[0];
+    return language === locale;
+  }) ?? null;
+  const voice = findVoice();
+  if (voice) return voice;
+  return new Promise(resolve => {
+    const checkVoices = () => { if (findVoice()) finish(); };
+    const finish = () => {
+      clearTimeout(timer);
+      synth.removeEventListener("voiceschanged", checkVoices);
+      resolve(findVoice());
+    };
+    const timer = setTimeout(finish, 1200);
+    synth.addEventListener("voiceschanged", checkVoices);
   });
-  const language = locale === "zh" ? "zh" : locale;
-  return voices.find(voice => voice.lang.toLowerCase().replaceAll("_", "-").startsWith(language)) ?? null;
 }

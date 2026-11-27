@@ -9,7 +9,7 @@ import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { matchCommand, conversationQuestion, type VoiceResult } from "@/lib/voice/match";
 import { pageVoiceActions } from "@/lib/voice/registry";
 import { buildGlobalActions } from "@/lib/voice/globalCommands";
-import { createMicrophone, microphoneError, type MicrophoneSession } from "@/lib/voice/microphone";
+import { createMicrophone, matchingSpeechVoice, microphoneError, type MicrophoneSession } from "@/lib/voice/microphone";
 import type { Loc } from "@/lib/homeContent";
 import {
   GUEST_LIMIT,
@@ -51,9 +51,10 @@ const COPY = {
     name: "Soma Bot", status: "Trợ lý giải phẫu", hello: "Chào bạn, mình là Soma Bot. Mình có thể tra cứu cấu trúc trong atlas, giải thích thuật ngữ và mở đúng mô hình 3D.",
     placeholder: "Hỏi bằng giọng nói hoặc văn bản…", send: "Gửi", thinking: "Đang tra thư viện…", source: "Cấu trúc liên quan", view: "Xem 3D", read2: "Đọc bài", learn: "Giải phẫu đại cương", goPage: "Mở trang", full: "Mở trợ lý đầy đủ", clear: "Xóa hội thoại", close: "Đóng", open: "Hỏi Soma Bot", error: "Mình chưa kết nối được với thư viện. Hãy thử lại.", disclaimer: "Phục vụ học tập, không thay thế chẩn đoán hoặc điều trị.", mic: "Nói với Soma", stopMic: "Dừng nghe", listening: "Đang nghe…", read: "Đọc câu trả lời", stopRead: "Dừng đọc", voiceUnsupported: "Trình duyệt này chưa hỗ trợ nhập giọng nói.", micDenied: "Bạn chưa cấp quyền sử dụng micro.",
     suggestions: ["Tim có những buồng nào?", "Gan nằm ở đâu?", "Dây thần kinh giữa chi phối gì?"],
-    voiceMissing: "Máy này chưa cài giọng đọc tiếng Việt nên mình chưa đọc được.",
+    voiceMissing: "Trình duyệt chưa có giọng đọc tiếng Việt. Hãy thêm giọng tiếng Việt trong cài đặt giọng nói của thiết bị rồi mở lại trình duyệt.",
     hide: "Ẩn trợ lý", show: "Hiện lại Soma Bot",
     handsFree: "Trò chuyện bằng giọng nói", handsFreeOn: "Đang nghe — hỏi trực tiếp khi mở chat; gọi “Soma…” khi thu nhỏ", handsFreeOff: "Dừng trò chuyện giọng nói",
+    voiceStopped: "Đã tắt micro.", stopVoicePhrases: ["tắt micro", "dừng nghe", "ngừng nghe"],
     done: "Xong.", cmdFail: "Không thực hiện được lệnh này.",
     notUnderstood: (x: string) => `Chưa hiểu lệnh “${x}”. Nói “trợ giúp” để nghe các lệnh.`,
     guestGateTitle: "Hết lượt hỏi của chế độ khách",
@@ -67,6 +68,7 @@ const COPY = {
     voiceMissing: "This device has no English text-to-speech voice installed.",
     hide: "Hide assistant", show: "Show Soma Bot again",
     handsFree: "Voice conversation", handsFreeOn: "Listening — ask directly in chat; say “Soma…” when minimized", handsFreeOff: "Stop voice conversation",
+    voiceStopped: "Microphone turned off.", stopVoicePhrases: ["turn off the microphone", "stop listening"],
     done: "Done.", cmdFail: "That command could not be carried out.",
     notUnderstood: (x: string) => `I didn't catch the command “${x}”. Say “help” to hear the commands.`,
     guestGateTitle: "Guest questions used up",
@@ -80,6 +82,7 @@ const COPY = {
     voiceMissing: "此设备未安装中文语音，暂时无法朗读。",
     hide: "隐藏助手", show: "重新显示 Soma Bot",
     handsFree: "持续收听", handsFreeOn: "正在持续收听——直接说指令，或说“Soma …”提问", handsFreeOff: "停止持续收听",
+    voiceStopped: "麦克风已关闭。", stopVoicePhrases: ["关闭麦克风", "停止收听"],
     done: "完成。", cmdFail: "无法执行该指令。",
     notUnderstood: (x: string) => `没有听懂指令“${x}”。说“帮助”可听取指令列表。`,
     guestGateTitle: "访客提问次数已用完",
@@ -218,6 +221,23 @@ export default function FloatingSomaBot() {
     if (voice) void speakPlain(r.say);
   }
 
+  function stopVoiceIfRequested(texts: string[], said: string) {
+    const command = matchCommand(texts, [{
+      id: "stop-voice",
+      exact: true,
+      phrases: [t.handsFreeOff, ...t.stopVoicePhrases],
+      run: () => {
+        stopBotMicrophones();
+        stopBotSpeech();
+        setVoiceNote("");
+        reportCommand(said, { ok: true, say: t.voiceStopped });
+      },
+    }]);
+    if (!command) return false;
+    void command.action.run(command.arg);
+    return true;
+  }
+
   /** Đọc lại trạng thái đăng nhập + hạn mức từ @/lib/chatMemory. */
   function syncQuota() {
     const g = isGuest();
@@ -305,7 +325,9 @@ export default function FloatingSomaBot() {
     // Lệnh chạy TRƯỚC khi xét "đang bận": nó chạy ngay trên máy, không cần chờ
     // trợ lý trả lời xong câu trước. Đã thấy trên trang thật: hỏi "tim có mấy
     // buồng" rồi nói "mở mô hình tim" trong lúc chờ thì lệnh bị nuốt mất.
-    const cmd = await runCommand(opts?.alts?.length ? opts.alts : [value]);
+    const texts = opts?.alts?.length ? opts.alts : [value];
+    if (stopVoiceIfRequested(texts, value)) return;
+    const cmd = await runCommand(texts);
     if (cmd) {
       reportCommand(value, cmd, opts?.voice);
       return;
@@ -390,25 +412,6 @@ export default function FloatingSomaBot() {
     recognitionRef.current = session; session.start();
   }
 
-  /**
-   * Danh sách giọng đọc nạp KHÔNG ĐỒNG BỘ.
-   *
-   * Chrome trả về mảng rỗng ở lần gọi getVoices() đầu tiên rồi mới bắn sự kiện
-   * voiceschanged sau đó. Bản trước không đợi, lại gán thẳng lang = "vi-VN"
-   * nên trên máy chỉ cài giọng en-US (đã đo: 3 giọng, đều en-US) trình duyệt
-   * lặng lẽ không phát gì — bấm loa tưởng hỏng.
-   */
-  function voicesReady(): Promise<SpeechSynthesisVoice[]> {
-    const now = window.speechSynthesis.getVoices();
-    if (now.length > 0) return Promise.resolve(now);
-    return new Promise((resolve) => {
-      const done = () => { clearTimeout(timer); window.speechSynthesis.removeEventListener("voiceschanged", done); resolve(window.speechSynthesis.getVoices()); };
-      window.speechSynthesis.addEventListener("voiceschanged", done, { once: true });
-      // Có trình duyệt không bao giờ bắn sự kiện này; đừng treo mãi ở đó.
-      const timer = setTimeout(done, 1200);
-    });
-  }
-
   async function speakMessage(text: string, index: number) {
     if (!("speechSynthesis" in window)) {
       setVoiceNote(t.voiceUnsupported);
@@ -422,13 +425,8 @@ export default function FloatingSomaBot() {
     stopBotSpeech();
     const serial = speechSerialRef.current;
 
-    const lang = locale === "vi" ? "vi-VN" : locale === "zh" ? "zh-CN" : "en-US";
-    const voices = await voicesReady();
+    const voice = await matchingSpeechVoice(locale);
     if (serial !== speechSerialRef.current) return;
-    // Khớp theo tiền tố ("vi") chứ không đòi đúng "vi-VN": nhiều hệ đặt tên là
-    // "vi_VN" hoặc chỉ "vi".
-    const prefix = lang.slice(0, 2).toLowerCase();
-    const voice = voices.find((v) => v.lang.toLowerCase().replace("_", "-").startsWith(prefix));
     if (!voice) {
       // Thà nói thẳng là máy thiếu giọng, còn hơn đọc tiếng Việt bằng giọng
       // tiếng Anh — nghe ra một thứ không ai hiểu.
@@ -457,10 +455,10 @@ export default function FloatingSomaBot() {
     window.dispatchEvent(new CustomEvent("soma-speech-owner", { detail: { owner: "bot" } }));
     stopBotSpeech();
     const serial = speechSerialRef.current;
-    const lang = locale === "vi" ? "vi-VN" : locale === "zh" ? "zh-CN" : "en-US";
-    const voice = (await voicesReady()).find((v) => v.lang.toLowerCase().replace("_", "-").startsWith(lang.slice(0, 2)));
+    const voice = await matchingSpeechVoice(locale);
     if (serial !== speechSerialRef.current) return;
     if (!voice) { setVoiceNote(t.voiceMissing); return; }
+    setVoiceNote("");
     const u = new SpeechSynthesisUtterance(text);
     u.voice = voice;
     u.lang = voice.lang;
@@ -476,6 +474,7 @@ export default function FloatingSomaBot() {
   async function handleHandsFree(alts: string[]) {
     const text = alts[0];
     if (!text || speakingRef.current) return;
+    if (stopVoiceIfRequested(alts, text)) return;
     const cmd = await runCommand(alts);
     if (cmd) return reportCommand(text, cmd, true);
     const q = conversationQuestion(alts, open);

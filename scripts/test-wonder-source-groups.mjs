@@ -3,7 +3,8 @@ import fs from 'node:fs/promises';
 import { sourceGroups,sourceDisplayName } from '../public/wonder/src/models/source-groups.js';
 import { InspectionTransition } from '../public/wonder/src/logic/inspection-transition.js';
 
-assert.equal(sourceDisplayName({id:'FJ1846',label:'Celiac artery'},{FJ1846:'Cấu trúc thuộc Động mạch chủ bụng và thân tạng · FJ1846'}),'Celiac artery');
+assert.equal(sourceDisplayName({id:'FJ1846',label:'Celiac artery'},{FJ1846:'Cấu trúc thuộc Động mạch chủ bụng và thân tạng · FJ1846'}),'Cấu trúc thuộc Động mạch chủ bụng và thân tạng · FJ1846');
+assert.equal(sourceDisplayName({id:'FJ1846',label:'Celiac artery',sourceName:'Celiac artery'},{}),'Cấu trúc FJ1846');
 assert.equal(sourceDisplayName({id:'FJ1833',label:'Left superior frontal gyrus'},{FJ1833:'Hồi trán trên (trái)'}),'Hồi trán trên (trái)');
 
 for (const id of ['body','bust','thorax','skeleton','muscles','upper-limb']) {

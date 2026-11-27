@@ -147,10 +147,17 @@ test("speaker waits for voices and never selects English to read Vietnamese", as
   t.mock.timers.enable({ apis: ["setTimeout"] });
   const oldWindow = Object.getOwnPropertyDescriptor(globalThis, "window");
   const synth = new EventTarget() as EventTarget & { getVoices(): SpeechSynthesisVoice[] };
-  let voices: SpeechSynthesisVoice[] = []; synth.getVoices = () => voices;
+  let voices = [{ lang: "en-US" }] as SpeechSynthesisVoice[]; synth.getVoices = () => voices;
   Object.defineProperty(globalThis, "window", { configurable: true, value: { speechSynthesis: synth } });
   try {
-    const waiting = matchingSpeechVoice("vi"); voices = [{ lang: "en-US" }, { lang: "vi_VN" }] as SpeechSynthesisVoice[]; synth.dispatchEvent(new Event("voiceschanged"));
-    assert.equal((await waiting)?.lang, "vi_VN"); voices = [{ lang: "en-US" }] as SpeechSynthesisVoice[]; assert.equal(await matchingSpeechVoice("vi"), null);
+    const waiting = matchingSpeechVoice("vi");
+    synth.dispatchEvent(new Event("voiceschanged"));
+    voices = [{ lang: "en-US" }, { lang: "vi_VN" }] as SpeechSynthesisVoice[];
+    synth.dispatchEvent(new Event("voiceschanged"));
+    assert.equal((await waiting)?.lang, "vi_VN");
+    voices = [{ lang: "en-US" }] as SpeechSynthesisVoice[];
+    const missing = matchingSpeechVoice("vi");
+    t.mock.timers.tick(1200);
+    assert.equal(await missing, null);
   } finally { if (oldWindow) Object.defineProperty(globalThis, "window", oldWindow); else Reflect.deleteProperty(globalThis, "window"); }
 });
