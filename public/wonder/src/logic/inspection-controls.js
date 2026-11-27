@@ -39,13 +39,21 @@ export function inspectionLabelsVisible({ enabled, explode, explodeTarget, partA
 
 export class PartSeparation {
   constructor() { this.clear(); }
-  clear() { this.target = 0; this.amount = 0; this.armed = false; this.sample = null; }
-  select() { this.clear(); }
-  set(value) { this.target = clamp(value); this.armed = false; this.sample = null; }
-  update(openness, active, sampleTime, dt) {
-    if (!active) { this.armed = false; this.sample = null; }
+  clear() { this.target = 0; this.amount = 0; this.armed = false; this.sample = null; this.pointOpen = false; }
+  select(fromPoint = false) { this.clear(); this.pointOpen = fromPoint; }
+  set(value) { this.target = clamp(value); this.armed = false; this.sample = null; this.pointOpen = false; }
+  armPoint() { if (this.target < .01) this.pointOpen = true; }
+  update(openness, active, sampleTime, dt, keepPointOpen = false) {
+    if (!active) {
+      this.armed = false;
+      this.sample = null;
+      if (!keepPointOpen) this.pointOpen = false;
+    }
     else if (sampleTime !== this.sample?.time) {
-      if (!this.sample) this.sample = { time: sampleTime, openness, target: this.target };
+      if (this.pointOpen && openness >= .75) {
+        this.set(1);
+        this.sample = { time: sampleTime, openness, target: 1 };
+      } else if (!this.sample) this.sample = { time: sampleTime, openness, target: this.target };
       else {
         const start = this.sample;
         // Releasing a point/pinch does not immediately pull the new selection.

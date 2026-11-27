@@ -183,7 +183,7 @@ class App {
       },
       onError: error => this.voiceError(error),
     });
-    this.speaker=new Speaker({voice:this.voice,onState:state=>{this.speakerState=state;this.updateVoiceUI();},onError:error=>this.voiceError(error)});
+    this.speaker=new Speaker({voice:this.voice,onState:state=>{this.speakerState=state;this.updateVoiceUI();},onError:error=>this.speakerError(error)});
     this.recorder = new Recorder(this.canvas, this.overlay); this.lastRecording = null;
     this.t = 0; this.last = null; this.frames = 0; this.fps = 0; this._fpsN = 0; this._fpsT = 0;
     this.handSource = null; this.handSource2 = null; this.lastSynthT = -1; this.demo = null; this.demoHand = undefined;
@@ -254,7 +254,7 @@ class App {
     this.motionTime += dt;
     const ctl = this.ctl, st = ctl.state;
     this.inspectionTransition.tick(this.motionTime);
-    ctl.suspended = !!this.scanActive || !!this.transition.pending || !!this.inspectionTransition.pending;
+    ctl.suspended = !!this.scanActive || !!this.transition.pending || !!this.inspectionTransition.pending || !!this.quiz;
     const switchTo = this.transition.commit(this.motionTime);
     if(switchTo!==null){
       this.hiddenSystems.clear();this.deselect();this.resetPose();st.select(switchTo,t);
@@ -323,12 +323,12 @@ class App {
     let target = 0;
     if (formed && machine) {
       // only a hand in THIS frame steers it (a hand that just left keeps its last openness for a while)
-      if (this.sel < 0 && !visibleBlock && vis && ctl.landmarks && !busyHand && !twoHands && !manualView && !this.sliderActive) { target = smooth(0.12, 0.85, ctl.openness); this.manualExplode = target; }
+      if (this.sel < 0 && !this.quiz && !visibleBlock && vis && ctl.landmarks && !busyHand && !twoHands && !manualView && !this.sliderActive) { target = smooth(0.12, 0.85, ctl.openness); this.manualExplode = target; }
       else target = this.manualExplode;
       // curling the fingers into a point / pinch briefly reads as "closing": restore the openest recent value
       this.expHist.push([t, target]);
       while (this.expHist[0][0] < t - 0.5) this.expHist.shift();
-      if (this.sel < 0 && busyHand && !this.wasBusy) { this.manualExplode = Math.max(...this.expHist.map((h) => h[1])); target = this.manualExplode; }
+      if (this.sel < 0 && !this.quiz && busyHand && !this.wasBusy) { this.manualExplode = Math.max(...this.expHist.map((h) => h[1])); target = this.manualExplode; }
     } else this.expHist = [];
     this.wasBusy = busyHand;
     this.explode += (target - this.explode) * (1 - Math.exp(-dt * 7));
@@ -407,11 +407,11 @@ class App {
     }
     if (twoHands) ctl.pinchStart = false;
     this.updatePicking(t, pointing && !twoHands, formed && machine && !this.inspectionTransition.pending && !twoHands);
-    this.pullAmt = this.partSeparation.update(ctl.openness, this.sel >= 0 && formed && vis && !!ctl.landmarks && !busyHand && !twoHands && !manualView && !this.sliderActive, ctl.lastHandT, dt);
+    const canPull = this.sel >= 0 && !this.quiz && formed && vis && !!ctl.landmarks && !twoHands && !manualView && !this.sliderActive;
+    this.pullAmt = this.partSeparation.update(ctl.openness, canPull && !busyHand, ctl.lastHandT, dt, canPull && pointing);
     this.pulled = this.partSeparation.target > .01;
     // Anchors and solid meshes must use the same current-frame pull amount.
     this.computeAnchors(formed && machine && m && !this.transition.pending, rot, exCenter, scale);
-    this.updateQuiz(t, formed && machine && m);
     if (this.cut.on) {
       if (vis && !busyHand && ctl.landmarks) {
         const c0 = project(this.projView, [0, 0, 0]), rr = this.globeRadiusPx();
@@ -467,6 +467,7 @@ class App {
       alpha, trails: this.trails, trailLen: 0.06, pointPx: this.canvas.height * 0.012 * Math.sqrt(this.zoom) * (def.pointScale || 1), gain: this.gain * (def.gainScale || 1),
       video: { has: false, dim: 0.65 }, sel, cutOn: this.cut.on && formed && this.cut.plane !== null, cut: this.cut.plane, flow: this.flow, time: t,
     });
+    this.updateQuiz(t, formed && machine && solidBlend >= .99 && !this.inspectionTransition.pending);
     this.drawOverlay(t, machine, formT, pointing);
     this.recorder.frame();
     this.frames++; this._fpsN++;
@@ -523,6 +524,7 @@ class App {
   }
   changeInspection(apply) {
     if(this.transition.pending||this.scanActive)return;
+    if (this.quiz) this.stopQuiz();
     if(this.model?.surface&&this.ctl.state.state===FORMED)this.inspectionTransition.begin(()=>{apply();this.inspectionSignature=null;},this.motionTime);
     else apply();
   }
@@ -547,14 +549,17 @@ class App {
     const tag=this.labelHits.find(a=>x>=a.x&&x<=a.x+a.w&&y>=a.y&&y<=a.y+a.h);
     if(tag)return {li:tag.li,scope:tag.scope||'part'};
     const solid=this.lastSolidBlend>=.99&&this.renderer.atlasSurface?.ready;
-    const li=solid?this.renderer.atlasSurface.pick(x,y,this.canvas.width,this.canvas.height):this.nearestAnchor(x,y,45*CFG.dpr);
-    const group=!!this.model?.surface&&this.$('selectionScope').value==='group'&&this.$('separationMode').value!=='muscles'&&!this.quiz;
+    let li=solid?this.renderer.atlasSurface.pick(x,y,this.canvas.width,this.canvas.height):this.nearestAnchor(x,y,45*CFG.dpr);
+    const focus = Number(this.$('systemFocus').value);
+    if (li < 0 && !this.quiz && focus >= 0 && this.anchors.length === 1) li = this.nearestAnchor(x,y,22*CFG.dpr);
+    const group=!!this.model?.surface&&this.$('selectionScope').value==='group'&&this.$('inspectionView').value==='all'&&this.$('separationMode').value!=='muscles'&&!this.quiz;
     return {li,scope:group?'group':'part'};
   }
   updatePicking(t, pointing, active) {
     const ctl = this.ctl;
     this.pointer = null;
-    if (!active) { this.hover = { li: -1, t0: t }; return; }
+    if (this.quiz && ctl.rawPose !== POINT) this.quiz.awaitPointRelease = false;
+    if (!active) { this.hover = { li: -1, t0: t }; this.pointSample = null; return; }
     if (pointing && ctl.landmarks) {
       const [x, y] = this.toScreen(ctl.landmarks[8]);
       // One hit test per inference frame, not sixty raycasts for the same fingertip.
@@ -564,18 +569,28 @@ class App {
       if (key !== this.hover.key) this.hover = { li, key, t0: t };
       const prog = li >= 0 ? clamp((t - this.hover.t0) / DWELL_S, 0, 1) : 0;
       this.pointer = { x, y, li, prog };
-      if (li >= 0 && prog >= 1 && key !== this.selection?.key) this.selectPart(li, 'point',scope);
+      if (ctl.rawPose === POINT && li >= 0 && prog >= 1 && !this.hover.committed && !this.quiz?.awaitPointRelease) {
+        this.hover.committed = true;
+        if (!this.quiz && key === this.selection?.key) this.partSeparation.armPoint();
+        else this.selectPart(li, 'point',scope);
+      }
     } else {this.hover = { li: -1, t0: t };this.pointSample=null;}
     if (ctl.pinchStart) {
       ctl.pinchStart = false;
-      if (this.sel >= 0) { this.setSeparation(this.partSeparation.target>.5?0:1); this.toast(this.pulled ? this.word('Đã kéo phần được chọn ra','Pulled the selection out') : this.word('Đã lắp phần được chọn lại','Put the selection back')); }
+      if (this.sel >= 0 && !this.quiz) { this.setSeparation(this.partSeparation.target>.5?0:1); this.toast(this.pulled ? this.word('Đã kéo phần được chọn ra','Pulled the selection out') : this.word('Đã lắp phần được chọn lại','Put the selection back')); }
     }
   }
   selectPart(li, source = 'click',scope='part') {
     if (!this.model || !this.model.labels[li]) return;
-    if (this.quiz && !this.quiz.done && this.quiz.phase === 'ask') { this.answerQuiz(li); return; }
+    if (this.quiz && source !== 'quiz') {
+      if (this.quiz.phase === 'ask' && (source === 'point' || source === 'click')) {
+        this.quiz.awaitPointRelease = source === 'point';
+        this.answerQuiz(li);
+      }
+      return;
+    }
     if(this.$('separationMode').value==='selected')this.$('separationMode').value=this.separationBeforeSelection||'systems';
-    this.sel = li; this.selection=selectionFor(this.model.labels,li,scope,this.visiblePicks()); this.partSeparation.select(); this.pullAmt=0; this.pulled = false;
+    this.sel = li; this.selection=selectionFor(this.model.labels,li,scope,this.visiblePicks()); this.partSeparation.select(source === 'point'); this.pullAmt=0; this.pulled = false;
     this.selection.envelope=pullEnvelope(this.model.surface,this.selection.ids);
     this.layoutSelection(0);
     if(this.selection.layout){this.separationBeforeSelection=this.$('separationMode').value;this.$('separationMode').value='selected';}
@@ -605,6 +620,7 @@ class App {
     return {...L,label:name,labelVi:name,info:this.selection.skull?this.word('Gồm xương sọ, hàm và răng nguồn','Skull bones, jaw and source teeth'):this.word('Nhóm giải phẫu','Anatomical group'),sourceName:this.selection.skull?'Skull':name,sourceId:'',latin:'',description:this.word('Đang chọn cả khối gồm '+this.selection.ids.size+' cấu trúc nguồn. Nắm rồi xòe tay để tách từng cấu trúc bên trong; nắm lại để lắp về đúng vị trí. Các hệ khác giữ nguyên.','Selected group of '+this.selection.ids.size+' source structures. Make a fist then open your hand to separate its individual structures; make a fist again to reassemble. Other systems stay fixed.'),descriptionEn:'Selected group: '+this.selection.ids.size+' source structures. Close then open your hand to separate its individual structures; close to reassemble. Other systems stay fixed.',learningNotes:[]};
   }
   setSeparation(value) {
+    if (this.quiz) return;
     if(this.sel<0&&this.model?.surface&&!this.quiz&&this.$('separationMode').value!=='muscles'){
       const block=singleVisibleGroup(this.model.labels,this.visiblePicks());
       if(block)this.selectPart(block.pick,'button','group');
@@ -626,7 +642,11 @@ class App {
 
   // ------------------------------------------------------------ quiz: "find the hippocampus"
   startQuiz() {
+    if (this.quiz) return;
+    this.deselect();
     this.$('systemFocus').value='-1';
+    this.appliedSystemFocus='-1';
+    this.autoRotate=false;
     const st = this.ctl.state;
     const requestedIndex = this.transition.pending?.index ?? st.index;
     const modelIndex = isMachine(requestedIndex) ? requestedIndex : CATALOG.findIndex(model => model.id === 'brain');
@@ -647,9 +667,15 @@ class App {
     if (!q || !ready || this.uploaded !== q.modelIndex || this.transition.pending) return;
     if (q.pending) {
       q.pending = false;
+      const sourceCounts = new Map();
+      for (const { L } of this.anchors) {
+        const source = L.sourceName?.trim().toLowerCase();
+        if (source) sourceCounts.set(source, (sourceCounts.get(source) ?? 0) + 1);
+      }
       const visible = new Map();
       for (const { li, L } of this.anchors) {
         if (this.locale === 'vi' && L.label.startsWith('Cấu trúc ')) continue;
+        if ((sourceCounts.get(L.sourceName?.trim().toLowerCase()) ?? 0) > 1) continue;
         const label = L.label.trim().toLowerCase();
         visible.set(label, visible.has(label) ? -1 : li);
       }
@@ -662,21 +688,50 @@ class App {
       q.total = Math.min(q.total, order.length);
       let s = (q.seed * 2654435761) >>> 0;
       for (let i = order.length - 1; i > 0; i--) { s = (s * 1664525 + 1013904223) >>> 0; const j = s % (i + 1); [order[i], order[j]] = [order[j], order[i]]; }
-      q.order = order; this.manualExplode = 1; this.nextQuestion();
+      q.order = order;
     }
-    if (q.phase === 'feedback' && t >= q.nextAt) this.nextQuestion();
+    if (q.phase === 'feedback' && t >= q.nextAt) {
+      this.deselect();
+      q.phase = 'wait';
+    }
+    if (q.phase === 'wait' && this.explode >= .98 && this.pullAmt < .02) this.nextQuestion();
     if (q.done && t >= q.nextAt + 4) this.stopQuiz();
+  }
+  quizTargetReachable(index) {
+    const anchor = this.anchors.find(item => item.li === index);
+    if (!anchor) return false;
+    const surface = this.renderer.atlasSurface;
+    const dpr = CFG.dpr;
+    const onCanvas = (x, y) => document.elementFromPoint(x / dpr, y / dpr) === this.canvas;
+    // A projected anchor can be behind another mesh or covered by the controls.
+    for (const [dx, dy] of [[0, 0], [-5, 0], [5, 0], [0, -5], [0, 5]]) {
+      const x = anchor.px + dx * dpr, y = anchor.py + dy * dpr;
+      if (onCanvas(x, y) && surface.pick(x, y, this.canvas.width, this.canvas.height) === index) return true;
+    }
+    return !!surface.findVisiblePoint(index, this.canvas.width, this.canvas.height, onCanvas);
   }
   nextQuestion() {
     const q = this.quiz;
-    this.deselect();
-    if (q.asked >= q.total) {
+    // Test a few candidates per frame so a large atlas doesn't stall the hand feed.
+    let target = -1;
+    for (let i = 0; q.asked < q.total && i < 3 && q.order.length; i++) {
+      const candidate = q.order.shift();
+      if (this.quizTargetReachable(candidate)) { target = candidate; break; }
+    }
+    if (target < 0 && q.asked < q.total && q.order.length) return;
+    if (target < 0) {
+      if (!q.asked) {
+        this.stopQuiz();
+        this.toast(this.word('Chưa tìm được cấu trúc có thể chọn ở góc này. Hãy xoay mô hình và thử lại.','No pickable structures from this angle. Turn the model and try again.'));
+        return;
+      }
+      q.total = q.asked;
       q.done = true; q.phase = 'done'; q.nextAt = this.t;
       q.feedback = this.word(`Điểm ${q.score} / ${q.total}`,`Score ${q.score} / ${q.total}`);
       this.say(this.voiceLanguage==='en'?`Quiz finished. You scored ${q.score} out of ${q.total}.`:`Kết thúc kiểm tra. Bạn đạt ${q.score} trên ${q.total} điểm.`);
       return;
     }
-    q.target = q.order[q.asked % q.order.length]; q.asked++; q.phase = 'ask'; q.feedback = '';
+    q.target = target; q.asked++; q.phase = 'ask'; q.feedback = '';
     const name=readingText(this.model.labels[q.target],null,this.voiceLanguage,'name').text;
     this.say(this.voiceLanguage==='en'?`Find the ${name}`:`Tìm ${name}`);
   }
@@ -708,7 +763,7 @@ class App {
     const labels = this.model && isMachine(this.uploaded) && this.uploaded === this.ctl.state.index ? this.model.labels : [];
     const { text: recognized, actions: acts } = matchSpokenCommand(text, options.alternatives ?? [], CATALOG, labels);
     this.lastHeard = recognized;
-    if (acts.length) this.$('voiceNote').textContent = '';
+    if (acts.length) this.setVoiceNote('');
     const st = this.ctl.state, done = [];
     for (const a of acts) {
       if(['explode','assemble','rotateDegrees'].includes(a.type)){
@@ -774,7 +829,7 @@ class App {
       this.$('voicePanel').open=true;
       this.$('micStatus').scrollIntoView({block:'nearest'});
       this.speaker.stop();
-      this.$('voiceNote').textContent='';
+      this.setVoiceNote('');
       if(window.parent!==window)window.parent.postMessage({type:'soma-voice-owner',owner:'vision'},location.origin);
       this.voice.start(this.voiceLanguage);
     }
@@ -787,17 +842,42 @@ class App {
   }
   voiceError(error){
     this.$('voicePanel').open=true;
-    const en=this.locale==='en';this.$('voiceNote').textContent=error.startsWith('missing-')?this.word('Thiết bị chưa có giọng '+(this.voiceLanguage==='en'?'tiếng Anh':'tiếng Việt')+'. Chọn ngôn ngữ khác hoặc cài giọng đọc.','This device has no '+(this.voiceLanguage==='en'?'English':'Vietnamese')+' voice. Choose another language or install a voice.'):['not-allowed','service-not-allowed'].includes(error)?(en?'Microphone permission was denied.':'Quyền micro đã bị từ chối.'):error==='network'?(en?'Speech recognition has a network error. Retry in Chrome/Edge or use the text command below.':'Dịch vụ giọng nói đang lỗi mạng. Thử Chrome/Edge hoặc nhập lệnh văn bản bên dưới.'):error==='audio-capture'?(en?'No microphone is available. Check your audio input or use a text command.':'Không tìm thấy micro. Kiểm tra thiết bị đầu vào hoặc dùng lệnh văn bản.'):error==='start-timeout'?(en?'The speech service did not start. Retry or use a text command.':'Dịch vụ giọng nói chưa khởi động. Bấm thử lại hoặc dùng lệnh văn bản.'):(en?'Voice is unavailable or could not start. Use Chrome/Edge or a text command.':'Giọng nói chưa hỗ trợ hoặc không khởi động được. Dùng Chrome/Edge hoặc lệnh văn bản.');
+    this.setVoiceNote(['not-allowed','service-not-allowed'].includes(error)?this.word('Quyền micro đã bị từ chối.','Microphone permission was denied.'):error==='network'?this.word('Dịch vụ nhận dạng giọng nói đang lỗi mạng. Thử Chrome/Edge hoặc nhập lệnh văn bản bên dưới.','Speech recognition has a network error. Retry in Chrome/Edge or use the text command below.'):error==='audio-capture'?this.word('Không tìm thấy micro. Kiểm tra thiết bị đầu vào hoặc dùng lệnh văn bản.','No microphone is available. Check your audio input or use a text command.'):error==='start-timeout'?this.word('Dịch vụ nhận dạng chưa khởi động. Bấm thử lại hoặc dùng lệnh văn bản.','The speech service did not start. Retry or use a text command.'):this.word('Không khởi động được micro. Thử nhập lệnh văn bản bên dưới.','Could not start the microphone. Try the text command below.'));
+  }
+  setVoiceNote(text, missingVoice = '') {
+    const note = this.$('voiceNote');
+    note.textContent = text;
+    if (missingVoice) note.dataset.missingVoice = missingVoice;
+    else delete note.dataset.missingVoice;
+  }
+  clearMissingVoice() {
+    const language = this.$('voiceNote').dataset.missingVoice;
+    if (language && this.speaker.findVoice(language)) this.setVoiceNote('');
+  }
+  speakerError(error) {
+    this.$('voicePanel').open = true;
+    const language = error === 'missing-vi' ? 'vi' : error === 'missing-en' ? 'en' : '';
+    if (language) {
+      const name = language === 'vi' ? this.word('tiếng Việt', 'Vietnamese') : this.word('tiếng Anh', 'English');
+      this.setVoiceNote(this.word(
+        `Trình duyệt chưa thấy giọng đọc ${name}. Nếu vừa cài, hãy thoát hẳn trình duyệt rồi mở lại.`,
+        `The browser has not detected a ${name} voice. If you just installed one, quit and reopen the browser.`,
+      ), language);
+      this.clearMissingVoice();
+      return;
+    }
+    this.setVoiceNote(this.word('Chưa phát được giọng đọc. Hãy bấm Đọc để thử lại.','Speech playback did not start. Click Read to retry.'));
   }
   readSelected(){
     if(window.parent!==window)window.parent.postMessage({type:'soma-voice-owner',owner:'vision'},location.origin);
     const content=readingText(this.selectionLabel(),CATALOG[this.ctl.state.index],this.voiceLanguage,this.$('readDetail').value);
-    this.$('voiceNote').textContent=content.missing?(this.voiceLanguage==='en'?this.word('Nguồn chưa có mô tả tiếng Anh; chỉ đọc tên gốc.','No English description in the source; reading the source name only.'):this.word('Nguồn chưa có mô tả riêng; đọc tên cấu trúc và nội dung có sẵn.','No Vietnamese description in the source; reading the available structure name.')) :'';
+    this.setVoiceNote(content.missing?(this.voiceLanguage==='en'?this.word('Nguồn chưa có mô tả tiếng Anh; chỉ đọc tên gốc.','No English description in the source; reading the source name only.'):this.word('Nguồn chưa có mô tả riêng; đọc tên cấu trúc và nội dung có sẵn.','No Vietnamese description in the source; reading the available structure name.')) :'');
     this.spoken.push(content.text);void this.speaker.speak(content.text,{language:this.voiceLanguage});
   }
 
   // ------------------------------------------------------------ cut-away + recording
   setCut(on) {
+    if (on && this.quiz) this.stopQuiz();
     if (!on || !this.cut.on) {
       this.cut.x = this.cut.target = 0;
       this.cut.plane = null;
@@ -894,14 +974,14 @@ class App {
       g.globalAlpha = 0.9; g.fillStyle = '#fff'; g.font = `600 ${12 * dpr}px ui-sans-serif, system-ui, sans-serif`; g.textAlign = 'center';
       g.fillText(this.word('Mặt cắt','Cross-section'), x, Math.max(22 * dpr, cy - rr * 1.1 - 8 * dpr)); g.globalAlpha = 1;
     }
-    if (!this.anchors.length) return;
-    if (!inspectionLabelsVisible({
+    if (!this.anchors.length || (this.quiz && this.quiz.phase !== 'feedback')) return;
+    if (!this.quiz && !inspectionLabelsVisible({
       enabled:this.labelsOn,explode:this.explode,explodeTarget:this.manualExplode,
       partAmount:this.pullAmt,partTarget:this.partSeparation.target,
       handActive:!this.scanActive&&ctl.handVisible(t)&&!!ctl.landmarks&&!pointing&&!ctl.pinch&&!ctl.navigationActive,
       openness:ctl.openness,pointing,
     })) return;
-    const showAll = this.labelsOn && this.explode > 0.15;
+    const showAll = !this.quiz && this.labelsOn && this.explode > 0.15;
     let candidates=this.anchors.filter(a=>showAll||a.li===this.sel||this.selection?.ids.has(a.li)).sort((a,b)=>(b.li===this.sel)-(a.li===this.sel)||b.L.count-a.L.count);
     if(this.model?.surface&&(this.explode>.65||this.selection?.ids.size>1)&&this.$('separationMode').value!=='muscles'&&this.$('selectionScope').value==='group'){
       const localSplit=this.selection?.layout&&this.pullAmt>.12;
@@ -1278,10 +1358,10 @@ class App {
       this.speaker.stop();
       this.voiceLanguage=$('voiceLanguage').value;
       this.voice.setLanguage(this.voiceLanguage);
-      $('voiceNote').textContent='';
+      this.setVoiceNote('');
       $('voiceExamples').textContent=this.voiceLanguage==='en'
         ?'“Rotate the model”, “open wrist”, “explode”, “read description”, “stop listening”.'
-        :'“Xoay mô hình”, “chuyển qua phần đầu”, “tách lớp”, “đọc chú thích”, “tắt micro”.';
+        :'“Xoay mô hình”, “chuyển mô hình”, “cô lập hộp sọ”, “đọc chú thích”, “tắt micro”.';
       this.updateVoiceUI();
     };
     $('voiceLanguage').onchange();
@@ -1392,7 +1472,12 @@ function boot() {
     document.getElementById('bStartCam').disabled = true; document.getElementById('bStartNoCam').disabled = true;
     return;
   }
-  addEventListener('pagehide',()=>{app.stopCamera();app.speaker.stop();app.voice.dispose();},{once:true});
+  const refreshVoices = () => app.clearMissingVoice();
+  window.speechSynthesis?.addEventListener('voiceschanged', refreshVoices);
+  addEventListener('pagehide',()=>{
+    window.speechSynthesis?.removeEventListener('voiceschanged', refreshVoices);
+    app.stopCamera();app.speaker.stop();app.voice.dispose();
+  },{once:true});
   const start = document.getElementById('start');
   const hideStart = () => { start.hidden = true; };
   document.getElementById('bStartCam').onclick = async () => { if (await app.startCamera()) hideStart(); };

@@ -46,15 +46,16 @@ export class Voice {
 export class Speaker {
   constructor({voice=null,onState=()=>{},onError=()=>{}}={}){this.voice=voice;this.onState=onState;this.onError=onError;this.serial=0;this.finish=null;this.waitCancel=null;}
   stop(){this.serial++;this.waitCancel?.();this.waitCancel=null;if(this.finish)globalThis.window?.speechSynthesis?.cancel();this.finish?.();this.finish=null;this.voice?.resume('speech');this.onState('off');}
+  findVoice(language) {
+    const voices = globalThis.window?.speechSynthesis?.getVoices() ?? [];
+    const locale = language === 'en' ? 'en-us' : 'vi-vn';
+    const code = voice => voice.lang.toLowerCase().replaceAll('_', '-');
+    return voices.find(voice => code(voice) === locale)
+      ?? voices.find(voice => code(voice).split('-')[0] === language);
+  }
   async waitForVoice(language) {
     const synth = window.speechSynthesis;
-    const locale = language === 'en' ? 'en-us' : 'vi-vn';
-    const findVoice = () => {
-      const voices = synth.getVoices();
-      const code = voice => voice.lang.toLowerCase().replace('_', '-');
-      return voices.find(voice => code(voice) === locale)
-        ?? voices.find(voice => code(voice).split('-')[0] === language);
-    };
+    const findVoice = () => this.findVoice(language);
     const ready = findVoice();
     if (ready) return ready;
     return new Promise(resolve => {

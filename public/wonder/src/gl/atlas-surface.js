@@ -17,6 +17,28 @@ export class AtlasSurface {
   }
   return -1;
  }
+ findVisiblePoint(pick, width, height, onCanvas) {
+  const point = new T.Vector3();
+  for (const mesh of this.meshes) {
+   const { g, pickable } = mesh.userData;
+   if (!pickable || g.pick !== pick) continue;
+   const vertices = mesh.geometry.getAttribute('position');
+   const triangles = Math.floor(g.count / 3);
+   const samples = Math.min(triangles, 7);
+   for (let sample = 0; sample < samples; sample++) {
+    const i = g.start + 3 * Math.floor((sample + .5) * triangles / samples);
+    point.set(
+     (vertices.getX(i) + vertices.getX(i + 1) + vertices.getX(i + 2)) / 3,
+     (vertices.getY(i) + vertices.getY(i + 1) + vertices.getY(i + 2)) / 3,
+     (vertices.getZ(i) + vertices.getZ(i + 1) + vertices.getZ(i + 2)) / 3,
+    ).applyMatrix4(mesh.matrixWorld).project(this.camera);
+    if (Math.abs(point.z) > 1) continue;
+    const x = (point.x * .5 + .5) * width, y = (.5 - point.y * .5) * height;
+    if (onCanvas(x, y) && this.pick(x, y, width, height) === pick) return [x, y];
+   }
+  }
+  return null;
+ }
  constructor(canvas,gl){
   this.renderer=new T.WebGLRenderer({canvas,context:gl});this.renderer.autoClear=false;
   this.renderer.outputColorSpace=T.SRGBColorSpace;this.renderer.toneMapping=T.ACESFilmicToneMapping;this.renderer.toneMappingExposure=.75;

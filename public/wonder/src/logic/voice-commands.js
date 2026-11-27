@@ -3,7 +3,7 @@ import { modelVoiceCommand } from './model-voice-commands.js';
 export const MODEL_NAMES = {
   brain:['não','brain','human brain'], heart:['tim','heart','human heart'], kidney:['thận','kidney','kidneys'],
   lungs:['phổi','lung','lungs'], eye:['mắt','eye','eyes','human eye'], ear:['tai','ear','ears','human ear'],
-  tooth:['răng','răng hàm','tooth','teeth','molar'], skull:['sọ','skull'], skeleton:['bộ xương','xương','skeleton'],
+  tooth:['răng','răng hàm','tooth','teeth','molar'], skull:['sọ','hộp sọ','xương sọ','skull'], skeleton:['bộ xương','xương','skeleton'],
   body:['cơ thể','toàn thân','human body','body'], arm:['cánh tay','upper arm','arm'],
   liver:['gan','gan và túi mật','liver','liver and gallbladder'], stomach:['dạ dày','stomach'],
   gut:['ruột','ruột non và đại tràng','intestine','intestines'], pancreas:['tụy','lá lách','tụy và lá lách','pancreas','spleen'],
@@ -53,14 +53,6 @@ export function parseCommand(text,catalog,labels=[]){
   if(['dung xoay','ngung xoay','dung xoay mo hinh','tat xoay','khong xoay','do not rotate','stop rotating','stop rotation'].includes(t))return [{type:'rotate',value:false}];
   const direction = t.match(/^(?:xoay|quay)(?: mo hinh)? (?:sang |qua )?(trai|phai)$/);
   if (direction) return [{ type: 'rotateDegrees', degrees: direction[1] === 'trai' ? -45 : 45 }];
-  const navigation = t.match(/^(?:chuyen (?:sang|qua|den)|qua|sang|den|xem) (.+)$/);
-  if (navigation) {
-    const words = raw.split(/\s+/);
-    const target = words.slice(words.length - navigation[1].split(' ').length).join(' ')
-      .replace(/^(?:mô hình|mo hinh|phần|phan|vùng|vung)\s+/i, '');
-    const model = resolveVoiceTarget(target, catalog, [], true);
-    return model ? [model] : [];
-  }
   const rules=[
     ['stopQuiz',['dung kiem tra','ket thuc kiem tra','stop quiz','end quiz','quit quiz']],
     ['quiz',['kiem tra','do vui','quiz','test me']],
@@ -72,7 +64,7 @@ export function parseCommand(text,catalog,labels=[]){
     ['explode',['tach lop','tach roi','tach','bung','mo','explode','open','apart','expand']],
     ['assemble',['lap lai','ghep lai','ghep','dong','assemble','close','collapse']],
     ['muscleSplit',['tach tung co','separate muscles']],['systemSplit',['tach cac he','separate systems']],
-    ['next',['tiep','ke tiep','mau tiep','mo hinh tiep','next','next model']],['prev',['lui','mau truoc','mo hinh truoc','previous','previous model','go back']],
+    ['next',['tiep','ke tiep','mau tiep','mo hinh tiep','mo hinh tiep theo','chuyen mo hinh','doi mo hinh','chuyen mo hinh tiep theo','chuyen sang mo hinh tiep theo','next','next model']],['prev',['lui','mau truoc','mo hinh truoc','mo hinh truoc do','chuyen ve mo hinh truoc','previous','previous model','go back']],
     ['snap',['goi mo hinh','hien mo hinh','summon','snap']],['dissolve',['an mo hinh','lam tan','dissolve','hide model']],
     ['zoomIn',['phong to','to hon','zoom in','bigger','closer']],['zoomOut',['thu nho','nho hon','zoom out','smaller']],
     ['reset',['dat lai','dat lai goc nhin','reset','reset view']],['front',['phia truoc','mat truoc','front','front view']],
@@ -89,7 +81,16 @@ export function parseCommand(text,catalog,labels=[]){
   if(manipulation)return [manipulation];
   if(/\b(khong|dung|do not|dont|don t|never)\b/.test(t))return [];
   const layer=t.match(/^(bat lop|hien lop|tat lop|an lop|xem he|chi xem|show layer|hide layer|show system|show only) (.+)$/);
-  if(layer){const systems=resolveVoiceSystems(layer[2]);return systems.length?[{type:layer[1].startsWith('tat')||layer[1].startsWith('an')||layer[1].startsWith('hide')?'layerOff':layer[1].includes('only')||layer[1].startsWith('xem')||layer[1].startsWith('chi')?'layerOnly':'layerOn',systems}]:[];}
+  if(layer){const systems=resolveVoiceSystems(layer[2]);if(systems.length)return [{type:layer[1].startsWith('tat')||layer[1].startsWith('an')||layer[1].startsWith('hide')?'layerOff':layer[1].includes('only')||layer[1].startsWith('xem')||layer[1].startsWith('chi')?'layerOnly':'layerOn',systems}];}
+  const navigation = t.match(/^(?:chuyen(?: mo hinh)? (?:sang|qua|den)|doi sang|qua|sang|den|xem|co lap|chi xem|isolate|show only) (.+)$/);
+  if (navigation) {
+    const words = raw.split(/\s+/);
+    const target = words.slice(words.length - navigation[1].split(' ').length).join(' ')
+      .replace(/^(?:mô hình|mo hinh|phần|phan|vùng|vung|the)\s+/i, '');
+    const model = resolveVoiceTarget(target, catalog, [], true);
+    return model ? [model] : [];
+  }
+  if (layer) return [];
   // Remove command prefixes from ORIGINAL text, retaining dấu for cổ/cơ and mắt/mặt.
   const query=raw.replace(/^(mở mô hình|mo mo hinh|mở|mo|chọn cấu trúc|chon cau truc|chọn|chon|open model|open the|open|show me the|show me|show the|show|select|pick)\s+/i,'').replace(/\s+model$/i,'');
   const modelOnly=/^(mở|mo|open)\s/i.test(raw);

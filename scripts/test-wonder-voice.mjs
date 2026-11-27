@@ -27,6 +27,11 @@ for(const phrase of ['chuyển qua phần đầu','chuyển sang vùng đầu','
   same(command(phrase)[0]?.id,'head',phrase);
 }
 same(command('đừng chuyển qua phần đầu'),[]);
+for(const phrase of ['chuyển mô hình','đổi mô hình','chuyển sang mô hình tiếp theo'])same(command(phrase),[{type:'next'}],phrase);
+same(command('chuyển mô hình sang phần đầu')[0]?.id,'head');
+for(const phrase of ['cô lập hộp sọ','chỉ xem hộp sọ','mở hộp sọ','isolate the skull'])same(command(phrase)[0]?.id,'skull',phrase);
+same(command('đừng cô lập hộp sọ'),[]);
+same(command('chỉ xem cơ'),[{type:'layerOnly',systems:['muscular']}]);
 for(const phrase of ['tách giải phẫu tim','tach giai phau tim','tách mô hình tim','explode heart'])same(command(phrase),[{type:'explode',modelId:'heart'}],phrase);
 for(const phrase of ['xoay mô hình tim 30 độ','xoay mô hình tim ba mươi độ','rotate heart 30 degrees','Soma ơi xoay tim 30 độ giúp mình'])same(command(phrase),[{type:'rotateDegrees',degrees:30,modelId:'heart'}],phrase);
 same(command('xoay tim sang trái 90 độ'),[{type:'rotateDegrees',degrees:-90,modelId:'heart'}]);

@@ -28,11 +28,15 @@ const proxies=[0,1].map(i=>{
  geometry.boundingBox=new T.Box3(new T.Vector3(-.5,-.5,-2-i*2),new T.Vector3(.5,.5,-2-i*2));
  geometry.boundingSphere=geometry.boundingBox.getBoundingSphere(new T.Sphere());
  const mesh=new T.Mesh(geometry,new T.MeshStandardMaterial());mesh.visible=false;
- mesh.userData={g:{pick:51+i},pickable:true,uniforms:{cutOn:{value:0},cut:{value:0}}};mesh.updateMatrixWorld();return mesh;
+ mesh.userData={g:{pick:51+i,start:i*3,count:3},pickable:true,uniforms:{cutOn:{value:0},cut:{value:0}}};mesh.updateMatrixWorld();return mesh;
 });
 surface.ready=true;surface.meshes=proxies;
 assert.equal(surface.pick(200,200,400,400),51,'shared buffer draw ranges preserve exact front-part picking');
+assert.ok(surface.findVisiblePoint(51,400,400,()=>true),'a visible question has a real mesh hit');
+assert.equal(surface.findVisiblePoint(52,400,400,()=>true),null,'a covered mesh is not eligible for a question');
+assert.equal(surface.findVisiblePoint(51,400,400,()=>false),null,'controls can cover an otherwise visible question');
 proxies[0].userData.pickable=false;
 assert.equal(surface.pick(200,200,400,400),52,'filtering one range reveals the other source part');
+assert.ok(surface.findVisiblePoint(52,400,400,()=>true));
 for(const mesh of proxies){mesh.geometry.dispose();mesh.material.dispose();}
 console.log('PASS visible surface picking, occlusion, hidden meshes, cross-sections and background');
