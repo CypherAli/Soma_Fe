@@ -26,6 +26,12 @@ assert.equal(names.FJ1758, "Chất trắng bán cầu đại não (trái)");
 assert.equal(names.FJ1806, "Chất trắng bán cầu đại não (phải)");
 assert.equal(names.FJ1835, "Tiểu thùy đỉnh trên (trái)");
 assert.equal(names.FJ1283, "Thần kinh sàng trước (trái)");
+const heart = JSON.parse(
+  await fs.readFile("public/wonder/assets/regions/heart.json", "utf8"),
+);
+for (const part of heart.parts) {
+  assert.ok(names[part.id] && !names[part.id].startsWith("Cấu trúc "), part.id);
+}
 let total = 0;
 for (const file of (await fs.readdir("public/wonder/assets/regions")).filter(
   (file) => file.endsWith(".json"),
